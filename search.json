@@ -1,0 +1,312 @@
+[
+  {
+    "objectID": "site-page-content/syllabus.html",
+    "href": "site-page-content/syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Important\n\n\n\nYou must familiarize yourself with this document. It is thorough and covers our expectations and policies.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#course-description",
+    "href": "site-page-content/syllabus.html#course-description",
+    "title": "Syllabus",
+    "section": "Course description",
+    "text": "Course description\nThis course provides an introduction to data science where we will explore the principles, methods, and tools that drive modern data-driven inquiry, inference, prediction and decision-making. This course is designed to provide you with a strong foundation in the core elements of the field, including data wrangling, exploratory analysis, statistical modeling, machine learning, and effective data visualization. Fundamental to this is an conceptual and practical understanding of uncertainty, association and causality. We will emphasize both the theoretical underpinnings and the practical applications of data science, preparing you to critically evaluate data, build robust analytical workflows, and effectively communicate results to diverse audiences. Through hands-on exercises, real-world datasets, and collaborative projects, you will gain not only technical proficiency but also the problem-solving mindset that defines successful data scientists.\nThis course will primarily use the statistical analytics program  and the GUI-based analytics platform JASP which runs on  for analyses, simulations, visualizations, and enhancing statistical understanding.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#learning-objectives",
+    "href": "site-page-content/syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nDevelop a foundational understanding of how to translate data into insights, inference and predictions\nUnderstand the central role of uncertainty and how it influences how we interpret data\nThink critically about data, including the appropriateness of study design, representativeness, and what you can really answer from a particular data set.\nAppreciate issues like bias and confounding that can affect our inferences from data\nUse high-quality data visualizations to tell your story\nEffectively use statistical software to ingest, transform, analyze, visualize and report on data in the appropriate context\nCommunicate findings effectively using compelling visualizations and clear, audience-appropriate narratives.\nCollaborate on data-centric projects, developing teamwork and project management skills essential in professional data science environments.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#pre-requisites",
+    "href": "site-page-content/syllabus.html#pre-requisites",
+    "title": "Syllabus",
+    "section": "Pre-requisites",
+    "text": "Pre-requisites\n\nThere are no formal pre-requisites, though an prior introduction to algebra will be very helpful\nFamiliarity with R will be helpful\n\nWe will encourage the use of version control systems like git in this class. Some tutorials to brush up on these skills:\n\ngit - the simple guide\nNico Riedmann’s Learn git concepts, not commands",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#required-resources",
+    "href": "site-page-content/syllabus.html#required-resources",
+    "title": "Syllabus",
+    "section": "Required resources",
+    "text": "Required resources\n\nComputer\nYou should have a laptop (no Chromebooks, please). Windows, Mac or Linux machines are acceptable. Please bring your machine to class, since we will be having interactive activities and labs.\n\n\nPaper and writing/drawing implements\nYou should have access to blank paper and writing/drawing instruments. A pad/notebook and a pen/pencil will suffice.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#evaluation",
+    "href": "site-page-content/syllabus.html#evaluation",
+    "title": "Syllabus",
+    "section": "Evaluation",
+    "text": "Evaluation\n\nAttendance: 10%\nEngagement and active learning: 20%\nAssignments: 30%\nLab completions and quizzes: 10%\nProject: 30%",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#learning-activities",
+    "href": "site-page-content/syllabus.html#learning-activities",
+    "title": "Syllabus",
+    "section": "Learning activities",
+    "text": "Learning activities\n\nClass format\nEach weekly class will comprise approximately 90 minutes of lecture and discussion and approximately 60 minutes of computational or data-driven laboratory. Slides will drive each lecture, but they will serve mainly as a framework and reference material for the class. The expectation is that students will come prepared to engage and ask questions, since much of the semester will be focused on foundational concepts that require thinking and understanding. Questions and discussion are the gateway to understanding and intuition.\n\nReadings and pre-work\nReadings, case studies and other pre-work will be assigned every week to introduce you to the topic of the week. It is essential that you complete this prior to class and are prepared to participate and engage in class. These materials will be made available on Canvas and on the website.\n\n\n\n\n\n\nImportant\n\n\n\nYou must read the readings and complete the pre-work prior to class time so you are prepared to participate in class.\n\n\n\n\nCase studies and laboratory work\nWe will discuss concepts, theory and methods most weeks, and have a laboratory section discussing both conceptual and technical aspects every week. These laboratory sessions will use JASP initially, and then R.\n\n\n\n\n\n\nImportant\n\n\n\n\nYou will start the labs in class but you will most likely not finish. It is your responsibility to complete the labs to enable your learning. Completing the labs succesfully is also part of your grade.\n\n\n\n\n\nEngagement and participation\nWe don’t expect merely token participation (just asking simple or rhetorical questions) but high quality content in the engagements. You are all high-quality students, and this is the expectation we carry. There are several ways we would like to interact with you:\n\nParticipation during class, asking questions, clarifying doubts, and even answering your classmate’s questions\nEach class will have a discussion on Canvas, for each section. Each student will do a “muddy water” exercise after each lecture, highlighting in short paragraphs (a) one thing that clicked for you in class, (b) one thing that remains confusing (especially conceptual topics), and (c) one thing that you think might have been done in class to improve your understanding\nEach lecture will have an associated Google document that everyone can edit. The intent is to have a shared set of notes generated by you so that we can co-learn and co-create through class. These will be living documents where we all share our understanding of the topic(s) at hand.\n\nWe will keep track of who is contributing to the class as a baseline evaluation, but full credit can be obtained with higher quality questions, comments, independent ideas, evidence of analytic thinking, and insights that help us all understand. We’re really looking forward to this aspect of the class.\n\n\n\n\n\n\nImportant\n\n\n\n\nClasses and labs will not be recorded. The best way to learn and benefit from this class is in-person participation.\n\n\n\n\n\n\nHomework assignments\nThere will be several homework assignments. The goal of these problem sets is to solidify concepts and learning objectives each week, as we build skills and knowledge throughout the semester These will typically involve a set of questions to reinforce the conceptual material of the week, and a set of coding/analysis exercises to solidify their implementation. Submissions will typically be done on Canvas. We will introduce Quarto as the primary tool for writing and submitting your work, which will allow us a single means of both textual and coding submissions.\nThe intent of the homework is to reinforce concepts, but not be overly burdensome. These will generally be thinking exercises. A grading rubric will be provided for all assignments.\nHomework assignments will be published after class, and will be due the following Sunday by 11:59pm Eastern time (but see the calendar for any deviations)\n\n\n\n\n\n\nImportant\n\n\n\nFamiliarize yourself with the submission requirements and the late policy for this class.\n\n\n\n\n\n\n\n\nNote\n\n\n\nSince this is a graduate-level class, we expect students to want to learn and not search online for answers. See the Academic Integrity section for more details.\n\n\n\n\nOnline Quizzes\nWe will often have quizzes to ensure that the pre-work material has been absorbed. These will be graded for completion.\nThere will be unannounced quizzes a few times during the semester, at random intervals and times. The quizzes ensure you are keeping up with the material presented in the class. The material for the quizzes will be drawn from lectures, labs, and readings.\n\n\n\n\n\n\nImportant\n\n\n\nMissed quizzes cannot be made up.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#project",
+    "href": "site-page-content/syllabus.html#project",
+    "title": "Syllabus",
+    "section": "Project",
+    "text": "Project\nYou will assemble into groups of 2 to 3 students. The objective is to have 10 groups in total. Over the course of the semester you will work towards creating an analytic project relevant to the program of study that will incorporate visualization, inference and prediction through the use of data science techniques. Details will be available in the project website. by week 2.\n\n\n\n\n\n\nImportant\n\n\n\nThe project will have several milestones that are cumulative in nature. Therefore, we will grade the project after the final submission with a holistic project rubric. We will grade the milestones in a qualitative way, and we will provide feedback and a trending grade with each milestone. It is up to you to incorporate the feedback provided. If your milestone trending grade is lower than you expected, and you do not incorporate the feedback we provide for improvement, do not expect your final project grade to improve.\n\n\nTotal is 100 points and the final grade will be based on the scale below. There is no plan to curve the final grade.\n\nA: &gt;= 95\nA-: &gt;= 90, &lt; 95\nB+: &gt;= 87 &lt; 90\nB: &gt;= 83, &lt; 87\nB-: &gt;= 80, &lt; 83\nC: &gt;= 70, &lt; 80 (last passing grade)\nF: &lt; 70\n\n\n\n\n\n\n\nImportant\n\n\n\nFailing this course is highly unlikely but definitely possible. Reasons for failing include but are not limited to:\n\nConsistently delivering work that is significantly below expectations\nConsistently missing deliverables\nConsistently missing class\nBeing found in violation of academic integrity\n\n\n\n\nGrading philosophy\nSome of the assignments you will work on are open-ended and some are not (i.e. specific tasks). Grading is generally holistic, meaning that there may not always be specific point value for individual elements of a deliverable. Each deliverable submission is unique and will be compared to all other submissions.\nDeliverables that:\n\nExceed the requirements and expectations are typically considered A level work.\nJust meet the requirements and expectations are typically considered B to A- level work.\nDo not meet the requirements are typically considered B- or lesser level work.\n\nPartial credit will be given where appropriate.\nAll deliverables must meet general quality requirements that are expected from students at the graduate school level as well as specific requirements that will be provided for each deliverable.\n\n\n\n\n\n\nImportant\n\n\n\nPortions of each assignment may be programmatically graded. To facilitate this, it is essential that folder structures and file names exactly match what the provided directions state. Failure to do so makes grading more difficult and time-consuming, especially in a class with over 100 students, and will lead to partial point deductions.\n\n\nPoints will be deducted for any of the following reasons:\n\nYour technical approach is fundamentally flawed\nYour analytical decisions are unjustified\nYou did not follow any direct and specific instructions\nYou do not have proper spelling and grammar in the textual parts of the assignment \nYour deliverable has missing sections\nYour overall presentation and/or writing is sloppy \nYou use incorrect file names (wrong extensions, wrong case, etc.)",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#submitting-your-work",
+    "href": "site-page-content/syllabus.html#submitting-your-work",
+    "title": "Syllabus",
+    "section": "Submitting your work",
+    "text": "Submitting your work\nAll submissions will be via Canvas. The preferred method will be as a Quarto document that has been rendered into PDF or HTML.\n\nLate policy\nFor homework assignments, if an extension past the deadline is requested, the following rules will apply:\n\nA late penalty of 10% per day, up to 4 days, will be assessed for assignments and labs that are submitted after the deadline. You may still submit a missed lab or assignment up until the last day of classes with a maximum possible grade of 50%. You are encouraged to do so to receive feedback.\nMissed in-class quizzes cannot be made up and will receive a grade of zero.\nProject deadlines are fixed and have no extensions or late penalty. A missed project deliverable will receive a grade of zero.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#other-course-policies",
+    "href": "site-page-content/syllabus.html#other-course-policies",
+    "title": "Syllabus",
+    "section": "Other course policies",
+    "text": "Other course policies\n\nAttendance and punctuality\nAttendance is mandatory and will be taken. Please be punctual and respectful and remain for the full period until excused.\nGiven the technical nature of this course, and the breadth of topics discussed, you are expected to attend each class, to complete all readings, and to participate actively in lectures, discussions and exercises. We understand there may be times you may need to miss class; please inform us in advance if you are not able to attend class for any reason so we can provide class materials and also prepare for a smaller classroom experience. However, it is up to you to keep up.\nPlease don’t take advantage of my sympathy and empathy. There are legitimate reasons for missing class, including illness, family emergencies, and unavoidable work situations. Let me know as soon as you can if you will not be able to attend class.\n\n\nParticipation\nWe love participation. Read. Raise your hand. Ask questions. Make comments. Challenge us. Acknowledge us. If we speak for three hours to a silent classroom, it is a lot more boring and tiring for everyone.\n\n\nLaptop and phone use\nYou must bring your laptop to class to work on labs. No phone use is allowed during lecture.\nWe would prefer that during class time, you use your laptops for class-specific activities, including analyses, on-the-fly searches for understanding and note-taking. This class is not easy, so your attention and focus will help you succeed.\n\n\nCommunication and Slack Rules\n\nAll announcements will be posted on Canvas and Slack\nUse Slack for any question you may have about the course, about assignments or any technical issue. This way everyone can learn from each others questions. We will be monitoring and providing answers on a regular basis. Make sure you understand what is allowed in Slack.\nAll communication with the professor should be either on general Slack channels or via the abhijit.dasgupta@gerogetown.edu email. *. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.\n\nSlack DMs are not to be used unless we DM you first and you can respond to our message. Students may not initiate DMs.\nAny email sent to the instructor containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.\nE-mails of a personal nature (personal issues or difficulties, questions regarding grades, seeking help with a personal issue, etc.) should be sent to the instructors’ e-mail (abhijit.dasgupta@gerogetown.edu).\n\nKeep an eye on the questions posted in Slack. Use the search function. It’s very possible that we have already answered a question, and we reserve the right to point you to the syllabus, previous Slack messages, or other document containing the information requested.\nAssignment, lab and project questions will only be answered on Slack up to 12 hours before something is due.\n\n\n\nOpen Door Policy\nPlease approach or get in touch with me if something is not working for you regarding the class, methods, etc. My pledge to you is to provide the best learning experience possible. If you have any issue please do not wait until the last minute to speak with us. I care deeply about your learning and success.\nIf you are struggling in any way, reach out so we can consider accommodations to improve your experience. Let me know early and often how you’re doing. I will also be checking in. There are many resources that you can avail if you are going to physical or mental issues. Please reach out and I’m ready to help.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#academic-integrity",
+    "href": "site-page-content/syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\nAs a Jesuit, Catholic university, committed to the education of the whole person, Georgetown expects all members of the academic community, students and faculty, to strive for excellence in scholarship and in character.The University spells out the specific minimum standards for academic integrity in its Honor Code, as well as the procedures to be followed if academic dishonesty is suspected.\nOver and above the honor code, in this course we will seek to create an engaged and passionate learning environment, characterized by respect and courtesy in both our discourse and our ways of paying attention to one another.\nThe code of academic integrity applies to all courses at Georgetown University. Please become familiar with the code. All students are expected to maintain the highest level of academic integrity throughout the course of the semester.Please note that acts of academic dishonesty during the course will be prosecuted and harsh penalties may be sought for such acts. Students are responsible for knowing what acts constitute academic dishonesty. The code may be found at https://bulletin.georgetown.edu/regulations/honor/.\n\n\n\n\n\n\nCaution\n\n\n\nWe have a ZERO TOLERANCE POLICY and students found to be in violation will be reported and penalized. The consequences of any violation may include: additional points penalty, getting a grade of zero, automatically failing the course, and suspension or expulsion from the program.\n\n\n\nDefinition of collaboration\nIn the spirit of fostering a collective and inclusive learning environment, we acknowledge that you will work and study with your peers. We also acknowledge that you use web resources (code examples specifically), and that in writing a program many of you will most likely use the same libraries, functions and other similar instructions in your scripts. However:\n\nYou must write your own code. This will be verified for every assignment against every submission, and any similarity greater than 60% between students on a given assignment will be considered to be unauthorized collaboration.\n\n\n\nWhat is allowed\n\nCollaborating with other students during in-class labs to facilitate collective learning\nUsing Slack for helping one-another as long as:\n\nYou do not provide answers directly but only discuss potential approaches\nYou only share up to a few lines of code for everyone’s benefit for the resolution of a specific question or issue\n\nUsing anything (code, resources, tips, approaches, etc.) provided by the instructional team\n\n\n\nWhat is forbidden\nThe following actions are not permitted in any way and are considered a violation of academic integrity:\n\nCopying and sharing code between students in individual assignments or across goups in the group project\nSharing anything on any individual assignment\nUsing code snippets found online (stack overflow, etc.) and not commenting the source\nPlagiarism of any kind\nUsing any Generative Artificial Intelligence tool without acknowledging it\nMaking your private GitHub repos public\nSharing or posting any course materials anywhere\nFaking or tampering with git commit dates or messages",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#use-of-generative-ai-tools",
+    "href": "site-page-content/syllabus.html#use-of-generative-ai-tools",
+    "title": "Syllabus",
+    "section": "Use of Generative AI tools",
+    "text": "Use of Generative AI tools\nWe recognize the recent availability of very powerful generative AI tools like Chat-GPT, GitHub Copilot, and others. These tools can help us be more effective and we embrace their use.\nHowever (and you know there’s a ‘however’), using GAI tools in place of thinking and gaining experience is not fruitful for you and will not serve you well. Intuition and understanding is gained by thinking, ruminating and discussing, not by the short-term objective of completing assignments and getting points. The concepts and tools we are exploring in this class will affect most aspects of your future career, and learning them well will benefit you. Inappropriate use of data and data scientific tools results in a “garbage in, garbage out” situation that can affect decisions and can cost time and money. So learning this stuff instead of relying on a hallucination-prone GAI tool at this foundational stage will probably be a good thingTM.\n\n\n\n\n\n\nImportant\n\n\n\nYou are allowed to use GAI tools in a non substantial way.\nWhat does non substantial mean?\nIt means that whatever is generated by GAI must not make up the majority of the work you do.\nAny use of these tools must abide to the following rules:\n\nYou must acknowledge the use of GAI tools\nYou must comment which code blocks were generated by GAI\nYou must note which written sections were generated by GAI\nIf you used a prompt to ask the GAI tool to do something, you must include it\n\nFor this course, valid uses of gen-ai can be:\n\nGenerating a code snippet or single function to perform a task. It’s likely you’ll need to modify it anyway\nCommenting code\nUsing it as a writing aid (spelling, grammar, word choice, limited phrase translation) on content created by you, not the actual writing. Note: non-native English speakers cannot use gen-ai to fully translate content written in another language.\nUsing it to assimilate openly available resources (papers, blogs, etc) that can allow you a launching pad to understand a topic. However, it is a case of “buyer beware” in terms of the reliability and veracity of the sources that ge-ai uses.\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nAny deviation from these rules is considered a violation of academic integrity and will be acted on.\nYou typically KNOW when you are crossing the line into un-ethical territory. As a general rule, If you feel like you might be crossing a line, then you probably are!",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "site-page-content/syllabus.html#resources-and-policies",
+    "href": "site-page-content/syllabus.html#resources-and-policies",
+    "title": "Syllabus",
+    "section": "Georgetown University resources and policies",
+    "text": "Georgetown University resources and policies\n\nGeorgetown University’s Plagiarism Policy\nPlagiarism or academic dishonesty in any form will not be tolerated and may result in a failing grade. All Honor Code violations will be submitted to the Honor Council.\nAcademic integrity is central to the learning and teaching process. Students are expected to conduct themselves in a manner that will contribute to the maintenance of academic integrity by making all reasonable efforts to prevent the occurrence of academic dishonesty. Academic dishonesty includes (but is not limited to) obtaining or giving aid on an examination, having unauthorized prior knowledge of an examination, doing work for another student, and plagiarism of all types, including copying code.\nPlagiarism is the intentional or unintentional presentation of another person’s idea or product as one’s own. Plagiarism includes, but is not limited to the following: copying verbatim all or part of another’s written work; using phrases, charts, figures, illustrations, code, or mathematical/scientific solutions without citing the source; paraphrasing ideas, conclusions, or research without citing the source; and using all or part of a literary plot, poem, film, musical score, or other artistic product without attributing the work to its creator. Students can avoid unintentional plagiarism by following carefully accepted scholarly practices. Notes taken for papers and research projects should accurately record sources cited, quoted, paraphrased, or summarized sources and articles should be acknowledged in footnotes.\n\n\nHonor System\nAll students are expected to maintain the highest standards of academic and personal integrity in pursuit of their education at Georgetown. Academic dishonesty, including plagiarism, in any form, is a serious offense, and students found in violation are subject to academic penalties that include, but are not limited to, failure of the course, termination from the program, and revocation of degrees already conferred. All students are held to the Georgetown University Honor Code. For more information about the Honor Code http://gervaseprograms.georgetown.edu/honor/\n\n\nAcademic Integrity and Courtesy\nAs a Jesuit, Catholic university committed to the education of the whole person, Georgetown expects all members of the academic community, students and faculty, to strive for excellence in scholarship and in character. The University spells out the specific minimum standards for academic integrity in its Honor Code and the procedures to be followed if academic dishonesty is suspected. Over and above the honor code, in this course, we will seek to create an engaged and passionate learning environment characterized by respect and courtesy in both our discourse and our ways of paying attention to one another.\n\n\nAcademic Resource Center\nThe Academic Resource Center (ARC) is the campus office responsible for reviewing medical documentation and determining reasonable accommodations for students with disabilities. You can reach the ARC via email at arc@georgetown.edu.\n\n\nCounseling and Psychiatric Services (CAPS)\nAs Georgetown faculty, you are among the most important individuals in some of the students’ lives. They may turn to you when they are struggling and in times of need, or you may be one of the first to notice when they are distressed.\nThe CAPS website has tips for faculty on how to deal with struggling or distressed students. 202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician.\n\n\nEmergency Preparedness and HOYAlert\nWe encourage all faculty to become familiar with Georgetown’s Office of Emergency Management and sign up for HOYAlert to receive important safety and University operating status updates. Faculty teaching at the Georgetown Downtown campus might also want to sign up for AlertDC to obtain safety and traffic updates.\n\n\nOffice of Institutional Compliance and Ethics\nThe Office of Institutional Compliance and Ethics supports and coordinates many compliance-related activities the University undertakes. With the endorsement and assistance of the University’s senior leadership, this Office is responsible for leading the development, implementation, and operation of the Georgetown Institutional Compliance and Ethics Program.\n\n\nOffice of Institutional Diversity, Equity and Affirmative Action (IDEAA)\nThe mission of IDEAA is to promote a deep understanding and appreciation among the diverse members of the University community to result in justice and equality in educational, employment, and contracting opportunities, as well as to lead efforts to create an inclusive academic and work environment.\n\n\nTitle IX/Sexual Misconduct\nGeorgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator. Suppose you disclose an incident of sexual misconduct to a professor in or outside of the classroom (except disclosures in papers). In that case, that faculty member must report the incident to the Title IX Coordinator or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet—[Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found on the Sexual Misconduct Website.\nIf you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:\n\nHealth Education Services for Sexual Assault Response and Prevention: confidential email sarp@georgetown.edu\nCounseling and Psychiatric Services (CAPS): 202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician\n\nTitle IX Sexual Misconduct Statement Please know that as faculty members, we are committed to supporting survivors of sexual misconduct, including relationship violence and sexual assault. However, university policy also requires us to report any disclosures about sexual misconduct to the Title IX Coordinator, whose role is to coordinate the University’s response to sexual misconduct.\nGeorgetown has a number of fully confidential professional resources who can provide support and assistance to survivors of sexual assault and other forms of sexual misconduct. These resources include:\n\nGetting Help\nJen Schweer, MA, LPCAssociate Director of Health Education Services for Sexual Assault Response and Prevention (202) 687-032jls242@georgetown.edu\nErica Shirley, Trauma SpecialistCounseling and Psychiatric Services (CAPS)(202) 687-6985els54@georgetown.edu\n\n\n\nThreat Assessment\nGeorgetown University established its Threat Assessment program as part of an extensive emergency planning initiative. The program at Georgetown has been developed and implemented to meet current best practices and national standards for hazard planning in higher education institutions and workplace violence prevention.\n\n\nSpecial Accommodations\nIf you believe that you have a disability that will affect your performance in this class, don’t hesitate to get in touch with the Academic Resource Center for further information. The center is located in the Leavey Center, Suite 335. The Academic Resource Center is the campus office responsible for reviewing documentation provided by students with disabilities and determining reasonable accommodations according to the Americans with Disabilities Act (ADA) and University policies.",
+    "crumbs": [
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "resources/js/plot.html",
+    "href": "resources/js/plot.html",
+    "title": "Observable Plot",
+    "section": "",
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#core-learning-materials",
+    "href": "resources/js/plot.html#core-learning-materials",
+    "title": "Observable Plot",
+    "section": "",
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#translating-from-other-toolkits",
+    "href": "resources/js/plot.html#translating-from-other-toolkits",
+    "title": "Observable Plot",
+    "section": "Translating from other toolkits",
+    "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science and Analytics",
+    "section": "",
+    "text": "This course website was last rendered on Tue Sep 09, 2025 at 12:03 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+  },
+  {
+    "objectID": "index.html#sections-and-meeting-locations",
+    "href": "index.html#sections-and-meeting-locations",
+    "title": "Data Science and Analytics",
+    "section": "Sections and meeting locations",
+    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
+  },
+  {
+    "objectID": "index.html#bookmark-these-links",
+    "href": "index.html#bookmark-these-links",
+    "title": "Data Science and Analytics",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://webbedfeet.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nGitHub Organization for your deliverables: https://github.com/gu-enia5120/\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@gerogetown.edu\nCanvas: &lt;https://georgetown.instructure.com/courses/&gt;"
+  },
+  {
+    "objectID": "index.html#calendar",
+    "href": "index.html#calendar",
+    "title": "Data Science and Analytics",
+    "section": "Calendar",
+    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
+  },
+  {
+    "objectID": "resources/books-links.html",
+    "href": "resources/books-links.html",
+    "title": "Books and other online resources",
+    "section": "",
+    "text": "Introduction to Modern Statistics (2e) by Mine Cetinkaya-Rundel and Johanna Hardin (2024) https://openintro-ims.netlify.app/\nR for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). https://r4ds.hadley.nz/\nStatistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). https://moderndive.com/v2/index.html",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-science-books",
+    "href": "resources/books-links.html#data-science-books",
+    "title": "Books and other online resources",
+    "section": "Data science books",
+    "text": "Data science books\n\nIntroduction to Environmental Data Science by Jerry Davis (2025). https://bookdown.org/igisc/EnvDataSci/\nTidy Modeling with R by Max Kuhn and Julia Silge (2023). https://www.tmwr.org/\nGeocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). https://r.geocompx.org/\nGeographic Data Science with R: Visualizing and Analyzing Environmental Change by Michael C. Wimberley (2023). https://bookdown.org/mcwimberly/gdswr-book/",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-visualization-books",
+    "href": "resources/books-links.html#data-visualization-books",
+    "title": "Books and other online resources",
+    "section": "Data visualization books",
+    "text": "Data visualization books\n   \nClicking on the covers will send you to the free online versions of each book\nThe following books’ content are not available. The links are non-affiliate Amazon links to the books, or to the books’ web pages:\n   \n\n\n\n\nThe Royal Statistical Society published a guide to Best Practices in Data Visualization, written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a series of tutorial papers in the journal Significance that are quite informative in thinking about data visualization. You can read this series here",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#toolkits",
+    "href": "resources/books-links.html#toolkits",
+    "title": "Books and other online resources",
+    "section": "Toolkits",
+    "text": "Toolkits\n\n\nJASP\n\nBayesian Inference in JASP: A Guide for Students by Mark A Goss-Sampson, Johnny van Doorn and EJ Wagenmakers (2020). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf\nStatistical Analysis in JASP: A Guide for Students by Mark A Goss-Sampson (2025). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#writing-and-publishing",
+    "href": "resources/books-links.html#writing-and-publishing",
+    "title": "Books and other online resources",
+    "section": "Writing and publishing",
+    "text": "Writing and publishing\n \nOf partcular interest to us will be chapters on HTML documents and HTML Presentations",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#publishing",
+    "href": "resources/books-links.html#publishing",
+    "title": "Books and other online resources",
+    "section": "Publishing",
+    "text": "Publishing\n\nQuarto",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#r-related",
+    "href": "resources/books-links.html#r-related",
+    "title": "Books and other online resources",
+    "section": "R-related",
+    "text": "R-related\n\nCheatsheets from Posit.co (formerly RStudio)\nggplot2 reference: The definitive guide to ggplot2. Check out the pages for the different functions for great examples\nR graph gallery: Example-filled site for different R-based graphs, especially in ggplot2. The ads can be a bit irritating, but the content is great.\nThemes to improve your ggplot figures\nR Graphics Cookbook by Winston Chang\nhtmlwidgets for R: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/js/vl.html",
+    "href": "resources/js/vl.html",
+    "title": "Vega-Lite & Altair",
+    "section": "",
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+  },
+  {
+    "objectID": "resources/js/vl.html#core-documentation",
+    "href": "resources/js/vl.html#core-documentation",
+    "title": "Vega-Lite & Altair",
+    "section": "",
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+  },
+  {
+    "objectID": "site-page-content/standards.html",
+    "href": "site-page-content/standards.html",
+    "title": "Minimum standards for deliverables",
+    "section": "",
+    "text": "Warning\n\n\n\nViolation of these guidelines will result in an automatic deduction of 1 grade step",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#code",
+    "href": "site-page-content/standards.html#code",
+    "title": "Minimum standards for deliverables",
+    "section": "Code",
+    "text": "Code",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "title": "Minimum standards for deliverables",
+    "section": "Rendered output (PDF, html, etc.)",
+    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#use-of-git",
+    "href": "site-page-content/standards.html#use-of-git",
+    "title": "Minimum standards for deliverables",
+    "section": "Use of git",
+    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  }
+]
