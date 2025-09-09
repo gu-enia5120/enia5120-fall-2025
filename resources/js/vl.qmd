@@ -1,0 +1,25 @@
+---
+title: Vega-Lite & Altair
+---
+
+## Core documentation
+
+::: {.panel-tabset}
+
+## Vega-Lite
+
+1. [Documentation](https://vega.github.io/vega-lite/docs/)
+1. [Examples](https://vega.github.io/vega-lite/examples/)
+1. [Tutorials](https://vega.github.io/vega-lite/tutorials/getting_started.html)
+1. [Introduction to Vega-Lite](https://observablehq.com/@uwdata/introduction-to-vega-lite) from UW IDL 
+1. [API](https://observablehq.com/collection/@vega/vega-lite-api)
+1. [Plot vs Vega-Lite](https://observablehq.com/@observablehq/plot-vega-lite)
+
+
+## Altair
+
+1. [Documentation](https://altair-viz.github.io/user_guide/data.html#user-guide-data)
+1. [Examples](https://altair-viz.github.io/gallery/index.html#example-gallery)
+
+:::
+

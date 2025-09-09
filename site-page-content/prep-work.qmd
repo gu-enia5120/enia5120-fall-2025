@@ -1,0 +1,175 @@
+---
+title: Weekly Class Preparation
+date: last-modified
+date-format: "dddd MMM D, YYYY [at] hh:mm a"
+---
+
+## Week 1
+
+These are two extracts from [Storytelling with data: a data visualization guide
+for business professionals by Cole Nussbaumer Knaflic (this is a link to the
+book in GU
+library)](https://wrlc-gu.primo.exlibrisgroup.com/discovery/fulldisplay?docid=cdi_askewsholts_vlebooks_9781119002062&context=PC&vid=01WRLC_GUNIV:01WRLC_GUNIV&lang=en&search_scope=WRLC_GT_CI&adaptor=Primo%20Central&tab=Everything&query=any,contains,storytelling%20with%20data%20a%20data%20visualization%20guide%20for%20business%20professionals%20cole%20nussbaumer%20knaflic&offset=0).
+Click on the links below to download the extracts:
+
+- Gestalt Principles:
+<https://georgetown.box.com/s/xeo3ht8x3efx9oulu47kayp0xzldi5h8>
+- Pre-attentive Attributes:
+<https://georgetown.box.com/s/efc0ffkt3zkyaz43i43450pvzu79l0o6>
+
+
+## Week 2
+
+[Matt Brehmer](https://mattbrehmer.ca/) and [Tamara
+Munzner](https://www.cs.ubc.ca/~tmm/) from the University of British Columbia
+proposed a framework for visualization tasks in a paper which became part of
+Tamara's Book called [Visualization Analysis and
+Design](https://www.cs.ubc.ca/~tmm/vadbook/). We are going to refer back to
+these ideas throughout the course.
+
+- Read the paper:
+<https://georgetown.box.com/s/juxorh1t317fbp07ekzk73xh6368bnlg> (this paper is
+a good summary of Ch. 2, 3 and 4 of the book)
+- Watch the video (16min):
+<https://georgetown.box.com/s/gf0k9p02rzoi1o0e37126rpvr2tx84op> Read Ch. 5 of
+the book which discusses marks and channels:
+<https://georgetown.box.com/s/gc5ti3ln139hnlyu83hydyuxcefo8cv1>
+
+## Week 3
+
+This week we explore good and bad visualizations, and understand what can make
+a visualization at least misleading if not outright poor. These are
+supplemented by further principles to consider to improve visualizations.
+
+- [Chapter 5](https://georgetown.box.com/s/3t6x4ggtshl3770z2qhs7i5jyulmzk0d) of
+[_How charts lie_](https://a.co/d/guUMJjO) by Alberto Cairo
+- [An excerpt](https://georgetown.box.com/s/ey8slgh9v8p61d9vpd21h8p2o429ldvh)
+from [Data Visualization](https://socviz.co/) by Kieran Healy (Optional)
+[Chapter 9](https://georgetown.box.com/s/3jmkx1ua2wqe1xjkyvaocbuklw4lnhsc) from
+[Visualize This](https://a.co/d/b8l0oe2) by [Nathan
+Yau](https://flowingdata.com/about/)
+
+Additionally, this week, as part of your discussion submissions, you will link
+to and comment on 2 blog posts in the [Junk
+Charts](https://junkcharts.typepad.com) blog that you find interesting in terms
+of the poor quality of visualization and the solution proposed by Dr. Fung.
+Feel free to suggest your own improvements.
+
+## Week 4
+
+This week we revisit Exploratory Data Analysis, a term coined by [John
+Tukey](https://en.wikipedia.org/wiki/John_Tukey). The paper below presents a
+formal process that describes EDA as a sequence of analysis states. It also
+discusses how interactive visualizations make the process easier and talks
+about Altair. We will be diving into Altair and interactivity beginning next
+week, but please pay special attention to Fig 2 and Fig 3 as a framework for
+structuring your EDA process.
+
+- Read the paper:
+<https://georgetown.box.com/s/pts0xzrtmu5d9axguavr2h2v0cc08pxk>
+
+
+## Week 5
+
+This week we begin the discussion on interactive graphics. [Ben
+Shneiderman](https://www.cs.umd.edu/users/ben/) from the University of Maryland
+wrote about how to interact with visualizations back in 1996.
+
+- Read the paper:
+<https://georgetown.box.com/s/0zg1wnufawyclthukoy1g4hryezfsou5>
+
+## Week 6
+
+This week we continue the discussion around interactive graphics. [Arvind
+Satyanarayan](https://arvindsatya.com) developed an "interaction grammar" when
+developing the software [Vega-Lite](https://vega.github.io/vega-lite/), one of
+the toolsets we'll explore this week.
+
+- Read the paper:
+<https://georgetown.box.com/s/gp5qpnnd2z2zpjm1e1jcry4eb78d6mqz>, winner of the
+Best Paper Award at the IEEE Symposium on Information Visualization, 2017
+- You can get started with the toolsets we'll explore this week by looking at
+their tutorials:
+[Vega-Lite](https://vega.github.io/vega-lite/tutorials/getting_started.html){target=_blank}
+[Altair](https://altair-viz.github.io/getting_started/overview.html){target=_blank}
+[Observable Plot](https://observablehq.com/plot/getting-started){target=_blank}
+
+## Week 7
+
+This week we start a sequence of "specialized" visualization patterns, where
+the type of data we're visualizing often requires special considerations. This
+week, we start with data with a temporal component. This includes time series
+data and repeated measures or longitudinal data. In these kinds of data, one
+feature to consider is the flow of **time** in a particular direction and at a
+particular rate of speed, and how that affects another variable, or aggregation
+of another variable. To this end
+
+- Read the chapter ["Time series
+graphics"](https://otexts.com/fpp3/graphics.html) from **Forecasting:
+Principles and Practice** by Hyndman and Athanasopoulos. Hyndman is one of the
+foremost academicians in Statistics and Economics in Australia, and a co-author
+of the R package `forecasting` among 62 others.
+- Read the chapter ["Working with Repated Measures
+Data"](https://neuraldatascience.io/5-eda/repeated_measures.html) from **Neural
+Data Science in Python** by Newman, et al. Discuss factors that are important
+to consider when visualizing temporally aligned data, and how interactive
+visualization patterns can enhance understanding of such data. Also consider
+how axes should be formatted for such data.
+
+## Week 8
+
+This week, we will be exploring geospatial visualizations (a.k.a., maps). Maps visualizations require
+particular kinds of data structures that can be transformed into map boundaries, and then there's the
+challenge of visualizing a 3-dimensional entity (the globe) in 2 dimensions, which requires some kind
+of projection into the 2-dimensional space.
+
+To get us thinking, we will start with Jon Schwabish's chapter on geospatial visualizations, which
+provides a solid introduction to geospatial visualizations.
+
+- [Geospatial visualization](https://georgetown.box.com/s/0448n9tv3zbcrg3iiw4t6l6fe9e524vi) by Jon Schwabish
+
+::: {.callout-note}
+Discussions for this week will be due by the beginning of Wednesday's class, i.e. 6:30pm 2/26
+:::
+
+## Week 9
+
+This week we dive into data storytelling.
+
+- [Cole Nussbaum Knafic's chapter on Lessons in Storytelling](https://georgetown.box.com/s/y00xthbfr8qsc5tg8kxa5d3yxfed05lb)
+- [S. McKenna et.al's paper on Visual Narrative Flow](https://georgetown.box.com/s/uz29q8l7x94sy6gklnnex5bm80t521hy)
+
+::: {.callout-note}
+There will not be an online discussion, but please read both of these documents and be ready to discuss in class.
+:::
+
+## Week 10
+
+This week, we will explore network data visualizations, often called _graphs_. Network visualizations have widespread
+utility since many questions and processes involve inter-relationships between different entities, and
+encourage a multivariate viewpoint. The actual data visualization process can also be challenging, since there
+isn't a natural coordinate system around which to anchor networks, and different layouts can potentially give
+us completely different views of the underlying data.
+
+- [Decoding Networks](https://georgetown.box.com/s/7as103r329idsctls5idyri33fscw3f7), a chapter from Manuel Lima's _Visual Complexity: Mapping Patterns of Information_.
+  Lima has been considered the "Tufte of the 21st century" and poses definite principles around network visualization.
+- [Gestalt Principles for Data Visualization: Proximity and Past Experience with Network Visualization](https://emeeks.github.io/gestaltdataviz/section3.html) is a
+  nice scrollytelling post around thinking about how a network visualization can be laid out.
+- [Using "Data Storytelling" with a chord diagram](https://www.visualcinnamon.com/2014/12/using-data-storytelling-with-chord/) by Nadieh Bremer gives a nice example of
+  how to "build" a chord diagram as stepping stones in a story, tying together this week with last week's concepts around storytelling.
+- If you want a more visual presentation, there is a [really nice lecture](https://youtu.be/PWMFgS6w3BY?si=e1263nn4e-wUkxDp:q
+) (52 minutes) by Manual Lima around these topcis.
+
+## Week 11
+
+This week we will explore the issues surrounding how to visualize "too much" data. The big data situation is increasingly common, and 
+new strategies have developed to enable efficient yet effective visualization of big data corpuses. 
+
+- The basic idea around many of the methods we'll see this week is encapsulated in this [Hadley Wickham paper](https://georgetown.box.com/s/jbsqmteq8i7dy41jvt56kx2h0c8dtwv0){target=_blank}
+  which shows how we might enable effective visualization by first summarizing the data at an appropriate granularity. These ideas
+  are quite similar to the ideas in [Cottam, Lumsdaine and Wang, 2014](https://doi.org/10.1117/12.2041200) (No GU access) which 
+  formed much of the basis for development of the `bokeh` Python package. 
+
+- If you want (optional), you can take a deeper dive into rasterization from a computer science perspective from this 
+  [lecture](https://youtu.be/qLr4FIiQYzQ?si=SjLPhu_mZ_jZ4gzX) from MIT. We won't cover the details in class, since our
+  focus is in applying these techniques to data. 

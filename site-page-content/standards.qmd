@@ -1,0 +1,38 @@
+---
+title: "Minimum standards for deliverables"
+date: last-modified
+date-format: "dddd MMM D, YYYY [at] hh:mm a"
+---
+
+::: callout-warning
+Violation of these guidelines will result in an automatic deduction of 1 grade step
+:::
+
+## Code
+
+
+## Rendered output (PDF, html, etc.)
+
+- Code should be folded, and not echoed
+- Code quality
+	- Code should be styled/linted using styler/lintr in R or _black_ in Python
+	- Comments should be present as needed to explain which code chunks are doing what
+- No warnings or messages should be visible in the final report
+- All output should be formatted. **No raw output**. Use the capabilities of R, Python, Jupyter, Quarto to achieve this.
+	- In particular,  consider Rich Iannone's work around `gt` and `great_tables`.
+- All text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)
+- All plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions
+- Pages with multiple topical sections should also contain a table of contents, either fixed or floating
+- References should be clearly cited and there should be a reference list on the page where the reference is made.
+
+## Use of `git`
+
+'git' is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.
+
+- You **must** use git commands to add files to your repositories on your machine. This includes `git clone`, `git pull`, `git push`, `git add` and `git commit`.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you.  **You cannot manually upload files to your repositories on GitHub.**
+- We expect to see several commits in all your work. This is important for several reasons:
+	- It shows the progress in your work
+	- It helps you revert back to a prior "snapshot" of your work in case anything goes wrong. Murphy's law says that if something can go wrong, it will.
+	- Generally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.
+
+See <https://happygitwithr.com> for a nice data science centric approach to git.

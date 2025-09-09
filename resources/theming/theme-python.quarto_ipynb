@@ -1,0 +1,1593 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Themes in data visualization  (Python)\"\n",
+        "subtitle: \"Styling static visualizations in Python\"\n",
+        "author: \"DSAN 5200 Instructional Team\"\n",
+        "date: last-modified\n",
+        "date-format: long\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "    code-summary: Show the code\n",
+        "    code-tools: true\n",
+        "execute: \n",
+        "  echo: true\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# Introduction\n",
+        "\n",
+        "Static data visualizations in Python have traditionally been built using the [matplotlib](https://www.matplotlib.org) package. This package provides quite granular control over data visualizations and hence can often result in longer, complex code. Over time, various other packages, like [seaborn](https://seaborn.pydata.org), networkx.draw, and others, have been built on top of matplotlib to provide a higher-level interface that makes several choices for the user, and allows easier code expression of complex visualizations.\n",
+        "\n",
+        "In this document, we will primarily look at seaborn and matplotlib. We will take the approach that the first pass at a data visualization should be done with seaborn, and then finer control and functionality can be implemented by dropping down to matplotlib. Seaborn can get you 80% to a final product, but you often need matplotlib to finalize the product. As such, it is important to not only be adept at seaborn, but also gain mastery of matplotlib, especially for customization.\n",
+        "\n",
+        "# Import packages\n"
+      ],
+      "id": "20edfecc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "cache": false
+      },
+      "source": [
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import matplotlib as mpl\n",
+        "import seaborn as sns\n",
+        "import seaborn.objects as so\n",
+        "import numpy as np"
+      ],
+      "id": "ad889dac",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: callout-tip\n",
+        "In version 0.12, seaborn introduced the `seaborn.objects` module, which provides an API closely aligned with the *Grammar of Graphics*. This allows us to build visualizations by layers much as {{< fa brands r-project >}} users can using **ggplot2**. We will explore this new API in this document as well as the more traditional API.\n",
+        ":::\n",
+        "\n",
+        "# A brief review of matplotlib\n",
+        "\n",
+        "::: callout-note\n",
+        "Much of this material is covered in the DSAN bootcamp, and is provided here as a refresher.\n",
+        ":::\n",
+        "\n",
+        "## Pyplot\n",
+        "\n",
+        "-   matplotlib.pyplot is a collection of functions that make matplotlib work like MATLAB.\n",
+        "-   Each pyplot function makes some change to a figure: e.g.,\n",
+        "    -   creates a figure, creates a plotting area in a figure, plots some lines in a plotting area, decorates the plot with labels, etc.\n",
+        "-   In matplotlib.pyplot states are preserved across function calls.\n",
+        "    -   This means it keeps track of things like the current figure and plotting area\n",
+        "    -   The plotting functions are directed to the current axes\n",
+        "\n",
+        "## Figures and axes <a id='H8'></a>\n",
+        "\n",
+        "In matplotlib there are two important object types, the **Figure** object and the **Axes** object.\n",
+        "\n",
+        "-   So what is the difference between these two objects?\n",
+        "\n",
+        "-   **Figures** (think of this as your \"canvas\")\n",
+        "\n",
+        "    -   Think of figures as the blank canvas (or paper) on which you are going to put your plots (i.e. the whole figure).\n",
+        "    -   The Figure keeps track of all the child Axes, a group of attributes (titles, figure legends, colorbars, etc), and even nested subfigures.\n",
+        "    -   It is often convenient to create the Axes together with the Figure, but you can also manually add Axes later on.\n",
+        "    -   **When you modify the figure attribute you are modifying the canvas rather than the subplots**\n",
+        "\n",
+        "-   **Axes** (individual plots)\n",
+        "\n",
+        "    -   Think of axes as the individual plots that go on the canvas.\n",
+        "        -   Each figure (canvas) can contain one or more Axes.\n",
+        "            -   Just like with pen and paper, you can put one plot on the paper or many (i.e. subplots)\n",
+        "        -   The axes are areas where visual encodings from data are displayed, e.g. coordinates, points, lines, etc.\\\n",
+        "        -   The simplest way of creating a Figure with an Axes is using `pyplot.subplots`.\n",
+        "        -   The Axes class and its member functions are the primary entry point to working with the **matplotlib** interface\n",
+        "            -   They have most of the plotting methods defined on them\n",
+        "\n",
+        "The following figure exemplifies the difference between the two types of objects.\n",
+        "\n",
+        "![](https://files.realpython.com/media/fig_map.bc8c7cabd823.png)\n",
+        "\n",
+        "Notice that we can have multiple axes objects per figure.\n",
+        "\n",
+        "![](https://files.realpython.com/media/empty_gridspec_annot.782349dc90a1.png)\n",
+        "\n",
+        "**Because of these two object types, there are essentially two ways to use Matplotlib:**\n",
+        "\n",
+        "-   Method 1: Rely on pyplot to automatically create and manage the Figures and Axes, and use pyplot functions for plotting. This is the original approach that mimics MATLAB.\n",
+        "-   Method 2: Explicitly create Figures and Axes, and call methods on them. This is considered the object-oriented programming (OOP) style, and is today (2020s) **the preferred way** to create matplotlib visualizations.\n",
+        "\n",
+        "### Method 1\n",
+        "\n",
+        "-   The Figure and Axes objects are not defined, but are defined implicitly in the background.\n"
+      ],
+      "id": "c4df5e6d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "# DEFINE DATA\n",
+        "x = [1, 2, 3, 4]\n",
+        "y = [1, 2, 3, 4]\n",
+        "\n",
+        "# PLOT\n",
+        "plt.plot(x, y, \"o\")  # 'o' makes a scatterplot or point plot\n",
+        "plt.show()"
+      ],
+      "id": "c19d39c2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Method 2\n",
+        "\n",
+        "-   This method creates more explicit code, and hence allows more explicit control over the visualization. All parts of the visualization are accessible using this API.\n",
+        "-   You always start by defining the Figure (canvas) and Axes (coordinates) for each visualization, and then build the visualization up by calling various methods on (primarily) the Axes object.\n"
+      ],
+      "id": "4949493a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "# DEFINE DATA\n",
+        "x = [1, 2, 3, 4]\n",
+        "y = [1, 2, 3, 4]\n",
+        "\n",
+        "# DEFINE OBJECTS\n",
+        "fig, ax = plt.subplots() #<1>\n",
+        "\n",
+        "# PLOT\n",
+        "ax.plot(x, y, \"o\") #<2>\n",
+        "#plt.show()"
+      ],
+      "id": "e2e9f321",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Here the `plt.subplots` function generates both the Figure and the default Axes. This code is typical, in that it uses syntactical sugar to store both the Figure and Axes objects in `fig` and `ax` using the `,` notation.\n",
+        "2.  The plotting method `plot` is part of the Axes object, and generates (in this case) a scatter plot.\n",
+        "\n",
+        "**Basic customization**\n"
+      ],
+      "id": "85e621f9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# DEFINE DATA\n",
+        "x = [1, 2, 3, 4]\n",
+        "y = [1, 2, 3, 4]\n",
+        "\n",
+        "# DEFINE OBJECTS\n",
+        "fig, ax = plt.subplots()\n",
+        "\n",
+        "# PLOT\n",
+        "ax.plot(x, y, \"o\")\n",
+        "\n",
+        "# CUSTOMIZE\n",
+        "FS = 12\n",
+        "ax.set_title(\"Newton's Law: F=ma\", fontsize=FS) #<1>\n",
+        "ax.set_xlabel(\"Acceleration (m/s/s)\", fontsize=FS) #<1>\n",
+        "ax.set_ylabel(\"Force (N)\", fontsize=FS) #<1>\n",
+        "ax.annotate(\"slope=mass (kg)\", (1, 3.65), fontsize=FS) #<2>\n",
+        "plt.show()"
+      ],
+      "id": "74db0e3b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Set various labels, and provide some customization\n",
+        "2.  Add an annotation at a specific position on the graph\n",
+        "\n",
+        "# Seaborn fundamentals (review)\n",
+        "\n",
+        "This section content was also covered in bootcamp, however, it is included for completeness and you should review it if you are unfamiliar with it. We will run through it quickly, to refresh your memory.\n",
+        "\n",
+        "## Overview\n",
+        "\n",
+        "Seaborn is a library for making statistical graphics in Python. It provides a high-level interface for drawing attractive and informative statistical graphics. It builds on top of matplotlib and integrates closely with pandas data structures.\n",
+        "\n",
+        "Its plotting functions operate on `pandas.DataFrame` objects and arrays containing whole datasets and internally performs the necessary semantic mapping and statistical aggregation to produce informative plots.\n",
+        "\n",
+        "Its dataset-oriented, declarative API lets you focus on what the different elements of your plots mean, rather than on the details of how to draw them.\n",
+        "\n",
+        "For more see: <https://seaborn.pydata.org>\n",
+        "\n",
+        "## Matplotlib inheritance <a id='H21'></a>\n",
+        "\n",
+        "Seaborn is built on top of Matplotlib. Therefore, depending on the plotting command, it will return either a Matplotlib axes or figure object.\n",
+        "\n",
+        "You can determine what is returned using the Python type() function\n"
+      ],
+      "id": "047b3c92"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# LOAD THE DATA-FRAME (REQUIRES INTERNET)\n",
+        "df = sns.load_dataset(\"tips\")\n",
+        "df.head()"
+      ],
+      "id": "dee0a825",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We're creating a figure using seaborn, but we're using several matplotlib functions to help with some customization of the axes. This isn't styling *per se*, but formatting of some data encoding elements.\n"
+      ],
+      "id": "d48dfadb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt = sns.scatterplot(data=df, x=\"total_bill\", y=\"tip\")\n",
+        "xlabels = [f\"${x:.0f}\" for x in sns_plt.get_xticks()] #<1>\n",
+        "sns_plt.set_xticklabels(xlabels)\n",
+        "sns_plt.set_yticklabels(\n",
+        "  [f\"${x:.0f}\" for x in sns_plt.get_yticks()]\n",
+        ") #<1>\n",
+        "sns_plt.set(xlabel = \"Total bill\", ylabel = \"Tip\",     #<2>\n",
+        "  title = \"Relation between tips and the total bill\")  #<2>\n",
+        "print(type(sns_plt)) #<3>\n",
+        "plt.show()"
+      ],
+      "id": "8c23e004",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  We're customizing the tick labels using f-strings\n",
+        "2.  We're setting labels and titles\n",
+        "3.  Notice, that the sns.scatterplot() function returns a MPL axes object. Therefore, we can use various MatplotLib axes commands to modify the Seaborn figure.\n",
+        "\n",
+        "Also notice that we're closer to a *Grammar of Graphics* model here, where we are specifying the data and the visual encodings in the seaborn function as arguments.\n",
+        "\n",
+        "## The objects interface\n",
+        "\n",
+        "The same plot as above can be generated using the newer `seaborn.objects` API.\n"
+      ],
+      "id": "22d8065c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt2 = (so.Plot(df, x = \"total_bill\", y = \"tip\")\n",
+        "    .add(so.Dot())\n",
+        "    .label(x = \"Total Bill\", y = \"Tip\",\n",
+        "      title = \"Relation between tips and the total bill\"))\n",
+        "sns_plt2"
+      ],
+      "id": "e31584ac",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(type(sns_plt2)) #<1>"
+      ],
+      "id": "e2f1db16",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "This results in a seaborn Plot object, not MPL axes. However, as we'll see, we can still customize this using the MPL tools as well as some seaborn tools.\n",
+        "\n",
+        "We're going to format the tick labels in the plot.\n"
+      ],
+      "id": "343d6e21"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from matplotlib.ticker import FuncFormatter\n",
+        "(sns_plt2.\n",
+        "  scale(\n",
+        "    x = so.Continuous().label(FuncFormatter(lambda x, pos: f\"${x:.0f}\")),\n",
+        "    y = so.Continuous().label(FuncFormatter(lambda x, pos: f\"${x:.0f}\"))\n",
+        "  ))"
+      ],
+      "id": "5f733742",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can also leverage the MPL API. Let's try to drop down to matplotlib to format these labels. Note that this method will use the matplotlib theme in use, rather than the `seaborn.objects` default theme.\n"
+      ],
+      "id": "9a986000"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from matplotlib import ticker\n",
+        "fig,ax = plt.subplots()\n",
+        "res = sns_plt2.on(ax).plot()  #<1>\n",
+        "ax.xaxis.set_major_formatter( #<2>\n",
+        "  ticker.FuncFormatter(lambda x,pos: f\"${x:.0f}\")\n",
+        ")\n",
+        "ax.yaxis.set_major_formatter(\n",
+        "  ticker.FuncFormatter(lambda x,pos: f\"${x:.0f}\")\n",
+        ") #<2>\n",
+        "res"
+      ],
+      "id": "745afaf4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Compile the `seaborn.objects.Plot` object to allow modification within the matplotlib system.\n",
+        "2.  Update the tick labels with a f-string. Many other formatters are available ([link](https://matplotlib.org/stable/api/ticker_api.html#tick-formatting))\n"
+      ],
+      "id": "809cc935"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| include: false\n",
+        "fig.clf()"
+      ],
+      "id": "d3949406",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The objects interface is closely aligned with the *Grammar of Graphics* approach, and allows us to build visualizations in a systematic manner, much as {{< fa brands r-project >}} users can using ggplot2. We will also see a similar syntax when we visit Altair.\n",
+        "\n",
+        "## Facets\n",
+        "\n",
+        "One of the advantages of seaborn is the ability to create facets (or trellis graphics) that split the data up by values of categorical variable(s) and create a panel of subplots, one of each level of the splitting variable.\n"
+      ],
+      "id": "0a253bce"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "my_plot = sns.relplot(data=df, x=\"total_bill\", y=\"tip\", col=\"time\")\n",
+        "my_plot.set(xlabel = \"Total bill ($)\", ylabel = \"Tip ($)\",\n",
+        "  title=\"Test\")\n",
+        "my_plot.set_titles(\"{col_name}\") #<1>\n",
+        "print(type(my_plot))\n",
+        "plt.show()"
+      ],
+      "id": "2c4ef4c1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Format the facet titles' content\n",
+        "\n",
+        "Note that, like for the object interface, the `FacetGrid` object is not of the `matplotlib.Axes` class.\n",
+        "\n",
+        "This plot can also be generated with the object interface.\n"
+      ],
+      "id": "6c5d6d63"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt = (so.Plot(df, x = \"total_bill\", y = \"tip\")\n",
+        "    .add(so.Dot())\n",
+        "    .facet(\"time\")\n",
+        "    .label(x = \"Total bill ($)\", y = \"Tip ($)\"))\n",
+        "print(type(sns_plt))\n",
+        "sns_plt.show()"
+      ],
+      "id": "244a34c5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Two things stand out here. One, the type of object is still a seaborn Plot object, so we can deal with the plot the same way as we would a singular plot, while in the traditional method, a different type of object is generated, requiring a different set of methods. Second, we see that better default aesthetics are used in the object interface.\n",
+        "\n",
+        "# Customization\n",
+        "\n",
+        "## Specifying colors in matplotlib/seaborn\n",
+        "\n",
+        "We can specify colors in several ways in the matplotlib ecosystem. These are:\n",
+        "\n",
+        "1. By name, e.g., 'red','blue', or shorthand names like 'r', 'b'.\n",
+        "2. By hex value, following the red-green-blue pattern, `#rrtggbb`. Since these are hexidecimal values running from 0 to F, the two-digit hex values determine 256 unique values for each of red, green and blue. You can also specify two more digits in decimal (0-9) to specify the alpha value, i.e., the transparency level, which defaults to 100 (this is called RGBA). So a 50% transparent red would be `#ff000050`. To calibrate, `#000000` is white, and `#ffffff` is black. Matplotlib is case-insensitive regarding this specification, so `#FF0000` and `#ff0000` produce the same color.\n",
+        "3. You can also specify Tableau colors by name.\n",
+        "\n",
+        "Full specification is described [here](https://matplotlib.org/stable/users/explain/colors/colors.html).\n",
+        "\n",
+        "## Styles in seaborn: easy wins\n",
+        "\n",
+        "Seaborn has a `set_theme` function that allows you to specify default styles and color palettes as well as add MPL-based specifications. See [the documentation](https://seaborn.pydata.org/generated/seaborn.set_theme.html).\n",
+        "\n",
+        "Seaborn has several built-in styles, namely, `darkgrid`, `whitegrid`, `dark`, `white`, and `ticks`. More importantly it has a function `set_style` that allows you to set the style for subsequent visualizations in your code, and `axes_style` which (a) will display the specification for the current style and (b) allow you to modify aspects of it. The `axes_style` function produces a Python dictionary of specifications.\n"
+      ],
+      "id": "45a87643"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.set_theme(style = \"whitegrid\")\n",
+        "def sns_plot2():\n",
+        "  my_plot=sns.relplot(data=df, x=\"total_bill\", y=\"tip\", col=\"time\")\n",
+        "  my_plot.set(xlabel = \"Total bill ($)\", ylabel = \"Tip ($)\",\n",
+        "  title=\"Test\")\n",
+        "  my_plot.set_titles(\"{col_name}\")\n",
+        "  plt.show()\n",
+        "\n",
+        "sns_plot2()"
+      ],
+      "id": "54acf546",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: callout-caution\n",
+        "With matplotlib and traditional seaborn, which produces matplotlib axes, the objects don't persist once they have been printed via `plt.show()`; they must be regenerated. With the object interface, seaborn objects do persist after being printed, and so can be built sequentially.\n",
+        ":::\n",
+        "\n",
+        "The object interface requires a slightly different syntax.\n"
+      ],
+      "id": "592afa1a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt.theme(sns.axes_style(\"whitegrid\")) #<1>"
+      ],
+      "id": "ce6cfa1c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  `seaborn.objects.Plot.theme` requires a dictionary of parameters, intended to be some form of `matplotlib.rcParams`, as its argument. This is why `seaborn.axes_style` is needed rather than `seaborn.set_style`.\n",
+        "\n",
+        "A default style can be set for the object interface as well.\n"
+      ],
+      "id": "a215c153"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "so.Plot.config.theme.update(sns.axes_style(\"whitegrid\"))\n",
+        "sns_plt.show()"
+      ],
+      "id": "bfda8e4e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: callout-warning\n",
+        "The function `sns.set_style` does work for traditional seaborn, but **not** for the objects interface\n",
+        ":::\n",
+        "\n",
+        "To modify some aspects of the current style, we can use `set_style` for traditional seaborn, and a dictionary of parameters for the object interface.\n"
+      ],
+      "id": "d168b8cf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.set_style({\"axes.facecolor\": \"w\", \"axes.edgecolor\": \"blue\"})\n",
+        "sns_plot2()"
+      ],
+      "id": "e00cea76",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| include: false\n",
+        "mpl.style.use('default')"
+      ],
+      "id": "fced1ba7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt.theme({\"axes.facecolor\": \"w\", \"axes.edgecolor\": \"blue\"})"
+      ],
+      "id": "9a930ffe",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: callout-caution\n",
+        "There are some differences between the two interfaces. This is expected since the objects interface is still experimental\n",
+        ":::\n",
+        "\n",
+        "The individual specifications seen above are based on `matplotlib.rcParams`, and an understanding of this is important to enable fine customization of your theme.\n",
+        "\n",
+        "## matplotlib and `rcParams`\n",
+        "\n",
+        "`matplotlib` has a styling system using a construct called `rcParams`\n",
+        "\n",
+        "When you use a style in `matplotlib`, what happens under the hood is that various elements of `matplotlib.rcParams` are changed to meet the specifications.\n",
+        "\n",
+        "You can manipulate `matplotlib.rcParams` yourself as well. This object is *very* granular, and you can see this for yourself.\n"
+      ],
+      "id": "cb36fc27"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: false\n",
+        "# Run on your own machine; it's long.\n",
+        "mpl.rcParamsDefault"
+      ],
+      "id": "5dde94a0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "There are a lot of settings that are specified here:\n"
+      ],
+      "id": "c0f70e76"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(len(mpl.rcParamsDefault))"
+      ],
+      "id": "c4d3e425",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "However, we can manipulate this object since\n"
+      ],
+      "id": "237de5ae"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "isinstance(mpl.rcParamsDefault, dict)"
+      ],
+      "id": "916d4845",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "so we can, if we want, change the values of some keys in `rcParams` to change the style of our visualizations.\n",
+        "\n",
+        "**There are essentially four ways to customize Matplotlib:**\n",
+        "\n",
+        "1.  Modifying rcParams at runtime.\n",
+        "2.  Using style sheets, which are stored in `*.mplstyle` files in a special location on your computer.\n",
+        "3.  Changing your matplotlibrc file.\n",
+        "4.  Manually modifying attributes of your plot when you create it\n",
+        "\n",
+        "::: callout-note\n",
+        "Setting rcParams at runtime takes precedence over style sheets, style sheets take precedence over matplotlibrc files.\n",
+        "\n",
+        "If you change the parameters in rcParams during your session, they will be re-set when you restart the python kernel.\n",
+        ":::\n",
+        "\n",
+        "### Plot with default rcParams\n",
+        "\n",
+        "Let's start with a default mpl plot\n"
+      ],
+      "id": "620019b4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def mpl_plot():\n",
+        "    # DATA FOR PLOTTING\n",
+        "    t = np.arange(0.0, 2.0, 0.01)\n",
+        "    s = 1 + np.sin(2 * np.pi * t)\n",
+        "\n",
+        "    # INITIALIZE\n",
+        "    fig, ax = plt.subplots()\n",
+        "\n",
+        "    # PLOT\n",
+        "    ax.plot(t, s)\n",
+        "    plt.show()\n",
+        "\n",
+        "\n",
+        "mpl_plot()"
+      ],
+      "id": "8fd3b6c1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "and a generic default seaborn plot (using the traditional API)\n"
+      ],
+      "id": "905a7f1f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def sns_plot():\n",
+        "    tips = sns.load_dataset(\"tips\")\n",
+        "    sns.histplot(tips[\"total_bill\"])\n",
+        "    plt.show()\n",
+        "sns_plot()"
+      ],
+      "id": "48ef483d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Customizing the rcParams during runtime\n",
+        "\n",
+        "You can edit the `rcParams` during your session, which will affect all subsequently rendered plots. However, these changes are fleeting, and will be reset to the default values once you re-start your Python session.\n"
+      ],
+      "id": "9bea2dcd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# print(type(plt.rcParams))\n",
+        "plt.rcParams.update(plt.rcParamsDefault)\n",
+        "\n",
+        "print(\"BEFORE:\", plt.rcParams[\"figure.figsize\"])\n",
+        "\n",
+        "# YOU CAN ALSO MODIFY THESE ATTRIBUTES\n",
+        "plt.rcParams[\"figure.figsize\"] = (\n",
+        "    10,\n",
+        "    10,\n",
+        ")  # change the default figure size to a 10in x 10in resolution\n",
+        "print(\"AFTER:\", plt.rcParams[\"figure.figsize\"])\n",
+        "\n",
+        "plt.rcParams[\"axes.grid\"] = True\n",
+        "plt.rcParams[\"axes.linewidth\"] = 2\n",
+        "plt.rcParams[\"lines.linewidth\"] = 4\n",
+        "plt.rcParams[\"lines.linestyle\"] = \"dotted\"\n",
+        "# change the order in which colors are chosen\n",
+        "plt.rcParams[\"axes.prop_cycle\"] = plt.cycler(color=[\"#32a852\", \"r\", \"b\", \"y\"])\n",
+        "plt.rcParams[\"font.size\"] = 16\n",
+        "plt.rcParams[\"axes.facecolor\"] = \"f0f0f0\"\n",
+        "plt.rcParams[\"font.family\"] = \"serif\"\n",
+        "plt.rcParams[\"lines.linewidth\"] = 5\n",
+        "plt.rcParams[\"xtick.labelsize\"] = 24\n",
+        "plt.rcParams[\"ytick.labelsize\"] = 24"
+      ],
+      "id": "80c183fb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mpl_plot()"
+      ],
+      "id": "623cc17d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Notice that the changes happen in seaborn too, since seaborn is based on matplotlib and uses the same style parameters, which have been changed for the session in the chunk above.\n"
+      ],
+      "id": "c136c1bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plot()"
+      ],
+      "id": "c5d4ae1d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# RESET BACK TO DEFAULTS\n",
+        "plt.rcParams.update(plt.rcParamsDefault)\n",
+        "# or\n",
+        "# sns.reset_defaults()"
+      ],
+      "id": "ab4fb446",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Modifying Matplotlib and seaborn themes\n",
+        "\n",
+        "There are several themes available in MPL and seaborn for generating the look and feel of your visualizations.\n"
+      ],
+      "id": "d38012b4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mpl.style.available"
+      ],
+      "id": "f496f2c3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Seaborn has 5 available styles: `darkgrid`, `whitegrid`, `dark`, `white`, and `ticks`.\n",
+        "\n",
+        "To specify a style to use, you can use `mpl.style.use`\n"
+      ],
+      "id": "ce1a657e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.style.use(\"fivethirtyeight\")\n",
+        "sns_plot()\n",
+        "\n",
+        "plt.style.use(\"ggplot\")\n",
+        "sns_plot()\n",
+        "\n",
+        "plt.style.use(\"seaborn-v0_8-white\")\n",
+        "sns_plot()\n",
+        "\n",
+        "plt.style.use(\"default\")  # revert to default\n",
+        "sns_plot()"
+      ],
+      "id": "58302ccd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Let's see if we can extract the `rcParams` that are changed for a pre-built MPL style.\n"
+      ],
+      "id": "9e26e190"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def changed_rcParams(style):\n",
+        "  if style not in mpl.style.available:\n",
+        "    raise ValueError(\"This function only works with pre-built MPL styles\")\n",
+        "  rc_orig = mpl.rcParamsDefault # default\n",
+        "  plt.style.use(style)\n",
+        "  rc_style = mpl.rcParams\n",
+        "  output = {k: rc_style[k] for k in rc_style if rc_style[k] != rc_orig[k]}\n",
+        "  return output\n",
+        "\n",
+        "changed_rcParams('ggplot')"
+      ],
+      "id": "340fea97",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can do something similar for seaborn styles.\n"
+      ],
+      "id": "45b38adc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def changed_sns_style(style):\n",
+        "  if style not in ['darkgrid', 'whitegrid', 'dark', 'white', 'ticks']:\n",
+        "    raise ValueError(\"This function only works with pre-built seaborn styles\")\n",
+        "  rc_orig = mpl.rcParamsDefault\n",
+        "  sns.set_style(style)\n",
+        "  rc_style = sns.axes_style()\n",
+        "  output = {k: rc_style[k] for k in rc_style if rc_style[k] != rc_orig[k]}\n",
+        "  return output\n",
+        "\n",
+        "changed_sns_style(\"white\")"
+      ],
+      "id": "ea9b233b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "You can also search for keywords in `rcParams` keys to help identify keys and values.\n"
+      ],
+      "id": "4e576a0f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mpl.rcParams.find_all('title')"
+      ],
+      "id": "d03e1372",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Now, let's see how we can modify an existing theme to customize elements.\n"
+      ],
+      "id": "9cb8a822"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.set_theme(style='white')\n",
+        "mpl.rcParams['text.color'] = 'red'\n",
+        "mpl.rcParams['font.sans-serif'] = 'DejaVu Sans'\n",
+        "mpl.rcParams['axes.edgecolor'] = \"lightblue\"\n",
+        "sns_plot2()"
+      ],
+      "id": "ddea0549",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Alternatively,\n"
+      ],
+      "id": "d8c631b3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns.set_style(\n",
+        "    style='white', #<1>\n",
+        "    rc = {                                              #<2>\n",
+        "      'text.color': 'red', 'font.sans-serif': 'DejaVu Sans',\n",
+        "      'axes.edgecolor': 'lightblue'\n",
+        "      } #<2>\n",
+        ")\n",
+        "sns_plot2()"
+      ],
+      "id": "99e094b1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Set a base style\n",
+        "2.  Update elements to customize in the specified base style\n",
+        "\n",
+        "In the objects interface\n"
+      ],
+      "id": "1eb57411"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt.theme(\n",
+        "    sns.axes_style(\n",
+        "      style='white',\n",
+        "      rc = {\n",
+        "        'text.color': 'red', 'font.sans-serif': 'DejaVu Sans',\n",
+        "        'axes.edgecolor': 'lightblue'\n",
+        "      }\n",
+        "  )\n",
+        "\n",
+        ")"
+      ],
+      "id": "0e17bea1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# RESET BACK TO DEFAULTS\n",
+        "plt.rcParams.update(plt.rcParamsDefault)"
+      ],
+      "id": "1e30d1f0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Create a new *style* and save to a file\n",
+        "\n",
+        "Matplotlib can read style specifications from files stored in a location specified by `mpl.get_configdir()`. These files wll have the suffix `mplstyle`. If you know the base theme you're going to use, you only need to store the customized bits in the file. You can of course store the full `rcParams` specification of your customized specification if you like.\n",
+        "\n",
+        "Here we're manually storing the customization og the ggplot style.\n"
+      ],
+      "id": "45772476"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from pathlib import Path\n",
+        "\n",
+        "cfgdir = mpl.get_configdir()  # find your configuration folder\n",
+        "p = Path(cfgdir)\n",
+        "stylelib = p / \"stylelib\"\n",
+        "stylelib.mkdir(exist_ok=True)\n",
+        "path = stylelib / \"mycustomstyle.mplstyle\"  # create paths\n",
+        "path.write_text(\n",
+        "    \"\"\" # write into the file\n",
+        "axes.facecolor : f0f0f0\n",
+        "font.family : serif\n",
+        "lines.linewidth : 5\n",
+        "xtick.labelsize : 24\n",
+        "ytick.labelsize : 24\n",
+        "\"\"\"\n",
+        ")"
+      ],
+      "id": "3661b624",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "This creates a new file `mycustomstyle.mplstyle`.\n",
+        "\n",
+        "Reload the matplotlib style library and you'll see this style appear as `mycustomstyle`\n"
+      ],
+      "id": "e495db0f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# BEFORE\n",
+        "sns_plot()"
+      ],
+      "id": "4722c2f2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# LOAD STYLE\n",
+        "plt.style.reload_library()\n",
+        "print(\"mycustomstyle\" in plt.style.available)"
+      ],
+      "id": "fd7fa6f4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# AFTER\n",
+        "plt.style.use([\"ggplot\", \"mycustomstyle\"])\n",
+        "sns_plot()"
+      ],
+      "id": "c2cab3a9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "You will see that there is a hierarchy of customization parameters, for example, under `grid` you have\n"
+      ],
+      "id": "5c0aa408"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "mpl.rcParams.find_all(\"^grid\")"
+      ],
+      "id": "3460d275",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "You can also use `plt.rc` to change multiple aligned parameters in one go. For example,\n",
+        "\n",
+        "```python\n",
+        "plt.rc('grid', edgecolor = 'blue', alpha = 0.5,\n",
+        "  linestyle = 'dashed')\n",
+        "```\n"
+      ],
+      "id": "e3576081"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.rcParams.update(plt.rcParamsDefault)"
+      ],
+      "id": "f330be20",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Creating custom style files programmatically\n",
+        "\n",
+        "Let's create a custom style file programmatically\n"
+      ],
+      "id": "e96e9382"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "white_style=dict( #<1>\n",
+        "  sns.axes_style(\n",
+        "    style='white',\n",
+        "    rc = {\n",
+        "      'text.color': 'red', 'font.sans-serif': 'DejaVu Sans',\n",
+        "      'axes.edgecolor': 'lightblue'\n",
+        "      }\n",
+        "  )\n",
+        ") #<1>\n",
+        "path = stylelib / \"white_custom.mplstyle\"\n",
+        "with open(path, 'w') as f: #<2>\n",
+        "  for key, value in white_style.items():\n",
+        "    f.write(\"%s : %s\\n\" % (key, value))\n",
+        "#<2>\n",
+        "plt.style.reload_library()\n",
+        "print('white_custom' in plt.style.available)"
+      ],
+      "id": "a9c7dfd5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Define a custom style\n",
+        "2.  Save it to a mplstyle file\n",
+        "\n",
+        "####\n"
+      ],
+      "id": "81fb0976"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.style.use('white_custom')\n",
+        "sns_plot2()"
+      ],
+      "id": "e4a638b6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "sns_plt.theme(mpl.style.library['white_custom'])"
+      ],
+      "id": "1a5274f4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Let's try to do a more complex one -- the customization of the `mpl_plot` done earlier.\n"
+      ],
+      "id": "43b8ea5b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "d = dict()\n",
+        "d[\"axes.grid\"] = True\n",
+        "d[\"axes.linewidth\"] = 2\n",
+        "d[\"lines.linewidth\"] = 4\n",
+        "d[\"lines.linestyle\"] = \"dotted\"\n",
+        "# change the order in which colors are chosen\n",
+        "d[\"axes.prop_cycle\"] = plt.cycler(color=[\"#32a852\", \"r\", \"b\", \"y\"])\n",
+        "d[\"font.size\"] = 16\n",
+        "d[\"axes.facecolor\"] = \"f0f0f0\"\n",
+        "d[\"font.family\"] = \"serif\"\n",
+        "d[\"lines.linewidth\"] = 5\n",
+        "d[\"xtick.labelsize\"] = 24\n",
+        "d[\"ytick.labelsize\"] = 24\n",
+        "\n",
+        "\n",
+        "path = stylelib / \"mpl_custom.mplstyle\"\n",
+        "with open(path, 'w') as f:\n",
+        "  for key, value in d.items():\n",
+        "    f.write(\"%s : %s\\n\" % (key, value))\n",
+        "\n",
+        "plt.rcParams.update(plt.rcParamsDefault)\n",
+        "plt.style.reload_library()\n",
+        "print('mpl_custom' in plt.style.available)\n",
+        "\n",
+        "plt.style.use('mpl_custom')\n",
+        "mpl_plot()"
+      ],
+      "id": "819916f9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## The `matplotlibrc` file\n",
+        "\n",
+        "You can save your configuration (going into `rcParams`) in a file named `matplotlibrc`.\n",
+        "\n",
+        "You can have a global one, stored in `mpl.get_configdir()`\n",
+        "\n",
+        "You can also have separate ones per project or folder.\n",
+        "\n",
+        "**Advantage**: You can put the configuration under version control and maintain its provenance.\n",
+        "\n",
+        "The `matplotlibrc` file would look something like this, similar to a python dictionary\n",
+        "\n",
+        "```\n",
+        "axes.axisbelow : True       # Draw axis grid lines and ticks below patches (True); above\n",
+        "                            # patches but below lines ('line'); or above all (False).\n",
+        "                            # Forces grid lines below figures.\n",
+        "font.size : 12              # Font size in pt.\n",
+        "grid.linewidth : 1.2        # In pt.\n",
+        "legend.framealpha : 1       # Legend patch transparency.\n",
+        "legend.scatterpoints : 3    # Number of scatter points in legend.\n",
+        "lines.linewidth : 3         # line width in pt.\n",
+        "```\n",
+        "\n",
+        "Notice that the tags are the same as in rcParams, so you can edit the file in a similar way.\n",
+        "\n",
+        "## Customize subplots/panels\n",
+        "\n",
+        "Creating subplots is quite easy in matplotlib using the `subplots` function\n",
+        "\n",
+        "You can add a title or other customization to just one of the panel\n"
+      ],
+      "id": "904c7748"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.linspace(0, 100, 50)\n",
+        "y = np.random.uniform(low=0, high=10, size=50)\n",
+        "fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 10 / 1.618))\n",
+        "ax1.scatter(x, y, c=\"red\", marker=\"+\")\n",
+        "ax2.bar(x, y)\n",
+        "plt.show()"
+      ],
+      "id": "e86c56be",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = plt.subplots(2, 2, figsize=(10, 12))\n",
+        "ax[0, 0].bar(x, y)\n",
+        "ax[1, 0].bar(x, y)\n",
+        "ax[0, 1].scatter(x, y)\n",
+        "ax[1, 1].plot(x)\n",
+        "ax[1, 1].set_title(\"Plot 4\")\n",
+        "plt.show()"
+      ],
+      "id": "c7c3b4d1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "You can also change the padding between the plots\n"
+      ],
+      "id": "38cb8d93"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(10, 12))\n",
+        "ax1.scatter(x, y, c=\"red\", marker=\"+\")\n",
+        "ax2.bar(x, y)\n",
+        "ax3.scatter(x, y, marker=\"x\")\n",
+        "ax4.barh(x, y)\n",
+        "ax4.set_title(\"Plot 4\")\n",
+        "plt.subplots_adjust(wspace=0.5, hspace=1.0)\n",
+        "plt.show()"
+      ],
+      "id": "199344a2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Axis alignment\n",
+        "\n",
+        "It is often important for comparison purposes that the axes in a panel be on the same scale. This can be achieved by setting the `sharex` and `sharey` parameters in `subplots`, as needed\n"
+      ],
+      "id": "2fc28f6a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.linspace(0, 100, 50)\n",
+        "y1 = np.random.normal(loc=10, scale=2, size=10)\n",
+        "y2 = np.random.normal(loc=20, scale=2, size=10)\n",
+        "fig, ((ax1, ax2)) = plt.subplots(1, 2, figsize=(10, 7))\n",
+        "ax1.plot(y1)\n",
+        "ax2.plot(y2)\n",
+        "plt.show()"
+      ],
+      "id": "1370eb7c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ((ax1, ax2)) = plt.subplots(1, 2, figsize=(10, 7), sharey=True)\n",
+        "ax1.plot(y1)\n",
+        "ax2.plot(y2)\n",
+        "plt.show()"
+      ],
+      "id": "24c682c3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Size considerations\n",
+        "\n",
+        "The size of a plot on your publication is often central to its aesthetics. This size can be specified in each matplotlib plot.\n",
+        "\n",
+        "An aesthetically pleasing ratio of with to height is the *Golden Ratio*, which is approximately 1.618. We can write a function to ensure that for any particular width we desire, we can set the height to meet the Golden ratio.\n"
+      ],
+      "id": "98e317d4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def set_size(width):\n",
+        "    \"\"\"Set aesthetic figure dimensions following golden ratio\n",
+        "    Args:\n",
+        "        width (float): width of the figure in inches (what matplotlib uses)\n",
+        "    Returns:\n",
+        "        fig_dim (tuple): Dimensions of the figure in inches\n",
+        "    \"\"\"\n",
+        "    golden_ratio = (5**0.5 - 1) / 2\n",
+        "    fig_height = width * golden_ratio\n",
+        "    return width, fig_height"
+      ],
+      "id": "9f402187",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.linspace(0, 10, num=1000)\n",
+        "fig, ax = plt.subplots(figsize=set_size(10))\n",
+        "ax.plot(x, np.sin(x))\n",
+        "plt.show()"
+      ],
+      "id": "e0188577",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## The `seaborn.objects` interface\n",
+        "\n",
+        "The `seaborn.objects` interface provides two methods to customize plots, quite similar to the ggplot2 approach in {{< fa brands r-project >}}. The data-driven components are customized using `seaborn.objects.Plot.scale` and the stylistic components with `seaborn.objects.Plot.theme`. We'll just look at `seaborn.objects.Plot.theme` here. The one piece of the customization that will go into the `seaborn.objects.Plot.scale` is the color palette you might use for data-driven groups ([documentation](https://seaborn.pydata.org/generated/seaborn.objects.Plot.scale.html)).\n",
+        "\n",
+        "Let's start with an example using the standard penguins dataset.\n"
+      ],
+      "id": "26b53bb2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.rcParams.update(plt.rcParamsDefault) # reset parameters\n",
+        "penguins = sns.load_dataset(\"penguins\")\n",
+        "penguins.head()"
+      ],
+      "id": "8229e0f6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can create a plot using this data.\n"
+      ],
+      "id": "fd1a379f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "peng_plot = (\n",
+        "  so.Plot(penguins, x = \"bill_length_mm\", y = \"body_mass_g\", color = \"species\")\n",
+        "  .add(so.Dot())\n",
+        "  .add(so.Line(), so.PolyFit(1))\n",
+        "  .facet(\"sex\")\n",
+        "  .label(\n",
+        "    x = \"Bill length (mm)\",\n",
+        "    y = \"Body mass (g)\",\n",
+        "    color = \"Species\",\n",
+        "    col = \"Sex:\",\n",
+        "    # title = \"Bill length vs Body mass among Palmer's penguins\"\n",
+        "  )\n",
+        ")\n",
+        "peng_plot"
+      ],
+      "id": "d81705a6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Updating the theme involves the `theme` method.\n"
+      ],
+      "id": "0420d564"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "peng_plot.theme(sns.axes_style(\"white\")) # setting a pre-built theme"
+      ],
+      "id": "1f55382c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "peng_plot.theme({\n",
+        "  'axes.facecolor': 'yellow',\n",
+        "  'axes.edgecolor': 'orange',\n",
+        "  'grid.color': 'orange'\n",
+        "  }) # changing particular rcParams"
+      ],
+      "id": "9123ccea",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that this process is changing the theme at runtime. The original theme when the plot was created still is stored in the object.\n"
+      ],
+      "id": "fa83de73"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "peng_plot"
+      ],
+      "id": "04bfd6f6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "If we want to have an overall title for this figure, we need to drop down to matplotlib.\n"
+      ],
+      "id": "69f8691a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = plt.figure() #<1>\n",
+        "fig.suptitle(\"Body mass vs bill length among Palmer's penguins\") #<2>\n",
+        "peng_plot.on(fig).show() #<3>"
+      ],
+      "id": "a5a979d0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "1.  Define a Figure (canvas)\n",
+        "2.  Specify a supertitle, which prints outside the axes in the figure\n",
+        "3.  Put the seaborn figure in the canvas and display it. See [here](https://seaborn.pydata.org/generated/seaborn.objects.Plot.on.html) for more details on how `seaborn.objects.Plot.on` works.\n",
+        "\n",
+        "# Online resources\n",
+        "\n",
+        "## Documentation\n",
+        "- [Seaborn Objects interface](https://seaborn.pydata.org/api.html) | [Tutorial](https://seaborn.pydata.org/tutorial/objects_interface.html)\n",
+        "- [Seaborn: Choosing color palettes](https://seaborn.pydata.org/tutorial/color_palettes.html)\n",
+        "- [Seaborn: Controlling figure aesthetics](https://seaborn.pydata.org/tutorial/aesthetics.html)\n",
+        "- [Matplotlib: Locating and formatting ticks](https://matplotlib.org/stable/api/ticker_api.html)\n",
+        "\n",
+        "## Customization\n",
+        "\n",
+        "- The Python Data Science Handbook by Jake Vanderplas has chapters on [creating stylesheets in matplotlib](https://jakevdp.github.io/PythonDataScienceHandbook/04.11-settings-and-stylesheets.html), [customizing ticks](https://jakevdp.github.io/PythonDataScienceHandbook/04.10-customizing-ticks.html), [customizing colorbars](https://jakevdp.github.io/PythonDataScienceHandbook/04.07-customizing-colorbars.html) and [customizing plot legends](https://jakevdp.github.io/PythonDataScienceHandbook/04.07-customizing-colorbars.html)\n",
+        "  - He uses `plt.rc` to modify multiple aligned parameters rather than individually changing items in `plt.rcParams`. For example,\n",
+        "```python\n",
+        "plt.rc('grid', color='w', linestyle='solid')\n",
+        "```\n",
+        "instead of\n",
+        "```python\n",
+        "plt.rcParams['grid.color'] = 'w'\n",
+        "plt.rcParams['grid.linestyle'] = 'solid'\n",
+        "```\n",
+        "\n",
+        "- [Matplotlib: Customizing | [Tutorial](https://seaborn.pydata.org/tutorial/objects_interface.html)\n",
+        "-\n",
+        "## Style sheets\n",
+        "\n",
+        "-   [How to create and use custom matplotlib style sheet](https://towardsdatascience.com/how-to-create-and-use-custom-matplotlib-style-sheet-9393f498063) by Shan Dou\n",
+        "\n",
+        "\n",
+        "## Colors\n",
+        "\n",
+        "- [Plotting with pride: Colors in matplotlib](https://petercbsmith.github.io/color-tutorial.html#part%205)\n",
+        "- [Colors in matplotlib](https://matplotlib.org/stable/gallery/color/index.html)\n",
+        "\n",
+        "# Acknowledgements\n",
+        "\n",
+        "This material was developed by Prof. Hickman in 2023. This was edited, with additional material around `seaborn.objects` and customization approaches by Prof. Dasgupta in 2024."
+      ],
+      "id": "d0d5a9f1"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/abhijit/Library/Python/3.9/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

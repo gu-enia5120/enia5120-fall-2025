@@ -1,0 +1,265 @@
+---
+title: "Themes in data visualization  (R)"
+subtitle: "Styling static visualizations in R"
+author: "DSAN 5200 Instructional Team"
+date: last-modified
+date-format: long
+execute:
+    echo: true
+---
+
+
+## Developing Customized Themes in the ggplot2 Ecosystem in R
+
+The `ggplot2` package in R provides a robust framework for creating elegant and
+informative data visualizations. One of its key features is the ability to
+customize plot themes, which control the non-data elements of a plot, such as
+background color, grid lines, text styles, and more. 
+
+### **Understanding ggplot2 Themes**
+
+A theme in `ggplot2` defines the overall appearance of a plot by modifying non-data elements. The package includes several built-in themes like `theme_gray()` (default), `theme_bw()`, `theme_minimal()`, and others. These can be further customized using the `theme()` function to adjust specific components such as text, lines, and rectangles[1][2].
+
+#### **Key Theme Elements**
+- **`element_line()`**: Customizes line elements like grid lines or axis lines. Parameters include color, size, and linetype.
+- **`element_rect()`**: Modifies rectangular elements like panel backgrounds or legend boxes. Parameters include fill color, border color, and size.
+- **`element_text()`**: Adjusts text elements such as axis labels or titles. Parameters include font size, family, color, and alignment[1][3].
+- `element_blank()`: Removes the element from the visualization
+  
+
+### **Creating Custom Themes**
+
+Custom themes can be created by either modifying an existing theme or defining one from scratch.
+
+#### **1. Modifying Existing Themes**
+The easiest way to create a custom theme is to start with an existing theme (e.g., `theme_minimal()`) and modify specific components using the `%+replace%` operator. For example:
+
+```r
+library(ggplot2)
+
+custom_theme <- function(base_size = 12, base_family = "Arial") {
+  theme_minimal(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      plot.title = element_text(face = "bold", hjust = 0.5),
+      panel.grid.major = element_line(color = "gray80", linetype = "dotted"),
+      axis.text = element_text(color = "blue", size = rel(0.8)),
+      legend.position = "bottom"
+    )
+}
+```
+This approach allows you to inherit default settings and override only the desired elements[3][6].
+
+#### **2. Building Themes from Scratch**
+For complete control over the appearance of a plot, you can define a theme from scratch by specifying all theme elements and setting `complete = TRUE`. This ensures that every component is explicitly defined:
+
+```r
+custom_theme_full <- function(base_size = 12) {
+  theme(
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_rect(fill = "lightgray"),
+    axis.text.x = element_text(size = base_size * 0.8),
+    axis.text.y = element_text(size = base_size * 0.8),
+    plot.title = element_text(face = "bold", size = base_size * 1.2)
+  )
+}
+```
+While more tedious than modifying an existing theme, this method ensures full customization[3][5].
+
+### **Saving and Reusing Custom Themes**
+
+To avoid redefining custom themes in every script, you can save them using `saveRDS()` and load them later with `readRDS()`. For example:
+
+```r
+# Save custom theme
+saveRDS(custom_theme(), "custom_theme.rds")
+
+# Load custom theme
+loaded_theme <- readRDS("custom_theme.rds")
+```
+This approach is especially useful for maintaining consistency across multiple projects[8].
+
+### **Best Practices for Custom Themes**
+1. **Start with an Existing Theme**: Modify a built-in theme to save time while ensuring a solid foundation.
+2. **Use Relative Sizing**: Use the `rel()` function to define sizes relative to a base size for scalability across different plots.
+3. **Centralize Theme Storage**: Save custom themes in a dedicated directory for easy access.
+4. **Set Global Defaults**: Use `theme_set()` to apply a custom theme globally within an R session[5][8].
+
+#### Sources
+
+1. [Creating and using custom ggplot2 themes - The MockUp](https://themockup.blog/posts/2020-12-26-creating-and-using-custom-ggplot2-themes/)
+2. [ggplot2 themes and background colors : The 3 elements - STHDA](https://www.sthda.com/english/wiki/ggplot2-themes-and-background-colors-the-3-elements)
+3. [Custom Themes in ggplot2 - statworx](https://www.statworx.com/en/content-hub/blog/custom-themes-in-ggplot2/)
+4. [Custom themes • thematic - rstudio.github.io](https://rstudio.github.io/thematic/articles/custom.html)
+5. [Elegant Graphics for Data Analysis (3e) - 17 Themes - ggplot2](https://ggplot2-book.org/themes)
+6. [Crate your own theme with ggplot2 - Emanuela Furfaro](https://emanuelaf.github.io/own-ggplot-theme.html)
+7. [How to create your own custom ggplot2 theme (CC152) - YouTube](https://www.youtube.com/watch?v=tplhrRNXx8Q)
+8. [Saving custom ggplot theme for future files - Stack Overflow](https://stackoverflow.com/questions/68815429/saving-custom-ggplot-theme-for-future-files)
+
+
+## Differences between `theme_set`, `theme_update` and `theme_replace`
+
+### Key Differences
+
+| Function         | Scope of Change                              | Does It Replace the Entire Theme? | Use Case                                       |
+|------------------|----------------------------------------------|------------------------------------|-----------------------------------------------|
+| `theme_update()` | Updates specific elements of the current theme | No                                | Add tweaks to the existing theme without overriding it. |
+| `theme_replace()`| Replaces specific elements completely         | No                                | Replace specific elements, ignoring previous settings. |
+| `theme_set()`    | Sets a new global default theme               | Yes                               | Replace the entire default theme for all plots. |
+
+
+### **`theme_update()`**
+- **Purpose**: Updates specific elements of the current default theme.
+- **Behavior**: It modifies only the specified elements of the theme while leaving other elements of the default theme unchanged.
+- **Use Case**: When you want to tweak some aspects of the current theme without overriding it completely.
+
+#### Example:
+```R
+library(ggplot2)
+
+# Update the default theme to use blue axis text
+theme_update(axis.text = element_text(color = "blue"))
+
+# Create a plot to see the updated theme
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+```
+
+In this example, only the axis text color is updated to blue, while all other default theme settings remain unchanged.
+
+---
+
+### **`theme_replace()`**
+- **Purpose**: Replaces specific elements of the current default theme.
+- **Behavior**: Similar to `theme_update()`, but it removes any previous settings for the theme elements you specify. It does not add to existing settings; instead, it completely replaces them.
+- **Use Case**: When you want to completely change specific theme elements, effectively ignoring any previous settings for those elements.
+
+#### Example:
+```R
+# Replace the axis.text with red text and remove any other axis.text settings
+theme_replace(axis.text = element_text(color = "red"))
+
+# Create a plot to see the replaced theme
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+```
+
+In this case, the `axis.text` settings are replaced with the new definition, and any previous settings for `axis.text` (like font size) are removed.
+
+---
+
+### **`theme_set()`**
+- **Purpose**: Sets a new default theme for all subsequent plots.
+- **Behavior**: Completely replaces the current default theme with the specified theme.
+- **Use Case**: When you want to set a completely new theme as the default for all your plots going forward.
+
+#### Example:
+```R
+# Set a new default theme
+theme_set(theme_minimal())
+
+# Create a plot to see the new default theme
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point()
+```
+
+Here, the default theme is set to `theme_minimal()` for all subsequent plots until you explicitly change it again.
+
+---
+
+
+### Summary
+- Use **`theme_update()`** to make incremental updates to the current theme.
+- Use **`theme_replace()`** to completely redefine specific theme elements.
+- Use **`theme_set()`** to replace the entire default theme with a new one. 
+
+## Shading and tinting to change saturation
+
+- **Shading** is adding black to a color
+- **Tinting** is adding white to a color
+
+Here's some code to change shade and tint
+```{r}
+#| echo: true
+col2hex <- function(col) {
+  rgb(t(col2rgb(col)), maxColorValue = 255)
+}
+
+# Color manipulation functions -----------------------------------------------
+
+colshade <- function(col, alpha) {
+  # This function creates a shade from a single color
+  # col = hexcode for color
+  # alpha = proportion of shading (0, 1)
+  x <- t(col2rgb(col))
+  rgb(round(x * alpha), alpha = 255, maxColorValue = 255)
+}
+
+coltint <- function(col, tint_factor) {
+  # This function creates a tint from a single color
+  # col = hexcode for color
+  # tint_factor = proportion of tint (0, 1)
+  x <- t(col2rgb(col))
+  rgb(round(x + (255 - x) * (1 - tint_factor)),
+    alpha = 255,
+    maxColorValue = 255
+  )
+}
+```
+
+These can be used to create palettes to use with your visualizations.
+
+::: {callout-note}
+Can someone contribute similar functions for Python?
+:::
+
+## Matching a specified or company theme
+
+To create a theme that matches your company's branding, you can follow these general steps based on the principles of branding and customization tools:
+
+### **1. Define Your Branding Elements**
+Start by gathering all the essential elements of your company's brand identity:
+
+- **Logo**: Ensure you have a high-resolution version of your company logo.
+- **Color Palette**: Identify your brand's primary and secondary colors, often defined in your brand guidelines.
+- **Typography**: Choose the fonts that represent your brand, including font sizes and styles.
+- **Style Guidelines**: Include specific design preferences, such as minimalism, gradients, or patterns.
+
+### **2. Use Customization Tools**
+
+Depending on the platform or software you're using, customization tools allow you to create themes that reflect your brand. Here are some examples:
+
+- **Global Settings**: Set fonts, font colors, and background colors globally to ensure consistency across all visual elements[2].
+- **Color Palette**: Assign brand colors to different components like buttons, charts, or links. For instance, in charting tools, the first series can use the primary color, and subsequent series can use complementary colors[2][5].
+- **Logos and Images**: Upload your company logo and apply it to headers or footers for consistent branding.
+
+### **3. Customize Specific Elements**
+
+Adjust individual elements to align with your branding:
+
+- **Navigation Colors**: Change navigation bar or menu colors to match your primary branding color.
+- **Text Styles**: Modify text styles for titles, subtitles, and body text. Add placeholder text where necessary for templates[2].
+- **Backgrounds and Borders**: Use branded patterns or solid colors for backgrounds and borders.
+
+### **4. Preview and Test**
+Most platforms provide a preview feature to see how your theme looks across different components (e.g., charts, forms, or tables). Use this feature to ensure all elements align with your branding guidelines[2].
+
+### **5. Save and Apply**
+Once satisfied with the theme:
+- Save it as a reusable template.
+- Apply it globally or selectively to projects, forms, or applications as needed.
+
+### **6. Maintain Consistency**
+To ensure consistent application:
+- Set your custom theme as the default for new projects or forms.
+- Share the theme with team members to standardize its use across departments[1].
+
+
+#### Sources
+
+1. [Ensure Consistent Branding with Your Own Organization Theme](https://www.cognitoforms.com/blog/547/ensure-consistent-branding-with-your-own-organization-theme)
+2. [Create a company theme - everviz Knowledge Base](https://help.everviz.com/article/1265-create-a-company-theme)
+8. [Branding with Custom Themes | SAP Help Portal](https://help.sap.com/docs/SAP_SUCCESSFACTORS_PLATFORM/7e56af8b533f439395da01074e7aca7a/3ba89002f64f44dcb64e0a68d860241c.html)
+
+
+
+> An initial draft of this document was generated using Generative AI and then curated and edited by the authors

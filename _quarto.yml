@@ -1,0 +1,99 @@
+project:
+  type: website
+  pre-render: python scripts/pre.py slides
+  post-render: python scripts/post.py slides
+
+  render:
+    - "*.qmd"
+    - "!*.md"
+
+  resources:
+    - img
+    - "site-page-content/*.pdf"
+    - "slides/Wrap-up.pdf"
+
+website:
+  page-navigation: false
+  title: ENIA 5120
+  search: true
+  sidebar:
+    pinned: true
+    background: "#f1de67" # Arylide Yellow
+    style: docked
+    search: false
+    collapse-level: 1
+    contents:
+      - site-page-content/syllabus.qmd
+      - site-page-content/prep-work.qmd
+      - site-page-content/standards.qmd
+      - section: "Lecture Slides"
+        contents:
+          - href: slides/week-01.qmd
+            target: _blank
+          #          - href: slides/week-02.qmd
+          #            target: _blank
+          #          - href: slides/week-03.qmd
+          #            target: _blank
+          #          - href: slides/week-04.qmd
+          #            target: _blank
+          #          - href: slides/week-05.qmd
+          #            target: _blank
+          #          - href: slides/week-08.qmd
+          #            target: _blank
+          #          - href: slides/week-09.qmd
+          #            target: _blank
+          #          - href: slides/week-10.qmd
+          #            target: _blank
+          #          - href: slides/week-11.qmd
+          #            target: _blank
+          #          - href: slides/week-12.qmd
+          #            target: _blank
+          #          - href: slides/week-13.qmd
+          #            target: _blank
+          #          - href: slides/Wrap-up.pdf
+          #            text: "Wrap-up"
+          #            target: _blank
+      - section: "Project"
+        #        contents:
+        #          - href: project/project.qmd
+        #            text: Overview
+        #          - href: project/dataset.qmd
+        #            text: "1. Dataset/topic proposal"
+        #          - href: project/proposal.qmd
+        #            text: "2. Project proposal"
+        #          - href: project/wip.qmd
+        #            text: "3. Mid-point review and feedback"
+      - section: "Resources"
+        contents:
+          - href: resources/books-links.qmd
+            target: _blank
+  page-footer:
+    left: |
+      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}}<br>
+      {{< var instructor.all >}}<br>
+      All content licensed under a {{< fa brands creative-commons >}}
+      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
+      [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+#      [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
+format:
+  html:
+    theme:
+      light: [cosmo, style/html-sta313.scss]
+      dark: [cosmo, style/html-sta313.scss, style/html-dark.scss]
+    toc: true
+    linkcolor: "#866fa3" # Glossy Grape
+    code-copy: true
+    code-overflow: wrap
+    mainfont: "Atkinson Hyperlegible"
+    link-external-icon: true
+    link-external-newwindow: true
+
+execute:
+  warning: false
+  message: false
+  freeze: auto
+  cache: true
+  eval: true
+  echo: false

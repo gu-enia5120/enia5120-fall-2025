@@ -1,0 +1,22 @@
+---
+title: Observable Plot
+---
+
+## Core learning materials
+
+1. [Documentation](https://observablehq.com/plot/)
+1. [Gallery](https://observablehq.com/@observablehq/plot-gallery)
+1. [Getting started](https://observablehq.com/plot/getting-started)
+1. [Learning Observable](https://observablehq.com/collection/@observablehq/intro-to-observable)
+
+
+## Translating from other toolkits
+
+1. [Plot from ggplot2](https://observablehq.com/@observablehq/plot-from-ggplot2)
+1. [Plot from matplotlib](https://observablehq.com/collection/@observablehq/plot-for-matplotlib-users)
+1. [Plot for D3 users](https://observablehq.com/@observablehq/plot-for-d3-users)
+1. [Observable for Python users](https://observablehq.com/collection/@observablehq/observable-for-python-users)
+1. [Observable for Jupyter users](https://observablehq.com/@observablehq/observable-for-jupyter-users)
+
+
+

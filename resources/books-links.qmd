@@ -1,0 +1,106 @@
+---
+title: "Books and other online resources"
+date: last-modified
+---
+
+# Books
+
+## Data visualization books
+
+[<img src="img/wilke.jpg" style="height:150px; width:112px; border: 3px solid black;"/>](https://clauswilke.com/dataviz/){target="_blank"} 
+[<img src="img/healy.jpg" style="border: 3px solid black;height:150px; width:112px"/>](https://socviz.co/){target="_blank"}
+[<img src="img/dougherty-ilyankou.jpg" style = "border: 3px solid black; height: 150px; width: 112px"/>](https://handsondataviz.org/){target="_blank"}
+
+Clicking on the covers will send you to the free online versions of each book
+
+The following books' content are not available. The links are **non-affiliate**
+Amazon links to the books, or to the books' web pages:
+
+[<img src="img/munzner.png" style="border: 3px solid black;height:150px; width:112px"/>](https://www.cs.ubc.ca/~tmm/vadbook/){target="_blank"}
+[<img src="img/yau.png" style="border: 3px solid black;height:150px; width:112px"/>](https://www.amazon.com/gp/product/0470944889/){target="_blank"}
+[<img src="img/cairo.png" style="border: 3px solid black;height:150px; width:112px"/>](http://www.thefunctionalart.com/p/the-truthful-art-book.html){target="_blank"}
+[<img src="img/tufte.gif" style="border: 3px solid black;height:150px; width:112px"/>](https://www.edwardtufte.com/tufte/books_vdqi){target="_blank"}
+
+:::: {.columns}
+::: {.column width="15%"}
+<img src="https://royal-statistical-society.github.io/datavisguide/images/RSS_logo_colour.png" style="border: 3px solid black; height: 65px;"/>
+:::
+::: {.column width="85%"}
+The [Royal Statistical Society](https://rss.org.uk/) published a guide to [Best Practices in Data Visualization](https://royal-statistical-society.github.io/datavisguide/),
+written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a 
+series of tutorial papers in the journal [Significance](https://academic.oup.com/) that are 
+quite informative in thinking about data visualization. You can read this series [here](https://georgetown.box.com/s/50oajtoml2mm2fybh5fay67e7cjcbf46){target="_blank"}
+:::
+::::
+
+## Toolkits
+
+[<img src="img/ggplot2.jpg" style="border: 3px solid black;height:150px; width:112px;"/>](https://ggplot2-book.org)
+[<img src="img/plotly.png" style="border:3px solid
+  black;height:150px;width:112px;"/>](https://plotly-r.com)
+[<img src="img/wilson.jpg" style="border: 3px solid black; height: 150px;
+width:112px;"/>](https://third-bit.com/js4ds/)
+
+**Non-online books**. Some may be available at GU via Safari or other resources.
+
+[<img src="img/murray.jpeg" style="border: 3px solid black;height:150px; width:112px"/>](https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/){target="_blank"}
+
+## Writing and publishing
+
+[<img src="img/rmd.png" style="width:112px; height:150px; border:3px solid black"/>](https://bookdown.org/yihui/rmarkdown/){target="_blank"}
+[<img src="img/tswd.png" style="width:112px; height:150px; border:3px solid
+black"/>](https://tellingstorieswithdata.com){target="_blank"}
+
+Of partcular interest to us will be chapters on [HTML documents](https://bookdown.org/yihui/rmarkdown/html-document.html){target="_blank"} and [HTML Presentations](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html){target="_blank"}
+
+
+
+------------------------------------------------------------------------
+
+# Web references
+
+## Data visualization
+
+- The Royal Statistical Society's [Best Practices for Data Visualization](https://royal-statistical-society.github.io/datavisguide/) guide (Krause, Rennie, Tarran, 2024)
+-   [Flowing Data](https://www.flowingdata.com): This is one of our favorite sites for learning data viz. There are several [tutorials](https://flowingdata.com/category/tutorials/) in R for different graphics, as well as other languages. Nathan Yau, who runs the website, also has 2 excellent [books](https://flowingdata.com/books/) on data viz, as well as a few self-guided [courses](https://flowingdata.com/courses/) for data viz in R.
+  -   [Flowing Data tutorials](https://flowingdata.com/category/tutorials/), with
+many in R 
+-   [JunkCharts](https://junkcharts.typepad.com): Critiques of chartjunk + junk art
+-   [I want hue](https://medialab.github.io/iwanthue/): Colors for data scientists
+-   [BusinessPundit's Guide to Infographics](https://www.businesspundit.com/guide-to-infographics/)
+-   [plotly reference](https://plotly.com/r/){target="_blank"}: The plotly reference, that provides examples and code for various plot types using R. There are also interfaces for [Python](https://plotly.com/python/){target="_blank"}. There is a [special section](https://plotly.com/ggplot2/){target="_blank"} looking at converting `ggplot2` graphics to plotly graphics.
+
+
+## Publishing 
+
+- [Quarto](https://www.quarto.org){target="_blank"}
+
+## R-related
+
+- [Cheatsheets](https://posit.co/resources/cheatsheets/){target="_blank"} from
+Posit.co (formerly RStudio)
+-   [ggplot2 reference](https://ggplot2.tidyverse.org/){target="_blank"}: The definitive guide to `ggplot2`. Check out the pages for the different functions for great examples
+-   [R graph gallery](https://www.r-graph-gallery.com/){target="_blank"}: Example-filled site for different R-based graphs, especially in `ggplot2`. The ads can be a bit irritating, but the content is great.
+-   [Themes to improve your ggplot figures](https://rfortherestofus.com/2019/08/themes-to-improve-your-ggplot-figures/)
+-   [R Graphics Cookbook](http://www.cookbook-r.com/Graphs/){target="_blank"} by Winston Chang
+-   [htmlwidgets for R](https://www.htmlwidgets.org/){target="_blank"}: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper
+
+## Python-related
+
+- [Python graph gallery](https://python-graph-gallery.com/){target="_blank"}: Example-filled site for different Python-based graphs, especially in `matplotlib` and `seaborn`. The ads can be a bit irritating, but the content is great.
+- [Matplotlib cheatsheets and handouts](https://matplotlib.org/cheatsheets/)
+
+## Javascript/Observable/Plotly
+
+-   [Observable](https://observablehq.com/): A great site for learning about Javascript and D3. There are many examples of different types of graphics, and you can fork the code and modify it to see how it works. There are also many tutorials on how to use the site and how to create different types of graphics.
+    - [Learning
+  Observable](https://observablehq.com/collection/@observablehq/intro-to-observable),
+  a series of 10 notebooks to get you started
+    - [Observable and Javascript](https://observablehq.com/@observablehq/learning-observable-javascript-and-observable)
+    - [Observable for Python
+    Users](https://observablehq.com/collection/@observablehq/observable-for-python-users)
+    - [Plot for Matplotlib
+    Users](https://observablehq.com/collection/@observablehq/plot-for-matplotlib-users)
+
+
+

@@ -1,0 +1,419 @@
+---
+title: Syllabus
+date: last-modified
+date-format: "dddd MMM D, YYYY [at] hh:mm a"
+---
+
+::: callout-important
+**You must familiarize yourself with this document. It is thorough and covers our expectations and policies.**
+:::
+
+:::: {.columns}
+::: {.column width="50%"}
+### Instructors
+
+-   [Abhijit Dasgupta](mailto:abhijit.dasgupta@georgetown.edu)
+-   [Marck Vaisman](mailto:marck.vaisman@georgetown.edu)
+
+:::
+::: {.column width="50%"}
+### TAs
+
+{{< var ta_list >}}
+
+:::
+::::
+
+::: callout-note
+This course is taught by and co-managed by multiple instructors. We are all equal and you should feel free to reach out to any of us. The course materials are co-developed and the same lectures and deliverables will be provided to all sections. There will of course be some individual variations given instructor individuality and different class and student dynamics in each section.
+:::
+
+### Communication
+
+::: callout-important
+The primary mode of communication will be **Slack**. The course's Slack workspace is [{{< var course.slack >}}.]({{< var course.slack >}}){target="_blank"}. You will receive an invitation to join.
+
+**Instructional team e-mail:** [dsan5200-instructors@georgetown.edu](mailto:dsan5200-instructors@georgetown.edu). This is the preferred way of contacting the professors privately. Please read the [communication and Slack rules.](#communication-and-slack-rules)
+:::
+
+## Course description
+
+This course explores the art and science of data visualization from the ground up and deepens your analytical thinking through the lens of data visualization. We discuss the power of visualizations to communicate data in an engaging, informative, and accessible way. Drawing from statistics, graphic design, and computer and information science techniques, you will learn to think critically about data, choose optimal static and dynamic visualization methods, recognize dishonest visualization techniques, and distinguish between visualizations used for data exploration and publication. We cover popular visualization libraries in R and Python, front-end web development tools for digital publishing with D3.js and other JavaScript libraries, and commercial applications like Tableau. By the end of the course, you will have a deep understanding of data visualization techniques, design principles for generating publication-quality graphics, manipulating data for analysis and visualization, and designing compelling visualizations for different purposes and audiences.
+
+
+
+## Learning objectives
+
+* Increase your data visualization vocabulary
+* Understand what comes before and after creating visualizations
+* Think critically about data
+* Distinguish between using visualizations for data exploration or presentation
+* Manipulate and arrange data for the purposes of analysis and visualization
+* Design effective visualizations for different purposes and audiences
+* Apply a set of rules to create highly effective and engaging data visualizations
+* Understand the role of data visualization within data science and for solving problems
+* Build dynamic visualizations designed for digital and interactive consumption
+* Use an array of tools including [R](http://cran.r-project.org), [Python](http://www.python.org), [Tableau](http://www.tableau.com), [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and web tools (HTML, CSS, etc.) to execute all of the above. This includes particular packages and libraries like `ggplot2`, `matplotlib/seaborn`, `plotly`,`Observable Plot`, `Vega/VegaLite/Altair`, and others.
+
+## Pre-requisites
+
+-   Experience with R and Python. **Note:** We will be using R and Python
+roughly equally and in parallel
+-   Experience with git and GitHub
+
+Some tutorials to brush up on these skills:
+
+-   [git - the simple guide](http://rogerdudler.github.io/git-guide/)
+-   [Nico Riedmann's Learn git concepts, not commands](https://dev.to/unseenwizzard/learn-git-concepts-not-commands-4gjc)
+-   The DSAN Bootcamp materials
+
+## Required resources
+
+### Computer
+
+You should have a laptop (no Chromebooks, please). Windows, Mac or Linux machines are acceptable. Please bring your machine to class, since we will be having interactive activities and labs.
+
+### Paper and writing/drawing implements
+
+You should have access to blank paper and writing/drawing instruments. A pad/notebook and a pen/pencil will suffice. We think sketching out ideas for data visualizations is important for learning this process, and we will encourage this during interactive portions of the class.
+
+## Evaluation
+
+- Engagement: 25%
+- Assignments: 30%
+- Lab completions and quizzes: 10%
+- Group project: 35%
+
+## Learning activities
+
+### Class format
+
+We will run this course in a [flipped classroom](https://en.wikipedia.org/wiki/Flipped_classroom) format, where we will provide readings and pre-work that you will be expected to complete **prior to class time**. Class time will be devoted to an interactive discussion of the concepts and topics introduced in the pre-work. We will also use class time to introduce case studies and laboratory work that reinforce conceptual and technical aspects of data visualization. As such, it is expected that students come prepared to **ask and answer questions**, discuss ideas and concepts, share learnings around the topic of the week, and generally engage and participate with the class and the class content. We also plan to have small group activities during class reinforcing concepts and techniques.
+
+#### Readings and pre-work
+
+Readings, case studies and other pre-work will be assigned every week to introduce you to the topic of the week. It is **essential** that you complete this prior to class and are prepared to participate and engage in class. These materials will be made available [here](prep-work.html){target=_blank} by Thursday of the previous week.
+
+::: callout-important
+You must read the readings and complete the pre-work prior to class time so you are prepared to participate in class.
+:::
+
+#### Case studies and laboratory work
+
+We will discuss a case study (that will be provided in the pre-work) most weeks, and have a laboratory section discussing both conceptual and technical aspects every week. These laboratory sessions will use both R and Python, as well as other technologies we will cover during the course.
+
+::: callout-important
+* You will start the labs in class but you will most likely not finish. It is your responsibility to complete the labs to enable your learning. **Completing the labs succesfully is also part of your grade.**
+:::
+
+#### Engagement and participation
+
+We don't expect merely token participation (just asking simple or rhetorical questions) but high quality content in the engagements. You are all high-quality students, and this is the expectation we carry. There are several ways we would like to interact with you:
+
+- Participation during class, asking questions, clarifying doubts, and even answering your classmate's questions
+- Each class will have a discussion on Canvas, for each section. You will be expected to ask a question or comment on an issue you have read in the pre-work, to be done before class time. These will help us guide the in-class discussions.
+- During class time, in addition to speaking up, feel free to add questions and comments to the discussion; we will glance at your contributions to further continue discussions during class.
+
+We will keep track of who is contributing to the class as a baseline evaluation, but full credit can be obtained with higher quality questions, comments, independent ideas, evidence of analytic thinking, and insights that help us all understand. We're really looking forward to this aspect of the class.
+
+::: callout-important
+* **Classes and labs will not be recorded.** The best way to learn and benefit from this class is in-person participation.
+:::
+
+### Homework assignments
+
+There will be several homework assignments. The goal of these problem sets is to solidify concepts and learning objectives each week, as we build skills and knowledge throughout the semester towards creating effective data visualizations. These will typically involve developing code in R and/or Python and/or Javascript and submitting both the code and the output produced. Assignments will be submitted through GitHub Classroom. Most assignments will require you to develop and submit Quarto documents.
+
+Homework assignments will be published after Wednesday class, and will be due Friday of the following week at 5pm.
+
+::: callout-important
+Familiarize yourself with the [submission requirements](#submitting-your-work) and the [late policy](#late-policy) for this class.
+:::
+
+::: callout-warning
+
+Data visualization is neither simple nor easy. It requires thought, creativity and understanding both the data and the topic/aspect/answer you are trying to express through the visualization. Give yourself ample time to think, explore and experiment. It is very easy for us to determine when you didn't give yourself enough time and [_phoned it in_](https://www.merriam-webster.com/grammar/phone-it-in-vs-dialed-in#:~:text=To%20phone%20it%20in%20is,to%20show%20up%20when%20expected.){target="_blank"}. **Start early!**
+:::
+
+
+::: callout-note
+We reuse problem set questions, we expect students not to copy, refer to, or look at the solutions in preparing their answers. Since this is a graduate-level class, we expect students to want to learn and not search online for answers. [See the Academic Integrity section for more details.](#academic-integrity)
+:::
+
+### Online Quizzes
+
+We will often have quizzes to ensure that the pre-work material has been absorbed. _These will be graded for completion_.
+
+There will be unannounced quizzes a few times during the semester, at random intervals and times. The quizzes ensure you are keeping up with the material presented in the class. The material for the quizzes will be drawn from lectures, labs, and readings.
+
+::: callout-important
+Missed quizzes cannot be made up.
+:::
+
+## Data Visualization project
+
+You will assemble into groups of 3 to 4 students in any section. Over the course of the semester you will work towards creating an interactive data-driven story through several data visualizations and narrative content. Details will be available in the [project website.](../project/project.qmd)
+
+::: callout-important
+The project will have several milestones that are cumulative in nature. Therefore, we will grade the project after the final submission with a holistic project rubric. We will grade the milestones in a qualitative way, and we will provide feedback and a trending grade with each milestone. It is up to you to incorporate the feedback provided. If your milestone trending grade is lower than you expected, and you do not incorporate the feedback we provide for improvement, do not expect your final project grade to improve.
+
+In addition, each team member will complete a peer evaluation for their group and provide feedback to everyone's contribution. Every team member is expected to contribute equally to their project. If peer evaluations indicate that students within a team are not contributing equally, those students will receive a grade penalty and a lower grade than the rest of their team.
+:::
+
+
+
+Total is 100 points and the final grade will be based on the scale below. There is no plan to curve the final grade.
+
+-   A: >= 95
+-   A-: >= 90, < 95
+-   B+: >= 87 < 90
+-   B: >= 83, < 87
+-   B-: >= 80, < 83
+-   C: >= 70, < 80 (last passing grade)
+-   F: < 70
+
+::: callout-important
+Failing this course is highly unlikely but definitely possible. Reasons for failing include but are not limited to:
+
+* Consistently delivering work that is significantly below expectations
+* Consistently missing deliverables
+* Consistently missing class
+* Being found in violation of [academic integrity](#academic-integrity)
+:::
+
+### Grading philosophy
+
+Some of the assignments you will work on are open-ended and some are not (i.e. specific tasks). Grading is generally holistic, meaning that there may not always be specific point value for individual elements of a deliverable. Each deliverable submission is unique and will be compared to all other submissions.
+
+Deliverables that:
+
+-   **Exceed the requirements and expectations** are typically considered A level work.
+-   **Just meet the requirements and expectations** are typically considered B to A- level work.
+-   **Do not meet the requirements** are typically considered B- or lesser level work.
+
+Partial credit will be given where appropriate.
+
+All deliverables must meet general quality requirements that are expected from students at the graduate school level as well as specific requirements that will be provided for each deliverable.
+
+::: callout-important
+Portions of each assignment may be programmatically graded. To facilitate this, it is **essential** that folder structures and file names exactly match what the provided directions state. Failure to do so makes grading more difficult and time-consuming, especially in a class with over 100 students, and will lead to partial point deductions.
+:::
+
+Points **will** be deducted for any of the following reasons:
+
+* Your technical approach is fundamentally flawed
+* Your analytical decisions are unjustified
+* You did not follow any direct and specific instructions
+* You do not have proper spelling and grammar in the textual parts of the assignment
+* Your code is not properly formatted (we prefer `styler` for R and `black` for Python, but a consistent style is imperative regardless)
+* Your deliverable has missing sections
+* Your overall presentation and/or writing is sloppy
+* Your code does not follow best coding practices
+* Your code has no comments (including the areas where GAI was used)
+* Your repository has either more or less files than those requested
+* You use absolute references (file paths, urls, etc.) paths in your scripts
+* You alter the repository structure in any way
+* You do not use GitHub Classroom
+* You do not use `git` effectively
+* You manually upload files to GitHub through the web and do not use `git`
+* You use incorrect file names (wrong extensions, wrong case, etc.)
+
+
+## Submitting your work
+
+### GitHub Classroom
+
+We use Github Classroom for all class deliverables: assignments, labs, and the final project. Submitting your work is the process of committing your files and results to your local repository **and** then pushing it to GitHub.
+
+::: callout-important
+You must submit everything through GitHub!
+Make sure you understand the difference between a git `commit` and a `push`, and that you `push` your repository successfully to GitHub.
+:::
+
+We will enforce submission deadlines on Github Classroom, where **the repositories will be write-locked after the due date**. If you need an extension, you must request one by sending an e-mail to [dsan5200-instructors@georgetown.edu](mailto:dsan5200-instructors@georgetown.edu) **no later than noon on the due date**. We can then unlock your assignment repository for a late submission. The [late submission policy](#late-policy) will be applicable to all extensions and late submissions.
+
+### Late policy
+
+::: callout-important
+We will use **commit datetime** and **commit message** to assess lateness.
+:::
+
+For homework assignments, if an extension past the deadline is requested, the following rules will apply:
+
+- A late penalty of 10% per day, up to 4 days, will be assessed for assignments and labs that are submitted after the deadline. You may still submit a missed lab or assignment up until the last day of classes with a maximum possible grade of 60%.
+- Missed in-class quizzes cannot be made up and will receive a grade of zero.
+- Project deadlines are fixed and have no extensions or late penalty. A missed project deliverable will receive a grade of zero.
+
+
+## Other course policies
+
+### Attendance and punctuality
+
+Attendance is mandatory and will be taken. Given the technical nature of this course, and the breadth of topics discussed, you are expected to attend each class, to complete all readings, and to participate actively in lectures, discussions and exercises. We understand there may be times you may need to miss class, please inform us in advance if you are not able to attend class for any reason. However, it is up to you to keep up.
+
+### Participation
+
+We love participation. Read. Raise your hand. Ask questions. Make comments. Challenge us. Acknowledge us. If we speak for three hours to a silent classroom, it is a lot more boring and tiring for everyone.
+
+### Laptop and phone use
+
+You must bring your laptop to class to work on labs. No phone use is allowed during lecture.
+
+We prefer you not use your laptops during class discussions. You're welcome to take handwritten notes or use an iPad or tablet. You may use your laptop during lecture to take notes, but please refrain from other activities. We reserve the right to ask you to put your phones and laptops away. You may not use your computer or phone while your peers or guest speakers are presenting.
+
+### Communication and Slack Rules
+-   All announcements will be posted on {{< var university.lms >}} and Slack
+-   Use Slack for any question you may have about the course, about assignments or any technical issue. This way everyone can learn from each others questions. We will be monitoring and providing answers on a regular basis. **Make sure you understand [what is allowed in Slack.](#what-is-allowed)**
+-   All communication with the professors should be either on general Slack channels or via the {{< var course.email >}}  email. **Do not email us individually.**. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.
+    - Slack DMs are not to be used **unless** we DM you first and you can respond to our message. Students may not initiate DMs.
+    - Any email sent to an individual instructor or the instructors' e-mail containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.
+    - E-mails of a personal nature (personal issues or difficulties, questions regarding grades, seeking help with a personal issue, etc.) should be sent to the instructors' e-mail ({{< var course.email >}}).
+-   Keep an eye on the questions posted in Slack. Use the search function. It's very possible that we have already answered a question, and we reserve the right to point you to the syllabus, previous Slack messages, or other document containing the information requested.
+-   Assignment, lab and project questions will only be answered on Slack up to 12 hours before something is due.
+
+### Open Door Policy
+
+Please approach or get in touch with us if something is not working for you regarding the class, methods, etc. Our pledge to you is to provide the best learning experience possible. If you have any issue please do not wait until the last minute to speak with us. You will find that we are fair, reasonable, and flexible and we care deeply about your learning and success.
+
+## Academic Integrity
+
+As a Jesuit, Catholic university, committed to the education of the whole person, Georgetown expects all members of the academic community, students and faculty, to strive for excellence in scholarship and in character.The University spells out the specific minimum standards for academic integrity in its Honor Code, as well as the procedures to be followed if academic dishonesty is suspected.
+
+Over and above the honor code, in this course we will seek to create an engaged and passionate learning environment, characterized by respect and courtesy in both our discourse and our ways of paying attention to one another.
+
+The code of academic integrity applies to all courses at Georgetown University. Please become familiar with the code. All students are expected to maintain the highest level of academic integrity throughout the course of the semester.Please note that acts of academic dishonesty during the course will be prosecuted and harsh penalties may be sought for such acts. Students are responsible for knowing what acts constitute academic dishonesty. The code may be found at [https://bulletin.georgetown.edu/regulations/honor/.](https://bulletin.georgetown.edu/regulations/honor/)
+
+::: callout-caution
+**We have a ZERO TOLERANCE POLICY and students found to be in violation will be reported and penalized. The consequences of any violation may include: additional points penalty, getting a grade of zero, automatically failing the course, and suspension or expulsion from the program.**
+:::
+
+### Definition of collaboration
+
+In the spirit of fostering a collective and inclusive learning environment, we acknowledge that you will work and study with your peers. We also acknowledge that you use web resources (code examples specifically), and that in writing a program many of you will most likely use the same libraries, functions and other similar instructions in your scripts. However:
+
+* **You must write your own code.** This will be verified for every assignment against every submission, and any similarity greater than 60% between students on a given assignment will be considered to be unauthorized collaboration.
+
+
+### What is allowed
+
+* Collaborating with other students during in-class labs to facilitate collective learning
+* Using Slack for helping one-another as long as:
+    * You do not provide answers directly but only discuss potential approaches
+    * You only share up to a few lines of code for everyone's benefit for the resolution of a specific question or issue
+* Using anything (code, resources, tips, approaches, etc.) provided by the instructional team
+
+### What is forbidden
+
+The following actions are **not permitted in any way** and are considered a violation of academic integrity:
+
+* Copying and sharing code _between students_ in **individual** assignments or _across goups_ in the **group project**
+* Sharing anything on any individual assignment
+* Using code snippets found online (stack overflow, etc.) and not commenting the source
+* Plagiarism of any kind
+* Using any [Generative Artificial Intelligence](#use-of-generative-ai-tools) tool without acknowledging it
+* Making your private GitHub repos public
+* Sharing or posting any course materials anywhere
+* Faking or tampering with git commit dates or messages
+
+## Use of Generative AI tools
+
+We recognize the recent availability of very powerful generative AI tools like Chat-GPT, GitHub Copilot, and others. These tools can help us be more effective and we embrace their use.
+
+
+::: callout-important
+You are allowed to use GAI tools in a _non substantial_ way.
+
+What does _non substantial_ mean?
+
+**It means that whatever is generated by GAI must not make up the majority of the work you do.**
+
+Any use of these tools must abide to the following rules:
+
+- You must acknowledge the use of GAI tools
+- You must comment which code blocks were generated by GAI
+- You must note which written sections were generated by GAI
+- If you used a prompt to ask the GAI tool to do something, you must include it
+
+For this course, valid uses of gen-ai can be:
+
+* Generating a code snippet or single function to perform a task. It's likely you'll need to modify it anyway
+* Commenting code
+* Using it as a writing aid (spelling, grammar, word choice, limited phrase translation) on content created by you, not the actual writing. **Note:** non-native English speakers cannot use gen-ai to fully translate content written in another language.
+* Generating visualization starter code (you can accelerate the generation of the starting point, but you still need to customize the viz with all the best practices learned in this course)
+
+:::
+
+
+
+::: callout-warning
+Any deviation from these rules is considered a violation of [academic integrity](#academic-integrity) and will be acted on.
+
+You typically KNOW when you are crossing the line into un-ethical territory. As a general rule, If you feel like you might be crossing a line, then you probably are!
+:::
+
+In addition to what we are stating here, please take a look at the [Data Science and Analytics Program's ChatGPT usage guidelines.](DSAN-ChatGPT-usage-guidelines.pdf)
+
+## {{< var university.name >}} resources and policies
+
+### Georgetown University’s Plagiarism Policy
+
+Plagiarism or academic dishonesty in any form will not be tolerated and may result in a failing grade. All Honor Code violations will be submitted to the Honor Council.
+
+Academic integrity is central to the learning and teaching process. Students are expected to conduct themselves in a manner that will contribute to the maintenance of academic integrity by making all reasonable efforts to prevent the occurrence of academic dishonesty. Academic dishonesty includes (but is not limited to) obtaining or giving aid on an examination, having unauthorized prior knowledge of an examination, doing work for another student, and plagiarism of all types, including copying code.
+
+Plagiarism is the intentional or unintentional presentation of another person’s idea or product as one’s own. Plagiarism includes, but is not limited to the following: copying verbatim all or part of another’s written work; using phrases, charts, figures, illustrations, code, or mathematical/scientific solutions without citing the source; paraphrasing ideas, conclusions, or research without citing the source; and using all or part of a literary plot, poem, film, musical score, or other artistic product without attributing the work to its creator. Students can avoid unintentional plagiarism by following carefully accepted scholarly practices. Notes taken for papers and research projects should accurately record sources cited, quoted, paraphrased, or summarized sources and articles should be acknowledged in footnotes.
+
+### Honor System
+
+All students are expected to maintain the highest standards of academic and personal integrity in pursuit of their education at Georgetown. Academic dishonesty, including plagiarism, in any form, is a serious offense, and students found in violation are subject to academic penalties that include, but are not limited to, failure of the course, termination from the program, and revocation of degrees already conferred. All students are held to the Georgetown University Honor Code. For more information about the Honor Code [http://gervaseprograms.georgetown.edu/honor/](http://gervaseprograms.georgetown.edu/honor/)
+
+### Academic Integrity and Courtesy
+
+As a Jesuit, Catholic university committed to the education of the whole person, Georgetown expects all members of the academic community, students and faculty, to strive for excellence in scholarship and in character. The University spells out the specific minimum standards for academic integrity in its Honor Code and the procedures to be followed if academic dishonesty is suspected. Over and above the honor code, in this course, we will seek to create an engaged and passionate learning environment characterized by respect and courtesy in both our discourse and our ways of paying attention to one another.
+
+### Academic Resource Center
+
+[The Academic Resource Center (ARC)](https://academicsupport.georgetown.edu/) is the campus office responsible for reviewing medical documentation and determining reasonable accommodations for students with disabilities. You can reach the ARC via email at [arc@georgetown.edu.](mailto::arc@georgetown.edu)
+
+### Counseling and Psychiatric Services (CAPS)
+
+As Georgetown faculty, you are among the most important individuals in some of the students’ lives. They may turn to you when they are struggling and in times of need, or you may be one of the first to notice when they are distressed.
+
+The CAPS website has tips for faculty on how to deal with struggling or distressed students.
+202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician.
+
+### Emergency Preparedness and HOYAlert
+We encourage all faculty to become familiar with Georgetown’s Office of Emergency Management and sign up for HOYAlert to receive important safety and University operating status updates. Faculty teaching at the Georgetown Downtown campus might also want to sign up for AlertDC to obtain safety and traffic updates.
+
+### Office of Institutional Compliance and Ethics
+
+The Office of Institutional Compliance and Ethics supports and coordinates many compliance-related activities the University undertakes. With the endorsement and assistance of the University’s senior leadership, this Office is responsible for leading the development, implementation, and operation of the Georgetown Institutional Compliance and Ethics Program.
+
+### Office of Institutional Diversity, Equity and Affirmative Action (IDEAA)
+
+The mission of IDEAA is to promote a deep understanding and appreciation among the diverse members of the University community to result in justice and equality in educational, employment, and contracting opportunities, as well as to lead efforts to create an inclusive academic and work environment.
+
+### Title IX/Sexual Misconduct
+
+Georgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator. Suppose you disclose an incident of sexual misconduct to a professor in or outside of the classroom (except disclosures in papers). In that case, that faculty member must report the incident to the Title IX Coordinator or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet—[Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found on the [Sexual Misconduct Website.](https://sexualassault.georgetown.edu/resourcecenter)
+
+If you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:
+
+* Health Education Services for Sexual Assault Response and Prevention: confidential email sarp@georgetown.edu
+* Counseling and Psychiatric Services (CAPS): 202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician
+
+_Title IX Sexual Misconduct Statement_ Please know that as faculty members, we are committed to supporting survivors of sexual misconduct, including relationship violence and sexual assault. However, university policy also requires us to report any disclosures about sexual misconduct to the Title IX Coordinator, whose role is to coordinate the University’s response to sexual misconduct.
+
+Georgetown has a number of fully confidential professional resources who can provide support and assistance to survivors of sexual assault and other forms of sexual misconduct. These resources include:
+
+* [Getting Help](https://sexualassault.georgetown.edu/get-help/#)
+* Jen Schweer, MA, LPC<br/>Associate Director of Health Education Services for Sexual Assault Response and Prevention (202) 687-032<br/>[jls242@georgetown.edu](mailto:jls242@georgetown.edu)
+* Erica Shirley, Trauma Specialist<br/>Counseling and Psychiatric Services (CAPS)<br/>(202) 687-6985<br/>[els54@georgetown.edu](mailto:els54@georgetown.edu)
+
+### Threat Assessment
+
+Georgetown University established its Threat Assessment program as part of an extensive emergency planning initiative. The program at Georgetown has been developed and implemented to meet current best practices and national standards for hazard planning in higher education institutions and workplace violence prevention.
+
+### Special Accommodations
+
+If you believe that you have a disability that will affect your performance in this class, don’t hesitate to get in touch with the [Academic Resource Center](mailto:arc@georgetown.edu) for further information. The center is located in the Leavey Center, Suite 335. The Academic Resource Center is the campus office responsible for reviewing documentation provided by students with disabilities and determining reasonable accommodations according to the Americans with Disabilities Act (ADA) and University policies.
