@@ -1,5 +1,383 @@
 [
   {
+    "objectID": "slides/week-01.html#agenda-and-goals-for-today",
+    "href": "slides/week-01.html#agenda-and-goals-for-today",
+    "title": "Lecture 1",
+    "section": "Agenda and Goals for Today",
+    "text": "Agenda and Goals for Today\n\nCourse overview and expectations\nMeet and Greet\nWhat is Data Science?\nSome foundational concepts\nR and JASP",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#abhijit-dasgupta",
+    "href": "slides/week-01.html#abhijit-dasgupta",
+    "title": "Lecture 1",
+    "section": "Abhijit Dasgupta",
+    "text": "Abhijit Dasgupta\n\n“AI” is the new line of makeup in data science; putting it on makes even BS attractive.\n\n\n\n\nData Science Director at AstraZeneca supporting Oncology R&D (lung, breast, bladder, GI, ovarian)\n\nbiomarkers, clinical studies, strategy, decision-making, education\nBayesian, survival, visualization, high-dimensional, causality\n\nAdjunct Professor at Georgetown since 2020, GMU since 2018\nData science consultant in a wide variety of domains, from the USPS to telecom to environmental health and epidemiology\nAcademia (TJU, GU), government (NIH), industry (AZ) and consulting\n\nCancer (15 years), Rheumatology (10 years), Psychiatry\n\nR and reproducible research evangelist\n\nPython is cool too!!\n\n\nFun Facts\n\nI’m a 5th degree black belt in Aikido,\nExploring whiskey, tequila, will drink beer in a pinch, no wine\n\n\n\n\n\nCommunity theater",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#one-view-of-data-science",
+    "href": "slides/week-01.html#one-view-of-data-science",
+    "title": "Lecture 1",
+    "section": "One view of data science",
+    "text": "One view of data science",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#what-skills-might-we-need-for-this",
+    "href": "slides/week-01.html#what-skills-might-we-need-for-this",
+    "title": "Lecture 1",
+    "section": "What skills might we need for this?",
+    "text": "What skills might we need for this?\n\nA question to answer\nAnalytic thinking\nA gnawing feeling that there might be something else going on\nDomain knowledge (or a knowledgable collaborator)\nAn understanding of uncertainty and randomness (we’ll talk about this a bit next)\n\n\n\n\n\n\n\nImportant\n\n\nData is just that, data. What gives it import are context, understanding limitations, and inherent patterns that might be explained or extrapolated",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#uncertainty-what-uncertainty",
+    "href": "slides/week-01.html#uncertainty-what-uncertainty",
+    "title": "Lecture 1",
+    "section": "Uncertainty? What uncertainty?",
+    "text": "Uncertainty? What uncertainty?\n\nThis is what you might think when you hear ML / AI results, or even stats results\n\nThere is a number that’s reported\nBut there is also some confidence interval or p-value (in stats, not in ML / AI)\n\n\nWhat is this stuff? and why do we care?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#we-also-want-to-relate-things-dont-we",
+    "href": "slides/week-01.html#we-also-want-to-relate-things-dont-we",
+    "title": "Lecture 1",
+    "section": "We also want to relate things, don’t we?",
+    "text": "We also want to relate things, don’t we?\n\nCorrelation\nRegression\nClusters\n\nBut there can be many answers from the same data. How do we judge?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#other-questionsconcepts-of-interest",
+    "href": "slides/week-01.html#other-questionsconcepts-of-interest",
+    "title": "Lecture 1",
+    "section": "Other questions/concepts of interest?",
+    "text": "Other questions/concepts of interest?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#an-adaptable-view-of-whats-coming",
+    "href": "slides/week-01.html#an-adaptable-view-of-whats-coming",
+    "title": "Lecture 1",
+    "section": "An (adaptable) view of what’s coming",
+    "text": "An (adaptable) view of what’s coming",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#course-description",
+    "href": "slides/week-01.html#course-description",
+    "title": "Lecture 1",
+    "section": "Course description",
+    "text": "Course description\n\nAn introduction to data science\n\nWe will explore the principles, methods, and tools that drive modern data-driven inquiry, inference, prediction and decision-making.\nA strong foundation in the core elements of the field, including data wrangling, exploratory analysis, statistical modeling, machine learning, and effective data visualization.\nA conceptual and practical understanding of uncertainty, association and causality.\nUsing R and JASP to ingest, manipulate, visualize, infer and predict",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#learning-objectives",
+    "href": "slides/week-01.html#learning-objectives",
+    "title": "Lecture 1",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nDevelop a foundational understanding of how to translate data into insights, inference and predictions\nUnderstand the central role of uncertainty and how it influences how we interpret data\nThink critically about data, including the appropriateness of study design, representativeness, and what you can really answer from a particular data set.\nAppreciate issues like bias and confounding that can affect our inferences from data\nUse high-quality data visualizations to tell your story\nEffectively use statistical software to ingest, transform, analyze, visualize and report on data in the appropriate context\nCommunicate findings effectively using compelling visualizations and clear, audience-appropriate narratives.\nCollaborate on data-centric projects, developing teamwork and project management skills essential in professional data science environments.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#software",
+    "href": "slides/week-01.html#software",
+    "title": "Lecture 1",
+    "section": "Software",
+    "text": "Software\n\n\n\nIn particular, we will make heavy use of the tidyverse group of packages and its philosophy\n\nJASP\n\nA -driven GUI-based teaching and analysis tool.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#youll-think-a-lot-and-participate-a-lot-in-this-course",
+    "href": "slides/week-01.html#youll-think-a-lot-and-participate-a-lot-in-this-course",
+    "title": "Lecture 1",
+    "section": "You’ll think a lot and participate a lot in this course",
+    "text": "You’ll think a lot and participate a lot in this course\n\nReadings and pre-work\nEmphasis on conceptual understanding\nIn class discussion (we may cold call so you need to be ready)\nCase studies and laboratory work",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#we-have-high-expectations-and-strong-opinions.-this-is-a-professional-graduate-level-program.",
+    "href": "slides/week-01.html#we-have-high-expectations-and-strong-opinions.-this-is-a-professional-graduate-level-program.",
+    "title": "Lecture 1",
+    "section": "We have high expectations and strong opinions!. This is a professional, graduate level program.",
+    "text": "We have high expectations and strong opinions!. This is a professional, graduate level program.\n\nYou must do excellent work. This is a high quality program and you are all great learners\nYou must develop and use excellent analytical and critical thinking skills.\nYour spelling and grammar must be accurate.\nYour discussion contributions must be thoughtful, perhaps even insightful.\nAll work must look professional, and have requisite titles, labels, source references, annotations and other textual elements in regular English",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#lets-avoid-this",
+    "href": "slides/week-01.html#lets-avoid-this",
+    "title": "Lecture 1",
+    "section": "Let’s avoid this",
+    "text": "Let’s avoid this",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#bookmark-these-links",
+    "href": "slides/week-01.html#bookmark-these-links",
+    "title": "Lecture 1",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#grades",
+    "href": "slides/week-01.html#grades",
+    "title": "Lecture 1",
+    "section": "Grades",
+    "text": "Grades\n\nAttendance: 10%\nEngagement and active learning: 20%\nAssignments: 30%\nLab completions and quizzes: 10%\nProject: 30%",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#what-the-heck-is-engagement-and-active-learning",
+    "href": "slides/week-01.html#what-the-heck-is-engagement-and-active-learning",
+    "title": "Lecture 1",
+    "section": "What the heck is “engagement and active learning”?",
+    "text": "What the heck is “engagement and active learning”?\n\nParticipation during class, asking questions, clarifying doubts, and even answering your classmate’s questions\nWe will do a “Muddied waters” exercise as a discussion/survey on Canvas after every class. You have to answer 3 questions briefly:\n\nWhat was one thing that clicked for you during class?\nWhat was one thing that you’re most confused about after class?\nWhat is one thing that could improve your experience during class in understanding the concepts?\n\nWe will have a shared Google Doc open during class for shared note-taking, so we can co-learn and learn from each other\nWe will use Slack channels to discuss weekly readings and concepts before, during and after class.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "slides/week-01.html#were-gonna-have-an-awesome-time",
+    "href": "slides/week-01.html#were-gonna-have-an-awesome-time",
+    "title": "Lecture 1",
+    "section": "We’re gonna have an awesome time!",
+    "text": "We’re gonna have an awesome time!",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 1"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html",
+    "href": "site-page-content/standards.html",
+    "title": "Minimum standards for deliverables",
+    "section": "",
+    "text": "Warning\n\n\n\nViolation of these guidelines will result in an automatic deduction of 1 grade step",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#code",
+    "href": "site-page-content/standards.html#code",
+    "title": "Minimum standards for deliverables",
+    "section": "Code",
+    "text": "Code",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "title": "Minimum standards for deliverables",
+    "section": "Rendered output (PDF, html, etc.)",
+    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#use-of-git",
+    "href": "site-page-content/standards.html#use-of-git",
+    "title": "Minimum standards for deliverables",
+    "section": "Use of git",
+    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "resources/js/vl.html",
+    "href": "resources/js/vl.html",
+    "title": "Vega-Lite & Altair",
+    "section": "",
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+  },
+  {
+    "objectID": "resources/js/vl.html#core-documentation",
+    "href": "resources/js/vl.html#core-documentation",
+    "title": "Vega-Lite & Altair",
+    "section": "",
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+  },
+  {
+    "objectID": "resources/books-links.html",
+    "href": "resources/books-links.html",
+    "title": "Books and other online resources",
+    "section": "",
+    "text": "Introduction to Modern Statistics (2e) by Mine Cetinkaya-Rundel and Johanna Hardin (2024) https://openintro-ims.netlify.app/\nR for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). https://r4ds.hadley.nz/\nStatistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). https://moderndive.com/v2/index.html",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-science-books",
+    "href": "resources/books-links.html#data-science-books",
+    "title": "Books and other online resources",
+    "section": "Data science books",
+    "text": "Data science books\n\nIntroduction to Environmental Data Science by Jerry Davis (2025). https://bookdown.org/igisc/EnvDataSci/\nTidy Modeling with R by Max Kuhn and Julia Silge (2023). https://www.tmwr.org/\nGeocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). https://r.geocompx.org/\nGeographic Data Science with R: Visualizing and Analyzing Environmental Change by Michael C. Wimberley (2023). https://bookdown.org/mcwimberly/gdswr-book/",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-visualization-books",
+    "href": "resources/books-links.html#data-visualization-books",
+    "title": "Books and other online resources",
+    "section": "Data visualization books",
+    "text": "Data visualization books\n   \nClicking on the covers will send you to the free online versions of each book\nThe following books’ content are not available. The links are non-affiliate Amazon links to the books, or to the books’ web pages:\n   \n\n\n\n\nThe Royal Statistical Society published a guide to Best Practices in Data Visualization, written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a series of tutorial papers in the journal Significance that are quite informative in thinking about data visualization. You can read this series here",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#toolkits",
+    "href": "resources/books-links.html#toolkits",
+    "title": "Books and other online resources",
+    "section": "Toolkits",
+    "text": "Toolkits\n\n\nJASP\n\nBayesian Inference in JASP: A Guide for Students by Mark A Goss-Sampson, Johnny van Doorn and EJ Wagenmakers (2020). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf\nStatistical Analysis in JASP: A Guide for Students by Mark A Goss-Sampson (2025). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#writing-and-publishing",
+    "href": "resources/books-links.html#writing-and-publishing",
+    "title": "Books and other online resources",
+    "section": "Writing and publishing",
+    "text": "Writing and publishing\n \nOf partcular interest to us will be chapters on HTML documents and HTML Presentations",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#publishing",
+    "href": "resources/books-links.html#publishing",
+    "title": "Books and other online resources",
+    "section": "Publishing",
+    "text": "Publishing\n\nQuarto",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#r-related",
+    "href": "resources/books-links.html#r-related",
+    "title": "Books and other online resources",
+    "section": "R-related",
+    "text": "R-related\n\nCheatsheets from Posit.co (formerly RStudio)\nggplot2 reference: The definitive guide to ggplot2. Check out the pages for the different functions for great examples\nR graph gallery: Example-filled site for different R-based graphs, especially in ggplot2. The ads can be a bit irritating, but the content is great.\nThemes to improve your ggplot figures\nR Graphics Cookbook by Winston Chang\nhtmlwidgets for R: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science and Analytics",
+    "section": "",
+    "text": "This course website was last rendered on Tue Sep 09, 2025 at 02:42 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+  },
+  {
+    "objectID": "index.html#sections-and-meeting-locations",
+    "href": "index.html#sections-and-meeting-locations",
+    "title": "Data Science and Analytics",
+    "section": "Sections and meeting locations",
+    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
+  },
+  {
+    "objectID": "index.html#bookmark-these-links",
+    "href": "index.html#bookmark-these-links",
+    "title": "Data Science and Analytics",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
+  },
+  {
+    "objectID": "index.html#calendar",
+    "href": "index.html#calendar",
+    "title": "Data Science and Analytics",
+    "section": "Calendar",
+    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
+  },
+  {
+    "objectID": "resources/js/plot.html",
+    "href": "resources/js/plot.html",
+    "title": "Observable Plot",
+    "section": "",
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#core-learning-materials",
+    "href": "resources/js/plot.html#core-learning-materials",
+    "title": "Observable Plot",
+    "section": "",
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#translating-from-other-toolkits",
+    "href": "resources/js/plot.html#translating-from-other-toolkits",
+    "title": "Observable Plot",
+    "section": "Translating from other toolkits",
+    "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
+  },
+  {
     "objectID": "site-page-content/syllabus.html",
     "href": "site-page-content/syllabus.html",
     "title": "Syllabus",
@@ -94,7 +472,7 @@
     "href": "site-page-content/syllabus.html#other-course-policies",
     "title": "Syllabus",
     "section": "Other course policies",
-    "text": "Other course policies\n\nAttendance and punctuality\nAttendance is mandatory and will be taken. Please be punctual and respectful and remain for the full period until excused.\nGiven the technical nature of this course, and the breadth of topics discussed, you are expected to attend each class, to complete all readings, and to participate actively in lectures, discussions and exercises. We understand there may be times you may need to miss class; please inform us in advance if you are not able to attend class for any reason so we can provide class materials and also prepare for a smaller classroom experience. However, it is up to you to keep up.\nPlease don’t take advantage of my sympathy and empathy. There are legitimate reasons for missing class, including illness, family emergencies, and unavoidable work situations. Let me know as soon as you can if you will not be able to attend class.\n\n\nParticipation\nWe love participation. Read. Raise your hand. Ask questions. Make comments. Challenge us. Acknowledge us. If we speak for three hours to a silent classroom, it is a lot more boring and tiring for everyone.\n\n\nLaptop and phone use\nYou must bring your laptop to class to work on labs. No phone use is allowed during lecture.\nWe would prefer that during class time, you use your laptops for class-specific activities, including analyses, on-the-fly searches for understanding and note-taking. This class is not easy, so your attention and focus will help you succeed.\n\n\nCommunication and Slack Rules\n\nAll announcements will be posted on Canvas and Slack\nUse Slack for any question you may have about the course, about assignments or any technical issue. This way everyone can learn from each others questions. We will be monitoring and providing answers on a regular basis. Make sure you understand what is allowed in Slack.\nAll communication with the professor should be either on general Slack channels or via the abhijit.dasgupta@gerogetown.edu email. *. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.\n\nSlack DMs are not to be used unless we DM you first and you can respond to our message. Students may not initiate DMs.\nAny email sent to the instructor containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.\nE-mails of a personal nature (personal issues or difficulties, questions regarding grades, seeking help with a personal issue, etc.) should be sent to the instructors’ e-mail (abhijit.dasgupta@gerogetown.edu).\n\nKeep an eye on the questions posted in Slack. Use the search function. It’s very possible that we have already answered a question, and we reserve the right to point you to the syllabus, previous Slack messages, or other document containing the information requested.\nAssignment, lab and project questions will only be answered on Slack up to 12 hours before something is due.\n\n\n\nOpen Door Policy\nPlease approach or get in touch with me if something is not working for you regarding the class, methods, etc. My pledge to you is to provide the best learning experience possible. If you have any issue please do not wait until the last minute to speak with us. I care deeply about your learning and success.\nIf you are struggling in any way, reach out so we can consider accommodations to improve your experience. Let me know early and often how you’re doing. I will also be checking in. There are many resources that you can avail if you are going to physical or mental issues. Please reach out and I’m ready to help.",
+    "text": "Other course policies\n\nAttendance and punctuality\nAttendance is mandatory and will be taken. Please be punctual and respectful and remain for the full period until excused.\nGiven the technical nature of this course, and the breadth of topics discussed, you are expected to attend each class, to complete all readings, and to participate actively in lectures, discussions and exercises. We understand there may be times you may need to miss class; please inform us in advance if you are not able to attend class for any reason so we can provide class materials and also prepare for a smaller classroom experience. However, it is up to you to keep up.\nPlease don’t take advantage of my sympathy and empathy. There are legitimate reasons for missing class, including illness, family emergencies, and unavoidable work situations. Let me know as soon as you can if you will not be able to attend class.\n\n\nParticipation\nWe love participation. Read. Raise your hand. Ask questions. Make comments. Challenge us. Acknowledge us. If we speak for three hours to a silent classroom, it is a lot more boring and tiring for everyone.\n\n\nLaptop and phone use\nYou must bring your laptop to class to work on labs. No phone use is allowed during lecture.\nWe would prefer that during class time, you use your laptops for class-specific activities, including analyses, on-the-fly searches for understanding and note-taking. This class is not easy, so your attention and focus will help you succeed.\n\n\nCommunication and Slack Rules\n\nAll announcements will be posted on Canvas and Slack\nUse Slack for any question you may have about the course, about assignments or any technical issue. This way everyone can learn from each others questions. We will be monitoring and providing answers on a regular basis. Make sure you understand what is allowed in Slack.\nAll communication with the professor should be either on general Slack channels or via the abhijit.dasgupta@georgetown.edu email. *. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.\n\nSlack DMs are not to be used unless we DM you first and you can respond to our message. Students may not initiate DMs.\nAny email sent to the instructor containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.\nE-mails of a personal nature (personal issues or difficulties, questions regarding grades, seeking help with a personal issue, etc.) should be sent to the instructors’ e-mail (abhijit.dasgupta@georgetown.edu).\n\nKeep an eye on the questions posted in Slack. Use the search function. It’s very possible that we have already answered a question, and we reserve the right to point you to the syllabus, previous Slack messages, or other document containing the information requested.\nAssignment, lab and project questions will only be answered on Slack up to 12 hours before something is due.\n\n\n\nOpen Door Policy\nPlease approach or get in touch with me if something is not working for you regarding the class, methods, etc. My pledge to you is to provide the best learning experience possible. If you have any issue please do not wait until the last minute to speak with us. I care deeply about your learning and success.\nIf you are struggling in any way, reach out so we can consider accommodations to improve your experience. Let me know early and often how you’re doing. I will also be checking in. There are many resources that you can avail if you are going to physical or mental issues. Please reach out and I’m ready to help.",
     "crumbs": [
       "Syllabus"
     ]
@@ -127,186 +505,6 @@
     "text": "Georgetown University resources and policies\n\nGeorgetown University’s Plagiarism Policy\nPlagiarism or academic dishonesty in any form will not be tolerated and may result in a failing grade. All Honor Code violations will be submitted to the Honor Council.\nAcademic integrity is central to the learning and teaching process. Students are expected to conduct themselves in a manner that will contribute to the maintenance of academic integrity by making all reasonable efforts to prevent the occurrence of academic dishonesty. Academic dishonesty includes (but is not limited to) obtaining or giving aid on an examination, having unauthorized prior knowledge of an examination, doing work for another student, and plagiarism of all types, including copying code.\nPlagiarism is the intentional or unintentional presentation of another person’s idea or product as one’s own. Plagiarism includes, but is not limited to the following: copying verbatim all or part of another’s written work; using phrases, charts, figures, illustrations, code, or mathematical/scientific solutions without citing the source; paraphrasing ideas, conclusions, or research without citing the source; and using all or part of a literary plot, poem, film, musical score, or other artistic product without attributing the work to its creator. Students can avoid unintentional plagiarism by following carefully accepted scholarly practices. Notes taken for papers and research projects should accurately record sources cited, quoted, paraphrased, or summarized sources and articles should be acknowledged in footnotes.\n\n\nHonor System\nAll students are expected to maintain the highest standards of academic and personal integrity in pursuit of their education at Georgetown. Academic dishonesty, including plagiarism, in any form, is a serious offense, and students found in violation are subject to academic penalties that include, but are not limited to, failure of the course, termination from the program, and revocation of degrees already conferred. All students are held to the Georgetown University Honor Code. For more information about the Honor Code http://gervaseprograms.georgetown.edu/honor/\n\n\nAcademic Integrity and Courtesy\nAs a Jesuit, Catholic university committed to the education of the whole person, Georgetown expects all members of the academic community, students and faculty, to strive for excellence in scholarship and in character. The University spells out the specific minimum standards for academic integrity in its Honor Code and the procedures to be followed if academic dishonesty is suspected. Over and above the honor code, in this course, we will seek to create an engaged and passionate learning environment characterized by respect and courtesy in both our discourse and our ways of paying attention to one another.\n\n\nAcademic Resource Center\nThe Academic Resource Center (ARC) is the campus office responsible for reviewing medical documentation and determining reasonable accommodations for students with disabilities. You can reach the ARC via email at arc@georgetown.edu.\n\n\nCounseling and Psychiatric Services (CAPS)\nAs Georgetown faculty, you are among the most important individuals in some of the students’ lives. They may turn to you when they are struggling and in times of need, or you may be one of the first to notice when they are distressed.\nThe CAPS website has tips for faculty on how to deal with struggling or distressed students. 202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician.\n\n\nEmergency Preparedness and HOYAlert\nWe encourage all faculty to become familiar with Georgetown’s Office of Emergency Management and sign up for HOYAlert to receive important safety and University operating status updates. Faculty teaching at the Georgetown Downtown campus might also want to sign up for AlertDC to obtain safety and traffic updates.\n\n\nOffice of Institutional Compliance and Ethics\nThe Office of Institutional Compliance and Ethics supports and coordinates many compliance-related activities the University undertakes. With the endorsement and assistance of the University’s senior leadership, this Office is responsible for leading the development, implementation, and operation of the Georgetown Institutional Compliance and Ethics Program.\n\n\nOffice of Institutional Diversity, Equity and Affirmative Action (IDEAA)\nThe mission of IDEAA is to promote a deep understanding and appreciation among the diverse members of the University community to result in justice and equality in educational, employment, and contracting opportunities, as well as to lead efforts to create an inclusive academic and work environment.\n\n\nTitle IX/Sexual Misconduct\nGeorgetown University and its faculty are committed to supporting survivors and those impacted by sexual misconduct, which includes sexual assault, sexual harassment, relationship violence, and stalking. Georgetown requires faculty members unless otherwise designated as confidential, to report all disclosures of sexual misconduct to the University Title IX Coordinator or a Deputy Title IX Coordinator. Suppose you disclose an incident of sexual misconduct to a professor in or outside of the classroom (except disclosures in papers). In that case, that faculty member must report the incident to the Title IX Coordinator or Deputy Title IX Coordinator. The coordinator will, in turn, reach out to the student to provide support, resources, and the option to meet—[Please note that the student is not required to meet with the Title IX coordinator.]. More information about reporting options and resources can be found on the Sexual Misconduct Website.\nIf you would prefer to speak to someone confidentially, Georgetown has a number of fully confidential professional resources that can provide support and assistance. These resources include:\n\nHealth Education Services for Sexual Assault Response and Prevention: confidential email sarp@georgetown.edu\nCounseling and Psychiatric Services (CAPS): 202.687.6985 or after hours, call (833) 960-3006 to reach Fonemed, a telehealth service; individuals may ask for the on-call CAPS clinician\n\nTitle IX Sexual Misconduct Statement Please know that as faculty members, we are committed to supporting survivors of sexual misconduct, including relationship violence and sexual assault. However, university policy also requires us to report any disclosures about sexual misconduct to the Title IX Coordinator, whose role is to coordinate the University’s response to sexual misconduct.\nGeorgetown has a number of fully confidential professional resources who can provide support and assistance to survivors of sexual assault and other forms of sexual misconduct. These resources include:\n\nGetting Help\nJen Schweer, MA, LPCAssociate Director of Health Education Services for Sexual Assault Response and Prevention (202) 687-032jls242@georgetown.edu\nErica Shirley, Trauma SpecialistCounseling and Psychiatric Services (CAPS)(202) 687-6985els54@georgetown.edu\n\n\n\nThreat Assessment\nGeorgetown University established its Threat Assessment program as part of an extensive emergency planning initiative. The program at Georgetown has been developed and implemented to meet current best practices and national standards for hazard planning in higher education institutions and workplace violence prevention.\n\n\nSpecial Accommodations\nIf you believe that you have a disability that will affect your performance in this class, don’t hesitate to get in touch with the Academic Resource Center for further information. The center is located in the Leavey Center, Suite 335. The Academic Resource Center is the campus office responsible for reviewing documentation provided by students with disabilities and determining reasonable accommodations according to the Americans with Disabilities Act (ADA) and University policies.",
     "crumbs": [
       "Syllabus"
-    ]
-  },
-  {
-    "objectID": "resources/js/plot.html",
-    "href": "resources/js/plot.html",
-    "title": "Observable Plot",
-    "section": "",
-    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
-  },
-  {
-    "objectID": "resources/js/plot.html#core-learning-materials",
-    "href": "resources/js/plot.html#core-learning-materials",
-    "title": "Observable Plot",
-    "section": "",
-    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
-  },
-  {
-    "objectID": "resources/js/plot.html#translating-from-other-toolkits",
-    "href": "resources/js/plot.html#translating-from-other-toolkits",
-    "title": "Observable Plot",
-    "section": "Translating from other toolkits",
-    "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Science and Analytics",
-    "section": "",
-    "text": "This course website was last rendered on Tue Sep 09, 2025 at 12:03 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
-  },
-  {
-    "objectID": "index.html#sections-and-meeting-locations",
-    "href": "index.html#sections-and-meeting-locations",
-    "title": "Data Science and Analytics",
-    "section": "Sections and meeting locations",
-    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
-  },
-  {
-    "objectID": "index.html#bookmark-these-links",
-    "href": "index.html#bookmark-these-links",
-    "title": "Data Science and Analytics",
-    "section": "Bookmark these links!",
-    "text": "Bookmark these links!\n\nCourse website: https://webbedfeet.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nGitHub Organization for your deliverables: https://github.com/gu-enia5120/\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@gerogetown.edu\nCanvas: &lt;https://georgetown.instructure.com/courses/&gt;"
-  },
-  {
-    "objectID": "index.html#calendar",
-    "href": "index.html#calendar",
-    "title": "Data Science and Analytics",
-    "section": "Calendar",
-    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
-  },
-  {
-    "objectID": "resources/books-links.html",
-    "href": "resources/books-links.html",
-    "title": "Books and other online resources",
-    "section": "",
-    "text": "Introduction to Modern Statistics (2e) by Mine Cetinkaya-Rundel and Johanna Hardin (2024) https://openintro-ims.netlify.app/\nR for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). https://r4ds.hadley.nz/\nStatistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). https://moderndive.com/v2/index.html",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#data-science-books",
-    "href": "resources/books-links.html#data-science-books",
-    "title": "Books and other online resources",
-    "section": "Data science books",
-    "text": "Data science books\n\nIntroduction to Environmental Data Science by Jerry Davis (2025). https://bookdown.org/igisc/EnvDataSci/\nTidy Modeling with R by Max Kuhn and Julia Silge (2023). https://www.tmwr.org/\nGeocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). https://r.geocompx.org/\nGeographic Data Science with R: Visualizing and Analyzing Environmental Change by Michael C. Wimberley (2023). https://bookdown.org/mcwimberly/gdswr-book/",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#data-visualization-books",
-    "href": "resources/books-links.html#data-visualization-books",
-    "title": "Books and other online resources",
-    "section": "Data visualization books",
-    "text": "Data visualization books\n   \nClicking on the covers will send you to the free online versions of each book\nThe following books’ content are not available. The links are non-affiliate Amazon links to the books, or to the books’ web pages:\n   \n\n\n\n\nThe Royal Statistical Society published a guide to Best Practices in Data Visualization, written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a series of tutorial papers in the journal Significance that are quite informative in thinking about data visualization. You can read this series here",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#toolkits",
-    "href": "resources/books-links.html#toolkits",
-    "title": "Books and other online resources",
-    "section": "Toolkits",
-    "text": "Toolkits\n\n\nJASP\n\nBayesian Inference in JASP: A Guide for Students by Mark A Goss-Sampson, Johnny van Doorn and EJ Wagenmakers (2020). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf\nStatistical Analysis in JASP: A Guide for Students by Mark A Goss-Sampson (2025). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#writing-and-publishing",
-    "href": "resources/books-links.html#writing-and-publishing",
-    "title": "Books and other online resources",
-    "section": "Writing and publishing",
-    "text": "Writing and publishing\n \nOf partcular interest to us will be chapters on HTML documents and HTML Presentations",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#publishing",
-    "href": "resources/books-links.html#publishing",
-    "title": "Books and other online resources",
-    "section": "Publishing",
-    "text": "Publishing\n\nQuarto",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#r-related",
-    "href": "resources/books-links.html#r-related",
-    "title": "Books and other online resources",
-    "section": "R-related",
-    "text": "R-related\n\nCheatsheets from Posit.co (formerly RStudio)\nggplot2 reference: The definitive guide to ggplot2. Check out the pages for the different functions for great examples\nR graph gallery: Example-filled site for different R-based graphs, especially in ggplot2. The ads can be a bit irritating, but the content is great.\nThemes to improve your ggplot figures\nR Graphics Cookbook by Winston Chang\nhtmlwidgets for R: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/js/vl.html",
-    "href": "resources/js/vl.html",
-    "title": "Vega-Lite & Altair",
-    "section": "",
-    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
-  },
-  {
-    "objectID": "resources/js/vl.html#core-documentation",
-    "href": "resources/js/vl.html#core-documentation",
-    "title": "Vega-Lite & Altair",
-    "section": "",
-    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
-  },
-  {
-    "objectID": "site-page-content/standards.html",
-    "href": "site-page-content/standards.html",
-    "title": "Minimum standards for deliverables",
-    "section": "",
-    "text": "Warning\n\n\n\nViolation of these guidelines will result in an automatic deduction of 1 grade step",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
-  },
-  {
-    "objectID": "site-page-content/standards.html#code",
-    "href": "site-page-content/standards.html#code",
-    "title": "Minimum standards for deliverables",
-    "section": "Code",
-    "text": "Code",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
-  },
-  {
-    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
-    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
-    "title": "Minimum standards for deliverables",
-    "section": "Rendered output (PDF, html, etc.)",
-    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
-  },
-  {
-    "objectID": "site-page-content/standards.html#use-of-git",
-    "href": "site-page-content/standards.html#use-of-git",
-    "title": "Minimum standards for deliverables",
-    "section": "Use of git",
-    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
-    "crumbs": [
-      "Minimum standards for deliverables"
     ]
   }
 ]
