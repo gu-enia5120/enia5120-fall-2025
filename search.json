@@ -238,18 +238,63 @@
     ]
   },
   {
-    "objectID": "resources/js/vl.html",
-    "href": "resources/js/vl.html",
-    "title": "Vega-Lite & Altair",
+    "objectID": "site-page-content/about.html",
+    "href": "site-page-content/about.html",
+    "title": "Abhijit Das Gupta",
     "section": "",
-    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+    "text": "Abhijit Das Gupta is a Data Science Director at AstraZeneca. He works at the interface of statistics and machine learning, with broad experience in statistical modeling and machine learning, bioinformatics, optimization, signal processing, and data visualization. He holds a PhD in Biostatistics with earlier training in Mathematical Statistics. He has been using R for over 25 years for a wide variety of applications in biomedical research, as well as for data-driven reports and presentations.\nAbhijit is adjunct faculty at Georgetown University, where he currently teaches courses in Data Visualization and Big Data & Cloud Computing and is a mentor to the Capstone project within the MS in Data Science program, as well as teaching introductory Data Science for the MS in Environment and International Affairs program. He is also adjunct faculty at George Mason University where he guest lectures twice a year. He is a certified Carpentries instructor. He co-founded and organized the Statistical Programming DC meetup (formerly R Users Group DC) for several years and got to know several luminaries in the field, including DJ Patil, Hadley Wickham, Max Kuhn, Frank Harrell and others.\nOutside of work, Abhijit is an aikido instructor holding a 5th degree black belt, having practiced the art since 1994. He teaches in Frederick County, MD. He is also active in community theater productions with Ebong Theatrix, a Bengali theater group in the DC area.",
+    "crumbs": [
+      "Abhijit Das Gupta"
+    ]
   },
   {
-    "objectID": "resources/js/vl.html#core-documentation",
-    "href": "resources/js/vl.html#core-documentation",
-    "title": "Vega-Lite & Altair",
+    "objectID": "resources/js/plot.html",
+    "href": "resources/js/plot.html",
+    "title": "Observable Plot",
     "section": "",
-    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#core-learning-materials",
+    "href": "resources/js/plot.html#core-learning-materials",
+    "title": "Observable Plot",
+    "section": "",
+    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
+  },
+  {
+    "objectID": "resources/js/plot.html#translating-from-other-toolkits",
+    "href": "resources/js/plot.html#translating-from-other-toolkits",
+    "title": "Observable Plot",
+    "section": "Translating from other toolkits",
+    "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science and Analytics",
+    "section": "",
+    "text": "This course website was last rendered on Tue Sep 09, 2025 at 03:08 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+  },
+  {
+    "objectID": "index.html#sections-and-meeting-locations",
+    "href": "index.html#sections-and-meeting-locations",
+    "title": "Data Science and Analytics",
+    "section": "Sections and meeting locations",
+    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
+  },
+  {
+    "objectID": "index.html#bookmark-these-links",
+    "href": "index.html#bookmark-these-links",
+    "title": "Data Science and Analytics",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
+  },
+  {
+    "objectID": "index.html#calendar",
+    "href": "index.html#calendar",
+    "title": "Data Science and Analytics",
+    "section": "Calendar",
+    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
   },
   {
     "objectID": "resources/books-links.html",
@@ -329,53 +374,18 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Science and Analytics",
+    "objectID": "resources/js/vl.html",
+    "href": "resources/js/vl.html",
+    "title": "Vega-Lite & Altair",
     "section": "",
-    "text": "This course website was last rendered on Tue Sep 09, 2025 at 02:42 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
   },
   {
-    "objectID": "index.html#sections-and-meeting-locations",
-    "href": "index.html#sections-and-meeting-locations",
-    "title": "Data Science and Analytics",
-    "section": "Sections and meeting locations",
-    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
-  },
-  {
-    "objectID": "index.html#bookmark-these-links",
-    "href": "index.html#bookmark-these-links",
-    "title": "Data Science and Analytics",
-    "section": "Bookmark these links!",
-    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
-  },
-  {
-    "objectID": "index.html#calendar",
-    "href": "index.html#calendar",
-    "title": "Data Science and Analytics",
-    "section": "Calendar",
-    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
-  },
-  {
-    "objectID": "resources/js/plot.html",
-    "href": "resources/js/plot.html",
-    "title": "Observable Plot",
+    "objectID": "resources/js/vl.html#core-documentation",
+    "href": "resources/js/vl.html#core-documentation",
+    "title": "Vega-Lite & Altair",
     "section": "",
-    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
-  },
-  {
-    "objectID": "resources/js/plot.html#core-learning-materials",
-    "href": "resources/js/plot.html#core-learning-materials",
-    "title": "Observable Plot",
-    "section": "",
-    "text": "Documentation\nGallery\nGetting started\nLearning Observable"
-  },
-  {
-    "objectID": "resources/js/plot.html#translating-from-other-toolkits",
-    "href": "resources/js/plot.html#translating-from-other-toolkits",
-    "title": "Observable Plot",
-    "section": "Translating from other toolkits",
-    "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
+    "text": "Vega-LiteAltair\n\n\n\nDocumentation\nExamples\nTutorials\nIntroduction to Vega-Lite from UW IDL\nAPI\nPlot vs Vega-Lite\n\n\n\n\nDocumentation\nExamples"
   },
   {
     "objectID": "site-page-content/syllabus.html",
