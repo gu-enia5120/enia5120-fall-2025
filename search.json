@@ -252,7 +252,7 @@
     "href": "site-page-content/prep-work.html#week-2-september-17",
     "title": "Weekly Class Preparation",
     "section": "Week 2: September 17",
-    "text": "Week 2: September 17\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
+    "text": "Week 2: September 17\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
     "crumbs": [
       "Weekly Class Preparation"
     ]
@@ -353,7 +353,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Mon Sep 15, 2025 at 01:04 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Mon Sep 15, 2025 at 01:31 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
