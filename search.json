@@ -353,7 +353,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Mon Sep 15, 2025 at 01:31 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Tue Sep 16, 2025 at 04:07 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -428,11 +428,11 @@
     ]
   },
   {
-    "objectID": "site-page-content/software.html#jasp",
-    "href": "site-page-content/software.html#jasp",
+    "objectID": "site-page-content/software.html#other-gui-based-software-running",
+    "href": "site-page-content/software.html#other-gui-based-software-running",
     "title": "Software for the class",
-    "section": "JASP",
-    "text": "JASP\nWe will occasionally use JASP for menu-driven graphs and analyses. JASP runs  in the background as its engine, and so the outputs generally will be quite compatible with what we’ll do in .\n\nDownload JASP from https://jasp-stats.org/download/ and install the appropriate version to your computer",
+    "section": "Other GUI-based software running ",
+    "text": "Other GUI-based software running \nRobert Muenchen provides a comprehensive review of GUI-based software running  here\n\nBluesky\nBluesky is a GUI-based software that runs  as the computational engine. It allows a menu- and GUI-driven use of  that is quite nice. It also produces the  code that it is running for a particular operation, so you can both learn  and reproduce the analyses independent of Bluesky\n\nDownload Bluesky from this link. You will need to create an account\nFollow the installation instructions found here. Special note for Mac users, you will need to install Xquartz in order for Bluesky to work.\n\n\n\nExploratoryIO\nExploratoryIO is an online statistical platform also using  as the computational engine. It has quite a nice UI. The free version has you download an app that will work on your desktop but only when you’re online.\n\n\njamovi\njamovi is another free GUI-based statistical analysis platform that uses  as the computational engine. Much like Bluesky, you can also get the  code that is used for particular analyses. You can download jamovi here or run it in your browser without downloads or installation.\n\n\nJASP\nWe will occasionally use JASP for menu-driven graphs and analyses. JASP runs  in the background as its engine, and so the outputs generally will be quite compatible with what we’ll do in .\n\nDownload JASP from https://jasp-stats.org/download/ and install the appropriate version to your computer",
     "crumbs": [
       "Software for the class"
     ]
