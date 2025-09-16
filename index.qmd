@@ -1,0 +1,94 @@
+---
+title: "{{< var course.name >}}"
+subtitle: |
+  {{< var university.name >}}<br>
+  {{< var course.semester >}}
+toc: true
+page-layout: full
+execute:
+  freeze: false
+---
+
+**This course website was last rendered {{< now "on %a %b %d, %Y at %I:%M %p" >}}.**
+
+{{< var course.short_description >}}
+
+## Sections and meeting locations
+
+| Section | Instructor | Day/Time | Location | |
+|----|-----|-----|-----|--|
+| 1 | [Abhijit Dasgupta](mailto:abhijit.dasgupta@georgetown.edu) | Tuesdays 5:00 - 7:30 pm| ICC 116|
+
+: {tbl-colwidths="[10,30,30,30]"}
+
+<!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/AcZssZ27KFF3HSS01h3r5RchQkEfVRRtq524UH7GEI8=?gv=true',
+      color: '#039BE5',
+      label: 'Book an appointment',
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
+
+## Bookmark these links!
+
+* Course website: [{{< var course.url >}}]({{< var course.url >}})
+* [Syllabus, especially course policies](./site-page-content/syllabus.qmd)
+* Slack Workspace: [{{< var course.slack >}}]({{< var course.slack >}})
+* **Instructors only** email: [{{< var course.email >}}](mailto::{{< var course.email >}})
+* {{< var university.lms >}}: [{{< var course.lms_base_url >}}{{< var course.lms_course_id >}}]({{< var course.lms_base_url >}}{{< var course.lms_course_id >}})
+
+
+## Calendar
+
+### Topics and Class Meetings
+
+```{r}
+#| echo: false
+source("site-page-content/class-meetings.R")
+
+cal_df |>
+  kableExtra::kbl(
+    escape = F,
+    col.names = c("Week", "Date", "Topic", "Labs", "Assignment", "Assignment due date", "Project milestone", "Milestone due date")
+  )
+# ("session_number", "monday", "session_name", "schedule_notes", "assignment_posted"
+
+```
+
+
+
+**Notes:**
+
+
+::: callout-note
+This schedule is subject to change. Check the timestamp above.
+:::
+
+
+* Assignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday
+
+### Deliverables
+
+
+* All graded work is due at 11:59pm Eastern time on the due date
+* The final project submission is due the Sunday after the last class meeting.
+
+```{r}
+#| eval: false
+
+del_df |>
+  kableExtra::kbl(
+    escape = F,
+    col.names = c("Due Date", "What is due")
+  )
+```

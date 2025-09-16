@@ -8,9 +8,9 @@ course:
   name: Data Science and Analytics
   # number: "{{< meta website.title >}}"
   number: "ENIA 5120"
-  url: <https://webbedfeet.github.io/enia5120-fall-2025/>
+  url: "https://gu-enia5120.github.io/enia5120-fall-2025/"
   number_code: "`enia5120`"
-  email: abhijit.dasgupta@gerogetown.edu
+  email: abhijit.dasgupta@georgetown.edu
   email_md: "[{{< var course.email >}}](mailto:{{< var course.email >}})"
   team_email:
   team_email_md:
@@ -20,7 +20,7 @@ course:
   slack: <https://enia5120fall2025.slack.com>
   github_org: <https://github.com/gu-enia5120/>
   lms_course_id: 214224
-  lms_base_url: https://georgetown.instructure.com/courses/
+  lms_base_url: "https://georgetown.instructure.com/courses/"
   lms_course_url: <{{< var course.lms_base_url >}}{{< var course.lms_course_id >}}>
 
 canvas_ids:
@@ -46,7 +46,7 @@ canvas_ids:
 
 university:
   name: Georgetown University
-  url: https://www.georgetown.edu
+  url: "https://www.georgetown.edu"
   email_format: "`NetID@georgetown.edu`"
   lms: Canvas
   lms_url: https://canvas.georgetown.edu

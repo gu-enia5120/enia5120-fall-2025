@@ -2,30 +2,35 @@ library(tidyverse)
 #library(kableExtra)
 #library(gt)
 library(googlesheets4)
+cal_sheet <- read_sheet(
+  "https://docs.google.com/spreadsheets/d/1lB7i-PtFJXRGZyiPryy-DAUB7kKPi7RuUZNeP-8x4YY/edit?usp=sharing",
+  sheet = "Calendar"
+)
 
-cal_sheet <- read_sheet("https://docs.google.com/spreadsheets/d/1Q1JaD24zK_jKIayO_DUMbwfaop_7lmI-TpnRqUvEjjw/edit?usp=sharing",
-  sheet = "Weekly Plan"
-) # Link to Spring 2025 sheet
-
-cal_cols <- c("session_number", "monday", "session_name", "schedule_notes")
-deliverable_cols <- c("date_due", "deliverable_due")
+cal_cols <- c(
+  "Week",
+  "Date",
+  "Learning topic",
+  "Computational/Data topic",
+  "Assignment provided",
+  "Assignment due",
+  "Project",
+  "Project due dates"
+)
+# deliverable_cols <- c("date_due", "deliverable_due")
 
 cal_df <-
   cal_sheet |>
   select(all_of(cal_cols)) |>
-  mutate(
-    session_number = as.character(session_number),
-    monday = format(monday, "%b %d"),
-    across(c("session_name", "schedule_notes"), ~ replace_na(.x, ""))
-  )
+  janitor::clean_names() |>
+  mutate(across(where(is.POSIXct), \(x) format(x, "%b %d"))) |>
+  mutate(across(where(is.character), \(x) replace_na(x, "")))
 
-
-del_df <-
-  cal_sheet |>
-  select(all_of(deliverable_cols)) |>
-  filter(!is.na(deliverable_due)) |>
-  mutate(date_due = format(date_due, "%b %d"))
-
+#del_df <-
+#  cal_sheet |>
+#  select(all_of(deliverable_cols)) |>
+#  filter(!is.na(deliverable_due)) |>
+#  mutate(date_due = format(date_due, "%b %d"))
 
 # cal_df|>
 #    select(week_of, week, lecture_topic, assignment_drop, schedule_notes) |>

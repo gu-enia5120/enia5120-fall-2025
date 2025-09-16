@@ -18,12 +18,14 @@ website:
   search: true
   sidebar:
     pinned: true
-    background: "#f1de67" # Arylide Yellow
+    background: "#fcc200" # Golden poppy
     style: docked
     search: false
     collapse-level: 1
     contents:
+      - site-page-content/about.qmd
       - site-page-content/syllabus.qmd
+      - site-page-content/software.qmd
       - site-page-content/prep-work.qmd
       - site-page-content/standards.qmd
       - section: "Lecture Slides"
