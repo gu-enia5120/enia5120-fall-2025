@@ -15,11 +15,11 @@ Violation of these guidelines will result in an automatic deduction of 1 grade s
 
 - Code should be folded, and not echoed
 - Code quality
-	- Code should be styled/linted using styler/lintr in R or _black_ in Python
+	- Code should be styled/linted using styler/lintr in R 
 	- Comments should be present as needed to explain which code chunks are doing what
 - No warnings or messages should be visible in the final report
-- All output should be formatted. **No raw output**. Use the capabilities of R, Python, Jupyter, Quarto to achieve this.
-	- In particular,  consider Rich Iannone's work around `gt` and `great_tables`.
+- All output should be formatted. **No raw output**. Use the capabilities of R and Quarto to achieve this.
+	- In particular,  consider Rich Iannone's work around `gt`.
 - All text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)
 - All plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions
 - Pages with multiple topical sections should also contain a table of contents, either fixed or floating

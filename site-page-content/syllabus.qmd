@@ -2,6 +2,9 @@
 title: Syllabus
 date: last-modified
 date-format: "dddd MMM D, YYYY [at] hh:mm a"
+format: 
+  html: default
+  pdf: default
 ---
 
 ::: callout-important
@@ -10,62 +13,89 @@ date-format: "dddd MMM D, YYYY [at] hh:mm a"
 
 :::: {.columns}
 ::: {.column width="50%"}
-### Instructors
+### Instructor
 
 -   [Abhijit Dasgupta](mailto:abhijit.dasgupta@georgetown.edu)
--   [Marck Vaisman](mailto:marck.vaisman@georgetown.edu)
-
-:::
-::: {.column width="50%"}
-### TAs
-
-{{< var ta_list >}}
-
+<!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/AcZssZ27KFF3HSS01h3r5RchQkEfVRRtq524UH7GEI8=?gv=true',
+      color: '#039BE5',
+      label: 'Book an appointment',
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
 :::
 ::::
 
-::: callout-note
-This course is taught by and co-managed by multiple instructors. We are all equal and you should feel free to reach out to any of us. The course materials are co-developed and the same lectures and deliverables will be provided to all sections. There will of course be some individual variations given instructor individuality and different class and student dynamics in each section.
-:::
 
 ### Communication
 
 ::: callout-important
-The primary mode of communication will be **Slack**. The course's Slack workspace is [{{< var course.slack >}}.]({{< var course.slack >}}){target="_blank"}. You will receive an invitation to join.
+The primary mode of communication will be **Slack**. The course's Slack
+workspace is [{{< var course.slack >}}.]({{< var course.slack >}}){target="_blank"}.
+You will receive an invitation to join.
 
-**Instructional team e-mail:** [dsan5200-instructors@georgetown.edu](mailto:dsan5200-instructors@georgetown.edu). This is the preferred way of contacting the professors privately. Please read the [communication and Slack rules.](#communication-and-slack-rules)
+**Instructor e-mail:** [abhijit.dasgupta@georgetown.edu](mailto:abhijit.dasgupta@georgetown.edu). 
+This is the preferred way of contacting the professor privately. 
+Please read the [communication and Slack rules.](#communication-and-slack-rules)
 :::
 
 ## Course description
 
-This course explores the art and science of data visualization from the ground up and deepens your analytical thinking through the lens of data visualization. We discuss the power of visualizations to communicate data in an engaging, informative, and accessible way. Drawing from statistics, graphic design, and computer and information science techniques, you will learn to think critically about data, choose optimal static and dynamic visualization methods, recognize dishonest visualization techniques, and distinguish between visualizations used for data exploration and publication. We cover popular visualization libraries in R and Python, front-end web development tools for digital publishing with D3.js and other JavaScript libraries, and commercial applications like Tableau. By the end of the course, you will have a deep understanding of data visualization techniques, design principles for generating publication-quality graphics, manipulating data for analysis and visualization, and designing compelling visualizations for different purposes and audiences.
+This course provides an introduction to data science where we will explore the
+principles, methods, and tools that drive modern data-driven inquiry,
+inference, prediction and decision-making. This course is designed to provide
+you with a strong foundation in the core elements of the field, including data
+wrangling, exploratory analysis, statistical modeling, machine learning, and
+effective data visualization. Fundamental to this is an conceptual and
+practical understanding of uncertainty, association and causality. We will
+emphasize both the theoretical
+underpinnings and the practical applications of data science, preparing you to
+critically evaluate data, build robust analytical workflows, and effectively
+communicate results to diverse audiences. Through hands-on exercises,
+real-world datasets, and collaborative projects, you will gain not only
+technical proficiency but also the problem-solving mindset that defines
+successful data scientists.
+
+This course will primarily use the statistical analytics program [{{< fa brands r-project >}}](https://www.r-project.org) and 
+the GUI-based analytics platform [JASP](https://jasp-stats.org) which runs on {{< fa brands r-project >}} for 
+analyses, simulations, visualizations, and enhancing statistical understanding. 
+
 
 
 
 ## Learning objectives
 
-* Increase your data visualization vocabulary
-* Understand what comes before and after creating visualizations
-* Think critically about data
-* Distinguish between using visualizations for data exploration or presentation
-* Manipulate and arrange data for the purposes of analysis and visualization
-* Design effective visualizations for different purposes and audiences
-* Apply a set of rules to create highly effective and engaging data visualizations
-* Understand the role of data visualization within data science and for solving problems
-* Build dynamic visualizations designed for digital and interactive consumption
-* Use an array of tools including [R](http://cran.r-project.org), [Python](http://www.python.org), [Tableau](http://www.tableau.com), [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) and web tools (HTML, CSS, etc.) to execute all of the above. This includes particular packages and libraries like `ggplot2`, `matplotlib/seaborn`, `plotly`,`Observable Plot`, `Vega/VegaLite/Altair`, and others.
+- Develop a foundational understanding of how to translate data into insights, inference and predictions
+- Understand the central role of uncertainty and how it influences how we interpret data 
+- Think critically about data, including the appropriateness of study design, representativeness, and what you can really answer from a particular data set.
+- Appreciate issues like bias and confounding that can affect our inferences from data
+- Use high-quality data visualizations to tell your story
+- Effectively use statistical software to ingest, transform, analyze, visualize and report on data in the appropriate context
+- Communicate findings effectively using compelling visualizations and clear, audience-appropriate narratives.
+- Collaborate on data-centric projects, developing teamwork and project management skills essential in professional data science environments.
+
 
 ## Pre-requisites
 
--   Experience with R and Python. **Note:** We will be using R and Python
-roughly equally and in parallel
--   Experience with git and GitHub
+-   There are no formal pre-requisites, though an prior introduction to algebra will be very helpful
+-   Familiarity with R will be helpful
 
+
+We will encourage the use of _version control systems_ like **git** in this class. 
 Some tutorials to brush up on these skills:
 
 -   [git - the simple guide](http://rogerdudler.github.io/git-guide/)
 -   [Nico Riedmann's Learn git concepts, not commands](https://dev.to/unseenwizzard/learn-git-concepts-not-commands-4gjc)
--   The DSAN Bootcamp materials
 
 ## Required resources
 
@@ -75,24 +105,30 @@ You should have a laptop (no Chromebooks, please). Windows, Mac or Linux machine
 
 ### Paper and writing/drawing implements
 
-You should have access to blank paper and writing/drawing instruments. A pad/notebook and a pen/pencil will suffice. We think sketching out ideas for data visualizations is important for learning this process, and we will encourage this during interactive portions of the class.
+You should have access to blank paper and writing/drawing instruments. A pad/notebook and a pen/pencil will suffice. 
 
 ## Evaluation
 
-- Engagement: 25%
+- Attendance: 10%
+- Engagement and active learning: 20%
 - Assignments: 30%
 - Lab completions and quizzes: 10%
-- Group project: 35%
+- Project: 30%
 
 ## Learning activities
 
 ### Class format
 
-We will run this course in a [flipped classroom](https://en.wikipedia.org/wiki/Flipped_classroom) format, where we will provide readings and pre-work that you will be expected to complete **prior to class time**. Class time will be devoted to an interactive discussion of the concepts and topics introduced in the pre-work. We will also use class time to introduce case studies and laboratory work that reinforce conceptual and technical aspects of data visualization. As such, it is expected that students come prepared to **ask and answer questions**, discuss ideas and concepts, share learnings around the topic of the week, and generally engage and participate with the class and the class content. We also plan to have small group activities during class reinforcing concepts and techniques.
+Each weekly class will comprise approximately 90 minutes of lecture and discussion and approximately 60 minutes of computational or data-driven laboratory. Slides will drive each 
+lecture, but they will serve mainly as a framework and reference material for the class. The expectation is that students will come prepared to engage and ask questions, since much
+of the semester will be focused on foundational concepts that require thinking and understanding. Questions and discussion are the gateway to understanding and intuition. 
 
 #### Readings and pre-work
 
-Readings, case studies and other pre-work will be assigned every week to introduce you to the topic of the week. It is **essential** that you complete this prior to class and are prepared to participate and engage in class. These materials will be made available [here](prep-work.html){target=_blank} by Thursday of the previous week.
+Readings, case studies and other pre-work will be assigned every week to
+introduce you to the topic of the week. It is **essential** that you complete
+this prior to class and are prepared to participate and engage in class. These
+materials will be made available on Canvas and on the website.
 
 ::: callout-important
 You must read the readings and complete the pre-work prior to class time so you are prepared to participate in class.
@@ -100,7 +136,9 @@ You must read the readings and complete the pre-work prior to class time so you 
 
 #### Case studies and laboratory work
 
-We will discuss a case study (that will be provided in the pre-work) most weeks, and have a laboratory section discussing both conceptual and technical aspects every week. These laboratory sessions will use both R and Python, as well as other technologies we will cover during the course.
+We will discuss concepts, theory and methods most weeks, and have a laboratory
+section discussing both conceptual and technical aspects every week. These
+laboratory sessions will use JASP initially, and then R. 
 
 ::: callout-important
 * You will start the labs in class but you will most likely not finish. It is your responsibility to complete the labs to enable your learning. **Completing the labs succesfully is also part of your grade.**
@@ -108,11 +146,21 @@ We will discuss a case study (that will be provided in the pre-work) most weeks,
 
 #### Engagement and participation
 
-We don't expect merely token participation (just asking simple or rhetorical questions) but high quality content in the engagements. You are all high-quality students, and this is the expectation we carry. There are several ways we would like to interact with you:
+We don't expect merely token participation (just asking simple or rhetorical
+questions) but high quality content in the engagements. You are all
+high-quality students, and this is the expectation we carry. There are several
+ways we would like to interact with you:
 
 - Participation during class, asking questions, clarifying doubts, and even answering your classmate's questions
-- Each class will have a discussion on Canvas, for each section. You will be expected to ask a question or comment on an issue you have read in the pre-work, to be done before class time. These will help us guide the in-class discussions.
-- During class time, in addition to speaking up, feel free to add questions and comments to the discussion; we will glance at your contributions to further continue discussions during class.
+- Each class will have a discussion on Canvas, for each section. Each student
+  will do a "muddy water" exercise after each lecture, highlighting in short
+  paragraphs (a) one thing that clicked for you in class, (b) one thing that
+  remains confusing (especially conceptual topics), and (c) one thing that you
+  think might have been done in class to improve your understanding
+- Each lecture will have an associated Google document that everyone can edit.
+  The intent is to have a shared set of notes generated by you so that we can
+  co-learn and co-create through class. These will be living documents where we
+  all share our understanding of the topic(s) at hand.
 
 We will keep track of who is contributing to the class as a baseline evaluation, but full credit can be obtained with higher quality questions, comments, independent ideas, evidence of analytic thinking, and insights that help us all understand. We're really looking forward to this aspect of the class.
 
@@ -122,22 +170,28 @@ We will keep track of who is contributing to the class as a baseline evaluation,
 
 ### Homework assignments
 
-There will be several homework assignments. The goal of these problem sets is to solidify concepts and learning objectives each week, as we build skills and knowledge throughout the semester towards creating effective data visualizations. These will typically involve developing code in R and/or Python and/or Javascript and submitting both the code and the output produced. Assignments will be submitted through GitHub Classroom. Most assignments will require you to develop and submit Quarto documents.
+There will be several homework assignments. The goal of these problem sets is
+to solidify concepts and learning objectives each week, as we build skills and
+knowledge throughout the semester 
+These will typically involve a set of questions to reinforce the conceptual
+material of the week, and a set of coding/analysis exercises to solidify their
+implementation. Submissions will typically be done on Canvas. 
+We will introduce Quarto as the primary tool for writing and submitting your work, which will allow us a single means of both textual and coding submissions. 
 
-Homework assignments will be published after Wednesday class, and will be due Friday of the following week at 5pm.
+The intent of the homework is to reinforce concepts, but not be overly burdensome. These will generally be thinking exercises. A grading rubric will be provided for all assignments. 
+
+Homework assignments will be published after class, and will be due the following Sunday by 11:59pm Eastern time (but see the calendar for any deviations)
 
 ::: callout-important
 Familiarize yourself with the [submission requirements](#submitting-your-work) and the [late policy](#late-policy) for this class.
 :::
 
-::: callout-warning
-
-Data visualization is neither simple nor easy. It requires thought, creativity and understanding both the data and the topic/aspect/answer you are trying to express through the visualization. Give yourself ample time to think, explore and experiment. It is very easy for us to determine when you didn't give yourself enough time and [_phoned it in_](https://www.merriam-webster.com/grammar/phone-it-in-vs-dialed-in#:~:text=To%20phone%20it%20in%20is,to%20show%20up%20when%20expected.){target="_blank"}. **Start early!**
-:::
-
 
 ::: callout-note
-We reuse problem set questions, we expect students not to copy, refer to, or look at the solutions in preparing their answers. Since this is a graduate-level class, we expect students to want to learn and not search online for answers. [See the Academic Integrity section for more details.](#academic-integrity)
+ Since this is a
+graduate-level class, we expect students to want to learn and not search online
+for answers. [See the Academic Integrity section for more
+details.](#academic-integrity)
 :::
 
 ### Online Quizzes
@@ -150,14 +204,17 @@ There will be unannounced quizzes a few times during the semester, at random int
 Missed quizzes cannot be made up.
 :::
 
-## Data Visualization project
+## Project
 
-You will assemble into groups of 3 to 4 students in any section. Over the course of the semester you will work towards creating an interactive data-driven story through several data visualizations and narrative content. Details will be available in the [project website.](../project/project.qmd)
+You will assemble into groups of 2 to 3 students. The objective is to have 10 groups in total.  Over the
+course of the semester you will work towards creating an 
+analytic project relevant to the program of study that will incorporate visualization, inference and prediction through the use of data science techniques.
+Details will be available in the [project website.](../project/project.qmd) by week 2.
 
 ::: callout-important
-The project will have several milestones that are cumulative in nature. Therefore, we will grade the project after the final submission with a holistic project rubric. We will grade the milestones in a qualitative way, and we will provide feedback and a trending grade with each milestone. It is up to you to incorporate the feedback provided. If your milestone trending grade is lower than you expected, and you do not incorporate the feedback we provide for improvement, do not expect your final project grade to improve.
+The project will have several milestones that are cumulative in nature. Therefore, we will grade the project after the final submission with a holistic project rubric. 
+We will grade the milestones in a qualitative way, and we will provide feedback and a trending grade with each milestone. It is up to you to incorporate the feedback provided. If your milestone trending grade is lower than you expected, and you do not incorporate the feedback we provide for improvement, do not expect your final project grade to improve.
 
-In addition, each team member will complete a peer evaluation for their group and provide feedback to everyone's contribution. Every team member is expected to contribute equally to their project. If peer evaluations indicate that students within a team are not contributing equally, those students will receive a grade penalty and a lower grade than the rest of their team.
 :::
 
 
@@ -205,42 +262,24 @@ Points **will** be deducted for any of the following reasons:
 * Your analytical decisions are unjustified
 * You did not follow any direct and specific instructions
 * You do not have proper spelling and grammar in the textual parts of the assignment
-* Your code is not properly formatted (we prefer `styler` for R and `black` for Python, but a consistent style is imperative regardless)
+<!--- * Your code is not properly formatted (we prefer `styler` for R and `black` for Python, but a consistent style is imperative regardless) -->
 * Your deliverable has missing sections
 * Your overall presentation and/or writing is sloppy
-* Your code does not follow best coding practices
-* Your code has no comments (including the areas where GAI was used)
-* Your repository has either more or less files than those requested
-* You use absolute references (file paths, urls, etc.) paths in your scripts
-* You alter the repository structure in any way
-* You do not use GitHub Classroom
-* You do not use `git` effectively
-* You manually upload files to GitHub through the web and do not use `git`
+<!--- * Your code does not follow best coding practices -->
 * You use incorrect file names (wrong extensions, wrong case, etc.)
 
 
 ## Submitting your work
 
-### GitHub Classroom
+All submissions will be via [Canvas]({{< var course.lms_base_url >}}{{< var course.lms_course_id >}}){target=_blank}. The preferred method will be as a Quarto document that has been rendered into PDF or HTML. 
 
-We use Github Classroom for all class deliverables: assignments, labs, and the final project. Submitting your work is the process of committing your files and results to your local repository **and** then pushing it to GitHub.
-
-::: callout-important
-You must submit everything through GitHub!
-Make sure you understand the difference between a git `commit` and a `push`, and that you `push` your repository successfully to GitHub.
-:::
-
-We will enforce submission deadlines on Github Classroom, where **the repositories will be write-locked after the due date**. If you need an extension, you must request one by sending an e-mail to [dsan5200-instructors@georgetown.edu](mailto:dsan5200-instructors@georgetown.edu) **no later than noon on the due date**. We can then unlock your assignment repository for a late submission. The [late submission policy](#late-policy) will be applicable to all extensions and late submissions.
 
 ### Late policy
 
-::: callout-important
-We will use **commit datetime** and **commit message** to assess lateness.
-:::
 
 For homework assignments, if an extension past the deadline is requested, the following rules will apply:
 
-- A late penalty of 10% per day, up to 4 days, will be assessed for assignments and labs that are submitted after the deadline. You may still submit a missed lab or assignment up until the last day of classes with a maximum possible grade of 60%.
+- A late penalty of 10% per day, up to 4 days, will be assessed for assignments and labs that are submitted after the deadline. You may still submit a missed lab or assignment up until the last day of classes with a maximum possible grade of 50%. You are encouraged to do so to receive feedback.
 - Missed in-class quizzes cannot be made up and will receive a grade of zero.
 - Project deadlines are fixed and have no extensions or late penalty. A missed project deliverable will receive a grade of zero.
 
@@ -249,7 +288,16 @@ For homework assignments, if an extension past the deadline is requested, the fo
 
 ### Attendance and punctuality
 
-Attendance is mandatory and will be taken. Given the technical nature of this course, and the breadth of topics discussed, you are expected to attend each class, to complete all readings, and to participate actively in lectures, discussions and exercises. We understand there may be times you may need to miss class, please inform us in advance if you are not able to attend class for any reason. However, it is up to you to keep up.
+Attendance is mandatory and will be taken. Please be punctual and respectful and remain for the full period until excused. 
+
+Given the technical nature of this
+course, and the breadth of topics discussed, you are expected to attend each
+class, to complete all readings, and to participate actively in lectures,
+discussions and exercises. We understand there may be times you may need to
+miss class; please inform us in advance if you are not able to attend class for
+any reason so we can provide class materials and also prepare for a smaller classroom experience. However, it is up to you to keep up.
+
+Please don't take advantage of my sympathy and empathy. There are legitimate reasons for missing class, including illness, family emergencies, and unavoidable work situations. Let me know as soon as you can if you will not be able to attend class. 
 
 ### Participation
 
@@ -259,21 +307,27 @@ We love participation. Read. Raise your hand. Ask questions. Make comments. Chal
 
 You must bring your laptop to class to work on labs. No phone use is allowed during lecture.
 
-We prefer you not use your laptops during class discussions. You're welcome to take handwritten notes or use an iPad or tablet. You may use your laptop during lecture to take notes, but please refrain from other activities. We reserve the right to ask you to put your phones and laptops away. You may not use your computer or phone while your peers or guest speakers are presenting.
+We would prefer that during class time, you use your laptops for class-specific activities, including analyses, on-the-fly searches for understanding and note-taking. This class is not easy, so your attention and focus will help you succeed. 
 
 ### Communication and Slack Rules
 -   All announcements will be posted on {{< var university.lms >}} and Slack
 -   Use Slack for any question you may have about the course, about assignments or any technical issue. This way everyone can learn from each others questions. We will be monitoring and providing answers on a regular basis. **Make sure you understand [what is allowed in Slack.](#what-is-allowed)**
--   All communication with the professors should be either on general Slack channels or via the {{< var course.email >}}  email. **Do not email us individually.**. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.
+-   All communication with the professor should be either on general Slack channels or via the {{< var course.email >}}  email. *. E-mail is preferred for any communication of a personal nature as opposed to questions about class materials.
     - Slack DMs are not to be used **unless** we DM you first and you can respond to our message. Students may not initiate DMs.
-    - Any email sent to an individual instructor or the instructors' e-mail containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.
+    - Any email sent to the instructor  containing any course question that is not personal in nature will not be answered; these are expected to go on Slack for general discussion and peer contributions.
     - E-mails of a personal nature (personal issues or difficulties, questions regarding grades, seeking help with a personal issue, etc.) should be sent to the instructors' e-mail ({{< var course.email >}}).
 -   Keep an eye on the questions posted in Slack. Use the search function. It's very possible that we have already answered a question, and we reserve the right to point you to the syllabus, previous Slack messages, or other document containing the information requested.
 -   Assignment, lab and project questions will only be answered on Slack up to 12 hours before something is due.
 
 ### Open Door Policy
 
-Please approach or get in touch with us if something is not working for you regarding the class, methods, etc. Our pledge to you is to provide the best learning experience possible. If you have any issue please do not wait until the last minute to speak with us. You will find that we are fair, reasonable, and flexible and we care deeply about your learning and success.
+Please approach or get in touch with me if something is not working for you
+regarding the class, methods, etc. My pledge to you is to provide the best
+learning experience possible. If you have any issue please do not wait until
+the last minute to speak with us. I care deeply about your learning and success.
+
+If you are struggling in any way, reach out so we can consider accommodations to improve your experience. Let me know early and often how you're doing. I will also be checking in. There are many resources
+that you can avail if you are going to physical or mental issues. Please reach out and I'm ready to help. 
 
 ## Academic Integrity
 
@@ -317,7 +371,15 @@ The following actions are **not permitted in any way** and are considered a viol
 
 ## Use of Generative AI tools
 
-We recognize the recent availability of very powerful generative AI tools like Chat-GPT, GitHub Copilot, and others. These tools can help us be more effective and we embrace their use.
+We recognize the recent availability of very powerful generative AI tools like
+Chat-GPT, GitHub Copilot, and others. These tools can help us be more effective
+and we embrace their use.
+
+However (and you know there's a 'however'), using GAI tools _in place of_ thinking and gaining experience is not fruitful for you and will not serve you well. 
+Intuition and understanding is gained by thinking, ruminating and discussing, not by the short-term objective of completing assignments and getting points. The 
+concepts and tools we are exploring in this class will affect most aspects of your future career, and learning them well will benefit you. Inappropriate use of 
+data and data scientific tools results in a "garbage in, garbage out" situation that can affect decisions and can cost time and money. So learning this stuff instead of 
+relying on a hallucination-prone GAI tool at this foundational stage will probably be a good thing^TM^. 
 
 
 ::: callout-important
@@ -339,8 +401,7 @@ For this course, valid uses of gen-ai can be:
 * Generating a code snippet or single function to perform a task. It's likely you'll need to modify it anyway
 * Commenting code
 * Using it as a writing aid (spelling, grammar, word choice, limited phrase translation) on content created by you, not the actual writing. **Note:** non-native English speakers cannot use gen-ai to fully translate content written in another language.
-* Generating visualization starter code (you can accelerate the generation of the starting point, but you still need to customize the viz with all the best practices learned in this course)
-
+* Using it to assimilate openly available resources (papers, blogs, etc) that can allow you a launching pad to understand a topic. However, it is a case of "buyer beware" in terms of the reliability and veracity of the sources that ge-ai uses. 
 :::
 
 
@@ -351,7 +412,6 @@ Any deviation from these rules is considered a violation of [academic integrity]
 You typically KNOW when you are crossing the line into un-ethical territory. As a general rule, If you feel like you might be crossing a line, then you probably are!
 :::
 
-In addition to what we are stating here, please take a look at the [Data Science and Analytics Program's ChatGPT usage guidelines.](DSAN-ChatGPT-usage-guidelines.pdf)
 
 ## {{< var university.name >}} resources and policies
 
