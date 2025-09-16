@@ -1,0 +1,21 @@
+---
+title: Lecture 1
+subtitle: "Welcome to ENIA 5120: Data Science and Analytics"
+---
+
+## {background-image="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTZtNTE0eDF6emRtMzlnNndoaDZrcHl4eTAwdXY5d2phNnNrYXI1byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GRPy8MKag9U1U88hzY/giphy.gif"}
+
+## Agenda and Goals for Today
+
+- Course overview and expectations
+- Meet and Greet
+- What is Data Science?
+- Some foundational concepts
+- R and JASP
+
+
+{{< include topics/teaching-team/_slides.qmd >}}
+
+{{< include topics/course-info/_slides.qmd >}}
+
+

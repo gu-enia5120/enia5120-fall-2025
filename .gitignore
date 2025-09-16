@@ -1,0 +1,10 @@
+/.quarto/
+.Rproj.user
+_extensions*
+_site/*
+unnamed-chunk*
+.DS_Store
+index_cache/*
+_artifacts/*
+.venv/*
+slides/topics/*

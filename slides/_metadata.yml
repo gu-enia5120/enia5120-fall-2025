@@ -1,0 +1,38 @@
+execute:
+  echo: true
+  eval: true
+  cache: true
+  freeze: auto
+
+format:
+  revealjs:
+    theme: ['default', 'clean.scss']
+    highlight-style: "a11y"
+    toc: false
+  #  highlight-style: github
+    code-fold: false
+    code-overflow: scroll
+    code-copy: true
+    scrollable: true
+    pdf-separate-fragments: false
+    fig-align: center
+    fig-dpi: 300
+    fig-width: 8
+    fig-asp: 0.618
+    fig-cap-location: bottom
+    slide-level: 2
+    slide-number: c/t
+    margin: 0.1
+    view-distance: 3
+    link-external-newwindow: true
+  # smaller: true
+
+filters:
+  - tachyons
+  - roughnotation
+
+lightbox: auto
+engine: knitr
+
+revealjs-plugins:
+  - attribution
