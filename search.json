@@ -267,7 +267,7 @@
     "href": "site-page-content/syllabus.html#course-description",
     "title": "Syllabus",
     "section": "Course description",
-    "text": "Course description\nThis course provides an introduction to data science where we will explore the principles, methods, and tools that drive modern data-driven inquiry, inference, prediction and decision-making. This course is designed to provide you with a strong foundation in the core elements of the field, including data wrangling, exploratory analysis, statistical modeling, machine learning, and effective data visualization. Fundamental to this is an conceptual and practical understanding of uncertainty, association and causality. We will emphasize both the theoretical underpinnings and the practical applications of data science, preparing you to critically evaluate data, build robust analytical workflows, and effectively communicate results to diverse audiences. Through hands-on exercises, real-world datasets, and collaborative projects, you will gain not only technical proficiency but also the problem-solving mindset that defines successful data scientists.\nThis course will primarily use the statistical analytics program  and the GUI-based analytics platform JASP which runs on  for analyses, simulations, visualizations, and enhancing statistical understanding.",
+    "text": "Course description\nThis course provides an introduction to data science where we will explore the principles, methods, and tools that drive modern data-driven inquiry, inference, prediction and decision-making. This course is designed to provide you with a strong foundation in the core elements of the field, including data wrangling, exploratory analysis, statistical modeling, machine learning, and effective data visualization. Fundamental to this is an conceptual and practical understanding of uncertainty, association and causality. We will emphasize both the theoretical underpinnings and the practical applications of data science, preparing you to critically evaluate data, build robust analytical workflows, and effectively communicate results to diverse audiences. Through hands-on exercises, real-world datasets, and collaborative projects, you will gain not only technical proficiency but also the problem-solving mindset that defines successful data scientists.\nThis course will primarily use the statistical analytics program  and other GUI-based software that use  for analyses, simulations, visualizations, and enhancing statistical understanding.",
     "crumbs": [
       "Syllabus"
     ]
@@ -307,7 +307,7 @@
     "href": "site-page-content/syllabus.html#evaluation",
     "title": "Syllabus",
     "section": "Evaluation",
-    "text": "Evaluation\n\nAttendance: 10%\nEngagement and active learning: 20%\nAssignments: 30%\nLab completions and quizzes: 10%\nProject: 30%",
+    "text": "Evaluation\n\nAttendance: 10%\nEngagement and active learning: 20%\nAssignments: 30%\nLab completions and quizzes: 10%\nProject: 30%\n\n\n\n\n\n\n\nTip\n\n\n\nYou will not be evaluated on the quality of your  code, beyond that they actully produce the outputs (tables, figures) that you present.\nHowever, code that is formatted and has appropriate comments is always desired for understanding",
     "crumbs": [
       "Syllabus"
     ]
@@ -444,34 +444,6 @@
     "text": "Translating from other toolkits\n\nPlot from ggplot2\nPlot from matplotlib\nPlot for D3 users\nObservable for Python users\nObservable for Jupyter users"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Science and Analytics",
-    "section": "",
-    "text": "This course website was last rendered on Tue Sep 16, 2025 at 11:48 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
-  },
-  {
-    "objectID": "index.html#sections-and-meeting-locations",
-    "href": "index.html#sections-and-meeting-locations",
-    "title": "Data Science and Analytics",
-    "section": "Sections and meeting locations",
-    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
-  },
-  {
-    "objectID": "index.html#bookmark-these-links",
-    "href": "index.html#bookmark-these-links",
-    "title": "Data Science and Analytics",
-    "section": "Bookmark these links!",
-    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
-  },
-  {
-    "objectID": "index.html#calendar",
-    "href": "index.html#calendar",
-    "title": "Data Science and Analytics",
-    "section": "Calendar",
-    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 14\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
-  },
-  {
     "objectID": "resources/books-links.html",
     "href": "resources/books-links.html",
     "title": "Books and other online resources",
@@ -546,6 +518,100 @@
     "crumbs": [
       "Resources",
       "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "project/milestones.html",
+    "href": "project/milestones.html",
+    "title": "Project milestones",
+    "section": "",
+    "text": "Milestones\n\n\n\n\n\n\nImportant\n\n\n\nEach milestone submission will be graded for completion and will be penalized for late submissions. This is to ensure that you make regular progress on your project.\n\n\n\nIdentify data (one or more datasets) and formulate 2-3 questions you want to answer (September 30)\nComplete EDA and have a sense whether your questions are answerable from the data you are using (October 14)\nSubmit a draft narrative of what you think the answers to your questions are based on your preliminary analyses (October 28)\nDescribe the analyses you are doing, and provide 1-2 visualizations to indicate that the proposed approach is reasonable (November 11)\nSubmit your analysis plan for answering your questions. This will be in the appendix of your final submission (November 25)\n\nWe will publish expectations and a rubric for each milestone shortly.",
+    "crumbs": [
+      "Project",
+      "Project milestones"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science and Analytics",
+    "section": "",
+    "text": "This course website was last rendered on Wed Sep 17, 2025 at 02:48 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+  },
+  {
+    "objectID": "index.html#sections-and-meeting-locations",
+    "href": "index.html#sections-and-meeting-locations",
+    "title": "Data Science and Analytics",
+    "section": "Sections and meeting locations",
+    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
+  },
+  {
+    "objectID": "index.html#bookmark-these-links",
+    "href": "index.html#bookmark-these-links",
+    "title": "Data Science and Analytics",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
+  },
+  {
+    "objectID": "index.html#calendar",
+    "href": "index.html#calendar",
+    "title": "Data Science and Analytics",
+    "section": "Calendar",
+    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nJASP/ggplot2/plotly\nHW 1\nSep 21\n\n\n\n\n3\nSep 23\nUnsupervised learning: finding patterns\nCluster analysis\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nSupervised learning: extending correlations\nregression, splines, xgboost, trees\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nData ingestion and manipulation (tidyverse)\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nData: Sampling, fairness, ethics\nFurther dive into R\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 7\nNov 16\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian statistics introduction\nBayes rule, simulation,\n\n\n\n\n\n\n12\nNov 25\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 15\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
+  },
+  {
+    "objectID": "project/overview.html",
+    "href": "project/overview.html",
+    "title": "Project overview",
+    "section": "",
+    "text": "Our final course evaluation will be a data–based project. We will develop questions based in political and environmental sciences, and obtain data sets that might help us answer these questions. A central element of the project will be data analysis and modeling to help us answer the questions we pose. It is hoped that each project will have elements of both political sciences and environmental sciences in them in line with the graduate program, and will address questions relevant to this program.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "project/overview.html#data",
+    "href": "project/overview.html#data",
+    "title": "Project overview",
+    "section": "Data",
+    "text": "Data\nYou may choose any data sets that are publicly available and not proprietary. These data should be made available in your final submission. The data should be from reputable sources such as government and international agencies and high-quality universities, and also from research publications in reputable journals.\nYou can choose one or more data sets for your project, provided that the data sets can be linked in some way, typically using a key variable(s). The data should be rich enough to answer your questions. This does not mean that they have to be Big Data. Small to medium size data sets (within 10,000 observations) might be a good size to consider.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "project/overview.html#software",
+    "href": "project/overview.html#software",
+    "title": "Project overview",
+    "section": "Software",
+    "text": "Software\nThe initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using , and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers.\nPlease do ensure that all tables and figures generated from your analysis look professional, and are easily readable and understandable. This means having appropriate labels and captions, having good annotations on your visualizations and generally providand will address questions relevant to this program.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "resources/datasets.html",
+    "href": "resources/datasets.html",
+    "title": "Free datasets for EIA",
+    "section": "",
+    "text": "Sources\n\n\n\nThese links were obtained and organized using Google searches and Perplexity AI",
+    "crumbs": [
+      "Resources",
+      "Free datasets for EIA"
+    ]
+  },
+  {
+    "objectID": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
+    "href": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
+    "title": "Free datasets for EIA",
+    "section": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs",
+    "text": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs\nBelow are curated, high-quality, and free data sets suitable for your course. They are selected for relevance to environmental and international affairs, compatibility with R, and educational value for beginner to intermediate data analytics labs.\n\n\n1. Environmental Data Sets\nOpen repo of ecological data for use in teaching\n\n\nGlobal and Regional Environmental Data\n\nWorldClim: High-resolution global climate data (temperature, precipitation, etc.), widely used for climate and ecological analysis[1][2].\nUSGS Earth Explorer: Satellite imagery, land cover, and environmental monitoring data for the United States and globally[1][2].\nNOAA Climate Data Online (CDO): Historical weather and climate data, including temperature, precipitation, and wind, available globally[3][2].\nGlobal Forest Watch: Deforestation, land use, and forest change data, including interactive maps and downloadable data[2][1].\nOpenWeatherMap: Real-time and historical weather data accessible via API, suitable for time series and spatial analysis[1][2].\n\n\n\nSpecialized Environmental Data\n\nLTER DataSampler R Package: Ready-to-use environmental data samples from the Long-Term Ecological Research (LTER) Network, ideal for R-based labs[4][5].\nSAGE (Center for Sustainability and the Global Environment): Datasets on global ecosystems, croplands, air quality, and land use change[6].\nEnvironmental Data Initiative (EDI): Repository of ecological and environmental datasets, including biodiversity, water quality, and ecosystem processes[5].\nGlobal Solar Atlas & Global Wind Atlas: Renewable energy potential data for solar and wind resources worldwide[1][2].\n\n\n\n\n2. International Affairs and Socio-Political Data Sets\n\nInternational Relations and Political Data\n\nWorld Bank Open Data: Comprehensive global development indicators, including environment, economy, health, and governance[7][8].\nUNData: Aggregated data from United Nations agencies on topics such as environment, demographics, and development[7][9].\nACLED (Armed Conflict Location & Event Data Project): Geolocated data on political violence, protests, and conflict events globally[9][7].\nFreedom House: Annual country-level data on political rights and civil liberties[9].\nWorldwide Governance Indicators: Measures of governance quality for over 200 countries (voice, accountability, stability, rule of law, etc.)[9][7].\nCorrelates of War Project: Datasets on international conflict, alliances, and militarized disputes[10][7].\n\n\n\nSocio-Economic and Health Data\n\nWHO Health Inequality Data Repository: Disaggregated health and environmental indicators from global to local levels[11].\nWorld Resources Institute: Data on climate, energy, food, forests, water, and urban issues at the intersection of environment and development[7].\nQuality of Government Institute Data: Cross-national data on governance, corruption, and government effectiveness[9][7].\n\n\n\n\n\n3. R-Compatible and Built-in Data Sets\n\nR Built-in Datasets: R comes with a variety of datasets (e.g., airquality, CO2, iris, PlantGrowth, quakes, USArrests) useful for teaching data manipulation, visualization, and modeling[12][5].\nRdatasets Repository: Searchable collection of nearly 2,000 datasets from R packages, suitable for a range of analytics exercises[13].\nSpecialized R Packages:\n\nclimate: R package for accessing free meteorological and hydrological datasets globally[14].\npeacesciencer: R package for peace and conflict studies datasets, including Correlates of War and UCDP data[10].\nvdemdata: R package for democracy and governance indicators worldwide[10].\n\n\n\n\n\n4. How to Use These Data Sets in R\n\nMost global and institutional datasets are downloadable as CSV or Excel files, which can be imported into R using read.csv() or readxl::read_excel()[15][12].\nMany R packages (e.g., climate, peacesciencer, LTERdatasampler) provide functions to download and load data directly into R, streamlining lab activities[14][4][10].\nBuilt-in datasets can be accessed with the data() function in R, and their documentation is available with ?datasetname[12][13].\n\n\n\n\n5. Example Table: Data Sets by Topic\n\n\n\n\n\n\n\n\nTopic\nData Set / Source\nR Compatibility\n\n\n\n\nClimate & Weather\nWorldClim, NOAA CDO, OpenWeatherMap\nYes (CSV/API)\n\n\nLand Use & Cover\nUSGS, SAGE, Global Forest Watch\nYes (CSV/GeoTIFF)\n\n\nBiodiversity & Ecology\nLTER, EDI, GBIF, PlantGrowth (R)\nYes (R/CSV)\n\n\nPolitical & Conflict Data\nACLED, Correlates of War, peacesciencer\nYes (R/CSV)\n\n\nSocio-Economic & Governance\nWorld Bank, UNData, WHO, WGI\nYes (CSV/R)\n\n\nBuilt-in & Package Datasets\nairquality, iris, Rdatasets, LTERdatasampler\nYes (R)\n\n\n\n\n\n\n6. Additional Resources\n\nAtlas.co Blog: Comprehensive guide to free environmental data sources, including global, regional, and geospatial repositories[1].\nR-bloggers: Lists and reviews ecological and environmental data sources, including those built into R and available online[5].\nEmory University Data Guide: Curated links to international relations and comparative politics datasets, many of which are R-compatible[8].\n\n\nThese data sets and resources provide a strong foundation for hands-on labs and projects in your course, ensuring students gain practical experience with real-world environmental and international affairs data[1][9][12].\n\n\nSources\n\nFree Data Sources for Environmental Data - Atlas.co https://atlas.co/blog/free-data-sources-for-environmental-data/\nBest places for open source environmental data? : r/gis - Reddit https://www.reddit.com/r/gis/comments/1b7rcir/best_places_for_open_source_environmental_data/\nClimate Data Online (CDO) https://www.ncei.noaa.gov/cdo-web/\nReady-to-teach R Environmental Datasets - LTER Network https://lternet.edu/stories/ready-to-teach-r-environmental-datasets-the-lterdatasampler-r-package/\nTop five(ish) sources of ecological data - R-bloggers https://www.r-bloggers.com/2023/03/top-fiveish-sources-of-ecological-data/\nDatasets | Center for Sustainability and the Global Environment https://sage.nelson.wisc.edu/data-and-models/datasets/\nInternational Relations: Data sets - LibGuides https://selu.libguides.com/international_relations/data_sets\nComparative Politics and International Relations - Data Resources … https://guides.libraries.emory.edu/c.php?g=944707&p=6810116\nInternational Relations: International Data and Datasets https://libguides.lib.msu.edu/c.php?g=96739&p=923034\nTop R packages for downloading political science and economics … https://rforpoliticalscience.com/2023/04/07/top-r-packages-for-downloading-political-science-and-economics-datasets/\nHealth Inequality Data Repository https://www.ingentaconnect.com/content/10.5260/chara.25.3.11\nBuilt-in Datasets in R - MachineLearningMastery.com https://www.machinelearningmastery.com/built-in-datasets-in-r/\nSearchable list of built in R Datasets - YouTube https://www.youtube.com/watch?v=4cfE5jTImP4\nClimate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment https://www.mdpi.com/2071-1050/12/1/394\nStatistics & Teaching Software - Rguroo https://rguroo.com/teaching/\nInternet of Things (IoT) for Integrating Environmental and Localization Data in Building Information Modeling (BIM) http://www.iaarc.org/publications/2017_proceedings_of_the_34rd_isarc/internet_of_things_iot_for_integrating_environmental_and_localization_data_in_building_information_modeling_bim.html\nGradient free stochastic training of ANNs, with local approximation in partitions https://link.springer.com/10.1007/s00477-023-02407-2\nIn Situ Visualization of Membrane Fouling Evolution during Ultrafiltration Using Label-Free Hyperspectral Light Sheet Fluorescence Imaging. https://pubs.acs.org/doi/10.1021/acs.est.2c08731\nRobust Portfolio Optimization with Environmental, Social, and Corporate Governance Preference https://www.mdpi.com/2227-9091/12/2/33\nAn Environmental Energy Harvesting-Driven Wireless Parking Detection Method: Analysis and Implementation https://ieeexplore.ieee.org/document/10124091/\nSome teaching resources using R with illustrative examples … https://pmc.ncbi.nlm.nih.gov/articles/PMC8447407/\nA framework for FAIR robotic datasets https://www.nature.com/articles/s41597-023-02495-3\nDeveloping Transdisciplinary Approaches to Sustainability Challenges: The Need to Model Socio-Environmental Systems in the Longue Durée https://www.mdpi.com/2071-1050/14/16/10234\nA model for the noninvasive, habitat-inclusive estimation of upper limit abundance for synanthropes, exemplified by M. fascicularis https://www.science.org/doi/10.1126/sciadv.adn5390\nRevolutionizing Education: Harnessing Graph Machine Learning for Enhanced Problem-Solving in Environmental Science and Pollution Technology https://neptjournal.com/upload-images/(38)B-4177.pdf\nTime-Evolving Data Science and Artificial Intelligence for Advanced Open Environmental Science (TAIAO) Programme https://www.ijcai.org/proceedings/2024/809\nThe scope of the Kalman filter for spatio‐temporal applications in environmental science https://onlinelibrary.wiley.com/doi/10.1002/env.2773\nA comparison of herbarium and citizen science phenology datasets for detecting response of flowering time to climate change in Denmark https://link.springer.com/10.1007/s00484-022-02238-w\nNon-linear visualization and analysis of large water quality data sets: a model-free basis for efficient monitoring and risk assessment http://link.springer.com/10.1007/s00477-008-0266-y\nPerformance Measurement of Free-Space Optical 980 nm Channel Using Multiple Sets of Environmental Conditions http://link.springer.com/10.1007/s11277-015-2742-2\nA nonparametric method for estimating asymmetric densities based on skewed Birnbaum–Saunders distributions applied to environmental data http://link.springer.com/10.1007/s00477-012-0684-8\nEstimation of polio infection prevalence from environmental surveillance data https://www.science.org/doi/10.1126/scitranslmed.aaf6786\nPublic Environmental Data - Yale University Library Research Guides https://guides.library.yale.edu/c.php?g=296375&p=7352744\nU.S. Environmental… - Dataset - Catalog https://catalog.data.gov/dataset/?tags=environment\nSciences & Environmental Data - Locating Data Sets & Raw Data https://guides.erau.edu/data/sciences\nDevelopment of the InTelligence And Machine LEarning (TAME) Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research https://www.frontiersin.org/articles/10.3389/ftox.2022.893924/full\nMissing Value Imputation of Wireless Sensor Data for Environmental Monitoring https://www.mdpi.com/1424-8220/24/8/2416\nList of R packages for Ecology https://drmattg.github.io/REcol-verse/\nEcology: Data Resources https://guides.libs.uga.edu/c.php?g=350264&p=10234580",
+    "crumbs": [
+      "Resources",
+      "Free datasets for EIA"
     ]
   },
   {

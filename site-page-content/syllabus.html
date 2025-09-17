@@ -156,8 +156,27 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Project</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/milestones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project milestones</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -172,6 +191,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../resources/books-links.html" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Books and other online resources</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/datasets.html" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Free datasets for EIA</span></a>
   </div>
 </li>
       </ul>
@@ -241,7 +266,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#special-accommodations" id="toc-special-accommodations" class="nav-link" data-scroll-target="#special-accommodations">Special Accommodations</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="syllabus.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -259,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Tuesday Sep 9, 2025 at 03:08 pm</p>
+      <p class="date">Wednesday Sep 17, 2025 at 02:48 am</p>
     </div>
   </div>
   
@@ -329,7 +354,7 @@ Important
 <section id="course-description" class="level2">
 <h2 class="anchored" data-anchor-id="course-description">Course description</h2>
 <p>This course provides an introduction to data science where we will explore the principles, methods, and tools that drive modern data-driven inquiry, inference, prediction and decision-making. This course is designed to provide you with a strong foundation in the core elements of the field, including data wrangling, exploratory analysis, statistical modeling, machine learning, and effective data visualization. Fundamental to this is an conceptual and practical understanding of uncertainty, association and causality. We will emphasize both the theoretical underpinnings and the practical applications of data science, preparing you to critically evaluate data, build robust analytical workflows, and effectively communicate results to diverse audiences. Through hands-on exercises, real-world datasets, and collaborative projects, you will gain not only technical proficiency but also the problem-solving mindset that defines successful data scientists.</p>
-<p>This course will primarily use the statistical analytics program <a href="https://www.r-project.org"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and the GUI-based analytics platform <a href="https://jasp-stats.org">JASP</a> which runs on <i class="fa-brands fa-r-project" aria-label="r-project"></i> for analyses, simulations, visualizations, and enhancing statistical understanding.</p>
+<p>This course will primarily use the statistical analytics program <a href="https://www.r-project.org"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and other GUI-based software that use <i class="fa-brands fa-r-project" aria-label="r-project"></i> for analyses, simulations, visualizations, and enhancing statistical understanding.</p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
@@ -376,6 +401,20 @@ Important
 <li>Lab completions and quizzes: 10%</li>
 <li>Project: 30%</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You will not be evaluated on the quality of your <i class="fa-brands fa-r-project" aria-label="r-project"></i> code, beyond that they actully produce the outputs (tables, figures) that you present.</p>
+<p>However, code that is formatted and has appropriate comments is always desired for understanding</p>
+</div>
+</div>
 </section>
 <section id="learning-activities" class="level2">
 <h2 class="anchored" data-anchor-id="learning-activities">Learning activities</h2>
@@ -497,7 +536,7 @@ Important
 </section>
 <section id="project" class="level2">
 <h2 class="anchored" data-anchor-id="project">Project</h2>
-<p>You will assemble into groups of 2 to 3 students. The objective is to have 10 groups in total. Over the course of the semester you will work towards creating an analytic project relevant to the program of study that will incorporate visualization, inference and prediction through the use of data science techniques. Details will be available in the <a href="../project/project.qmd">project website.</a> by week 2.</p>
+<p>You will assemble into groups of 2 to 3 students. The objective is to have 10 groups in total. Over the course of the semester you will work towards creating an analytic project relevant to the program of study that will incorporate visualization, inference and prediction through the use of data science techniques. Details will be available in the <a href="../project/overview.html">project website.</a> by week 2.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
