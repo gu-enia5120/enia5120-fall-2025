@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0957ca8a0d0f386f36afdadbbb993762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-6745840605051657264742256cd953f6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/quarto-contrib/tachyons-4.12.0/tachyons.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/roughnotation-0.5.1/rough-notation.iife.js"></script>
-<script src="../site_libs/quarto-contrib/roughnotation-init-1.0.0/rough.js"></script>
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
-<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -222,9 +197,9 @@
     }
   </style>
 </head>
-<body class="quarto-light nav-sidebar">
-  <div class="reveal page-columns page-full">
-    <div class="slides page-columns page-full">
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Lecture 2</h1>
@@ -284,12 +259,12 @@
 <li>The report will be written in Quarto with all tables, figures and analytic answers driven by <i class="fa-brands fa-r-project" aria-label="r-project"></i> code, so it will be reproducible with the data in hand</li>
 </ul>
 </section>
-<section class="page-columns page-full">
+<section>
 <section id="visual-exploratory-analysis-eda" class="title-slide slide level1 center">
 <h1>Visual exploratory analysis (EDA)</h1>
 
 </section>
-<section id="history" class="slide level2 page-columns page-full">
+<section id="history" class="slide level2">
 <h2>History</h2>
 <p>The ideas behind visual EDA dates back over 100 years</p>
 <ul>
@@ -300,9 +275,9 @@
 <p><em>Exploratory data analysis can never be the whole story, but nothing else can serve as the foundation stone –- as the first step</em></p>
 <p>John Tukey, 1977</p>
 </div>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Bowley, A.L (1920). <em>Elementary Manual of Statistics</em>, 3rd Edition</span></div></div>
+<p><span class="column-margin margin-aside">Bowley, A.L (1920). <em>Elementary Manual of Statistics</em>, 3rd Edition</span></p>
 </section>
-<section id="a-more-modern-description" class="slide level2 page-columns page-full">
+<section id="a-more-modern-description" class="slide level2">
 <h2>A more modern description</h2>
 <div class="b--blue tl ba bw2 br3 shadow-5 ph4 mt5 f3 avenir">
 <p><em>An approach/philosophy for data analysis that employs a variety of techniques (mostly graphical) to <b>maximize insight</b> into a data set, uncover underlying structure, extract important variables, detect outliers and anomalies, test underlying assumptions, develop parsimonious models and determine optimal factor settings.</em></p>
@@ -376,7 +351,7 @@
 <li>How to best present your data visually</li>
 </ul>
 </div></section>
-<section id="food-for-thought" class="slide level2 page-columns page-full">
+<section id="food-for-thought" class="slide level2">
 <h2>Food for thought <iconify-icon role="img" inline="" icon="mdi:thought-bubble" style="font-size: 3em;" aria-label="Icon thought-bubble from mdi Iconify.design set." title="Icon thought-bubble from mdi Iconify.design set."></iconify-icon></h2>
 <p>Think about each data type or pair of data types, and consider</p>
 <ul>
@@ -411,7 +386,7 @@
           display:block!important;
       }</style></aside>
 </section></section>
-<section class="page-columns page-full">
+<section>
 <section id="the-process" class="title-slide slide level1 center">
 <h1>The process</h1>
 
@@ -421,7 +396,7 @@
 <p><a href="img/eda1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="img/eda1.png"></a></p>
 <p><span class="absolute" style="font-weight: bold;font-size:30px; font-variant: small-caps;top: 0px; left: 150px; ">Aspects of data</span> <span class="absolute" style="font-weight: bold;font-size:30px; font-variant: small-caps;top: 0px; right: 0px; ">When it is realized in the process</span></p>
 </section>
-<section id="what-are-we-looking-for" class="slide level2 page-columns page-full">
+<section id="what-are-we-looking-for" class="slide level2">
 <h2>What are we looking for?</h2>
 <div class="columns">
 <div class="column" style="width:47%;">
@@ -529,7 +504,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(DataExplorer)</span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-3"><a></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'adult.csv'</span>)</span>
-<span id="cb1-4"><a></a><span class="fu">create_report</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a></a><span class="fu">create_report</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 <p><strong>Remember, every visualization has to earn its place</strong>. This can give you a quick first pass through the data, but it isn’t what you’d want to report. This report would need to be curated to advance insights and narratives, and personalized to your brand.</p>
 </section>
@@ -597,12 +572,12 @@ The tendency to be influenced by how the information is presented rather than th
 <p><strong>Active Search</strong>: Deliberately look for evidence that contradicts your initial hypotheses rather than just supporting data</p>
 <p><strong>Early Feedback</strong>: Debrief with stakeholders to avoid misinterpretation of results and preempt biased follow-up requests</p>
 </section></section>
-<section class="page-columns page-full">
+<section>
 <section id="missing-data" class="title-slide slide level1 center">
 <h1>Missing data</h1>
 
 </section>
-<section id="why-are-missing-data-patterns-important" class="slide level2 scrollable page-columns page-full">
+<section id="why-are-missing-data-patterns-important" class="slide level2 scrollable">
 <h2>Why are missing data patterns important</h2>
 <ol type="1">
 <li>From a completeness perspective, it gives a sense of the amount of usable data on hand</li>
@@ -671,18 +646,18 @@ The fact that the data are missing is systematically related to the values of th
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb2-2"><a></a><span class="fu">data</span>(msleep)</span>
-<span id="cb2-3"><a></a>visdat<span class="sc">::</span><span class="fu">vis_miss</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a></a>visdat<span class="sc">::</span><span class="fu">vis_miss</span>(msleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><a href="week-02_files/figure-revealjs/-slides-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-02_files/figure-revealjs/-slides-7-1.png" width="2400" class="figure-img"></a></p>
+<figure>
+<p><a href="week-02_files/figure-revealjs/-slides-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-02_files/figure-revealjs/-slides-7-1.png" width="2400"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This visualization provides both missing data patterns and summary statistics about the missing data</p>
 </section>
-<section id="a-closer-look-at-missing-data-patterns-1" class="slide level2 page-columns page-full">
+<section id="a-closer-look-at-missing-data-patterns-1" class="slide level2">
 <h2>A closer look at missing data patterns</h2>
 <p>The <code>naniar</code> package by Nicholas Tierney provides more detailed looks at missing data patterns</p>
 <div class="column" style="width:47%;">
@@ -693,11 +668,11 @@ The fact that the data are missing is systematically related to the values of th
 <span id="cb3-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"REM sleep (hours)"</span>,</span>
 <span id="cb3-5"><a></a>       <span class="at">y =</span> <span class="st">"Time awake (hours)"</span>,</span>
 <span id="cb3-6"><a></a>       <span class="at">title =</span> <span class="st">"Is missing data in REM sleep associated with time awake"</span>)<span class="sc">+</span></span>
-<span id="cb3-7"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><a href="week-02_files/figure-revealjs/-slides-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-02_files/figure-revealjs/-slides-8-1.png" width="2400" class="figure-img"></a></p>
+<figure>
+<p><a href="week-02_files/figure-revealjs/-slides-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-02_files/figure-revealjs/-slides-8-1.png" width="2400"></a></p>
 </figure>
 </div>
 </div>
@@ -712,11 +687,11 @@ The fact that the data are missing is systematically related to the values of th
 <span id="cb4-6"><a></a>       <span class="at">y =</span> <span class="st">"Mean ozone (ppb)"</span>,</span>
 <span id="cb4-7"><a></a>       <span class="at">title =</span> <span class="st">"Are there missing data patterns"</span>,</span>
 <span id="cb4-8"><a></a>       <span class="at">caption =</span> <span class="st">"Data obtained from `datasets::airquality`"</span>)<span class="sc">+</span></span>
-<span id="cb4-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><a href="week-02_files/figure-revealjs/-slides-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-02_files/figure-revealjs/-slides-9-1.png" width="2400" class="figure-img"></a></p>
+<figure>
+<p><a href="week-02_files/figure-revealjs/-slides-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-02_files/figure-revealjs/-slides-9-1.png" width="2400"></a></p>
 </figure>
 </div>
 </div>
@@ -748,7 +723,7 @@ The fact that the data are missing is systematically related to the values of th
       }</style></aside>
 <p>:::</p>
 </section>
-<section id="section-1" class="slide level2 page-columns page-full" data-background-image="img/missingval.png" data-background-size="contain">
+<section id="section-1" class="slide level2" data-background-image="img/missingval.png" data-background-size="contain">
 <h2></h2>
 <aside class="notes">
 <p>This plot visualizes the missing values in a dataset. At the top it shows the aggregate for each column using a relative scale and absolute missing-value annotations, while on the right, summary statistics and individual row results are displayed. Using this plot allows to gain a quick overview over the structure of missing values and their relation in a dataset and easily determine which columns and rows to investigate / drop.</p>
@@ -765,20 +740,20 @@ The fact that the data are missing is systematically related to the values of th
           display:block!important;
       }</style></aside>
 </section></section>
-<section class="page-columns page-full">
+<section>
 <section id="upset-plots" class="title-slide slide level1 center">
 <h1>UpSet plots</h1>
 <p>Looking at multivariate relationships among categorical variables<br> applied to missing data</p>
 </section>
-<section id="upset-plots-1" class="slide level2 page-columns page-full">
+<section id="upset-plots-1" class="slide level2">
 <h2>UpSet plots</h2>
 <p>The UpSet plot was originally developed at Harvard in 2014.</p>
 <p>The main purpose was to solve the problem of set visualizations when you have more than one set (so an extension of Venn Diagrams), in an intuitive manner</p>
 <div class="fragment">
 <p>It tries to solve the problem created by the following visualization looking at the intersection of 6 sets</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="https://upset.app/assets/images//banana.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="D’Hont et al, The banana (Musa acuminata) genome and the evolution of monocotyledonous plants. Nature 488, 213-217 (2012)"><img data-src="https://upset.app/assets/images//banana.png" height="370" alt="D’Hont et al, The banana (Musa acuminata) genome and the evolution of monocotyledonous plants. Nature 488, 213-217 (2012)" class="figure-img"></a></p>
+<figure>
+<p><a href="https://upset.app/assets/images//banana.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="D’Hont et al, The banana (Musa acuminata) genome and the evolution of monocotyledonous plants. Nature 488, 213-217 (2012)"><img data-src="https://upset.app/assets/images//banana.png" height="370" alt="D’Hont et al, The banana (Musa acuminata) genome and the evolution of monocotyledonous plants. Nature 488, 213-217 (2012)"></a></p>
 <figcaption>D’Hont et al, <em>The banana (Musa acuminata) genome and the evolution of monocotyledonous plants</em>. Nature <strong>488</strong>, 213-217 (2012)</figcaption>
 </figure>
 </div>
@@ -808,11 +783,11 @@ The fact that the data are missing is systematically related to the values of th
 <p>Let’s look at this from a missing data perspective. Each “set” is the missing/non-missing annotation of each variable in a data set, and we’re interested in when the missing data co-occur.</p>
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">gg_miss_upset</span>(msleep) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">gg_miss_upset</span>(msleep) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="week-02_files/figure-revealjs/-slides-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="The msleep data"><img data-src="week-02_files/figure-revealjs/-slides-12-1.png" width="2400" alt="The msleep data" class="figure-img"></a></p>
+<figure>
+<p><a href="week-02_files/figure-revealjs/-slides-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="The msleep data"><img data-src="week-02_files/figure-revealjs/-slides-12-1.png" width="2400" alt="The msleep data"></a></p>
 <figcaption>The msleep data</figcaption>
 </figure>
 </div>
@@ -834,7 +809,7 @@ The fact that the data are missing is systematically related to the values of th
 <span id="cb6-2"><a></a>d <span class="ot">&lt;-</span> msleep <span class="sc">|&gt;</span> </span>
 <span id="cb6-3"><a></a>  <span class="fu">select</span>(vore, sleep_rem, brainwt, conservation, sleep_cycle)</span>
 <span id="cb6-4"><a></a>d <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">is.na</span>(d)<span class="sc">*</span><span class="dv">1</span>)</span>
-<span id="cb6-5"><a></a><span class="fu">upset</span>(d, <span class="at">nsets=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a></a><span class="fu">upset</span>(d, <span class="at">nsets=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="img/upset1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="img/upset1.png"></a></p>
 </div><div class="column" style="width:47%;">
@@ -842,7 +817,7 @@ The fact that the data are missing is systematically related to the values of th
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(ComplexHeatmap)</span>
 <span id="cb7-2"><a></a>m <span class="ot">&lt;-</span> <span class="fu">make_comb_mat</span>(d)</span>
-<span id="cb7-3"><a></a><span class="fu">UpSet</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a></a><span class="fu">UpSet</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="img/upset2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="img/upset2.png"></a></p>
 </div></section></section>
