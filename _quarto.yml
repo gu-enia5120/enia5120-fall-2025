@@ -69,6 +69,8 @@ website:
         contents:
           - href: resources/books-links.qmd
             target: _blank
+          - href: resources/datasets.qmd
+            target: _blank
   page-footer:
     left: |
       Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}}<br>

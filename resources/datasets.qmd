@@ -1,0 +1,139 @@
+---
+title: "Free datasets for EIA"
+date: last-modified
+---
+
+::: callout-note
+## Sources
+These links were obtained and organized using Google searches and Perplexity AI
+:::
+
+## Recommended Free Data Sets for Data Analytics in Environment and International Affairs
+
+Below are curated, high-quality, and free data sets suitable for your course. They are selected for relevance to environmental and international affairs, compatibility with R, and educational value for beginner to intermediate data analytics labs.
+
+---
+
+### 1. Environmental Data Sets
+
+[Open repo of ecological data for use in teaching](https://www.seascapemodels.org/rstats/2025/06/10/open-access-data-for-teaching.html)
+
+### Global and Regional Environmental Data
+
+- **WorldClim**: High-resolution global climate data (temperature, precipitation, etc.), widely used for climate and ecological analysis[1][2].
+- **USGS Earth Explorer**: Satellite imagery, land cover, and environmental monitoring data for the United States and globally[1][2].
+- **NOAA Climate Data Online (CDO)**: Historical weather and climate data, including temperature, precipitation, and wind, available globally[3][2].
+- **Global Forest Watch**: Deforestation, land use, and forest change data, including interactive maps and downloadable data[2][1].
+- **OpenWeatherMap**: Real-time and historical weather data accessible via API, suitable for time series and spatial analysis[1][2].
+
+### Specialized Environmental Data
+
+- **LTER DataSampler R Package**: Ready-to-use environmental data samples from the Long-Term Ecological Research (LTER) Network, ideal for R-based labs[4][5].
+- **SAGE (Center for Sustainability and the Global Environment)**: Datasets on global ecosystems, croplands, air quality, and land use change[6].
+- **Environmental Data Initiative (EDI)**: Repository of ecological and environmental datasets, including biodiversity, water quality, and ecosystem processes[5].
+- **Global Solar Atlas & Global Wind Atlas**: Renewable energy potential data for solar and wind resources worldwide[1][2].
+
+---
+
+### 2. International Affairs and Socio-Political Data Sets
+
+##### International Relations and Political Data
+
+- **World Bank Open Data**: Comprehensive global development indicators, including environment, economy, health, and governance[7][8].
+- **UNData**: Aggregated data from United Nations agencies on topics such as environment, demographics, and development[7][9].
+- **ACLED (Armed Conflict Location & Event Data Project)**: Geolocated data on political violence, protests, and conflict events globally[9][7].
+- **Freedom House**: Annual country-level data on political rights and civil liberties[9].
+- **Worldwide Governance Indicators**: Measures of governance quality for over 200 countries (voice, accountability, stability, rule of law, etc.)[9][7].
+- **Correlates of War Project**: Datasets on international conflict, alliances, and militarized disputes[10][7].
+
+#### Socio-Economic and Health Data
+
+- **WHO Health Inequality Data Repository**: Disaggregated health and environmental indicators from global to local levels[11].
+- **World Resources Institute**: Data on climate, energy, food, forests, water, and urban issues at the intersection of environment and development[7].
+- **Quality of Government Institute Data**: Cross-national data on governance, corruption, and government effectiveness[9][7].
+
+---
+
+### 3. R-Compatible and Built-in Data Sets
+
+- **R Built-in Datasets**: R comes with a variety of datasets (e.g., `airquality`, `CO2`, `iris`, `PlantGrowth`, `quakes`, `USArrests`) useful for teaching data manipulation, visualization, and modeling[12][5].
+- **Rdatasets Repository**: Searchable collection of nearly 2,000 datasets from R packages, suitable for a range of analytics exercises[13].
+- **Specialized R Packages**:
+  - **climate**: R package for accessing free meteorological and hydrological datasets globally[14].
+  - **peacesciencer**: R package for peace and conflict studies datasets, including Correlates of War and UCDP data[10].
+  - **vdemdata**: R package for democracy and governance indicators worldwide[10].
+
+---
+
+### 4. How to Use These Data Sets in R
+
+- Most global and institutional datasets are downloadable as CSV or Excel files, which can be imported into R using `read.csv()` or `readxl::read_excel()`[15][12].
+- Many R packages (e.g., `climate`, `peacesciencer`, `LTERdatasampler`) provide functions to download and load data directly into R, streamlining lab activities[14][4][10].
+- Built-in datasets can be accessed with the `data()` function in R, and their documentation is available with `?datasetname`[12][13].
+
+---
+
+### 5. Example Table: Data Sets by Topic
+
+| Topic                          | Data Set / Source                         | R Compatibility   |
+|---------------------------------|-------------------------------------------|-------------------|
+| Climate & Weather               | WorldClim, NOAA CDO, OpenWeatherMap       | Yes (CSV/API)     |
+| Land Use & Cover                | USGS, SAGE, Global Forest Watch           | Yes (CSV/GeoTIFF) |
+| Biodiversity & Ecology          | LTER, EDI, GBIF, PlantGrowth (R)          | Yes (R/CSV)       |
+| Political & Conflict Data       | ACLED, Correlates of War, peacesciencer   | Yes (R/CSV)       |
+| Socio-Economic & Governance     | World Bank, UNData, WHO, WGI              | Yes (CSV/R)       |
+| Built-in & Package Datasets     | airquality, iris, Rdatasets, LTERdatasampler | Yes (R)           |
+
+---
+
+### 6. Additional Resources
+
+- **Atlas.co Blog**: Comprehensive guide to free environmental data sources, including global, regional, and geospatial repositories[1].
+- **R-bloggers**: Lists and reviews ecological and environmental data sources, including those built into R and available online[5].
+- **Emory University Data Guide**: Curated links to international relations and comparative politics datasets, many of which are R-compatible[8].
+
+---
+
+These data sets and resources provide a strong foundation for hands-on labs and projects in your course, ensuring students gain practical experience with real-world environmental and international affairs data[1][9][12].
+
+### Sources
+
+1. Free Data Sources for Environmental Data - Atlas.co <https://atlas.co/blog/free-data-sources-for-environmental-data/>
+1.  Best places for open source environmental data? : r/gis - Reddit <https://www.reddit.com/r/gis/comments/1b7rcir/best_places_for_open_source_environmental_data/>
+1.  Climate Data Online (CDO) <https://www.ncei.noaa.gov/cdo-web/>
+1.  Ready-to-teach R Environmental Datasets - LTER Network <https://lternet.edu/stories/ready-to-teach-r-environmental-datasets-the-lterdatasampler-r-package/>
+1.  Top five(ish) sources of ecological data - R-bloggers <https://www.r-bloggers.com/2023/03/top-fiveish-sources-of-ecological-data/>
+1.  Datasets | Center for Sustainability and the Global Environment <https://sage.nelson.wisc.edu/data-and-models/datasets/>
+1.  International Relations: Data sets - LibGuides <https://selu.libguides.com/international_relations/data_sets>
+1.  Comparative Politics and International Relations - Data Resources ... <https://guides.libraries.emory.edu/c.php?g=944707&p=6810116>
+1.  International Relations: International Data and Datasets <https://libguides.lib.msu.edu/c.php?g=96739&p=923034>
+1.  Top R packages for downloading political science and economics ... <https://rforpoliticalscience.com/2023/04/07/top-r-packages-for-downloading-political-science-and-economics-datasets/>
+1.  Health Inequality Data Repository <https://www.ingentaconnect.com/content/10.5260/chara.25.3.11>
+1.  Built-in Datasets in R - MachineLearningMastery.com <https://www.machinelearningmastery.com/built-in-datasets-in-r/>
+1.  Searchable list of built in R Datasets - YouTube <https://www.youtube.com/watch?v=4cfE5jTImP4>
+1.  Climate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment <https://www.mdpi.com/2071-1050/12/1/394>
+1.  Statistics & Teaching Software - Rguroo <https://rguroo.com/teaching/>
+1.  Internet of Things (IoT) for Integrating Environmental and Localization Data in Building Information Modeling (BIM) <http://www.iaarc.org/publications/2017_proceedings_of_the_34rd_isarc/internet_of_things_iot_for_integrating_environmental_and_localization_data_in_building_information_modeling_bim.html>
+1.  Gradient free stochastic training of ANNs, with local approximation in partitions <https://link.springer.com/10.1007/s00477-023-02407-2>
+1.  In Situ Visualization of Membrane Fouling Evolution during Ultrafiltration Using Label-Free Hyperspectral Light Sheet Fluorescence Imaging. <https://pubs.acs.org/doi/10.1021/acs.est.2c08731>
+1.  Robust Portfolio Optimization with Environmental, Social, and Corporate Governance Preference <https://www.mdpi.com/2227-9091/12/2/33>
+1.  An Environmental Energy Harvesting-Driven Wireless Parking Detection Method: Analysis and Implementation <https://ieeexplore.ieee.org/document/10124091/>
+1.  Some teaching resources using R with illustrative examples ... <https://pmc.ncbi.nlm.nih.gov/articles/PMC8447407/>
+1.  A framework for FAIR robotic datasets <https://www.nature.com/articles/s41597-023-02495-3>
+1.  Developing Transdisciplinary Approaches to Sustainability Challenges: The Need to Model Socio-Environmental Systems in the Longue Durée <https://www.mdpi.com/2071-1050/14/16/10234>
+1.  A model for the noninvasive, habitat-inclusive estimation of upper limit abundance for synanthropes, exemplified by M. fascicularis <https://www.science.org/doi/10.1126/sciadv.adn5390>
+1.  Revolutionizing Education: Harnessing Graph Machine Learning for Enhanced Problem-Solving in Environmental Science and Pollution Technology <https://neptjournal.com/upload-images/(38)B-4177.pdf>
+1.  Time-Evolving Data Science and Artificial Intelligence for Advanced Open Environmental Science (TAIAO) Programme <https://www.ijcai.org/proceedings/2024/809>
+1.  The scope of the Kalman filter for spatio‐temporal applications in environmental science <https://onlinelibrary.wiley.com/doi/10.1002/env.2773>
+1.  A comparison of herbarium and citizen science phenology datasets for detecting response of flowering time to climate change in Denmark <https://link.springer.com/10.1007/s00484-022-02238-w>
+1.  Non-linear visualization and analysis of large water quality data sets: a model-free basis for efficient monitoring and risk assessment <http://link.springer.com/10.1007/s00477-008-0266-y>
+1.  Performance Measurement of Free-Space Optical 980 nm Channel Using Multiple Sets of Environmental Conditions <http://link.springer.com/10.1007/s11277-015-2742-2>
+1.  A nonparametric method for estimating asymmetric densities based on skewed Birnbaum–Saunders distributions applied to environmental data <http://link.springer.com/10.1007/s00477-012-0684-8>
+1.  Estimation of polio infection prevalence from environmental surveillance data <https://www.science.org/doi/10.1126/scitranslmed.aaf6786>
+1.  Public Environmental Data - Yale University Library Research Guides <https://guides.library.yale.edu/c.php?g=296375&p=7352744>
+1.  U.S. Environmental... - Dataset - Catalog <https://catalog.data.gov/dataset/?tags=environment>
+1.  Sciences & Environmental Data - Locating Data Sets & Raw Data <https://guides.erau.edu/data/sciences>
+1.  Development of the InTelligence And Machine LEarning (TAME) Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research <https://www.frontiersin.org/articles/10.3389/ftox.2022.893924/full>
+1.  Missing Value Imputation of Wireless Sensor Data for Environmental Monitoring <https://www.mdpi.com/1424-8220/24/8/2416>
+1.  List of R packages for Ecology <https://drmattg.github.io/REcol-verse/>
+1.  Ecology: Data Resources <https://guides.libs.uga.edu/c.php?g=350264&p=10234580>

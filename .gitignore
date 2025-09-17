@@ -11,3 +11,5 @@ _artifacts/*
 slides/topics/*cache
 _freeze/*
 _worksheets/*.html
+
+slides/topics
