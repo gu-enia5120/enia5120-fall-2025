@@ -54,6 +54,7 @@ execute:
 
 ```{r}
 #| echo: false
+#| cache: false
 source("site-page-content/class-meetings.R")
 
 cal_df |>
@@ -64,8 +65,6 @@ cal_df |>
 # ("session_number", "monday", "session_name", "schedule_notes", "assignment_posted"
 
 ```
-
-
 
 **Notes:**
 
