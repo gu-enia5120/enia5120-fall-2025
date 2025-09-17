@@ -1,0 +1,42 @@
+---
+title: "Lecture 2"
+subtitle: "Starting data analysis: Software and EDA"
+---
+
+## Agenda
+
+- Introduction to different software for the class
+- Introducing EDA (Exploratory Data Analysis)
+- Starting {{< fa brands r-project >}} (baby steps)
+- Worksheets
+
+. . .
+
+* Homework will be posted tonight
+* Project
+
+## Project
+
+::: {.callout-note}
+## Team structure
+- Two-person teams, preferable with one individual from PolSci and one from EnvSci
+- Sign up for teams [here](https://georgetown.instructure.com/courses/214224/groups#tab-31744)
+:::
+
+### Milestones
+
+1. Identify data (one or more datasets) and formulate 2-3 questions you want to answer
+2. Complete EDA and have a sense whether your questions are answerable from the data you are using
+3. Submit a draft narrative of what you think the answers to your questions are based on your preliminary analyses
+4. Describe the analyses you are doing, and provide 1-2 visualizations to indicate that the proposed approach is reasonable
+5. Submit your analysis plan for answering your questions. This will be in the appendix of your final submission
+
+## Project
+
+### Final submission
+
+A narrative report (like a policy report) driven by your data that provides a clear answer to your proposed questions. The report itself should be publication quality and have no code visible.
+
+- The report will be written in Quarto with all tables, figures and analytic answers driven by {{< fa brands r-project >}} code, so it will be reproducible with the data in hand
+
+{{< include topics/eda2/_slides.qmd >}}

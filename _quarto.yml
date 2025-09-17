@@ -32,8 +32,8 @@ website:
         contents:
           - href: slides/week-01.qmd
             target: _blank
-          #          - href: slides/week-02.qmd
-          #            target: _blank
+          - href: slides/week-02.qmd
+            target: _blank
           #          - href: slides/week-03.qmd
           #            target: _blank
           #          - href: slides/week-04.qmd
