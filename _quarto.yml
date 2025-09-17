@@ -56,15 +56,9 @@ website:
           #            text: "Wrap-up"
           #            target: _blank
       - section: "Project"
-        #        contents:
-        #          - href: project/project.qmd
-        #            text: Overview
-        #          - href: project/dataset.qmd
-        #            text: "1. Dataset/topic proposal"
-        #          - href: project/proposal.qmd
-        #            text: "2. Project proposal"
-        #          - href: project/wip.qmd
-        #            text: "3. Mid-point review and feedback"
+        contents:
+          - href: project/overview.qmd
+          - href: project/milestones.qmd
       - section: "Resources"
         contents:
           - href: resources/books-links.qmd

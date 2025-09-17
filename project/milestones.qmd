@@ -1,0 +1,17 @@
+---
+title: "Project milestones"
+---
+
+# Milestones
+
+::: callout-important
+Each milestone submission will be graded for completion and will be penalized for late submissions. This is to ensure that you make regular progress on your project.
+:::
+
+1. Identify data (one or more datasets) and formulate 2-3 questions you want to answer (September 30)
+2. Complete EDA and have a sense whether your questions are answerable from the data you are using (October 14)
+3. Submit a draft narrative of what you think the answers to your questions are based on your preliminary analyses (October 28)
+4. Describe the analyses you are doing, and provide 1-2 visualizations to indicate that the proposed approach is reasonable (November 11)
+5. Submit your analysis plan for answering your questions. This will be in the appendix of your final submission (November 25)
+
+We will publish expectations and a rubric for each milestone shortly.

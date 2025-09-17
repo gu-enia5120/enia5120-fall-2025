@@ -1,0 +1,40 @@
+---
+title: "Project overview"
+date: last-modified
+---
+
+# Introduction
+
+Our final course evaluation will be a data–based project. We will develop questions based in political and environmental sciences, and obtain data sets that might help us answer these questions. A central element of the project will be data analysis and modeling to help us answer the questions we pose. It is hoped that each project will have elements of both political sciences and environmental sciences in them in line with the graduate program, and will address questions relevant to this program.
+
+# Logistics
+
+You will organize yourselves in groups of 2 to 3 students. Each group will hopefully have some combination of political science and environmental science expertise. It is your group's responsibility to decide on the questions to ask and procure the data sets that might help you answer those questions. Your questions should be relevant to the current understanding of environmental and international affairs.
+
+## Data
+
+You may choose any data sets that are publicly available and not proprietary. These data should be made available in your final submission. The data should be from reputable sources such as government and international agencies and high-quality universities, and also from research publications in reputable journals.
+
+You can choose one or more data sets for your project, provided that the data sets can be linked in some way, typically using a key variable(s). The data should be rich enough to answer your questions. This does not mean that they have to be Big Data. Small to medium size data sets (within 10,000 observations) might be a good size to consider.
+
+## Software
+
+The initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using R, and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers. 
+
+Please do ensure that all tables and figures generated from your analysis look professional, and are easily readable and understandable. This means having appropriate labels and captions, having good annotations on your visualizations and generally providand will address questions relevant to this program.
+
+# The final product
+
+::: callout-important
+<b>The final submission will be on December 15</b>
+:::
+
+The final submission will involve a narrative like a policy report or a policy proposal. This will include an appendix of the analytic plan you implemented in this report. We expect this report to be anywhere between 2 to 10 pages and will have appropriate references, citations and be professionally formatted. This document will be created using Quarto and rendered as an HTML document (You will be taught how to do this in class).
+
+As a component of the final submission, you will give a 10 to 15 minute presentation in class on **Tuesday, December 9**. This will provide an opportunity for you to showcase your work and to receive feedback from peers and the instructor. This presentation can be written in PowerPoint,or preferably, using Quarto. This presentation will summarize the report that you will submit in a manner that highlights the salient points from your analysis and the main threads of your narrative.
+
+All products should meet the minimum requirements explained [here](site-page-content/standards.qmd).
+
+# Grading
+
+Your final submission along with your milestone submissions will be graded holistically with a total of 100 points. A rubric aligning expectations with grades will be published shortly.
