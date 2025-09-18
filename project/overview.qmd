@@ -19,7 +19,7 @@ You can choose one or more data sets for your project, provided that the data se
 
 ## Software
 
-The initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using R, and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers. 
+The initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using {{< fa brands r-project >}}, and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers. 
 
 Please do ensure that all tables and figures generated from your analysis look professional, and are easily readable and understandable. This means having appropriate labels and captions, having good annotations on your visualizations and generally providand will address questions relevant to this program.
 
