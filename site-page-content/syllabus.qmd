@@ -65,9 +65,8 @@ real-world datasets, and collaborative projects, you will gain not only
 technical proficiency but also the problem-solving mindset that defines
 successful data scientists.
 
-This course will primarily use the statistical analytics program [{{< fa brands r-project >}}](https://www.r-project.org) and 
-the GUI-based analytics platform [JASP](https://jasp-stats.org) which runs on {{< fa brands r-project >}} for 
-analyses, simulations, visualizations, and enhancing statistical understanding. 
+This course will primarily use the statistical analytics program [{{< fa brands r-project >}}](https://www.r-project.org) and other GUI-based software that use {{< fa brands r-project >}} for 
+analyses, simulations, visualizations, and enhancing statistical understanding. Approved software includes [JASP](https://jasp-stats.org), [jamovi](https://www.jamovi.org/), [Bluesky](https://www.blueskystatistics.com/), and [ExploratoryIO](https://exploratory.io/)
 
 
 
@@ -114,6 +113,11 @@ You should have access to blank paper and writing/drawing instruments. A pad/not
 - Lab completions and quizzes: 10%
 - Project: 30%
 
+::: callout-tip
+You will not be evaluated on the quality of your {{< fa brands r-project >}} code, beyond that they actully produce the outputs (tables, figures) that you present. 
+
+However, code that is formatted and has appropriate comments is always desired for understanding
+:::
 ## Learning activities
 
 ### Class format
@@ -208,7 +212,7 @@ Missed quizzes cannot be made up.
 You will assemble into groups of 2 to 3 students. The objective is to have 10 groups in total.  Over the
 course of the semester you will work towards creating an 
 analytic project relevant to the program of study that will incorporate visualization, inference and prediction through the use of data science techniques.
-Details will be available in the [project website.](../project/project.qmd) by week 2.
+Details will be available in the [project website.](../project/overview.qmd) by week 2.
 
 ::: callout-important
 The project will have several milestones that are cumulative in nature. Therefore, we will grade the project after the final submission with a holistic project rubric. 
