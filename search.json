@@ -801,11 +801,21 @@
     ]
   },
   {
-    "objectID": "site-page-content/prep-work.html#week-2-september-17",
-    "href": "site-page-content/prep-work.html#week-2-september-17",
+    "objectID": "site-page-content/prep-work.html#week-2-september-16",
+    "href": "site-page-content/prep-work.html#week-2-september-16",
     "title": "Weekly Class Preparation",
-    "section": "Week 2: September 17",
-    "text": "Week 2: September 17\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
+    "section": "Week 2: September 16",
+    "text": "Week 2: September 16\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
+    "crumbs": [
+      "Weekly Class Preparation"
+    ]
+  },
+  {
+    "objectID": "site-page-content/prep-work.html#week-3-september-23",
+    "href": "site-page-content/prep-work.html#week-3-september-23",
+    "title": "Weekly Class Preparation",
+    "section": "Week 3: September 23",
+    "text": "Week 3: September 23\nThis week, we will basically hold a  covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.\nIn terms of deliverables, we will not have a quiz this week, but we will have an -based homework using scaffolded code chunks and Quarto.\n\n\n\n\n\n\nImportant\n\n\n\nPhilosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To quote Stephen Covey, “Begin with the End in Mind”.\nWhat is primary is what you want to achieve with the data.\nThen, and only then, do you try to figure out how to use the software tools to achieve that.",
     "crumbs": [
       "Weekly Class Preparation"
     ]
@@ -870,7 +880,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Thu Sep 18, 2025 at 04:37 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Sun Sep 21, 2025 at 11:34 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -1493,14 +1503,14 @@
     "href": "worksheets/data-wrangling-2.html",
     "title": "Data wrangling 2",
     "section": "",
-    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
+    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
   },
   {
     "objectID": "worksheets/data-wrangling-2.html#introduction",
     "href": "worksheets/data-wrangling-2.html#introduction",
     "title": "Data wrangling 2",
     "section": "",
-    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
+    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
   },
   {
     "objectID": "worksheets/data-wrangling-2.html#analyzing-subsets",
