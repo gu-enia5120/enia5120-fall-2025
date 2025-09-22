@@ -1503,14 +1503,14 @@
     "href": "worksheets/data-wrangling-2.html",
     "title": "Data wrangling 2",
     "section": "",
-    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
+    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
   },
   {
     "objectID": "worksheets/data-wrangling-2.html#introduction",
     "href": "worksheets/data-wrangling-2.html#introduction",
     "title": "Data wrangling 2",
     "section": "",
-    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
+    "text": "In this worksheet, we will continue with basic data manipulations, now moving on to grouping and summarizing, making data tables wider or longer, and joining data tables.\nFirst we need to load the required R packages. Please wait a moment until the live R session is fully set up and all packages are loaded.\n\n\n\n\n\n\n\n\nNext we set up the data. We will be working with data on individual penguins in Antarctica.\npenguins\n\n\n\n\n\n\n\n\n\n\nWe’ll also be working with two datasets containing some information about Texas cities."
   },
   {
     "objectID": "worksheets/data-wrangling-2.html#analyzing-subsets",
