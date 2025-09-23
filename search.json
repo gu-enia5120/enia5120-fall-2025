@@ -553,6 +553,622 @@
     "text": "Using aesthetics as parameters\nMany of the aesthetics (such as color, fill, and also size to change line size or point thickness) can be used as parameters inside a geom rather than inside an aes() statement. The difference is that when you use an aesthetic as a parameter, you specify a specific value, such as color = \"blue\", rather than a mapping, such as aes(color = location). Notice the difference: Inside the aes() function, we don’t actually specify the specific color values, ggplot does that for us. We only say that we want the data values of the location column to correspond to different colors. (We will learn later how to tell ggplot to use specific colors in this mapping.)\nTry this with the boxplot example from the previous section. Map location onto the fill aesthetic but set the color of the lines to \"navyblue\".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nggplot(temperatures, aes(x = month, y = temperature, fill = ___)) +\n  geom_boxplot(color = ___)\n\n\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nggplot(temperatures, aes(x = month, y = temperature, fill = location)) +\n  geom_boxplot(color = \"navyblue\")\n\n\n\n\nNow do the reverse. Map location onto the line colors but fill the box with the color \"navyblue\".\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHint\n\n\n\n\n\nggplot(temperatures, aes(x = month, y = temperature, color = ___)) +\n  geom_boxplot(fill = ___)\n\n\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\nggplot(temperatures, aes(x = month, y = temperature, color = location)) +\n  geom_boxplot(fill = \"navyblue\")"
   },
   {
+    "objectID": "slides/week-03.html#agenda",
+    "href": "slides/week-03.html#agenda",
+    "title": "Lecture 3",
+    "section": "Agenda",
+    "text": "Agenda\n\nIntroduction to R and RStudio\nR basics\nData structures\nData import\nData manipulation\nData and object export",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#frustration-is-part-of-learning-r-but-it-doesnt-have-to-be",
+    "href": "slides/week-03.html#frustration-is-part-of-learning-r-but-it-doesnt-have-to-be",
+    "title": "Lecture 3",
+    "section": "Frustration is part of learning R, but it doesn’t have to be",
+    "text": "Frustration is part of learning R, but it doesn’t have to be\n\nYou will get errors (need fixing) and warnings (just informative) when you run code\nErrors and warnings are your friends. They tell you what is wrong\n\n\n\nErrors and warnings are not your fault. They are part of the learning process\n\n\n\n\nTake a breath and step away\nWork on it for a set time; don’t go down a rabbit hole\nWhen you’re more settled …",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#trying-to-figure-it-out",
+    "href": "slides/week-03.html#trying-to-figure-it-out",
+    "title": "Lecture 3",
+    "section": "Trying to figure it out",
+    "text": "Trying to figure it out\n\n\n\nCheck the documentation of the function you are using (?function_name or help(function_name))\nApproach the problem from a different angle\nAsk for help from the local community (classmates, instructor)\nConsult online resources (Stack Overflow, RStudio Community, Claude AI)\n\n\n\n\n\n\nA lot of this advice comes from R for Political Science Research by Jane L. Sumner (might be available through the GU library)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#what-is-coding",
+    "href": "slides/week-03.html#what-is-coding",
+    "title": "Lecture 3",
+    "section": "What is coding?",
+    "text": "What is coding?\n\nTranslating a set of logical steps into a language the computer understands\n\nIt is a “conversation” with a computer (no, we’re not going to vibe code here)\nusing a grammar and vocabulary that the computer understands1\n\n\n\n\nComputers are “dumb” - they do exactly what you tell them to do\n\nThings can get lost in translation\nSo you have to be accurate and precise\nIf the computer is making a mistake, it’s because of the instructions it got\nYou have to tell it everything, even the things that seem obvious to you (but it gets better)\n\n\n\nSo you’ll get into similar difficulties as asking directions in Tokyo or Paris.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#an-opinionated-tour-of",
+    "href": "slides/week-03.html#an-opinionated-tour-of",
+    "title": "Lecture 3",
+    "section": "An opinionated tour of ",
+    "text": "An opinionated tour of \n\nWe will concentrate on the tidyverse set of packages\n\nSo you don’t have to tell R everything\nReasonable choices have been made for you\n\nWe won’t learn everything today\n\nYou will learn more as you go along\nYou will learn more by doing\nYou will learn more by making mistakes and getting feedback\n\n\n\n\n\n\n\n\nImportant\n\n\nHave R and RStudio open while we go through this, but also keep these slides open. There are coding examples embedded in the slides.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#make-an-rstudio-project",
+    "href": "slides/week-03.html#make-an-rstudio-project",
+    "title": "Lecture 3",
+    "section": "Make an RStudio project",
+    "text": "Make an RStudio project\n\nProjects help you manage your work\nThey keep your files organized\nThey help R find your files\n\nIf you create a project, and then forget where you created it, type getwd() in the console to find out where you are.\nFor reference, you can see a walkthrough of creating a project here.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#basic-keyboard-shortcuts",
+    "href": "slides/week-03.html#basic-keyboard-shortcuts",
+    "title": "Lecture 3",
+    "section": "Basic keyboard shortcuts",
+    "text": "Basic keyboard shortcuts\n\n\n\n\n\n\nRegular coding use keyboard shortcuts\n\n\n\nRun current line or selection: Ctrl+EnterCtrl+Enter (Windows) or Cmd+EnterCmd+Enter (Mac)\nInsert assignment operator: Alt+-Alt+- (Windows) or Option+-Option+- (Mac)\ninsert pipe operator: Ctrl+Shift+MCtrl+Shift+M (Windows) or Cmd+Shift+MCmd+Shift+M (Mac)\nComment/uncomment current line or selection: Ctrl+Shift+CCtrl+Shift+C (Windows) or Cmd+Shift+CCmd+Shift+C (Mac)\n\n\n\n\n\n\n\n\n\n\nGeneral use keyboard shortcuts\n\n\n\nFind: Ctrl+FCtrl+F (Windows) or Cmd+FCmd+F (Mac)\nReplace: Ctrl+HCtrl+H (Windows) or Cmd+Option+FCmd+Option+F (Mac)\nSave: Ctrl+SCtrl+S (Windows) or Cmd+SCmd+S (Mac)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#what-are-packages",
+    "href": "slides/week-03.html#what-are-packages",
+    "title": "Lecture 3",
+    "section": "What are packages?",
+    "text": "What are packages?\n\nPackages are collections of R functions, data, and compiled code in a well-defined format\n\nUsually for a specific purpose\nThey extend R’s functionality\n\nR comes with a standard set of packages, but there are thousands more available\n\nYou can install packages from CRAN, Bioconductor, GitHub, and other repositories\n\n\n\n\n\n\n\n\nNote\n\n\nPackages are collections of functions, and sometimes data, that are usually unified for a common purpose\nIf functions are recipes, then packages are recipe books\nIf you want to cook from a recipe, you first have to grab the recipe book from your shelf\nSimilarly, if you want to use a function from a package, you first have to grab or activate the package in your current R session\n\n\n\nAn (incomplete) list of packages you might want to explore is available here",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#installing-and-loading-packages",
+    "href": "slides/week-03.html#installing-and-loading-packages",
+    "title": "Lecture 3",
+    "section": "Installing and loading packages",
+    "text": "Installing and loading packages\n\n\n\n\n\n\nImportant\n\n\nYou only need to install a package once, but you need to load it every time you start a new R session\n\n\n\n\nlibrary(tidyverse)\nlibrary(janitor)\n\n\n\n\n\n\n\nNote\n\n\nIf you don’t have the package janitor installed, you can install it by running the following command once:\ninstall.packages(\"janitor\")\n\n  \n    −\n    +\n \n 00:45",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#using-functions-from-packages",
+    "href": "slides/week-03.html#using-functions-from-packages",
+    "title": "Lecture 3",
+    "section": "Using functions from packages",
+    "text": "Using functions from packages\nThere is another way to access functions from packages, if you’re really only going to use one function from it.\nThe general form for this is &lt;package&gt;::&lt;function&gt; (note the two colons)\nFor example, if you just want to use the clean_names function from the janitor package, you can do so by\njanitor::clean_names(dataset)\nwhere dataset is the name of the data.frame whose column names you want to clean.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#cleaning-names-to-maintain-sanity-and-typing-efficiency",
+    "href": "slides/week-03.html#cleaning-names-to-maintain-sanity-and-typing-efficiency",
+    "title": "Lecture 3",
+    "section": "Cleaning names (to maintain sanity and typing efficiency)",
+    "text": "Cleaning names (to maintain sanity and typing efficiency)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#cleaning-names-to-maintain-sanity-and-typing-efficiency-1",
+    "href": "slides/week-03.html#cleaning-names-to-maintain-sanity-and-typing-efficiency-1",
+    "title": "Lecture 3",
+    "section": "Cleaning names (to maintain sanity and typing efficiency)",
+    "text": "Cleaning names (to maintain sanity and typing efficiency)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nIf you download the data, you need to know where it’s downloaded to on your computer, so that you can tell R where to find it. Typically this is your “Downloads” folder. Preferably, you move it to your project’s data folder.\n\n\n\n\n  \n    −\n    +\n \n 01:30\n \n\nThe dataset is available here",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#easier-data-imports-the-rio-package",
+    "href": "slides/week-03.html#easier-data-imports-the-rio-package",
+    "title": "Lecture 3",
+    "section": "Easier data imports: the rio package",
+    "text": "Easier data imports: the rio package\n\nInstall the rio package if you haven’t already\n\n\n  \n    −\n    +\n \n 01:00",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#now-use-it",
+    "href": "slides/week-03.html#now-use-it",
+    "title": "Lecture 3",
+    "section": "Now use it",
+    "text": "Now use it\n\n\n\n\n\n\n\n\njanitor::clean_names() calls the clean_names function from the janitor package, without loading the whole package\nBut what is this |&gt; thing? (I create this using Ctrl+Shift+MCtrl+Shift+M or Cmd+Shift+MCmd+Shift+M)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#pipes",
+    "href": "slides/week-03.html#pipes",
+    "title": "Lecture 3",
+    "section": "Pipes",
+    "text": "Pipes\nPipes are a method in R to create analytic pipelines utilizing tidyverse functions.\nThe pipe operator (denoted |&gt;, spoken as “going to”) is what creates the pipes.\nYou start with a dataset, and then progressively add functions to the pipe. Typically you save the result to a new object.\nEach element of the pipe takes as its first argument the results of the previous step, which typically is a data frame.\nPipes are just a different representation of an analytic process that we can do in separate steps anyway. We’ll see this later.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#what-is-the-tidyverse",
+    "href": "slides/week-03.html#what-is-the-tidyverse",
+    "title": "Lecture 3",
+    "section": "What is the “Tidyverse”?",
+    "text": "What is the “Tidyverse”?\n\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#what-is-the-tidyverse-1",
+    "href": "slides/week-03.html#what-is-the-tidyverse-1",
+    "title": "Lecture 3",
+    "section": "What is the “Tidyverse”?",
+    "text": "What is the “Tidyverse”?\nA set of R packages that:\n\n\nhelp make data more computer-friendly\n\nwhile making your code more human-friendly\n\n\nMost of these packages are (co-)written by Dr. Hadley Wickham, who has rockstar status in the R world\nThey are supported by the company RStudio",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#let-us-count-the-ways",
+    "href": "slides/week-03.html#let-us-count-the-ways",
+    "title": "Lecture 3",
+    "section": "Let us count the ways",
+    "text": "Let us count the ways\nThere are many ways data can be messy. An incomplete list….\n\nColumn headers are values, not variables\nMultiple variables are stored in a single column\nVariables are stored in both rows and columns\nMultiple types of observational units are saved in the same table\nA single observational unit is stored in multiple tables",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data",
+    "href": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data",
+    "title": "Lecture 3",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nColumn headers contain values\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\n&lt; $10K\n$10-20K\n$20-50K\n$50-100K\n&gt; $100K\n\n\n\n\nIndia\n40\n25\n25\n9\n1\n\n\nUSA\n20\n20\n20\n30\n10",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data-1",
+    "href": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data-1",
+    "title": "Lecture 3",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nColumn headers contain values\n\n\n\n\nCountry\nIncome\nPercentage\n\n\n\n\nIndia\n&lt; $10K\n40\n\n\nUSA\n&lt; $10K\n20\n\n\n\nThis is a case of reshaping or melting",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data-2",
+    "href": "slides/week-03.html#ways-to-have-messy-i.e.-not-tidy-data-2",
+    "title": "Lecture 3",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nMultiple variables in one column\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nYear\nM_0-14\nF_0-14\nM_ 15-60\nF_15-60\nM_60+\nF_60+\n\n\n\n\nUK\n2010\n\n\n\n\n\n\n\n\nUK\n2011\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nYear\nGender\nAge\nCount\n\n\n\n\n\nSeparating columns into different variables",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying-data",
+    "href": "slides/week-03.html#tidying-data",
+    "title": "Lecture 3",
+    "section": "Tidying data",
+    "text": "Tidying data\nThe typical steps are\n\nTransforming data from wide to tall (pivot_longer) and from tall to wide (pivot_wider)\nSeparating columns into different columns\nPutting columns together into new variables",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#some-actions-on-data",
+    "href": "slides/week-03.html#some-actions-on-data",
+    "title": "Lecture 3",
+    "section": "Some actions on data",
+    "text": "Some actions on data\n\nCreating new variables (mutate)\nChoose some columns (select)\nSelecting rows based on some criteria (filter)\nSort data based on some variables (arrange)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#example-data-link",
+    "href": "slides/week-03.html#example-data-link",
+    "title": "Lecture 3",
+    "section": "Example data (link)",
+    "text": "Example data (link)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#the-tidyverse-package",
+    "href": "slides/week-03.html#the-tidyverse-package",
+    "title": "Lecture 3",
+    "section": "The tidyverse package",
+    "text": "The tidyverse package\nThe tidyverse package is a meta-package that installs a set of packages that are useful for data cleaning, data tidying and data munging (manipulating data to get a computationally “attractive” dataset)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#the-tidyverse-package-1",
+    "href": "slides/week-03.html#the-tidyverse-package-1",
+    "title": "Lecture 3",
+    "section": "The tidyverse package",
+    "text": "The tidyverse package",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#core-tidyverse-packages",
+    "href": "slides/week-03.html#core-tidyverse-packages",
+    "title": "Lecture 3",
+    "section": "Core tidyverse packages",
+    "text": "Core tidyverse packages\n\n\n\n\n\nPackage\nDescription\n\n\n\n\nggplot2\nData visualization (next week)\n\n\ntibble\ndata.frame on steroids\n\n\ntidyr\nData tidying (today)\n\n\nreadr\nReading text files (CSV)\n\n\npurrr\nApplying functions to data iteratively(later this sem)\n\n\ndplyr\nData cleaning and munging (today)\n\n\nstringr\nString (character) manipulation\n\n\nforcats\nManipulating categorical variables",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#additional-tidyverse-packages",
+    "href": "slides/week-03.html#additional-tidyverse-packages",
+    "title": "Lecture 3",
+    "section": "Additional tidyverse packages",
+    "text": "Additional tidyverse packages\n\n\n\n\n\nPackage\nDescription\n\n\n\n\nreadxl\nRead Excel files\n\n\nhaven\nRead SAS, SPSS, Stata files\n\n\nlubridate\nDeal with dates and times\n\n\nmagrittr\nProvides the pipe operator %&gt;%\n\n\nglue\nMakes pasting text and data easier",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#a-pipe-example-data-munging",
+    "href": "slides/week-03.html#a-pipe-example-data-munging",
+    "title": "Lecture 3",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\n\nlibrary(tidyverse)\nupdated_cars &lt;- \n  mtcars |&gt; \n  rownames_to_column(var = 'model') |&gt; \n  mutate(kmpg = mpg * 1.6) |&gt; \n  select(model, kmpg, cyl, disp) |&gt; \n  filter(cyl == 6)\n\n\n\n\n\n\nmodel\nkmpg\ncyl\ndisp\n\n\n\n\nMazda RX4\n33.60\n6\n160.0\n\n\nMazda RX4 Wag\n33.60\n6\n160.0\n\n\nHornet 4 Drive\n34.24\n6\n258.0\n\n\nValiant\n28.96\n6\n225.0\n\n\nMerc 280\n30.72\n6\n167.6\n\n\nMerc 280C\n28.48\n6\n167.6\n\n\n\n\n\nHuh??!!!",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#a-pipe-example-data-munging-1",
+    "href": "slides/week-03.html#a-pipe-example-data-munging-1",
+    "title": "Lecture 3",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\nLet’s take our time to understand this concept. We start with the mtcars dataset, which is built into R.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#a-pipe-example-data-munging-2",
+    "href": "slides/week-03.html#a-pipe-example-data-munging-2",
+    "title": "Lecture 3",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\n\n\n\n\n\n\n\n\nThe idea is to use verbs to express operations on a dataset, so it is easier to express what you want to do in code.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#the-pipe-operator",
+    "href": "slides/week-03.html#the-pipe-operator",
+    "title": "Lecture 3",
+    "section": "The pipe operator",
+    "text": "The pipe operator\nThe pipe operator |&gt; takes a data.frame or tibble object on the left, then “pipes” it to a function that takes the data.frame object as its first argument.\n\nmtcars %&gt;% mutate(kmpg = mpg * 1.6)\n\nwould be the same as\n\nmutate(mtcars, kmpg = mpg * 1.6)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#the-pipe-operator-1",
+    "href": "slides/week-03.html#the-pipe-operator-1",
+    "title": "Lecture 3",
+    "section": "The pipe operator",
+    "text": "The pipe operator\nWith pipes\n\nmtcars %&gt;% \n  rownames_to_column(var = \"model\") %&gt;% \n  select(model:disp) %&gt;% \n  mutate(kmpg = mpg * 1.6) %&gt;% \n  filter(cyl == 6)\n\nWithout pipes\n\ntmp &lt;- rownames_to_column(mtcars, var=\"model\")\ntmp3 &lt;- select(tmp2, model:disp)\ntmp2 &lt;- mutate(tmp, kmpg = mpg * 1.6)\ntmp4 &lt;- filter(tmp3, cyl == 6)\n\nBoth are fine, but I find pipes help translating my thoughts into code better",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#need-for-tidying",
+    "href": "slides/week-03.html#need-for-tidying",
+    "title": "Lecture 3",
+    "section": "Need for tidying",
+    "text": "Need for tidying\n\nFor the same variable (e.g., radius) there are 3 columns giving the mean, se and worst value. So the names of the metric are stored in the column names\nThere are really 3 kinds of summaries for each metric – mean, se and worst.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying",
+    "href": "slides/week-03.html#tidying",
+    "title": "Lecture 3",
+    "section": "Tidying",
+    "text": "Tidying",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying-selecting",
+    "href": "slides/week-03.html#tidying-selecting",
+    "title": "Lecture 3",
+    "section": "Tidying (selecting)",
+    "text": "Tidying (selecting)\n\nlibrary(tidyverse)\nbrca_data |&gt; \n  select(id, diagnosis, ends_with('mean'), ends_with('se'), ends_with('worst'),\n         -starts_with('fractal')) \n                             # removes columns starting with \"fractal\"",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying-pivoting",
+    "href": "slides/week-03.html#tidying-pivoting",
+    "title": "Lecture 3",
+    "section": "Tidying (pivoting)",
+    "text": "Tidying (pivoting)\n\n\n\n\n\n\n\n\n\nColumn names become variable, everything stays aligned with id and diagnosis",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying-separating",
+    "href": "slides/week-03.html#tidying-separating",
+    "title": "Lecture 3",
+    "section": "Tidying (separating)",
+    "text": "Tidying (separating)\n\n\n\n\n\n\n\n\n\nSplit variable into 2 cols, Variable and stat",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#tidying-spreading",
+    "href": "slides/week-03.html#tidying-spreading",
+    "title": "Lecture 3",
+    "section": "Tidying (spreading)",
+    "text": "Tidying (spreading)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#syntactic-names",
+    "href": "slides/week-03.html#syntactic-names",
+    "title": "Lecture 3",
+    "section": "Syntactic names",
+    "text": "Syntactic names\nFollowing these rules will always give you valid object names without the need for additional trouble.\n\nContains letters, numbers, . or _ characters\nStarts with a letter or . not followed by a number\nIs not a reserved word ()\n\n\nSo .2way is not a syntactically valid name",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#going-wild",
+    "href": "slides/week-03.html#going-wild",
+    "title": "Lecture 3",
+    "section": "Going wild",
+    "text": "Going wild\nYou can actually use any name for an object, as long as you encase it in backticks\nThe name can then include spaces, special characters, start with a number, etc.\nStill, don’t use reserved words.\n–\n\n\nYou can do\n`First variable`\n`2 many bikes`\n\nBut should you?!!",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#naming-conventions",
+    "href": "slides/week-03.html#naming-conventions",
+    "title": "Lecture 3",
+    "section": "Naming conventions",
+    "text": "Naming conventions\nThere are several prevalent naming conventions in R\n\nsnake case, e.g., my_variable\nlower camel case, e.g., myVariable\nupper camel case, e.g., MyVariable\nperiod separated, e.g., my.variable\nlower case, e.g., myvariable\n\nChoose one and stick with it. It will save you some sanity.\n\nThe janitor package has a nice function called clean_names which will transform the column names in a data.frame to follow a particular naming convention, with the default being snake case.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#resources",
+    "href": "slides/week-03.html#resources",
+    "title": "Lecture 3",
+    "section": "Resources",
+    "text": "Resources\nThe following commands, typed in the R console, will get you to the corresponding help files. + ?make.names + ?assign",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#brackets-1",
+    "href": "slides/week-03.html#brackets-1",
+    "title": "Lecture 3",
+    "section": "Brackets",
+    "text": "Brackets\nThere are three kinds of brackets in R\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#brackets-2",
+    "href": "slides/week-03.html#brackets-2",
+    "title": "Lecture 3",
+    "section": "Brackets",
+    "text": "Brackets\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#brackets-3",
+    "href": "slides/week-03.html#brackets-3",
+    "title": "Lecture 3",
+    "section": "Brackets",
+    "text": "Brackets\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\nA function definition\n\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#why-do-we-need-functions",
+    "href": "slides/week-03.html#why-do-we-need-functions",
+    "title": "Lecture 3",
+    "section": "Why do we need functions?",
+    "text": "Why do we need functions?\nWhen you are typing instructions to the computer, you might find yourself repeating the same instructions over and over. So you end up copying and pasting code for each repitition.\n\nCan make a mistake copying and pasting\nIf you need to change the instructions, you need to find every instance of it manually and change it, and you’re likely to miss one\n\nThe rule of thumb is, if you’re copying the same code more than twice, write a function.\n\nWrite the instructions once\nChange it in only one place, if needed",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#defining-functions",
+    "href": "slides/week-03.html#defining-functions",
+    "title": "Lecture 3",
+    "section": "Defining functions",
+    "text": "Defining functions\nThe basic syntax of a function is\n&lt;function name&gt; &lt;- function(&lt;input argument(s)&gt;){\n  &lt;code for instructions&gt;\n  ...\n  &lt;more code&gt;\n  return(&lt;output object&gt;)\n}",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#defining-functions-1",
+    "href": "slides/week-03.html#defining-functions-1",
+    "title": "Lecture 3",
+    "section": "Defining functions",
+    "text": "Defining functions\nLet’s create our own function to convert feet to inches.\n\n\n\n\n\n\n\n\n\nft2in is the name of the function\nThe input argument is named ft (make an expressive name)\nInches are computed by multiplying ft by 12 and storing it in inch\nThe output of the function is the value of the inch variable",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#defining-functions-2",
+    "href": "slides/week-03.html#defining-functions-2",
+    "title": "Lecture 3",
+    "section": "Defining functions",
+    "text": "Defining functions\nWhat if we want more than one input?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#quick-reminder-about-conditions",
+    "href": "slides/week-03.html#quick-reminder-about-conditions",
+    "title": "Lecture 3",
+    "section": "Quick reminder about conditions",
+    "text": "Quick reminder about conditions\nSome comparison operators for filtering\n\n\n\nOperator\nMeaning\n\n\n\n\n==\nEquals\n\n\n!=\nNot equals\n\n\n&gt; / &lt;\nGreater / less than\n\n\n&gt;= / &lt;=\nGreater or equal / Less or equal\n\n\n!\nNot\n\n\n%in%\nIn a set\n\n\n\nCombining comparisons\n\n\n\nOperator\nMeaning\n\n\n\n\n&\nAnd\n\n\n|\nOr",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#defining-functions-3",
+    "href": "slides/week-03.html#defining-functions-3",
+    "title": "Lecture 3",
+    "section": "Defining functions",
+    "text": "Defining functions",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#the-concept-of-local-vs-global-variables",
+    "href": "slides/week-03.html#the-concept-of-local-vs-global-variables",
+    "title": "Lecture 3",
+    "section": "The concept of local vs global variables",
+    "text": "The concept of local vs global variables\n\nx &lt;-  10\nprint(x)\n\n[1] 10\n\nf &lt;- function(x){\n  x &lt;- 5\n  print(x)\n}\n\nf(x)\n\n[1] 5\n\nprint(x)\n\n[1] 10\n\n\nThe x inside the function is local to the function and is independent of the x in the global space that has the value 10..",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#for-loops",
+    "href": "slides/week-03.html#for-loops",
+    "title": "Lecture 3",
+    "section": "for-loops",
+    "text": "for-loops",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#for-loops-1",
+    "href": "slides/week-03.html#for-loops-1",
+    "title": "Lecture 3",
+    "section": "for-loops",
+    "text": "for-loops\nThe for-loop is a construct to repeat the same operation over a list of values.\nBasic syntax:\nfor(&lt;variable&gt; in &lt;list&gt;){\n    &lt;code&gt;\n    ...\n    &lt;more code&gt;\n}\nExample:\n.pull-left[\n\nfor(i in 1:10){\n  print(i)\n}\n\nHere i is a dummy variable. It’s actual name doesn’t matter, just its action ] .pull-right[\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n\n\n]",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
+    "objectID": "slides/week-03.html#for-loops-2",
+    "href": "slides/week-03.html#for-loops-2",
+    "title": "Lecture 3",
+    "section": "for-loops",
+    "text": "for-loops\nExample:\n\nfor(n in names(iris)){\n  if(is.numeric(iris[,n])){\n    print(glue::glue('The mean of {n} is {mean(iris[,n])}')) #&lt;&lt;\n  }\n}\n\nThe mean of Sepal.Length is 5.84333333333333\nThe mean of Sepal.Width is 3.05733333333333\nThe mean of Petal.Length is 3.758\nThe mean of Petal.Width is 1.19933333333333\n\n\nYou don’t need the &lt;list&gt; in the for-loop definition to be integers. In this case it is a list of strings.\nNote that vectors are also considered lists for this purpose.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe glue package allows you to run templated text strings interspersed with the results of R objects]",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 3"
+    ]
+  },
+  {
     "objectID": "slides/week-01.html#agenda-and-goals-for-today",
     "href": "slides/week-01.html#agenda-and-goals-for-today",
     "title": "Lecture 1",
@@ -751,285 +1367,53 @@
     ]
   },
   {
-    "objectID": "site-page-content/standards.html",
-    "href": "site-page-content/standards.html",
-    "title": "Minimum standards for deliverables",
-    "section": "",
-    "text": "Warning\n\n\n\nViolation of these guidelines will result in an automatic deduction of 1 grade step",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
+    "objectID": "slides/topics/naming_rules.html#syntactic-names",
+    "href": "slides/topics/naming_rules.html#syntactic-names",
+    "title": "ENIA 5120",
+    "section": "Syntactic names",
+    "text": "Syntactic names\nFollowing these rules will always give you valid object names without the need for additional trouble.\n\nContains letters, numbers, . or _ characters\nStarts with a letter or . not followed by a number\nIs not a reserved word ()\n\n\nSo .2way is not a syntactically valid name"
   },
   {
-    "objectID": "site-page-content/standards.html#code",
-    "href": "site-page-content/standards.html#code",
-    "title": "Minimum standards for deliverables",
-    "section": "Code",
-    "text": "Code",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
+    "objectID": "slides/topics/naming_rules.html#going-wild",
+    "href": "slides/topics/naming_rules.html#going-wild",
+    "title": "ENIA 5120",
+    "section": "Going wild",
+    "text": "Going wild\nYou can actually use any name for an object, as long as you encase it in backticks\nThe name can then include spaces, special characters, start with a number, etc.\nStill, don’t use reserved words.\n–\n\n\nYou can do\n`First variable`\n`2 many bikes`\n\nBut should you?!!"
   },
   {
-    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
-    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
-    "title": "Minimum standards for deliverables",
-    "section": "Rendered output (PDF, html, etc.)",
-    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
+    "objectID": "slides/topics/naming_rules.html#naming-conventions",
+    "href": "slides/topics/naming_rules.html#naming-conventions",
+    "title": "ENIA 5120",
+    "section": "Naming conventions",
+    "text": "Naming conventions\nThere are several prevalent naming conventions in R\n\nsnake case, e.g., my_variable\nlower camel case, e.g., myVariable\nupper camel case, e.g., MyVariable\nperiod separated, e.g., my.variable\nlower case, e.g., myvariable\n\nChoose one and stick with it. It will save you some sanity.\n\nThe janitor package has a nice function called clean_names which will transform the column names in a data.frame to follow a particular naming convention, with the default being snake case."
   },
   {
-    "objectID": "site-page-content/standards.html#use-of-git",
-    "href": "site-page-content/standards.html#use-of-git",
-    "title": "Minimum standards for deliverables",
-    "section": "Use of git",
-    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
-    "crumbs": [
-      "Minimum standards for deliverables"
-    ]
+    "objectID": "slides/topics/naming_rules.html#resources",
+    "href": "slides/topics/naming_rules.html#resources",
+    "title": "ENIA 5120",
+    "section": "Resources",
+    "text": "Resources\nThe following commands, typed in the R console, will get you to the corresponding help files. + ?make.names + ?assign"
   },
   {
-    "objectID": "site-page-content/prep-work.html",
-    "href": "site-page-content/prep-work.html",
-    "title": "Weekly Class Preparation",
-    "section": "",
-    "text": "Key\n\n\n\n\nIMS = Introduction to Modern Statistics (2e)\nRDS = R for Data Science (2e)\nSIDS = Statistical Inference via Data Science (2e)",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
+    "objectID": "slides/topics/naming_rules.html#brackets-1",
+    "href": "slides/topics/naming_rules.html#brackets-1",
+    "title": "ENIA 5120",
+    "section": "Brackets",
+    "text": "Brackets\nThere are three kinds of brackets in R\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst"
   },
   {
-    "objectID": "site-page-content/prep-work.html#week-2-september-16",
-    "href": "site-page-content/prep-work.html#week-2-september-16",
-    "title": "Weekly Class Preparation",
-    "section": "Week 2: September 16",
-    "text": "Week 2: September 16\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
+    "objectID": "slides/topics/naming_rules.html#brackets-2",
+    "href": "slides/topics/naming_rules.html#brackets-2",
+    "title": "ENIA 5120",
+    "section": "Brackets",
+    "text": "Brackets\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()"
   },
   {
-    "objectID": "site-page-content/prep-work.html#week-3-september-23",
-    "href": "site-page-content/prep-work.html#week-3-september-23",
-    "title": "Weekly Class Preparation",
-    "section": "Week 3: September 23",
-    "text": "Week 3: September 23\nThis week, we will basically hold a  covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.\nIn terms of deliverables, we will not have a quiz this week, but we will have an -based homework using scaffolded code chunks and Quarto.\n\n\n\n\n\n\nImportant\n\n\n\nPhilosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To quote Stephen Covey, “Begin with the End in Mind”.\nWhat is primary is what you want to achieve with the data.\nThen, and only then, do you try to figure out how to use the software tools to achieve that.",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
-  },
-  {
-    "objectID": "resources/datasets.html",
-    "href": "resources/datasets.html",
-    "title": "Free datasets for EIA",
-    "section": "",
-    "text": "Sources\n\n\n\nThese links were obtained and organized using Google searches and Perplexity AI",
-    "crumbs": [
-      "Resources",
-      "Free datasets for EIA"
-    ]
-  },
-  {
-    "objectID": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
-    "href": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
-    "title": "Free datasets for EIA",
-    "section": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs",
-    "text": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs\nBelow are curated, high-quality, and free data sets suitable for your course. They are selected for relevance to environmental and international affairs, compatibility with R, and educational value for beginner to intermediate data analytics labs.\n\n\n1. Environmental Data Sets\nOpen repo of ecological data for use in teaching\n\n\nGlobal and Regional Environmental Data\n\nWorldClim: High-resolution global climate data (temperature, precipitation, etc.), widely used for climate and ecological analysis[1][2].\nUSGS Earth Explorer: Satellite imagery, land cover, and environmental monitoring data for the United States and globally[1][2].\nNOAA Climate Data Online (CDO): Historical weather and climate data, including temperature, precipitation, and wind, available globally[3][2].\nGlobal Forest Watch: Deforestation, land use, and forest change data, including interactive maps and downloadable data[2][1].\nOpenWeatherMap: Real-time and historical weather data accessible via API, suitable for time series and spatial analysis[1][2].\n\n\n\nSpecialized Environmental Data\n\nLTER DataSampler R Package: Ready-to-use environmental data samples from the Long-Term Ecological Research (LTER) Network, ideal for R-based labs[4][5].\nSAGE (Center for Sustainability and the Global Environment): Datasets on global ecosystems, croplands, air quality, and land use change[6].\nEnvironmental Data Initiative (EDI): Repository of ecological and environmental datasets, including biodiversity, water quality, and ecosystem processes[5].\nGlobal Solar Atlas & Global Wind Atlas: Renewable energy potential data for solar and wind resources worldwide[1][2].\n\n\n\n\n2. International Affairs and Socio-Political Data Sets\n\nInternational Relations and Political Data\n\nWorld Bank Open Data: Comprehensive global development indicators, including environment, economy, health, and governance[7][8].\nUNData: Aggregated data from United Nations agencies on topics such as environment, demographics, and development[7][9].\nACLED (Armed Conflict Location & Event Data Project): Geolocated data on political violence, protests, and conflict events globally[9][7].\nFreedom House: Annual country-level data on political rights and civil liberties[9].\nWorldwide Governance Indicators: Measures of governance quality for over 200 countries (voice, accountability, stability, rule of law, etc.)[9][7].\nCorrelates of War Project: Datasets on international conflict, alliances, and militarized disputes[10][7].\n\n\n\nSocio-Economic and Health Data\n\nWHO Health Inequality Data Repository: Disaggregated health and environmental indicators from global to local levels[11].\nWorld Resources Institute: Data on climate, energy, food, forests, water, and urban issues at the intersection of environment and development[7].\nQuality of Government Institute Data: Cross-national data on governance, corruption, and government effectiveness[9][7].\n\n\n\n\n\n3. R-Compatible and Built-in Data Sets\n\nR Built-in Datasets: R comes with a variety of datasets (e.g., airquality, CO2, iris, PlantGrowth, quakes, USArrests) useful for teaching data manipulation, visualization, and modeling[12][5].\nRdatasets Repository: Searchable collection of nearly 2,000 datasets from R packages, suitable for a range of analytics exercises[13].\nSpecialized R Packages:\n\nclimate: R package for accessing free meteorological and hydrological datasets globally[14].\npeacesciencer: R package for peace and conflict studies datasets, including Correlates of War and UCDP data[10].\nvdemdata: R package for democracy and governance indicators worldwide[10].\n\n\n\n\n\n4. How to Use These Data Sets in R\n\nMost global and institutional datasets are downloadable as CSV or Excel files, which can be imported into R using read.csv() or readxl::read_excel()[15][12].\nMany R packages (e.g., climate, peacesciencer, LTERdatasampler) provide functions to download and load data directly into R, streamlining lab activities[14][4][10].\nBuilt-in datasets can be accessed with the data() function in R, and their documentation is available with ?datasetname[12][13].\n\n\n\n\n5. Example Table: Data Sets by Topic\n\n\n\n\n\n\n\n\nTopic\nData Set / Source\nR Compatibility\n\n\n\n\nClimate & Weather\nWorldClim, NOAA CDO, OpenWeatherMap\nYes (CSV/API)\n\n\nLand Use & Cover\nUSGS, SAGE, Global Forest Watch\nYes (CSV/GeoTIFF)\n\n\nBiodiversity & Ecology\nLTER, EDI, GBIF, PlantGrowth (R)\nYes (R/CSV)\n\n\nPolitical & Conflict Data\nACLED, Correlates of War, peacesciencer\nYes (R/CSV)\n\n\nSocio-Economic & Governance\nWorld Bank, UNData, WHO, WGI\nYes (CSV/R)\n\n\nBuilt-in & Package Datasets\nairquality, iris, Rdatasets, LTERdatasampler\nYes (R)\n\n\n\n\n\n\n6. Additional Resources\n\nAtlas.co Blog: Comprehensive guide to free environmental data sources, including global, regional, and geospatial repositories[1].\nR-bloggers: Lists and reviews ecological and environmental data sources, including those built into R and available online[5].\nEmory University Data Guide: Curated links to international relations and comparative politics datasets, many of which are R-compatible[8].\n\n\nThese data sets and resources provide a strong foundation for hands-on labs and projects in your course, ensuring students gain practical experience with real-world environmental and international affairs data[1][9][12].\n\n\nSources\n\nFree Data Sources for Environmental Data - Atlas.co https://atlas.co/blog/free-data-sources-for-environmental-data/\nBest places for open source environmental data? : r/gis - Reddit https://www.reddit.com/r/gis/comments/1b7rcir/best_places_for_open_source_environmental_data/\nClimate Data Online (CDO) https://www.ncei.noaa.gov/cdo-web/\nReady-to-teach R Environmental Datasets - LTER Network https://lternet.edu/stories/ready-to-teach-r-environmental-datasets-the-lterdatasampler-r-package/\nTop five(ish) sources of ecological data - R-bloggers https://www.r-bloggers.com/2023/03/top-fiveish-sources-of-ecological-data/\nDatasets | Center for Sustainability and the Global Environment https://sage.nelson.wisc.edu/data-and-models/datasets/\nInternational Relations: Data sets - LibGuides https://selu.libguides.com/international_relations/data_sets\nComparative Politics and International Relations - Data Resources … https://guides.libraries.emory.edu/c.php?g=944707&p=6810116\nInternational Relations: International Data and Datasets https://libguides.lib.msu.edu/c.php?g=96739&p=923034\nTop R packages for downloading political science and economics … https://rforpoliticalscience.com/2023/04/07/top-r-packages-for-downloading-political-science-and-economics-datasets/\nHealth Inequality Data Repository https://www.ingentaconnect.com/content/10.5260/chara.25.3.11\nBuilt-in Datasets in R - MachineLearningMastery.com https://www.machinelearningmastery.com/built-in-datasets-in-r/\nSearchable list of built in R Datasets - YouTube https://www.youtube.com/watch?v=4cfE5jTImP4\nClimate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment https://www.mdpi.com/2071-1050/12/1/394\nStatistics & Teaching Software - Rguroo https://rguroo.com/teaching/\nInternet of Things (IoT) for Integrating Environmental and Localization Data in Building Information Modeling (BIM) http://www.iaarc.org/publications/2017_proceedings_of_the_34rd_isarc/internet_of_things_iot_for_integrating_environmental_and_localization_data_in_building_information_modeling_bim.html\nGradient free stochastic training of ANNs, with local approximation in partitions https://link.springer.com/10.1007/s00477-023-02407-2\nIn Situ Visualization of Membrane Fouling Evolution during Ultrafiltration Using Label-Free Hyperspectral Light Sheet Fluorescence Imaging. https://pubs.acs.org/doi/10.1021/acs.est.2c08731\nRobust Portfolio Optimization with Environmental, Social, and Corporate Governance Preference https://www.mdpi.com/2227-9091/12/2/33\nAn Environmental Energy Harvesting-Driven Wireless Parking Detection Method: Analysis and Implementation https://ieeexplore.ieee.org/document/10124091/\nSome teaching resources using R with illustrative examples … https://pmc.ncbi.nlm.nih.gov/articles/PMC8447407/\nA framework for FAIR robotic datasets https://www.nature.com/articles/s41597-023-02495-3\nDeveloping Transdisciplinary Approaches to Sustainability Challenges: The Need to Model Socio-Environmental Systems in the Longue Durée https://www.mdpi.com/2071-1050/14/16/10234\nA model for the noninvasive, habitat-inclusive estimation of upper limit abundance for synanthropes, exemplified by M. fascicularis https://www.science.org/doi/10.1126/sciadv.adn5390\nRevolutionizing Education: Harnessing Graph Machine Learning for Enhanced Problem-Solving in Environmental Science and Pollution Technology https://neptjournal.com/upload-images/(38)B-4177.pdf\nTime-Evolving Data Science and Artificial Intelligence for Advanced Open Environmental Science (TAIAO) Programme https://www.ijcai.org/proceedings/2024/809\nThe scope of the Kalman filter for spatio‐temporal applications in environmental science https://onlinelibrary.wiley.com/doi/10.1002/env.2773\nA comparison of herbarium and citizen science phenology datasets for detecting response of flowering time to climate change in Denmark https://link.springer.com/10.1007/s00484-022-02238-w\nNon-linear visualization and analysis of large water quality data sets: a model-free basis for efficient monitoring and risk assessment http://link.springer.com/10.1007/s00477-008-0266-y\nPerformance Measurement of Free-Space Optical 980 nm Channel Using Multiple Sets of Environmental Conditions http://link.springer.com/10.1007/s11277-015-2742-2\nA nonparametric method for estimating asymmetric densities based on skewed Birnbaum–Saunders distributions applied to environmental data http://link.springer.com/10.1007/s00477-012-0684-8\nEstimation of polio infection prevalence from environmental surveillance data https://www.science.org/doi/10.1126/scitranslmed.aaf6786\nPublic Environmental Data - Yale University Library Research Guides https://guides.library.yale.edu/c.php?g=296375&p=7352744\nU.S. Environmental… - Dataset - Catalog https://catalog.data.gov/dataset/?tags=environment\nSciences & Environmental Data - Locating Data Sets & Raw Data https://guides.erau.edu/data/sciences\nDevelopment of the InTelligence And Machine LEarning (TAME) Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research https://www.frontiersin.org/articles/10.3389/ftox.2022.893924/full\nMissing Value Imputation of Wireless Sensor Data for Environmental Monitoring https://www.mdpi.com/1424-8220/24/8/2416\nList of R packages for Ecology https://drmattg.github.io/REcol-verse/\nEcology: Data Resources https://guides.libs.uga.edu/c.php?g=350264&p=10234580",
-    "crumbs": [
-      "Resources",
-      "Free datasets for EIA"
-    ]
-  },
-  {
-    "objectID": "project/overview.html",
-    "href": "project/overview.html",
-    "title": "Project overview",
-    "section": "",
-    "text": "Our final course evaluation will be a data–based project. We will develop questions based in political and environmental sciences, and obtain data sets that might help us answer these questions. A central element of the project will be data analysis and modeling to help us answer the questions we pose. It is hoped that each project will have elements of both political sciences and environmental sciences in them in line with the graduate program, and will address questions relevant to this program.",
-    "crumbs": [
-      "Project",
-      "Project overview"
-    ]
-  },
-  {
-    "objectID": "project/overview.html#data",
-    "href": "project/overview.html#data",
-    "title": "Project overview",
-    "section": "Data",
-    "text": "Data\nYou may choose any data sets that are publicly available and not proprietary. These data should be made available in your final submission. The data should be from reputable sources such as government and international agencies and high-quality universities, and also from research publications in reputable journals.\nYou can choose one or more data sets for your project, provided that the data sets can be linked in some way, typically using a key variable(s). The data should be rich enough to answer your questions. This does not mean that they have to be Big Data. Small to medium size data sets (within 10,000 observations) might be a good size to consider.",
-    "crumbs": [
-      "Project",
-      "Project overview"
-    ]
-  },
-  {
-    "objectID": "project/overview.html#software",
-    "href": "project/overview.html#software",
-    "title": "Project overview",
-    "section": "Software",
-    "text": "Software\nThe initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using , and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers.\nPlease do ensure that all tables and figures generated from your analysis look professional, and are easily readable and understandable. This means having appropriate labels and captions, having good annotations on your visualizations and generally providand will address questions relevant to this program.",
-    "crumbs": [
-      "Project",
-      "Project overview"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data Science and Analytics",
-    "section": "",
-    "text": "This course website was last rendered on Sun Sep 21, 2025 at 11:34 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
-  },
-  {
-    "objectID": "index.html#sections-and-meeting-locations",
-    "href": "index.html#sections-and-meeting-locations",
-    "title": "Data Science and Analytics",
-    "section": "Sections and meeting locations",
-    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
-  },
-  {
-    "objectID": "index.html#bookmark-these-links",
-    "href": "index.html#bookmark-these-links",
-    "title": "Data Science and Analytics",
-    "section": "Bookmark these links!",
-    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
-  },
-  {
-    "objectID": "index.html#calendar",
-    "href": "index.html#calendar",
-    "title": "Data Science and Analytics",
-    "section": "Calendar",
-    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nggplot2/JASP/jamovi/Bluesky/Exploratory\nHW 1\nSep 22\n\n\n\n\n3\nSep 23\nEDA and visualization, continued\nR labs and worksheets; data manipulation\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nStatistical learning: finding patterns in data\nModeling lab and worksheets\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nSimulating studies\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nDecision-making, ethics, fairness, philosophy\nStudents' choice\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nBayesian statistics introduction\nBayes rule, simulation,\n\n\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 7\nNov 23\n\n\n\n\n12\nNov 25\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 15\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
-  },
-  {
-    "objectID": "project/milestones.html",
-    "href": "project/milestones.html",
-    "title": "Project milestones",
-    "section": "",
-    "text": "Milestones\n\n\n\n\n\n\nImportant\n\n\n\nEach milestone submission will be graded for completion and will be penalized for late submissions. This is to ensure that you make regular progress on your project.\n\n\n\nIdentify data (one or more datasets) and formulate 2-3 questions you want to answer (September 30)\nComplete EDA and have a sense whether your questions are answerable from the data you are using (October 14)\nSubmit a draft narrative of what you think the answers to your questions are based on your preliminary analyses (October 28)\nDescribe the analyses you are doing, and provide 1-2 visualizations to indicate that the proposed approach is reasonable (November 11)\nSubmit your analysis plan for answering your questions. This will be in the appendix of your final submission (November 25)\n\nWe will publish expectations and a rubric for each milestone shortly.",
-    "crumbs": [
-      "Project",
-      "Project milestones"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html",
-    "href": "resources/books-links.html",
-    "title": "Books and other online resources",
-    "section": "",
-    "text": "Introduction to Modern Statistics (2e) by Mine Cetinkaya-Rundel and Johanna Hardin (2024) https://openintro-ims.netlify.app/\nR for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). https://r4ds.hadley.nz/\nStatistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). https://moderndive.com/v2/index.html",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#data-science-books",
-    "href": "resources/books-links.html#data-science-books",
-    "title": "Books and other online resources",
-    "section": "Data science books",
-    "text": "Data science books\n\nIntroduction to Environmental Data Science by Jerry Davis (2025). https://bookdown.org/igisc/EnvDataSci/\nTidy Modeling with R by Max Kuhn and Julia Silge (2023). https://www.tmwr.org/\nGeocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). https://r.geocompx.org/\nGeographic Data Science with R: Visualizing and Analyzing Environmental Change by Michael C. Wimberley (2023). https://bookdown.org/mcwimberly/gdswr-book/",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#data-visualization-books",
-    "href": "resources/books-links.html#data-visualization-books",
-    "title": "Books and other online resources",
-    "section": "Data visualization books",
-    "text": "Data visualization books\n   \nClicking on the covers will send you to the free online versions of each book\nThe following books’ content are not available. The links are non-affiliate Amazon links to the books, or to the books’ web pages:\n   \n\n\n\n\nThe Royal Statistical Society published a guide to Best Practices in Data Visualization, written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a series of tutorial papers in the journal Significance that are quite informative in thinking about data visualization. You can read this series here",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#toolkits",
-    "href": "resources/books-links.html#toolkits",
-    "title": "Books and other online resources",
-    "section": "Toolkits",
-    "text": "Toolkits\n\n\nJASP\n\nBayesian Inference in JASP: A Guide for Students by Mark A Goss-Sampson, Johnny van Doorn and EJ Wagenmakers (2020). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf\nStatistical Analysis in JASP: A Guide for Students by Mark A Goss-Sampson (2025). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#writing-and-publishing",
-    "href": "resources/books-links.html#writing-and-publishing",
-    "title": "Books and other online resources",
-    "section": "Writing and publishing",
-    "text": "Writing and publishing\n \nOf partcular interest to us will be chapters on HTML documents and HTML Presentations",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#publishing",
-    "href": "resources/books-links.html#publishing",
-    "title": "Books and other online resources",
-    "section": "Publishing",
-    "text": "Publishing\n\nQuarto",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "resources/books-links.html#r-related",
-    "href": "resources/books-links.html#r-related",
-    "title": "Books and other online resources",
-    "section": "R-related",
-    "text": "R-related\n\nCheatsheets from Posit.co (formerly RStudio)\nggplot2 reference: The definitive guide to ggplot2. Check out the pages for the different functions for great examples\nR graph gallery: Example-filled site for different R-based graphs, especially in ggplot2. The ads can be a bit irritating, but the content is great.\nThemes to improve your ggplot figures\nR Graphics Cookbook by Winston Chang\nhtmlwidgets for R: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper",
-    "crumbs": [
-      "Resources",
-      "Books and other online resources"
-    ]
-  },
-  {
-    "objectID": "site-page-content/about.html",
-    "href": "site-page-content/about.html",
-    "title": "Abhijit Das Gupta",
-    "section": "",
-    "text": "Abhijit Das Gupta is a Data Science Director at AstraZeneca. He works at the interface of statistics and machine learning, with broad experience in statistical modeling and machine learning, bioinformatics, optimization, signal processing, and data visualization. He holds a PhD in Biostatistics with earlier training in Mathematical Statistics. He has been using R for over 25 years for a wide variety of applications in biomedical research, as well as for data-driven reports and presentations.\nAbhijit is adjunct faculty at Georgetown University, where he currently teaches courses in Data Visualization and Big Data & Cloud Computing and is a mentor to the Capstone project within the MS in Data Science program, as well as teaching introductory Data Science for the MS in Environment and International Affairs program. He is also adjunct faculty at George Mason University where he guest lectures twice a year. He is a certified Carpentries instructor. He co-founded and organized the Statistical Programming DC meetup (formerly R Users Group DC) for several years and got to know several luminaries in the field, including DJ Patil, Hadley Wickham, Max Kuhn, Frank Harrell and others.\nOutside of work, Abhijit is an aikido instructor holding a 5th degree black belt, having practiced the art since 1994. He teaches in Frederick County, MD. He is also active in community theater productions with Ebong Theatrix, a Bengali theater group in the DC area.",
-    "crumbs": [
-      "Abhijit Das Gupta"
-    ]
-  },
-  {
-    "objectID": "site-page-content/software.html",
-    "href": "site-page-content/software.html",
-    "title": "Software for the class",
-    "section": "",
-    "text": "The primary software we will use for class is . This is an industry-standard statistical analysis platform with a very large supportive ecosystem of packages for particuar analytic purposes.",
-    "crumbs": [
-      "Software for the class"
-    ]
-  },
-  {
-    "objectID": "site-page-content/software.html#accessing-r",
-    "href": "site-page-content/software.html#accessing-r",
-    "title": "Software for the class",
-    "section": "Accessing R",
-    "text": "Accessing R\n\nUsing R in the browser\nThe no-installation method to using R and RStudio is to get an account on Posit Cloud, which will enable you to use R in your web browser. You can get a free account, which should generally suffice for learning . Once you login, you should see something like this:\n\nThe two things you want to pay attention to here are highlighted below:\n\nWe will organize ourselves in RStudio Projects. This is a generally good practice for dealing with data science projects, and we’ll discuss this in class\nOn the left you have access to several learning guides for self-learning .\n\n\nUsing R on your laptop\nWe are going to use  through the Integrated Development Environment (IDE) called RStudio. Note that  and RStudio are two different things. You need to install  first, and then install RStudio.\n\n\nYou can use other IDEs like Positron or Visual Studio, or even a plain text editing software, but for this class, we will use RStudio\n\nInstall R\n\nGo to https://cran.r-project.org\nAt the very top, follow the link to download and install  for your operating system\n\nNote that there are two versions of  for the Mac: the Apple Silicon version for those with a M1, M2, M3, M4 Mac, and the Intel version for older Macs. Install as appropriate\n\n\n\n\nInstalling RStudio\n\nDownload the appropriate version of RStudio for your operating system from https://posit.co/download/rstudio-desktop/\nInstall RStudio on your computer\nOpen RStudio\n\nOn a Windows machine you can open RStudio from the Start () menu\nOn a Mac, you can search for RStudio using Searchlight ( + Space)\n\n\nRstudio will pick up your current  installation and run it within RStudio.",
-    "crumbs": [
-      "Software for the class"
-    ]
-  },
-  {
-    "objectID": "site-page-content/software.html#other-gui-based-software-running",
-    "href": "site-page-content/software.html#other-gui-based-software-running",
-    "title": "Software for the class",
-    "section": "Other GUI-based software running ",
-    "text": "Other GUI-based software running \nRobert Muenchen provides a comprehensive review of GUI-based software running  here\n\nBluesky\nBluesky is a GUI-based software that runs  as the computational engine. It allows a menu- and GUI-driven use of  that is quite nice. It also produces the  code that it is running for a particular operation, so you can both learn  and reproduce the analyses independent of Bluesky\n\nDownload Bluesky from this link. You will need to create an account\nFollow the installation instructions found here. Special note for Mac users, you will need to install Xquartz in order for Bluesky to work.\n\n\n\nExploratoryIO\nExploratoryIO is an online statistical platform also using  as the computational engine. It has quite a nice UI. The free version has you download an app that will work on your desktop but only when you’re online.\n\n\njamovi\njamovi is another free GUI-based statistical analysis platform that uses  as the computational engine. Much like Bluesky, you can also get the  code that is used for particular analyses. You can download jamovi here or run it in your browser without downloads or installation.\n\n\nJASP\nWe will occasionally use JASP for menu-driven graphs and analyses. JASP runs  in the background as its engine, and so the outputs generally will be quite compatible with what we’ll do in .\n\nDownload JASP from https://jasp-stats.org/download/ and install the appropriate version to your computer",
-    "crumbs": [
-      "Software for the class"
-    ]
+    "objectID": "slides/topics/naming_rules.html#brackets-3",
+    "href": "slides/topics/naming_rules.html#brackets-3",
+    "title": "ENIA 5120",
+    "section": "Brackets",
+    "text": "Brackets\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\nA function definition\n\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}"
   },
   {
     "objectID": "site-page-content/syllabus.html",
@@ -1160,6 +1544,525 @@
     "crumbs": [
       "Syllabus"
     ]
+  },
+  {
+    "objectID": "site-page-content/software.html",
+    "href": "site-page-content/software.html",
+    "title": "Software for the class",
+    "section": "",
+    "text": "The primary software we will use for class is . This is an industry-standard statistical analysis platform with a very large supportive ecosystem of packages for particuar analytic purposes.",
+    "crumbs": [
+      "Software for the class"
+    ]
+  },
+  {
+    "objectID": "site-page-content/software.html#accessing-r",
+    "href": "site-page-content/software.html#accessing-r",
+    "title": "Software for the class",
+    "section": "Accessing R",
+    "text": "Accessing R\n\nUsing R in the browser\nThe no-installation method to using R and RStudio is to get an account on Posit Cloud, which will enable you to use R in your web browser. You can get a free account, which should generally suffice for learning . Once you login, you should see something like this:\n\nThe two things you want to pay attention to here are highlighted below:\n\nWe will organize ourselves in RStudio Projects. This is a generally good practice for dealing with data science projects, and we’ll discuss this in class\nOn the left you have access to several learning guides for self-learning .\n\n\nUsing R on your laptop\nWe are going to use  through the Integrated Development Environment (IDE) called RStudio. Note that  and RStudio are two different things. You need to install  first, and then install RStudio.\n\n\nYou can use other IDEs like Positron or Visual Studio, or even a plain text editing software, but for this class, we will use RStudio\n\nInstall R\n\nGo to https://cran.r-project.org\nAt the very top, follow the link to download and install  for your operating system\n\nNote that there are two versions of  for the Mac: the Apple Silicon version for those with a M1, M2, M3, M4 Mac, and the Intel version for older Macs. Install as appropriate\n\n\n\n\nInstalling RStudio\n\nDownload the appropriate version of RStudio for your operating system from https://posit.co/download/rstudio-desktop/\nInstall RStudio on your computer\nOpen RStudio\n\nOn a Windows machine you can open RStudio from the Start () menu\nOn a Mac, you can search for RStudio using Searchlight ( + Space)\n\n\nRstudio will pick up your current  installation and run it within RStudio.",
+    "crumbs": [
+      "Software for the class"
+    ]
+  },
+  {
+    "objectID": "site-page-content/software.html#other-gui-based-software-running",
+    "href": "site-page-content/software.html#other-gui-based-software-running",
+    "title": "Software for the class",
+    "section": "Other GUI-based software running ",
+    "text": "Other GUI-based software running \nRobert Muenchen provides a comprehensive review of GUI-based software running  here\n\nBluesky\nBluesky is a GUI-based software that runs  as the computational engine. It allows a menu- and GUI-driven use of  that is quite nice. It also produces the  code that it is running for a particular operation, so you can both learn  and reproduce the analyses independent of Bluesky\n\nDownload Bluesky from this link. You will need to create an account\nFollow the installation instructions found here. Special note for Mac users, you will need to install Xquartz in order for Bluesky to work.\n\n\n\nExploratoryIO\nExploratoryIO is an online statistical platform also using  as the computational engine. It has quite a nice UI. The free version has you download an app that will work on your desktop but only when you’re online.\n\n\njamovi\njamovi is another free GUI-based statistical analysis platform that uses  as the computational engine. Much like Bluesky, you can also get the  code that is used for particular analyses. You can download jamovi here or run it in your browser without downloads or installation.\n\n\nJASP\nWe will occasionally use JASP for menu-driven graphs and analyses. JASP runs  in the background as its engine, and so the outputs generally will be quite compatible with what we’ll do in .\n\nDownload JASP from https://jasp-stats.org/download/ and install the appropriate version to your computer",
+    "crumbs": [
+      "Software for the class"
+    ]
+  },
+  {
+    "objectID": "site-page-content/about.html",
+    "href": "site-page-content/about.html",
+    "title": "Abhijit Das Gupta",
+    "section": "",
+    "text": "Abhijit Das Gupta is a Data Science Director at AstraZeneca. He works at the interface of statistics and machine learning, with broad experience in statistical modeling and machine learning, bioinformatics, optimization, signal processing, and data visualization. He holds a PhD in Biostatistics with earlier training in Mathematical Statistics. He has been using R for over 25 years for a wide variety of applications in biomedical research, as well as for data-driven reports and presentations.\nAbhijit is adjunct faculty at Georgetown University, where he currently teaches courses in Data Visualization and Big Data & Cloud Computing and is a mentor to the Capstone project within the MS in Data Science program, as well as teaching introductory Data Science for the MS in Environment and International Affairs program. He is also adjunct faculty at George Mason University where he guest lectures twice a year. He is a certified Carpentries instructor. He co-founded and organized the Statistical Programming DC meetup (formerly R Users Group DC) for several years and got to know several luminaries in the field, including DJ Patil, Hadley Wickham, Max Kuhn, Frank Harrell and others.\nOutside of work, Abhijit is an aikido instructor holding a 5th degree black belt, having practiced the art since 1994. He teaches in Frederick County, MD. He is also active in community theater productions with Ebong Theatrix, a Bengali theater group in the DC area.",
+    "crumbs": [
+      "Abhijit Das Gupta"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html",
+    "href": "resources/books-links.html",
+    "title": "Books and other online resources",
+    "section": "",
+    "text": "Introduction to Modern Statistics (2e) by Mine Cetinkaya-Rundel and Johanna Hardin (2024) https://openintro-ims.netlify.app/\nR for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). https://r4ds.hadley.nz/\nStatistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). https://moderndive.com/v2/index.html",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-science-books",
+    "href": "resources/books-links.html#data-science-books",
+    "title": "Books and other online resources",
+    "section": "Data science books",
+    "text": "Data science books\n\nIntroduction to Environmental Data Science by Jerry Davis (2025). https://bookdown.org/igisc/EnvDataSci/\nTidy Modeling with R by Max Kuhn and Julia Silge (2023). https://www.tmwr.org/\nGeocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). https://r.geocompx.org/\nGeographic Data Science with R: Visualizing and Analyzing Environmental Change by Michael C. Wimberley (2023). https://bookdown.org/mcwimberly/gdswr-book/",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#data-visualization-books",
+    "href": "resources/books-links.html#data-visualization-books",
+    "title": "Books and other online resources",
+    "section": "Data visualization books",
+    "text": "Data visualization books\n   \nClicking on the covers will send you to the free online versions of each book\nThe following books’ content are not available. The links are non-affiliate Amazon links to the books, or to the books’ web pages:\n   \n\n\n\n\nThe Royal Statistical Society published a guide to Best Practices in Data Visualization, written by Andreas Krause, Nicola Rennie, and Brian Tarran. Krause and Rennie published a series of tutorial papers in the journal Significance that are quite informative in thinking about data visualization. You can read this series here",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#toolkits",
+    "href": "resources/books-links.html#toolkits",
+    "title": "Books and other online resources",
+    "section": "Toolkits",
+    "text": "Toolkits\n\n\nJASP\n\nBayesian Inference in JASP: A Guide for Students by Mark A Goss-Sampson, Johnny van Doorn and EJ Wagenmakers (2020). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf\nStatistical Analysis in JASP: A Guide for Students by Mark A Goss-Sampson (2025). https://static.jasp-stats.org/Manuals/Bayesian_Guide_v0_12_2_1.pdf",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#writing-and-publishing",
+    "href": "resources/books-links.html#writing-and-publishing",
+    "title": "Books and other online resources",
+    "section": "Writing and publishing",
+    "text": "Writing and publishing\n \nOf partcular interest to us will be chapters on HTML documents and HTML Presentations",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#publishing",
+    "href": "resources/books-links.html#publishing",
+    "title": "Books and other online resources",
+    "section": "Publishing",
+    "text": "Publishing\n\nQuarto",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "resources/books-links.html#r-related",
+    "href": "resources/books-links.html#r-related",
+    "title": "Books and other online resources",
+    "section": "R-related",
+    "text": "R-related\n\nCheatsheets from Posit.co (formerly RStudio)\nggplot2 reference: The definitive guide to ggplot2. Check out the pages for the different functions for great examples\nR graph gallery: Example-filled site for different R-based graphs, especially in ggplot2. The ads can be a bit irritating, but the content is great.\nThemes to improve your ggplot figures\nR Graphics Cookbook by Winston Chang\nhtmlwidgets for R: Reference and gallery for different Javascript interactive graphics libraries that have been ported to R, or have a R wrapper",
+    "crumbs": [
+      "Resources",
+      "Books and other online resources"
+    ]
+  },
+  {
+    "objectID": "project/milestones.html",
+    "href": "project/milestones.html",
+    "title": "Project milestones",
+    "section": "",
+    "text": "Milestones\n\n\n\n\n\n\nImportant\n\n\n\nEach milestone submission will be graded for completion and will be penalized for late submissions. This is to ensure that you make regular progress on your project.\n\n\n\nIdentify data (one or more datasets) and formulate 2-3 questions you want to answer (September 30)\nComplete EDA and have a sense whether your questions are answerable from the data you are using (October 14)\nSubmit a draft narrative of what you think the answers to your questions are based on your preliminary analyses (October 28)\nDescribe the analyses you are doing, and provide 1-2 visualizations to indicate that the proposed approach is reasonable (November 11)\nSubmit your analysis plan for answering your questions. This will be in the appendix of your final submission (November 25)\n\nWe will publish expectations and a rubric for each milestone shortly.",
+    "crumbs": [
+      "Project",
+      "Project milestones"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Science and Analytics",
+    "section": "",
+    "text": "This course website was last rendered on Tue Sep 23, 2025 at 03:42 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+  },
+  {
+    "objectID": "index.html#sections-and-meeting-locations",
+    "href": "index.html#sections-and-meeting-locations",
+    "title": "Data Science and Analytics",
+    "section": "Sections and meeting locations",
+    "text": "Sections and meeting locations\n\n\n\n\n\n\n\n\n\n\nSection\nInstructor\nDay/Time\nLocation\n\n\n\n\n\n1\nAbhijit Dasgupta\nTuesdays 5:00 - 7:30 pm\nICC 116"
+  },
+  {
+    "objectID": "index.html#bookmark-these-links",
+    "href": "index.html#bookmark-these-links",
+    "title": "Data Science and Analytics",
+    "section": "Bookmark these links!",
+    "text": "Bookmark these links!\n\nCourse website: https://gu-enia5120.github.io/enia5120-fall-2025/\nSyllabus, especially course policies\nSlack Workspace: https://enia5120fall2025.slack.com\nInstructors only email: abhijit.dasgupta@georgetown.edu\nCanvas: https://georgetown.instructure.com/courses/214224"
+  },
+  {
+    "objectID": "index.html#calendar",
+    "href": "index.html#calendar",
+    "title": "Data Science and Analytics",
+    "section": "Calendar",
+    "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nggplot2/JASP/jamovi/Bluesky/Exploratory\nHW 1\nSep 22\n\n\n\n\n3\nSep 23\nEDA and visualization, continued\nR labs and worksheets; data manipulation\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nStatistical learning: finding patterns in data\nModeling lab and worksheets\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nSimulating studies\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nDecision-making, ethics, fairness, philosophy\nStudents' choice\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nBayesian statistics introduction\nBayes rule, simulation,\n\n\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 7\nNov 23\n\n\n\n\n12\nNov 25\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 15\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
+  },
+  {
+    "objectID": "project/overview.html",
+    "href": "project/overview.html",
+    "title": "Project overview",
+    "section": "",
+    "text": "Our final course evaluation will be a data–based project. We will develop questions based in political and environmental sciences, and obtain data sets that might help us answer these questions. A central element of the project will be data analysis and modeling to help us answer the questions we pose. It is hoped that each project will have elements of both political sciences and environmental sciences in them in line with the graduate program, and will address questions relevant to this program.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "project/overview.html#data",
+    "href": "project/overview.html#data",
+    "title": "Project overview",
+    "section": "Data",
+    "text": "Data\nYou may choose any data sets that are publicly available and not proprietary. These data should be made available in your final submission. The data should be from reputable sources such as government and international agencies and high-quality universities, and also from research publications in reputable journals.\nYou can choose one or more data sets for your project, provided that the data sets can be linked in some way, typically using a key variable(s). The data should be rich enough to answer your questions. This does not mean that they have to be Big Data. Small to medium size data sets (within 10,000 observations) might be a good size to consider.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "project/overview.html#software",
+    "href": "project/overview.html#software",
+    "title": "Project overview",
+    "section": "Software",
+    "text": "Software\nThe initial exploratory work and modeling of your data can be done in any of the approved software. However, the final analyses needs to be done using , and the final submission needs to be written using Quarto. This is to ensure that the final project submission is reproducible given the data you use is available. It is also good training and preparation for creating reproducible document documents during your careers.\nPlease do ensure that all tables and figures generated from your analysis look professional, and are easily readable and understandable. This means having appropriate labels and captions, having good annotations on your visualizations and generally providand will address questions relevant to this program.",
+    "crumbs": [
+      "Project",
+      "Project overview"
+    ]
+  },
+  {
+    "objectID": "resources/datasets.html",
+    "href": "resources/datasets.html",
+    "title": "Free datasets for EIA",
+    "section": "",
+    "text": "Sources\n\n\n\nThese links were obtained and organized using Google searches and Perplexity AI",
+    "crumbs": [
+      "Resources",
+      "Free datasets for EIA"
+    ]
+  },
+  {
+    "objectID": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
+    "href": "resources/datasets.html#recommended-free-data-sets-for-data-analytics-in-environment-and-international-affairs",
+    "title": "Free datasets for EIA",
+    "section": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs",
+    "text": "Recommended Free Data Sets for Data Analytics in Environment and International Affairs\nBelow are curated, high-quality, and free data sets suitable for your course. They are selected for relevance to environmental and international affairs, compatibility with R, and educational value for beginner to intermediate data analytics labs.\n\n\n1. Environmental Data Sets\nOpen repo of ecological data for use in teaching\n\n\nGlobal and Regional Environmental Data\n\nWorldClim: High-resolution global climate data (temperature, precipitation, etc.), widely used for climate and ecological analysis[1][2].\nUSGS Earth Explorer: Satellite imagery, land cover, and environmental monitoring data for the United States and globally[1][2].\nNOAA Climate Data Online (CDO): Historical weather and climate data, including temperature, precipitation, and wind, available globally[3][2].\nGlobal Forest Watch: Deforestation, land use, and forest change data, including interactive maps and downloadable data[2][1].\nOpenWeatherMap: Real-time and historical weather data accessible via API, suitable for time series and spatial analysis[1][2].\n\n\n\nSpecialized Environmental Data\n\nLTER DataSampler R Package: Ready-to-use environmental data samples from the Long-Term Ecological Research (LTER) Network, ideal for R-based labs[4][5].\nSAGE (Center for Sustainability and the Global Environment): Datasets on global ecosystems, croplands, air quality, and land use change[6].\nEnvironmental Data Initiative (EDI): Repository of ecological and environmental datasets, including biodiversity, water quality, and ecosystem processes[5].\nGlobal Solar Atlas & Global Wind Atlas: Renewable energy potential data for solar and wind resources worldwide[1][2].\n\n\n\n\n2. International Affairs and Socio-Political Data Sets\n\nInternational Relations and Political Data\n\nWorld Bank Open Data: Comprehensive global development indicators, including environment, economy, health, and governance[7][8].\nUNData: Aggregated data from United Nations agencies on topics such as environment, demographics, and development[7][9].\nACLED (Armed Conflict Location & Event Data Project): Geolocated data on political violence, protests, and conflict events globally[9][7].\nFreedom House: Annual country-level data on political rights and civil liberties[9].\nWorldwide Governance Indicators: Measures of governance quality for over 200 countries (voice, accountability, stability, rule of law, etc.)[9][7].\nCorrelates of War Project: Datasets on international conflict, alliances, and militarized disputes[10][7].\n\n\n\nSocio-Economic and Health Data\n\nWHO Health Inequality Data Repository: Disaggregated health and environmental indicators from global to local levels[11].\nWorld Resources Institute: Data on climate, energy, food, forests, water, and urban issues at the intersection of environment and development[7].\nQuality of Government Institute Data: Cross-national data on governance, corruption, and government effectiveness[9][7].\n\n\n\n\n\n3. R-Compatible and Built-in Data Sets\n\nR Built-in Datasets: R comes with a variety of datasets (e.g., airquality, CO2, iris, PlantGrowth, quakes, USArrests) useful for teaching data manipulation, visualization, and modeling[12][5].\nRdatasets Repository: Searchable collection of nearly 2,000 datasets from R packages, suitable for a range of analytics exercises[13].\nSpecialized R Packages:\n\nclimate: R package for accessing free meteorological and hydrological datasets globally[14].\npeacesciencer: R package for peace and conflict studies datasets, including Correlates of War and UCDP data[10].\nvdemdata: R package for democracy and governance indicators worldwide[10].\n\n\n\n\n\n4. How to Use These Data Sets in R\n\nMost global and institutional datasets are downloadable as CSV or Excel files, which can be imported into R using read.csv() or readxl::read_excel()[15][12].\nMany R packages (e.g., climate, peacesciencer, LTERdatasampler) provide functions to download and load data directly into R, streamlining lab activities[14][4][10].\nBuilt-in datasets can be accessed with the data() function in R, and their documentation is available with ?datasetname[12][13].\n\n\n\n\n5. Example Table: Data Sets by Topic\n\n\n\n\n\n\n\n\nTopic\nData Set / Source\nR Compatibility\n\n\n\n\nClimate & Weather\nWorldClim, NOAA CDO, OpenWeatherMap\nYes (CSV/API)\n\n\nLand Use & Cover\nUSGS, SAGE, Global Forest Watch\nYes (CSV/GeoTIFF)\n\n\nBiodiversity & Ecology\nLTER, EDI, GBIF, PlantGrowth (R)\nYes (R/CSV)\n\n\nPolitical & Conflict Data\nACLED, Correlates of War, peacesciencer\nYes (R/CSV)\n\n\nSocio-Economic & Governance\nWorld Bank, UNData, WHO, WGI\nYes (CSV/R)\n\n\nBuilt-in & Package Datasets\nairquality, iris, Rdatasets, LTERdatasampler\nYes (R)\n\n\n\n\n\n\n6. Additional Resources\n\nAtlas.co Blog: Comprehensive guide to free environmental data sources, including global, regional, and geospatial repositories[1].\nR-bloggers: Lists and reviews ecological and environmental data sources, including those built into R and available online[5].\nEmory University Data Guide: Curated links to international relations and comparative politics datasets, many of which are R-compatible[8].\n\n\nThese data sets and resources provide a strong foundation for hands-on labs and projects in your course, ensuring students gain practical experience with real-world environmental and international affairs data[1][9][12].\n\n\nSources\n\nFree Data Sources for Environmental Data - Atlas.co https://atlas.co/blog/free-data-sources-for-environmental-data/\nBest places for open source environmental data? : r/gis - Reddit https://www.reddit.com/r/gis/comments/1b7rcir/best_places_for_open_source_environmental_data/\nClimate Data Online (CDO) https://www.ncei.noaa.gov/cdo-web/\nReady-to-teach R Environmental Datasets - LTER Network https://lternet.edu/stories/ready-to-teach-r-environmental-datasets-the-lterdatasampler-r-package/\nTop five(ish) sources of ecological data - R-bloggers https://www.r-bloggers.com/2023/03/top-fiveish-sources-of-ecological-data/\nDatasets | Center for Sustainability and the Global Environment https://sage.nelson.wisc.edu/data-and-models/datasets/\nInternational Relations: Data sets - LibGuides https://selu.libguides.com/international_relations/data_sets\nComparative Politics and International Relations - Data Resources … https://guides.libraries.emory.edu/c.php?g=944707&p=6810116\nInternational Relations: International Data and Datasets https://libguides.lib.msu.edu/c.php?g=96739&p=923034\nTop R packages for downloading political science and economics … https://rforpoliticalscience.com/2023/04/07/top-r-packages-for-downloading-political-science-and-economics-datasets/\nHealth Inequality Data Repository https://www.ingentaconnect.com/content/10.5260/chara.25.3.11\nBuilt-in Datasets in R - MachineLearningMastery.com https://www.machinelearningmastery.com/built-in-datasets-in-r/\nSearchable list of built in R Datasets - YouTube https://www.youtube.com/watch?v=4cfE5jTImP4\nClimate: An R Package to Access Free In-Situ Meteorological and Hydrological Datasets For Environmental Assessment https://www.mdpi.com/2071-1050/12/1/394\nStatistics & Teaching Software - Rguroo https://rguroo.com/teaching/\nInternet of Things (IoT) for Integrating Environmental and Localization Data in Building Information Modeling (BIM) http://www.iaarc.org/publications/2017_proceedings_of_the_34rd_isarc/internet_of_things_iot_for_integrating_environmental_and_localization_data_in_building_information_modeling_bim.html\nGradient free stochastic training of ANNs, with local approximation in partitions https://link.springer.com/10.1007/s00477-023-02407-2\nIn Situ Visualization of Membrane Fouling Evolution during Ultrafiltration Using Label-Free Hyperspectral Light Sheet Fluorescence Imaging. https://pubs.acs.org/doi/10.1021/acs.est.2c08731\nRobust Portfolio Optimization with Environmental, Social, and Corporate Governance Preference https://www.mdpi.com/2227-9091/12/2/33\nAn Environmental Energy Harvesting-Driven Wireless Parking Detection Method: Analysis and Implementation https://ieeexplore.ieee.org/document/10124091/\nSome teaching resources using R with illustrative examples … https://pmc.ncbi.nlm.nih.gov/articles/PMC8447407/\nA framework for FAIR robotic datasets https://www.nature.com/articles/s41597-023-02495-3\nDeveloping Transdisciplinary Approaches to Sustainability Challenges: The Need to Model Socio-Environmental Systems in the Longue Durée https://www.mdpi.com/2071-1050/14/16/10234\nA model for the noninvasive, habitat-inclusive estimation of upper limit abundance for synanthropes, exemplified by M. fascicularis https://www.science.org/doi/10.1126/sciadv.adn5390\nRevolutionizing Education: Harnessing Graph Machine Learning for Enhanced Problem-Solving in Environmental Science and Pollution Technology https://neptjournal.com/upload-images/(38)B-4177.pdf\nTime-Evolving Data Science and Artificial Intelligence for Advanced Open Environmental Science (TAIAO) Programme https://www.ijcai.org/proceedings/2024/809\nThe scope of the Kalman filter for spatio‐temporal applications in environmental science https://onlinelibrary.wiley.com/doi/10.1002/env.2773\nA comparison of herbarium and citizen science phenology datasets for detecting response of flowering time to climate change in Denmark https://link.springer.com/10.1007/s00484-022-02238-w\nNon-linear visualization and analysis of large water quality data sets: a model-free basis for efficient monitoring and risk assessment http://link.springer.com/10.1007/s00477-008-0266-y\nPerformance Measurement of Free-Space Optical 980 nm Channel Using Multiple Sets of Environmental Conditions http://link.springer.com/10.1007/s11277-015-2742-2\nA nonparametric method for estimating asymmetric densities based on skewed Birnbaum–Saunders distributions applied to environmental data http://link.springer.com/10.1007/s00477-012-0684-8\nEstimation of polio infection prevalence from environmental surveillance data https://www.science.org/doi/10.1126/scitranslmed.aaf6786\nPublic Environmental Data - Yale University Library Research Guides https://guides.library.yale.edu/c.php?g=296375&p=7352744\nU.S. Environmental… - Dataset - Catalog https://catalog.data.gov/dataset/?tags=environment\nSciences & Environmental Data - Locating Data Sets & Raw Data https://guides.erau.edu/data/sciences\nDevelopment of the InTelligence And Machine LEarning (TAME) Toolkit for Introductory Data Science, Chemical-Biological Analyses, Predictive Modeling, and Database Mining for Environmental Health Research https://www.frontiersin.org/articles/10.3389/ftox.2022.893924/full\nMissing Value Imputation of Wireless Sensor Data for Environmental Monitoring https://www.mdpi.com/1424-8220/24/8/2416\nList of R packages for Ecology https://drmattg.github.io/REcol-verse/\nEcology: Data Resources https://guides.libs.uga.edu/c.php?g=350264&p=10234580",
+    "crumbs": [
+      "Resources",
+      "Free datasets for EIA"
+    ]
+  },
+  {
+    "objectID": "site-page-content/prep-work.html",
+    "href": "site-page-content/prep-work.html",
+    "title": "Weekly Class Preparation",
+    "section": "",
+    "text": "Key\n\n\n\n\nIMS = Introduction to Modern Statistics (2e)\nRDS = R for Data Science (2e)\nSIDS = Statistical Inference via Data Science (2e)",
+    "crumbs": [
+      "Weekly Class Preparation"
+    ]
+  },
+  {
+    "objectID": "site-page-content/prep-work.html#week-2-september-16",
+    "href": "site-page-content/prep-work.html#week-2-september-16",
+    "title": "Weekly Class Preparation",
+    "section": "Week 2: September 16",
+    "text": "Week 2: September 16\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
+    "crumbs": [
+      "Weekly Class Preparation"
+    ]
+  },
+  {
+    "objectID": "site-page-content/prep-work.html#week-3-september-23",
+    "href": "site-page-content/prep-work.html#week-3-september-23",
+    "title": "Weekly Class Preparation",
+    "section": "Week 3: September 23",
+    "text": "Week 3: September 23\nThis week, we will basically hold a  covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.\nIn terms of deliverables, we will not have a quiz this week, but we will have an -based homework using scaffolded code chunks and Quarto.\n\n\n\n\n\n\nImportant\n\n\n\nPhilosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To quote Stephen Covey, “Begin with the End in Mind”.\nWhat is primary is what you want to achieve with the data.\nThen, and only then, do you try to figure out how to use the software tools to achieve that.",
+    "crumbs": [
+      "Weekly Class Preparation"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html",
+    "href": "site-page-content/standards.html",
+    "title": "Minimum standards for deliverables",
+    "section": "",
+    "text": "Warning\n\n\n\nViolation of these guidelines will result in an automatic deduction of 1 grade step",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#code",
+    "href": "site-page-content/standards.html#code",
+    "title": "Minimum standards for deliverables",
+    "section": "Code",
+    "text": "Code",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "title": "Minimum standards for deliverables",
+    "section": "Rendered output (PDF, html, etc.)",
+    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "site-page-content/standards.html#use-of-git",
+    "href": "site-page-content/standards.html#use-of-git",
+    "title": "Minimum standards for deliverables",
+    "section": "Use of git",
+    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
+    "crumbs": [
+      "Minimum standards for deliverables"
+    ]
+  },
+  {
+    "objectID": "slides/topics/functions.html#why-do-we-need-functions",
+    "href": "slides/topics/functions.html#why-do-we-need-functions",
+    "title": "ENIA 5120",
+    "section": "Why do we need functions?",
+    "text": "Why do we need functions?\nWhen you are typing instructions to the computer, you might find yourself repeating the same instructions over and over. So you end up copying and pasting code for each repitition.\n\nCan make a mistake copying and pasting\nIf you need to change the instructions, you need to find every instance of it manually and change it, and you’re likely to miss one\n\nThe rule of thumb is, if you’re copying the same code more than twice, write a function.\n\nWrite the instructions once\nChange it in only one place, if needed"
+  },
+  {
+    "objectID": "slides/topics/functions.html#defining-functions",
+    "href": "slides/topics/functions.html#defining-functions",
+    "title": "ENIA 5120",
+    "section": "Defining functions",
+    "text": "Defining functions\nThe basic syntax of a function is\n&lt;function name&gt; &lt;- function(&lt;input argument(s)&gt;){\n  &lt;code for instructions&gt;\n  ...\n  &lt;more code&gt;\n  return(&lt;output object&gt;)\n}"
+  },
+  {
+    "objectID": "slides/topics/functions.html#defining-functions-1",
+    "href": "slides/topics/functions.html#defining-functions-1",
+    "title": "ENIA 5120",
+    "section": "Defining functions",
+    "text": "Defining functions\nLet’s create our own function to convert feet to inches.\n\n\n\n\n\n\n\n\n\nft2in is the name of the function\nThe input argument is named ft (make an expressive name)\nInches are computed by multiplying ft by 12 and storing it in inch\nThe output of the function is the value of the inch variable"
+  },
+  {
+    "objectID": "slides/topics/functions.html#defining-functions-2",
+    "href": "slides/topics/functions.html#defining-functions-2",
+    "title": "ENIA 5120",
+    "section": "Defining functions",
+    "text": "Defining functions\nWhat if we want more than one input?"
+  },
+  {
+    "objectID": "slides/topics/functions.html#quick-reminder-about-conditions",
+    "href": "slides/topics/functions.html#quick-reminder-about-conditions",
+    "title": "ENIA 5120",
+    "section": "Quick reminder about conditions",
+    "text": "Quick reminder about conditions\nSome comparison operators for filtering\n\n\n\nOperator\nMeaning\n\n\n\n\n==\nEquals\n\n\n!=\nNot equals\n\n\n&gt; / &lt;\nGreater / less than\n\n\n&gt;= / &lt;=\nGreater or equal / Less or equal\n\n\n!\nNot\n\n\n%in%\nIn a set\n\n\n\nCombining comparisons\n\n\n\nOperator\nMeaning\n\n\n\n\n&\nAnd\n\n\n|\nOr"
+  },
+  {
+    "objectID": "slides/topics/functions.html#defining-functions-3",
+    "href": "slides/topics/functions.html#defining-functions-3",
+    "title": "ENIA 5120",
+    "section": "Defining functions",
+    "text": "Defining functions"
+  },
+  {
+    "objectID": "slides/topics/functions.html#the-concept-of-local-vs-global-variables",
+    "href": "slides/topics/functions.html#the-concept-of-local-vs-global-variables",
+    "title": "ENIA 5120",
+    "section": "The concept of local vs global variables",
+    "text": "The concept of local vs global variables\n\nx &lt;-  10\nprint(x)\n\n[1] 10\n\nf &lt;- function(x){\n  x &lt;- 5\n  print(x)\n}\n\nf(x)\n\n[1] 5\n\nprint(x)\n\n[1] 10\n\n\nThe x inside the function is local to the function and is independent of the x in the global space that has the value 10.."
+  },
+  {
+    "objectID": "slides/topics/functions.html#for-loops",
+    "href": "slides/topics/functions.html#for-loops",
+    "title": "ENIA 5120",
+    "section": "for-loops",
+    "text": "for-loops"
+  },
+  {
+    "objectID": "slides/topics/functions.html#for-loops-1",
+    "href": "slides/topics/functions.html#for-loops-1",
+    "title": "ENIA 5120",
+    "section": "for-loops",
+    "text": "for-loops\nThe for-loop is a construct to repeat the same operation over a list of values.\nBasic syntax:\nfor(&lt;variable&gt; in &lt;list&gt;){\n    &lt;code&gt;\n    ...\n    &lt;more code&gt;\n}\nExample:\n.pull-left[\n\nfor(i in 1:10){\n  print(i)\n}\n\nHere i is a dummy variable. It’s actual name doesn’t matter, just its action ] .pull-right[\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n\n\n]"
+  },
+  {
+    "objectID": "slides/topics/functions.html#for-loops-2",
+    "href": "slides/topics/functions.html#for-loops-2",
+    "title": "ENIA 5120",
+    "section": "for-loops",
+    "text": "for-loops\nExample:\n\nfor(n in names(iris)){\n  if(is.numeric(iris[,n])){\n    print(glue::glue('The mean of {n} is {mean(iris[,n])}')) #&lt;&lt;\n  }\n}\n\nThe mean of Sepal.Length is 5.84333333333333\nThe mean of Sepal.Width is 3.05733333333333\nThe mean of Petal.Length is 3.758\nThe mean of Petal.Width is 1.19933333333333\n\n\nYou don’t need the &lt;list&gt; in the for-loop definition to be integers. In this case it is a list of strings.\nNote that vectors are also considered lists for this purpose.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe glue package allows you to run templated text strings interspersed with the results of R objects]"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#what-is-the-tidyverse",
+    "href": "slides/topics/tidyverse.html#what-is-the-tidyverse",
+    "title": "ENIA 5120",
+    "section": "What is the “Tidyverse”?",
+    "text": "What is the “Tidyverse”?\n\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#what-is-the-tidyverse-1",
+    "href": "slides/topics/tidyverse.html#what-is-the-tidyverse-1",
+    "title": "ENIA 5120",
+    "section": "What is the “Tidyverse”?",
+    "text": "What is the “Tidyverse”?\nA set of R packages that:\n\n\nhelp make data more computer-friendly\n\nwhile making your code more human-friendly\n\n\nMost of these packages are (co-)written by Dr. Hadley Wickham, who has rockstar status in the R world\nThey are supported by the company RStudio"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#let-us-count-the-ways",
+    "href": "slides/topics/tidyverse.html#let-us-count-the-ways",
+    "title": "ENIA 5120",
+    "section": "Let us count the ways",
+    "text": "Let us count the ways\nThere are many ways data can be messy. An incomplete list….\n\nColumn headers are values, not variables\nMultiple variables are stored in a single column\nVariables are stored in both rows and columns\nMultiple types of observational units are saved in the same table\nA single observational unit is stored in multiple tables"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data",
+    "href": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data",
+    "title": "ENIA 5120",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nColumn headers contain values\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\n&lt; $10K\n$10-20K\n$20-50K\n$50-100K\n&gt; $100K\n\n\n\n\nIndia\n40\n25\n25\n9\n1\n\n\nUSA\n20\n20\n20\n30\n10"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data-1",
+    "href": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data-1",
+    "title": "ENIA 5120",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nColumn headers contain values\n\n\n\n\nCountry\nIncome\nPercentage\n\n\n\n\nIndia\n&lt; $10K\n40\n\n\nUSA\n&lt; $10K\n20\n\n\n\nThis is a case of reshaping or melting"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data-2",
+    "href": "slides/topics/tidyverse.html#ways-to-have-messy-i.e.-not-tidy-data-2",
+    "title": "ENIA 5120",
+    "section": "Ways to have messy (i.e. not tidy) data",
+    "text": "Ways to have messy (i.e. not tidy) data\n\nMultiple variables in one column\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nYear\nM_0-14\nF_0-14\nM_ 15-60\nF_15-60\nM_60+\nF_60+\n\n\n\n\nUK\n2010\n\n\n\n\n\n\n\n\nUK\n2011\n\n\n\n\n\n\n\n\n\n\n\n\n\nCountry\nYear\nGender\nAge\nCount\n\n\n\n\n\nSeparating columns into different variables"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying-data",
+    "href": "slides/topics/tidyverse.html#tidying-data",
+    "title": "ENIA 5120",
+    "section": "Tidying data",
+    "text": "Tidying data\nThe typical steps are\n\nTransforming data from wide to tall (pivot_longer) and from tall to wide (pivot_wider)\nSeparating columns into different columns\nPutting columns together into new variables"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#some-actions-on-data",
+    "href": "slides/topics/tidyverse.html#some-actions-on-data",
+    "title": "ENIA 5120",
+    "section": "Some actions on data",
+    "text": "Some actions on data\n\nCreating new variables (mutate)\nChoose some columns (select)\nSelecting rows based on some criteria (filter)\nSort data based on some variables (arrange)"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#example-data-link",
+    "href": "slides/topics/tidyverse.html#example-data-link",
+    "title": "ENIA 5120",
+    "section": "Example data (link)",
+    "text": "Example data (link)"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#the-tidyverse-package",
+    "href": "slides/topics/tidyverse.html#the-tidyverse-package",
+    "title": "ENIA 5120",
+    "section": "The tidyverse package",
+    "text": "The tidyverse package\nThe tidyverse package is a meta-package that installs a set of packages that are useful for data cleaning, data tidying and data munging (manipulating data to get a computationally “attractive” dataset)"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#the-tidyverse-package-1",
+    "href": "slides/topics/tidyverse.html#the-tidyverse-package-1",
+    "title": "ENIA 5120",
+    "section": "The tidyverse package",
+    "text": "The tidyverse package"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#core-tidyverse-packages",
+    "href": "slides/topics/tidyverse.html#core-tidyverse-packages",
+    "title": "ENIA 5120",
+    "section": "Core tidyverse packages",
+    "text": "Core tidyverse packages\n\n\n\n\n\nPackage\nDescription\n\n\n\n\nggplot2\nData visualization (next week)\n\n\ntibble\ndata.frame on steroids\n\n\ntidyr\nData tidying (today)\n\n\nreadr\nReading text files (CSV)\n\n\npurrr\nApplying functions to data iteratively(later this sem)\n\n\ndplyr\nData cleaning and munging (today)\n\n\nstringr\nString (character) manipulation\n\n\nforcats\nManipulating categorical variables"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#additional-tidyverse-packages",
+    "href": "slides/topics/tidyverse.html#additional-tidyverse-packages",
+    "title": "ENIA 5120",
+    "section": "Additional tidyverse packages",
+    "text": "Additional tidyverse packages\n\n\n\n\n\nPackage\nDescription\n\n\n\n\nreadxl\nRead Excel files\n\n\nhaven\nRead SAS, SPSS, Stata files\n\n\nlubridate\nDeal with dates and times\n\n\nmagrittr\nProvides the pipe operator %&gt;%\n\n\nglue\nMakes pasting text and data easier"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#a-pipe-example-data-munging",
+    "href": "slides/topics/tidyverse.html#a-pipe-example-data-munging",
+    "title": "ENIA 5120",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\n\nlibrary(tidyverse)\nupdated_cars &lt;- \n  mtcars |&gt; \n  rownames_to_column(var = 'model') |&gt; \n  mutate(kmpg = mpg * 1.6) |&gt; \n  select(model, kmpg, cyl, disp) |&gt; \n  filter(cyl == 6)\n\n\n\n\n\n\nmodel\nkmpg\ncyl\ndisp\n\n\n\n\nMazda RX4\n33.60\n6\n160.0\n\n\nMazda RX4 Wag\n33.60\n6\n160.0\n\n\nHornet 4 Drive\n34.24\n6\n258.0\n\n\nValiant\n28.96\n6\n225.0\n\n\nMerc 280\n30.72\n6\n167.6\n\n\nMerc 280C\n28.48\n6\n167.6\n\n\n\n\n\nHuh??!!!"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#a-pipe-example-data-munging-1",
+    "href": "slides/topics/tidyverse.html#a-pipe-example-data-munging-1",
+    "title": "ENIA 5120",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\nLet’s take our time to understand this concept. We start with the mtcars dataset, which is built into R."
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#a-pipe-example-data-munging-2",
+    "href": "slides/topics/tidyverse.html#a-pipe-example-data-munging-2",
+    "title": "ENIA 5120",
+    "section": "A pipe example (data munging)",
+    "text": "A pipe example (data munging)\n\n\n\n\n\n\n\n\nThe idea is to use verbs to express operations on a dataset, so it is easier to express what you want to do in code."
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#the-pipe-operator",
+    "href": "slides/topics/tidyverse.html#the-pipe-operator",
+    "title": "ENIA 5120",
+    "section": "The pipe operator",
+    "text": "The pipe operator\nThe pipe operator |&gt; takes a data.frame or tibble object on the left, then “pipes” it to a function that takes the data.frame object as its first argument.\n\nmtcars %&gt;% mutate(kmpg = mpg * 1.6)\n\nwould be the same as\n\nmutate(mtcars, kmpg = mpg * 1.6)"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#the-pipe-operator-1",
+    "href": "slides/topics/tidyverse.html#the-pipe-operator-1",
+    "title": "ENIA 5120",
+    "section": "The pipe operator",
+    "text": "The pipe operator\nWith pipes\n\nmtcars %&gt;% \n  rownames_to_column(var = \"model\") %&gt;% \n  select(model:disp) %&gt;% \n  mutate(kmpg = mpg * 1.6) %&gt;% \n  filter(cyl == 6)\n\nWithout pipes\n\ntmp &lt;- rownames_to_column(mtcars, var=\"model\")\ntmp3 &lt;- select(tmp2, model:disp)\ntmp2 &lt;- mutate(tmp, kmpg = mpg * 1.6)\ntmp4 &lt;- filter(tmp3, cyl == 6)\n\nBoth are fine, but I find pipes help translating my thoughts into code better"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#need-for-tidying",
+    "href": "slides/topics/tidyverse.html#need-for-tidying",
+    "title": "ENIA 5120",
+    "section": "Need for tidying",
+    "text": "Need for tidying\n\nFor the same variable (e.g., radius) there are 3 columns giving the mean, se and worst value. So the names of the metric are stored in the column names\nThere are really 3 kinds of summaries for each metric – mean, se and worst."
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying",
+    "href": "slides/topics/tidyverse.html#tidying",
+    "title": "ENIA 5120",
+    "section": "Tidying",
+    "text": "Tidying"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying-selecting",
+    "href": "slides/topics/tidyverse.html#tidying-selecting",
+    "title": "ENIA 5120",
+    "section": "Tidying (selecting)",
+    "text": "Tidying (selecting)\n\nlibrary(tidyverse)\nbrca_data |&gt; \n  select(id, diagnosis, ends_with('mean'), ends_with('se'), ends_with('worst'),\n         -starts_with('fractal')) \n                             # removes columns starting with \"fractal\""
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying-pivoting",
+    "href": "slides/topics/tidyverse.html#tidying-pivoting",
+    "title": "ENIA 5120",
+    "section": "Tidying (pivoting)",
+    "text": "Tidying (pivoting)\n\n\n\n\n\n\n\n\n\nColumn names become variable, everything stays aligned with id and diagnosis"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying-separating",
+    "href": "slides/topics/tidyverse.html#tidying-separating",
+    "title": "ENIA 5120",
+    "section": "Tidying (separating)",
+    "text": "Tidying (separating)\n\n\n\n\n\n\n\n\n\nSplit variable into 2 cols, Variable and stat"
+  },
+  {
+    "objectID": "slides/topics/tidyverse.html#tidying-spreading",
+    "href": "slides/topics/tidyverse.html#tidying-spreading",
+    "title": "ENIA 5120",
+    "section": "Tidying (spreading)",
+    "text": "Tidying (spreading)"
   },
   {
     "objectID": "slides/week-02.html#agenda",
@@ -1360,17 +2263,6 @@
     ]
   },
   {
-    "objectID": "slides/week-02.html#section-1",
-    "href": "slides/week-02.html#section-1",
-    "title": "Lecture 2",
-    "section": "",
-    "text": "This plot visualizes the missing values in a dataset. At the top it shows the aggregate for each column using a relative scale and absolute missing-value annotations, while on the right, summary statistics and individual row results are displayed. Using this plot allows to gain a quick overview over the structure of missing values and their relation in a dataset and easily determine which columns and rows to investigate / drop.\nThe right side shows the number of variables with missing data for each observation",
-    "crumbs": [
-      "Lecture Slides",
-      "Lecture 2"
-    ]
-  },
-  {
     "objectID": "slides/week-02.html#upset-plots-1",
     "href": "slides/week-02.html#upset-plots-1",
     "title": "Lecture 2",
@@ -1413,6 +2305,27 @@
       "Lecture Slides",
       "Lecture 2"
     ]
+  },
+  {
+    "objectID": "templates/templates.html#code-style-and-ggplot-theme",
+    "href": "templates/templates.html#code-style-and-ggplot-theme",
+    "title": "Quarto Blackboard theme",
+    "section": "Code style and ggplot theme",
+    "text": "Code style and ggplot theme\n\nggplot(cars) +\n  geom_point(aes(speed,dist),col=\"white\")+\n  theme_chalk()"
+  },
+  {
+    "objectID": "templates/templates.html#images-and-text-with-frame",
+    "href": "templates/templates.html#images-and-text-with-frame",
+    "title": "Quarto Blackboard theme",
+    "section": "Images and text with frame",
+    "text": "Images and text with frame\n\nImages and text can be framed!"
+  },
+  {
+    "objectID": "templates/templates.html#lists",
+    "href": "templates/templates.html#lists",
+    "title": "Quarto Blackboard theme",
+    "section": "Lists",
+    "text": "Lists\n\nLists\nare\nfun\n\nfun fun"
   },
   {
     "objectID": "worksheets/clustering.html",
