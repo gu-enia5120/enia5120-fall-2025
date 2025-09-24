@@ -18,7 +18,7 @@ execute:
 
 This assignment is to be submitted as a PDF file into Canvas. All questions are worth 5 points each, or as marked. The preferred option is to render this Quarto document to PDF and submit that file. This file is set up to render to PDF by default. If you have trouble with that, you can also render to HTML and print to PDF from your browser. (Change `typst` in the header lines above to `html`)
 
-You will fill in the blanks (indicated by `______`) in the code chunks below. You will also need to write some code from scratch in a few places. Once you're done filling in the blanks, you should be able to run all the code chunks without errors. To make the code chunks run, you will need to change the `eval` option from `false` to `true` in the execute options at the top of the document.
+You will fill in the blanks (indicated by `______`) in the code chunks below. You will also need to write some code from scratch in a few places. Ensure that you have removed all the underscores, otherwise you will get errors. Once you're done filling in the blanks, you should be able to run all the code chunks without errors. To make the code chunks run, **you will need to change the `eval` option from `false` to `true` in the execute options at the top of the document**.
 
 You should install any required packages on your own. If you run into trouble, please reach out to me for help. You should do this outside this document, so the code for installing packages is not included here (You should [never]{style="color: red; font-weight: bold;"} include code for installing packages in a Quarto document).
 :::
@@ -160,7 +160,7 @@ water_quality |>
 
 #### Extra credit (10)
 
-Using the water quality data filtered for water temperatures ≤ 35C, recreate the following plot. Even if you can't code them in R yet, write out what data steps you would need to be able to draw these plots.
+Using the water quality data filtered for water temperatures ≤ 35C, recreate the following plot. Even if you can't code them in R yet, write out what data steps, and in what order, you would need to get the data in shape to be able to draw these plots.
 
 > This exercise is meant to train you to (a) reverse-engineer graphs, and (b) conceptualize the data munging steps you need to get to these visualization
 
