@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Abhijit Dasgupta">
 
-<title>Introduction to Quarto – ENIA 5120</title>
+<title>HW1 – ENIA 5120</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,11 +43,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -74,168 +73,33 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">ENIA 5120</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-worksheets" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Worksheets</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-worksheets">    
-        <li>
-    <a class="dropdown-item" href="../worksheets/intro-to-Quarto.html">
- <span class="dropdown-text">Introduction to Quarto</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/intro-to-R.html">
- <span class="dropdown-text">Introduction to R</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/aesthetic-mappings.html">
- <span class="dropdown-text">Aesthetic mappings</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-amounts.html">
- <span class="dropdown-text">Visualizing amounts</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/coordinate-systems-axes.html">
- <span class="dropdown-text">Coordinate systems and axes</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-distributions-1.html">
- <span class="dropdown-text">Visualizing distributions 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-distributions-2.html">
- <span class="dropdown-text">Visualizing distributions 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/color-scales.html">
- <span class="dropdown-text">Color scales</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/color-selection.html">
- <span class="dropdown-text">Color selection</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/data-wrangling-1.html">
- <span class="dropdown-text">Data wrangling 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/data-wrangling-2.html">
- <span class="dropdown-text">Data wrangling 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-proportions.html">
- <span class="dropdown-text">Visualizing proportions</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/know-your-data-1.html">
- <span class="dropdown-text">Getting to know your data 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/know-your-data-2.html">
- <span class="dropdown-text">Getting to know your data 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/getting-things-in-order.html">
- <span class="dropdown-text">Getting things into the right order</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/figure-design.html">
- <span class="dropdown-text">Figure design</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/compound-figures.html">
- <span class="dropdown-text">Compound figures</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-trends.html">
- <span class="dropdown-text">Visualizing trends</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/functional-programming.html">
- <span class="dropdown-text">Functions and functional programming</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/working-with-models.html">
- <span class="dropdown-text">Working with models</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/visualizing-uncertainty.html">
- <span class="dropdown-text">Visualizing uncertainty</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/dimension-reduction-1.html">
- <span class="dropdown-text">Dimension reduction 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/dimension-reduction-2.html">
- <span class="dropdown-text">Dimension reduction 2</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/clustering.html">
- <span class="dropdown-text">Clustering</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/hierarchical-clustering.html">
- <span class="dropdown-text">Hierarchical clustering</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/redundant-coding.html">
- <span class="dropdown-text">Redundant coding</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/overplotting.html">
- <span class="dropdown-text">Dealing with overplotting</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/geospatial-data.html">
- <span class="dropdown-text">Visualizing geospatial data</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../worksheets/interactive-plots.html">
- <span class="dropdown-text">Interactive plots</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Introduction to Quarto</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/week-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/week-01.html">HW1</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ENIA 5120</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -322,13 +186,36 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/week-01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">HW1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignments/week-02.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 2: R practice</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/books-links.html" class="sidebar-item-text sidebar-link" target="_blank">
@@ -348,27 +235,31 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link active" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  <li><a href="#extra-credit" id="toc-extra-credit" class="nav-link" data-scroll-target="#extra-credit">Extra credit</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignments/week-01.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignments/week-01.html">HW1</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction to Quarto</h1>
+<h1 class="title">HW1</h1>
+<p class="subtitle lead">Exploratory data analysis</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Abhijit Dasgupta </p>
-          </div>
-  </div>
     
   
     
@@ -379,10 +270,80 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>All assignments in this class will be done via <a href="https://quarto.org">Quarto documents.</a> Quarto documents are documents that combine text, code, and output, including figures. They are a great way to produce self-contained and documented statistical analyses. Quarto has support for a variety of popular programming languages for data analysis, including R and python.</p>
-<p>To get familiar with Quarto, please download <a href="../assignments/intro_to_Quarto.qmd">this Quarto template worksheet,</a> complete it, and render into a PDF. You will use this same workflow in all homeworks and projects throughout the semester.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This assignment is to be submitted as a PDF file into Canvas. All questions are worth 15 points</p>
+</div>
+</div>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>List 5 things that you might want to look for while doing exploratory data analysis</p>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>The following dataset is a simplified version of population data in the United States.</p>
+<p><img src="img/a0-data.png" class="img-fluid"></p>
+<ol type="a">
+<li>Clearly state a question you would like to address using this data (5)</li>
+<li>Sketch out (in pen/pencil and paper) two data visualizations that would help you address the question you have stated above. Draw these out, take pictures and include them below. Properly label the visualizations so that they are self-explanatory. Describe what insight you gain from each visualization. (10)</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Yes, I’m really asking you to sketch these graphs with pen and paper. Not a joke. As I was saying in class, I think data visualizations develop better with the end in mind. The software is just a tool for getting there in a pretty and reproducible manner</p>
+</div>
+</div>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p>The file <code>crabs.csv</code> provides data on fiddler crab body size in 13 marshes along the east coast of the US in 2016, along with water and air temperature data colected from monitoring programs, weather stations and ocean buoys. A description of the dataset is available in Canvas.</p>
+<ol type="a">
+<li>Pose 2 questions you would like to address using this data set, that are reflective of relationships between the available variables. (5)</li>
+<li>Using any approved software, generate one visualization per question to explore the data and get an idea about the answer to the question. (10)</li>
+</ol>
+</section>
+<section id="extra-credit" class="level2">
+<h2 class="anchored" data-anchor-id="extra-credit">Extra credit</h2>
+<p>A data set from Mother Jones provides details on 151 mass shootings in the United States. This data is a bit messy.</p>
+<ol type="1">
+<li>Identify issues with the data</li>
+<li>What questions might be interesting to ask of this data?</li>
+<li>Evaluate the completeness of the data (in other words, are there variables with a lot of missing values)</li>
+<li>Create one interesting visualization from this dataset, relevant to your questions. Make sure it “stands on its own” with proper labels and the like</li>
+<li>What other kinds of visualizations might be interesting?</li>
+</ol>
+<p>(3 points each)</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can continue to work on this dataset as an exercise to try out new concepts, or to just get more proficient at <i class="fa-brands fa-r-project" aria-label="r-project"></i>.</p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
