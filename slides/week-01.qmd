@@ -1,6 +1,7 @@
 ---
 title: Lecture 1
 subtitle: "Welcome to ENIA 5120: Data Science and Analytics"
+format: live-revealjs
 ---
 
 ## {background-image="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTZtNTE0eDF6emRtMzlnNndoaDZrcHl4eTAwdXY5d2phNnNrYXI1byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GRPy8MKag9U1U88hzY/giphy.gif"}
