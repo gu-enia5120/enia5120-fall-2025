@@ -1,6 +1,6 @@
 ---
 title: "Visualizing proportions"
-author: "Claus O. Wilke"
+author: "Abhijit Dasgupta"
 format: live-html
 engine: knitr
 webr:

@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Quarto"
-author: "Claus O. Wilke"
+author: "Abhijit Dasgupta"
 format: html
 ---
 

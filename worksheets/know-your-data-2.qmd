@@ -1,6 +1,6 @@
 ---
 title: "Getting to know your data 2"
-author: "Claus O. Wilke"
+author: "Abhijit Dasgupta"
 format: live-html
 engine: knitr
 webr:
