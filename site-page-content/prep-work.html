@@ -241,7 +241,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#week-2-september-16" id="toc-week-2-september-16" class="nav-link active" data-scroll-target="#week-2-september-16">Week 2: September 16</a></li>
-  <li><a href="#week-3-september-23" id="toc-week-3-september-23" class="nav-link" data-scroll-target="#week-3-september-23">Week 3: September 23</a></li>
+  <li><a href="#week-3-september-23" id="toc-week-3-september-23" class="nav-link" data-scroll-target="#week-3-september-23">Week 3: September 23</a>
+  <ul class="collapse">
+  <li><a href="#supplementary-materials" id="toc-supplementary-materials" class="nav-link" data-scroll-target="#supplementary-materials">Supplementary materials</a></li>
+  </ul></li>
+  <li><a href="#week-4-september-30" id="toc-week-4-september-30" class="nav-link" data-scroll-target="#week-4-september-30">Week 4: September 30</a></li>
   </ul>
 </nav>
     </div>
@@ -261,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Sunday Sep 21, 2025 at 11:34 pm</p>
+      <p class="date">Wednesday Sep 24, 2025 at 03:57 am</p>
     </div>
   </div>
   
@@ -284,9 +288,10 @@ Key
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>IMS = Introduction to Modern Statistics (2e)</li>
-<li>RDS = R for Data Science (2e)</li>
-<li>SIDS = Statistical Inference via Data Science (2e)</li>
+<li>IMS = Introduction to Modern Statistics (2e) (<a href="https://openintro-ims.netlify.app/">link</a>)</li>
+<li>RDS = R for Data Science (2e) (<a href="https://r4ds.had.co.nz/">link</a>)</li>
+<li>SIDS = Statistical Inference via Data Science (2e) (<a href="https://moderndive.com/v2/index.html">link</a>)</li>
+<li>ISLR = Introduction to Statistical Learning with R (2e) (<a href="https://www.statlearning.com/">link</a>)</li>
 </ul>
 </div>
 </div>
@@ -305,7 +310,7 @@ IMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work
 </section>
 <section id="week-3-september-23" class="level2">
 <h2 class="anchored" data-anchor-id="week-3-september-23">Week 3: September 23</h2>
-<p>This week, we will basically hold a <i class="fa-brands fa-r-project" aria-label="r-project"></i> covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.</p>
+<p>This week, we will basically hold a <i class="fa-brands fa-r-project" aria-label="r-project"></i> workshop covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.</p>
 <p>In terms of deliverables, we will not have a quiz this week, but we will have an <i class="fa-brands fa-r-project" aria-label="r-project"></i>-based homework using scaffolded code chunks and Quarto.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -322,6 +327,25 @@ Important
 <p>Then, and only then, do you try to figure out how to use the software tools to achieve that.</p>
 </div>
 </div>
+<section id="supplementary-materials" class="level3">
+<h3 class="anchored" data-anchor-id="supplementary-materials">Supplementary materials</h3>
+<ul>
+<li><p><a href="https://vita.had.co.nz/papers/tidy-data.pdf">Tidy Data</a> by Hadley Wickham</p></li>
+<li><p><a href="https://rstudio-education.github.io/hopr/basics.html">The Very Basics</a>, from Hands-On Programming with R by Garrett Grolemund (free online)</p></li>
+<li><p><a href="https://moderndive.com/3-wrangling.html">Data Wrangling</a> from ModernDive by Chester Ismay and Albert Y. Kim (free online)</p></li>
+<li><p><a href="https://csgillespie.github.io/efficientR/workflow.html">Efficient workflow</a> from Efficient R Programming by Colin Gillespie and Robin Lovelace (free online)</p></li>
+<li><p><a href="https://posit.co/resources/cheatsheets/">Posit cheatsheets</a> (especially forcats, lubridate, stringr, dplyr, ggplot2)</p></li>
+<li><p><a href="https://readr.tidyverse.org/">Data Import with readr</a> (RDS Chapter 6)</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/">Data Transformation with dplyr</a> (RDS Chapter 5)</p></li>
+<li><p><a href="https://tidyr.tidyverse.org/">Data Cleaning with tidyr</a> (RDS Chapter 4) (we will not cover this in detail this week, but you should be aware of it)</p></li>
+<li><p><a href="https://ggplot2.tidyverse.org/">Data Visualization with ggplot2</a> (RDS Chapter 3)</p></li>
+</ul>
+</section>
+</section>
+<section id="week-4-september-30" class="level2">
+<h2 class="anchored" data-anchor-id="week-4-september-30">Week 4: September 30</h2>
+<p>This week, we start exploring the world of statistical pattern recognition, and think about the kinds of models and algorithms can help us identify patterns in data. We’ll start distinguishing between explanatory and predictive modeling, and think about the kinds of questions we can answer with models. We’ll also distinguish between unsupervised and supervised learning.</p>
+<p><strong>Reading:</strong> 1. A fundamental paper to understand how to think about models: <a href="https://www.stat.berkeley.edu/~breiman/TwoCultures.pdf">The Two Cultures</a> by Leo Breiman. This is a must-read for the class, and for anyone interested in data science. 1. IMS Chapter 10 1. What is Statistical Learning? (ISLR Chapter 2.1, book available <a href="https://www.statlearning.com/">here</a>)</p>
 
 
 </section>
