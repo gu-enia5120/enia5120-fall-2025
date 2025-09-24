@@ -1,0 +1,83 @@
+---
+title: "Brackets in R"
+execute:
+  echo: true
+  warning: false
+  error: false
+  message: false
+  eval: false
+---
+
+There are three kinds of brackets in R
+
+
+### `[]` are used for extracting elements from arrays, matrices, data frames.
+
+::: {.panel-tabset}
+
+## Arrays
+
+- `x[3]` is the 3rd element of an array `x`
+- `d[1,3]` is the element in the 1st row and 3rd column of a matrix/data frame `d`
+- `d[2,]` is the entire first __row__ of a matrix/data frame `d`
+- `d[,4]` is the entire 4th __column__ of a matrix/data frame `d`
+- `d[,'gender']` is the column named _gender_ in a _data frame_ `d`
+
+## Lists
+
+To extract single elements, you use a .acidinline[double bracket:]
+- `lst[[3]]` is the third element of the list `lst`
+- `lst[['apple']]` is the element named _apple_ in a named list `lst`
+
+To extract a sub-list, you use .acidinline[single brackets]:
++ `lst[1:3]` creates a sub-list with the first 3 elements of `lst`
+:::
+
+
+### `()` are used for specifying arguments to functions
+
+- `mean(x)` gives the mean of an array of numbers `x`
+- `summary(d)` gives a summary representation of a data frame `d`
+- There are several functions used to make the following visualization
+
+```{r, eval=F}
+ggplot(beaches, aes(x = temperature, y = rainfall)) + 
+  geom_point() + 
+  geom_smooth() + 
+  theme_classic()
+```
+
+
+### `{}` are used to contain groups of commands/statements
+
+:::: {.columns}
+::: {.column}
+A conditional statement
+
+```{r Rintro-1, eval = F}
+if (age < 18){
+   person <- 'Minor'
+} else if (age > 65) {
+  person <- 'Senior'
+} else {
+  person <- 'Adult'
+}
+```
+:::
+::: {.column}
+A function definition
+
+```{r}
+
+my_mean <- function(x, na.rm = T){
+  if(na.rm){
+    x <- x[!is.na(x)]
+  }
+  s <- sum(x)
+  n <- length(x)
+  mn <- s / n # There is a built-in function mean, so I don't use that word
+  return(mn)
+}
+```
+:::
+::::

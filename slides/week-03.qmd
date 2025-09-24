@@ -1,27 +1,6 @@
 ---
 title: "Lecture 3"
 subtitle: "An introduction to R"
-format: 
-  live-revealjs:
-    theme: ['default', 'clean.scss']
-    highlight-style: "a11y"
-    toc: false
-    code-fold: false
-    code-overflow: scroll
-    code-copy: true
-    scrollable: true
-    fig-align: center
-    fig-dpi: 300
-    fig-width: 8
-    fig-asp: 0.618
-    fig-cap-location: bottom
-    slide-level: 2
-    slide-number: c/t
-    margin: 0.1
-    view-distance: 3
-    link-external-newwindow: true
-
-
 webr:
     packages:
       - tidyverse
@@ -30,6 +9,8 @@ webr:
       - palmerpenguins
 resources:
   - data
+revealjs-plugins:
+  - attribution
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
@@ -61,6 +42,10 @@ resources:
 
 ![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/d6b4f8cb-53bf-49d5-822c-e45cd01204a4_rw_1200.png?h=8dd8a9af5a2104fb34f4c391a260a2e3){width="40%" style="float: right; margin-left: 1em;"}
 
+::: aside
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
+:::
+
 ## Trying to figure it out
 
 :::: {.columns}
@@ -73,13 +58,15 @@ resources:
 :::
 ::: {.column width="50%"}
 
-![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1200.png?h=4812a536b27c1674bfd8962b1ce4ea87){height="80"}
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1200.png?h=4812a536b27c1674bfd8962b1ce4ea87){height="500"}
 
 :::
 :::: 
 
 ::: aside
 A lot of this advice comes from [R for Political Science Research](https://a.co/d/34I21mN) by Jane L. Sumner (might be available through the GU library)
+
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
 :::
 
 ## What is coding?
@@ -203,6 +190,10 @@ where dataset is the name of the data.frame whose column names you want to clean
 
 ## Cleaning names (to maintain sanity and typing efficiency) {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/79a12c01-0cc1-4643-b1e7-8ce8cafc947b_rw_1200.png?h=4136fa7e5c95e6d8e4b3a35faaebd082" background-size="contain" background-repeat="no-repeat" background-position="center:center"
 }
+::: aside
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
+:::
+
 
 
 ## Cleaning names (to maintain sanity and typing efficiency)

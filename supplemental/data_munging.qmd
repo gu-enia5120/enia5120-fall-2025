@@ -1,0 +1,14 @@
+---
+title: "Additional resources for data munging"
+format: html
+---
+
+## My slides and blogs
+
+1. Slightly dated slides from the class **Practical R** that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: <https://www.araastat.com/BIOF339/slides/index.html>
+    - The slides on Data Structures and the Week 2 material will be particularly useful for you.
+
+> Rmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today. 
+
+
+
