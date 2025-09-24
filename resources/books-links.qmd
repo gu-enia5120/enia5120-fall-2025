@@ -11,10 +11,23 @@ format: html
 2. R for Data Science (2e) by Hadely Wickham, Mine Cetinkaya-Rundel and Garret Grolemund (2025). <https://r4ds.hadley.nz/>
 3. Statistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). <https://moderndive.com/v2/index.html>
 
-# Books
 
+# {{< fa brands r-project >}} and R-related books
+
+1. Hands-On Programming with R by Garrett Grolemund (2014). <https://rstudio-education.github.io/hopr/>
+
+
+## Cheatsheets
+
+1. [Getting started with R](https://media.datacamp.com/legacy/image/upload/v1697642178/Marketing/Blog/R_Cheat_Sheet_PNG_1.pdf){target="_blank"} from DataCamp
+2. [Various high-quality cheatsheets](https://posit.co/resources/cheatsheets/){target="_blank"} from Posit
+
+
+# Books
 ## Data science books
 
+1. Introduction to Statistical Learning with R (2e) by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani (2021). <https://www.statlearning.com/>
+1. Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition by Trevor Hastie, Robert Tibshirani, and Jerome Friedman (2009). <https://hastie.su.domains/ElemStatLearn/>
 1. Introduction to Environmental Data Science by Jerry Davis (2025). <https://bookdown.org/igisc/EnvDataSci/>
 2. Tidy Modeling with R by Max Kuhn and Julia Silge (2023). <https://www.tmwr.org/>
 3. Geocomputation with R by Robin Lovelace, Jakub Nowosad and Jannes Muenchow (2025). <https://r.geocompx.org/>

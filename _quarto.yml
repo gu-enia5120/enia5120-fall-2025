@@ -18,8 +18,12 @@ website:
   page-navigation: false
   title: ENIA 5120
   search: true
-  # navbar:
-  #   right:
+  navbar:
+    right:
+      - text: "Supplemental"
+        menu:
+          - href: supplemental/brackets.qmd
+          - href: supplemental/data_munging.qmd
   #       - text: "Worksheets"
   #         menu:
   #           - text: "Introduction to Quarto"
@@ -155,8 +159,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, style/html-sta313.scss]
-      dark: [cosmo, style/html-sta313.scss, style/html-dark.scss]
+      light: [cosmo, style/html-sta313.scss, style/sfah.scss]
+      dark: [cosmo, style/html-sta313.scss, style/html-dark.scss, style/sfah.scss]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
     code-copy: true

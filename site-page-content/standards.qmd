@@ -11,29 +11,36 @@ Violation of these guidelines will result in an automatic deduction of 1 grade s
 
 ## Code
 
-
-## Rendered output (PDF, html, etc.)
-
-- Code should be folded, and not echoed
-- Code quality
-	- Code should be styled/linted using styler/lintr in R 
-	- Comments should be present as needed to explain which code chunks are doing what
+- Code should be commented as needed to explain what is being done
+- Code should be styled using styler/lintr in R
 - No warnings or messages should be visible in the final report
-- All output should be formatted. **No raw output**. Use the capabilities of R and Quarto to achieve this.
-	- In particular,  consider Rich Iannone's work around `gt`.
+- No packages should be installed in the code (You should never include code to install packages in a Quarto document)
+
+## Homework submissions (Quarto documents)
+
+- The code standards above apply
+- All code should be visible and not folded, unless otherwise specified
+- Any visualizations should be properly annotated, with no variable names visible
 - All text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)
+
+### After Homework 5:
+
+- All output should be formatted after Homework 5. **No raw output**. Use the capabilities of R and Quarto to achieve this.
+	- In particular,  consider Rich Iannone's work around the **gt** package.
 - All plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions
 - Pages with multiple topical sections should also contain a table of contents, either fixed or floating
 - References should be clearly cited and there should be a reference list on the page where the reference is made.
+- If you are using code from other sources (e.g., Stack Overflow, GitHub, etc.), you should provide a reference to the source in a comment in the code
+- Any use of AI tools (e.g., ChatGPT, Bard, etc.) should be clearly indicated in a comment in the code
 
-## Use of `git`
 
-'git' is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.
+## Final reports (PDF, html, etc.)
 
-- You **must** use git commands to add files to your repositories on your machine. This includes `git clone`, `git pull`, `git push`, `git add` and `git commit`.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you.  **You cannot manually upload files to your repositories on GitHub.**
-- We expect to see several commits in all your work. This is important for several reasons:
-	- It shows the progress in your work
-	- It helps you revert back to a prior "snapshot" of your work in case anything goes wrong. Murphy's law says that if something can go wrong, it will.
-	- Generally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.
+- All guidelines for homework submissions after Homework 5 apply
+- Code should be folded, and not echoed
+	- No code should be visible in the final report
+- All figures and tables should be numbered and have self-explanatory captions
+- There should be a reference list at the end of the document
+- Either the raw Quarto file or all the code used to generate the report should be submitted as an appendix to the final report. This should be properly formatted and commented code that can be run to generate the data-drive artufacts (tables, figures, etc.) in the report
 
-See <https://happygitwithr.com> for a nice data science centric approach to git.
+

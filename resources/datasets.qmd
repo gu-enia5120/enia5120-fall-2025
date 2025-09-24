@@ -17,7 +17,8 @@ Below are curated, high-quality, and free data sets suitable for your course. Th
 
 ### 1. Environmental Data Sets
 
-[Open repo of ecological data for use in teaching](https://www.seascapemodels.org/rstats/2025/06/10/open-access-data-for-teaching.html)
+- [Open repo of ecological data for use in teaching](https://www.seascapemodels.org/rstats/2025/06/10/open-access-data-for-teaching.html)
+- [Top five(ish) sources of ecological data](https://www.rforecology.com/post/top-five-ish-sources-of-ecological-data/)
 
 ### Global and Regional Environmental Data
 
