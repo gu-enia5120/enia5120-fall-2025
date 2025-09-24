@@ -1,6 +1,7 @@
 ---
 title: "Project overview"
 date: last-modified
+format: html
 ---
 
 # Introduction
@@ -33,7 +34,7 @@ The final submission will involve a narrative like a policy report or a policy p
 
 As a component of the final submission, you will give a 10 to 15 minute presentation in class on **Tuesday, December 9**. This will provide an opportunity for you to showcase your work and to receive feedback from peers and the instructor. This presentation can be written in PowerPoint,or preferably, using Quarto. This presentation will summarize the report that you will submit in a manner that highlights the salient points from your analysis and the main threads of your narrative.
 
-All products should meet the minimum requirements explained [here](site-page-content/standards.qmd).
+All products should meet the minimum requirements explained [here](../site-page-content/standards.qmd).
 
 # Grading
 
