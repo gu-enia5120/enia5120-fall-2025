@@ -5,7 +5,7 @@ execute:
   freeze: auto
 
 format:
-  revealjs:
+  live-revealjs:
     theme: ['default', 'clean.scss']
     highlight-style: "a11y"
     toc: false
@@ -27,12 +27,6 @@ format:
     link-external-newwindow: true
   # smaller: true
 
-filters:
-  - tachyons
-  - roughnotation
 
 lightbox: auto
 engine: knitr
-
-revealjs-plugins:
-  - attribution
