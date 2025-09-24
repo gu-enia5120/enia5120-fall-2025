@@ -7,6 +7,7 @@ toc: true
 page-layout: full
 execute:
   freeze: false
+format: html
 ---
 
 **This course website was last rendered {{< now "on %a %b %d, %Y at %I:%M %p" >}}.**
