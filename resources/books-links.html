@@ -39,16 +39,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0957ca8a0d0f386f36afdadbbb993762.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-6745840605051657264742256cd953f6.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e839936bf2ca2a71024ecfeea4518ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f7d3f2f3aee4f04dbc530767b7fca687.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -74,10 +74,45 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ENIA 5120</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-supplemental" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Supplemental</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-supplemental">    
+        <li>
+    <a class="dropdown-item" href="../supplemental/brackets.html">
+ <span class="dropdown-text">Brackets in R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../supplemental/data_munging.html">
+ <span class="dropdown-text">Additional resources for data munging</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -90,17 +125,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="../">ENIA 5120</a> 
-        <div class="sidebar-tools-main">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-</div>
-    </div>
-      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -242,6 +269,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#required-materials" id="toc-required-materials" class="nav-link active" data-scroll-target="#required-materials">Required materials</a></li>
+  <li><a href="#and-r-related-books" id="toc-and-r-related-books" class="nav-link" data-scroll-target="#and-r-related-books"><i class="fa-brands fa-r-project" aria-label="r-project"></i> and R-related books</a>
+  <ul class="collapse">
+  <li><a href="#cheatsheets" id="toc-cheatsheets" class="nav-link" data-scroll-target="#cheatsheets">Cheatsheets</a></li>
+  </ul></li>
   <li><a href="#books" id="toc-books" class="nav-link" data-scroll-target="#books">Books</a>
   <ul class="collapse">
   <li><a href="#data-science-books" id="toc-data-science-books" class="nav-link" data-scroll-target="#data-science-books">Data science books</a></li>
@@ -296,11 +327,24 @@ ul.task-list li input[type="checkbox"] {
 <li>Statistical Inference via Data Science (2e) by Chester Ismay, Albert Y. Kim and Arturo Valdivia (2025). <a href="https://moderndive.com/v2/index.html" class="uri">https://moderndive.com/v2/index.html</a></li>
 </ol>
 </section>
+<section id="and-r-related-books" class="level1">
+<h1><i class="fa-brands fa-r-project" aria-label="r-project"></i> and R-related books</h1>
+<ol type="1">
+<li>Hands-On Programming with R by Garrett Grolemund (2014). <a href="https://rstudio-education.github.io/hopr/" class="uri">https://rstudio-education.github.io/hopr/</a></li>
+</ol>
+<section id="cheatsheets" class="level2">
+<h2 class="anchored" data-anchor-id="cheatsheets">Cheatsheets</h2>
+<ol type="1">
+<li><a href="https://media.datacamp.com/legacy/image/upload/v1697642178/Marketing/Blog/R_Cheat_Sheet_PNG_1.pdf" target="_blank">Getting started with R</a> from DataCamp</li>
+<li><a href="https://posit.co/resources/cheatsheets/" target="_blank">Various high-quality cheatsheets</a> from Posit</li>
+</ol>
+</section>
+</section>
 <section id="books" class="level1">
 <h1>Books</h1>
 <section id="data-science-books" class="level2">
 <h2 class="anchored" data-anchor-id="data-science-books">Data science books</h2>
-<ol start="4" type="1">
+<ol type="1">
 <li>Introduction to Statistical Learning with R (2e) by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani (2021). <a href="https://www.statlearning.com/" class="uri">https://www.statlearning.com/</a></li>
 <li>Elements of Statistical Learning: Data Mining, Inference, and Prediction, Second Edition by Trevor Hastie, Robert Tibshirani, and Jerome Friedman (2009). <a href="https://hastie.su.domains/ElemStatLearn/" class="uri">https://hastie.su.domains/ElemStatLearn/</a></li>
 <li>Introduction to Environmental Data Science by Jerry Davis (2025). <a href="https://bookdown.org/igisc/EnvDataSci/" class="uri">https://bookdown.org/igisc/EnvDataSci/</a></li>
