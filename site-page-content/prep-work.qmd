@@ -2,6 +2,7 @@
 title: Weekly Class Preparation
 date: last-modified
 date-format: "dddd MMM D, YYYY [at] hh:mm a"
+format: html
 ---
 
 ::: {.callout-note}
@@ -11,7 +12,7 @@ date-format: "dddd MMM D, YYYY [at] hh:mm a"
 - SIDS = Statistical Inference via Data Science (2e)
 :::
 
-## Week 2: September 17
+## Week 2: September 16
 
 **Reading:**   
 IMS Chapters 1, 3, 4-6. I don't expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty
@@ -29,3 +30,24 @@ exploratory data analysis. So please ensure that you have access to {{< fa brand
 with a limited vocabulary and grammar. 
 
 There will be **a quiz** this week, to familiarize yourselves with the syllabus. We will have a **homework** and labs this week to help you acclimatize to {{< fa brands r-project >}}
+
+## Week 3: September 23
+
+This week, we will basically hold a {{< fa brands r-project >}} covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these 
+chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then
+address questions around the code and how you might achieve something you want to do. 
+
+In terms of deliverables, we will not have a quiz this week, but we will have an {{< fa brands r-project >}}-based homework using scaffolded code chunks and Quarto. 
+
+::: callout-important
+Philosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So 
+I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To 
+quote Stephen Covey, _"Begin with the End in Mind"_. 
+
+[What is primary is what you want to achieve with the data]{style="color:red;"}. 
+
+Then, and only then, do you try to figure out how to use the software tools to achieve that. 
+:::
+
+
+
