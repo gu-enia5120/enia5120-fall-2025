@@ -1,6 +1,7 @@
 ---
 title: "Free datasets for EIA"
 date: last-modified
+format: html
 ---
 
 ::: callout-note

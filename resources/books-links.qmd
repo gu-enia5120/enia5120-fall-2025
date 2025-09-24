@@ -1,6 +1,7 @@
 ---
 title: "Books and other online resources"
 date: last-modified
+format: html
 ---
 
 # Required materials
