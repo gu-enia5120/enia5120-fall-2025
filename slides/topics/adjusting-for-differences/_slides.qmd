@@ -1,0 +1,113 @@
+# Adjusting for different audiences
+
+##
+::: {.f2 .ba .bw2 .br3 .ph4 .mt4 .b--dark-blue .bg-washed-blue}
+Readers who land on your visualization may not have the same luxury of developing and answering questions like you did.
+
+Your audience wants to know the story, conclusions, and/or results; they don't want to analyze the data - that's your job!
+:::
+
+
+## You MUST care about your different audiences
+
+![](https://media.giphy.com/media/l2YWAC4zYseVWIh8I/giphy.gif){fig-align="center" height="250"}
+
+:::: {.columns}
+::: {.column width="50%"}
+### Visualization for Analysis
+
+* visualizations for you and your team
+* team and audience knows context
+* tool for understanding datasets
+* iterate quickly to develop insights
+* rough drafts
+* can make changes later
+:::
+
+::: {.column width="50%"}
+### Visualization for Presentation
+
+* audience external to you and team
+* content is likely new and audience has no context
+* designed to communicate useful information
+* takes significant more time
+* publication ready
+:::
+::::
+
+## Nathan Yau's four ways to adjust for these differences
+
+1. Explain the encodings
+1. Provide context
+1. Focus on readability
+1. Develop aesthetics
+
+
+
+## Explain the encodings
+
+For example: what scale are you using? What does that color represent? Is this normal?
+
+It’s better to err on the side of too much explanation than it is too little. At least with the former, people can gloss over the details if they’re already familiar. They can still read the chart. With the latter, people who are unfamiliar with the visual encodings will get stuck.
+
+:::: {.columns}
+::: {.column width="50%"}
+![](https://flowingdata.com/wp-content/uploads/2020/03/Rank-of-populous-cities-1090x754.png)
+:::
+
+::: {.column width="50%"}
+![](https://flowingdata.com/wp-content/uploads/2020/03/annotation-750x484.png)
+:::
+::::
+
+::: {.aside}
+The Statistical Atlas of the United States, produced in the late 1800s by the Census Bureau, explained all of the encodings. For example, look at this bump chart from the 1880 atlas. It ranks cities by population.
+:::
+
+
+## Provide context
+
+When readers can decode the shapes, colors and geometries on your chart, you are more than half way there to producing an awesome chart. However, **readers also need to understand the context of the data.**
+
+![](https://flowingdata.com/wp-content/uploads/2019/03/Texting-history-750x629.png){fig-align="center" height=500}
+
+
+
+## Another context example
+
+![](https://flowingdata.com/wp-content/uploads/2017/10/Heart-rate-during-layoff-720x425.png){fig-align="center" height=500}
+
+
+## Improve readability
+
+Charts should read like text. When combining the data, design, and context, it should be obvious what the chart is about and how to interpret it.
+
+::: {layout-ncol="2"}
+
+:::{.fragment}
+![From this](https://flowingdata.com/wp-content/uploads/2020/07/flat-750x525.png)
+:::
+
+:::{.fragment}
+![To this](https://flowingdata.com/wp-content/uploads/2020/07/organized-750x525.png)
+:::
+
+:::
+
+
+## Develop aesthetics (a visual style, not ggplot's `aes()`)
+
+Default setting in the tools are generic and designed in such a way that they would work with many datasets and visualization types. You can, and you should develop _aesthetics_ to make your charts less ugly.
+
+![](https://flowingdata.com/wp-content/uploads/2015/10/Feltron-Report-1090x681.jpg){fig-align="center" height=500}
+
+## Using these guidelines
+
+* They’re more _continuous_ than _absolute_. Your charts may need more or less explanations, more or less context, etc.
+
+* Depends on your audience and the purpose behind your chart:
+  * If your audience is a small group who has the same background as you, then you might not need to provide as much context for the data you show.
+  * If your audience is already excited about a dataset, then you probably don’t need to make it too flashy.
+  * If you make charts for a research paper, there are probably publisher guidelines that you need to follow, which limits what you can do (sometimes a good thing).
+
+* Think of the above adjustments as _continuous knobs_ that you can turn up or down. The more charts you make, the better you’ll get at deciding how much to turn.

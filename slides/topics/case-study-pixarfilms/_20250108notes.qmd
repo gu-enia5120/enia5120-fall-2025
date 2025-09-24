@@ -1,0 +1,21 @@
+## Questions to answer
+
+These were the questions brought up in the 1/8 discussion:
+
+- Was there a relationship between budget and box office?
+- How have the production budgets have changed over time?
+- Are certain genres more prevalent over time?
+- Is there a relationship between the rating of a film and box office?
+- What is the relationship between production cost and rating?
+- What is the relationship between critic ratings and film genre?
+- The number of infamous people associated with each film vs. critic rating
+
+::: {.callout-note}
+Are all of these real questions?
+:::
+
+Let's apply Munzner's framework to all of them and build an "instance" (or more) for each one:
+
+- [What? (data the user sees)]{.red}
+- [Why? (the task the user is performing )]{.yellow}
+- [How? (the methods)]{.green}

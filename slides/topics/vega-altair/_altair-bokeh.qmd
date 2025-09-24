@@ -1,0 +1,224 @@
+# Altair
+
+
+
+## Comparing Altair to Plotly {.smaller}
+
+* **D3:** Both are plotting libraries based un underlying javascript libraries. Plotly creates objects for `plotly.js`. Altair is a wrapper around `VegaLite.js` which in turn in based on `Vega.js`. Both are based on the D3 visualization library.
+
+* **High level:** Altair is a high level declarative library (as is Plotly) which means you express yourself in terms of data and relationships (like in `seaborn` and `ggplot`) rather than in tems of lower level plotting mechanics (like in `matplotlib` and `bokeh`.)
+
+* **Syntax:** `Plotly's` syntax is focused more on having individual functions for each plot and then each of those individual functions take several parameters to control their behavior. In contrast, `altair's` syntax focuses on haveing a graphical grammar where you compose charts from the individual graphical grammar units.
+
+* **Interactivity:** both are very capable and can create multipanel layouts of plots that are linked together via interactions, such as filter or hovering events that update other plots. Altair has an interaction grammar which allows you to compose interactions between widgets and plots (similar to the grammar of graphics.)
+
+<https://stackoverflow.com/questions/59845407/plotly-express-vs-altair-vega-lite-for-interactive-plots>
+
+## What do you need to make an Altair plot?
+
+### Required
+
+* Data: the data used for the visualization (analogous to `data` in `ggplot`)
+* Marks: how would you like the data to be visualized (analogous to `geom_*` in `ggplot`)
+* Visual channel/encoding: what data attribute gets mapped to an encoding (analogous to `aes()` in `ggplot`)
+
+### Optional
+
+* Transform
+* Scale
+* Guide
+
+## Practical considerations for the data {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+### Supported data sources
+* Pandas DataFrame
+* Data or related object (i.e. UrlData, InlineData, NamedData)
+* Url string pointing to a json or csv formatted text file
+
+The data must be serializable to JSON
+
+::: {.callout-warning appearance='simple'}
+Altair has a 5,000 row limit for the data.
+:::
+:::
+::: {.column width="50%"}
+### Considerations
+* If you would like the index to be available to the chart, you can explicitly turn it into a column using the `reset_index()` method of Pandas dataframes
+* The documentation says that Altair works best with _long data_. However that definition is somewhat incorrect. What they mean by long data is actually _Tidy Data_ (one row per observation of the unit of analysis)
+* Altair has a built-in transformation called `transform_fold` which reshapes data
+* Given the data size limit, consider pre-processing (aggregating, etc) before you create a plot
+:::
+::::
+
+## Other practical considerations
+
+* Altair's API exposes all of the functionality from VegaLite
+* Altair is best written in a pipe style, akin to tidyverse pipelines. In Python, the "pipe operator" is the . (dot/full stop). Also, to ensure that pipeline is recognized over multiple lines, it is _encapsulated in parentheses_
+* The order of the methods doesn't matter (as long as you specify data, marks and encodings)
+* You can layer by specifying a base graph with one set of encodings (i.e. the x axis) and you don't need to repeat it in later layers (analogous to layer inheritance in ggplot)
+* The default size display for Altair plots is too small for revealjs slides
+
+
+## Altair examples
+
+Let's use some data about LEGO sets over time. The source of this data is from [Rebrickable](https://rebrickable.com/) and has been prepared by prof. Vaisman. This is a set of summary statistics by year.
+
+```{python}
+#| cache: false
+#| label: "lego"
+import pandas as pd
+import altair as alt
+import numpy as np
+
+alt.renderers.enable("html")
+
+lego_stats = pd.read_parquet(
+    "https://github.com/anly503/datasets/raw/main/year_stats_tbl.parquet"
+)
+lego_stats.head()
+```
+
+## Altair syntax (and first plot)
+
+Let's look at the number of LEGO sets over time. A LEGO set can be not only the boxed sets (collection of bricks and minifigs), but also gear (merch), books, and special collections.
+
+```{python}
+# | echo: true
+# | code-fold: false
+# | output-location: column
+(
+    alt.Chart(lego_stats)
+    .mark_bar()  # defines a bar plot
+    .encode(x="set_year", y="total_set_ct:Q")
+    # sets the visual encodings/aesthetics
+)
+```
+
+It's an OK plot. Let's clean it up.
+
+## Format axis and add titles {auto-animate=true}
+
+```{python}
+# | echo: true
+# | code-fold: false
+# | output-location: column
+(
+    alt.Chart(lego_stats)
+    .mark_bar()
+    .encode(
+        alt.X("set_year", title="Year", axis=alt.Axis(format="0f")),
+        alt.Y("total_set_ct:Q", title="Number of sets"),
+    )
+    .properties(title="LEGO sets 1950-2022")
+)
+```
+
+## Change the color of the bars and round the corners {auto-animate=true}
+
+```{python}
+# | echo: true
+# | code-fold: false
+# | output-location: column
+(
+    alt.Chart(lego_stats)
+    .mark_bar(fill="darkgrey", cornerRadius=5)
+    .encode(
+        alt.X("set_year", title="Year", axis=alt.Axis(format="0f")),
+        alt.Y("total_set_ct:Q", title="Number of sets"),
+    )
+    .properties(title="LEGO sets 1950-2022")
+)
+```
+
+
+## Layers {auto-animate=true}
+
+```{python}
+# | echo: true
+# | code-fold: false
+# | output-location: column
+
+
+(
+    # layer 1
+    alt.Chart(lego_stats)
+    .mark_bar(fill="darkgrey", cornerRadius=5)
+    .encode(
+        alt.X("set_year", title="Year", axis=alt.Axis(format="0f")),
+        alt.Y("total_set_ct:Q", title="Units"),
+    )
+    .properties(title="LEGO sets 1950-2022")
+    +
+    # layer 2 (median)
+    alt.Chart(lego_stats)
+    .mark_line(color="darkblue")
+    .encode(alt.X("set_year"), alt.Y("q50:Q"))
+    +
+    # layer 3
+    alt.Chart(lego_stats)
+    .mark_line(color="darkred")
+    .encode(alt.X("set_year"), alt.Y("mean_parts_qty:Q"))
+)
+```
+
+## Make it interactive {auto-animate=true}
+
+
+```{python}
+# | echo: true
+# | code-fold: false
+# | output-location: column
+
+(
+    # layer 1
+    alt.Chart(lego_stats)
+    .mark_bar(fill="darkgrey", cornerRadius=5)
+    .encode(
+        alt.X("set_year", title="Year", axis=alt.Axis(format="0f")),
+        alt.Y("total_set_ct", title="Units"),
+    )
+    .properties(title="LEGO sets 1950-2022")
+    +
+    # layer 2 (median)
+    alt.Chart(lego_stats)
+    .mark_line(color="darkblue")
+    .encode(alt.X("set_year"), alt.Y("q50"))
+    +
+    # layer 3
+    alt.Chart(lego_stats)
+    .mark_line(color="darkred")
+    .encode(alt.X("set_year"), alt.Y("mean_parts_qty"))
+).interactive()
+```
+
+## [vegabrite](https://vegawidget.github.io/vegabrite/index.html)
+
+`vegabrite` is a R package that wraps the Vega-Lite API in {{< fa brands r-project >}}. It basically helps build a plot using the Vega-Lite API 
+This is probably our preferred way of developing Vega-Lite graphics in {{< fa brands r-project >}}.
+```{r}
+#| code-fold: false
+
+library(arrow)
+library(vegabrite)
+lego_stats = read_parquet(
+    "https://github.com/anly503/datasets/raw/main/year_stats_tbl.parquet"
+)
+
+vl_chart() |> 
+  vl_add_data(lego_stats) |> 
+  vl_mark_bar(fill = 'darkgrey') |> 
+  vl_encode(x = "set_year", y = "total_set_ct:Q") |>
+  vl_axis_x(title = "Year", format = "0f") |>
+  vl_axis_y(title = "Total number of sets")
+
+```
+## vegabrite
+
+The `vegabrite` example gallery provides several examples that translate the visualizations present in the Vega-Lite gallery. In particular:
+
+1. [Interactive controls](https://vegawidget.github.io/vegabrite/articles/example_gallery.html#interactive)
+1. [Facets](https://vegawidget.github.io/vegabrite/articles/example_gallery.html#faceting-small-multiple)
+1. [Interactive splom](https://vegawidget.github.io/vegabrite/articles/example_gallery.html#interactive-multiple-view)
+

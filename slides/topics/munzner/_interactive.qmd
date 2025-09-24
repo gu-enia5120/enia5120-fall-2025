@@ -1,0 +1,241 @@
+## A static multi-viewpoint approach
+
+- We're quite familiar with this
+  - facets, scatterplot matrices
+  - layered graphics
+
+::: {.bl .b--blue .ph3 .bw3 .f3 .calisto}
+- This can get quite muddy, depending on how many things we're trying to compare
+- This typically shows aggregate or overall patterns, which can be misleading
+  - We can't separate out individual observations from the whole
+  - We can't see the which points correspond to the same observations
+:::
+
+# Making sense in a cluttered visualization
+
+::: {.notes}
+We had seen this spaghetti plot earlier. We can use interactivity to **select** particular trajectories and identify the corresponding cities. We'll see the reverse in a bit, when we can **filter** the cities to highlight them.
+:::
+
+:::: {.columns}
+
+::: {.column width="75%"}
+
+```{r}
+#| code-fold: true
+#| cache: false
+library(plotly)
+data(txhousing, package = "ggplot2")
+tx <- highlight_key(txhousing, ~city)
+base <- plot_ly(tx, color = I("black")) %>% 
+  group_by(city)
+time_series <- base |> 
+  group_by(city) |> 
+  add_lines(x = ~date, y = ~median) |> 
+  layout(
+    title = "Housing prices in Texas",
+    xaxis = list(title = ""),
+    yaxis = list(title = "Median house price ($)"),
+    width = 800,
+    height=500
+  )
+highlight(
+  time_series,
+  on = "plotly_click",
+  selectize=TRUE,
+  dynamic=TRUE,
+  persistent=TRUE
+)
+```
+
+:::
+
+::: {.column width="25%"}
+We had seen this spaghetti plot earlier. We can use interactivity to **select** particular trajectories and identify the corresponding cities. We'll see the reverse in a bit, when we can **filter** the cities to highlight them.
+:::
+::::
+
+```{r}
+#| include: false
+#| cache: false
+ojs_define(tx = txhousing)
+```
+
+## Introducing Vega-Lite/Altair
+
+```{ojs}
+//| include: false
+import {vl} from "@vega/vega-lite-api-v5"
+```
+
+:::: {.columns}
+
+::: {.column width="47%"}
+::: {.panel-tabset}
+## Vega-Lite
+```{{ojs}}
+txhousing = transpose(tx)
+{
+txhousing = transpose(tx)
+selection = vl.selectPoint();
+
+viewof line=vl.markLine()
+  .data(txhousing)
+  .params(selection)
+  .encode(
+    vl.x().fieldQ('date').axis({format:"d"}),
+    vl.y().fieldQ("median").axis({format: "$d", title: "Median house price"}),
+    vl.detail().fieldN("city"),
+    vl.opacity().if(selection, vl.value(0.8)).value(0.1),
+    vl.tooltip().fieldN("city")
+)
+  .width(400)
+  .height(300)
+  .render()
+
+}
+```
+
+## Altair
+
+```{{python}}
+import altair as alt
+import pandas as pd
+from rdatasets import data
+txhousing = data('ggplot2','txhousing')
+alt.data_transformers.disable_max_rows()
+
+selection = alt.selection_single(on='mouseover', nearest=True)
+alt.Chart(txhousing).mark_line().encode(
+  x = "date",
+  y = "median",
+  detail = "city",
+  opacity = alt.condition(selection,0.8, alt.value(0.1))
+  tooltip = "city"
+).add_selection(
+  selection
+)
+
+
+
+```
+
+:::
+
+
+:::
+
+::: {.column width="47%"}
+```{ojs}
+//| echo: false
+//| out-width: "100%"
+//| out-height: "100%"
+txhousing = transpose(tx)
+selection = vl.selectPoint();
+
+viewof line=vl.markLine()
+  .data(txhousing)
+  .params(selection)
+  .encode(
+    vl.x().fieldQ('date').axis({format:"d"}),
+    vl.y().fieldQ("median").axis({format: "$d", title: "Median house price"}),
+    vl.detail().fieldN("city"),
+    vl.opacity().if(selection, vl.value(0.8)).value(0.1),
+    vl.tooltip().fieldN("city")
+)
+  .width(400)
+  .height(300)
+  .render()
+
+```
+
+[Full size](https://observablehq.com/d/5e508cf0e75b9a8a)
+:::
+
+::::
+
+Vega-Lite/Altair work better with linked plots and some interactions
+
+Note that you might be better directly dealing with Vega-Lite, since Altair imposes a somewhat artificial limit on the number of rows in your dataset
+
+
+# Interactivity and multiple views
+
+## 
+
+::: {.bl .bw3 .pa3 .b--blue .f2 .calisto}
+A graphic is not ‘drawn’ once and for all; it is ‘constructed’ and reconstructed until it reveals all the relationships constituted by the interplay of the data. The best graphic operations are those carried out by the decision-maker themselves.
+
+::: {.tr .f3}
+-- Jacques Bertin
+:::
+:::
+
+## Hotels and multiple views
+
+![](munzner-interactive/images/clipboard-1991562879.png)
+
+## Hotels and multiple views
+
+![](munzner-interactive/images/clipboard-220436782.png)
+
+## Hotels and multiple views
+
+![](munzner-interactive/images/clipboard-3314970740.png)
+
+## Hotels and multiple views
+
+![](munzner-interactive/images/clipboard-1745432720.png)
+
+## Re-arrange views to make sense ...
+
+![](munzner-interactive/images/clipboard-1961952212.png)
+
+## and interpret
+
+![](munzner-interactive/images/clipboard-3601652703.png)
+
+## and interpret
+
+![](munzner-interactive/images/clipboard-833236804.png)
+
+## Aspects of change
+
+::: aside
+Tamara Munzner: *Visual Analysis and Design*
+:::
+
+::: notes
+There are multiple ways to change your viewpoint. These include looking at different idioms, re-ordering categories, filtering, zooming, etc.
+:::
+
+-   Change the idioms
+-   Change parameters for idioms
+-   Ordering or choice of spatial arrangement
+-   Using different visual channels
+    -   color, size, shape, orientation, etc.
+-   Level of aggregation
+-   Data partitions
+-   Zooming in and out
+
+::: callout-note
+There is a large variety of attributes that you can change in a visualization. The choice of which to change depends on the data and the story you want to tell. We also consider the transition effects from one choice to the next, to make the transitions less jarring
+:::
+
+## Multiple views and interactivity
+
+-   Recall the three blind men and the elephant
+-   You're trying to shift your viewpoint (your camera, so to speak) so that you can get different and perhaps more complete views of your data
+    -   Data today is sufficiently rich and complex that a single view cannot do it justice. You either miss things or make things so cluttered that discerning detail becomes impossible
+-   Reordering or sorting the data appropriately can give us insights into different patterns. This is especially true for categorical data
+    -   ["The power of reordering lies in the privileged status of spatial position as the highest ranked visual channel"]{.blue}
+- However, you do want to still maintain the sanctity of the observation
+    - We're really interested in relationships between **observations**
+    - We'll see how filtering, brushing and linking allows this to happen
+
+::: {.bl .bw3 .ph3 .navy}
+[*Les Miserables* Co-occurrence](https://bost.ocks.org/mike/miserables/){target="_blank"}
+:::
+
+
+

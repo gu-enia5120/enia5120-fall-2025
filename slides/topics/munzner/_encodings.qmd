@@ -1,0 +1,63 @@
+
+# Mark and Channel Examples
+
+## Points
+
+:::: {.columns}
+::: {.column width="50%"}
+![](img/points-ex.png){height="500"}
+:::
+
+::: {.column width="50%"}
+- Zero-dimensional
+- Convey position only
+- Additionally, can be **size** and **shape** coded
+:::
+::::
+
+
+## Lines
+
+:::: {.columns}
+::: {.column width="50%"}
+![](img/lines-ex.png){height="500"}
+:::
+::: {.column width="50%"}
+- One-dimensional
+- Convey position and length
+- Can only be **width** coded
+:::
+::::
+
+## Areas
+
+:::: {.columns}
+::: {.column width="50%"}
+![](img/areas-ex.png){height="500"}
+:::
+
+::: {.column width="50%"}
+- Two dimensional
+- Are fully constrained
+:::
+::::
+
+
+
+
+
+
+## Mackinlay '86
+
+::: {layout-ncol="2"}
+![](img/mackinlay-fig14.png)
+
+![](img/mackinlay-fig15.png)
+:::
+
+
+## Another encoding guide (Noah Illinsky)
+
+Although encoding is often undertaken without much intention or deeper consideration, it has significant impact on the ability of the visualization to communicate knowledge accurately and efficiently.
+
+![](img/illinksy.gif){fig-align="center" height=450}

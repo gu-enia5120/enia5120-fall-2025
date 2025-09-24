@@ -1,0 +1,94 @@
+# Base maps
+
+## What are base maps?
+
+Base maps are (often raster) representations of geographic entities (what we usually call "maps") upon which we can then
+layer other data based on location.
+
+- Think Waze or Google Maps or Apple Maps
+
+The underlying geographic information is used for reference and context, and helps with interpreting the
+data being presented
+
+We'll often prefer interactive maps here (what we're used to from GPS), and these are most often
+done using the `leaflet.js` package and it's various wrappers (`leaflet` in R and `folium` in Python)
+
+## Plotting Houston crime
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| cache: true
+#| fig-width: 3
+#| fig-height: 3
+#| label: houston
+library(osmdata)
+library(sf)
+#houston = getbb("Houston") |> opq() |>
+#  add_osm_feature(key ='highway', value = c('motorway','primary','secondary')) |>
+#  osmdata_sf()
+#houston_crime = st_as_sf(ggmap::crime |> drop_na(lon, lat),
+#  coords = c('lon','lat'),
+#  crs = st_crs(houston$osm_lines))
+#save(houston_crime, houston, file='topics/geospatial/data/houston.rda')
+load('topics/geospatial/data/houston.rda')
+ggplot() +
+  geom_sf(data = houston$osm_polygons) +
+  geom_sf(data = houston$osm_lines) +
+  geom_sf(data = filter(houston_crime, offense == "murder"), color='red', size=2)+
+  coord_sf(xlim = getbb("Houston")[1,], ylim = getbb("Houston")[2,]) +
+  labs(title = "Murders in Houston, 2010")
+
+```
+## Plotting Houston crime
+
+```{r}
+#| label: leaflet1
+library(leaflet)
+crime_murder = ggmap::crime |> drop_na(lon, lat) |> filter(offense == "murder")
+leaflet() |>
+  addTiles() |>
+  addMarkers(lng = crime_murder$lon, lat = crime_murder$lat)
+```
+
+## Visualizing NYC subway stations
+
+```{python}
+# | label: geopandas1
+# | code-fold: true
+# | message: false
+import geopandas
+import folium
+
+gdf = geopandas.read_file(
+    "https://raw.githubusercontent.com/python-visualization/folium-example-data/main/subway_stations.geojson"
+)
+gdf["href"] = '<a href="' + gdf.url + '">' + gdf.url + "</a>"
+gdf["service_level"] = gdf.notes.str.split(", ").apply(
+    lambda x: len([v for v in x if "all" in v])
+)
+gdf["lines_served"] = gdf.line.str.split("-").apply(lambda x: len(x))
+service_levels = gdf.service_level.unique().tolist()
+colors = ["orange", "yellow", "green", "blue"]
+m = folium.Map(location=[40.75, -73.95], zoom_start=13)
+
+folium.GeoJson(
+    gdf,
+    name="Subway Stations",
+    marker=folium.Circle(
+        radius=4, fill_color="orange", fill_opacity=0.4, color="black", weight=1
+    ),
+    tooltip=folium.GeoJsonTooltip(fields=["name", "line", "notes"]),
+    popup=folium.GeoJsonPopup(fields=["name", "line", "href", "notes"]),
+    style_function=lambda x: {
+        "fillColor": colors[x["properties"]["service_level"]],
+        "radius": (x["properties"]["lines_served"]) * 30,
+    },
+    highlight_function=lambda x: {"fillOpacity": 0.8},
+    zoom_on_click=True,
+).add_to(m)
+
+m
+
+
+```

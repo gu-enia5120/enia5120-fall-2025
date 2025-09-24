@@ -1,0 +1,492 @@
+# Vega
+
+A visualization grammar
+
+## Vega
+
+[Vega](https://vega.github.io/vega/) is a declarative language for
+
+-   creating,
+-   saving,
+-   sharing
+
+interactive visualizations.
+
+:::{.fragment}
+It is built on D3.js, but adds a layer of abstraction
+:::
+
+:::{.fragment}
+It is still quite granular, providing building blocks like data loading and transformation, scales, maps, axes, legends, and marks.
+:::
+
+
+::: {.callout-note appearance="minimal"}
+### Declarative programming
+
+[Declarative programming](https://en.wikipedia.org/wiki/Declarative_programming) is a non-imperative style of programming in which programs describe their desired results without explicitly listing commands or steps that must be performed
+
+-- Wikipedia
+:::
+
+
+## Vega
+
+The Vega specification is written in JSON
+
+Recall that JSON provides a _hierarchical structure_ to record data.
+
+
+We will demonstrate the capabilities of Vega and Vega-lite through `ojs` cells 
+in Quarto. These use the capabilities of [Observable](https://www.observablehq.com) to embed Javascript graphics into Quarto documents.
+
+::: {.callout-tip appearance="simple"}
+JSON looks like a Python dictionary in many ways, but note that JSON is a 
+data storage format while the dictionary is a Python object
+:::
+
+## Vega
+
+We start by including the Vega definition in our document
+
+```{ojs}
+//| echo: fenced
+//| code-fold: false
+vega = require("https://cdn.jsdelivr.net/npm/vega@4/build/vega.js")
+```
+
+One of the interesting things about Observable Javascript  and calling JS libraries like Vega and Vega-Lite and Observable and D3 is that the order of the commands _doesn't matter_. In fact, if you look at Observable notebooks, the call to Vega or Vega-Lite or D3 is often at 
+the bottom of the notebook!!
+
+::: {.callout-tip appearance="simple"}
+Note we are calling a CDN, or _content delivery network_ to access the Vega JS specification. Alternatives would be to download the specification locally and 
+import it from there. 
+
+This method requires that you be connected to the internet.
+:::
+
+::: {.callout-warning appearance="simple"}
+Note also the different syntax for chunk options in `ojs`
+:::
+
+::: {.callout-warning appearance="simple"}
+Traditional Javascript is linear, but Observable works like a spreadsheet, so any change in code anywhere in the document propagates to all elements on the page. See [this page](https://observablehq.com/@observablehq/observable-javascript) for more details.
+:::
+
+## Vega {.scrollable}
+
+We said that the definition for a Vega graph is written in JSON. Here's an example of a full specification: 
+
+```{ojs}
+//| code-fold: false
+inputSpec = ({
+  "$schema": "https://vega.github.io/schema/vega/v4.json",
+  "width": 400,
+  "height": 200,
+  "padding": 5,
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"category": "A", "amount": 28},
+        {"category": "B", "amount": 55},
+        {"category": "C", "amount": 43},
+        {"category": "D", "amount": 91},
+        {"category": "E", "amount": 81},
+        {"category": "F", "amount": 53},
+        {"category": "G", "amount": 19},
+        {"category": "H", "amount": 87}
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+     
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "band",
+      "domain": {"data": "table", "field": "category"},
+      "range": "width",
+      "padding": 0.05,
+      "round": true
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "table", "field": "amount"},
+      "nice": true,
+      "range": "height"
+    }
+  ],
+
+  "axes": [
+    { "orient": "bottom", "scale": "xscale" },
+    { "orient": "left", "scale": "yscale" }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "category"},
+          "width": {"scale": "xscale", "band": 1},
+          "y": {"scale": "yscale", "field": "amount"},
+          "y2": {"scale": "yscale", "value": 0}
+        },
+        "update": {
+          "fill": {"value": "steelblue"}
+        },
+        "hover": {
+          "fill": {"value": "red"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "isNaN(tooltip.amount)", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+  ]
+}
+)
+
+
+```
+
+## Vega
+
+Since we're using OJS, we first have to _parse_ the input specification to a live 
+dataflow.
+
+```{ojs}
+//|code-fold: false
+parsedSpec = vega.parse(inputSpec)
+```
+
+This results in the following plot:
+
+```{ojs}
+//| output-location: column
+//| code-fold: false
+viewof view={
+   const div = document.createElement('div');
+   div.value = new vega.View(parsedSpec)
+      .initialize(div)
+      .run();
+   return div;
+}
+```
+
+::: {style="font-size: 1.2rem;"}
+Note, we're using JS to 
+
+- define a `div`
+- populate the `div` with a `View` of the parsed VegaJS specification
+- run Vega on that `div`
+- return the `div` to the web page
+:::
+
+## A note on parsing the Vega JSON specification {.smaller}
+
+Vega parses an input specification to produce a _dataflow graph_
+
+This graph is the basis of all necessary computations to visually encode the data
+
+:::: {.columns}
+::: {.column width="47%"}
+### Nodes
+
+- These are _operators_ that perform operations
+   - calculate an aggregate
+   - create a scale mapping
+
+:::
+::: {.column width="47%"}
+### Edges
+
+- Dependencies between nodes
+
+:::
+::::
+
+Once the input specification is parsed into a dataflow graph, you can instatiate a 
+`View` component that makes an interactive graph using the `vega-runtime` library
+
+A major advantage to modeling computation as a dataflow graph is the ability to perform efficient reactive updates. When parameters change or the input data is modified, the dataflow can re-evaluate *only those nodes affected by the update*.
+
+::: {.aside}
+See the Observable notebook [here](https://observablehq.com/@vega/how-vega-works) for more details about the _dataflow graph_ and how Vega works
+:::
+
+## Vega
+
+Let's get back to the Vega graph specification.
+
+### Visualization size
+
+::: {.columns}
+::: {.column width="30%"}
+
+```ojs
+ "width": 400,
+ "height": 200,
+ "padding": 5,
+ "autosize": "pad",
+```
+:::
+::: {.column width="68%"}
+The `width` and `height` determine the size of the canvas where the data will be plotted.
+
+The `padding` determines the margin between the plot and the border of the view
+
+The `autosize` property allows either 
+
+(a) extra space to accommodate all visual marks (`"pad"`), 
+(b) fits the entire plot into the provided width and height (`"fit"`), or 
+(c) does no automatic sizing (`"none"`)
+:::
+:::
+
+## Vega: Data
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```ojs
+
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {"category": "A", "amount": 28},
+        {"category": "B", "amount": 55},
+        {"category": "C", "amount": 43},
+        {"category": "D", "amount": 91},
+        {"category": "E", "amount": 81},
+        {"category": "F", "amount": 53},
+        {"category": "G", "amount": 19},
+        {"category": "H", "amount": 87}
+      ]
+    }
+  ],
+
+```
+
+:::
+::: {.column width="48%" style="font-size: 1.2rem;"}
+We have an array of data objects with fields named `category` (a string label) and `amount` (a number)
+
+Data can be 
+
+- loaded from the web using the `url` property (including JSON and CSV)
+- derived from a previously defined data set using the `source` property
+- left undefined and dynamically set when the visualization is constructed
+
+Only _one_ of the `values`, `url` or `source` properties can be defined
+
+You can also modify data using [transforms](https://vega.github.io/vega/docs/transforms/), like filtering, aggregation and layout operations. 
+
+:::
+::::
+
+## Vega: scales
+
+Scales map data to visual values like positions and colors (think `ggplot2`)
+
+:::: {.columns}
+::: {.column width="60%"}
+```ojs
+"scales": [
+    {
+      "name": "xscale",
+      "type": "band",
+      "domain": {"data": "table", "field": "category"},
+      "range": "width",
+      "padding": 0.05,
+      "round": true
+    },
+    {
+      "name": "yscale",
+      "domain": {"data": "table", "field": "amount"},
+      "nice": true,
+      "range": "height"
+    }
+  ],
+
+```
+:::
+::: {.column width="38%" }
+:::{style="font-size: 1.2rem;"}
+- `domain` specifies the data that is being encoded in that scale
+   - Here we specify it dynamically from the data
+   - You can also use an array of values
+- By default, quantitative `domains` include 0. To disable, use `"zero": false` in the scale definition
+- `padding` puts space between bars
+- `nice: true` makes the scale domain more readable and human-friendly
+:::
+:::
+::::
+
+::: {.callout-tip appearance='simple'}
+The  range settings of `width` and `height` are conveniences provided by Vega, and in this case map to the arrays defined by the size of the visualization.
+
+Each scale needs a unique `name` attribute.
+:::
+
+## Vega: axes
+
+```ojs
+"axes": [
+ { "orient": "bottom", "scale": "xscale" },
+ { "orient": "left", "scale": "yscale" }
+],
+```
+
+You can further customize axes; see the [axes](https://vega.github.io/vega/docs/axes) documentation
+
+## Vega: Marks
+
+:::: {.columns}
+::: {.column width="60%"}
+```ojs
+ "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "category"},
+          "width": {"scale": "xscale", "band": 1},
+          "y": {"scale": "yscale", "field": "amount"},
+          "y2": {"scale": "yscale", "value": 0}
+        },
+        "update": {
+          "fill": {"value": "steelblue"}
+        },
+        "hover": {
+          "fill": {"value": "red"}
+        }
+      }
+    },
+```
+:::
+::: {.column width="40%"}
+This provides the specification of the marks. There are different kinds of _encoding sets_ within the `encode` property
+
+- `enter` specifies properties when a mark is first created
+- `exit` specifies properties when a mark is removed
+- `update` specifies updates 
+- `hover`  specifies properties upon mouse hover
+
+- `y` and `y2` refer to the top and bottom of the bars, respectively. 
+:::
+::::
+
+## Vega: [signals](https://vega.github.io/vega/docs/signals)
+
+::: {.notes}
+Every time these events occur, the corresponding expression is evaluated and set as the tooltip value. Thus, when the mouse pointer is moved over a rectangle mark, tooltip is equal to the mark’s backing datum; when the pointer is moved off the rectangle, tooltip is an empty object
+
+The position and text values are drawn directly from the tooltip signal. To only show the tooltip text when the mouse pointer is over a rectangle, we set the fillOpacity using production rules: a chain of if-then-else rules for visual encoding. If tooltip is an empty object, the tooltip text is fully transparent since isNaN(tooltip.amount) is true, otherwise it is opaque.
+
+
+:::
+Signals are dynamic variables: expressions that are automatically re-evaluated when other signal values change or when input events occur
+
+Each signal must have a unique `name` and an inital `value`
+
+:::: {.columns}
+::: {.column width="47%"}
+```ojs
+"signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+```
+
+`tooltip` changes in response to `mouseover` and `mouseout` events on `rect` marks
+
+
+
+:::
+::: {.column width="47%"}
+```ojs
+"marks": [
+    ...,
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.category", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.amount", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "isNaN(tooltip.amount)", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+```
+:::
+::::
+
+## Vega: [transforms](https://vega.github.io/vega/docs/transforms/)
+
+<iframe width="100%" height = "65%" src="https://vega.github.io/vega/docs/transforms"/></iframe>
+
+There is a lot of granular specification possible in Vega
+
+It's not as granular as D3.js, in that there are some abstractions like `loess` and `pivot` and `quantile`
+
+
+## Developing in Vega
+
+::: {.notes}
+Show how to see the JS script for each component in an Observable notebook by clicking on the left `>` that appears on mouseover of any construct on the page 
+:::
+- We've been using `ojs` chunks in a Quarto document to develop Vega graphics. This is a modern solution
+
+- Vega can be developed online using the [Vega Editor](https://vega.github.io/editor/#/custom/vega)
+   - Solutions can be transferred to Github quite easily
+   
+- A great listing of how to specify axes and legends in Vega is available [here](https://observablehq.com/@vega/a-guide-to-guides-axes-legends-in-vega)
+
+
+<!-- # [VegaLite](VegaLite.html) -->

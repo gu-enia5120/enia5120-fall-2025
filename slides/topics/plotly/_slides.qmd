@@ -1,0 +1,904 @@
+# Plotly
+An introduction
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(widgetframe_self_contained=FALSE)
+knitr::opts_chunk$set(widgetframe_isolate_widgets=TRUE)
+```
+```{ojs}
+//| echo: false
+//| cache: false
+//| eval: false
+plt = require("https://cdn.plot.ly/plotly-latest.min.js")
+```
+
+## What is Plotly?
+
+Plotly is a technical computing company headquartered in Montreal, Canada
+
+- Develops tools for data visualization, analytics, and statistical tools, as well as graphing libraries for Python, R, MATLAB, Perl, Julia, Arduino, and REST
+    - **Dash**, an open source Python, R, Julia framework for building analytic applications (competes with Shiny)
+    - **Chart Studio Cloud** is a free, online tool for creating interactive graphics in a point-and-click interface. However, as with any online resource, data privacy is a concern
+    - **Figure converters** that convert `matplotlib`, `ggplot2` graphs into interactive JS-based graphics.
+
+The base graphing toolkit is **plotly.js** which is built on top of d3.js and stack.gl
+
+## Plotly.js: Interactive controls
+
+Plotly plots have interactive controls to do the following:
+
+![](img/2023-03-10-13-08-41.png)
+
+- **Pan:** Move around in the plot.
+- **Box Select:** Select a rectangular region of the plot to be highlighted.
+- **Lasso Select:** Draw a region of the plot to be highlighted.
+- **Autoscale:** Zoom to a “best” scale.
+- **Reset axes:** Return the plot to its original state.
+- **Toggle Spike Lines:** Show or hide lines to the axes whenever you hover over data.
+- **Show closest data on hover:** Show details for the nearest data point to the cursor.
+- **Compare data on hover:** Show the nearest data point to the x-coordinate of the cursor.
+
+## Plotly.js: Fundamental components
+
+```{ojs}
+//| echo: fenced
+//| output-location: column
+
+plt = require("https://cdn.plot.ly/plotly-latest.min.js")
+
+{let trace1 = {
+    x: [1,2,3,4],
+    y: [10,11,12,13],
+    mode: "markers",
+    marker:{
+        size: [40, 60, 80, 100]
+    }
+};
+
+let data = [trace1];
+
+let layout = {
+    title: "Marker size",
+    showlegend: false,
+    height: 500,
+    width: 500
+};
+
+const div = DOM.element('div');
+plt.newPlot(div, data, layout);
+return div;
+}
+```
+
+## Plotly.js: Fundamental components
+
+:::: {.columns}
+
+::: {.column width="47%"}
+
+```
+plt = require("https://cdn.plot.ly/plotly-latest.min.js")
+
+{var trace1 = {
+    x: [1,2,3,4],
+    y: [10,11,12,13],
+    mode: "markers",
+    marker:{
+        size: [40, 60, 80, 100]
+    }
+};
+
+var data = [trace1];
+
+var layout = {
+    title: "Marker size",
+    showlegend: false,
+    height: 500,
+    width: 500
+};
+
+const div = DOM.element('div');
+plt.newPlot(div, data, layout);
+return div;
+}
+```
+
+:::
+
+::: {.column width="47%"}
+- **Trace:** Describes a collection of data and the specifications about how you want the data displayed on the plotting surface, which is described by the trace type (scatter, box, , etc).
+- **Data:** Collection (list) of traces
+- **Layout:** Controls various structural and stylistic components of the figure (e.g. title, font, size, etc)
+
+The Python (or R) wrappers create JSON files that map from Python/R commands to the format needed by plotly.js with these fundamental components
+
+:::
+::::
+
+# Wrapping Plotly
+
+## Transforming ggplot
+
+:::: {.columns}
+
+::: {.column width="47%"}
+```{r}
+#| echo: false
+#| out-width: "100%"
+#| out-height: "100%"
+library(gapminder)
+library(plotly)
+library(scales)
+plt <- gapminder %>%
+  filter(year == 2007) %>%
+  ggplot(aes(gdpPercap, lifeExp, size = pop, color = continent)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy", color = "Continent", size = "Population") +
+  scale_size("Population", labels = scales::label_number(scale_cut = cut_si("K"), scale=1e3)) +
+  scale_color_viridis_d() +
+  theme_bw()
+plt
+
+```
+
+> In {{< fa brands r-project >}},  the **plotly** package allows you to directly transform ggplot graphics
+into plotly web graphics using the `ggplotly` function. This is fantastic, since
+developing graphs in ggplot is more familiar.
+>
+> You may be stuck with default settings though
+
+
+:::
+
+::: {.column width="47%"}
+```{r}
+#| out-width: "100%"
+#| out-height: "100%"
+ggplotly(plt)
+
+```
+
+::: {.callout-warning appearance="simple" icon=true}
+This is not great, since
+
+- the theme isn't exactly copied
+- the default tooltips (see on mouseover) are unformated
+:::
+
+:::
+
+::::
+
+## Transforming matplotlib
+
+```{python}
+#| warning: false
+#| message: false
+#| out-width: "100%"
+#| out-height: "100%"
+import plotly.express as px
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+import plotly.tools as tpl
+import numpy as np
+
+gapminder = px.data.gapminder()
+gm = gapminder.query("year==2007")
+
+fig,ax = plt.subplots()
+sns.scatterplot(gm, x = "gdpPercap", y = "lifeExp", size = "pop", hue = "continent", ax = ax)
+ax.set_xlabel("GDP per capita ($)")
+ax.set_ylabel("Life expectancy")
+f = tpl.mpl_to_plotly(fig)
+f.show()
+```
+
+## Using Plotly wrappers
+
+::: {.panel-tabset}
+
+## Python (express)
+
+- The input arguments for a Plotly express function are similar to other libraries.
+- The typical data input is a Pandas data frame, list, or numpy array
+- The x argument is a string naming the column to be used on the x-axis.
+- The y argument can either be a string or a list of strings naming column(s) to be used on the y-axis.
+- Basic customization is straight-forward
+
+```python
+px.plotting_fn(dataframe, # Dataframe being visualized
+    x = ["column-for-x-axis"], # Accepts a string or a list of strings
+    y = ["columns-for-y-axis"], # Accepts a string or a list of strings
+    title = "Overall plot title", # Accepts a string
+    xaxis_title = "X-axis title", # Accepts a string
+    yaxis_title = "Y-axis title", # Accepts a string
+    width = width_in_points, # Accepts an integer
+    height = height_in_pixels) # Accepts an integer
+```
+
+IMPORTANT: To make stylistic changes, e.g. figure-size, we can use `fig.update_layout()`
+
+## R
+
+- Plotly has an R-based API that covers most but not all of Plotly’s capabilities.
+- Furthermore, the concepts from the python section, e.g. data, traces, layout, etc, also apply to the R case
+
+A nice reference is Carson Sievert's [book](https://plotly-r.com/).
+:::
+
+
+## Scatter plots
+
+::: {.panel-tabset}
+
+## Python
+
+```{python}
+#| output-location: column
+import plotly.express as px
+import seaborn as sns
+penguins = sns.load_dataset('penguins')
+
+fig = px.scatter(data_frame = penguins,
+                 x = "bill_length_mm",
+                 y = "body_mass_g",
+                 width=500,
+                 height=500,
+                 labels = dict(bill_length_mm = "Bill length (mm)",
+                    body_mass_g = "Body mass (g)")
+)
+fig.show()
+```
+
+
+## R
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| out-width: "100%"
+library(plotly)
+library(palmerpenguins)
+df = penguins
+fig <- plot_ly(df,
+    x = ~bill_length_mm,
+    y = ~body_mass_g,
+    type = "scatter",
+    mode = "markers",
+    width=500, height=500) |>
+    plotly::layout(
+        xaxis = list(title = "Bill length (mm)"),
+        yaxis = list(title = "Body mass (g)")
+    )
+htmlwidgets::saveWidget(as_widget(fig), "plotly-R-scatter.html", selfcontained=TRUE)
+```
+:::
+::: {.column width="50%"}
+```{=html}
+<iframe src= "plotly-R-scatter.html" width="500" height="500"></iframe>
+```
+:::
+::::
+
+## JS
+
+```{r}
+#| cache: false
+#| include: false
+ojs_define(peng = palmerpenguins::penguins)
+```
+
+```{ojs}
+//| output-location: column
+//| echo: fenced
+//plt = require("https://cdn.plot.ly/plotly-latest.min.js")
+penguins = transpose(peng)
+
+{var data = [
+{
+    x: penguins.map(d => d.bill_length_mm),
+    y: penguins.map(d => d.body_mass_g),
+    type: "scatter",
+    mode: "markers"
+}
+];
+var layout = {
+    title: "",
+    xaxis: {title: "Bill length (mm)"},
+    yaxis: {title: "Body mass (g)"},
+    height: 500,
+    width: 500
+};
+const div = DOM.element('div');
+plt.newPlot(div, data, layout);
+return div
+}
+
+```
+
+:::
+
+## Adding groups and annotations
+
+::: {.panel-tabset}
+## Python
+
+```{python}
+#| output-location: column
+import plotly.express as px
+fig =px.scatter(data_frame=penguins,
+    x='bill_length_mm',
+    y = 'body_mass_g',
+    color = 'species',
+    labels = dict(bill_length_mm="Bill length (mm)",
+                  body_mass_g = "Body mass (g)",
+                  species='Species'),
+    title = "Palmer Penguins")
+fig.update_traces(customdata=penguins,
+  hovertemplate="Species: %{customdata[0]}<br>Island: %{customdata[1]}<br>Sex: %{customdata[6]}")
+```
+
+## R
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+#| label: tmpR
+#| out-width: "100%"
+
+library(plotly)
+fig <- plot_ly(penguins,
+  x = ~bill_length_mm,
+  y = ~body_mass_g,
+  color = ~species,
+  type = "scatter", mode = "markers",
+  hovertemplate = paste("Species:", penguins$species, "<br>Island: ", penguins$island, "<br>Sex:", penguins$sex)
+) %>%
+  plotly::layout(
+    xaxis = list(title = "Bill length (mm)"),
+    yaxis = list(title = "Body mass (g)"),
+    title = "Palmer Penguins"
+  )
+htmlwidgets::saveWidget(as_widget(fig), "plotly-R-scatter2.html", selfcontained=TRUE)
+```
+:::
+::: {.column width="50%"}
+
+```{=html}
+<iframe src="plotly-R-scatter2.html" width="500" height="500"></iframe>
+```
+:::
+::::
+
+## JS
+
+:::: {.columns}
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+{
+    const species = ["Adelie", "Gentoo", "Chinstrap"];
+    const colors = {"Adelie": "blue", "Gentoo": "green", "Chinstrap": "orange"};
+    const unpack = (rows, key) => rows.map(row => row[key]);
+    const specie = "Adelie";
+    const data = species.map(specie => {
+        const rowsFiltered = penguins.filter(row => row.species === specie);
+        return {
+            mode: "markers",
+            type: "scatter",
+            name: specie,
+            sp: unpack(rowsFiltered, "species"),
+            x: unpack(rowsFiltered, "bill_length_mm"),
+            y: unpack(rowsFiltered, "body_mass_g"),
+            isl: unpack(rowsFiltered, 'island'),
+            customdata: unpack(rowsFiltered,'sex'),
+            text: unpack(rowsFiltered, 'island'),
+            hovertemplate: "Species: %{data.name}<br> Gender: %{customdata}<extra></extra> <br> Island: %{text}",
+            marker: {
+                color: colors[specie]
+            }
+}
+});
+    var layout = {
+        xaxis: {title: "Life expectancy"},
+        yaxis: {title: "GDP per capita ($)"},
+        width: 500,
+        height: 500,
+        hovermode: "closest",
+        showlegend: true
+        };
+
+const div= DOM.element('div')
+plt.newPlot(div, data, layout, {showLink: false})
+return div
+};
+```
+
+:::
+::: {.column width="50%"}
+
+```{ojs}
+//| echo: false
+{
+    const species = ["Adelie", "Gentoo", "Chinstrap"];
+    const colors = {"Adelie": "blue", "Gentoo": "green", "Chinstrap": "orange"};
+    const unpack = (rows, key) => rows.map(row => row[key]);
+    const specie = "Adelie";
+    const data = species.map(specie => {
+        const rowsFiltered = penguins.filter(row => row.species === specie);
+        return {
+            mode: "markers",
+            type: "scatter",
+            name: specie,
+            sp: unpack(rowsFiltered, "species"),
+            x: unpack(rowsFiltered, "bill_length_mm"),
+            y: unpack(rowsFiltered, "body_mass_g"),
+            isl: unpack(rowsFiltered, 'island'),
+            customdata: unpack(rowsFiltered,'sex'),
+            text: unpack(rowsFiltered, 'island'),
+            hovertemplate: "Species: %{data.name}<br> Gender: %{customdata}<extra></extra> <br> Island: %{text}",
+            marker: {
+                color: colors[specie]
+            }
+}
+});
+    var layout = {
+        xaxis: {title: "Life expectancy"},
+        yaxis: {title: "GDP per capita ($)"},
+        width: 500,
+        height: 500,
+        hovermode: "closest",
+        showlegend: true
+        };
+
+const div= DOM.element('div')
+plt.newPlot(div, data, layout, {showLink: false})
+return div
+};
+```
+:::
+::::
+
+:::
+
+## Plotly Express: Available functions
+
+- **Basics**: [`scatter`](https://plotly.com/python/line-and-scatter/), [`line`](https://plotly.com/python/line-charts/), [`area`](https://plotly.com/python/filled-area-plots/), [`bar`](https://plotly.com/python/bar-charts/), [`funnel`](https://plotly.com/python/funnel-charts/), [`timeline`](https://plotly.com/python/gantt/)
+- **Part-of-Whole**: [`pie`](https://plotly.com/python/pie-charts/), [`sunburst`](https://plotly.com/python/sunburst-charts/), [`treemap`](https://plotly.com/python/treemaps/), [`icicle`](https://plotly.com/python/icicle-charts/), [`funnel_area`](https://plotly.com/python/funnel-charts/)
+- **1D Distributions**: [`histogram`](https://plotly.com/python/histograms/), [`box`](https://plotly.com/python/box-plots/), [`violin`](https://plotly.com/python/violin/), [`strip`](https://plotly.com/python/strip-charts/), [`ecdf`](https://plotly.com/python/ecdf-plots/)
+- **2D Distributions**: [`density_heatmap`](https://plotly.com/python/2D-Histogram/), [`density_contour`](https://plotly.com/python/2d-histogram-contour/), [`imshow`](https://plotly.com/python/imshow/)
+- **3-Dimensional**: [`scatter_3d`](https://plotly.com/python/3d-scatter-plots/), [`line_3d`](https://plotly.com/python/3d-line-plots/)
+- **Multidimensional**: [`scatter_matrix`](https://plotly.com/python/splom/), [`parallel_coordinates`](https://plotly.com/python/parallel-coordinates-plot/), [`parallel_categories`](https://plotly.com/python/parallel-categories-diagram/)
+- **Tile Maps**: [`scatter_mapbox`](https://plotly.com/python/scattermapbox/), [`line_mapbox`](https://plotly.com/python/lines-on-mapbox/), [`choropleth_mapbox`](https://plotly.com/python/mapbox-county-choropleth/), [`density_mapbox`](https://plotly.com/python/mapbox-density-heatmaps/)
+- **Outline Maps**: [`scatter_geo`](https://plotly.com/python/scatter-plots-on-maps/), [`line_geo`](https://plotly.com/python/lines-on-maps/), [`choropleth`](https://plotly.com/python/choropleth-maps/)
+- **Polar Charts**: [`scatter_polar`](https://plotly.com/python/polar-chart/), [`line_polar`](https://plotly.com/python/polar-chart/), [`bar_polar`](https://plotly.com/python/wind-rose-charts/)
+- **Ternary Charts**: [`scatter_ternary`](https://plotly.com/python/ternary-plots/), [`line_ternary`](https://plotly.com/python/ternary-plots/)
+
+<sup>Source: [click here](https://plotly.com/python/plotly-express/) <sup>
+
+## Plotly inputs in Python
+
+Plotly Express can take inputs in 3 different formats, which are all appropriately converted to JSON internally for plotting.
+
+1. A pandas DataFrame, where encodings are determined by column names
+1. Separate lists for each encoding
+3. A dictionary, where visual encodings are specified by the keys.
+
+Suppose we have this toy dictionary
+
+```{python}
+import numpy as np
+d =  {"dates": ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04"], "y_vals": np.array([100, 200,300,400])}
+```
+
+We can easily convert this to a DataFrame and vice versa
+
+```{python}
+d1 = pd.DataFrame(d)
+d2 = d1.to_dict('list') # removes index
+d1
+d2
+```
+
+## A pairs plot
+
+::: {.panel-tabset}
+## Python
+
+```{python}
+#| code-fold: true
+#| out-height: "400px"
+#| out-width: "800px"
+import plotly.express as px
+import seaborn as sns
+
+df = sns.load_dataset("penguins")
+
+fig = px.scatter_matrix(
+    df,
+    dimensions=[
+        "bill_length_mm",
+        "bill_depth_mm",
+        "flipper_length_mm",
+        "body_mass_g",
+    ],
+    color="species",
+    width=900,
+    height=900,
+    labels=dict(
+        bill_length_mm="Bill length (mm)",
+        bill_depth_mm="Bill depth (mm)",
+        flipper_length_mm="Flipper length (mm)",
+        body_mass_g="Body mass (g)",
+    ),
+).update_traces(diagonal_visible=False)
+
+fig.update_layout(template="plotly_white")
+fig.show()
+```
+
+## R
+
+```{r}
+#| code-fold: true
+#| out-height: "400px"
+#| out-width: "800px"
+library(palmerpenguins)
+fig <- penguins |> plot_ly()
+fig <- fig |>
+    add_trace(
+        type = "splom",
+        dimensions = list(
+            list(label = "Bill length (mm)", values = ~bill_length_mm),
+            list(label = "Bill depth (mm)", values = ~bill_depth_mm),
+            list(label = "Flipper length (mm)", values = ~flipper_length_mm),
+            list(label = "Body mass (g)", values = ~body_mass_g)
+        ),
+        text = ~species,
+        marker = list(
+            color = as.integer(penguins$species),
+            size = 7,
+            line = list(width=1, color = 'rgb(230,230,230)'
+                        )
+        )
+    )
+fig <- fig |> layout(
+    title = "Palmer penguins",
+    hovermode="closest",
+    dragmode= "select",
+    plot_bgcolor = "rgba(240, 240, 240, 0.95)",
+    xaxis = list(domain=NULL, showline=F, zeroline=F, gridcolor = '#fff', ticklen=4),
+    yaxis = list(domain=NULL, showline=F, zeroline=F, gridcolor ='#ffff', ticklen=4)
+)
+fig
+```
+
+
+## JS
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-fold: true
+{
+    const unpack = (rows, key) => rows.map(row => row[key]);
+    let axis = () => ({
+        showline: false,
+        zeroline: false,
+        gridcolor: '#ffff',
+        ticklen: 4
+    })
+
+    let data = [{
+        type:"splom",
+        dimensions: [
+            {label: 'Bill length (mm)', values: unpack(penguins, 'bill_length_mm')},
+            {label: 'Bill depth (mm)', values: unpack(penguins, 'bill_depth_mm')},
+            {label: 'Flipper length (mm)', values: unpack(penguins, 'flipper_length_mm')},
+            {label: 'Body mass (g)', values: unpack(penguins, 'body_mass_g')}
+        ],
+        text: unpack(penguins, "species"),
+        marker: {
+            size: 7,
+            line: {
+                color: "white",
+                width: 0.5
+            }
+        }
+    }]
+    let layout = {
+        title: "Palmer Penguins",
+        height: 800,
+        width: 800,
+        autosize: false,
+        hovermode: 'closest',
+        dragmode: 'select',
+        plot_bgcolor: 'rgba(240,240, 240, 0.95)'
+    }
+    const div= DOM.element('div')
+    plt.newPlot(div, data, layout, {showLink: false})
+    return div
+};
+```
+```{ojs}
+//| echo: false
+{
+    const unpack = (rows, key) => rows.map(row => row[key]);
+    let axis = () => ({
+        showline: false,
+        zeroline: false,
+        gridcolor: '#ffff',
+        ticklen: 4
+    })
+
+    let data = [{
+        type:"splom",
+        dimensions: [
+            {label: 'Bill length (mm)', values: unpack(penguins, 'bill_length_mm')},
+            {label: 'Bill depth (mm)', values: unpack(penguins, 'bill_depth_mm')},
+            {label: 'Flipper length (mm)', values: unpack(penguins, 'flipper_length_mm')},
+            {label: 'Body mass (g)', values: unpack(penguins, 'body_mass_g')}
+        ],
+        text: unpack(penguins, "species"),
+        marker: {
+            size: 7,
+            line: {
+                color: "white",
+                width: 0.5
+            }
+        }
+    }]
+    let layout = {
+        title: "Palmer Penguins",
+        height: 800,
+        width: 800,
+        autosize: false,
+        hovermode: 'closest',
+        dragmode: 'select',
+        plot_bgcolor: 'rgba(240,240, 240, 0.95)'
+    }
+    const div= DOM.element('div')
+    plt.newPlot(div, data, layout, {showLink: false})
+    return div
+};
+
+```
+
+:::
+
+## Line plots
+
+::: {.panel-tabset}
+
+## Python
+
+```{python}
+#| code-fold: true
+import plotly.express as px
+
+# EXAMPLE-1
+df = px.data.gapminder()
+
+fig = px.line(
+    df,
+    x="year",
+    y="lifeExp",
+    color="continent",
+    line_group="country",
+    hover_name="country",
+    height=500,
+    width=1000,
+    template="presentation",
+    labels={"lifeExp": "Life expectancy (years)", "year": "Time (years)"},
+)
+fig.update_layout(showlegend=True)
+```
+
+## R
+
+```{r}
+#| code-fold: true
+library(gapminder)
+df <- filter(gapminder, continent == "Asia")
+fig <- plot_ly(df,
+  x = ~year, y = ~lifeExp,
+  color = ~country,
+  type = "scatter", mode = "lines",
+  hovertemplate = paste("<b>", df$country, "</b><br>Year=%{x}<br>Life Expectancy=%{y:.2f} yrs")
+) %>%
+  plotly::layout(
+    xaxis = list(title = "Year"),
+    yaxis = list(title = "Life Expectancy"),
+    showlegend = FALSE,
+    width=600,
+    height=600
+
+  )
+fig
+```
+:::
+
+
+## Marginal plots
+
+```{python}
+#| code-fold: true
+import plotly.express as px
+import seaborn as sns
+
+tips = px.data.tips()
+# print(tips)
+
+fig = px.density_heatmap(
+    tips,
+    x="total_bill",
+    y="tip",
+    marginal_x="histogram",
+    marginal_y="histogram",
+    color_continuous_scale=px.colors.sequential.Viridis,
+    nbinsx=50,
+    nbinsy=50,
+    labels=dict(total_bill="Total bill", tip="Tip"),
+    title="Joint distribution of tip and total bill",
+    width=500,
+    height=500,
+)
+
+fig
+```
+
+## Themes
+
+There are several built-in themes in plotly. These can be modified (see the [documentation](https://plotly.com/python/templates/))
+
+```{python}
+#| eval: false
+import plotly.express as px
+
+df = px.data.gapminder()
+df_2007 = df.query("year==2007")
+k = 0
+for template in [
+    "plotly",
+    "plotly_white",
+    "plotly_dark",
+    "ggplot2",
+    "seaborn",
+    "none",
+    "simple_white",
+]:
+    fig = px.scatter(
+        df_2007,
+        x="gdpPercap",
+        y="lifeExp",
+        size=df_2007["pop"],
+        color="continent",
+        log_x=True,
+        size_max=60,
+        template=template,
+        title="Gapminder 2007: '%s' theme" % template,
+    )
+    file_name = "./plotly/plotly-theme-" + str(k) + ".html"
+    # print(file_name)
+    fig.write_html(file_name)
+    fig.show()
+    k += 1
+
+# from IPython.display import IFrame
+# IFrame(src=file_name, width=1000, height=500)
+```
+
+## Facets
+
+```{python}
+#| code-fold: true
+#| out-height: "400px"
+#| out-width: "800px"
+
+import plotly.express as px
+
+# import seaborn as sns
+
+gap = px.data.gapminder()
+fig = px.line(
+    data_frame=gap,
+    x="year",
+    y="lifeExp",
+    color="continent",
+    facet_col="continent",
+    # line_group="country",
+    facet_col_wrap=3,  # << facet_col is the key
+    labels={"lifeExp": "Life expectancy"},  # , "year" : 'Time (years)'},
+    template="plotly_white",
+    width=1000,
+    height=1000,
+).update_layout(showlegend=False)
+fig.show()
+```
+
+## Animations and controls
+
+::: {.panel-tabset}
+
+## Python
+
+```{python}
+#| code-fold: true
+fig = px.scatter(
+    px.data.gapminder(),
+    x="gdpPercap",
+    y="lifeExp",
+    animation_frame="year",    # Basis for animation
+    animation_group="country", # Groups within animation
+    size="pop",
+    color="continent",
+    hover_name="country",
+    template="plotly_white",
+    log_x=True,                # log-scale on x-axis
+    size_max=45,
+    range_x=[100, 100000],
+    range_y=[25, 90],
+    labels = dict(gdpPercap = "GDP per capita ($)", lifeExp = "Life expectancy (years)",
+                  pop = "Population", country = "Country", continent = "Continent", 
+                  year = "Year", title = "Gapminder data")
+)
+fig.show()
+```
+
+
+## R
+```{r} 
+#| code-fold: true 
+#| out-height: "400px"
+#| out-width: "800px"
+library(plotly)
+library(gapminder)
+
+plot_ly(gapminder, 
+  x = ~gdpPercap,
+  y = ~lifeExp,
+  color = ~continent,
+  size = ~pop,
+  text = ~country,
+  frame = ~year, 
+  ids = ~country,
+  mode = "markers",
+  hovertemplate = paste(
+    "<b>GDP per capita:</b> $%{x}",
+    "<b>Life Expectancy:</b> %{y:.2f} years",
+    "<b>Country:</b> %{text}", sep = "\n")
+  ) |>
+layout(
+  title = "Gapminder data",
+  xaxis = list(type = "log", title = "Life expectancy"),
+  yaxis = list(title = "GDP per capita ($)"),
+  font = list(family = "Gravitas One", color = "#145da0"),
+  legend = list(font = list(family = "Gravitas One", size=14, color = "#145da0"))
+) |>
+animation_opts(frame = 1000, transition = 0, redraw = FALSE)
+```
+
+## ggplotly 
+
+```{r}
+#| code-fold: true 
+#| out-height: "400px"
+#| out-width: "800px"
+gg <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+  geom_point(aes(size = pop, frame = year, ids = country)) +
+  scale_x_log10("GDP per capita ($)", labels = scales::label_comma()) + 
+  labs(y = "Life expectancy (years)", color = "Continent", 
+    frame = "Year", ids = "Country", size = "Population",
+    title = "Gapminder data") + 
+  theme_bw()
+ggplotly(gg)
+```
+:::
+
+Note that animations can be cool, but you really need to think whether they are necessary. Animations are **not** the same as interactivity, and you really need to have a good story (usually changes over time) to make good animated data visualizations.

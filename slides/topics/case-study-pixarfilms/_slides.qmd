@@ -1,0 +1,37 @@
+# Case Study & Interactive Discussion
+
+## The Dataset
+
+Information collected from Wikipedia and other sources about all [Pixar](https://www.pixar.com/) movies. This information is also avaiable as the `pixarfilms` package in {{< fa brands r-project >}}. The raw data files are also here: <https://github.com/erictleung/pixarfilms/blob/main/data-raw/>
+
+Without diving into the actual datasets (yet), here's what we know about each movie:
+
+:::: {.columns}
+
+::: {.column}
+- Movie title
+- Release date
+- Run time (in minutes)
+- Film rating (G, PG, etc.)
+- Production budget ($)
+- People associated with each film
+- Multiple genres and sub-genres for each film
+
+:::
+::: {.column}
+- Box office in US & Canada ($)
+- Box office rest of the world ($)
+- Plot summary
+- Rotten Tomatoes rating (0-100)
+- Metacritic rating (0-100)
+- CinemaScore rating (A, B, C, etc.)
+:::
+
+::::
+
+:::{.incremental}
+- What kinds of questions can we ask of this data?
+- Of these, which ones can we visualize?
+- What is the unit of analysis?
+- What is the best way to represent this data?
+:::

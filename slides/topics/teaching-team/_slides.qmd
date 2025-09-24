@@ -1,0 +1,81 @@
+# Your instructor
+
+## Abhijit Dasgupta
+
+> "AI" is the new line of makeup in data science; putting it on makes even BS attractive.
+
+:::: {.columns}
+::: {.column width="75%" .r-fit-text}
+- Data Science Director at AstraZeneca supporting Oncology R&D (lung, breast, bladder, GI, ovarian)
+  - biomarkers, clinical studies, strategy, decision-making, education
+  - Bayesian, survival, visualization, high-dimensional, causality
+- Adjunct Professor at Georgetown  since 2020, GMU since 2018
+- Data science consultant in a wide variety of domains, from the USPS to telecom to environmental health and epidemiology
+- Academia (TJU, GU), government (NIH), industry (AZ) and consulting
+  - Cancer (15 years), Rheumatology (10 years), Psychiatry
+- R and reproducible research evangelist
+  - Python is cool too!!
+
+**Fun Facts**
+
+- I'm a 5th degree black belt in Aikido,
+- Exploring whiskey, tequila, will drink beer in a pinch, no wine
+
+
+:::
+::: {.column width="25%"}
+
+![Community theater](img/abhijit.jpg)
+
+:::
+::::
+
+# And you?
+
+Did you complete the "Getting to know you" survey?
+
+# What is data science to you?
+
+
+## One view of data science 
+
+![](img/DataScienceVD.png)
+
+
+# Someone who combines the skills of software programmer, statistician, and storyteller slash artist to evoke the chunks of gold hidden under mountains of data
+
+## What skills might we need for this?
+
+- A question to answer
+- Analytic thinking
+- A gnawing feeling that there might be something else going on
+- Domain knowledge (or a knowledgable collaborator)
+- An understanding of uncertainty and randomness (we'll talk about this a bit next)
+
+::: {.callout-important}
+Data is just that, data. What gives it import are context, understanding limitations, and inherent patterns that might be explained or extrapolated
+:::
+
+
+## Uncertainty? What uncertainty?
+
+- This is what you might think when you hear ML / AI results, or even stats results
+  - There is a number that's reported
+  - But there is also some `confidence interval` or `p-value` (in stats, not in ML / AI)
+
+### What is this stuff? and why do we care?
+
+# A JASP demo
+
+## We also want to relate things, don't we?
+
+- Correlation
+- Regression
+- Clusters
+
+### But there can be many answers from the same data. How do we judge?
+
+## Other questions/concepts of interest?
+
+
+## An (adaptable) view of what's coming

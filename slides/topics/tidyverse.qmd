@@ -1,0 +1,324 @@
+
+## What is the ["Tidyverse"](http://www.tidyverse.org)?
+
+> The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures
+
+
+## What is the ["Tidyverse"](http://www.tidyverse.org)?
+
+A set of R packages that:
+
+<ul>
+  <li> help make data more computer-friendly
+  <li>while making your code more human-friendly
+</ul>
+
+
+- Most of these packages are (co-)written by Dr. Hadley Wickham, who has rockstar status in the R world
+- They are supported by the company RStudio
+
+
+## 
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/85520b8f-4629-4763-8a2a-9ceff27458bf_rw_1200.jpg?h=5d85c81a3c09465b086614afb4a2c7e7)
+
+## 
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6e297111-efb7-4555-93d2-085071d1853c_rw_1200.jpg?h=e48090b9c8990f87c681a8037dece17f)
+
+
+## Let us count the ways
+
+There are many ways data can be messy. An incomplete list....
+
++ Column headers are values, not variables
++ Multiple variables are stored in a single column
++ Variables are stored in both rows and columns
++ Multiple types of observational units are saved in the same table
++ A single observational unit is stored in multiple tables
+
+## Ways to have messy (i.e. not tidy) data
+
+1. Column headers contain values
+
+Country   |   < $10K    | $10-20K    | $20-50K   | $50-100K    | > $100K
+----------|-------------|------------|-----------|-------------|---------
+India     |   40        |  25        |   25      |  9          |  1
+USA       |   20        |  20        |  20       | 30          |  10
+
+## Ways to have messy (i.e. not tidy) data
+
+1. Column headers contain values
+
+Country   |   Income  | Percentage
+----------|-----------|------------
+India     |  < $10K   |  40
+USA       |  < $10K   | 20
+
+This is a case of reshaping or melting 
+
+## Ways to have messy (i.e. not tidy) data
+
+2. Multiple variables in one column
+
+Country  | Year   | M_0-14  | F_0-14  | M_ 15-60  | F_15-60  | M_60+  | F_60+
+---------|--------|---------|---------|-----------|----------|--------|-------
+UK       |  2010  |         |         |           |          |        | 
+UK       |  2011  |         |         |           |          |        | 
+
+<p>
+
+Country  | Year   | Gender  | Age    | Count
+---------|--------|---------|--------|-------
+
+
+Separating columns into different variables
+
+## Tidying data
+
+The typical steps are 
+
++ Transforming data from wide to tall (`pivot_longer`) and from tall to wide (`pivot_wider`)
++ Separating columns into different columns
++ Putting columns together into new variables
+
+
+# Cleaning data
+
+## Some actions on data
+
++ Creating new variables (`mutate`)
++ Choose some columns (`select`)
++ Selecting rows based on some criteria (`filter`)
++ Sort data based on some variables (`arrange`)
+
+
+
+## Example data ([link](https://dl.dropboxusercontent.com/s/pqavhcckshqxtjm/brca.csv))
+
+```{webr}
+#| label: dat-brca
+brca_data <- rio::import('data/brca.csv')
+head(brca_data)
+```
+
+## The `tidyverse` package
+
+The `tidyverse` package is a meta-package that installs a set of packages that are useful for data 
+cleaning, data tidying and data munging (manipulating data to get a computationally "attractive" 
+dataset)
+
+## The `tidyverse` package
+
+```{webr}
+# install.packages('tidyverse')
+library(tidyverse)
+```
+
+
+## Core `tidyverse` packages
+
+```{r, echo = FALSE, message=F, warning=F}
+my_tbl <- tibble::tribble(
+  ~Package, ~Description,
+      'ggplot2',     'Data visualization (next week)',
+      'tibble',     'data.frame on steroids',
+      'tidyr',     'Data tidying (today)',
+      'readr',     'Reading text files (CSV)',
+      'purrr',     'Applying functions to data iteratively(later this sem)',
+      'dplyr',     'Data cleaning and munging (today)',
+      'stringr',     'String (character) manipulation',
+      'forcats',     'Manipulating categorical variables'
+  )
+
+require(knitr)
+kable(my_tbl, digits = 3, row.names = FALSE, align = "l",
+              caption = NULL)
+```
+
+## Additional `tidyverse` packages
+
+```{r, echo=F}
+my_tbl <- tibble::tribble(
+  ~Package, ~Description,
+      'readxl',     'Read Excel files',
+      'haven',     'Read SAS, SPSS, Stata files',
+      'lubridate',  'Deal with dates and times'  ,
+      'magrittr',     'Provides the pipe operator %>%',
+      'glue', 'Makes pasting text and data easier')
+
+require(knitr)
+kable(my_tbl, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL)
+
+```
+
+# Pipes
+
+## A pipe example (data munging)
+
+```{r, message=F, warning=F}
+library(tidyverse)
+updated_cars <- 
+  mtcars |> 
+  rownames_to_column(var = 'model') |> 
+  mutate(kmpg = mpg * 1.6) |> 
+  select(model, kmpg, cyl, disp) |> 
+  filter(cyl == 6)
+```
+```{r, echo=F}
+knitr::kable(head(updated_cars), format='pandoc')
+```
+
+[Huh??!!!]{style="color:red; font-size:200%"}
+
+## A pipe example (data munging)
+
+Let's take our time to understand this concept. We start with the `mtcars` dataset, which is built into R.
+
+```{webr}
+head(mtcars)
+```
+
+## A pipe example (data munging)
+
+```{webr}
+library(tidyverse)
+updated_cars <- 
+  mtcars |> # Take the data set
+  janitor::clean_names() |> # Clean up the column names
+  rownames_to_column(var = 'model') |> # Make rownames a column
+  select(model, mpg, cyl, disp) |> # Keep only certain columns
+  mutate(kmpg = mpg * 1.6) |> # Create a new variable
+  filter(cyl == 6) # Keep only certain rows
+
+head(updated_cars)
+```
+
+The idea is to use **verbs** to express operations on a dataset, so it is easier to express what you want to do in code. 
+
+## The pipe operator
+
+The pipe operator ` |> ` takes a 
+**data.frame or tibble object** on the left, then "pipes" it to a function that takes the **data.frame object as its first argument**.
+
+```{r, eval=F}
+mtcars %>% mutate(kmpg = mpg * 1.6)
+```
+
+would be the same as 
+
+```{r, eval = F}
+mutate(mtcars, kmpg = mpg * 1.6)
+```
+
+## The pipe operator
+
+
+### With pipes
+
+```{r, eval = F}
+mtcars %>% 
+  rownames_to_column(var = "model") %>% 
+  select(model:disp) %>% 
+  mutate(kmpg = mpg * 1.6) %>% 
+  filter(cyl == 6)
+```
+
+### Without pipes
+
+```{r, eval = F}
+tmp <- rownames_to_column(mtcars, var="model")
+tmp3 <- select(tmp2, model:disp)
+tmp2 <- mutate(tmp, kmpg = mpg * 1.6)
+tmp4 <- filter(tmp3, cyl == 6)
+```
+
+Both are fine, but I find pipes help translating my thoughts into code better
+
+
+
+# Data tidying
+
+## 
+```{webr}
+
+brca_data <- rio::import('data/brca.csv')
+```
+<img src = "https://dl.dropboxusercontent.com/s/k3r12s7d22zhku8/Screenshot%202018-09-26%2000.27.50.png" 
+  width="800" height="200"></img>
+
+## 
+
+
+```{webr}
+names(brca_data)
+```
+
+## Need for tidying
+
+1. For the same variable (e.g., radius) there are 3 columns giving the mean, se and worst value. So the names of the metric are stored in the column names
+2. There are really 3 kinds of summaries for each metric -- mean, se and worst. 
+
+## Tidying
+
+```{webr}
+
+brca_data
+```
+
+
+## Tidying (selecting)
+
+```{r, eval=F}
+library(tidyverse)
+brca_data |> 
+  select(id, diagnosis, ends_with('mean'), ends_with('se'), ends_with('worst'),
+         -starts_with('fractal')) 
+                             # removes columns starting with "fractal"
+```
+
+
+## Tidying (pivoting)
+
+```{webr}
+library(tidyverse)
+brca_data %>% 
+  select(id, diagnosis, ends_with('mean'),
+         ends_with('se'), ends_with('worst'),
+         -starts_with('fractal')) %>% 
+  pivot_longer(columns = c(-id, -diagnosis), names_to = "variable", values_to = "value") # operate on everything but
+```
+
+> Column names become `variable`, everything stays aligned with id and diagnosis
+
+
+## Tidying (separating)
+
+```{webr}
+library(tidyverse)
+brca_data |> 
+  select(id, diagnosis, ends_with('mean'),
+         ends_with('se'), ends_with('worst'),
+         -starts_with('fractal')) |> 
+  pivot_longer(columns = c(-id, -diagnosis), names_to = "variable", values_to = "value") |> 
+  separate(variable, c("Variable","stat"), sep="_", remove = T) 
+```
+
+> Split `variable` into 2 cols, `Variable` and `stat`
+
+
+## Tidying (spreading)
+
+```{webr}
+library(tidyverse)
+brca_data |> 
+  select(id, diagnosis, ends_with('mean'),
+         ends_with('se'), ends_with('worst'),
+         -starts_with('fractal')) |> 
+  pivot_longer(columns = c(-id, -diagnosis), names_to = "variable", values_to = "value") |> 
+  separate(variable, c("Variable","stat"), sep="_", remove = T) 
+  spread(names_from = stat, values_from = value)
+```
+
+
+

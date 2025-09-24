@@ -1,0 +1,195 @@
+# Functions
+
+
+## Why do we need functions?
+
+When you are typing instructions to the computer, you might find yourself repeating the same instructions over and over. So you end up copying and pasting code for each repitition.
+
++ Can make a mistake copying and pasting
++ If you need to change the instructions, you need to find every instance of it **manually** and change it, and you're likely to miss one
+
+The rule of thumb is, if you're copying the same code more than twice, write a function.
+
++ Write the instructions once
++ Change it in only one place, if needed
+
+
+## Defining functions
+
+The basic syntax of a function is 
+
+```
+<function name> <- function(<input argument(s)>){
+  <code for instructions>
+  ...
+  <more code>
+  return(<output object>)
+}
+```
+
+---
+
+## Defining functions
+
+Let's create our own function to convert feet to inches.
+
+```{webr}
+ft2in <- function(ft){
+  inch <- ft * 12
+  return(inch)
+}
+```
+
++ `ft2in` is the name of the function
++ The input argument is named `ft` (make an expressive name)
++ Inches are computed by multiplying `ft` by 12 and storing it in `inch`
++ The output of the function is the value of the `inch` variable
+
+
+
+## Defining functions
+
+What if we want more than one input?
+
+```{webr}
+ft2in <- function(ft, convert_to){
+  # ft = input (feet)
+  # convert_to = unit to convert to ('in','m','cm')
+  if(convert_to == 'in'){
+    output <- ft * 12
+  }
+  if(convert_to == 'm'){
+    output <- ft * 0.3048
+  }
+  if(convert_to == 'cm'){
+    output <- ft * 30.48
+  }
+  return(paste(output, convert_to))
+}
+```
+
+
+## Quick reminder about conditions
+
+Some comparison operators for filtering
+
+| Operator | Meaning                          |
+|----------|----------------------------------|
+| ==       | Equals                           |
+| !=       | Not equals                       |
+| > / <    | Greater / less than              |
+| >= / <=  | Greater or equal / Less or equal |
+| !        | Not                              |
+| %in%     | In a set                         |
+
+Combining comparisons
+
+| Operator   | Meaning |
+|------------|---------|
+| &          | And     |
+| &#124;       | Or      |
+
+---
+background-image: url(https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6ffcd6d6-c783-4087-ae76-99aa851663ed_rw_1200.png?h=f87df71ff07eb7b5b5c11f3662846772)
+background-size: contain
+
+---
+
+## Defining functions
+
+```{webr}
+ft2in <- function(ft, convert_to){
+  # ft = input (feet)
+  # convert_to = unit to convert to ('in','m','cm')
+  conversion <- case_when( #<<
+    convert_to == 'in' ~ 12, #<<
+    convert_to =='m' ~ 0.3048, #<<
+    convert_to == 'cm' ~ 30.48, #<<
+    TRUE ~ 1  # otherwise #<< 
+  ) #<<
+  output = ft * conversion
+  return(paste(output, convert_to))
+}
+```
+
+
+## The concept of local vs global variables
+
+```{r}
+x <-  10
+print(x)
+
+f <- function(x){
+  x <- 5
+  print(x)
+}
+
+f(x)
+
+print(x)
+```
+
+The `x` inside the function is local to the function and is independent of the `x` in the global space that has the value 10..
+
+
+# Loops   
+
+
+
+## for-loops
+
+![](https://giphy.com/gifs/doctorwho-doctor-who-dr-patrick-troughton-SVI9nccwH3sz5XJhbK)
+
+---
+
+## for-loops
+
+The for-loop is a construct to repeat the same operation over a list of values.
+
+Basic syntax:
+
+```
+for(<variable> in <list>){
+    <code>
+    ...
+    <more code>
+}
+```
+
+Example:
+
+.pull-left[
+```{r loop1, eval = F, echo = T}
+for(i in 1:10){
+  print(i)
+}
+```
+
+Here `i` is a dummy variable. It's actual name doesn't matter, just its action
+]
+.pull-right[
+```{r, eval=T, echo = F, ref.label="loop1"}
+```
+]
+
+---
+
+## for-loops
+
+Example:
+
+```{r}
+for(n in names(iris)){
+  if(is.numeric(iris[,n])){
+    print(glue::glue('The mean of {n} is {mean(iris[,n])}')) #<<
+  }
+}
+```
+
+You don't need the `<list>` in the for-loop definition to be integers. In this case it is a list of strings.
+
+Note that vectors are also considered lists for this purpose. 
+
+::: {.aside}
+The **glue** package allows you to run templated text strings interspersed with the results of R objects]
+:::

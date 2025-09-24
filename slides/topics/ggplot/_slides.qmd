@@ -1,0 +1,26 @@
+## An implementation mental model: The Grammar of Graphics
+
+-   The Grammar of graphics is a conceptual framework for thinking about graphics
+-   It provides a hierarchy of elements to deconstruct and understand figure design
+
+### Historical context
+
+- 1994: William S. Cleveland, The Elements of Graphing Data, lists the "basic elements of graph construction" as **scales, captions, plotting symbols, reference lines, keys, labels, panels, and tick marks.**
+
+- 1999: L. Wilkinson's book *The Grammar of Graphics* defines 'components of a graphic', a tructured framework utilizing a layered approach to describe and construct visualizations
+
+- 2007/2008: Hadley Wickham releases `ggplot2` and writes his [doctoral thesis](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=12e56343dd1b8ffecc83e0e9d95df883ab1217fc)
+
+
+## The Grammar of Graphics
+
+Hadley Wickham implemented Wilkinson’s grammar in R with the popular `ggplot2` package.
+
+| Statement | Description | Munzer Model |
+| --------|-----------------------|--------|
+| DATA | a set of data operations that create variables from datasets | [What?: Data]{.red}
+| TRANS| variable transformation (e.g. rank)| [How?: Manipulate]{.green}
+| SCALE| scale transformations (e.g. log)|
+| COORD| a coordinate system (e.g. polar)>|
+| ELEMENT| graphs (e.g. points) and their aesthetic attributes (e.g. color)| [How?: Encode (marks and channels)]{.green}
+| GUIDE| one or more guides (axes, legends, etc.)|
