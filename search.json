@@ -575,7 +575,7 @@
     "href": "site-page-content/prep-work.html#week-4-september-30",
     "title": "Weekly Class Preparation",
     "section": "Week 4: September 30",
-    "text": "Week 4: September 30\nThis week, we start exploring the world of statistical pattern recognition, and think about the kinds of models and algorithms can help us identify patterns in data. We’ll start distinguishing between explanatory and predictive modeling, and think about the kinds of questions we can answer with models. We’ll also distinguish between unsupervised and supervised learning.\nReading: 1. A fundamental paper to understand how to think about models: The Two Cultures by Leo Breiman. This is a must-read for the class, and for anyone interested in data science. 1. IMS Chapter 10 1. What is Statistical Learning? (ISLR Chapter 2.1, book available here)",
+    "text": "Week 4: September 30\nThis week, we start exploring the world of statistical pattern recognition, and think about the kinds of models and algorithms can help us identify patterns in data. We’ll start distinguishing between explanatory and predictive modeling, and think about the kinds of questions we can answer with models. We’ll also distinguish between unsupervised and supervised learning.\nReading:\n\nA fundamental paper to understand how to think about models: The Two Cultures by Leo Breiman. This is a must-read for the class, and for anyone interested in data science.\nIMS Chapter 10\nWhat is Statistical Learning? (ISLR Chapter 2.1, book available here)",
     "crumbs": [
       "Weekly Class Preparation"
     ]
@@ -640,7 +640,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Wed Sep 24, 2025 at 03:57 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Wed Sep 24, 2025 at 03:59 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
