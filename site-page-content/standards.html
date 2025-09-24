@@ -241,8 +241,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#code" id="toc-code" class="nav-link active" data-scroll-target="#code">Code</a></li>
-  <li><a href="#rendered-output-pdf-html-etc." id="toc-rendered-output-pdf-html-etc." class="nav-link" data-scroll-target="#rendered-output-pdf-html-etc.">Rendered output (PDF, html, etc.)</a></li>
-  <li><a href="#use-of-git" id="toc-use-of-git" class="nav-link" data-scroll-target="#use-of-git">Use of <code>git</code></a></li>
+  <li><a href="#homework-submissions-quarto-documents" id="toc-homework-submissions-quarto-documents" class="nav-link" data-scroll-target="#homework-submissions-quarto-documents">Homework submissions (Quarto documents)</a>
+  <ul class="collapse">
+  <li><a href="#after-homework-5" id="toc-after-homework-5" class="nav-link" data-scroll-target="#after-homework-5">After Homework 5:</a></li>
+  </ul></li>
+  <li><a href="#final-reports-pdf-html-etc." id="toc-final-reports-pdf-html-etc." class="nav-link" data-scroll-target="#final-reports-pdf-html-etc.">Final reports (PDF, html, etc.)</a></li>
   </ul>
 </nav>
     </div>
@@ -262,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Thursday Sep 18, 2025 at 03:58 am</p>
+      <p class="date">Wednesday Sep 24, 2025 at 03:09 am</p>
     </div>
   </div>
   
@@ -289,40 +292,48 @@ Warning
 </div>
 <section id="code" class="level2">
 <h2 class="anchored" data-anchor-id="code">Code</h2>
-</section>
-<section id="rendered-output-pdf-html-etc." class="level2">
-<h2 class="anchored" data-anchor-id="rendered-output-pdf-html-etc.">Rendered output (PDF, html, etc.)</h2>
 <ul>
-<li>Code should be folded, and not echoed</li>
-<li>Code quality
-<ul>
-<li>Code should be styled/linted using styler/lintr in R</li>
-<li>Comments should be present as needed to explain which code chunks are doing what</li>
-</ul></li>
+<li>Code should be commented as needed to explain what is being done</li>
+<li>Code should be styled using styler/lintr in R</li>
 <li>No warnings or messages should be visible in the final report</li>
-<li>All output should be formatted. <strong>No raw output</strong>. Use the capabilities of R and Quarto to achieve this.
+<li>No packages should be installed in the code (You should never include code to install packages in a Quarto document)</li>
+</ul>
+</section>
+<section id="homework-submissions-quarto-documents" class="level2">
+<h2 class="anchored" data-anchor-id="homework-submissions-quarto-documents">Homework submissions (Quarto documents)</h2>
 <ul>
-<li>In particular, consider Rich Iannone’s work around <code>gt</code>.</li>
-</ul></li>
+<li>The code standards above apply</li>
+<li>All code should be visible and not folded, unless otherwise specified</li>
+<li>Any visualizations should be properly annotated, with no variable names visible</li>
 <li>All text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)</li>
+</ul>
+<section id="after-homework-5" class="level3">
+<h3 class="anchored" data-anchor-id="after-homework-5">After Homework 5:</h3>
+<ul>
+<li>All output should be formatted after Homework 5. <strong>No raw output</strong>. Use the capabilities of R and Quarto to achieve this.
+<ul>
+<li>In particular, consider Rich Iannone’s work around the <strong>gt</strong> package.</li>
+</ul></li>
 <li>All plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions</li>
 <li>Pages with multiple topical sections should also contain a table of contents, either fixed or floating</li>
 <li>References should be clearly cited and there should be a reference list on the page where the reference is made.</li>
+<li>If you are using code from other sources (e.g., Stack Overflow, GitHub, etc.), you should provide a reference to the source in a comment in the code</li>
+<li>Any use of AI tools (e.g., ChatGPT, Bard, etc.) should be clearly indicated in a comment in the code</li>
 </ul>
 </section>
-<section id="use-of-git" class="level2">
-<h2 class="anchored" data-anchor-id="use-of-git">Use of <code>git</code></h2>
-<p>‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.</p>
+</section>
+<section id="final-reports-pdf-html-etc." class="level2">
+<h2 class="anchored" data-anchor-id="final-reports-pdf-html-etc.">Final reports (PDF, html, etc.)</h2>
 <ul>
-<li>You <strong>must</strong> use git commands to add files to your repositories on your machine. This includes <code>git clone</code>, <code>git pull</code>, <code>git push</code>, <code>git add</code> and <code>git commit</code>.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. <strong>You cannot manually upload files to your repositories on GitHub.</strong></li>
-<li>We expect to see several commits in all your work. This is important for several reasons:
+<li>All guidelines for homework submissions after Homework 5 apply</li>
+<li>Code should be folded, and not echoed
 <ul>
-<li>It shows the progress in your work</li>
-<li>It helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.</li>
-<li>Generally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.</li>
+<li>No code should be visible in the final report</li>
 </ul></li>
+<li>All figures and tables should be numbered and have self-explanatory captions</li>
+<li>There should be a reference list at the end of the document</li>
+<li>Either the raw Quarto file or all the code used to generate the report should be submitted as an appendix to the final report. This should be properly formatted and commented code that can be run to generate the data-drive artufacts (tables, figures, etc.) in the report</li>
 </ul>
-<p>See <a href="https://happygitwithr.com" class="uri">https://happygitwithr.com</a> for a nice data science centric approach to git.</p>
 
 
 </section>

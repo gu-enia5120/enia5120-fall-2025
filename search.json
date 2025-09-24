@@ -515,27 +515,27 @@
     "href": "site-page-content/standards.html#code",
     "title": "Minimum standards for deliverables",
     "section": "Code",
-    "text": "Code",
+    "text": "Code\n\nCode should be commented as needed to explain what is being done\nCode should be styled using styler/lintr in R\nNo warnings or messages should be visible in the final report\nNo packages should be installed in the code (You should never include code to install packages in a Quarto document)",
     "crumbs": [
       "Minimum standards for deliverables"
     ]
   },
   {
-    "objectID": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
-    "href": "site-page-content/standards.html#rendered-output-pdf-html-etc.",
+    "objectID": "site-page-content/standards.html#homework-submissions-quarto-documents",
+    "href": "site-page-content/standards.html#homework-submissions-quarto-documents",
     "title": "Minimum standards for deliverables",
-    "section": "Rendered output (PDF, html, etc.)",
-    "text": "Rendered output (PDF, html, etc.)\n\nCode should be folded, and not echoed\nCode quality\n\nCode should be styled/linted using styler/lintr in R\nComments should be present as needed to explain which code chunks are doing what\n\nNo warnings or messages should be visible in the final report\nAll output should be formatted. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around gt.\n\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.",
+    "section": "Homework submissions (Quarto documents)",
+    "text": "Homework submissions (Quarto documents)\n\nThe code standards above apply\nAll code should be visible and not folded, unless otherwise specified\nAny visualizations should be properly annotated, with no variable names visible\nAll text should be checked for spelling and grammar and should be in good quality English (Grammarly is a friend here)\n\n\nAfter Homework 5:\n\nAll output should be formatted after Homework 5. No raw output. Use the capabilities of R and Quarto to achieve this.\n\nIn particular, consider Rich Iannone’s work around the gt package.\n\nAll plots should be numbered/labeled so they can be referred to in the text and in reviews. All plots should also have self-explanatory captions\nPages with multiple topical sections should also contain a table of contents, either fixed or floating\nReferences should be clearly cited and there should be a reference list on the page where the reference is made.\nIf you are using code from other sources (e.g., Stack Overflow, GitHub, etc.), you should provide a reference to the source in a comment in the code\nAny use of AI tools (e.g., ChatGPT, Bard, etc.) should be clearly indicated in a comment in the code",
     "crumbs": [
       "Minimum standards for deliverables"
     ]
   },
   {
-    "objectID": "site-page-content/standards.html#use-of-git",
-    "href": "site-page-content/standards.html#use-of-git",
+    "objectID": "site-page-content/standards.html#final-reports-pdf-html-etc.",
+    "href": "site-page-content/standards.html#final-reports-pdf-html-etc.",
     "title": "Minimum standards for deliverables",
-    "section": "Use of git",
-    "text": "Use of git\n‘git’ is the most popular version control tool used today. It is very important that you are fluent in the tool and the process.\n\nYou must use git commands to add files to your repositories on your machine. This includes git clone, git pull, git push, git add and git commit.You may use git functionality within your IDE (VSCode, RStudio, Positron, etc.) which runs git commands for you. You cannot manually upload files to your repositories on GitHub.\nWe expect to see several commits in all your work. This is important for several reasons:\n\nIt shows the progress in your work\nIt helps you revert back to a prior “snapshot” of your work in case anything goes wrong. Murphy’s law says that if something can go wrong, it will.\nGenerally the rule is to commit often with small-ish commits and a descriptive commit message, and then push to GitHub at the end of your work or your day. Small commits make it easier to go back without losing too much work.\n\n\nSee https://happygitwithr.com for a nice data science centric approach to git.",
+    "section": "Final reports (PDF, html, etc.)",
+    "text": "Final reports (PDF, html, etc.)\n\nAll guidelines for homework submissions after Homework 5 apply\nCode should be folded, and not echoed\n\nNo code should be visible in the final report\n\nAll figures and tables should be numbered and have self-explanatory captions\nThere should be a reference list at the end of the document\nEither the raw Quarto file or all the code used to generate the report should be submitted as an appendix to the final report. This should be properly formatted and commented code that can be run to generate the data-drive artufacts (tables, figures, etc.) in the report",
     "crumbs": [
       "Minimum standards for deliverables"
     ]
@@ -630,7 +630,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Wed Sep 24, 2025 at 01:51 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Wed Sep 24, 2025 at 03:10 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
