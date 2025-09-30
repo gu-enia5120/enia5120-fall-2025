@@ -6,11 +6,9 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-3e476e15ae565c222d94875412ae43a1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dece3bd051e391dd7205a6b15f93dc59.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
-<script src="../site_libs/quarto-contrib/countdown-0.5.0/countdown.js"></script>
-<link href="../site_libs/quarto-contrib/countdown-0.5.0/countdown.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/kbd/kbd.js"></script>
@@ -18,7 +16,7 @@
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+  <meta name="generator" content="quarto-1.6.40">
 
   <title>ENIA 5120 – Lecture 3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -318,13 +316,7 @@
 <section>
 <section id="start-up-r-and-rstudio" class="title-slide slide level1 center">
 <h1>Start up R and RStudio</h1>
-<div id="timer_a7e611d90bf7610ca488bc24955f1ced89d71838" class="countdown" data-warn-when="0" data-update-every="1" data-play-sound="false" data-blink-colon="false" data-start-immediately="false" tabindex="0" style="right: 0;bottom: 0;">
-  <div class="countdown-controls">
-    <button class="countdown-bump-down">−</button>
-    <button class="countdown-bump-up">+</button>
- </div>
- <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
- </div>
+{{&lt; countdown minutes="1" &gt;}}
 </section>
 <section id="make-an-rstudio-project" class="slide level2">
 <h2>Make an RStudio project</h2>
@@ -429,8 +421,11 @@
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -443,13 +438,7 @@
 <div class="callout-content">
 <p>If you don’t have the package <code>janitor</code> installed, you can install it by running the following command once:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">install.packages</span>(<span class="st">"janitor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="timer_a7e611d90bf7610ca488bc24955f1ced89d71838" class="countdown" data-warn-when="0" data-update-every="1" data-play-sound="false" data-blink-colon="false" data-start-immediately="false" tabindex="0" style="right: 0;bottom: 0;">
-  <div class="countdown-controls">
-    <button class="countdown-bump-down">−</button>
-    <button class="countdown-bump-up">+</button>
- </div>
- <code class="countdown-time"><span class="countdown-digits minutes">00</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">45</span></code>
- </div>
+{{&lt; countdown seconds="45" minutes="0"&gt;}}
 </div>
 </div>
 </div>
@@ -494,13 +483,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeShyZWFkcilcbmxp
 </div>
 </div>
 </div>
-<div id="timer_a7e611d90bf7610ca488bc24955f1ced89d71838" class="countdown" data-warn-when="0" data-update-every="1" data-play-sound="false" data-blink-colon="false" data-start-immediately="false" tabindex="0" style="right: 0;bottom: 0;">
-  <div class="countdown-controls">
-    <button class="countdown-bump-down">−</button>
-    <button class="countdown-bump-up">+</button>
- </div>
- <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">30</span></code>
- </div>
+{{&lt; countdown minutes="1" seconds="30" &gt;}}
 <aside><div>
 <p>The dataset is available <a href="https://raw.githubusercontent.com/gu-dsan5200/datasets/refs/heads/main/cars2018.csv">here</a></p>
 </div></aside></section>
@@ -509,13 +492,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeShyZWFkcilcbmxp
 <ul>
 <li>Install the <strong>rio</strong> package if you haven’t already</li>
 </ul>
-<div id="timer_a7e611d90bf7610ca488bc24955f1ced89d71838" class="countdown" data-warn-when="0" data-update-every="1" data-play-sound="false" data-blink-colon="false" data-start-immediately="false" tabindex="0" style="right: 0;bottom: 0;">
-  <div class="countdown-controls">
-    <button class="countdown-bump-down">−</button>
-    <button class="countdown-bump-up">+</button>
- </div>
- <code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
- </div>
+{{&lt; countdown seconds="60" minutes="0"&gt;}}
 </section>
 <section id="now-use-it" class="slide level2">
 <h2>Now use it</h2>
@@ -754,7 +731,7 @@ while making your code more human-friendly
 
 </div>
 <script type="webr-3-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiYnJjYV9kYXRhIDwtIHJpbzo6aW1wb3J0KCdkYXRhL2JyY2EuY3N2JylcbmhlYWQoYnJjYV9kYXRhKSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImxhYmVsIjoiZGF0LWJyY2EifSwiY29kZSI6ImJyY2FfZGF0YSA8LSByaW86OmltcG9ydCgnZGF0YS9icmNhLmNzdicpXG5oZWFkKGJyY2FfZGF0YSkifQ==
 </script>
 </div>
 </div>
@@ -870,6 +847,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBpbnN0YWxsLnBhY2thZ2Vz
 <section id="a-pipe-example-data-munging" class="slide level2">
 <h2>A pipe example (data munging)</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb4-2"><a></a>updated_cars <span class="ot">&lt;-</span> </span>
 <span id="cb4-3"><a></a>  mtcars <span class="sc">|&gt;</span> </span>
@@ -877,6 +856,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBpbnN0YWxsLnBhY2thZ2Vz
 <span id="cb4-5"><a></a>  <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb4-6"><a></a>  <span class="fu">select</span>(model, kmpg, cyl, disp) <span class="sc">|&gt;</span> </span>
 <span id="cb4-7"><a></a>  <span class="fu">filter</span>(cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -964,29 +944,41 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <h2>The pipe operator</h2>
 <p>The pipe operator <code>|&gt;</code> takes a <strong>data.frame or tibble object</strong> on the left, then “pipes” it to a function that takes the <strong>data.frame object as its first argument</strong>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>would be the same as</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">mutate</span>(mtcars, <span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="the-pipe-operator-1" class="slide level2">
 <h2>The pipe operator</h2>
 <h3 id="with-pipes">With pipes</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>mtcars <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"model"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-3"><a></a>  <span class="fu">select</span>(model<span class="sc">:</span>disp) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-4"><a></a>  <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-5"><a></a>  <span class="fu">filter</span>(cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <h3 id="without-pipes">Without pipes</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>tmp <span class="ot">&lt;-</span> <span class="fu">rownames_to_column</span>(mtcars, <span class="at">var=</span><span class="st">"model"</span>)</span>
 <span id="cb8-2"><a></a>tmp3 <span class="ot">&lt;-</span> <span class="fu">select</span>(tmp2, model<span class="sc">:</span>disp)</span>
 <span id="cb8-3"><a></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(tmp, <span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span>
 <span id="cb8-4"><a></a>tmp4 <span class="ot">&lt;-</span> <span class="fu">filter</span>(tmp3, cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Both are fine, but I find pipes help translating my thoughts into code better</p>
 </section></section>
@@ -1045,11 +1037,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiXG5icmNhX2RhdGEifQ==
 <section id="tidying-selecting" class="slide level2">
 <h2>Tidying (selecting)</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb9-2"><a></a>brca_data <span class="sc">|&gt;</span> </span>
 <span id="cb9-3"><a></a>  <span class="fu">select</span>(id, diagnosis, <span class="fu">ends_with</span>(<span class="st">'mean'</span>), <span class="fu">ends_with</span>(<span class="st">'se'</span>), <span class="fu">ends_with</span>(<span class="st">'worst'</span>),</span>
 <span id="cb9-4"><a></a>         <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">'fractal'</span>)) </span>
 <span id="cb9-5"><a></a>                             <span class="co"># removes columns starting with "fractal"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="tidying-pivoting" class="slide level2">
@@ -1180,10 +1175,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <li>There are several functions used to make the following visualization</li>
 </ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">ggplot</span>(beaches, <span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">y =</span> rainfall)) <span class="sc">+</span> </span>
 <span id="cb10-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
 <span id="cb10-3"><a></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span> </span>
 <span id="cb10-4"><a></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="brackets-3" class="slide level2">
@@ -1193,6 +1191,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <div class="column">
 <p>A conditional statement</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="cf">if</span> (age <span class="sc">&lt;</span> <span class="dv">18</span>){</span>
 <span id="cb11-2"><a></a>   person <span class="ot">&lt;-</span> <span class="st">'Minor'</span></span>
 <span id="cb11-3"><a></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;</span> <span class="dv">65</span>) {</span>
@@ -1200,10 +1200,13 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <span id="cb11-5"><a></a>} <span class="cf">else</span> {</span>
 <span id="cb11-6"><a></a>  person <span class="ot">&lt;-</span> <span class="st">'Adult'</span></span>
 <span id="cb11-7"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div><div class="column">
 <p>A function definition</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>my_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T){</span>
 <span id="cb12-2"><a></a>  <span class="cf">if</span>(na.rm){</span>
 <span id="cb12-3"><a></a>    x <span class="ot">&lt;-</span> x[<span class="sc">!</span><span class="fu">is.na</span>(x)]</span>
@@ -1213,6 +1216,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <span id="cb12-7"><a></a>  mn <span class="ot">&lt;-</span> s <span class="sc">/</span> n <span class="co"># There is a built-in function mean, so I don't use that word</span></span>
 <span id="cb12-8"><a></a>  <span class="fu">return</span>(mn)</span>
 <span id="cb12-9"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div></div>
 </section></section>
@@ -1351,21 +1355,30 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnQyaW4gPC0gZnVuY3Rpb24o
 <section id="the-concept-of-local-vs-global-variables" class="slide level2">
 <h2>The concept of local vs global variables</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>x <span class="ot">&lt;-</span>  <span class="dv">10</span></span>
 <span id="cb14-2"><a></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
 <span id="cb16-2"><a></a>  x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb16-3"><a></a>  <span class="fu">print</span>(x)</span>
 <span id="cb16-4"><a></a>}</span>
 <span id="cb16-5"><a></a></span>
 <span id="cb16-6"><a></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">print</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
@@ -1393,9 +1406,12 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnQyaW4gPC0gZnVuY3Rpb24o
 <p>Example:</p>
 <p>.pull-left[</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
 <span id="cb21-2"><a></a>  <span class="fu">print</span>(i)</span>
 <span id="cb21-3"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Here <code>i</code> is a dummy variable. It’s actual name doesn’t matter, just its action ] .pull-right[</p>
 <div class="cell">
@@ -1418,11 +1434,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZnQyaW4gPC0gZnVuY3Rpb24o
 <h2>for-loops</h2>
 <p>Example:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">names</span>(iris)){</span>
 <span id="cb23-2"><a></a>  <span class="cf">if</span>(<span class="fu">is.numeric</span>(iris[,n])){</span>
 <span id="cb23-3"><a></a>    <span class="fu">print</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">'The mean of {n} is {mean(iris[,n])}'</span>)) <span class="co">#&lt;&lt;</span></span>
 <span id="cb23-4"><a></a>  }</span>
 <span id="cb23-5"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>The mean of Sepal.Length is 5.84333333333333
 The mean of Sepal.Width is 3.05733333333333
@@ -1450,7 +1469,7 @@ eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xNSIsImlubGluZSI6ZmFsc2UsIm1l
 </div>
 </div>
 <script type="vfs-file">
-W10=
+WyJkYXRhIl0=
 </script>
 <aside><div>
 <p>The <strong>glue</strong> package allows you to run templated text strings interspersed with the results of R objects]</p>
@@ -1811,7 +1830,7 @@ W10=
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

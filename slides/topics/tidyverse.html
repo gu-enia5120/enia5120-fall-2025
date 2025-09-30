@@ -6,13 +6,13 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3e476e15ae565c222d94875412ae43a1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dece3bd051e391dd7205a6b15f93dc59.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+  <meta name="generator" content="quarto-1.6.40">
 
   <title>ENIA 5120 – tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -524,6 +524,8 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBpbnN0YWxsLnBhY2thZ2Vz
 <section id="a-pipe-example-data-munging" class="slide level2">
 <h2>A pipe example (data munging)</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a>updated_cars <span class="ot">&lt;-</span> </span>
 <span id="cb1-3"><a></a>  mtcars <span class="sc">|&gt;</span> </span>
@@ -531,6 +533,7 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBpbnN0YWxsLnBhY2thZ2Vz
 <span id="cb1-5"><a></a>  <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb1-6"><a></a>  <span class="fu">select</span>(model, kmpg, cyl, disp) <span class="sc">|&gt;</span> </span>
 <span id="cb1-7"><a></a>  <span class="fu">filter</span>(cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -618,29 +621,41 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoibGlicmFyeSh0aWR5dmVyc2Up
 <h2>The pipe operator</h2>
 <p>The pipe operator <code>|&gt;</code> takes a <strong>data.frame or tibble object</strong> on the left, then “pipes” it to a function that takes the <strong>data.frame object as its first argument</strong>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>would be the same as</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">mutate</span>(mtcars, <span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="the-pipe-operator-1" class="slide level2">
 <h2>The pipe operator</h2>
 <h3 id="with-pipes">With pipes</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mtcars <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"model"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a></a>  <span class="fu">select</span>(model<span class="sc">:</span>disp) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-4"><a></a>  <span class="fu">mutate</span>(<span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-5"><a></a>  <span class="fu">filter</span>(cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <h3 id="without-pipes">Without pipes</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>tmp <span class="ot">&lt;-</span> <span class="fu">rownames_to_column</span>(mtcars, <span class="at">var=</span><span class="st">"model"</span>)</span>
 <span id="cb5-2"><a></a>tmp3 <span class="ot">&lt;-</span> <span class="fu">select</span>(tmp2, model<span class="sc">:</span>disp)</span>
 <span id="cb5-3"><a></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">mutate</span>(tmp, <span class="at">kmpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>)</span>
 <span id="cb5-4"><a></a>tmp4 <span class="ot">&lt;-</span> <span class="fu">filter</span>(tmp3, cyl <span class="sc">==</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Both are fine, but I find pipes help translating my thoughts into code better</p>
 </section></section>
@@ -699,11 +714,14 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiXG5icmNhX2RhdGEifQ==
 <section id="tidying-selecting" class="slide level2">
 <h2>Tidying (selecting)</h2>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb6-2"><a></a>brca_data <span class="sc">|&gt;</span> </span>
 <span id="cb6-3"><a></a>  <span class="fu">select</span>(id, diagnosis, <span class="fu">ends_with</span>(<span class="st">'mean'</span>), <span class="fu">ends_with</span>(<span class="st">'se'</span>), <span class="fu">ends_with</span>(<span class="st">'worst'</span>),</span>
 <span id="cb6-4"><a></a>         <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">'fractal'</span>)) </span>
 <span id="cb6-5"><a></a>                             <span class="co"># removes columns starting with "fractal"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="tidying-pivoting" class="slide level2">
@@ -1121,7 +1139,7 @@ W10=
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
