@@ -27,7 +27,7 @@ website:
   #       - text: "Worksheets"
   #         menu:
   #           - text: "Introduction to Quarto"
-  #             href: worksheets/intro-to-Quarto.qmd 
+  #             href: worksheets/intro-to-Quarto.qmd
   #           - text: "Introduction to R"
   #             href: worksheets/intro-to-R.qmd
   #           - text: "Aesthetic mappings"
@@ -75,16 +75,16 @@ website:
   #           - text: "Clustering"
   #             href: worksheets/clustering.qmd
   #           - text: "Hierarchical clustering"
-  #             href: worksheets/hierarchical-clustering.qmd 
+  #             href: worksheets/hierarchical-clustering.qmd
   #           - text: "Redundant coding"
-  #             href: worksheets/redundant-coding.qmd 
+  #             href: worksheets/redundant-coding.qmd
   #           - text: "Dealing with overplotting"
-  #             href: worksheets/overplotting.qmd 
+  #             href: worksheets/overplotting.qmd
   #           - text: "Visualizing geospatial data"
   #             href: worksheets/geospatial-data.qmd
   #           - text: "Interactive plots"
   #             href: worksheets/interactive-plots.qmd
- 
+
   sidebar:
     pinned: true
     background: "#fcc200" # Golden poppy
@@ -105,8 +105,8 @@ website:
             target: _blank
           - href: slides/week-03.qmd
             target: _blank
-          #          - href: slides/week-04.qmd
-          #            target: _blank
+          - href: slides/week-04.qmd
+            target: _blank
           #          - href: slides/week-05.qmd
           #            target: _blank
           #          - href: slides/week-08.qmd

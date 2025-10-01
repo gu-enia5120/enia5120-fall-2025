@@ -10,14 +10,14 @@ format:
     highlight-style: "a11y"
     toc: false
   #  highlight-style: github
-    code-fold: false
+    code-fold: true
     code-overflow: scroll
     code-copy: true
     scrollable: true
     pdf-separate-fragments: false
     fig-align: center
     fig-dpi: 300
-    fig-width: 8
+    fig-width: 5
     fig-asp: 0.618
     fig-cap-location: bottom
     slide-level: 2
