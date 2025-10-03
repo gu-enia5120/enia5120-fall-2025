@@ -12,6 +12,7 @@ project:
     - img
     - "site-page-content/*.pdf"
     - "slides/Wrap-up.pdf"
+    - "assignments/*.qmd"
     - assets
 
 website:
@@ -132,7 +133,7 @@ website:
         contents:
           - href: assignments/week-01.qmd
           - href: assignments/week-02.qmd
-          # - href: assignments/assignment-03.qmd
+          - href: assignments/week-03.qmd
           # - href: assignments/assignment-04.qmd
           # - href: assignments/assignment-05.qmd
           # - href: assignments/assignment-06.qmd
