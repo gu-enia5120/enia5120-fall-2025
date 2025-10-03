@@ -1,5 +1,6 @@
 ---
-title: "Homework Assignment: Statistical Pattern Recognition"
+title: "Homework 3"
+subtitle: "Statistical Pattern Recognition"
 author: "<Your name>"
 format:
     typst: default

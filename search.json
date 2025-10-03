@@ -1085,13 +1085,6 @@
     "text": "Calendar\n\nTopics and Class Meetings\n\n\n\n\n\nWeek\nDate\nTopic\nLabs\nAssignment\nAssignment due date\nProject milestone\nMilestone due date\n\n\n\n\n1\nSep 09\nIntroduction to Data Science\nR/JASP\n\n\n\n\n\n\n2\nSep 16\nEDA and visualization\nggplot2/JASP/jamovi/Bluesky/Exploratory\nHW 1\nSep 22\n\n\n\n\n3\nSep 23\nEDA and visualization, continued\nR labs and worksheets; data manipulation\nHW 2\nSep 28\n\n\n\n\n4\nSep 30\nStatistical learning: finding patterns in data\nModeling lab and worksheets\nHW 3\nOct 05\nMilestone 1\nSep 30\n\n\n5\nOct 07\nProbability: A framework for uncertainty\nIntroduction to simulation\nHW 4\nOct 12\n\n\n\n\n6\nOct 14\nProbability 2\nSimulating studies\nHW 5\nOct 19\nMilestone 2\nOct 14\n\n\n7\nOct 21\nA causality primer\ncausal diagrams, identifying confounders\n\n\n\n\n\n\n8\nOct 28\nDecision-making, ethics, fairness, philosophy\nStudents' choice\n\n\nMilestone 3\nOct 28\n\n\n9\nNov 04\nData Science: modeling, prediction, inference\nData splitting, bootstrapping, cross-validation\nHW 6\nNov 09\n\n\n\n\n10\nNov 11\nBayesian statistics introduction\nBayes rule, simulation,\n\n\nMilestone 4\nNov 11\n\n\n11\nNov 18\nBayesian inference: updating our understanding\nPosterior simulation, predictive checks,\nHW 7\nNov 23\n\n\n\n\n12\nNov 25\nClassical inference: confidence intervals and p-values\nThe infer package\nHW 8\nDec 05\nMilestone 5\nNov 25\n\n\n13\nDec 02\nInterpreting, validating, reporting and making decisions\npredictive uncertainty, calibration,\n\n\n\n\n\n\n14\nDec 09\nProject Presentations\n\n\nDec 14\nFinal submission\nDec 15\n\n\n\n\n\n\n\nNotes:\n\n\n\n\n\n\nNote\n\n\n\nThis schedule is subject to change. Check the timestamp above.\n\n\n\nAssignments will be posted after the corresponding lecture. The due date for HW 8 is extended to account for the Thanksgiving holiday\n\n\n\nDeliverables\n\nAll graded work is due at 11:59pm Eastern time on the due date\nThe final project submission is due the Sunday after the last class meeting."
   },
   {
-    "objectID": "Test.html",
-    "href": "Test.html",
-    "title": "Untitled",
-    "section": "",
-    "text": "Testing\nLooking at the iris dataset\n\n\n\n\n\n\n\n\n\n\n\n[1] 3.758"
-  },
-  {
     "objectID": "assignments/week-01.html",
     "href": "assignments/week-01.html",
     "title": "HW1",
@@ -1149,23 +1142,23 @@
   {
     "objectID": "assignments/week-03.html",
     "href": "assignments/week-03.html",
-    "title": "Homework Assignment: Statistical Pattern Recognition",
+    "title": "Homework 3",
     "section": "",
     "text": "Instructions\n\n\n\nModify this quarto notebook, convert it to PDF using typst or to HTML and submit. Total is 70 points\n{{&lt; downloadthis week-03.qmd dname=\"homework3.qmd\" label=\"Download Quarto file\" &gt;}}\n\n\n\nTextual answers will be graded holistically. 5 points for an accurate and thoughtful answer, 4 points for minor errors, 3 points for a reasonable attempt with minor conceptual issues, 2 or less otherwise\nCoding answers: 5 points for correct results, 4 points for correct approach, wrong answer, 3 points for an attempt which is mostly complete but got stuck in the end, 2 or less otherwise",
     "crumbs": [
       "Assignments",
-      "Homework Assignment: Statistical Pattern Recognition"
+      "Homework 3"
     ]
   },
   {
     "objectID": "assignments/week-03.html#implementing-roc-curves-5-points",
     "href": "assignments/week-03.html#implementing-roc-curves-5-points",
-    "title": "Homework Assignment: Statistical Pattern Recognition",
+    "title": "Homework 3",
     "section": "Implementing ROC curves (5 points)",
     "text": "Implementing ROC curves (5 points)\nYou can read more about ROC curves and AUC here: https://www.statology.org/interpret-roc-curve\nNow, reproduce this graph using ggplot2",
     "crumbs": [
       "Assignments",
-      "Homework Assignment: Statistical Pattern Recognition"
+      "Homework 3"
     ]
   },
   {
