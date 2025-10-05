@@ -290,7 +290,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#week-4-september-30" id="toc-week-4-september-30" class="nav-link" data-scroll-target="#week-4-september-30">Week 4: September 30</a></li>
   <li><a href="#week-5-october-7-meeting-october-8" id="toc-week-5-october-7-meeting-october-8" class="nav-link" data-scroll-target="#week-5-october-7-meeting-october-8">Week 5: October 7 (meeting October 8)</a>
   <ul class="collapse">
-  <li><a href="#reading-1" id="toc-reading-1" class="nav-link" data-scroll-target="#reading-1">Reading</a></li>
+  <li><a href="#reading-1" id="toc-reading-1" class="nav-link" data-scroll-target="#reading-1">Reading</a>
+  <ul class="collapse">
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional readings</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -311,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Sunday Oct 5, 2025 at 10:24 am</p>
+      <p class="date">Sunday Oct 5, 2025 at 10:58 am</p>
     </div>
   </div>
   
@@ -447,12 +450,19 @@ Reading
 <section id="reading-1" class="level2">
 <h2 class="anchored" data-anchor-id="reading-1">Reading</h2>
 <ul>
+<li><a href="https://math.libretexts.org/Courses/Prince_Georges_Community_College/MAT_1130_Mathematical_Ideas_Mirtova_Jones_(PGCC:_Fall_2022)/03:_Probability/3.01:_Basics_of_Probability">LibreTexts: Basics of Probability</a></li>
+<li><a href="https://seeing-theory.brown.edu/basic-probability/index.html">Seeing Theory Chapter 1</a> (The Seeing Theory site is really good for several topics we’ll cover)</li>
 <li><a href="https://senseaboutscience.org/wp-content/uploads/2016/11/Makingsenseofuncertainty.pdf">Making Sense of Uncertainty</a></li>
+</ul>
+<section id="additional-readings" class="level3">
+<h3 class="anchored" data-anchor-id="additional-readings">Additional readings</h3>
+<ul>
 <li><a href="https://openbooks.library.umass.edu/p132-lab-manual/chapter/introduction-to-statistical-vs-systematic-uncertainty/">Introduction to Statistical vs Systematic Uncertainty</a></li>
 <li><a href="https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/variability-and-uncertainty-standard-deviations-standard-errors-confidence-intervals.html">Variability and Uncertainty: Standard Deviations, Standard Errors, Confidence Intervals</a></li>
 </ul>
 
 
+</section>
 </section>
 </section>
 
@@ -691,7 +701,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
