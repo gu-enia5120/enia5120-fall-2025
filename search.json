@@ -1,5 +1,131 @@
 [
   {
+    "objectID": "templates/templates.html#code-style-and-ggplot-theme",
+    "href": "templates/templates.html#code-style-and-ggplot-theme",
+    "title": "Quarto Blackboard theme",
+    "section": "Code style and ggplot theme",
+    "text": "Code style and ggplot theme\n\nggplot(cars) +\n  geom_point(aes(speed,dist),col=\"white\")+\n  theme_chalk()"
+  },
+  {
+    "objectID": "templates/templates.html#images-and-text-with-frame",
+    "href": "templates/templates.html#images-and-text-with-frame",
+    "title": "Quarto Blackboard theme",
+    "section": "Images and text with frame",
+    "text": "Images and text with frame\n\nImages and text can be framed!"
+  },
+  {
+    "objectID": "templates/templates.html#lists",
+    "href": "templates/templates.html#lists",
+    "title": "Quarto Blackboard theme",
+    "section": "Lists",
+    "text": "Lists\n\nLists\nare\nfun\n\nfun fun"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html",
+    "href": "supplemental/models/categorical.html",
+    "title": "Categorical variables and factors in R",
+    "section": "",
+    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#what-are-categorical-variables",
+    "href": "supplemental/models/categorical.html#what-are-categorical-variables",
+    "title": "Categorical variables and factors in R",
+    "section": "",
+    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#non-ordered",
+    "href": "supplemental/models/categorical.html#non-ordered",
+    "title": "Categorical variables and factors in R",
+    "section": "Non-ordered",
+    "text": "Non-ordered\n\nRace (White, Black, Hispanic, Asian, Native American)\nGender (Male, Female, Other)\nGeographic regions (Africa, Asia, Europe, North America, South America)\nGenes/Proteins"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordered",
+    "href": "supplemental/models/categorical.html#ordered",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordered",
+    "text": "Ordered\n\nIncome levels (&lt; $10K, $10K - $25K, $25K - $75K, $75K - $100K)\nBMI categories (Underweight, Normal, Overweight, Obese)\nNumber of bedrooms in houses (1 BR, 2BR, 3BR, 4BR)"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#the-factor-data-type",
+    "href": "supplemental/models/categorical.html#the-factor-data-type",
+    "title": "Categorical variables and factors in R",
+    "section": "The factor data type",
+    "text": "The factor data type\nR stores categorical variables as type factor.\n\nYou can coerce a character or numeric object into a factor using as.factor.\nYou can check if an object is a factor with is.factor.\nYou can create a factor with the function factor.\n\n\n\n\n\n\n\nThe factor function\n\n\n\nfactor(x = character(), levels, labels = levels,       exclude = NA, ordered = is.ordered(x), nmax = NA)\nfactor returns an object of class “factor” which has a set of integer codes the length of x with a “levels” attribute of mode character and unique\n\n\n\nInternally, each level of a factor is coded as an integer\nEach such integer has a corresponding level which is a character, describing the level.\nYou can add labels to each level to change the printed form of the factor.\n\n\n\nCode\nx &lt;- c('Maryland','Virginia', 'District', 'Maryland','Virginia')  # a character vector\nxf &lt;- as.factor(x)\nxf\n\n\n[1] Maryland Virginia District Maryland Virginia\nLevels: District Maryland Virginia\n\n\nThere are three levels, that by default are in alphabetical order\n\n\n\n\nCode\nas.integer(xf)\n\n\n[1] 2 3 1 2 3\n\n\n\nDistrict = 1, Maryland = 2, Virginia = 3\n\n\n\n\nCode\nas.character(xf)\n\n\n[1] \"Maryland\" \"Virginia\" \"District\" \"Maryland\" \"Virginia\"\n\n\n\nGet original characters back\n\n\n\nNow let’s look at what happens when we convert a numeric vector to a factor\n\n\nCode\ny &lt;- c(5, 3, 9, 4, 5, 3)\nyf &lt;- as.factor(y)\nyf\n\n\n[1] 5 3 9 4 5 3\nLevels: 3 4 5 9\n\n\nLevels are still in alphanumeric order\n\n\n\n\nCode\nas.numeric(yf)\n\n\n[1] 3 1 4 2 3 1\n\n\n\nNote, we don’t get original integers back!!\n3 = 1, 4 = 2, 5 = 3, 9 = 4\n\n\n\n\nCode\nas.numeric(as.character(yf))\n\n\n[1] 5 3 9 4 5 3\n\n\n\nThis is how you get numbers back\n\n\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x)\nunclass(xf)\n\n\n[1] 2 1 3 2 1\nattr(,\"levels\")\n[1] \"DC\" \"MD\" \"VA\"\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x, levels = c('MD','DC','VA'))\nunclass(xf)\n\n\n[1] 1 2 3 1 2\nattr(,\"levels\")\n[1] \"MD\" \"DC\" \"VA\"\n\n\n\n\n\nIf I change the level designation, the underlying coding changes\nThis is important when a factor is an independent variable in a regression model\n\nThe drv variable in the mpg dataset tells us the kind of drive (front, rear or 4-wheel) each car has. However it’s coded as f, r, and 4, which is not great for display purposes. We can re-label these levels, but we have to be a bit careful\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n\n\n\n[1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4', 'f','r'),\n2              labels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n2\n\nlabels are what you want the levels to be displayed as\n\n\n\n\n[1] Front wheel Front wheel Front wheel Front wheel Front wheel Front wheel\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\nLevels have to match what’s actually in the original data, but you can re-label the levels."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
+    "href": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
+    "title": "Categorical variables and factors in R",
+    "section": "Factors are R’s discrete data type",
+    "text": "Factors are R’s discrete data type\n\nFactors are interpreted as discrete by R’s functions\n\n\n\n\n\nCode\nggplot(mpg,\n       aes(year, cty))+\n  geom_boxplot()\n\n\nWarning: Continuous x aesthetic\nℹ did you forget `aes(group = ...)`?\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(mpg, \n       aes(as.factor(year), cty))+\n  geom_boxplot()"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
+    "href": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
+    "title": "Categorical variables and factors in R",
+    "section": "Dummy variables: converting factors to numeric for modeling",
+    "text": "Dummy variables: converting factors to numeric for modeling\nModeling is a numerical enterprise, where we optimize a function of numerical variables to fit a numerical outcome. So categorical variables need to be converted to some numerical representation. The most common approach is to use dummy variables (also called indicator variables or one-hot encoding). With this approach, if a factor has n levels, we create n-1 new binary variables, each taking on values 0 or 1. Each new variable indicates whether the observation belongs to that level or not. The level corresponding to integer code 1 is omitted as the reference level.\nFor example, if we have a factor race with levels White, Black, Hispanic, Asian, Native American, we can create 4 new binary variables black, hispanic, asian, native_american, where each variable takes on value 1 if the observation belongs to that race, and 0 otherwise. White is the reference level, so if all 4 new variables are 0, then the observation is White.\n\n\n\n\n\n\nWhy don’t we just code categories as integers, e.g., 1, 2, 3?\n\n\n\nCoding categories as integers implies an ordering and distance between the categories that may not exist. For example, if we code race categories as 1 = White, 2 = Black, 3 = Hispanic, 4 = Asian, 5 = Native American, then we are implying that the difference between White and Black is the same as the difference between Hispanic and Asian. This is not true, and can lead to misleading results in models. There is no reasonable interpretation of this difference."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
+    "href": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
+    "title": "Categorical variables and factors in R",
+    "section": "Dummy variables are automatically created from factors",
+    "text": "Dummy variables are automatically created from factors\n\n\n\n\nCode\nmodel.matrix(~species, data = palmerpenguins::penguins)\n\n\n\n\n  (Intercept) speciesChinstrap speciesGentoo\n1           1                0             0\n2           1                0             0\n3           1                1             0\n4           1                1             0\n5           1                0             1\n6           1                0             1\nattr(,\"assign\")\n[1] 0 1 1\nattr(,\"contrasts\")\nattr(,\"contrasts\")$species\n[1] \"contr.treatment\"\n\n\n\n\n\nIf a factor has n levels, you get n-1 dummy variables\nThe level corresponding to integer code 1 is omitted as the reference level\n\n\n\nChanging the base level (integer code 1) changes model interpretation since it changes the reference level against which all other levels are compared.\nThis enconding is automatically done when a factor is used as an independent variable in a model.\n\n\nNote on contrasts\nR uses treatment contrasts by default, which is the dummy variable approach described above. Other contrast schemes are possible, such as sum contrasts, Helmert contrasts, polynomial contrasts, etc. See ?contrasts for more details."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#effect-in-models",
+    "href": "supplemental/models/categorical.html#effect-in-models",
+    "title": "Categorical variables and factors in R",
+    "section": "Effect in models",
+    "text": "Effect in models\n\n\n\n\nCode\nlibrary(palmerpenguins)\nm &lt;- lm(body_mass_g ~ species, data = penguins)\nbroom::tidy(m)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)        3701.       37.6    98.4   2.49e-251\n2 speciesChinstrap     32.4      67.5     0.480 6.31e-  1\n3 speciesGentoo      1375.       56.1    24.5   5.42e- 77\n\n\nCompare with Adele\n\n\n\nCode\np1 &lt;- penguins %&gt;% \n  mutate(species = fct_relevel(species, 'Gentoo'))\nm1 &lt;- lm(body_mass_g ~ species, data=p1 )\nbroom::tidy(m1)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)         5076.      41.7     122.  6.86e-282\n2 speciesAdelie      -1375.      56.1     -24.5 5.42e- 77\n3 speciesChinstrap   -1343.      69.9     -19.2 3.21e- 56\n\n\nCompare with Gentoo\n\n\nProviding only one level to fct_relevel makes that the base level (integer code 1).\nYou can also fully specify all the levels in order, or partially specify them. If you partially specify them, the remaining levels will be put in alphabetical order after the ones you specify."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#effect-in-plots",
+    "href": "supplemental/models/categorical.html#effect-in-plots",
+    "title": "Categorical variables and factors in R",
+    "section": "Effect in plots",
+    "text": "Effect in plots\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species))+\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nggplot(p1, \n       aes(x = species))+\n  geom_bar()\nChanges the order in which bars are plotted"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#extra-levels",
+    "href": "supplemental/models/categorical.html#extra-levels",
+    "title": "Categorical variables and factors in R",
+    "section": "Extra levels",
+    "text": "Extra levels\n\n\n\n\nCode\nx &lt;- factor(str_split('statistics', '')[[1]], \n            levels = letters)\nx\n\n\n [1] s t a t i s t i c s\nLevels: a b c d e f g h i j k l m n o p q r s t u v w x y z\n\n\n\n\nCode\np1 &lt;- penguins %&gt;% filter(species != 'Gentoo')\nfct_count(p1$species)\n\n\n# A tibble: 3 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n3 Gentoo        0\n\n\n\n\n\nCode\nfct_drop(x)\n\n\n [1] s t a t i s t i c s\nLevels: a c i s t\n\n\n\n\nCode\np1 &lt;- p1 %&gt;% mutate(species = fct_drop(species))\nfct_count(p1$species)\n\n\n# A tibble: 2 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n\n\n\n\nGetting rid of extra levels Sometimes levels with no data show up in summaries or plots"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
+    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordering levels by values of another variable",
+    "text": "Ordering levels by values of another variable\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species,\n           y = bill_length_mm))+\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = fct_reorder(species, bill_length_mm, \n                           .fun=median, na.rm=T),\n           y = bill_length_mm))+\n  geom_boxplot() + labs(x = 'species')\n\n\n\n\n\n\n\n\n\n\n\nfct_reorder is useful for ordering a plot by ascending or descending levels. This makes the plot easier to read."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
+    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordering levels by values of another variable",
+    "text": "Ordering levels by values of another variable\n\n\nCode\nUSArrests &lt;- USArrests %&gt;% rownames_to_column('State')\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(x=State, y = Murder))+\n  geom_bar(stat = 'identity') + \n  theme(axis.text = element_text(size=6))+\n  coord_flip()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(\n  x = fct_reorder(State, Murder),\n  y = Murder))+\n  geom_bar(stat = 'identity')+\n  theme(axis.text = element_text(size=6))+\n  coord_flip()"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
+    "href": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
+    "title": "Categorical variables and factors in R",
+    "section": "Order levels based on last values when plotting 2 variables",
+    "text": "Order levels based on last values when plotting 2 variables\nThe level ordering also shows up in the order of levels in the legends of plots. Suppose you are plotting two variables, grouped by a factor.\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = Species))+\n  geom_smooth(se=F)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = fct_reorder2(Species,\n                       Sepal.Length, Sepal.Width)))+\n  geom_smooth(se=F) + labs(color = 'Species')"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#further-exploration",
+    "href": "supplemental/models/categorical.html#further-exploration",
+    "title": "Categorical variables and factors in R",
+    "section": "Further exploration",
+    "text": "Further exploration\n\nforcats cheatsheet\nChapter 15 of R4DS"
+  },
+  {
     "objectID": "supplemental/data_munging.html",
     "href": "supplemental/data_munging.html",
     "title": "Additional resources for data munging",
@@ -480,7 +606,7 @@
     "href": "slides/week-02.html#a-more-modern-description",
     "title": "Lecture 2",
     "section": "A more modern description",
-    "text": "A more modern description\n\nAn approach/philosophy for data analysis that employs a variety of techniques (mostly graphical) to maximize insight into a data set, uncover underlying structure, extract important variables, detect outliers and anomalies, test underlying assumptions, develop parsimonious models and determine optimal factor settings.\nU.S. National Institute of Standards and Technology\n\n\n{{&lt; iconify mdi:head-lightbulb size=2x &gt;}} Being able to interpret what you see in question-agnostic visualizations\n{{&lt; iconify mdi:head-lightbulb size=2x &gt;}} Using visualizations to ask particular questions of the data (but beware of biases in your questions and approach)\n{{&lt; iconify mdi:head-lightbulb size=2x &gt;}} Synthesize what you find into confirmatory approaches (expository figures, models, hypotheses, validation)\n{{&lt; iconify mdi:head-lightbulb size=2x &gt;}} Gain awareness of data characteristics that may modify or bias your interpretations or inferences (informative missingness, collinearity, pattern changes)\n\n\nEDA is the first process (not just a step) to go through after receiving a data set\n\nAllows us to understand univariate, bivariate and multivariate patterns\nAllows us to quickly catch issues and mistakes in the data\nAllows us to start to hypothesize about potential analyses\nAllows us to ensure that the data aligns with the context (the science or the business case)\nHopefully prevents us from going down unreasonable analytic paths\n\nAlmost entirely graphical\n\nPeople catch graphical anomalies much faster than textual anomalies\nWe inherently can recognize patterns",
+    "text": "A more modern description\n\nAn approach/philosophy for data analysis that employs a variety of techniques (mostly graphical) to maximize insight into a data set, uncover underlying structure, extract important variables, detect outliers and anomalies, test underlying assumptions, develop parsimonious models and determine optimal factor settings.\nU.S. National Institute of Standards and Technology\n\n\n Being able to interpret what you see in question-agnostic visualizations\n Using visualizations to ask particular questions of the data (but beware of biases in your questions and approach)\n Synthesize what you find into confirmatory approaches (expository figures, models, hypotheses, validation)\n Gain awareness of data characteristics that may modify or bias your interpretations or inferences (informative missingness, collinearity, pattern changes)\n\n\nEDA is the first process (not just a step) to go through after receiving a data set\n\nAllows us to understand univariate, bivariate and multivariate patterns\nAllows us to quickly catch issues and mistakes in the data\nAllows us to start to hypothesize about potential analyses\nAllows us to ensure that the data aligns with the context (the science or the business case)\nHopefully prevents us from going down unreasonable analytic paths\n\nAlmost entirely graphical\n\nPeople catch graphical anomalies much faster than textual anomalies\nWe inherently can recognize patterns",
     "crumbs": [
       "Lecture Slides",
       "Lecture 2"
@@ -501,8 +627,8 @@
     "objectID": "slides/week-02.html#food-for-thought",
     "href": "slides/week-02.html#food-for-thought",
     "title": "Lecture 2",
-    "section": "Food for thought {{< iconify mdi:thought-bubble size=3x  >}}",
-    "text": "Food for thought {{&lt; iconify mdi:thought-bubble size=3x  &gt;}}\nThink about each data type or pair of data types, and consider\n\nThe kinds of visualizations you can create\nWhat you will get out of each type of visualization, i.e., what will that visualization teach you about the data\nChoices you make to get the most out of the visualization\n\n\n\n\n{{}} How many bins should I use in a histogram?\n{{}} What span should I use for a smoother?\n{{}} What would help me discern outliers better, a histogram, density plot or boxplot?\n{{}} How can I visualize missing value patterns?\n\n\n\nThese choices can make the process of EDA more effective\n\n\n\nThese questions are prompts for the students to think about these. These are choices they don’t think about and are important so as not to miss patterns. Typically you start with 100-200 bins and then ramp back (ask for a vote about whether you should go low or high on bin number). Similar issue with span. And not all viz’s can reveal what you want to ask of it.",
+    "section": "Food for thought ",
+    "text": "Food for thought \nThink about each data type or pair of data types, and consider\n\nThe kinds of visualizations you can create\nWhat you will get out of each type of visualization, i.e., what will that visualization teach you about the data\nChoices you make to get the most out of the visualization\n\n\n\n\n How many bins should I use in a histogram?\n What span should I use for a smoother?\n What would help me discern outliers better, a histogram, density plot or boxplot?\n How can I visualize missing value patterns?\n\n\n\nThese choices can make the process of EDA more effective\n\n\n\nThese questions are prompts for the students to think about these. These are choices they don’t think about and are important so as not to miss patterns. Typically you start with 100-200 bins and then ramp back (ask for a vote about whether you should go low or high on bin number). Similar issue with span. And not all viz’s can reveal what you want to ask of it.",
     "crumbs": [
       "Lecture Slides",
       "Lecture 2"
@@ -962,41 +1088,21 @@
     ]
   },
   {
-    "objectID": "site-page-content/prep-work.html#week-2-september-16",
-    "href": "site-page-content/prep-work.html#week-2-september-16",
-    "title": "Weekly Class Preparation",
-    "section": "Week 2: September 16",
-    "text": "Week 2: September 16\nReading:\nIMS Chapters 1, 3, 4-6. I don’t expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.\nYou can also look at RDS Chapter 10, which is not quite as insightful\nAlso, let’s start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.\n\nInstall Quarto from https://quarto.org/docs/get-started/\nFollow along the tutorial at your own pace to get a feel for Quarto documents https://quarto.org/docs/get-started/hello/rstudio.html\n\nThe plan for class is to on-ramp you to , using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to . We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.\nThere will be a quiz this week, to familiarize yourselves with the syllabus. We will have a homework and labs this week to help you acclimatize to",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
-  },
-  {
-    "objectID": "site-page-content/prep-work.html#week-3-september-23",
-    "href": "site-page-content/prep-work.html#week-3-september-23",
-    "title": "Weekly Class Preparation",
-    "section": "Week 3: September 23",
-    "text": "Week 3: September 23\nThis week, we will basically hold a  workshop covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.\nIn terms of deliverables, we will not have a quiz this week, but we will have an -based homework using scaffolded code chunks and Quarto.\n\n\n\n\n\n\nImportant\n\n\n\nPhilosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To quote Stephen Covey, “Begin with the End in Mind”.\nWhat is primary is what you want to achieve with the data.\nThen, and only then, do you try to figure out how to use the software tools to achieve that.\n\n\n\n\n\n\n\n\nSupplementary materials\n\n\n\n\nTidy Data by Hadley Wickham\nThe Very Basics, from Hands-On Programming with R by Garrett Grolemund (free online)\nData Wrangling from ModernDive by Chester Ismay and Albert Y. Kim (free online)\nEfficient workflow from Efficient R Programming by Colin Gillespie and Robin Lovelace (free online)\n\n\n\nPosit cheatsheets (especially forcats, lubridate, stringr, dplyr, ggplot2)\nProject Structure by Danielle Navarro\n\n\n\nData Import with readr (RDS Chapter 6)\nData Transformation with dplyr (RDS Chapter 5)\nData Cleaning with tidyr (RDS Chapter 4) (we will not cover this in detail this week, but you should be aware of it)\nData Visualization with ggplot2 (RDS Chapter 3)",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
-  },
-  {
-    "objectID": "site-page-content/prep-work.html#week-4-september-30",
-    "href": "site-page-content/prep-work.html#week-4-september-30",
-    "title": "Weekly Class Preparation",
-    "section": "Week 4: September 30",
-    "text": "Week 4: September 30\nThis week, we start exploring the world of statistical pattern recognition, and think about the kinds of models and algorithms can help us identify patterns in data. We’ll start distinguishing between explanatory and predictive modeling, and think about the kinds of questions we can answer with models. We’ll also distinguish between unsupervised and supervised learning.\n\n\n\n\n\n\nReading\n\n\n\n\nConceptual\n\nA fundamental paper to understand how to think about models: The Two Cultures by Leo Breiman. This is a must-read for the class, and for anyone interested in data science.\nIMS Chapter 10\nWhat is Statistical Learning? (ISLR Chapter 2.1, book available here)\n\n\nOptional reading\n\nThe Two Cultures: Statistics and Machine Learning in Science by Robert E. Kass\nRoad Map for Choosing Between Statistical Modeling and Machine Learning by Frank Harrell\nNavigating Statistical Modeling and Machine Learning by Drew Griffin Levy\n\n\n\n\nR\n\nChapter 25 of RDS (Functions)",
-    "crumbs": [
-      "Weekly Class Preparation"
-    ]
-  },
-  {
     "objectID": "site-page-content/prep-work.html#r",
     "href": "site-page-content/prep-work.html#r",
     "title": "Weekly Class Preparation",
     "section": "R",
     "text": "R\n\nChapter 25 of RDS (Functions)",
+    "crumbs": [
+      "Weekly Class Preparation"
+    ]
+  },
+  {
+    "objectID": "site-page-content/prep-work.html#reading-1",
+    "href": "site-page-content/prep-work.html#reading-1",
+    "title": "Weekly Class Preparation",
+    "section": "Reading",
+    "text": "Reading\n\nMaking Sense of Uncertainty\nIntroduction to Statistical vs Systematic Uncertainty\nVariability and Uncertainty: Standard Deviations, Standard Errors, Confidence Intervals",
     "crumbs": [
       "Weekly Class Preparation"
     ]
@@ -1061,7 +1167,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Fri Oct 03, 2025 at 04:26 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Sun Oct 05, 2025 at 10:25 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -1137,28 +1243,6 @@
     "crumbs": [
       "Assignments",
       "HW1"
-    ]
-  },
-  {
-    "objectID": "assignments/week-03.html",
-    "href": "assignments/week-03.html",
-    "title": "Homework 3",
-    "section": "",
-    "text": "Instructions\n\n\n\nModify this quarto notebook, convert it to PDF using typst or to HTML and submit. Total is 70 points\n{{&lt; downloadthis week-03.qmd dname=\"homework3.qmd\" label=\"Download Quarto file\" &gt;}}\n\n\n\nTextual answers will be graded holistically. 5 points for an accurate and thoughtful answer, 4 points for minor errors, 3 points for a reasonable attempt with minor conceptual issues, 2 or less otherwise\nCoding answers: 5 points for correct results, 4 points for correct approach, wrong answer, 3 points for an attempt which is mostly complete but got stuck in the end, 2 or less otherwise",
-    "crumbs": [
-      "Assignments",
-      "Homework 3"
-    ]
-  },
-  {
-    "objectID": "assignments/week-03.html#implementing-roc-curves-5-points",
-    "href": "assignments/week-03.html#implementing-roc-curves-5-points",
-    "title": "Homework 3",
-    "section": "Implementing ROC curves (5 points)",
-    "text": "Implementing ROC curves (5 points)\nYou can read more about ROC curves and AUC here: https://www.statology.org/interpret-roc-curve\nNow, reproduce this graph using ggplot2",
-    "crumbs": [
-      "Assignments",
-      "Homework 3"
     ]
   },
   {
@@ -1285,7 +1369,7 @@
     "href": "site-page-content/software.html#accessing-r",
     "title": "Software for the class",
     "section": "Accessing R",
-    "text": "Accessing R\n\nUsing R in the browser\nThe no-installation method to using R and RStudio is to get an account on Posit Cloud, which will enable you to use R in your web browser. You can get a free account, which should generally suffice for learning . Once you login, you should see something like this:\n\nThe two things you want to pay attention to here are highlighted below:\n\nWe will organize ourselves in RStudio Projects. This is a generally good practice for dealing with data science projects, and we’ll discuss this in class\nOn the left you have access to several learning guides for self-learning .\n\n\nUsing R on your laptop\nWe are going to use  through the Integrated Development Environment (IDE) called RStudio. Note that  and RStudio are two different things. You need to install  first, and then install RStudio.\n\n\nYou can use other IDEs like Positron or Visual Studio, or even a plain text editing software, but for this class, we will use RStudio\n\nInstall R\n\nGo to https://cran.r-project.org\nAt the very top, follow the link to download and install  for your operating system\n\nNote that there are two versions of  for the Mac: the Apple Silicon version for those with a M1, M2, M3, M4 Mac, and the Intel version for older Macs. Install as appropriate\n\n\n\n\nInstalling RStudio\n\nDownload the appropriate version of RStudio for your operating system from https://posit.co/download/rstudio-desktop/\nInstall RStudio on your computer\nOpen RStudio\n\nOn a Windows machine you can open RStudio from the Start () menu\nOn a Mac, you can search for RStudio using Searchlight ({{&lt; iconify command &gt;}} + Space)\n\n\nRstudio will pick up your current  installation and run it within RStudio.",
+    "text": "Accessing R\n\nUsing R in the browser\nThe no-installation method to using R and RStudio is to get an account on Posit Cloud, which will enable you to use R in your web browser. You can get a free account, which should generally suffice for learning . Once you login, you should see something like this:\n\nThe two things you want to pay attention to here are highlighted below:\n\nWe will organize ourselves in RStudio Projects. This is a generally good practice for dealing with data science projects, and we’ll discuss this in class\nOn the left you have access to several learning guides for self-learning .\n\n\nUsing R on your laptop\nWe are going to use  through the Integrated Development Environment (IDE) called RStudio. Note that  and RStudio are two different things. You need to install  first, and then install RStudio.\n\n\nYou can use other IDEs like Positron or Visual Studio, or even a plain text editing software, but for this class, we will use RStudio\n\nInstall R\n\nGo to https://cran.r-project.org\nAt the very top, follow the link to download and install  for your operating system\n\nNote that there are two versions of  for the Mac: the Apple Silicon version for those with a M1, M2, M3, M4 Mac, and the Intel version for older Macs. Install as appropriate\n\n\n\n\nInstalling RStudio\n\nDownload the appropriate version of RStudio for your operating system from https://posit.co/download/rstudio-desktop/\nInstall RStudio on your computer\nOpen RStudio\n\nOn a Windows machine you can open RStudio from the Start () menu\nOn a Mac, you can search for RStudio using Searchlight ( + Space)\n\n\nRstudio will pick up your current  installation and run it within RStudio.",
     "crumbs": [
       "Software for the class"
     ]
@@ -2298,6 +2382,34 @@
     "href": "supplemental/brackets.html",
     "title": "Brackets in R",
     "section": "",
-    "text": "There are three kinds of brackets in R\n\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst\n\n\n\n\n\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()\n\n\n\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\nA function definition\n\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}"
+    "text": "There are three kinds of brackets in R\n\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst\n\n\n\n\n\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\n\nCode\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()\n\n\n\n\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\n\nCode\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\n\nA function definition\n\n\nCode\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}"
+  },
+  {
+    "objectID": "supplemental/models/boston.html",
+    "href": "supplemental/models/boston.html",
+    "title": "Modeling case study: Boston housing data",
+    "section": "",
+    "text": "The Boston housing dataset is a classic dataset in the field of machine learning and statistics. It contains information about various attributes of houses in the Boston area, including the median value of owner-occupied homes (in $1000s), crime rate, average number of rooms per dwelling, and more. You can look at the data dictionary here.\nCode\nlibrary(tidyverse)\nlibrary(mlbench)\ndata(\"BostonHousing\", package='mlbench')\n\nhead(BostonHousing)\n\n\n     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b lstat\n1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98\n2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14\n3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03\n4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94\n5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33\n6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21\n  medv\n1 24.0\n2 21.6\n3 34.7\n4 33.4\n5 36.2\n6 28.7\nWe can see that the dataset contains 506 rows and 14 columns. The target variable is medv, which represents the median value of owner-occupied homes in $1000s. The other columns are the features that we will use to predict medv.\nCode\nglimpse(BostonHousing)\n\n\nRows: 506\nColumns: 14\n$ crim    &lt;dbl&gt; 0.00632, 0.02731, 0.02729, 0.03237, 0.06905, 0.02985, 0.08829,…\n$ zn      &lt;dbl&gt; 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.5, 12.5, 12.5, 12.5, 12.5, 1…\n$ indus   &lt;dbl&gt; 2.31, 7.07, 7.07, 2.18, 2.18, 2.18, 7.87, 7.87, 7.87, 7.87, 7.…\n$ chas    &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ nox     &lt;dbl&gt; 0.538, 0.469, 0.469, 0.458, 0.458, 0.458, 0.524, 0.524, 0.524,…\n$ rm      &lt;dbl&gt; 6.575, 6.421, 7.185, 6.998, 7.147, 6.430, 6.012, 6.172, 5.631,…\n$ age     &lt;dbl&gt; 65.2, 78.9, 61.1, 45.8, 54.2, 58.7, 66.6, 96.1, 100.0, 85.9, 9…\n$ dis     &lt;dbl&gt; 4.0900, 4.9671, 4.9671, 6.0622, 6.0622, 6.0622, 5.5605, 5.9505…\n$ rad     &lt;dbl&gt; 1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4,…\n$ tax     &lt;dbl&gt; 296, 242, 242, 222, 222, 222, 311, 311, 311, 311, 311, 311, 31…\n$ ptratio &lt;dbl&gt; 15.3, 17.8, 17.8, 18.7, 18.7, 18.7, 15.2, 15.2, 15.2, 15.2, 15…\n$ b       &lt;dbl&gt; 396.90, 396.90, 392.83, 394.63, 396.90, 394.12, 395.60, 396.90…\n$ lstat   &lt;dbl&gt; 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43, 19.15, 29.93, 17.10…\n$ medv    &lt;dbl&gt; 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, 27.1, 16.5, 18.9, 15…\nAlmost all the features are numeric, except for chas, which is a binary variable indicating whether the house is adjacent to the Charles River (1 if true, 0 if false)."
+  },
+  {
+    "objectID": "supplemental/models/boston.html#eda",
+    "href": "supplemental/models/boston.html#eda",
+    "title": "Modeling case study: Boston housing data",
+    "section": "EDA",
+    "text": "EDA\n\n\nCode\nlibrary(ggplot2)\n\nggplot(BostonHousing, aes(x=medv)) +\n  geom_histogram(binwidth=1, fill='blue', color='black', alpha=0.7) +\n  labs(title='Distribution of Median Value of Homes', x='Median Value (in $1000s)', y='Frequency') +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nThe histogram shows that the distribution of medv is right-skewed, with a few high-value homes pulling the mean up. Most homes are valued between $10,000 and $30,000.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\nChange the predictor in the code above and explore bivariate relationships with medv using visualizations\n\n\nWe will see that there are fairly strong correlations of medv with the different predictors, and many of the relations are non-linear."
+  },
+  {
+    "objectID": "supplemental/models/boston.html#modeling",
+    "href": "supplemental/models/boston.html#modeling",
+    "title": "Modeling case study: Boston housing data",
+    "section": "Modeling",
+    "text": "Modeling\nEven if we eventually want to do and inferential statistical model, when you have many predictors which may or may not have linear relationships with the target (medv), and may have varying degrees of correlation with each other, it is often initially a fruitful exercise to fit a machine learning model that can account for the data complexity before dropping down to an explanatory statistical model. We’ll try using a random forest model.\n\n\n\n\n\n\n\n\n\nThis notation medv ~ . means include all available predictors in the right hand side\n\n\n\n\n\n\n\nExercise\n\n\n\nPlay around with the value of nodesize in the code above (it can range from 1 to 506) and see how the prediction quality changes. You’re looking for bias (how poorly the data aligns the the green line which shows where the observed and predicted values would be equal) and variance (how much the predictions are spread out or tight)\n\n\nYou can get a sense of what variables might be important for the prediction by using what are called variable importances (for regression problems like this one, look at the %IncMSE one, which shows the % increase in the RMSE). Note that these will change as you change the nodesize value.\n\n\n\n\n\n\n\n\nThis plot shows that rm and lstat are the most predictive of the predictors, but others have some influence on the predictions\n\n\n\n\n\n\nTip\n\n\n\nWhat the variable importances are showing is how much worse the prediction would be if you replaced each variable with random noise, which would have no relationship with medv. There are other variable importance scores that can be computed.\nFor a linear regression, the estimated coefficients (or their squared values) work as variable importance scores"
+  },
+  {
+    "objectID": "supplemental/models/practicing-factors.html",
+    "href": "supplemental/models/practicing-factors.html",
+    "title": "Practicing with factors",
+    "section": "",
+    "text": "The tidyr package provides a dataset from the 2017 American Community Survey (ACS) that contains information about the median household incomes and median monthly rents by state. The dataset is called us_rent_income. We plot a barplot of the medianan household income by state.\n\n\n\n\n\n\n\n\nWe can see that the states are ordered alphabetically. We can use the forcats package to change the order of the states to be in descending order of median household income. Find the right function in the forcats package to do this, and add it to the data wrangling step above. You can refer to the forcats documentation and forcats cheatsheet for help.\n\nExerciseHintSolution\n\n\n\n\n\n\n\n\n\n\n\n\n\nThink of what you want to do with the states. Do you want to reorder them based on another variable? Do you want to change the order of the levels? Find a function that does that rather than trying to do it manually."
   }
 ]
