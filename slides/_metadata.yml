@@ -6,7 +6,10 @@ execute:
 
 format:
   live-revealjs:
-    theme: ['default', 'clean.scss']
+    theme: 
+      - default
+      - ../style/slides-reveal-adg.scss
+      - ../style/sfah.scss
     auto-stretch: true
     transition: fade
     background-transition: fade
