@@ -12,3 +12,5 @@ slides/topics/*cache
 _freeze/*
 _worksheets/*.html
 
+
+**/*.quarto_ipynb

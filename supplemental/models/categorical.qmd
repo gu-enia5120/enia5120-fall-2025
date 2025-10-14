@@ -1,7 +1,24 @@
 ---
 title: "Categorical variables and factors in R"
+custom-callout:
+  todo:
+    icon-symbol: "📝"
+    color: "pink"
+  thumbs-up:
+    title: "Great job!"
+    icon-symbol: "fa-thumbs-up"
+    color: "#008000"
+filters:
+  - quarto
+  - line-highlight
+  - custom-callout
+  - panelize
 ---
 
+```{r}
+#| include: false
+library(tidyverse)
+```
 
 ## What are categorical variables?
 
@@ -55,6 +72,7 @@ R stores categorical variables as type `factor`.
 
 
 ```{r factors-1}
+#| code-fold: show 
 x <- c('Maryland','Virginia', 'District', 'Maryland','Virginia')  # a character vector
 xf <- as.factor(x)
 xf
@@ -65,6 +83,7 @@ There are three levels, that by default are in alphabetical order
 ::: {.columns}
 ::: {.column}
 ```{r factors-2}
+#| code-fold: show 
 as.integer(xf)
 ```
 
@@ -72,6 +91,7 @@ as.integer(xf)
 :::
 ::: {.column}
 ```{r factors-3}
+#| code-fold: show 
 as.character(xf)
 ```
 
@@ -83,6 +103,7 @@ as.character(xf)
 Now let's look at what happens when we convert a numeric vector to a factor
 
 ```{r factors-4}
+#| code-fold: show 
 y <- c(5, 3, 9, 4, 5, 3)
 yf <- as.factor(y)
 yf
@@ -93,6 +114,7 @@ Levels are still in alphanumeric order
 ::: {.columns}
 ::: {.column}
 ```{r factors-5}
+#| code-fold: show 
 as.numeric(yf)
 ```
 
@@ -101,6 +123,7 @@ as.numeric(yf)
 :::
 ::: {.column}
 ```{r factors-6}
+#| code-fold: show 
 as.numeric(as.character(yf))
 ```
 
@@ -114,6 +137,7 @@ as.numeric(as.character(yf))
 ::: {.columns}
 ::: {.column}
 ```{r factors-7}
+#| code-fold: show 
 x <- c('MD','DC','VA','MD','DC')
 xf <- factor(x)
 unclass(xf)
@@ -122,6 +146,7 @@ unclass(xf)
 :::
 ::: {.column}
 ```{r factors-8}
+#| code-fold: show 
 x <- c('MD','DC','VA','MD','DC')
 xf <- factor(x, levels = c('MD','DC','VA'))
 unclass(xf)
@@ -140,22 +165,29 @@ it's coded as `f`, `r`, and `4`, which is not great for display purposes. We can
 :::: .columns
 ::: .column
 ```{r factors-9, error=TRUE}
+#| code-fold: show 
 x <- mpg$drv
 xf <- factor(x, 
-              levels = c('4-wheel','Front wheel',
+              levels = c('4-wheel','Front wheel', # <1>
                          'Rear wheel'))
 head(xf)
 ```
+1. levels have to match what's actually in the data
 :::
 ::: .column
 ```{r factors-10}
+#| code-fold: show 
+#| source-line-numbers: "3-5"
+
 x <- mpg$drv
 xf <- factor(x, 
-              levels = c('4', 'f','r'), #<<
-              labels = c('4-wheel','Front wheel',#<<
-                         'Rear wheel'))#<<
+              levels = c('4', 'f','r'), # <1>
+              labels = c('4-wheel','Front wheel', #<2>
+                         'Rear wheel'))
 head(xf)
 ```
+1. levels have to match what's actually in the data
+2. labels are what you want the levels to be displayed as
 :::
 ::::
 
@@ -185,11 +217,25 @@ ggplot(mpg,
 :::
 ::: 
 
+## Dummy variables: converting factors to numeric for modeling
+
+Modeling is a numerical enterprise, where we optimize a function of numerical variables to fit a numerical outcome. 
+So categorical variables need to be converted to some numerical representation. The most common approach is to use
+_dummy variables_ (also called indicator variables or one-hot encoding). With this approach, if a factor has _n_ levels, we create _n-1_ new binary variables, each taking on values 0 or 1. Each new variable indicates whether the observation belongs to that level or not. The level corresponding to integer code 1 is omitted as the reference level.
+
+For example, if we have a factor `race` with levels White, Black, Hispanic, Asian, Native American, we can create 4 new binary variables `black`, `hispanic`, `asian`, `native_american`, where each variable takes on value 1 if the observation
+belongs to that race, and 0 otherwise. White is the reference level, so if all 4 new variables are 0, then the observation is White.
+
+::: {.callout-caution}
+## Why don't we just code categories as integers, e.g., 1, 2, 3?
+Coding categories as integers implies an ordering and distance between the categories that may not exist. For example, if we code race categories as 1 = White, 2 = Black, 3 = Hispanic, 4 = Asian, 5 = Native American, then we are implying that the difference between White and Black is the same as the difference between Hispanic and Asian. This is not true, and can lead to misleading results in models. There is no reasonable interpretation of this difference. 
+:::
 ## Dummy variables are automatically created from factors
 
 :::: .columns
 ::: .column
 ```{r factors-13, eval=F}
+#| code-fold: show 
 model.matrix(~species, data = palmerpenguins::penguins)
 ```
 ```{r factors-14, echo = F}
@@ -209,6 +255,12 @@ palmerpenguins::penguins %>%
 Changing the base level (integer code 1) changes model interpretation since
 it changes the reference level against which all other levels are compared.
 
+This enconding is automatically done when a factor is used as an independent variable in a model.
+
+::: {.aside}
+**Note on contrasts**  
+R uses _treatment contrasts_ by default, which is the dummy variable approach described above. Other contrast schemes are possible, such as sum contrasts, Helmert contrasts, polynomial contrasts, etc. See `?contrasts` for more details.
+:::
 
 
 
@@ -255,6 +307,7 @@ ggplot(penguins,
 
 :::
 ::: {.column}
+```r
 ggplot(p1, 
        aes(x = species))+
   geom_bar()
@@ -297,7 +350,8 @@ Sometimes levels with no data show up in summaries or plots
 
 ::: {.columns}
 ::: {.column}
-```{r factors-23, fig.height=4} ggplot(penguins, 
+```{r factors-23, fig.height=4} 
+ggplot(penguins, 
        aes(x = species))+
   geom_bar()
 ```

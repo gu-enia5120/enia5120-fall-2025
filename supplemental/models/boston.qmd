@@ -1,0 +1,198 @@
+---
+title: "Modeling case study: Boston housing data"
+engine: knitr
+execute: 
+    warning: false
+    messages: false
+webr:
+    packages:
+        - tidyverse
+        - mlbench
+        - randomForest
+        - parsnip
+        - geomtextpath
+        - gt
+        - gtsummary
+        - broom
+        - broom.helpers
+    render-df: DT
+---
+
+The Boston housing dataset is a classic dataset in the field of machine learning and statistics. It contains information about various attributes of houses in the Boston area, including the median value of owner-occupied homes (in \$1000s), crime rate, average number of rooms per dwelling, and more. You can look at the data dictionary [here](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html).
+
+```{r}
+library(tidyverse)
+library(mlbench)
+data("BostonHousing", package='mlbench')
+
+head(BostonHousing)
+```
+
+We can see that the dataset contains `r nrow(BostonHousing)` rows and `r ncol(BostonHousing)` columns. The target variable is `medv`, which represents the median value of owner-occupied homes in \$1000s. The other columns are the features that we will use to predict `medv`.
+
+```{r}
+glimpse(BostonHousing)
+```
+
+Almost all the features are numeric, except for `chas`, which is a binary variable indicating whether the house is adjacent to the Charles River (1 if true, 0 if false).
+
+## EDA
+
+```{r}
+library(ggplot2)
+
+ggplot(BostonHousing, aes(x=medv)) +
+  geom_histogram(binwidth=1, fill='blue', color='black', alpha=0.7) +
+  labs(title='Distribution of Median Value of Homes', x='Median Value (in $1000s)', y='Frequency') +
+  theme_minimal()
+```
+
+The histogram shows that the distribution of `medv` is right-skewed, with a few high-value homes pulling the mean up. Most homes are valued between \$10,000 and \$30,000.
+
+```{webr}
+#| echo: false
+library(broom.helpers)
+```
+
+```{webr}
+library(mlbench)
+data(BostonHousing)
+ggplot(BostonHousing, aes(x=rm, y=medv)) +
+  geom_point(alpha=0.4) +
+  geom_smooth(color='red') +
+  labs(y='Median Value (in $1000s)') +
+  theme_minimal()
+```
+
+::: callout-note
+## Exercise
+
+Change the predictor in the code above and explore bivariate relationships with `medv` using visualizations
+:::
+
+We will see that there are fairly strong correlations of `medv` with the different predictors, and many of the relations are non-linear.
+
+## Modeling
+
+Even if we eventually want to do and inferential statistical model, when you have many predictors which may or may not have linear relationships with the target (`medv`), and may have varying degrees of correlation with each other, it is often initially a fruitful exercise to fit a machine learning model that can account for the data complexity before dropping down to an explanatory statistical model. We'll try using a *random forest* model.
+
+```{webr}
+library(randomForest)
+library(mlbench)
+data(BostonHousing)
+model_rf <- randomForest(medv ~ ., data = BostonHousing, # <1>
+    mtry = 4, nodesize = 20, importance = TRUE)
+BostonHousing$predicted_rf <- predict(model_rf, newdata=BostonHousing)
+ggplot(BostonHousing, aes(x = medv, y = predicted_rf))+
+    geom_point() + 
+    geom_smooth(se=FALSE)+
+    geom_abline(color = 'green') + 
+    labs(x='Median value',y ='Predicted median value') + 
+theme_minimal()
+```
+
+1.  This notation `medv ~ .` means include all available predictors in the right hand side
+
+::: callout-note
+## Exercise
+
+Play around with the value of `nodesize` in the code above (it can range from 1 to `r nrow(BostonHousing)`) and see how the prediction quality changes. You're looking for bias (how poorly the data aligns the the green line which shows where the observed and predicted values would be equal) and variance (how much the predictions are spread out or tight)
+:::
+
+You can get a sense of what variables might be important for the prediction by using what are called **variable importances** (for regression problems like this one, look at the %IncMSE one, which shows the % increase in the RMSE). Note that these will change as you change the `nodesize` value.
+
+```{webr}
+randomForest::varImpPlot(model_rf, main = "Variable Importance Plot")
+```
+
+This plot shows that `rm` and `lstat` are the most predictive of the predictors, but others have some influence on the predictions
+
+::: callout-tip
+What the variable importances are showing is how much worse the prediction would be if you replaced each variable with random noise, which would have no relationship with `medv`. There are other variable importance scores that can be computed.
+
+For a linear regression, the estimated coefficients (or their squared values) work as variable importance scores
+:::
+
+# Over- and under-fitting
+
+The `nodesize` parameter gives the number of observations that are averaged over in the random forest algorithm. [Technically it is the number of observations at each terminal node of the component decision trees that are averaged over, and eventually the result is an average of averages]{.aside}. If the `nodesize` gets larger, you get more coarser predictions (much like a straight line model), while smaller `nodesize` gives more granular, localized predictions.
+
+::: callout-important
+Which situation is more likely to lead to over-fitting and which might lead to underfitting?
+:::
+
+Let's follow the ML paradigm of splitting the data and seeing how the model works in a different data set
+
+[The approach above is akin to what a statistician might do]{.aside}
+
+```{r}
+#| code-fold: show
+library(mlbench)
+library(randomForest)
+library(yardstick)
+library(rsample)
+library(geomtextpath)
+data(BostonHousing)
+
+set.seed(2305) # <1>
+data_split <- initial_split(BostonHousing, prop = 3/4) # <2>
+training_data <- training(data_split) # <2>
+test_data <- testing(data_split) # <2>
+
+nodesizes <- c(seq(5,45, by=5),seq(50,500,by=50)) # <3>
+train_error <- rep(0, length(nodesizes))
+test_error <- rep(0, length(nodesizes))
+for(i in 1:length(nodesizes)){ # <4>
+    model_rf = randomForest(medv ~ ., data = training_data, 
+    mtry = 4, nodesize = nodesizes[i], importance = TRUE)
+    train_error[i] = rmse_vec(training_data$medv, predict(model_rf, training_data))
+    test_error[i] = rmse_vec(test_data$medv, predict(model_rf, test_data)) 
+}
+outcome <- data.frame('nodesize' = nodesizes, 'train' = train_error,'test' = test_error)
+ggplot(outcome, aes(x = nodesize))+
+ geom_textline(aes(y = train), color = 'green', label = 'Training') + 
+ geom_textline(aes(y = test), color = 'red', label = 'Test') + 
+labs(x = 'Nodesize', y = 'Root mean squared error (RMSE)' ) + 
+theme_minimal()
+```
+
+1.  Set a seed for the random number generator (we'll talk about this in Week 5)
+2.  Make a random split of the data in a 3:1 ratio and save the splits
+3.  Generate a sequence of `nodesize` values to interrogate
+4.  Loop through those values and extract the training data error and the test data error (computing the RMSE)
+
+What we see here is that, despite the potential for overfitting, it is not really an issue here (the Test curve doesn't start going up as node size decreases). This is probably due to the fact that you have a very strong signal-to-noise ratio in this dataset, and so even very localized predictions (when you make `nodesize` very small) have reasonable generalizability
+
+# Statistical modeling
+
+Let's look back at the variable importance plot and take the first 5 predictors when we use `nodesize=20` . These would be `rm`, `lstat`, `nox`, `dis`, and `crim`. We can develop a linear model using these predictors.
+
+```{webr}
+#| autorun: true
+data(BostonHousing)
+library(broom)
+library(broom.helpers)
+library(gtsummary)
+model_lm <- lm(medv ~ rm + lstat + nox + dis + crim, data = BostonHousing)
+
+tbl_regression(model_lm)
+
+glance(model_lm) |> mutate(RMSE = sqrt(deviance)) |> select(r.squared, RMSE) |> gt()
+
+augment(model_lm) |>
+  ggplot(aes(.fitted, .resid)) + 
+    geom_point(alpha = 0.3)+
+    geom_smooth(se=F) + 
+    geom_hline(yintercept = 0, linetype = 2) + 
+labs(x = 'Fitted values', y = 'Residual values')
+
+augment(model_lm) |>
+  ggplot(aes(medv, .fitted)) + 
+    geom_point(alpha = 0.3)+
+    geom_smooth(se=F) + 
+    geom_abline(color='green')+ 
+labs(x = 'Actual values (median price)', y = 'Fitted values')
+
+```
+
+Not great, right? With even a moderate number of predictors as we have here, it's hard to manually do an exhaustive exploration of what variables and their transformations would result in a good model, one that fits the data well. This is another situation where ML models can come to the fore. We lose interpretability, but we gain a better fit. The variable importance scores helps us somewhat here to understand which variables might be more influential and predictive of the median house prices.
