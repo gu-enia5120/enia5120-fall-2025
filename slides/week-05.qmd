@@ -546,7 +546,7 @@ ggplot() +
 
 - Many statistical methods, including linear regression, assume that the errors are normally distributed
 
-## The Central Limit Theorem
+## The Central Limit Theorem {#sec-clt}
 
 -   The Central Limit Theorem (CLT) states that the sum (or average) of a large number of **independent** random variables, regardless of their individual distributions, will be approximately normally distributed
 -   This is a powerful result, as it allows us to use the normal distribution to make inferences about the population mean, even if the underlying data is not normally distributed

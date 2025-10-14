@@ -1,0 +1,124 @@
+---
+title: "Lecture 6"
+subtitle: "Introduction to statistical inference"
+format: live-revealjs
+webr:
+    packages:
+      - tidyverse
+      - janitor
+custom-callout:
+    question:
+        appearance: simple
+        title: "{{< fa circle-question  >}} Question(s)"
+        color: red
+        collapse: false
+execute:
+  cache: false
+  message: false
+  warning: false
+  echo: true
+filters:
+  - tachyons
+---
+
+## Announcements
+
+1.  Feedback from Milestone 1 & 2 by Friday
+2.  No quiz today
+3.  Homework encompassing probability and inference (today) with 2 weeks time.
+4.  Start weaning yourself off the software and write R code
+
+## Where we've been
+
+-   Start understanding the data through EDA and visualization
+
+-   Identifying gross patterns and relationships, usually univariate and bivariate
+
+-   Some probability tools that will help us understand our path forward.
+
+    -   It's ok to think about probability as relative frequency for now, but eventually, think of it as the likelihood of something happening
+
+## Where are we going?
+
+-   Statistical inference based on random sampling principles
+
+-   But we know garbage in = garbage out
+
+    -   How do we collect data to make statistical inference valid?
+
+    -   Design of experiments
+
+-   When can we get beyond associations?
+
+    -   Causality criteria, domain knowledge and graphs
+
+## Resources for this week
+
+We'll mainly be working on material related to IMS2e Chapters 11-12, and SIDS chapters 7-9
+
+-   We'll work through these probably over a couple of weeks, depending on pace
+
+-   We'll deal with ideal or toy situations to illustrate concepts
+
+-   Understand that real analyses aren't nearly going to be that clean, which is where some of the next topics around causality and observational data will come in
+
+# An opinionated approach {.inverse}
+
+## The Gaussian distribution is not so important in practice
+
+-   Classical statistics relies on the Gaussian distribution (through the [Central Limit Theorem](week-05.qmd#sec-clt)) to make inference around means
+
+    -   Most things we look at are in fact means or averages. A proportion is the average number of 1's we see.
+
+-   Simulation methods don't require many assumptions and reflect the data we see much better
+
+    -   We'll try to get simulated results rather than make assumptions on probability distributions that aren't verifiable
+
+    -   The simulations **do** make the assumptions we make quite explicit.
+
+    -   You can use simulations to understand properties of "non-standard" statistics
+
+## Some definitions
+
+Population
+
+:   The full set of individuals/observations that are under investigation
+
+Sample
+
+:   A subset of the population that is actually observed (the definition of sample is context dependent and doesn't have to be random)
+
+Random sample
+
+:   A sample where each individual/event in the population has an equal chance of being selected
+
+Parameter
+
+:   A numerical summary of a **population** (e.g., population mean, population proportion); some characteristic of interest
+
+Statistic
+
+:   A numerical summary of a **sample** (e.g., sample mean, sample proportion)
+
+## Context
+
+What is the average amount of PM2.5 particles at Reagan National Airport in August, 2025?
+
+-   Population: PM2.5 readings at all times in August, 2025
+
+-   Sample: Daily readings at 9am, 12 noon, and 5pm during August 2025
+
+-   Parameter: Average PM2.5 readings ($\mu$) during August, 2025 (unobservable)
+
+-   Statistics (corresponding to the parameter): Average of the PM2.5 levels ($\bar{x}$) observed during August, 2025
+
+:::: fragment
+::: questions
+### Questions
+<hr/>
+
+1.  Is this study based on a random sample?
+2.  Are there evident biases in the results we might get from this study?
+:::
+::::
+
