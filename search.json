@@ -1699,7 +1699,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Wed Oct 15, 2025 at 10:45 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Wed Oct 15, 2025 at 10:50 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -2750,322 +2750,506 @@
     "href": "slides/week-06.html#announcements",
     "title": "Lecture 6",
     "section": "Announcements",
-    "text": "Announcements\n\nFeedback from Milestone 1 & 2 by Friday\nNo quiz today\nHomework encompassing probability and inference (today) with 2 weeks time.\nStart weaning yourself off the software and write R code"
+    "text": "Announcements\n\nFeedback from Milestone 1 & 2 by Friday\nNo quiz today\nHomework encompassing probability and inference (today) with 2 weeks time.\nStart weaning yourself off the software and write R code",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#where-weve-been",
     "href": "slides/week-06.html#where-weve-been",
     "title": "Lecture 6",
     "section": "Where we’ve been",
-    "text": "Where we’ve been\n\nStart understanding the data through EDA and visualization\nIdentifying gross patterns and relationships, usually univariate and bivariate\nSome probability tools that will help us understand our path forward.\n\nIt’s ok to think about probability as relative frequency for now, but eventually, think of it as the likelihood of something happening"
+    "text": "Where we’ve been\n\nStart understanding the data through EDA and visualization\nIdentifying gross patterns and relationships, usually univariate and bivariate\nSome probability tools that will help us understand our path forward.\n\nIt’s ok to think about probability as relative frequency for now, but eventually, think of it as the likelihood of something happening",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#where-are-we-going",
     "href": "slides/week-06.html#where-are-we-going",
     "title": "Lecture 6",
     "section": "Where are we going?",
-    "text": "Where are we going?\n\nStatistical inference based on random sampling principles\nBut we know garbage in = garbage out\n\nHow do we collect data to make statistical inference valid?\nDesign of experiments\n\nWhen can we get beyond associations?\n\nCausality criteria, domain knowledge and graphs"
+    "text": "Where are we going?\n\nStatistical inference based on random sampling principles\nBut we know garbage in = garbage out\n\nHow do we collect data to make statistical inference valid?\nDesign of experiments\n\nWhen can we get beyond associations?\n\nCausality criteria, domain knowledge and graphs",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#resources-for-this-week",
     "href": "slides/week-06.html#resources-for-this-week",
     "title": "Lecture 6",
     "section": "Resources for this week",
-    "text": "Resources for this week\nWe’ll mainly be working on material related to IMS2e Chapters 11-12, and SIDS chapters 7-9\n\nWe’ll work through these probably over a couple of weeks, depending on pace\nWe’ll deal with ideal or toy situations to illustrate concepts\nUnderstand that real analyses aren’t nearly going to be that clean, which is where some of the next topics around causality and observational data will come in"
+    "text": "Resources for this week\nWe’ll mainly be working on material related to IMS2e Chapters 11-12, and SIDS chapters 7-9\n\nWe’ll work through these probably over a couple of weeks, depending on pace\nWe’ll deal with ideal or toy situations to illustrate concepts\nUnderstand that real analyses aren’t nearly going to be that clean, which is where some of the next topics around causality and observational data will come in",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-gaussian-distribution-is-not-so-important-in-practice",
     "href": "slides/week-06.html#the-gaussian-distribution-is-not-so-important-in-practice",
     "title": "Lecture 6",
     "section": "The Gaussian distribution is not so important in practice",
-    "text": "The Gaussian distribution is not so important in practice\n\nClassical statistics relies on the Gaussian distribution (through the Central Limit Theorem) to make inference around means\n\nMost things we look at are in fact means or averages. A proportion is the average number of 1’s we see.\n\nSimulation methods don’t require many assumptions and reflect the data we see much better\n\nWe’ll try to get simulated results rather than make assumptions on probability distributions that aren’t verifiable\nThe simulations do make the assumptions we make quite explicit.\nYou can use simulations to understand properties of “non-standard” statistics"
+    "text": "The Gaussian distribution is not so important in practice\n\nClassical statistics relies on the Gaussian distribution (through the Central Limit Theorem) to make inference around means\n\nMost things we look at are in fact means or averages. A proportion is the average number of 1’s we see.\n\nSimulation methods don’t require many assumptions and reflect the data we see much better\n\nWe’ll try to get simulated results rather than make assumptions on probability distributions that aren’t verifiable\nThe simulations do make the assumptions we make quite explicit.\nYou can use simulations to understand properties of “non-standard” statistics",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#some-definitions",
     "href": "slides/week-06.html#some-definitions",
     "title": "Lecture 6",
     "section": "Some definitions",
-    "text": "Some definitions\n\nPopulation\n\nThe full set of individuals/observations that are under investigation\n\nSample\n\nA subset of the population that is actually observed (the definition of sample is context dependent and doesn’t have to be random)\n\nRandom sample\n\nA sample where each individual/event in the population has an equal chance of being selected\n\nParameter\n\nA numerical summary of a population (e.g., population mean, population proportion); some characteristic of interest\n\nStatistic\n\nA numerical summary of a sample (e.g., sample mean, sample proportion)"
+    "text": "Some definitions\n\nPopulation\n\nThe full set of individuals/observations that are under investigation\n\nSample\n\nA subset of the population that is actually observed (the definition of sample is context dependent and doesn’t have to be random)\n\nRandom sample\n\nA sample where each individual/event in the population has an equal chance of being selected\n\nParameter\n\nA numerical summary of a population (e.g., population mean, population proportion); some characteristic of interest\n\nStatistic\n\nA numerical summary of a sample (e.g., sample mean, sample proportion)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#study-1",
     "href": "slides/week-06.html#study-1",
     "title": "Lecture 6",
     "section": "Study 1",
-    "text": "Study 1\nWhat is the average amount of PM2.5 particles at Reagan National Airport in August, 2025?\n\nPopulation: PM2.5 readings at all times in August, 2025\nSample: Daily readings at 9am, 12 noon, and 5pm during August 2025\nParameter: Average PM2.5 readings (\\(\\mu\\)) during August, 2025 (unobservable)\nStatistic (corresponding to the parameter): Average of the PM2.5 levels (\\(\\bar{x}\\)) observed during August, 2025\n\n\n\nQuestions\n\n\nIs this study based on a random sample?\nAre there evident biases in the results we might get from this study?"
+    "text": "Study 1\nWhat is the average amount of PM2.5 particles at Reagan National Airport in August, 2025?\n\nPopulation: PM2.5 readings at all times in August, 2025\nSample: Daily readings at 9am, 12 noon, and 5pm during August 2025\nParameter: Average PM2.5 readings (\\(\\mu\\)) during August, 2025 (unobservable)\nStatistic (corresponding to the parameter): Average of the PM2.5 levels (\\(\\bar{x}\\)) observed during August, 2025\n\n\n\nQuestions\n\n\nIs this study based on a random sample?\nAre there evident biases in the results we might get from this study?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#study-2",
     "href": "slides/week-06.html#study-2",
     "title": "Lecture 6",
     "section": "Study 2",
-    "text": "Study 2\nWhat is the median income of people in the District of Columbia?\n\nPopulation: Incomes of all people in DC\nSample: Asking 50 individuals on the Georgetown Campus\nParameter: Median income of people in DC\nStatistic: Median income of people in the sample\n\n\n\nQuestions\n\n\nWhat are the issues with the sample in this study?\nWould you trust your results to answer the question you’re addressing?\nCan we do better?"
+    "text": "Study 2\nWhat is the median income of people in the District of Columbia?\n\nPopulation: Incomes of all people in DC\nSample: Asking 50 individuals on the Georgetown Campus\nParameter: Median income of people in DC\nStatistic: Median income of people in the sample\n\n\n\nQuestions\n\n\nWhat are the issues with the sample in this study?\nWould you trust your results to answer the question you’re addressing?\nCan we do better?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#revisiting-the-central-limit-theorem",
     "href": "slides/week-06.html#revisiting-the-central-limit-theorem",
     "title": "Lecture 6",
     "section": "Revisiting the Central Limit Theorem",
-    "text": "Revisiting the Central Limit Theorem\nHere’s the formal definition:\n\nSuppose \\(X_1, \\dots, X_n\\) is a random sample from some population distribution with mean \\(\\mu\\) and variance \\(\\sigma^2\\). Then, as \\(n \\rightarrow \\infty\\),\n\\[\n\\bar{X}_n = \\frac{1}{n}\\sum_{i=1}^n X_i \\rightarrow^d N\\left(\\mu, \\frac{\\sigma^2}{n}\\right)\n\\]\ni.e., the sampling distribution of the sample mean approaches a normal (Gaussian) distribution as \\(n \\rightarrow \\infty\\).\n\nSo, what’s a sampling distribution? And how is this theorem useful for understanding something about \\(\\mu\\)?"
+    "text": "Revisiting the Central Limit Theorem\nHere’s the formal definition:\n\nSuppose \\(X_1, \\dots, X_n\\) is a random sample from some population distribution with mean \\(\\mu\\) and variance \\(\\sigma^2\\). Then, as \\(n \\rightarrow \\infty\\),\n\\[\n\\bar{X}_n = \\frac{1}{n}\\sum_{i=1}^n X_i \\rightarrow^d N\\left(\\mu, \\frac{\\sigma^2}{n}\\right)\n\\]\ni.e., the sampling distribution of the sample mean approaches a normal (Gaussian) distribution as \\(n \\rightarrow \\infty\\).\n\nSo, what’s a sampling distribution? And how is this theorem useful for understanding something about \\(\\mu\\)?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-population-distribution",
     "href": "slides/week-06.html#the-population-distribution",
     "title": "Lecture 6",
     "section": "The population distribution",
-    "text": "The population distribution\nThe population distribution is the distribution of observations of interest in the population"
+    "text": "The population distribution\nThe population distribution is the distribution of observations of interest in the population",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#a-random-sample-of-size-n50",
     "href": "slides/week-06.html#a-random-sample-of-size-n50",
     "title": "Lecture 6",
     "section": "A random sample (of size n=50)",
-    "text": "A random sample (of size n=50)"
+    "text": "A random sample (of size n=50)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-sample-distribution",
     "href": "slides/week-06.html#the-sample-distribution",
     "title": "Lecture 6",
     "section": "The sample distribution",
-    "text": "The sample distribution\nThe sampling distribution of the mean (or any statistic) is the distribution of the statistic over all possible random samples of size n from the population.\n\nOf course for any real situation, we don’t have access to all possible samples, since it’s often prohibitively expensive to collect data\nBut we can approximate this distribution through simulation\n\nDraw n samples from the population repeatedly\nCalculate the statistic of interest for each sample (here, the mean)\nPlot the distribution of these statistics"
+    "text": "The sample distribution\nThe sampling distribution of the mean (or any statistic) is the distribution of the statistic over all possible random samples of size n from the population.\n\nOf course for any real situation, we don’t have access to all possible samples, since it’s often prohibitively expensive to collect data\nBut we can approximate this distribution through simulation\n\nDraw n samples from the population repeatedly\nCalculate the statistic of interest for each sample (here, the mean)\nPlot the distribution of these statistics",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean",
     "href": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean",
     "title": "Lecture 6",
     "section": "Simulating the sampling distribution of the mean",
-    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = 50) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(binwidth = 1, color = \"black\", fill = \"lightblue\") +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=50)\",\n    x = \"Sample mean of age\",\n    y = \"Count\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))"
+    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = 50) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(binwidth = 1, color = \"black\", fill = \"lightblue\") +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=50)\",\n    x = \"Sample mean of age\",\n    y = \"Count\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-1",
     "href": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-1",
     "title": "Lecture 6",
     "section": "Simulating the sampling distribution of the mean",
-    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 50\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(binwidth = 1, color = \"black\", fill = \"lightblue\") +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  labs(\n    title = glue::glue(\"Sampling distribution of the sample mean (n={n})\"),\n    x = \"Sample mean of age\",\n    y = \"Count\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nNotice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT."
+    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 50\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(binwidth = 1, color = \"black\", fill = \"lightblue\") +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  labs(\n    title = glue::glue(\"Sampling distribution of the sample mean (n={n})\"),\n    x = \"Sample mean of age\",\n    y = \"Count\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nNotice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-2",
     "href": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-2",
     "title": "Lecture 6",
     "section": "Simulating the sampling distribution of the mean",
-    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 50\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(\n    aes(y = ..density..),\n    binwidth = 1,\n    color = \"black\",\n    fill = \"lightblue\"\n  ) +\n  stat_function(\n    fun = dnorm,\n    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),\n    col = \"red4\",\n    lwd = 1.2\n  ) +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  annotate(\n    'text',\n    x = 38,\n    y = 0.12,\n    label = \"Theoretical normal distribution (CLT)\",\n    color = 'red4',\n    size = 5,\n    hjust = 0\n  ) +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=50)\",\n    x = \"Sample mean of age\",\n    y = \"Density\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nNotice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT."
+    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 50\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(\n    aes(y = ..density..),\n    binwidth = 1,\n    color = \"black\",\n    fill = \"lightblue\"\n  ) +\n  stat_function(\n    fun = dnorm,\n    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),\n    col = \"red4\",\n    lwd = 1.2\n  ) +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  annotate(\n    'text',\n    x = 38,\n    y = 0.12,\n    label = \"Theoretical normal distribution (CLT)\",\n    color = 'red4',\n    size = 5,\n    hjust = 0\n  ) +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=50)\",\n    x = \"Sample mean of age\",\n    y = \"Density\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nNotice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-3",
     "href": "slides/week-06.html#simulating-the-sampling-distribution-of-the-mean-3",
     "title": "Lecture 6",
     "section": "Simulating the sampling distribution of the mean",
-    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 250\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(\n    aes(y = ..density..),\n    bins = 30,\n    color = \"black\",\n    fill = \"lightblue\"\n  ) +\n  stat_function(\n    fun = dnorm,\n    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),\n    col = \"red4\",\n    lwd = 1.2\n  ) +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  annotate(\n    'text',\n    x = 38,\n    y = 0.12,\n    label = \"Theoretical normal distribution (CLT)\",\n    color = 'red4',\n    size = 5,\n    hjust = 0\n  ) +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=250)\",\n    x = \"Sample mean of age\",\n    y = \"Density\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nIf you take larger samples, the sampling distribution gets tighter around the population mean, and is also more closely approximated by the normal distribution. This is also an application of the CLT."
+    "text": "Simulating the sampling distribution of the mean\n\n\nSimulation code\nset.seed(123)\nn_sims &lt;- 1000\nn &lt;- 250\nsample_means &lt;- replicate(n_sims, {\n  sample_n(dc_pop, size = n) |&gt;\n    summarise(mean_age = mean(age)) |&gt;\n    pull(mean_age)\n})\n\ntibble(sample_mean = sample_means) |&gt;\n  ggplot(aes(x = sample_mean)) +\n  geom_histogram(\n    aes(y = ..density..),\n    bins = 30,\n    color = \"black\",\n    fill = \"lightblue\"\n  ) +\n  stat_function(\n    fun = dnorm,\n    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),\n    col = \"red4\",\n    lwd = 1.2\n  ) +\n  geom_textvline(\n    xintercept = mean(dc_pop$age),\n    label = 'Population mean',\n    hjust = 0.2,\n    color = 'red4',\n    linetype = 'dashed',\n    size = 4,\n    linewidth = 1.2\n  ) +\n  annotate(\n    'text',\n    x = 38,\n    y = 0.12,\n    label = \"Theoretical normal distribution (CLT)\",\n    color = 'red4',\n    size = 5,\n    hjust = 0\n  ) +\n  labs(\n    title = \"Sampling distribution of the sample mean (n=250)\",\n    x = \"Sample mean of age\",\n    y = \"Density\"\n  ) +\n  lims(x = c(28, 45)) +\n  theme(plot.title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\nIf you take larger samples, the sampling distribution gets tighter around the population mean, and is also more closely approximated by the normal distribution. This is also an application of the CLT.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#uncertainty-in-the-sample-mean",
     "href": "slides/week-06.html#uncertainty-in-the-sample-mean",
     "title": "Lecture 6",
     "section": "Uncertainty in the sample mean",
-    "text": "Uncertainty in the sample mean\nIt’s clear that the sample mean varies from sample to sample. This is called sampling variability. But how much does it vary?\n\n\n\n\n\n\nTerminology\n\n\nThe standard deviation of the sampling distribution of the sample mean is called the standard error (SE) of the sample mean, and is given by: \\[\nSE(\\bar{X}) = \\frac{\\sigma}{\\sqrt{n}}\n\\] where \\(\\sigma\\) is the population standard deviation.\n\n\n\nNow the CLT gives us a bit of a guarantee based on properties of the normal distribution.\n\n\nAbout 68% of the time, the sample mean will be within 1 SE of the population mean\nAbout 95% of the time, the sample mean will be within 2 SE of the population mean\nAbout 99.7% of the time, the sample mean will be within 3 SE of the population mean"
+    "text": "Uncertainty in the sample mean\nIt’s clear that the sample mean varies from sample to sample. This is called sampling variability. But how much does it vary?\n\n\n\n\n\n\nTerminology\n\n\nThe standard deviation of the sampling distribution of the sample mean is called the standard error (SE) of the sample mean, and is given by: \\[\nSE(\\bar{X}) = \\frac{\\sigma}{\\sqrt{n}}\n\\] where \\(\\sigma\\) is the population standard deviation.\n\n\n\nNow the CLT gives us a bit of a guarantee based on properties of the normal distribution.\n\n\nAbout 68% of the time, the sample mean will be within 1 SE of the population mean\nAbout 95% of the time, the sample mean will be within 2 SE of the population mean\nAbout 99.7% of the time, the sample mean will be within 3 SE of the population mean",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#a-word-about-the-standard-deviation",
     "href": "slides/week-06.html#a-word-about-the-standard-deviation",
     "title": "Lecture 6",
     "section": "A word about the standard deviation",
-    "text": "A word about the standard deviation\nThe SD is a measure of how much the data varies.\n\\[\n\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^N (x_i-\\bar{x})^2\n\\]\nis called the variance. It is measuring how far from the mean, on average, we might see observations.\n\nHigher values of \\(\\sigma\\) means a wider range of possible observable values, and a “fatter” histogram"
+    "text": "A word about the standard deviation\nThe SD is a measure of how much the data varies.\n\\[\n\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^N (x_i-\\bar{x})^2\n\\]\nis called the variance. It is measuring how far from the mean, on average, we might see observations.\n\nHigher values of \\(\\sigma\\) means a wider range of possible observable values, and a “fatter” histogram",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#section",
     "href": "slides/week-06.html#section",
     "title": "Lecture 6",
     "section": "",
-    "text": "Code\nlibrary(ggdist)\nlibrary(distributional)\ntibble(sigma=seq(0.5, 3, by=0.5)) |&gt;\n    ggplot(aes(y=sigma, xdist = dist_normal(0,sigma))) +\n        stat_halfeye() +\n        labs(x = \"Normal(0, sigma) distribution\", y = 'sigma')"
+    "text": "Code\nlibrary(ggdist)\nlibrary(distributional)\ntibble(sigma=seq(0.5, 3, by=0.5)) |&gt;\n    ggplot(aes(y=sigma, xdist = dist_normal(0,sigma))) +\n        stat_halfeye() +\n        labs(x = \"Normal(0, sigma) distribution\", y = 'sigma')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#smaller-se-means-were-closer-to-the-truth",
     "href": "slides/week-06.html#smaller-se-means-were-closer-to-the-truth",
     "title": "Lecture 6",
     "section": "Smaller SE means we’re closer to the truth",
-    "text": "Smaller SE means we’re closer to the truth\n\nThe smaller the SE, the tighter the sampling distribution is around the true (unobservable) parameter\n\nIt is more likely that your sample mean is within some small interval of the truth\n\n\n\\[\n\\Pr(-c &lt; \\bar{X}_n - \\mu &lt; c) \\rightarrow 1\\quad\\text{as}\\quad n\\rightarrow \\infty\n\\]\nfor any positive number c\n\n\n\n\n\n\nBut we only observe finite n\n\n\nSo, we need to have an idea of how close we might be for a given n, or what n would get us “close enough”"
+    "text": "Smaller SE means we’re closer to the truth\n\nThe smaller the SE, the tighter the sampling distribution is around the true (unobservable) parameter\n\nIt is more likely that your sample mean is within some small interval of the truth\n\n\n\\[\n\\Pr(-c &lt; \\bar{X}_n - \\mu &lt; c) \\rightarrow 1\\quad\\text{as}\\quad n\\rightarrow \\infty\n\\]\nfor any positive number c\n\n\n\n\n\n\nBut we only observe finite n\n\n\nSo, we need to have an idea of how close we might be for a given n, or what n would get us “close enough”",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#bounding-uncertainty",
     "href": "slides/week-06.html#bounding-uncertainty",
     "title": "Lecture 6",
     "section": "Bounding uncertainty",
-    "text": "Bounding uncertainty\nRecall that for a normal distribution, you have a 95% likelihood of being within 2 SE of the mean\n\\[\n\\begin{eqnarray}\n0.95 &=& \\Pr(\\mu - 2\\sigma/\\sqrt{n} &lt; \\bar{X}_n &lt; \\mu + 2 \\sigma/\\sqrt{n})\\\\\n&=& \\Pr(\\bar{X}_n - 2\\sigma/\\sqrt{n} &lt; \\mu &lt; \\bar{X}_n + 2 \\sigma/\\sqrt{n})\n\\end{eqnarray}\n\\]\nThis doesn’t get us quite there, since we also don’t know the true value of \\(\\sigma\\), but this is saying that…\n\nthe true mean will be within \\(\\bar{X}_n \\pm 2\\sigma/\\sqrt{n}\\) 95% of the time.\nWe can’t quite say that. What is random here? The interval, not the parameter (Huh?!!)\n\nBut we will be able to say something like this when we talk about Bayesian statistics"
+    "text": "Bounding uncertainty\nRecall that for a normal distribution, you have a 95% likelihood of being within 2 SE of the mean\n\\[\n\\begin{eqnarray}\n0.95 &=& \\Pr(\\mu - 2\\sigma/\\sqrt{n} &lt; \\bar{X}_n &lt; \\mu + 2 \\sigma/\\sqrt{n})\\\\\n&=& \\Pr(\\bar{X}_n - 2\\sigma/\\sqrt{n} &lt; \\mu &lt; \\bar{X}_n + 2 \\sigma/\\sqrt{n})\n\\end{eqnarray}\n\\]\nThis doesn’t get us quite there, since we also don’t know the true value of \\(\\sigma\\), but this is saying that…\n\nthe true mean will be within \\(\\bar{X}_n \\pm 2\\sigma/\\sqrt{n}\\) 95% of the time.\nWe can’t quite say that. What is random here? The interval, not the parameter (Huh?!!)\n\nBut we will be able to say something like this when we talk about Bayesian statistics",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-variable-interval-of-uncertainty",
     "href": "slides/week-06.html#the-variable-interval-of-uncertainty",
     "title": "Lecture 6",
     "section": "The variable interval of uncertainty",
-    "text": "The variable interval of uncertainty"
+    "text": "The variable interval of uncertainty",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#we-can-make-mistakes",
     "href": "slides/week-06.html#we-can-make-mistakes",
     "title": "Lecture 6",
     "section": "We can make mistakes …",
-    "text": "We can make mistakes …\nand we won’t know if we make one!!!\n\nStatistics is all about using probability to give us limits to how often we might be wrong (yes, “uncertainty” pops its head again)\nUncertainty intervals like this are a thing even in machine learning, when you have limited training data\nWhat we’re doing is inferring something about our world with partial information, and so our inference will be imperfect.\n\n\nWhat can we say about this interval we would create from one sample that is in hand\n\nIntervals constructed in this manner from repeated samples would cover the true mean 95% of the time.\nWe don’t, and will never, know whether the particular interval we got covers the true mean\n\nRather unsatisfying, right?"
+    "text": "We can make mistakes …\nand we won’t know if we make one!!!\n\nStatistics is all about using probability to give us limits to how often we might be wrong (yes, “uncertainty” pops its head again)\nUncertainty intervals like this are a thing even in machine learning, when you have limited training data\nWhat we’re doing is inferring something about our world with partial information, and so our inference will be imperfect.\n\n\nWhat can we say about this interval we would create from one sample that is in hand\n\nIntervals constructed in this manner from repeated samples would cover the true mean 95% of the time.\nWe don’t, and will never, know whether the particular interval we got covers the true mean\n\nRather unsatisfying, right?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-confidence-interval",
     "href": "slides/week-06.html#the-confidence-interval",
     "title": "Lecture 6",
     "section": "The confidence interval",
-    "text": "The confidence interval\nWhat we developed in the past few slides is called a confidence interval, in particular a 95% confidence interval.\n\nThe 95% comes from the choice of \\(\\pm\\) 2 SE that we made. A different factor would give a different confidence level.\nYou can set that factor by using qnorm((1-p)/2, lower.tail=FALSE) where p is the confidence level you want as a decimal\n\n\n\nThe confidence interval is widely used in practice, and is often reported in papers and articles\nIt does give us a sense of how uncertain we are about our estimate of the parameter\nBut it is often misinterpreted as a probability statement about the parameter, i.e., that there’s a 95% chance the parameter lies in the interval we got"
+    "text": "The confidence interval\nWhat we developed in the past few slides is called a confidence interval, in particular a 95% confidence interval.\n\nThe 95% comes from the choice of \\(\\pm\\) 2 SE that we made. A different factor would give a different confidence level.\nYou can set that factor by using qnorm((1-p)/2, lower.tail=FALSE) where p is the confidence level you want as a decimal\n\n\n\nThe confidence interval is widely used in practice, and is often reported in papers and articles\nIt does give us a sense of how uncertain we are about our estimate of the parameter\nBut it is often misinterpreted as a probability statement about the parameter, i.e., that there’s a 95% chance the parameter lies in the interval we got",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#computing-a-confidence-interval-in-the-real-world",
     "href": "slides/week-06.html#computing-a-confidence-interval-in-the-real-world",
     "title": "Lecture 6",
     "section": "Computing a confidence interval in the real world",
-    "text": "Computing a confidence interval in the real world\nOne thing we glossed over is that we don’t know \\(\\sigma\\) in practice!\nWe can estimate it from the sample using the sample standard deviation \\(s\\): \\[\ns^2 = \\frac{1}{n-1}\\sum_{i=1}^n (X_i - \\bar{X}_n)^2\n\\] This gives us the estimated standard error: \\[\nSE(\\bar{X}) \\approx \\frac{s}{\\sqrt{n}}\n\\] We can then construct the confidence interval as: \\[\n\\bar{X} \\pm 2 \\frac{s}{\\sqrt{n}}\n\\]\nBut, since we’re estimating \\(\\sigma\\) here from a sample, and that estimate has sampling variability, the \\(\\pm\\) 2 SE won’t quite give us the right coverage."
+    "text": "Computing a confidence interval in the real world\nOne thing we glossed over is that we don’t know \\(\\sigma\\) in practice!\nWe can estimate it from the sample using the sample standard deviation \\(s\\): \\[\ns^2 = \\frac{1}{n-1}\\sum_{i=1}^n (X_i - \\bar{X}_n)^2\n\\] This gives us the estimated standard error: \\[\nSE(\\bar{X}) \\approx \\frac{s}{\\sqrt{n}}\n\\] We can then construct the confidence interval as: \\[\n\\bar{X} \\pm 2 \\frac{s}{\\sqrt{n}}\n\\]\nBut, since we’re estimating \\(\\sigma\\) here from a sample, and that estimate has sampling variability, the \\(\\pm\\) 2 SE won’t quite give us the right coverage.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-t-distribution-to-the-rescue",
     "href": "slides/week-06.html#the-t-distribution-to-the-rescue",
     "title": "Lecture 6",
     "section": "The t-distribution to the rescue",
-    "text": "The t-distribution to the rescue\nWhen we estimate \\(\\sigma\\) from a sample, the distribution of the sample mean (appropriately standardized) follows a t-distribution with \\(n-1\\) degrees of freedom\n\\[\n\\frac{\\bar{X}_n - \\mu}{s/\\sqrt{n}} \\sim t_{n-1}\n\\]\nSo, we can use quantiles1 from the t-distribution instead of the normal distribution to get the right coverage.\n\n\n\n\n\n\nDegrees of freedom\n\n\nThe degrees of freedom is the number of independent pieces of information that went into estimating a parameter. Here, we estimated \\(\\sigma\\) from \\(n\\) observations, but since we also estimated \\(\\mu\\) from the same \\(n\\) observations, we lost one degree of freedom. So, we have \\(n-1\\) degrees of freedom left to estimate \\(\\sigma\\).\n\n\n\nQuantiles are the inverse of the cumulative distribution function (CDF). For a given probability p, the p-th quantile is the value x such that \\(P(X \\leq x) = p\\)."
+    "text": "The t-distribution to the rescue\nWhen we estimate \\(\\sigma\\) from a sample, the distribution of the sample mean (appropriately standardized) follows a t-distribution with \\(n-1\\) degrees of freedom\n\\[\n\\frac{\\bar{X}_n - \\mu}{s/\\sqrt{n}} \\sim t_{n-1}\n\\]\nSo, we can use quantiles1 from the t-distribution instead of the normal distribution to get the right coverage.\n\n\n\n\n\n\nDegrees of freedom\n\n\nThe degrees of freedom is the number of independent pieces of information that went into estimating a parameter. Here, we estimated \\(\\sigma\\) from \\(n\\) observations, but since we also estimated \\(\\mu\\) from the same \\(n\\) observations, we lost one degree of freedom. So, we have \\(n-1\\) degrees of freedom left to estimate \\(\\sigma\\).\n\n\n\nQuantiles are the inverse of the cumulative distribution function (CDF). For a given probability p, the p-th quantile is the value x such that \\(P(X \\leq x) = p\\).",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-t-distribution",
     "href": "slides/week-06.html#the-t-distribution",
     "title": "Lecture 6",
     "section": "The t-distribution",
-    "text": "The t-distribution\nThe t-distribution is similar to the normal distribution, but has heavier tails (is fatter), which accounts for the extra uncertainty introduced by estimating \\(\\sigma\\)."
+    "text": "The t-distribution\nThe t-distribution is similar to the normal distribution, but has heavier tails (is fatter), which accounts for the extra uncertainty introduced by estimating \\(\\sigma\\).",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#hypothesis-testing",
     "href": "slides/week-06.html#hypothesis-testing",
     "title": "Lecture 6",
     "section": "Hypothesis testing",
-    "text": "Hypothesis testing\nStating hypotheses and finding evidence to support or refute them is central to the scientific method.\n\nUnderstand that we will very rarely “prove” something, but rather will find a preponderance of evidence for or against a hypothesis\nWe’re used to the courtroom analogy of “beyond a reasonable doubt” or “preponderance of evidence”. Statistical hypothesis testing is similar.\nWe will use data to make decisions about the validity of hypotheses\nWe will use probability to quantify the strength of evidence, so quantify what “reasonable doubt” means\nWe will make decisions based on this evidence, but will always be aware that we might be wrong"
+    "text": "Hypothesis testing\nStating hypotheses and finding evidence to support or refute them is central to the scientific method.\n\nUnderstand that we will very rarely “prove” something, but rather will find a preponderance of evidence for or against a hypothesis\nWe’re used to the courtroom analogy of “beyond a reasonable doubt” or “preponderance of evidence”. Statistical hypothesis testing is similar.\nWe will use data to make decisions about the validity of hypotheses\nWe will use probability to quantify the strength of evidence, so quantify what “reasonable doubt” means\nWe will make decisions based on this evidence, but will always be aware that we might be wrong",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#distinguishing-between-estimation-and-hypothesis-testing",
     "href": "slides/week-06.html#distinguishing-between-estimation-and-hypothesis-testing",
     "title": "Lecture 6",
     "section": "Distinguishing between estimation and hypothesis testing",
-    "text": "Distinguishing between estimation and hypothesis testing\n\nEstimation is about finding a plausible value for a parameter, along with a measure of uncertainty (confidence interval)\nHypothesis testing is about making a decision about the validity of a hypothesis about a parameter, based on evidence from data\nBoth use the same underlying principles of probability and sampling distributions\nBoth are subject to sampling variability and uncertainty"
+    "text": "Distinguishing between estimation and hypothesis testing\n\nEstimation is about finding a plausible value for a parameter, along with a measure of uncertainty (confidence interval)\nHypothesis testing is about making a decision about the validity of a hypothesis about a parameter, based on evidence from data\nBoth use the same underlying principles of probability and sampling distributions\nBoth are subject to sampling variability and uncertainty",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#hypotheses-in-the-statistical-context",
     "href": "slides/week-06.html#hypotheses-in-the-statistical-context",
     "title": "Lecture 6",
     "section": "Hypotheses in the statistical context",
-    "text": "Hypotheses in the statistical context\nWe usually state hypotheses in terms of parameters and values that they might take.\nFor example, if we are interested in the average age of people in DC, we might state:\n\nNull hypothesis (\\(H_0\\)): \\(\\mu = 35\\) (the average age is 35)\nAlternative hypothesis (\\(H_a\\)): \\(\\mu &gt; 35\\) (the average age is more than 35)\n\nor\n\nAlternative hypothesis (\\(H_a\\)): \\(\\mu \\neq 35\\) (the average age is not 35)"
+    "text": "Hypotheses in the statistical context\nWe usually state hypotheses in terms of parameters and values that they might take.\nFor example, if we are interested in the average age of people in DC, we might state:\n\nNull hypothesis (\\(H_0\\)): \\(\\mu = 35\\) (the average age is 35)\nAlternative hypothesis (\\(H_a\\)): \\(\\mu &gt; 35\\) (the average age is more than 35)\n\nor\n\nAlternative hypothesis (\\(H_a\\)): \\(\\mu \\neq 35\\) (the average age is not 35)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#the-null-and-alternative-hypotheses",
     "href": "slides/week-06.html#the-null-and-alternative-hypotheses",
     "title": "Lecture 6",
     "section": "The null and alternative hypotheses",
-    "text": "The null and alternative hypotheses\n\nThe null hypothesis (\\(H_0\\)) is a statement of no effect or no difference. It is the hypothesis that we will test against.\n\nIt is a strawman that we will try to disprove or reject based on evidence from data\n\nThe alternative hypothesis (\\(H_a\\)) is a statement of effect or difference. It is what we hope to find evidence for.\n\n\nThe one-sided nature of classical hypothesis testing\n\nIn classical hypothesis testing, we can only find evidence to reject the null hypothesis. We can never “accept” the null hypothesis. So we are trying to set up a strawman (\\(H_0\\)) to knock down. In reality, we set up the null hypothesis to be the opposite of what we want to find evidence for, or what we think is true and want to confirm."
+    "text": "The null and alternative hypotheses\n\nThe null hypothesis (\\(H_0\\)) is a statement of no effect or no difference. It is the hypothesis that we will test against.\n\nIt is a strawman that we will try to disprove or reject based on evidence from data\n\nThe alternative hypothesis (\\(H_a\\)) is a statement of effect or difference. It is what we hope to find evidence for.\n\n\nThe one-sided nature of classical hypothesis testing\n\nIn classical hypothesis testing, we can only find evidence to reject the null hypothesis. We can never “accept” the null hypothesis. So we are trying to set up a strawman (\\(H_0\\)) to knock down. In reality, we set up the null hypothesis to be the opposite of what we want to find evidence for, or what we think is true and want to confirm.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing",
-    "text": "Concepts of hypothesis testing\nWe will make errors in our decisions when we test hypotheses.\n\nIf the null hypothesis is true, we might still decide to reject it. This is called a Type I error (false positive).\nIf the null hypothesis is false, we might decide not to reject it. This is called a Type II error (false negative).\n\nThose errors are asking,\n\n“How unlikely is it to see data like this if the null hypothesis were true?” (Type I), and\n“How likely is it to see data like this if the null hypothesis were false?” (Type II)"
+    "text": "Concepts of hypothesis testing\nWe will make errors in our decisions when we test hypotheses.\n\nIf the null hypothesis is true, we might still decide to reject it. This is called a Type I error (false positive).\nIf the null hypothesis is false, we might decide not to reject it. This is called a Type II error (false negative).\n\nThose errors are asking,\n\n“How unlikely is it to see data like this if the null hypothesis were true?” (Type I), and\n“How likely is it to see data like this if the null hypothesis were false?” (Type II)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-1",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-1",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing",
-    "text": "Concepts of hypothesis testing\nIn the sequel, we will use idealized distributions to illustrate concepts, based on the CLT. We’ll see that in practice, we can use resampling methods to get at the same ideas.\nLet’s go to DC and take a random sample of 100 people and measure their ages.\n\n\nCode\nset.seed(1234)\nn &lt;- 100\nsample_100 &lt;- sample_n(dc_pop, n)\nsample_100$age\n\n\n  [1] 67 31 30 17 36 33 43 28 32 24 19 29 48 27 39 23 26 82 31 36 32 18  5 56 70\n [26] 47 35 55 21 59 38 50 59 19 30 60 35 27 19 73 44 25 59 25 34 63 31  3 70 32\n [51] 81 27 66 30 33 59 24 37 47  4 53 13 43 77 39 31 20 52 23 42 16 57 47 49 26\n [76] 28 63 60 14 33  3 54 56  5 29 18 19 40 35 49 84 60 82 60 76  0 43 68 27 26\n\n\nThis sample has a mean age of 39.23 and a standard deviation of 19.98. We know from earlier that the sampling distribution of the mean is approximately normal with mean \\(\\mu\\) and standard error \\(\\sigma/\\sqrt{n}\\)."
+    "text": "Concepts of hypothesis testing\nIn the sequel, we will use idealized distributions to illustrate concepts, based on the CLT. We’ll see that in practice, we can use resampling methods to get at the same ideas.\nLet’s go to DC and take a random sample of 100 people and measure their ages.\n\n\nCode\nset.seed(1234)\nn &lt;- 100\nsample_100 &lt;- sample_n(dc_pop, n)\nsample_100$age\n\n\n  [1] 67 31 30 17 36 33 43 28 32 24 19 29 48 27 39 23 26 82 31 36 32 18  5 56 70\n [26] 47 35 55 21 59 38 50 59 19 30 60 35 27 19 73 44 25 59 25 34 63 31  3 70 32\n [51] 81 27 66 30 33 59 24 37 47  4 53 13 43 77 39 31 20 52 23 42 16 57 47 49 26\n [76] 28 63 60 14 33  3 54 56  5 29 18 19 40 35 49 84 60 82 60 76  0 43 68 27 26\n\n\nThis sample has a mean age of 39.23 and a standard deviation of 19.98. We know from earlier that the sampling distribution of the mean is approximately normal with mean \\(\\mu\\) and standard error \\(\\sigma/\\sqrt{n}\\).",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-2",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-2",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing",
-    "text": "Concepts of hypothesis testing\nWe will test the hypotheses:\n\nNull hypothesis (\\(H_0\\)): \\(\\mu = 35\\) (the average age is 35)\nAlternative hypothesis (\\(H_a\\)): \\(\\mu &gt; 35\\) (the average age is more than 35)\n\nWe’ll deal with the Type I error first, i.e., how likely is it to see a sample mean as large as we saw if the null hypothesis were true?\n\n\nCode\np = pnorm(mean(sample_100$age), mean = 35, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)\n\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |&gt; \nggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x &gt; mean(sample_100$age))), show.legend=F) +\n    stat_halfeye() + \n    scale_fill_manual(values = c(\"TRUE\"='red', \"FALSE\" = 'lightblue')) +\n    annotate('text', x = 40, y = 0.4, label = paste(\"p =\", round(p,4)), size = 3) +\n    labs(x = 'Age') + \n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+    "text": "Concepts of hypothesis testing\nWe will test the hypotheses:\n\nNull hypothesis (\\(H_0\\)): \\(\\mu = 35\\) (the average age is 35)\nAlternative hypothesis (\\(H_a\\)): \\(\\mu &gt; 35\\) (the average age is more than 35)\n\nWe’ll deal with the Type I error first, i.e., how likely is it to see a sample mean as large as we saw if the null hypothesis were true?\n\n\nCode\np = pnorm(mean(sample_100$age), mean = 35, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)\n\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |&gt; \nggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x &gt; mean(sample_100$age))), show.legend=F) +\n    stat_halfeye() + \n    scale_fill_manual(values = c(\"TRUE\"='red', \"FALSE\" = 'lightblue')) +\n    annotate('text', x = 40, y = 0.4, label = paste(\"p =\", round(p,4)), size = 3) +\n    labs(x = 'Age') + \n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-3",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-3",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing",
-    "text": "Concepts of hypothesis testing\nWe see that the probability of seeing a sample mean as large as we saw if the null hypothesis were true is 0.019. This is called the p-value.\n\nThe p-value is the probability of observing data as extreme or more extreme than what we observed, assuming the null hypothesis is true.\nWe set a threshold called the significance level (\\(\\alpha\\)), which is the maximum acceptable probability of making a Type I error.\n\n\nThis is where the “beyond a reasonable doubt” or “preponderance of evidence” comes in. How small does the p-value need to be for us to reject the null hypothesis?"
+    "text": "Concepts of hypothesis testing\nWe see that the probability of seeing a sample mean as large as we saw if the null hypothesis were true is 0.019. This is called the p-value.\n\nThe p-value is the probability of observing data as extreme or more extreme than what we observed, assuming the null hypothesis is true.\nWe set a threshold called the significance level (\\(\\alpha\\)), which is the maximum acceptable probability of making a Type I error.\n\n\nThis is where the “beyond a reasonable doubt” or “preponderance of evidence” comes in. How small does the p-value need to be for us to reject the null hypothesis?",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-4",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-4",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing",
-    "text": "Concepts of hypothesis testing\nWe decide on a significance level (\\(\\alpha\\)) before we look at the data. A common choice is \\(\\alpha = 0.05\\).\nOnce we see the data, we compare the p-value to \\(\\alpha\\), and our work is basically done.\nWe might like to also take a look at the other kind of error, the Type II error."
+    "text": "Concepts of hypothesis testing\nWe decide on a significance level (\\(\\alpha\\)) before we look at the data. A common choice is \\(\\alpha = 0.05\\).\nOnce we see the data, we compare the p-value to \\(\\alpha\\), and our work is basically done.\nWe might like to also take a look at the other kind of error, the Type II error.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-errors",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-errors",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing: Errors",
-    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-errors-1",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-errors-1",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing: Errors",
-    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), geom='area', fill = 'blue', \n    xlim = c(mean(sample_100$age), 48), alpha = 0.5) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    annotate('text', x = 37, y = 0.02, label = 'Type I error', color = 'blue') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), geom='area', fill = 'blue', \n    xlim = c(mean(sample_100$age), 48), alpha = 0.5) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    annotate('text', x = 37, y = 0.02, label = 'Type I error', color = 'blue') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-errors-2",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-errors-2",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing: Errors",
-    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), geom='area', fill = 'red', \n    xlim = c(28,mean(sample_100$age)), alpha = 0.5) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    annotate('text', x = 35, y = 0.02, hjust=1, label = 'Type II error', color = 'red') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+    "text": "Concepts of hypothesis testing: Errors\nTo understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for \\(\\mu\\) that are greater than 35. The further away the true \\(\\mu\\) is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.\n\n\nCode\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), geom='area', fill = 'red', \n    xlim = c(28,mean(sample_100$age)), alpha = 0.5) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    annotate('text', x = 35, y = 0.02, hjust=1, label = 'Type II error', color = 'red') +\n    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +\n    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-errors-3",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-errors-3",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing: Errors",
-    "text": "Concepts of hypothesis testing: Errors\n\nIf you look at the graphs, you’ll see that if you move the observed sample mean to the right, the Type I error area (blue) shrinks, and the Type II error area (red) grows. And vice versa.\nWhich means that you cannot minimize both types of errors simultaneously.\n\n\nThe trade-off between Type I and Type II errors\n\nDecreasing the probability of one type of error increases the probability of the other type of error. So you have to choose which type of error is more important to minimize in your context.\nGenerally speaking, Type I errors are considered more serious in scientific contexts, while Type II errors may be more tolerable in exploratory contexts. So we usually set a low significance level (\\(\\alpha\\)) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size)."
+    "text": "Concepts of hypothesis testing: Errors\n\nIf you look at the graphs, you’ll see that if you move the observed sample mean to the right, the Type I error area (blue) shrinks, and the Type II error area (red) grows. And vice versa.\nWhich means that you cannot minimize both types of errors simultaneously.\n\n\nThe trade-off between Type I and Type II errors\n\nDecreasing the probability of one type of error increases the probability of the other type of error. So you have to choose which type of error is more important to minimize in your context.\nGenerally speaking, Type I errors are considered more serious in scientific contexts, while Type II errors may be more tolerable in exploratory contexts. So we usually set a low significance level (\\(\\alpha\\)) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size).",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#concepts-of-hypothesis-testing-errors-4",
     "href": "slides/week-06.html#concepts-of-hypothesis-testing-errors-4",
     "title": "Lecture 6",
     "section": "Concepts of hypothesis testing: Errors",
-    "text": "Concepts of hypothesis testing: Errors"
+    "text": "Concepts of hypothesis testing: Errors",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#running-a-hypothesis-test-in-r",
     "href": "slides/week-06.html#running-a-hypothesis-test-in-r",
     "title": "Lecture 6",
     "section": "Running a hypothesis test in R",
-    "text": "Running a hypothesis test in R\n\n\nCode\nt.test(sample_100$age, mu = 35, alternative = \"greater\")\n\n\n\n    One Sample t-test\n\ndata:  sample_100$age\nt = 2.1169, df = 99, p-value = 0.01839\nalternative hypothesis: true mean is greater than 35\n95 percent confidence interval:\n 35.91225      Inf\nsample estimates:\nmean of x \n    39.23 \n\n\nThis output can be cleaned up using broom::tidy()\n\n\nCode\nbroom::tidy(t.test(sample_100$age, mu = 35, alternative = \"greater\"))\n\n\n# A tibble: 1 × 8\n  estimate statistic p.value parameter conf.low conf.high method     alternative\n     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      \n1     39.2      2.12  0.0184        99     35.9       Inf One Sampl… greater"
+    "text": "Running a hypothesis test in R\n\n\nCode\nt.test(sample_100$age, mu = 35, alternative = \"greater\")\n\n\n\n    One Sample t-test\n\ndata:  sample_100$age\nt = 2.1169, df = 99, p-value = 0.01839\nalternative hypothesis: true mean is greater than 35\n95 percent confidence interval:\n 35.91225      Inf\nsample estimates:\nmean of x \n    39.23 \n\n\nThis output can be cleaned up using broom::tidy()\n\n\nCode\nbroom::tidy(t.test(sample_100$age, mu = 35, alternative = \"greater\"))\n\n\n# A tibble: 1 × 8\n  estimate statistic p.value parameter conf.low conf.high method     alternative\n     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      \n1     39.2      2.12  0.0184        99     35.9       Inf One Sampl… greater",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#what-happens-if-we-change-to-a-two-sided-test",
     "href": "slides/week-06.html#what-happens-if-we-change-to-a-two-sided-test",
     "title": "Lecture 6",
     "section": "What happens if we change to a two-sided test?",
-    "text": "What happens if we change to a two-sided test?\n\n\nCode\nbroom::tidy(t.test(sample_100$age, mu = 35, alternative = \"two.sided\"))\n\n\n# A tibble: 1 × 8\n  estimate statistic p.value parameter conf.low conf.high method     alternative\n     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      \n1     39.2      2.12  0.0368        99     35.3      43.2 One Sampl… two.sided  \n\n\nThe p-value has doubled, since we are now considering extreme values on both sides of the null hypothesis value."
+    "text": "What happens if we change to a two-sided test?\n\n\nCode\nbroom::tidy(t.test(sample_100$age, mu = 35, alternative = \"two.sided\"))\n\n\n# A tibble: 1 × 8\n  estimate statistic p.value parameter conf.low conf.high method     alternative\n     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      \n1     39.2      2.12  0.0368        99     35.3      43.2 One Sampl… two.sided  \n\n\nThe p-value has doubled, since we are now considering extreme values on both sides of the null hypothesis value.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#section-1",
     "href": "slides/week-06.html#section-1",
     "title": "Lecture 6",
     "section": "",
-    "text": "Code\np = 2*pnorm(abs(35-mean(sample_100$age)), mean = 0, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)\n\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |&gt; \nggplot(aes(xdist = dist_normal(mean, sd), \n    fill = stat(abs(x - 35) &gt; abs(35 - mean(sample_100$age))), show.legend=F)) +\n    stat_halfeye() + \n    scale_fill_manual(values = c(\"TRUE\"='red', \"FALSE\" = 'lightblue')) +\n    annotate('text', x = 40, y = 0.4, label = paste(\"p =\", round(p,4)), size = 3) +\n    labs(x = 'Age') + \n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+    "text": "Code\np = 2*pnorm(abs(35-mean(sample_100$age)), mean = 0, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)\n\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |&gt; \nggplot(aes(xdist = dist_normal(mean, sd), \n    fill = stat(abs(x - 35) &gt; abs(35 - mean(sample_100$age))), show.legend=F)) +\n    stat_halfeye() + \n    scale_fill_manual(values = c(\"TRUE\"='red', \"FALSE\" = 'lightblue')) +\n    annotate('text', x = 40, y = 0.4, label = paste(\"p =\", round(p,4)), size = 3) +\n    labs(x = 'Age') + \n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#summary",
     "href": "slides/week-06.html#summary",
     "title": "Lecture 6",
     "section": "Summary",
-    "text": "Summary\n\nWe can use data to make decisions about hypotheses about parameters\nWe use probability to quantify the strength of evidence against the null hypothesis\nWe make decisions based on this evidence, but are aware that we might be wrong\nWe can make two types of errors: Type I (false positive) and Type II (false negative)\nThere is a trade-off between Type I and Type II errors\nWe usually set a low significance level (\\(\\alpha\\)) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size)"
+    "text": "Summary\n\nWe can use data to make decisions about hypotheses about parameters\nWe use probability to quantify the strength of evidence against the null hypothesis\nWe make decisions based on this evidence, but are aware that we might be wrong\nWe can make two types of errors: Type I (false positive) and Type II (false negative)\nThere is a trade-off between Type I and Type II errors\nWe usually set a low significance level (\\(\\alpha\\)) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size)",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "slides/week-06.html#scenario",
     "href": "slides/week-06.html#scenario",
     "title": "Lecture 6",
     "section": "Scenario",
-    "text": "Scenario\nIn the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15% of this age group own homes, compared to a national average of 20%. Home-owners have a 1% chance of leaving the state, while renters and non-home-owners have a 15% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost $1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15% to 10%. It is expected that 30% of renters will take up the program. The average cost of a person leaving the state is estimated to be $50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using usdata::pop_age_2019."
+    "text": "Scenario\nIn the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15% of this age group own homes, compared to a national average of 20%. Home-owners have a 1% chance of leaving the state, while renters and non-home-owners have a 15% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost $1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15% to 10%. It is expected that 30% of renters will take up the program. The average cost of a person leaving the state is estimated to be $50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using usdata::pop_age_2019.",
+    "crumbs": [
+      "Lecture Slides",
+      "Lecture 6"
+    ]
   },
   {
     "objectID": "supplemental/data_munging.html",
