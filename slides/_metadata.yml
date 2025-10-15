@@ -3,6 +3,7 @@ execute:
   eval: true
   cache: true
   freeze: auto
+  max-lines: 8
 
 format:
   live-revealjs:
@@ -26,11 +27,24 @@ format:
     view-distance: 3
     link-external-newwindow: true
   # smaller: true
-
+webr:
+  cell-options:
+    fig-width: 8
+    fig-height: 4
+    max-lines: 6
+    warning: false
+  resources: data
+  packages:
+    - tidyverse
+    - tidymodels
+    - janitor
+    - usdata
 
 lightbox: true
 chalkboard: true
 engine: knitr
 revealjs-plugins: 
   - drop
+
+
   

@@ -36,12 +36,13 @@ $presentation-font-size-root: 28px !default;
   .slide-background-content {
     background-color: $primary;
   }
-  h1{
+
+  h1 {
     color: $accent2;
   }
 }
 
-.question .presentation-callout-tip{
+.question .presentation-callout-tip {
   $callout-color-note: $accent;
 }
 
@@ -72,13 +73,14 @@ details>summary {
   padding-bottom: 200px;
 }
 
-.accent-color{
+.accent-color {
   color: $accent;
 }
 
 .b--accent {
   border-color: $accent !important;
 }
+
 .small {
   font-size: 0.75em;
 }
@@ -93,6 +95,10 @@ details>summary {
 
 .medium {
   font-size: 0.9em;
+}
+
+.red {
+  color: red
 }
 
 .center-align {
@@ -115,18 +121,27 @@ details>summary {
   background-color: #F1DE6750;
 }
 
-.reveal .questions {
-  border-color: $accent !important;
+div.questions {
+  border-color: $accent;
   border-radius: .5rem;
   border-width: .25rem;
   border-style: solid;
   padding: .75rem;
-  margin: .25rem;;
+  margin: .25rem;
+  ;
+  font-size: 0.75em;
+}
+
+div.thm {
+  border-color: $primary ;
+  border-radius: .5rem;
+  border-width: .25rem;
+  border-style: solid;
+  padding: .75rem;
+  margin: .25rem;
+  ;
   font-size: 0.75em;
 
-  h3 {
-    color: $accent !important;
-  }
 }
 
 //.ba .b--accent .br3 .bw2 .pa3 .ma2
