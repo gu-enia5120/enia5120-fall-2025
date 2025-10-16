@@ -1,12 +1,61 @@
 /*-- scss:defaults --*/
 
+// Custom colours and variables
+$primary: #041e42;
+$accent2: #bbbcbc;
+$accent: #862633;
+$subtle-accent: #003da5;
+
 @import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:200,200i,300,300i,350,350i,400,400i');
 
 $font-family: "Atkinson Hyperlegible", sans-serif;
-$link-color: #866fa3;
+$font-family-monospace: "Source Code Pro", monospace;
+$link-color: $accent;
 $hover-color: lighten($link-color, 40%);
 
 /*-- scss:rules --*/
+
+div.questions {
+  border-color: $accent;
+  border-radius: .5rem;
+  border-width: .25rem;
+  border-style: solid;
+  padding: .75rem;
+  margin: .25rem;
+  ;
+  font-size: 0.75em;
+}
+
+div.thm {
+  border-color: $primary ;
+  border-radius: .5rem;
+  border-width: .25rem;
+  border-style: solid;
+  padding: .75rem;
+  margin: .25rem;
+  ;
+  font-size: 0.75em;
+
+}
+
+.small {
+  font-size: 0.75em;
+}
+
+.smallest {
+  font-size: 0.5em;
+}
+
+.large {
+  font-size: 1.5em;
+}
+
+.bold {
+  font-weight: bold;
+}
 
 a{
   color: $link-color;
