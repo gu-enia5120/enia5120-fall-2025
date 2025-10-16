@@ -1,0 +1,140 @@
+---
+title: "Homework 4"
+subtitle: "Probability and Inference foundations"
+author: "<Your name>"
+format:
+    html: 
+        embed-resources: true
+    typst: default
+execute:
+    eval: false
+    messages: false
+    warning: false
+engine: knitr
+---
+
+```{css}
+.bold {
+  font-weight: bold;
+}
+```
+
+::: callout-note
+## Instructions
+
+Modify this quarto notebook, change `eval: false` to `eval: true` above, convert it to PDF using typst or to HTML and submit. Total is 70 points
+
+Either HTML or PDF submissions are fine. Please also submit this Quarto file.
+
+
+### Rubric:
+
+-   Each question is worth 10 points
+-   Since these are numerical questions with a right answer, full credit will be given for following directions, using appropriate methods and getting the right answer
+-   Partial credit may be given for incorrect answers if the reasoning and methodology are sound. The correct answer itself is worth 2 points.
+:::
+
+::: callout-note
+## Useful facts
+
+1.  If two events *A* and *B* are independent, then P(A and B) = P(A) x P(B).
+2.  The law of total probability states that for two events *A* and *B*, P(B) = P(A \| B)P(B) + P(A \| not B) P(not B)
+3.  For two events *A* and *B*, the conditional probability of *B* given *A* is P(B\|A) = P(A and B) / P(A)
+4.  A 95% confidence interval for a mean is given by $(\bar{x} - 2 s/\sqrt{n}, \bar{x} + 2s/\sqrt{n})$ where $\bar{x}$ is the sample mean and $s$ is the sample standard deviation from a sample of size $n$
+:::
+
+------------------------------------------------------------------------
+
+:::: bold
+Question 1: An air quality monitoring station reports that the probability of a “high pollution alert” on any given day in July is 0.3. Assuming days are independent, what is the probability that exactly 2 out of the next 5 days have high pollution alerts?
+
+::: small
+Show your work, and confirm your answer using `dbinom(x=2, size=5, prob=0.3)`
+:::
+::::
+
+
+#### Answer
+
+### 
+
+::: bold
+Question 2: An environmental sensor detects excess ozone (event A) and excess particulate matter (event B). Historical data show: - P(A) = 0.25 - P(B) = 0.40 - P(A∩B) = 0.12 Compute P(B\|A) and interpret the result in context. What does it suggest about the joint occurrence of these pollutants?
+
+Are A and B independent? Provide both a numerical check and an interpretation in terms of environmental processes
+:::
+
+#### Answer
+
+::: bold
+Question 3. In a three-region election analysis, probabilities of supporting Candidate Y differ by region:
+
+-   Urban (45% of population): 0.70
+-   Suburban (35%): 0.55
+-   Rural (20%): 0.40
+
+Find the overall probability that a randomly selected voter supports Candidate Y.
+:::
+
+#### Answer
+
+
+::: bold
+Question 4. Suppose a new water-testing kit detects microplastics with 95% sensitivity (true positive) and 90% specificity (true negative). Environmental assessments show that 10% of water samples in the region contain microplastics. If the test gives a positive result, what is the posterior probability the sample truly contains microplastics?
+:::
+
+#### Answer
+
+### 
+
+::: bold
+Question 5: A survey of 1000 voters shows a mean approval rating of 35% for the Governor, with a standard deviation of 12%. Construct a 95% confidence interval for the true approval rating. Interpret your results.
+:::
+
+#### Answer
+
+
+:::: bold
+Question 6. An environmental agency claims that the average nitrate level in groundwater exceeds the safety standard of 10 mg/L. A random sample of 40 wells gives a mean of 10.6 mg/L with a standard deviation of 1.5 mg/L.
+
+a.  Formulate the null and alternate hypothesis to test this claim.
+b.  Construct a simulation experiment to assess the evidence against the null hypothesis and report the p-value from the simulation
+c.  Interpret this p-value and its implications for the agency's claim. The agency has set a significance level of 3%.
+d.  Construct a 95% confidence interval for the mean nitrate level.
+
+::: small
+Note that two people will likely not get the same answers to these questions, due to the random nature of the simulations. However, there is a ballpark of right answers, and you will be graded on your simulation code.
+:::
+::::
+
+#### Answer
+
+::::: bold
+The file `dc_sample.rds` is provided you on Canvas. Download this and load this into R with the code
+
+``` r
+dc_data <- readRDS("dc_sample.rds") # specify the right path to the file for your setup
+```
+
+This dataset is a sample of 500 individuals and their race, based on standard Census criteria.
+
+a.  Construct a confidence interval of the proportion of black people in DC using this dataset. (5 points)
+
+
+b.  Perform a simulation experiment as follows: (10 points)
+
+-   Create 1000 datasets of size 500 from this dataset by resampling with replacement.
+-   For each dataset, compute the proportion of black individuals.
+-   Construct a distribution of these proportions and report the 2.5% and 97.5% percentiles.
+-   Compare the confidence interval from part (a) with the distribution from the simulation in part (b).
+
+c.  Provide a table showing how often subjects are repeated in one of the resampled datasets. What I'm looking for is a table like the following, where the header denotes the number of times a subject is repeated.
+
+| **1** | **2** | **3** | **4** | **5** |
+|:------|:------|:------|:------|:------|
+| 191   | 86    | 29    | 10    | 2     |
+
+Also, report on the number of unique individuals included in this resampled dataset (it is **not** 500)
+
+:::::
+
