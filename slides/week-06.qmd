@@ -1,0 +1,904 @@
+---
+title: "Lecture 6"
+subtitle: "Introduction to statistical inference"
+format: live-revealjs
+execute:
+  cache: true
+  message: false
+  warning: false
+  echo: true
+---
+
+## Announcements
+
+1.  Feedback from Milestone 1 & 2 by Friday
+2.  No quiz today
+3.  Homework encompassing probability and inference (today) with 2 weeks time.
+4.  Start weaning yourself off the software and write R code
+
+## Where we've been
+
+-   Start understanding the data through EDA and visualization
+
+-   Identifying gross patterns and relationships, usually univariate and bivariate
+
+-   Some probability tools that will help us understand our path forward.
+
+    -   It's ok to think about probability as relative frequency for now, but eventually, think of it as the likelihood of something happening
+
+## Where are we going?
+
+-   Statistical inference based on random sampling principles
+
+-   But we know garbage in = garbage out
+
+    -   How do we collect data to make statistical inference valid?
+
+    -   Design of experiments
+
+-   When can we get beyond associations?
+
+    -   Causality criteria, domain knowledge and graphs
+
+## Resources for this week
+
+We'll mainly be working on material related to IMS2e Chapters 11-12, and SIDS chapters 7-9
+
+-   We'll work through these probably over a couple of weeks, depending on pace
+
+-   We'll deal with ideal or toy situations to illustrate concepts
+
+-   Understand that real analyses aren't nearly going to be that clean, which is where some of the next topics around causality and observational data will come in
+
+# An opinionated approach {.inverse}
+
+## The Gaussian distribution is not so important in practice
+
+-   Classical statistics relies on the Gaussian distribution (through the [Central Limit Theorem](week-05.qmd#sec-clt)) to make inference around means
+
+    -   Most things we look at are in fact means or averages. A proportion is the average number of 1's we see.
+
+-   Simulation methods don't require many assumptions and reflect the data we see much better
+
+    -   We'll try to get simulated results rather than make assumptions on probability distributions that aren't verifiable
+
+    -   The simulations **do** make the assumptions we make quite explicit.
+
+    -   You can use simulations to understand properties of "non-standard" statistics
+
+## Some definitions
+
+Population
+
+:   The full set of individuals/observations that are under investigation
+
+Sample
+
+:   A subset of the population that is actually observed (the definition of sample is context dependent and doesn't have to be random)
+
+Random sample
+
+:   A sample where each individual/event in the population has an equal chance of being selected
+
+Parameter
+
+:   A numerical summary of a **population** (e.g., population mean, population proportion); some characteristic of interest
+
+Statistic
+
+:   A numerical summary of a **sample** (e.g., sample mean, sample proportion)
+
+## Study 1
+
+What is the average amount of PM2.5 particles at Reagan National Airport in August, 2025?
+
+-   Population: PM2.5 readings at all times in August, 2025
+-   Sample: Daily readings at 9am, 12 noon, and 5pm during August 2025
+-   Parameter: Average PM2.5 readings ($\mu$) during August, 2025 (unobservable)
+-   Statistic (corresponding to the parameter): Average of the PM2.5 levels ($\bar{x}$) observed during August, 2025
+
+:::: fragment
+::: questions
+[**Questions**]{.large}
+
+<hr/>
+
+1.  Is this study based on a random sample?
+2.  Are there evident biases in the results we might get from this study?
+:::
+::::
+
+## Study 2
+
+What is the median income of people in the District of Columbia?
+
+-   Population: Incomes of all people in DC
+-   Sample: Asking 50 individuals on the Georgetown Campus
+-   Parameter: Median income of people in DC
+-   Statistic: Median income of people in the sample
+
+:::: fragment
+::: questions
+[**Questions**]{.large}
+
+<hr/>
+
+1.  What are the issues with the sample in this study?
+2.  Would you trust your results to answer the question you're addressing?
+3.  Can we do better?
+:::
+::::
+
+## Revisiting the Central Limit Theorem
+
+Here's the formal definition:
+
+::: thm
+Suppose $X_1, \dots, X_n$ is a **random sample** from some population distribution with mean $\mu$ and variance $\sigma^2$. Then, as $n \rightarrow \infty$,
+
+$$
+\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i \rightarrow^d N\left(\mu, \frac{\sigma^2}{n}\right)
+$$
+
+i.e., the **sampling distribution** of the sample mean approaches a *normal (Gaussian)* distribution as $n \rightarrow \infty$.
+:::
+
+So, what's a **sampling distribution**? And how is this theorem useful for understanding something about $\mu$?
+
+# Defining things {.inverse}
+
+## The population distribution
+
+The population distribution is the distribution of observations of interest in the population
+
+```{r}
+#| include: false
+#| label: setup
+#| cache: false
+library(tidyverse)
+library(tidymodels)
+library(janitor)
+library(geomtextpath)
+library(usdata)
+theme_set(theme_minimal())
+
+dc_pop <- pop_age_2019 |>
+  filter(state == "DC") |>
+  uncount(population) |>
+  select(state, age) |>
+  mutate(age = as.numeric(age)) |>
+  drop_na(age)
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+ggplot(dc_pop, aes(x = age)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "lightblue") +
+  labs(
+    title = "Population distribution of age in DC (2019)",
+    x = "Age",
+    y = "Count"
+  ) +
+  theme(plot.title = element_text(size = 20))
+```
+
+## A random sample (of size n=50)
+
+```{webr}
+#| max-lines: 5
+#| warning: false
+#| cache: false
+
+theme_set(theme_minimal())
+
+dc_pop <- readRDS('data/dc_pop.rds')
+
+sample_50 <- dc_pop |>
+  slice_sample(n = 50)
+sample_50$age
+
+ggplot(sample_50, aes(x = age)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "lightblue") +
+  annotate('text', x = 60, y = 5, label = paste("mean =", round(mean(sample_50$age),2)),
+    color = "black",
+    size = 6
+  ) +
+  annotate('text', x = 60, y = 4.5, label = "Notice how this changes", color = 'orange', size= 6) + 
+  labs(
+    title = "A random sample of size n=50",
+    x = "Age",
+    y = "Count"
+  ) +
+  theme(plot.title = element_text(size = 20))
+```
+
+## The sample distribution
+
+The sampling distribution of the mean (or any statistic) is the distribution of the statistic over all possible random samples of size *n* from the population.
+
+-   Of course for any real situation, we don't have access to all possible samples, since it's often prohibitively expensive to collect data
+-   But we can approximate this distribution through simulation
+    -   Draw *n* samples from the population repeatedly
+    -   Calculate the statistic of interest for each sample (here, the mean)
+    -   Plot the distribution of these statistics
+
+## Simulating the sampling distribution of the mean
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| warning: false
+#| code-summary: Simulation code
+set.seed(123)
+n_sims <- 1000
+sample_means <- replicate(n_sims, {
+  sample_n(dc_pop, size = 50) |>
+    summarise(mean_age = mean(age)) |>
+    pull(mean_age)
+})
+
+tibble(sample_mean = sample_means) |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "lightblue") +
+  labs(
+    title = "Sampling distribution of the sample mean (n=50)",
+    x = "Sample mean of age",
+    y = "Count"
+  ) +
+  lims(x = c(28, 45)) +
+  theme(plot.title = element_text(size = 20))
+```
+
+## Simulating the sampling distribution of the mean
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| code-summary: Simulation code
+set.seed(123)
+n_sims <- 1000
+n <- 50
+sample_means <- replicate(n_sims, {
+  sample_n(dc_pop, size = n) |>
+    summarise(mean_age = mean(age)) |>
+    pull(mean_age)
+})
+
+tibble(sample_mean = sample_means) |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(binwidth = 1, color = "black", fill = "lightblue") +
+  geom_textvline(
+    xintercept = mean(dc_pop$age),
+    label = 'Population mean',
+    hjust = 0.2,
+    color = 'red4',
+    linetype = 'dashed',
+    size = 4,
+    linewidth = 1.2
+  ) +
+  labs(
+    title = glue::glue("Sampling distribution of the sample mean (n={n})"),
+    x = "Sample mean of age",
+    y = "Count"
+  ) +
+  lims(x = c(28, 45)) +
+  theme(plot.title = element_text(size = 20))
+```
+
+Notice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT.
+
+## Simulating the sampling distribution of the mean
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| code-summary: Simulation code
+set.seed(123)
+n_sims <- 1000
+n <- 50
+sample_means <- replicate(n_sims, {
+  sample_n(dc_pop, size = n) |>
+    summarise(mean_age = mean(age)) |>
+    pull(mean_age)
+})
+
+tibble(sample_mean = sample_means) |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(
+    aes(y = ..density..),
+    binwidth = 1,
+    color = "black",
+    fill = "lightblue"
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),
+    col = "red4",
+    lwd = 1.2
+  ) +
+  geom_textvline(
+    xintercept = mean(dc_pop$age),
+    label = 'Population mean',
+    hjust = 0.2,
+    color = 'red4',
+    linetype = 'dashed',
+    size = 4,
+    linewidth = 1.2
+  ) +
+  annotate(
+    'text',
+    x = 38,
+    y = 0.12,
+    label = "Theoretical normal distribution (CLT)",
+    color = 'red4',
+    size = 5,
+    hjust = 0
+  ) +
+  labs(
+    title = "Sampling distribution of the sample mean (n=50)",
+    x = "Sample mean of age",
+    y = "Density"
+  ) +
+  lims(x = c(28, 45)) +
+  theme(plot.title = element_text(size = 20))
+```
+
+Notice that the population mean is pretty much in the middle of the sampling distribution. This is an application of the CLT.
+
+## Simulating the sampling distribution of the mean
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+#| warning: false
+#| code-summary: Simulation code
+set.seed(123)
+n_sims <- 1000
+n <- 250
+sample_means <- replicate(n_sims, {
+  sample_n(dc_pop, size = n) |>
+    summarise(mean_age = mean(age)) |>
+    pull(mean_age)
+})
+
+tibble(sample_mean = sample_means) |>
+  ggplot(aes(x = sample_mean)) +
+  geom_histogram(
+    aes(y = ..density..),
+    bins = 30,
+    color = "black",
+    fill = "lightblue"
+  ) +
+  stat_function(
+    fun = dnorm,
+    args = list(mean = mean(dc_pop$age), sd = sd(dc_pop$age) / sqrt(n)),
+    col = "red4",
+    lwd = 1.2
+  ) +
+  geom_textvline(
+    xintercept = mean(dc_pop$age),
+    label = 'Population mean',
+    hjust = 0.2,
+    color = 'red4',
+    linetype = 'dashed',
+    size = 4,
+    linewidth = 1.2
+  ) +
+  annotate(
+    'text',
+    x = 38,
+    y = 0.12,
+    label = "Theoretical normal distribution (CLT)",
+    color = 'red4',
+    size = 5,
+    hjust = 0
+  ) +
+  labs(
+    title = "Sampling distribution of the sample mean (n=250)",
+    x = "Sample mean of age",
+    y = "Density"
+  ) +
+  lims(x = c(28, 45)) +
+  theme(plot.title = element_text(size = 20))
+```
+
+If you take larger samples, the sampling distribution gets tighter around the population mean, and is also more closely approximated by the normal distribution. This is also an application of the CLT.
+
+## Uncertainty in the sample mean
+
+It's clear that the sample mean varies from sample to sample. This is called **sampling variability**. But how much does it vary?
+
+::: callout-note
+## Terminology
+
+The standard deviation of the sampling distribution of the sample mean is called the **standard error (SE)** of the sample mean, and is given by: $$
+SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}
+$$ where $\sigma$ is the **population** standard deviation.
+:::
+
+Now the CLT gives us a bit of a guarantee based on properties of the normal distribution.
+
+::: small
+-   About 68% of the time, the sample mean will be within 1 SE of the population mean
+-   About 95% of the time, the sample mean will be within 2 SE of the population mean
+-   About 99.7% of the time, the sample mean will be within 3 SE of the population mean
+:::
+
+## A word about the standard deviation
+
+The SD is a measure of how much the **data** varies.
+
+$$
+\sigma^2 = \frac{1}{N}\sum_{i=1}^N (x_i-\bar{x})^2
+$$
+
+is called the **variance**. It is measuring how far from the mean, on average, we might see observations.
+
+-   Higher values of $\sigma$ means a wider range of possible observable values, and a "fatter" histogram
+
+## 
+
+```{r}
+library(ggdist)
+library(distributional)
+tibble(sigma=seq(0.5, 3, by=0.5)) |>
+    ggplot(aes(y=sigma, xdist = dist_normal(0,sigma))) +
+        stat_halfeye() +
+        labs(x = "Normal(0, sigma) distribution", y = 'sigma')
+```
+
+## Smaller SE means we're closer to the truth
+
+-   The smaller the SE, the tighter the sampling distribution is around the true (unobservable) parameter
+
+    -   It is more likely that your sample mean is within some small interval of the truth
+
+$$
+\Pr(-c < \bar{X}_n - \mu < c) \rightarrow 1\quad\text{as}\quad n\rightarrow \infty
+$$
+
+for any positive number *c*
+
+::: callout-important
+## But we only observe finite *n*
+
+So, we need to have an idea of how close we might be for a given *n*, or what *n* would get us "close enough"
+:::
+
+## Bounding uncertainty
+
+Recall that for a normal distribution, you have a 95% likelihood of being within 2 SE of the mean
+
+$$
+\begin{eqnarray}
+0.95 &=& \Pr(\mu - 2\sigma/\sqrt{n} < \bar{X}_n < \mu + 2 \sigma/\sqrt{n})\\
+&=& \Pr(\bar{X}_n - 2\sigma/\sqrt{n} < \mu < \bar{X}_n + 2 \sigma/\sqrt{n})
+\end{eqnarray}
+$$
+
+This doesn't get us quite there, since we also don't know the true value of $\sigma$, but this is saying that...
+
+::: fragment
+the true mean will be within $\bar{X}_n \pm 2\sigma/\sqrt{n}$ 95% of the time.
+
+We can't quite say that. What is random here? The interval, not the parameter (Huh?!!)
+
+> But we will be able to say something like this when we talk about Bayesian statistics
+:::
+
+## The variable interval of uncertainty
+
+```{webr}
+dc_pop = readRDS('data/dc_pop.rds')
+theme_set(theme_minimal())
+
+sigma <- sd(dc_pop$age)
+n <- 100
+nsim <- 10
+
+intervals <- 
+ replicate(nsim, {sample_n(dc_pop, n) |> 
+  summarise(m = mean(age), 
+            lb = mean(age) - 2*sigma/sqrt(n), 
+            ub = mean(age) + 2*sigma/sqrt(n))},
+          simplify = FALSE) |>
+  bind_rows(.id = 'reps')
+
+ggplot(intervals, aes(y = reps, x = m, xmin = lb, xmax = ub)) +
+  geom_pointrange(
+    aes(color = lb > mean(dc_pop$age) | ub < mean(dc_pop$age)), show.legend=FALSE
+  ) + 
+      geom_vline(xintercept = mean(dc_pop$age), color = 'red4', linetype = 2) +
+scale_color_manual(values = c("TRUE"='red', "FALSE" = 'black'))+
+theme(axis.title = element_blank() axis.text.y = element_blank())
+```
+
+## We can make mistakes ...
+
+and we won't know if we make one!!!
+
+-   Statistics is all about using *probability* to give us **limits** to how often we might be wrong (yes, "uncertainty" pops its head again)
+
+-   Uncertainty intervals like this are a thing even in machine learning, when you have limited training data
+
+-   What we're doing is **inferring** something about our world with partial information, and so our inference will be imperfect.
+
+. . .
+
+What can we say about this interval we would create from **one sample that is in hand**
+
+::: thm
+Intervals constructed in this manner from repeated samples would cover the true mean 95% of the time.
+
+[We don't, and will never, know whether the particular interval we got covers the true mean]{.red}
+:::
+
+Rather unsatisfying, right?
+
+## The confidence interval
+
+What we developed in the past few slides is called a **confidence interval**, in particular a 95% confidence interval.
+
+- The 95\% comes from the choice of $\pm$ 2 SE that we made. A different factor would give a different confidence level.
+- You can set that factor by using `qnorm((1-p)/2, lower.tail=FALSE)` where *p* is the confidence level you want as a decimal
+
+. . .
+
+- The confidence interval is widely used in practice, and is often reported in papers and articles
+- It does give us a sense of how uncertain we are about our estimate of the parameter
+- But it is often misinterpreted as a probability statement about the parameter, i.e., that there's a 95\% chance the parameter lies in the interval we got
+
+## Computing a confidence interval in the real world
+
+One thing we glossed over is that we don't know $\sigma$ in practice!
+
+We can estimate it from the sample using the sample standard deviation $s$:
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X}_n)^2
+$$
+This gives us the estimated standard error:
+$$
+SE(\bar{X}) \approx \frac{s}{\sqrt{n}}
+$$
+We can then construct the confidence interval as:
+$$
+\bar{X} \pm 2 \frac{s}{\sqrt{n}}
+$$
+
+But, since we're **estimating** $\sigma$ here from a sample, and that estimate has sampling variability, the $\pm$ 2 SE won't quite give us the right coverage.
+
+## The t-distribution to the rescue
+
+When we estimate $\sigma$ from a sample, the distribution of the sample mean (appropriately standardized) follows a **t-distribution** with $n-1$ degrees of freedom
+
+$$
+\frac{\bar{X}_n - \mu}{s/\sqrt{n}} \sim t_{n-1}
+$$
+
+So, we can use quantiles[^1] from the t-distribution instead of the normal distribution to get the right coverage.
+
+::: callout-note
+## Degrees of freedom
+The degrees of freedom is the number of independent pieces of information that went into estimating a parameter. Here, we estimated $\sigma$ from $n$ observations, but since we also estimated $\mu$ from the same $n$ observations, we lost one degree of freedom.
+So, we have $n-1$ degrees of freedom left to estimate $\sigma$.
+:::
+
+[^1]: Quantiles are the inverse of the cumulative distribution function (CDF). For a given probability *p*, the *p*-th quantile is the value *x* such that $P(X \leq x) = p$.
+
+## The t-distribution
+
+The t-distribution is similar to the normal distribution, but has heavier tails (is fatter), which accounts for the extra uncertainty introduced by estimating $\sigma$.
+
+```{webr}
+#| fig-width: 8
+#| fig-height: 4
+df <- 5
+d <- tibble(
+    x = seq(-4, 4, length.out = 1000),
+    y1 = dt(x, df = df),
+    y2 = dnorm(x)
+)
+ggplot(d, aes(x = x)) +
+    geom_line(aes(y = y1, color = paste0("t-dist (df=", df, ")")), size = 1) +
+    geom_line(aes(y = y2, color = "Normal(0,1)"), size = 1) +
+    scale_color_manual(values = c("t-dist (df=5)" = "blue", "Normal(0,1)" = "red")) +
+    labs(
+        title = "t-distribution vs Normal distribution",
+        y = "Density",
+        color = "Distribution"
+    ) +
+    theme_minimal() +
+    theme(plot.title = element_text(size = 20))
+```
+
+# Hypotheses, decisions and errors {.inverse}
+
+## Hypothesis testing
+
+Stating hypotheses and finding evidence to support or refute them is central to the scientific method.
+
+- Understand that we will very rarely "prove" something, but rather will find a preponderance of evidence for or against a hypothesis
+- We're used to the courtroom analogy of "beyond a reasonable doubt" or "preponderance of evidence". Statistical hypothesis testing is similar.
+- We will use data to make decisions about the validity of hypotheses
+- We will use probability to quantify the strength of evidence, so quantify what "reasonable doubt" means
+- We will make decisions based on this evidence, but will always be aware that we might be wrong
+
+## Distinguishing between estimation and hypothesis testing
+
+- Estimation is about finding a plausible value for a parameter, along with a measure of uncertainty (confidence interval)
+- Hypothesis testing is about making a decision about the validity of a hypothesis about a parameter, based on evidence from data
+- Both use the same underlying principles of probability and sampling distributions
+- Both are subject to sampling variability and uncertainty
+
+## Hypotheses in the statistical context
+
+We usually state hypotheses in terms of parameters and values that they might take. 
+
+For example, if we are interested in the average age of people in DC, we might state:
+
+- Null hypothesis ($H_0$): $\mu = 35$ (the average age is 35)
+- Alternative hypothesis ($H_a$): $\mu > 35$ (the average age is more than 35)
+
+or
+
+- Alternative hypothesis ($H_a$): $\mu \neq 35$ (the average age is not 35)
+
+## The null and alternative hypotheses
+- The null hypothesis ($H_0$) is a statement of no effect or no difference. It is the hypothesis that we will test against.
+    - It is a strawman that we will try to disprove or reject based on evidence from data
+- The alternative hypothesis ($H_a$) is a statement of effect or difference. It is what we hope to find evidence for.
+
+::: {.thm .fragment}
+[**The one-sided nature of classical hypothesis testing**]{.large}
+<hr/>
+In classical hypothesis testing, we can only find evidence to **reject the null hypothesis**. We can never "accept" the null hypothesis. So we are trying to set up a strawman ($H_0$) to knock down.
+In reality, we set up the null hypothesis to be the opposite of what we want to find evidence for, or what we think is true and want to confirm. 
+:::
+
+## Concepts of hypothesis testing
+
+We will make errors in our decisions when we test hypotheses.
+
+1. If the null hypothesis is true, we might still decide to reject it. This is called a **Type I error** (false positive).
+2. If the null hypothesis is false, we might decide not to reject it. This is called a **Type II error** (false negative).
+
+Those errors are asking, 
+
+- "How unlikely is it to see data like this if the null hypothesis were true?" (Type I), and 
+- "How likely is it to see data like this if the null hypothesis were false?" (Type II)
+
+## Concepts of hypothesis testing
+
+In the sequel, we will use idealized distributions to illustrate concepts, based on the CLT. We'll see that in practice, we can use resampling methods to get at the same ideas.
+
+Let's go to DC and take a random sample of 100 people and measure their ages.
+
+```{r}
+set.seed(1234)
+n <- 100
+sample_100 <- sample_n(dc_pop, n)
+sample_100$age
+```
+This sample has a mean age of `r round(mean(sample_100$age),2)` and a standard deviation of `r round(sd(sample_100$age),2)`. We know from earlier that the sampling distribution of the mean is approximately normal with mean $\mu$ and standard error $\sigma/\sqrt{n}$.
+
+## Concepts of hypothesis testing
+
+We will test the hypotheses: 
+
+- Null hypothesis ($H_0$): $\mu = 35$ (the average age is 35)
+- Alternative hypothesis ($H_a$): $\mu > 35$ (the average age is more than 35)
+
+We'll deal with the Type I error first, i.e., how likely is it to see a sample mean as large as we saw if the null hypothesis were true?
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+p = pnorm(mean(sample_100$age), mean = 35, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)
+
+tibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |> 
+ggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x > mean(sample_100$age))), show.legend=F) +
+    stat_halfeye() + 
+    scale_fill_manual(values = c("TRUE"='red', "FALSE" = 'lightblue')) +
+    annotate('text', x = 40, y = 0.4, label = paste("p =", round(p,4)), size = 3) +
+    labs(x = 'Age') + 
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Concepts of hypothesis testing
+
+We see that the probability of seeing a sample mean as large as we saw if the null hypothesis were true is `r round(p,4)`. This is called the **p-value**.
+
+- The p-value is the probability of observing data as extreme or more extreme than what we observed, assuming the null hypothesis is true.
+
+
+- We set a threshold called the **significance level** ($\alpha$), which is the maximum acceptable probability of making a Type I error.
+
+
+::: {.fragment .thm}
+This is where the "beyond a reasonable doubt" or "preponderance of evidence" comes in. How small does the p-value need to be for us to reject the null hypothesis?
+:::
+
+## Concepts of hypothesis testing
+
+We decide on a significance level ($\alpha$) before we look at the data. A common choice is $\alpha = 0.05$.
+
+Once we see the data, we compare the p-value to $\alpha$, and our work is basically done.
+
+We might like to also take a look at the other kind of error, the Type II error.
+
+## Concepts of hypothesis testing: Errors
+
+To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+mu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)
+tibble(x = seq(28, 48, length.out=100)) |> 
+    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |> 
+ggplot(aes(x=x)) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +
+    labs(x = 'Age') + 
+    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +
+    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +
+    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +
+    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Concepts of hypothesis testing: Errors
+
+To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+mu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)
+tibble(x = seq(28, 48, length.out=100)) |> 
+    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |> 
+ggplot(aes(x=x)) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), geom='area', fill = 'blue', 
+    xlim = c(mean(sample_100$age), 48), alpha = 0.5) +
+    labs(x = 'Age') + 
+    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +
+    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +
+    annotate('text', x = 37, y = 0.02, label = 'Type I error', color = 'blue') +
+    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +
+    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Concepts of hypothesis testing: Errors
+To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+mu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)
+tibble(x = seq(28, 48, length.out=100)) |> 
+    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |> 
+ggplot(aes(x=x)) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), geom='area', fill = 'red', 
+    xlim = c(28,mean(sample_100$age)), alpha = 0.5) +
+    labs(x = 'Age') + 
+    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +
+    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +
+    annotate('text', x = 35, y = 0.02, hjust=1, label = 'Type II error', color = 'red') +
+    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +
+    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Concepts of hypothesis testing: Errors
+
+- If you look at the graphs, you'll see that if you move the observed sample mean to the right, the Type I error area (blue) shrinks, and the Type II error area (red) grows. And vice versa.
+- Which means that you cannot minimize both types of errors simultaneously.
+
+::: {.thm}
+[**The trade-off between Type I and Type II errors**]{.large}
+<hr/>
+Decreasing the probability of one type of error increases the probability of the other type of error. So you have to choose which type of error is more important to minimize in your context.
+
+Generally speaking, Type I errors are considered more serious in scientific contexts, while Type II errors may be more tolerable in exploratory contexts. So we usually set a low significance level ($\alpha$) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size).
+:::
+
+## Concepts of hypothesis testing: Errors
+
+```{webr}
+#| fig-width: 8
+#| fig-height: 3
+set.seed(1234)
+dc_pop = readRDS('data/dc_pop.rds')
+n = 100;
+sample_100 <- sample_n(dc_pop, n)
+
+mu1 = 35; mu2 = 41;  observed_mean = mean(sample_100$age)
+type_1 <- pnorm(observed_mean, mean = mu1, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)
+type_2 <- pnorm(observed_mean, mean = mu2, sd = sd(dc_pop$age)/sqrt(n), lower.tail=TRUE)
+
+sdev = sd(dc_pop$age)/sqrt(n)
+tibble(x = seq(24, 52, length.out=100)) |> 
+ggplot(aes(x=x)) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +
+    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), geom='area', fill = 'red', 
+    xlim = c(28,observed_mean), alpha = 0.2) +
+    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), geom='area', fill = 'blue', 
+    xlim = c(observed_mean, 48), alpha = 0.2) +
+    labs(x = 'Age') + 
+    annotate('text', x = mu1, y = 0.21, label = 'Null hypothesis', color = 'blue', hjust = 1) +
+    annotate('text', x = mu2, y = 0.21, label = 'Alternative hypothesis', color = 'red', hjust = 0) +
+    annotate('text', x = 32, y = 0.15, hjust=1, label = paste0('Type I error = ', round(type_1,2)), color = 'blue') +
+    annotate('text', x = 44, y = 0.15, hjust=0, label = paste0('Type II error = ', round(type_2,2)), color = 'red') +
+    geom_vline(xintercept = mean(sample_100$age), linetype = 2) +
+    annotate('text', x = mean(sample_100$age)+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +
+    #geom_vline(xintercept = qnorm(0.95, mean = mu1, sd = sdev), linetype = 2, color = 'darkgreen') +
+    #annotate('text', x = qnorm(0.95, mean = mu1, sd = sdev)+1, y = 0.22, label = 'Rejection threshold', color = 'darkgreen', hjust = 0) +
+    theme_minimal()+
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Running a hypothesis test in R
+
+```{r}
+t.test(sample_100$age, mu = 35, alternative = "greater")
+```
+
+This output can be cleaned up using `broom::tidy()`
+
+```{r}
+broom::tidy(t.test(sample_100$age, mu = 35, alternative = "greater"))
+```
+
+## What happens if we change to a two-sided test?
+
+```{r}
+broom::tidy(t.test(sample_100$age, mu = 35, alternative = "two.sided"))
+```
+The p-value has doubled, since we are now considering extreme values on both sides of the null hypothesis value.
+
+## 
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+
+p = 2*pnorm(abs(35-mean(sample_100$age)), mean = 0, sd = sd(dc_pop$age)/sqrt(n), lower.tail=FALSE)
+
+tibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |> 
+ggplot(aes(xdist = dist_normal(mean, sd), 
+    fill = stat(abs(x - 35) > abs(35 - mean(sample_100$age))), show.legend=F)) +
+    stat_halfeye() + 
+    scale_fill_manual(values = c("TRUE"='red', "FALSE" = 'lightblue')) +
+    annotate('text', x = 40, y = 0.4, label = paste("p =", round(p,4)), size = 3) +
+    labs(x = 'Age') + 
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+```
+
+## Summary
+
+- We can use data to make decisions about hypotheses about parameters
+- We use probability to quantify the strength of evidence against the null hypothesis
+- We make decisions based on this evidence, but are aware that we might be wrong
+- We can make two types of errors: Type I (false positive) and Type II (false negative)
+- There is a trade-off between Type I and Type II errors
+- We usually set a low significance level ($\alpha$) to minimize Type I errors, and find technical ways to reduce Type II errors (like increasing sample size)
+
+# Simulation lab {.inverse}
+
+## Scenario 
+
+In the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15\% of this age group own homes, compared to a national average of 20\%. Home-owners have a 1\% chance of leaving the state, while renters and non-home-owners have a 15\% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost \$1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15\% to 10\%. It is expected that 30\% of renters will take up the program. The average cost of a person leaving the state is estimated to be \$50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using `usdata::pop_age_2019`.

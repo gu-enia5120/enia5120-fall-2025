@@ -25,6 +25,9 @@ website:
         menu:
           - href: supplemental/brackets.qmd
           - href: supplemental/data_munging.qmd
+          - href: supplemental/models/categorical.qmd
+          - href: supplemental/models/practicing-factors.qmd
+          - href: supplemental/models/boston.qmd
   #       - text: "Worksheets"
   #         menu:
   #           - text: "Introduction to Quarto"
@@ -108,8 +111,8 @@ website:
             target: _blank
           - href: slides/week-04.qmd
             target: _blank
-          #          - href: slides/week-05.qmd
-          #            target: _blank
+          - href: slides/week-05.qmd
+            target: _blank
           #          - href: slides/week-08.qmd
           #            target: _blank
           #          - href: slides/week-09.qmd

@@ -1,6 +1,5 @@
 ---
 title: "Additional resources for data munging"
-format: html
 ---
 
 ## My slides and blogs

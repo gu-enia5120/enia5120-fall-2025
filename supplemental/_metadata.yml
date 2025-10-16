@@ -1,0 +1,28 @@
+engine: knitr
+format:
+  live-html:
+    theme:
+      light: [cosmo, ../style/html-sta313.scss, ../style/sfah.scss]
+      dark: [cosmo, ../style/html-sta313.scss, ../style/html-dark.scss, ../style/sfah.scss]
+    toc: true
+    linkcolor: "#866fa3" # Glossy Grape
+    code-copy: true
+    code-overflow: wrap
+    code-fold: true
+    mainfont: "Atkinson Hyperlegible"
+    link-external-icon: true
+    link-external-newwindow: true
+  # smaller: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+  cache: true
+  cache-depth: 2
+  cache-path: ../.cache/
+  fig-width: 7
+  fig-height: 5
+  fig-dpi: 96
+  out-width: "70%"
+  out-height: "70%"

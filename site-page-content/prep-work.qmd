@@ -5,73 +5,67 @@ date-format: "dddd MMM D, YYYY [at] hh:mm a"
 format: html
 ---
 
-::: {.callout-note}
+::: callout-note
 ## Key
-- IMS = Introduction to Modern Statistics (2e) ([link](https://openintro-ims.netlify.app/))
-- RDS = R for Data Science (2e) ([link](https://r4ds.had.co.nz/))
-- SIDS = Statistical Inference via Data Science (2e) ([link](https://moderndive.com/v2/index.html))
-- ISLR = Introduction to Statistical Learning with R (2e) ([link](https://www.statlearning.com/))
+
+-   IMS = Introduction to Modern Statistics (2e) ([link](https://openintro-ims.netlify.app/))
+-   RDS = R for Data Science (2e) ([link](https://r4ds.had.co.nz/))
+-   SIDS = Statistical Inference via Data Science (2e) ([link](https://moderndive.com/v2/index.html))
+-   ISLR = Introduction to Statistical Learning with R (2e) ([link](https://www.statlearning.com/))
 :::
 
-## Week 2: September 16
+# Week 2: September 16
 
-**Reading:**   
-IMS Chapters 1, 3, 4-6. I don't expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty
-good on-ramp to R. 
+**Reading:**\
+IMS Chapters 1, 3, 4-6. I don't expect you to know this before class, but work through this material this week. Especially Chapter 3, which gives a pretty good on-ramp to R.
 
 You can also look at RDS Chapter 10, which is not quite as insightful
 
-Also, let's start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto. 
+Also, let's start thinking about using Quarto (https://www.quarto.org) for our work in this class rather than Word or something like that. Data analysis is necessarily computational and so we need a good way to incorporate our analyses into our documents; that is Quarto.
 
-1. Install Quarto from <https://quarto.org/docs/get-started/>
-2. Follow along the tutorial at your own pace to get a feel for Quarto documents <https://quarto.org/docs/get-started/hello/rstudio.html>
+1.  Install Quarto from <https://quarto.org/docs/get-started/>
+2.  Follow along the tutorial at your own pace to get a feel for Quarto documents <https://quarto.org/docs/get-started/hello/rstudio.html>
 
-The plan for class is to on-ramp you to {{< fa brands r-project >}}, using examples and labs, with a focus on 
-exploratory data analysis. So please ensure that you have access to {{< fa brands r-project >}}. We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, 
-with a limited vocabulary and grammar. 
+The plan for class is to on-ramp you to {{< fa brands r-project >}}, using examples and labs, with a focus on exploratory data analysis. So please ensure that you have access to {{< fa brands r-project >}}. We will go slow and steady, since I know some of you have trepidation around this aspect of the class. Think of this as a language to learn and explore, with a limited vocabulary and grammar.
 
 There will be **a quiz** this week, to familiarize yourselves with the syllabus. We will have a **homework** and labs this week to help you acclimatize to {{< fa brands r-project >}}
 
-## Week 3: September 23
+# Week 3: September 23
 
-This week, we will basically hold a {{< fa brands r-project >}} workshop covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these 
-chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then
-address questions around the code and how you might achieve something you want to do. 
+This week, we will basically hold a {{< fa brands r-project >}} workshop covering (broadly) the material in RDS 1-8. In terms of reading, take a look at these chapters to start familiarizing yourselves with the language. The plan will be to show you how to do something, reinforce it with short worksheets, and then address questions around the code and how you might achieve something you want to do.
 
-In terms of deliverables, we will not have a quiz this week, but we will have an {{< fa brands r-project >}}-based homework using scaffolded code chunks and Quarto. 
+In terms of deliverables, we will not have a quiz this week, but we will have an {{< fa brands r-project >}}-based homework using scaffolded code chunks and Quarto.
 
 ::: callout-important
-Philosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So 
-I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To 
-quote Stephen Covey, _"Begin with the End in Mind"_. 
+Philosophically, the software and coding, regardless of the tool involved, is just a tool in service of your overall purpose, be that scientific or narrative. So I would like you think about coding not as a major hurdle but as a way to achieve something you conceive of to generate and enhance insight from the data. To quote Stephen Covey, *"Begin with the End in Mind"*.
 
-[What is primary is what you want to achieve with the data]{style="color:red;"}. 
+[What is primary is what you want to achieve with the data]{style="color:red;"}.
 
-Then, and only then, do you try to figure out how to use the software tools to achieve that. 
+Then, and only then, do you try to figure out how to use the software tools to achieve that.
 :::
 
 ::: callout-tip
 ## Supplementary materials
 
-- [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) by Hadley Wickham
-- [The Very Basics](https://rstudio-education.github.io/hopr/basics.html), from Hands-On Programming with R by Garrett Grolemund (free online)
-- [Data Wrangling](https://moderndive.com/3-wrangling.html) from ModernDive by Chester Ismay and Albert Y. Kim (free online)
-- [Efficient workflow](https://csgillespie.github.io/efficientR/workflow.html) from Efficient R Programming by Colin Gillespie and Robin Lovelace (free online)
+-   [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) by Hadley Wickham
+-   [The Very Basics](https://rstudio-education.github.io/hopr/basics.html), from Hands-On Programming with R by Garrett Grolemund (free online)
+-   [Data Wrangling](https://moderndive.com/3-wrangling.html) from ModernDive by Chester Ismay and Albert Y. Kim (free online)
+-   [Efficient workflow](https://csgillespie.github.io/efficientR/workflow.html) from Efficient R Programming by Colin Gillespie and Robin Lovelace (free online)
 
----
+------------------------------------------------------------------------
 
-- [Posit cheatsheets](https://posit.co/resources/cheatsheets/) (especially forcats, lubridate, stringr, dplyr, ggplot2)
-- [Project Structure](https://djnavarro.net/slides-project-structure/#1) by Danielle Navarro
+-   [Posit cheatsheets](https://posit.co/resources/cheatsheets/) (especially forcats, lubridate, stringr, dplyr, ggplot2)
+-   [Project Structure](https://djnavarro.net/slides-project-structure/#1) by Danielle Navarro
 
----
+------------------------------------------------------------------------
 
-- [Data Import with readr](https://readr.tidyverse.org/) (RDS Chapter 6)
-- [Data Transformation with dplyr](https://dplyr.tidyverse.org/) (RDS Chapter 5)
-- [Data Cleaning with tidyr](https://tidyr.tidyverse.org/) (RDS Chapter 4) (we will not cover this in detail this week, but you should be aware of it)
-- [Data Visualization with ggplot2](https://ggplot2.tidyverse.org/) (RDS Chapter 3)
+-   [Data Import with readr](https://readr.tidyverse.org/) (RDS Chapter 6)
+-   [Data Transformation with dplyr](https://dplyr.tidyverse.org/) (RDS Chapter 5)
+-   [Data Cleaning with tidyr](https://tidyr.tidyverse.org/) (RDS Chapter 4) (we will not cover this in detail this week, but you should be aware of it)
+-   [Data Visualization with ggplot2](https://ggplot2.tidyverse.org/) (RDS Chapter 3)
 :::
 
-## Week 4: September 30
+# Week 4: September 30
 
 This week, we start exploring the world of statistical pattern recognition, and think about the kinds of models and algorithms can help us identify patterns in data. We'll start distinguishing between explanatory and predictive modeling, and think about the kinds of questions we can answer with models. We'll also distinguish between unsupervised and supervised learning.
 
@@ -79,15 +73,31 @@ This week, we start exploring the world of statistical pattern recognition, and 
 ## Reading
 
 ### Conceptual
-1. A fundamental paper to understand how to think about models: [The Two Cultures](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full) by Leo Breiman. This is a must-read for the class, and for anyone interested in data science.
-1. IMS Chapter 10
-1. What is Statistical Learning? (ISLR Chapter 2.1, book available [here](https://www.statlearning.com/))
+
+1.  A fundamental paper to understand how to think about models: [The Two Cultures](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full) by Leo Breiman. This is a must-read for the class, and for anyone interested in data science.
+2.  IMS Chapter 10
+3.  What is Statistical Learning? (ISLR Chapter 2.1, book available [here](https://www.statlearning.com/))
 
 #### Optional reading
-1. [The Two Cultures: Statistics and Machine Learning in Science](https://www.stat.cmu.edu/~kass/papers/KassOnBreiman.pdf) by Robert E. Kass
-1. [Road Map for Choosing Between Statistical Modeling and Machine Learning](https://www.fharrell.com/post/stat-ml/) by Frank Harrell
-1. [Navigating Statistical Modeling and Machine Learning](https://www.fharrell.com/post/stat-ml2/) by Drew Griffin Levy
+
+1.  [The Two Cultures: Statistics and Machine Learning in Science](https://www.stat.cmu.edu/~kass/papers/KassOnBreiman.pdf) by Robert E. Kass
+2.  [Road Map for Choosing Between Statistical Modeling and Machine Learning](https://www.fharrell.com/post/stat-ml/) by Frank Harrell
+3.  [Navigating Statistical Modeling and Machine Learning](https://www.fharrell.com/post/stat-ml2/) by Drew Griffin Levy
 
 ## R
-1. Chapter 25 of RDS (Functions)
+
+1.  Chapter 25 of RDS (Functions)
 :::
+
+# Week 5: October 7 (meeting October 8)
+
+## Reading
+
+-   [LibreTexts: Basics of Probability](https://math.libretexts.org/Courses/Prince_Georges_Community_College/MAT_1130_Mathematical_Ideas_Mirtova_Jones_(PGCC:_Fall_2022)/03:_Probability/3.01:_Basics_of_Probability)
+-   [Seeing Theory Chapter 1](https://seeing-theory.brown.edu/basic-probability/index.html) (The Seeing Theory site is really good for several topics we'll cover)
+-   [Making Sense of Uncertainty](https://senseaboutscience.org/wp-content/uploads/2016/11/Makingsenseofuncertainty.pdf)
+
+### Additional readings
+
+-   [Introduction to Statistical vs Systematic Uncertainty](https://openbooks.library.umass.edu/p132-lab-manual/chapter/introduction-to-statistical-vs-systematic-uncertainty/)
+-   [Variability and Uncertainty: Standard Deviations, Standard Errors, Confidence Intervals](https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/variability-and-uncertainty-standard-deviations-standard-errors-confidence-intervals.html)
