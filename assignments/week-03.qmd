@@ -1,11 +1,10 @@
 ---
-title: "Homework Assignment: Statistical Pattern Recognition"
+title: "Homework 3"
+subtitle: "Statistical Pattern Recognition"
 author: "<Your name>"
 format:
+    html: default
     typst: default
-    html:
-        theme: cosmo
-        embed-resources: true
 execute:
     eval: false
     messages: false
