@@ -4744,6 +4744,17 @@ font-size: 2em;
 font-size: 2.5em;
 }
 </style>
+<style type="text/css">.downloadthis:focus,
+.downloadthis:active {
+box-shadow: none !important;
+}
+.downloadthis:hover {
+transition: 0.2s;
+filter: brightness(0.90);
+}
+.downloadthis:active {
+filter: brightness(0.80);
+}</style>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -5130,18 +5141,8 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"></a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week-04.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week-04.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -5183,6 +5184,15 @@ Instructions
 <div class="callout-body-container callout-body">
 <p>Modify this quarto notebook, change <code>eval: false</code> to <code>eval: true</code> above, convert it to PDF using typst or to HTML and submit. Total is 70 points</p>
 <p>Either HTML or PDF submissions are fine. Please also submit this Quarto file.</p>
+<p><a href="#dnldts58154" onclick="fetch(&#39;data:text/plain;base64,LS0tCnRpdGxlOiAiSG9tZXdvcmsgNCIKc3VidGl0bGU6ICJQcm9iYWJpbGl0eSBhbmQgSW5mZXJlbmNlIGZvdW5kYXRpb25zIgphdXRob3I6ICI8WW91ciBuYW1lPiIKZm9ybWF0OgogICAgaHRtbDogCiAgICAgICAgZW1iZWQtcmVzb3VyY2VzOiB0cnVlCiAgICB0eXBzdDogZGVmYXVsdApleGVjdXRlOgogICAgZXZhbDogZmFsc2UKICAgIG1lc3NhZ2VzOiBmYWxzZQogICAgd2FybmluZzogZmFsc2UKZW5naW5lOiBrbml0cgotLS0KCmBgYHtjc3N9Ci5ib2xkIHsKICBmb250LXdlaWdodDogYm9sZDsKfQpgYGAKCjo6OiBjYWxsb3V0LW5vdGUKIyMgSW5zdHJ1Y3Rpb25zCgpNb2RpZnkgdGhpcyBxdWFydG8gbm90ZWJvb2ssIGNoYW5nZSBgZXZhbDogZmFsc2VgIHRvIGBldmFsOiB0cnVlYCBhYm92ZSwgY29udmVydCBpdCB0byBQREYgdXNpbmcgdHlwc3Qgb3IgdG8gSFRNTCBhbmQgc3VibWl0LiBUb3RhbCBpcyA3MCBwb2ludHMKCkVpdGhlciBIVE1MIG9yIFBERiBzdWJtaXNzaW9ucyBhcmUgZmluZS4gUGxlYXNlIGFsc28gc3VibWl0IHRoaXMgUXVhcnRvIGZpbGUuCgp7ezwgZG93bmxvYWR0aGlzIHdlZWstMDQtc3R1ZGVudC5xbWQgZG5hbWU9ImhvbWV3b3JrNC5xbWQiIGxhYmVsPSJEb3dubG9hZCBRdWFydG8gZmlsZSIgPn19CgojIyMgUnVicmljOgoKLSAgIEVhY2ggcXVlc3Rpb24gaXMgd29ydGggMTAgcG9pbnRzCi0gICBTaW5jZSB0aGVzZSBhcmUgbnVtZXJpY2FsIHF1ZXN0aW9ucyB3aXRoIGEgcmlnaHQgYW5zd2VyLCBmdWxsIGNyZWRpdCB3aWxsIGJlIGdpdmVuIGZvciBmb2xsb3dpbmcgZGlyZWN0aW9ucywgdXNpbmcgYXBwcm9wcmlhdGUgbWV0aG9kcyBhbmQgZ2V0dGluZyB0aGUgcmlnaHQgYW5zd2VyCi0gICBQYXJ0aWFsIGNyZWRpdCBtYXkgYmUgZ2l2ZW4gZm9yIGluY29ycmVjdCBhbnN3ZXJzIGlmIHRoZSByZWFzb25pbmcgYW5kIG1ldGhvZG9sb2d5IGFyZSBzb3VuZC4gVGhlIGNvcnJlY3QgYW5zd2VyIGl0c2VsZiBpcyB3b3J0aCAyIHBvaW50cy4KOjo6Cgo6OjogY2FsbG91dC1ub3RlCiMjIFVzZWZ1bCBmYWN0cwoKMS4gIElmIHR3byBldmVudHMgKkEqIGFuZCAqQiogYXJlIGluZGVwZW5kZW50LCB0aGVuIFAoQSBhbmQgQikgPSBQKEEpIHggUChCKS4KMi4gIFRoZSBsYXcgb2YgdG90YWwgcHJvYmFiaWxpdHkgc3RhdGVzIHRoYXQgZm9yIHR3byBldmVudHMgKkEqIGFuZCAqQiosIFAoQikgPSBQKEEgXHwgQilQKEIpICsgUChBIFx8IG5vdCBCKSBQKG5vdCBCKQozLiAgRm9yIHR3byBldmVudHMgKkEqIGFuZCAqQiosIHRoZSBjb25kaXRpb25hbCBwcm9iYWJpbGl0eSBvZiAqQiogZ2l2ZW4gKkEqIGlzIFAoQlx8QSkgPSBQKEEgYW5kIEIpIC8gUChBKQo0LiAgQSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgYSBtZWFuIGlzIGdpdmVuIGJ5ICQoXGJhcnt4fSAtIDIgcy9cc3FydHtufSwgXGJhcnt4fSArIDJzL1xzcXJ0e259KSQgd2hlcmUgJFxiYXJ7eH0kIGlzIHRoZSBzYW1wbGUgbWVhbiBhbmQgJHMkIGlzIHRoZSBzYW1wbGUgc3RhbmRhcmQgZGV2aWF0aW9uIGZyb20gYSBzYW1wbGUgb2Ygc2l6ZSAkbiQKOjo6CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCjo6OjogYm9sZApRdWVzdGlvbiAxOiBBbiBhaXIgcXVhbGl0eSBtb25pdG9yaW5nIHN0YXRpb24gcmVwb3J0cyB0aGF0IHRoZSBwcm9iYWJpbGl0eSBvZiBhIOKAnGhpZ2ggcG9sbHV0aW9uIGFsZXJ04oCdIG9uIGFueSBnaXZlbiBkYXkgaW4gSnVseSBpcyAwLjMuIEFzc3VtaW5nIGRheXMgYXJlIGluZGVwZW5kZW50LCB3aGF0IGlzIHRoZSBwcm9iYWJpbGl0eSB0aGF0IGV4YWN0bHkgMiBvdXQgb2YgdGhlIG5leHQgNSBkYXlzIGhhdmUgaGlnaCBwb2xsdXRpb24gYWxlcnRzPwoKOjo6IHNtYWxsClNob3cgeW91ciB3b3JrLCBhbmQgY29uZmlybSB5b3VyIGFuc3dlciB1c2luZyBgZGJpbm9tKHg9Miwgc2l6ZT01LCBwcm9iPTAuMylgCjo6Ogo6Ojo6CgojIyMjIEFuc3dlcgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgo6OjogYm9sZApRdWVzdGlvbiAyOiBBbiBlbnZpcm9ubWVudGFsIHNlbnNvciBkZXRlY3RzIGV4Y2VzcyBvem9uZSAoZXZlbnQgQSkgYW5kIGV4Y2VzcyBwYXJ0aWN1bGF0ZSBtYXR0ZXIgKGV2ZW50IEIpLiBIaXN0b3JpY2FsIGRhdGEgc2hvdzogLSBQKEEpID0gMC4yNSAtIFAoQikgPSAwLjQwIC0gUChB4oipQikgPSAwLjEyIENvbXB1dGUgUChCXHxBKSBhbmQgaW50ZXJwcmV0IHRoZSByZXN1bHQgaW4gY29udGV4dC4gV2hhdCBkb2VzIGl0IHN1Z2dlc3QgYWJvdXQgdGhlIGpvaW50IG9jY3VycmVuY2Ugb2YgdGhlc2UgcG9sbHV0YW50cz8KCkFyZSBBIGFuZCBCIGluZGVwZW5kZW50PyBQcm92aWRlIGJvdGggYSBudW1lcmljYWwgY2hlY2sgYW5kIGFuIGludGVycHJldGF0aW9uIGluIHRlcm1zIG9mIGVudmlyb25tZW50YWwgcHJvY2Vzc2VzCjo6OgoKIyMjIyBBbnN3ZXIKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKOjo6IGJvbGQKUXVlc3Rpb24gMy4gSW4gYSB0aHJlZS1yZWdpb24gZWxlY3Rpb24gYW5hbHlzaXMsIHByb2JhYmlsaXRpZXMgb2Ygc3VwcG9ydGluZyBDYW5kaWRhdGUgWSBkaWZmZXIgYnkgcmVnaW9uOgoKLSAgIFVyYmFuICg0NSUgb2YgcG9wdWxhdGlvbik6IDAuNzAKLSAgIFN1YnVyYmFuICgzNSUpOiAwLjU1Ci0gICBSdXJhbCAoMjAlKTogMC40MAoKRmluZCB0aGUgb3ZlcmFsbCBwcm9iYWJpbGl0eSB0aGF0IGEgcmFuZG9tbHkgc2VsZWN0ZWQgdm90ZXIgc3VwcG9ydHMgQ2FuZGlkYXRlIFkuCjo6OgoKCgojIyMjIEFuc3dlcgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgo6OjogYm9sZApRdWVzdGlvbiA0LiBTdXBwb3NlIGEgbmV3IHdhdGVyLXRlc3Rpbmcga2l0IGRldGVjdHMgbWljcm9wbGFzdGljcyB3aXRoIDk1JSBzZW5zaXRpdml0eSAodHJ1ZSBwb3NpdGl2ZSkgYW5kIDkwJSBzcGVjaWZpY2l0eSAodHJ1ZSBuZWdhdGl2ZSkuIEVudmlyb25tZW50YWwgYXNzZXNzbWVudHMgc2hvdyB0aGF0IDEwJSBvZiB3YXRlciBzYW1wbGVzIGluIHRoZSByZWdpb24gY29udGFpbiBtaWNyb3BsYXN0aWNzLiBJZiB0aGUgdGVzdCBnaXZlcyBhIHBvc2l0aXZlIHJlc3VsdCwgd2hhdCBpcyB0aGUgcG9zdGVyaW9yIHByb2JhYmlsaXR5IHRoZSBzYW1wbGUgdHJ1bHkgY29udGFpbnMgbWljcm9wbGFzdGljcz8KOjo6CgoKCiMjIyMgQW5zd2VyCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCjo6OiBib2xkClF1ZXN0aW9uIDU6IEEgc3VydmV5IG9mIDEwMDAgdm90ZXJzIHNob3dzIGEgbWVhbiBhcHByb3ZhbCByYXRpbmcgb2YgMzUlIGZvciB0aGUgR292ZXJub3IsIHdpdGggYSBzdGFuZGFyZCBkZXZpYXRpb24gb2YgMTIlLiBDb25zdHJ1Y3QgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgdGhlIHRydWUgYXBwcm92YWwgcmF0aW5nLiBJbnRlcnByZXQgeW91ciByZXN1bHRzLgo6OjoKCiMjIyMgQW5zd2VyCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCjo6OjogYm9sZApRdWVzdGlvbiA2LiBBbiBlbnZpcm9ubWVudGFsIGFnZW5jeSBjbGFpbXMgdGhhdCB0aGUgYXZlcmFnZSBuaXRyYXRlIGxldmVsIGluIGdyb3VuZHdhdGVyIGV4Y2VlZHMgdGhlIHNhZmV0eSBzdGFuZGFyZCBvZiAxMCBtZy9MLiBBIHJhbmRvbSBzYW1wbGUgb2YgNDAgd2VsbHMgZ2l2ZXMgYSBtZWFuIG9mIDEwLjYgbWcvTCB3aXRoIGEgc3RhbmRhcmQgZGV2aWF0aW9uIG9mIDEuNSBtZy9MLgoKYS4gIEZvcm11bGF0ZSB0aGUgbnVsbCBhbmQgYWx0ZXJuYXRlIGh5cG90aGVzaXMgdG8gdGVzdCB0aGlzIGNsYWltLgpiLiAgQ29uc3RydWN0IGEgc2ltdWxhdGlvbiBleHBlcmltZW50IHRvIGFzc2VzcyB0aGUgZXZpZGVuY2UgYWdhaW5zdCB0aGUgbnVsbCBoeXBvdGhlc2lzIGFuZCByZXBvcnQgdGhlIHAtdmFsdWUgZnJvbSB0aGUgc2ltdWxhdGlvbgpjLiAgSW50ZXJwcmV0IHRoaXMgcC12YWx1ZSBhbmQgaXRzIGltcGxpY2F0aW9ucyBmb3IgdGhlIGFnZW5jeSdzIGNsYWltLiBUaGUgYWdlbmN5IGhhcyBzZXQgYSBzaWduaWZpY2FuY2UgbGV2ZWwgb2YgMyUuCmQuICBDb25zdHJ1Y3QgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgdGhlIG1lYW4gbml0cmF0ZSBsZXZlbC4KCjo6OiBzbWFsbApOb3RlIHRoYXQgdHdvIHBlb3BsZSB3aWxsIGxpa2VseSBub3QgZ2V0IHRoZSBzYW1lIGFuc3dlcnMgdG8gdGhlc2UgcXVlc3Rpb25zLCBkdWUgdG8gdGhlIHJhbmRvbSBuYXR1cmUgb2YgdGhlIHNpbXVsYXRpb25zLiBIb3dldmVyLCB0aGVyZSBpcyBhIGJhbGxwYXJrIG9mIHJpZ2h0IGFuc3dlcnMsIGFuZCB5b3Ugd2lsbCBiZSBncmFkZWQgb24geW91ciBzaW11bGF0aW9uIGNvZGUuCjo6Ogo6Ojo6CgoKCiMjIyMgQW5zd2VyCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCjo6Ojo6IGJvbGQKUXVlc3Rpb24gNzoKClRoZSBmaWxlIGBkY19zYW1wbGUucmRzYCBpcyBwcm92aWRlZCB5b3Ugb24gQ2FudmFzLiBEb3dubG9hZCB0aGlzIGFuZCBsb2FkIHRoaXMgaW50byBSIHdpdGggdGhlIGNvZGUKCmBgYCByCmRjX2RhdGEgPC0gcmVhZFJEUygiZGNfc2FtcGxlLnJkcyIpICMgc3BlY2lmeSB0aGUgcmlnaHQgcGF0aCB0byB0aGUgZmlsZSBmb3IgeW91ciBzZXR1cApgYGAKClRoaXMgZGF0YXNldCBpcyBhIHNhbXBsZSBvZiA1MDAgaW5kaXZpZHVhbHMgYW5kIHRoZWlyIHJhY2UsIGJhc2VkIG9uIHN0YW5kYXJkIENlbnN1cyBjcml0ZXJpYS4KCmEuICBDb25zdHJ1Y3QgYSBjb25maWRlbmNlIGludGVydmFsIG9mIHRoZSBwcm9wb3J0aW9uIG9mIGJsYWNrIHBlb3BsZSBpbiBEQyB1c2luZyB0aGlzIGRhdGFzZXQuICg1IHBvaW50cykKCjo6OiB7LmNhbGxvdXQtdGlwIGNvbGxhcHNlPSJ0cnVlIn0KWW91IGNvbXB1dGUgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgYSBwcm9wb3J0aW9uIHVzaW5nIHRoZSBmb3JtdWxhCgokJAooXGhhdHtwfSAtIDIgXGNkb3QgXHNxcnR7XGZyYWN7XGhhdHtwfSgxIC0gXGhhdHtwfSl9e259fSwgXGhhdHtwfSArIDIgXGNkb3QgXHNxcnR7XGZyYWN7XGhhdHtwfSgxIC0gXGhhdHtwfSl9e259fSkKJCQKCndoZXJlICRcaGF0e3B9JCBpcyB0aGUgc2FtcGxlIHByb3BvcnRpb24gYW5kICRuJCBpcyB0aGUgc2FtcGxlIHNpemUuCjo6OgoKYi4gIFBlcmZvcm0gYSBzaW11bGF0aW9uIGV4cGVyaW1lbnQgYXMgZm9sbG93czogKDEwIHBvaW50cykKCi0gICBDcmVhdGUgMTAwMCBkYXRhc2V0cyBvZiBzaXplIDUwMCBmcm9tIHRoaXMgZGF0YXNldCBieSByZXNhbXBsaW5nIHdpdGggcmVwbGFjZW1lbnQuCi0gICBGb3IgZWFjaCBkYXRhc2V0LCBjb21wdXRlIHRoZSBwcm9wb3J0aW9uIG9mIGJsYWNrIGluZGl2aWR1YWxzLgotICAgQ29uc3RydWN0IGEgZGlzdHJpYnV0aW9uIG9mIHRoZXNlIHByb3BvcnRpb25zIGFuZCByZXBvcnQgdGhlIDIuNSUgYW5kIDk3LjUlIHBlcmNlbnRpbGVzLgotICAgQ29tcGFyZSB0aGUgY29uZmlkZW5jZSBpbnRlcnZhbCBmcm9tIHBhcnQgKGEpIHdpdGggdGhlIGRpc3RyaWJ1dGlvbiBmcm9tIHRoZSBzaW11bGF0aW9uIGluIHBhcnQgKGIpLgoKYy4gIFByb3ZpZGUgYSB0YWJsZSBzaG93aW5nIGhvdyBvZnRlbiBzdWJqZWN0cyBhcmUgcmVwZWF0ZWQgaW4gb25lIG9mIHRoZSByZXNhbXBsZWQgZGF0YXNldHMuIFdoYXQgSSdtIGxvb2tpbmcgZm9yIGlzIGEgdGFibGUgbGlrZSB0aGUgZm9sbG93aW5nLCB3aGVyZSB0aGUgaGVhZGVyIGRlbm90ZXMgdGhlIG51bWJlciBvZiB0aW1lcyBhIHN1YmplY3QgaXMgcmVwZWF0ZWQuCgp8ICoqMSoqIHwgKioyKiogfCAqKjMqKiB8ICoqNCoqIHwgKio1KiogfAp8Oi0tLS0tLXw6LS0tLS0tfDotLS0tLS18Oi0tLS0tLXw6LS0tLS0tfAp8IDE5MSAgIHwgODYgICAgfCAyOSAgICB8IDEwICAgIHwgMiAgICAgfAoKQWxzbywgcmVwb3J0IG9uIHRoZSBudW1iZXIgb2YgdW5pcXVlIGluZGl2aWR1YWxzIGluY2x1ZGVkIGluIHRoaXMgcmVzYW1wbGVkIGRhdGFzZXQgKGl0IGlzICoqbm90KiogNTAwKQoKOjo6IHsuY2FsbG91dC10aXAgY29sbGFwc2U9InRydWUifQpZb3UgY2FuIGNyZWF0ZSBhIHNpbmdsZSByZXNhbXBsZWQgZGF0YXNldCBmcm9tIHRoZSBvcmlnaW5hbCBkYXRhc2V0IHdpdGggcmVwbGFjZW1lbnQgdXNpbmcgdGhlIGZvbGxvd2luZyBjb2RlOgoKYGBgIHIKZGNfcmVzYW1wbGVkIDwtIGRjX2RhdGFbc2FtcGxlKG5yb3coZGNfZGF0YSksIHJlcGxhY2UgPSBUUlVFKSwgXQpgYGAKCm9yCgpgYGAgcgpkY19yZXNhbXBsZWQgPC0gZGNfZGF0YSB8PiBzbGljZV9zYW1wbGUocCA9IDEsIHJlcGxhY2UgPSBUUlVFKQpgYGAKOjo6Cjo6Ojo6Cgo=&#39;).then(res =&gt; res.blob()).then(blob =&gt; {
+      const downloadURL = window.URL.createObjectURL(blob);
+      const a = document.createElement(&#39;a&#39;);
+      document.body.appendChild(a);
+      a.href = downloadURL;
+      a.download = &#39;homework4.qmd&#39;; a.click();
+      window.URL.revokeObjectURL(downloadURL);
+      document.body.removeChild(a);
+        });"><button class="btn btn-default downloadthis  " id="dnldts58154"><i class="bi bi-download"></i> Download Quarto file </button></a></p>
 <section id="rubric" class="level3">
 <h3 class="anchored" data-anchor-id="rubric">Rubric:</h3>
 <ul>
@@ -5241,19 +5251,15 @@ P(x \text{ events out of }n) = {n\choose x}p^x(1-p)^{n-x}
 </div>
 <section id="answer" class="level4">
 <h4 class="anchored" data-anchor-id="answer">Answer</h4>
-</section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
+<hr>
 <div class="bold">
 <p>Question 2: An environmental sensor detects excess ozone (event A) and excess particulate matter (event B). Historical data show: - P(A) = 0.25 - P(B) = 0.40 - P(A∩B) = 0.12 Compute P(B|A) and interpret the result in context. What does it suggest about the joint occurrence of these pollutants?</p>
 <p>Are A and B independent? Provide both a numerical check and an interpretation in terms of environmental processes</p>
 </div>
+</section>
 <section id="answer-1" class="level4">
 <h4 class="anchored" data-anchor-id="answer-1">Answer</h4>
-</section>
-</section>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1"></h3>
+<hr>
 <div class="bold">
 <p>Question 3. In a three-region election analysis, probabilities of supporting Candidate Y differ by region:</p>
 <ul>
@@ -5282,12 +5288,10 @@ P(Y) = P(Y | \text{Urban})P(\text{Urban}) + P(Y | \text{Suburban})P(\text{Suburb
 </div>
 </div>
 </div>
+</section>
 <section id="answer-2" class="level4">
 <h4 class="anchored" data-anchor-id="answer-2">Answer</h4>
-</section>
-</section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2"></h3>
+<hr>
 <div class="bold">
 <p>Question 4. Suppose a new water-testing kit detects microplastics with 95% sensitivity (true positive) and 90% specificity (true negative). Environmental assessments show that 10% of water samples in the region contain microplastics. If the test gives a positive result, what is the posterior probability the sample truly contains microplastics?</p>
 </div>
@@ -5327,21 +5331,17 @@ Hint 2
 </div>
 </div>
 </div>
+</section>
 <section id="answer-3" class="level4">
 <h4 class="anchored" data-anchor-id="answer-3">Answer</h4>
-</section>
-</section>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3"></h3>
+<hr>
 <div class="bold">
 <p>Question 5: A survey of 1000 voters shows a mean approval rating of 35% for the Governor, with a standard deviation of 12%. Construct a 95% confidence interval for the true approval rating. Interpret your results.</p>
 </div>
+</section>
 <section id="answer-4" class="level4">
 <h4 class="anchored" data-anchor-id="answer-4">Answer</h4>
-</section>
-</section>
-<section id="section-4" class="level3">
-<h3 class="anchored" data-anchor-id="section-4"></h3>
+<hr>
 <div class="bold">
 <p>Question 6. An environmental agency claims that the average nitrate level in groundwater exceeds the safety standard of 10 mg/L. A random sample of 40 wells gives a mean of 10.6 mg/L with a standard deviation of 1.5 mg/L.</p>
 <ol type="a">
@@ -5370,9 +5370,12 @@ Hint
 </div>
 </div>
 </div>
+</section>
 <section id="answer-5" class="level4">
 <h4 class="anchored" data-anchor-id="answer-5">Answer</h4>
+<hr>
 <div class="bold">
+<p>Question 7:</p>
 <p>The file <code>dc_sample.rds</code> is provided you on Canvas. Download this and load this into R with the code</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dc_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;dc_sample.rds&quot;</span>) <span class="co"># specify the right path to the file for your setup</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This dataset is a sample of 500 individuals and their race, based on standard Census criteria.</p>
@@ -5481,7 +5484,6 @@ Hint
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -5719,7 +5721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

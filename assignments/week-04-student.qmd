@@ -26,6 +26,7 @@ Modify this quarto notebook, change `eval: false` to `eval: true` above, convert
 
 Either HTML or PDF submissions are fine. Please also submit this Quarto file.
 
+{{< downloadthis week-04-student.qmd dname="homework4.qmd" label="Download Quarto file" >}}
 
 ### Rubric:
 
@@ -53,10 +54,9 @@ Show your work, and confirm your answer using `dbinom(x=2, size=5, prob=0.3)`
 :::
 ::::
 
-
 #### Answer
 
-### 
+------------------------------------------------------------------------
 
 ::: bold
 Question 2: An environmental sensor detects excess ozone (event A) and excess particulate matter (event B). Historical data show: - P(A) = 0.25 - P(B) = 0.40 - P(A∩B) = 0.12 Compute P(B\|A) and interpret the result in context. What does it suggest about the joint occurrence of these pollutants?
@@ -65,6 +65,8 @@ Are A and B independent? Provide both a numerical check and an interpretation in
 :::
 
 #### Answer
+
+------------------------------------------------------------------------
 
 ::: bold
 Question 3. In a three-region election analysis, probabilities of supporting Candidate Y differ by region:
@@ -76,16 +78,21 @@ Question 3. In a three-region election analysis, probabilities of supporting Can
 Find the overall probability that a randomly selected voter supports Candidate Y.
 :::
 
+
+
 #### Answer
 
+------------------------------------------------------------------------
 
 ::: bold
 Question 4. Suppose a new water-testing kit detects microplastics with 95% sensitivity (true positive) and 90% specificity (true negative). Environmental assessments show that 10% of water samples in the region contain microplastics. If the test gives a positive result, what is the posterior probability the sample truly contains microplastics?
 :::
 
+
+
 #### Answer
 
-### 
+------------------------------------------------------------------------
 
 ::: bold
 Question 5: A survey of 1000 voters shows a mean approval rating of 35% for the Governor, with a standard deviation of 12%. Construct a 95% confidence interval for the true approval rating. Interpret your results.
@@ -93,6 +100,7 @@ Question 5: A survey of 1000 voters shows a mean approval rating of 35% for the 
 
 #### Answer
 
+------------------------------------------------------------------------
 
 :::: bold
 Question 6. An environmental agency claims that the average nitrate level in groundwater exceeds the safety standard of 10 mg/L. A random sample of 40 wells gives a mean of 10.6 mg/L with a standard deviation of 1.5 mg/L.
@@ -107,9 +115,15 @@ Note that two people will likely not get the same answers to these questions, du
 :::
 ::::
 
+
+
 #### Answer
 
+------------------------------------------------------------------------
+
 ::::: bold
+Question 7:
+
 The file `dc_sample.rds` is provided you on Canvas. Download this and load this into R with the code
 
 ``` r
@@ -120,6 +134,15 @@ This dataset is a sample of 500 individuals and their race, based on standard Ce
 
 a.  Construct a confidence interval of the proportion of black people in DC using this dataset. (5 points)
 
+::: {.callout-tip collapse="true"}
+You compute a 95% confidence interval for a proportion using the formula
+
+$$
+(\hat{p} - 2 \cdot \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}, \hat{p} + 2 \cdot \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}})
+$$
+
+where $\hat{p}$ is the sample proportion and $n$ is the sample size.
+:::
 
 b.  Perform a simulation experiment as follows: (10 points)
 
@@ -136,5 +159,18 @@ c.  Provide a table showing how often subjects are repeated in one of the resamp
 
 Also, report on the number of unique individuals included in this resampled dataset (it is **not** 500)
 
+::: {.callout-tip collapse="true"}
+You can create a single resampled dataset from the original dataset with replacement using the following code:
+
+``` r
+dc_resampled <- dc_data[sample(nrow(dc_data), replace = TRUE), ]
+```
+
+or
+
+``` r
+dc_resampled <- dc_data |> slice_sample(p = 1, replace = TRUE)
+```
+:::
 :::::
 
