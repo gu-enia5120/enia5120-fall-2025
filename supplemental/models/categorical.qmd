@@ -1,18 +1,8 @@
 ---
 title: "Categorical variables and factors in R"
-custom-callout:
-  todo:
-    icon-symbol: "📝"
-    color: "pink"
-  thumbs-up:
-    title: "Great job!"
-    icon-symbol: "fa-thumbs-up"
-    color: "#008000"
 filters:
   - quarto
   - line-highlight
-  - custom-callout
-  - panelize
 ---
 
 ```{r}

@@ -1,0 +1,91 @@
+---
+title: "Practicing with factors"
+engine: knitr
+execute: 
+    warning: false
+    messages: false
+live:
+    show-hints: true
+    show-solutions: true
+webr:
+    packages:
+        - tidyr
+        - dplyr
+        - forcats
+        - ggplot2
+---
+
+<!-- {{< include ../../_extensions/r-wasm/live/_knitr.qmd >}} -->
+
+```{webr}
+#| label: setup
+#| setup: true
+#| exercise: ex_1
+library(tidyr)
+library(forcats)
+library(dplyr)
+library(ggplot2)
+
+```
+
+The **tidyr** package provides a dataset from the 2017 American Community Survey (ACS) that contains information about the median household incomes and median monthly rents by state. The dataset is called `us_rent_income`. We plot a barplot of the medianan household income by state.
+
+```{webr}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+mydata <- us_rent_income |> 
+  filter(variable == 'income')
+ggplot(mydata, aes(y = NAME, x = estimate)) +
+    geom_col() +
+    labs(x = "Median Household Income", y = "State") + 
+    theme_bw()
+```
+
+We can see that the states are ordered alphabetically. We can use the `forcats` package to change the order of the states to be in descending order of median household income. Find the right function in the `forcats` package to do this, and add it to the data wrangling step above. You can refer to the [forcats documentation](https://forcats.tidyverse.org/) and forcats cheatsheet for help.
+
+
+:::: {.panel-tabset}
+
+## Exercise
+
+```{webr}
+#| exercise: ex_1
+library(forcats)
+mydata <- us_rent_income |> 
+  mutate(state = ___________(NAME, estimate)) # starts with fct_
+ggplot(mydata, aes(y = NAME, x = estimate)) +
+    geom_col() +
+    labs(x = "Median Household Income", y = "State") + 
+    theme_bw()
+```
+
+## Hint 
+
+::: { .hint exercise="ex_1"}
+
+Think of what you want to do with the states. Do you want to reorder them based on another variable? Do you want to change the order of the levels? Find a function that does that rather than trying to do it manually.
+
+:::
+
+
+## Solution 
+
+::: {.solution exercise="ex_1"}
+
+
+```{webr}
+#| exercise: ex_1
+#| solution: true
+#| source-line-numbers: "3"
+library(forcats)
+mydata <- us_rent_income |> 
+  mutate(state = fct_reorder(NAME, estimate))
+ggplot(mydata, aes(y = state, x = estimate)) +
+    geom_col() +
+    labs(x = "Median Household Income", y = "State") + 
+    theme_bw()
+```
+
+:::
+::::

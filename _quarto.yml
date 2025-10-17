@@ -12,6 +12,7 @@ project:
     - img
     - "site-page-content/*.pdf"
     - "slides/Wrap-up.pdf"
+    - "assignments/*.qmd"
     - assets
 
 website:
@@ -25,7 +26,7 @@ website:
           - href: supplemental/brackets.qmd
           - href: supplemental/data_munging.qmd
           - href: supplemental/models/categorical.qmd
-          - href: supplemental/models/practicing-factors.qmd
+          # - href: supplemental/models/practicing-factors.qmd
           - href: supplemental/models/boston.qmd
   #       - text: "Worksheets"
   #         menu:
@@ -106,8 +107,8 @@ website:
             target: _blank
           - href: slides/week-02.qmd
             target: _blank
-          - href: slides/week-03.qmd
-            target: _blank
+          # - href: slides/week-03.qmd
+            # target: _blank
           - href: slides/week-04.qmd
             target: _blank
           - href: slides/week-05.qmd
@@ -137,8 +138,8 @@ website:
         contents:
           - href: assignments/week-01.qmd
           - href: assignments/week-02.qmd
-          # - href: assignments/assignment-03.qmd
-          # - href: assignments/assignment-04.qmd
+          - href: assignments/week-03.qmd
+          - href: assignments/week-04.qmd
           # - href: assignments/assignment-05.qmd
           # - href: assignments/assignment-06.qmd
           # - href: assignments/assignment-07.qmd
@@ -168,6 +169,7 @@ format:
       dark: [cosmo, style/html-sta313.scss, style/html-dark.scss, style/sfah.scss]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
+    embed-resources: true
     code-copy: true
     code-overflow: wrap
     mainfont: "Atkinson Hyperlegible"
