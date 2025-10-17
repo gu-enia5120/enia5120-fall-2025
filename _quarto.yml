@@ -26,7 +26,7 @@ website:
           - href: supplemental/brackets.qmd
           - href: supplemental/data_munging.qmd
           - href: supplemental/models/categorical.qmd
-          # - href: supplemental/models/practicing-factors.qmd
+          - href: supplemental/models/practicing-factors.qmd
           - href: supplemental/models/boston.qmd
   #       - text: "Worksheets"
   #         menu:
@@ -107,8 +107,8 @@ website:
             target: _blank
           - href: slides/week-02.qmd
             target: _blank
-          # - href: slides/week-03.qmd
-            # target: _blank
+          - href: slides/week-03.qmd
+            target: _blank
           - href: slides/week-04.qmd
             target: _blank
           - href: slides/week-05.qmd
@@ -165,8 +165,8 @@ website:
 format:
   html:
     theme:
-      light: [cosmo, style/html-sta313.scss, style/sfah.scss]
-      dark: [cosmo, style/html-sta313.scss, style/html-dark.scss, style/sfah.scss]
+      light: [cerulean, brand, style/html-sta313-adg.scss, style/sfah.scss]
+      dark: [cerulean, brand, style/html-sta313-adg.scss, style/html-dark.scss, style/sfah.scss]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
     embed-resources: true
