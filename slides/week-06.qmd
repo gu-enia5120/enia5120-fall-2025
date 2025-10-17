@@ -514,7 +514,7 @@ ggplot(intervals, aes(y = reps, x = m, xmin = lb, xmax = ub)) +
   ) + 
       geom_vline(xintercept = mean(dc_pop$age), color = 'red4', linetype = 2) +
 scale_color_manual(values = c("TRUE"='red', "FALSE" = 'black'))+
-theme(axis.title = element_blank() axis.text.y = element_blank())
+theme(axis.title = element_blank(), axis.text.y = element_blank())
 ```
 
 ## We can make mistakes ...

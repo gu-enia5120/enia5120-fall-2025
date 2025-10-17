@@ -112,6 +112,8 @@ website:
             target: _blank
           - href: slides/week-05.qmd
             target: _blank
+          - href: slides/week-06.qmd
+            target: _blank
           #          - href: slides/week-08.qmd
           #            target: _blank
           #          - href: slides/week-09.qmd
