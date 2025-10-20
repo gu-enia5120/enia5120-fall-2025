@@ -99,7 +99,7 @@
     code span.vs { color: #008000; } /* VerbatimString */
     code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-29f0a8a060d1807bf1541810e0e35c2c.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-202071fc02f58b4a3bb510e8b45ba0e8.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -218,11 +218,6 @@
 </li>
 <li>Goal: Build models to identify trends, predict outcomes, or group data meaningfully.</li>
 </ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-</div>
 </section>
 <section id="major-approaches" class="slide level2">
 <h2>Major Approaches</h2>
@@ -334,13 +329,14 @@ y = b_0 + b_1x_1 + b_2x_2 + b_3 x_1x_2
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb2-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone))<span class="sc">+</span></span>
-<span id="cb2-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone)) <span class="sc">+</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-3" class="hljs-ln-code"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -352,14 +348,15 @@ y = b_0 + b_1x_1 + b_2x_2 + b_3 x_1x_2
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone))<span class="sc">+</span></span>
-<span id="cb3-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span>F) <span class="sc">+</span> </span>
-<span id="cb3-3"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone)) <span class="sc">+</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb2-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -371,15 +368,23 @@ y = b_0 + b_1x_1 + b_2x_2 + b_3 x_1x_2
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone))<span class="sc">+</span></span>
-<span id="cb4-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span>F) <span class="sc">+</span> </span>
-<span id="cb4-3"><a></a>  <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">65</span>, <span class="at">y =</span> <span class="dv">125</span>, <span class="at">label =</span> <span class="st">"Not linear"</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">'red'</span>)<span class="sc">+</span></span>
-<span id="cb4-4"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone)) <span class="sc">+</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb3-4"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb3-5"><a></a>    <span class="st">'text'</span>,</span>
+<span id="cb3-6"><a></a>    <span class="at">x =</span> <span class="dv">65</span>,</span>
+<span id="cb3-7"><a></a>    <span class="at">y =</span> <span class="dv">125</span>,</span>
+<span id="cb3-8"><a></a>    <span class="at">label =</span> <span class="st">"Not linear"</span>,</span>
+<span id="cb3-9"><a></a>    <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb3-10"><a></a>    <span class="at">color =</span> <span class="st">'red'</span></span>
+<span id="cb3-11"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb3-12"><a></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -388,8 +393,8 @@ y = b_0 + b_1x_1 + b_2x_2 + b_3 x_1x_2
 <section id="fitting-a-linear-model-in-r" class="slide level2">
 <h2>Fitting a linear model in R</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp , <span class="at">data =</span> airquality)</span>
-<span id="cb5-2"><a></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp, <span class="at">data =</span> airquality)</span>
+<span id="cb4-2"><a></a><span class="fu">summary</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -418,16 +423,16 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(broom)</span>
-<span id="cb7-2"><a></a>add_model <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
-<span id="cb7-3"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(<span class="at">x =</span> Temp))<span class="sc">+</span></span>
-<span id="cb7-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span> </span>
-<span id="cb7-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span><span class="st">'blue'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb6-2"><a></a>add_model <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
+<span id="cb6-3"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(<span class="at">x =</span> Temp)) <span class="sc">+</span></span>
+<span id="cb6-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb6-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span> <span class="st">'blue'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -438,17 +443,24 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(broom)</span>
-<span id="cb8-2"><a></a>add_model <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
-<span id="cb8-3"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(<span class="at">x =</span> Temp))<span class="sc">+</span></span>
-<span id="cb8-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span> </span>
-<span id="cb8-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span><span class="st">'blue'</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a></a>  <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">65</span>, <span class="at">y =</span> <span class="dv">125</span>, <span class="at">label =</span> <span class="st">'Not a great fit'</span>, <span class="at">size=</span><span class="dv">8</span>, <span class="at">color =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb7-2"><a></a>add_model <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
+<span id="cb7-3"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(<span class="at">x =</span> Temp)) <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb7-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb7-7"><a></a>    <span class="st">'text'</span>,</span>
+<span id="cb7-8"><a></a>    <span class="at">x =</span> <span class="dv">65</span>,</span>
+<span id="cb7-9"><a></a>    <span class="at">y =</span> <span class="dv">125</span>,</span>
+<span id="cb7-10"><a></a>    <span class="at">label =</span> <span class="st">'Not a great fit'</span>,</span>
+<span id="cb7-11"><a></a>    <span class="at">size =</span> <span class="dv">8</span>,</span>
+<span id="cb7-12"><a></a>    <span class="at">color =</span> <span class="st">'red'</span></span>
+<span id="cb7-13"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -461,15 +473,16 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(.fitted, .resid))<span class="sc">+</span></span>
-<span id="cb9-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span>F) <span class="sc">+</span> </span>
-<span id="cb9-3"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Fitted values'</span>, <span class="at">y =</span> <span class="st">'Residual values'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">ggplot</span>(add_model, <span class="fu">aes</span>(.fitted, .resid)) <span class="sc">+</span></span>
+<span id="cb8-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Fitted values'</span>, <span class="at">y =</span> <span class="st">'Residual values'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -480,17 +493,17 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp <span class="sc">+</span> <span class="fu">I</span>(Temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> airquality)</span>
-<span id="cb10-2"><a></a>add_model2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(model2)</span>
-<span id="cb10-3"><a></a><span class="fu">ggplot</span>(model2, <span class="fu">aes</span>(<span class="at">x =</span> Temp))<span class="sc">+</span></span>
-<span id="cb10-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span> </span>
-<span id="cb10-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span> <span class="st">'blue'</span>)<span class="sc">+</span></span>
-<span id="cb10-6"><a></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone), <span class="at">se=</span>F, <span class="at">color =</span> <span class="st">'green'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Ozone <span class="sc">~</span> Temp <span class="sc">+</span> <span class="fu">I</span>(Temp<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> airquality)</span>
+<span id="cb9-2"><a></a>add_model2 <span class="ot">&lt;-</span> <span class="fu">augment</span>(model2)</span>
+<span id="cb9-3"><a></a><span class="fu">ggplot</span>(model2, <span class="fu">aes</span>(<span class="at">x =</span> Temp)) <span class="sc">+</span></span>
+<span id="cb9-4"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone)) <span class="sc">+</span></span>
+<span id="cb9-5"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> .fitted), <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">y =</span> Ozone), <span class="at">se =</span> F, <span class="at">color =</span> <span class="st">'green'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -501,15 +514,16 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">ggplot</span>(add_model2, <span class="fu">aes</span>(.fitted, .resid))<span class="sc">+</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">se=</span>F) <span class="sc">+</span> </span>
-<span id="cb11-3"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb11-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Fitted values'</span>, <span class="at">y =</span> <span class="st">'Residual values'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">ggplot</span>(add_model2, <span class="fu">aes</span>(.fitted, .resid)) <span class="sc">+</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> F) <span class="sc">+</span></span>
+<span id="cb10-4"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Fitted values'</span>, <span class="at">y =</span> <span class="st">'Residual values'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -532,27 +546,27 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb12-2"><a></a><span class="fu">tbl_regression</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb11-2"><a></a><span class="fu">tbl_regression</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="tqzdzbjcda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tqzdzbjcda table {
+<div id="pqagzdxwph" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pqagzdxwph table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tqzdzbjcda thead, #tqzdzbjcda tbody, #tqzdzbjcda tfoot, #tqzdzbjcda tr, #tqzdzbjcda td, #tqzdzbjcda th {
+#pqagzdxwph thead, #pqagzdxwph tbody, #pqagzdxwph tfoot, #pqagzdxwph tr, #pqagzdxwph td, #pqagzdxwph th {
   border-style: none;
 }
 
-#tqzdzbjcda p {
+#pqagzdxwph p {
   margin: 0;
   padding: 0;
 }
 
-#tqzdzbjcda .gt_table {
+#pqagzdxwph .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -578,12 +592,12 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_caption {
+#pqagzdxwph .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tqzdzbjcda .gt_title {
+#pqagzdxwph .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -595,7 +609,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#tqzdzbjcda .gt_subtitle {
+#pqagzdxwph .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -607,7 +621,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#tqzdzbjcda .gt_heading {
+#pqagzdxwph .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -619,13 +633,13 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_bottom_border {
+#pqagzdxwph .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_col_headings {
+#pqagzdxwph .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -640,7 +654,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_col_heading {
+#pqagzdxwph .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -660,7 +674,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#tqzdzbjcda .gt_column_spanner_outer {
+#pqagzdxwph .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -672,15 +686,15 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#tqzdzbjcda .gt_column_spanner_outer:first-child {
+#pqagzdxwph .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tqzdzbjcda .gt_column_spanner_outer:last-child {
+#pqagzdxwph .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tqzdzbjcda .gt_column_spanner {
+#pqagzdxwph .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -692,11 +706,11 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#tqzdzbjcda .gt_spanner_row {
+#pqagzdxwph .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tqzdzbjcda .gt_group_heading {
+#pqagzdxwph .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,7 +736,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#tqzdzbjcda .gt_empty_group_heading {
+#pqagzdxwph .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -737,15 +751,15 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#tqzdzbjcda .gt_from_md > :first-child {
+#pqagzdxwph .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tqzdzbjcda .gt_from_md > :last-child {
+#pqagzdxwph .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tqzdzbjcda .gt_row {
+#pqagzdxwph .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,7 +778,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#tqzdzbjcda .gt_stub {
+#pqagzdxwph .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -777,7 +791,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#tqzdzbjcda .gt_stub_row_group {
+#pqagzdxwph .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -791,15 +805,15 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#tqzdzbjcda .gt_row_group_first td {
+#pqagzdxwph .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tqzdzbjcda .gt_row_group_first th {
+#pqagzdxwph .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tqzdzbjcda .gt_summary_row {
+#pqagzdxwph .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -809,16 +823,16 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#tqzdzbjcda .gt_first_summary_row {
+#pqagzdxwph .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_first_summary_row.thick {
+#pqagzdxwph .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tqzdzbjcda .gt_last_summary_row {
+#pqagzdxwph .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -828,7 +842,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_grand_summary_row {
+#pqagzdxwph .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -838,7 +852,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#tqzdzbjcda .gt_first_grand_summary_row {
+#pqagzdxwph .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -848,7 +862,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_last_grand_summary_row_top {
+#pqagzdxwph .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,11 +872,11 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_striped {
+#pqagzdxwph .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tqzdzbjcda .gt_table_body {
+#pqagzdxwph .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -871,7 +885,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_footnotes {
+#pqagzdxwph .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -885,7 +899,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_footnote {
+#pqagzdxwph .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -894,7 +908,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#tqzdzbjcda .gt_sourcenotes {
+#pqagzdxwph .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -908,7 +922,7 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tqzdzbjcda .gt_sourcenote {
+#pqagzdxwph .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -916,72 +930,72 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#tqzdzbjcda .gt_left {
+#pqagzdxwph .gt_left {
   text-align: left;
 }
 
-#tqzdzbjcda .gt_center {
+#pqagzdxwph .gt_center {
   text-align: center;
 }
 
-#tqzdzbjcda .gt_right {
+#pqagzdxwph .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tqzdzbjcda .gt_font_normal {
+#pqagzdxwph .gt_font_normal {
   font-weight: normal;
 }
 
-#tqzdzbjcda .gt_font_bold {
+#pqagzdxwph .gt_font_bold {
   font-weight: bold;
 }
 
-#tqzdzbjcda .gt_font_italic {
+#pqagzdxwph .gt_font_italic {
   font-style: italic;
 }
 
-#tqzdzbjcda .gt_super {
+#pqagzdxwph .gt_super {
   font-size: 65%;
 }
 
-#tqzdzbjcda .gt_footnote_marks {
+#pqagzdxwph .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tqzdzbjcda .gt_asterisk {
+#pqagzdxwph .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tqzdzbjcda .gt_indent_1 {
+#pqagzdxwph .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tqzdzbjcda .gt_indent_2 {
+#pqagzdxwph .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tqzdzbjcda .gt_indent_3 {
+#pqagzdxwph .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tqzdzbjcda .gt_indent_4 {
+#pqagzdxwph .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tqzdzbjcda .gt_indent_5 {
+#pqagzdxwph .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tqzdzbjcda .katex-display {
+#pqagzdxwph .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tqzdzbjcda div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pqagzdxwph div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1153,15 +1167,15 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">data</span>(iris)</span>
-<span id="cb13-2"><a></a>clust <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>Species), <span class="at">centers=</span><span class="dv">3</span>)</span>
-<span id="cb13-3"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width))<span class="sc">+</span></span>
-<span id="cb13-4"><a></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> clust<span class="sc">$</span>cluster, <span class="at">show.legend=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">data</span>(iris)</span>
+<span id="cb12-2"><a></a>clust <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>Species), <span class="at">centers =</span> <span class="dv">3</span>)</span>
+<span id="cb12-3"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width)) <span class="sc">+</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> clust<span class="sc">$</span>cluster, <span class="at">show.legend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1172,17 +1186,17 @@ F-statistic: 108.5 on 1 and 114 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>d <span class="ot">=</span> <span class="fu">dist</span>(iris <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>Species))</span>
-<span id="cb14-2"><a></a>clust2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d)</span>
-<span id="cb14-3"><a></a>clust_ids <span class="ot">&lt;-</span> <span class="fu">cutree</span>(clust2, <span class="at">k =</span> <span class="dv">3</span>)</span>
-<span id="cb14-4"><a></a></span>
-<span id="cb14-5"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width))<span class="sc">+</span></span>
-<span id="cb14-6"><a></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> clust_ids, <span class="at">show.legend=</span>F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>d <span class="ot">=</span> <span class="fu">dist</span>(iris <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>Species))</span>
+<span id="cb13-2"><a></a>clust2 <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d)</span>
+<span id="cb13-3"><a></a>clust_ids <span class="ot">&lt;-</span> <span class="fu">cutree</span>(clust2, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width)) <span class="sc">+</span></span>
+<span id="cb13-6"><a></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> clust_ids, <span class="at">show.legend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-04_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></a></p>
+<p><a href="week-04_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="week-04_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -1617,7 +1631,7 @@ W10=
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
