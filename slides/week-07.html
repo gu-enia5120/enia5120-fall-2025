@@ -8,7 +8,12 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
   <title>ENIA 5120 – Lecture 7</title>
@@ -29,6 +34,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-202071fc02f58b4a3bb510e8b45ba0e8.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -127,6 +198,9 @@
   </style>
   <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -140,42 +214,709 @@
 </div>
 
 </section>
+<section>
 <section id="simulating-studies" class="title-slide slide level1 center">
 <h1>Simulating studies</h1>
 
 </section>
+<section id="scenario" class="slide level2">
+<h2>Scenario</h2>
+<p>In the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15% of this age group own homes, compared to a national average of 20%. Home-owners have a 1% chance of leaving the state, while renters and non-home-owners have a 15% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost $1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15% to 10%. It is expected that 30% of renters will take up the program. The average cost of a person leaving the state is estimated to be $50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using <code>usdata::pop_age_2019</code>.</p>
+</section>
+<section id="simulations-are-most-often-based-on-conditional-probabilities" class="slide level2">
+<h2>Simulations are most often based on conditional probabilities</h2>
+<div class="r-fit-text">
+<p>If this, what is the <u>likelihood</u> of that?</p>
+</div>
+</section>
+<section id="there-is-intrinsic-variability-in-consequences" class="slide level2">
+<h2>There is intrinsic variability in consequences</h2>
+<ul>
+<li>If there was surety (likelihood = 100%), we wouldn’t need simulations</li>
+<li>What we will often think about is, how variable are the consequences?</li>
+</ul>
+</section>
+<section id="categorical-outcomes" class="slide level2">
+<h2>Categorical outcomes</h2>
+<p>If there is a small set of possible consequences:</p>
+<ul>
+<li>Yes/No → <em>Binomial(1, p)</em> where <em>p</em>=P(Yes) → <code>rbinom</code></li>
+<li>Mutually exclusive outcomes → <em>Multinomial(1, <strong>p</strong>)</em>, where <em><strong>p</strong></em> is a <u>vector</u> of probabilities summing to 1 → <code>rmultinom</code></li>
+<li>If not mutually exclusive, needs more thought.
+<ul>
+<li>Usually split into two correlated categoricals where you work out the joint distribution</li>
+</ul></li>
+</ul>
+</section>
+<section id="continuous-outcomes" class="slide level2">
+<h2>Continuous outcomes</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Symmetric → <em>Normal (<span class="math inline">\(\mu,\ \sigma\)</span>)</em></p>
+<ul>
+<li>More uncertain → larger <span class="math inline">\(\sigma\)</span></li>
+<li><code>rnorm</code></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Long right tail → <em>Gamma (<span class="math inline">\(\alpha,\ \beta\)</span>)</em></p>
+<ul>
+<li><code>rgamma</code></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="continouous-outcomes-contd." class="slide level2">
+<h2>Continouous outcomes (contd.)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>Continuous between 0 and 1 → <em>Beta (<span class="math inline">\(\alpha,\ \beta\)</span>)</em> - <code>rbeta</code></p>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p>Many other choices possible, depending on the situation.</p>
+<p><i class="fa-brands fa-r-project" aria-label="r-project"></i> implementations: see the <a href="https://cran.r-project.org/web/views/Distributions.html">Distributions Task View</a> on CRAN.</p>
+</section>
+<section id="simulating-the-sc-population" class="slide level2">
+<h2>Simulating the SC population</h2>
+<p>Let’s break the scenario down:</p>
+<ul>
+<li>Population size: number of 20-35 year olds in SC in 2019</li>
+<li>Home-ownership rate: 15% (= P(Homeowner))</li>
+<li>Leaving probabilities:
+<ul>
+<li>Homeowners: 1% (= P(Leave | Homeowner))</li>
+<li>Renters without program: 15% (= P(Leave | Renter, No Program))</li>
+<li>Renters with program: 10% (= P(Leave | Renter, Program))</li>
+</ul></li>
+<li>Program take-up rate: 30% (= P(Program | Renter))</li>
+<li>Costs:
+<ul>
+<li>Cost of leaving: $50,000</li>
+<li>Cost of program: $1,000 per participant</li>
+</ul></li>
+</ul>
+</section>
+<section id="simulating-the-sc-population-1" class="slide level2">
+<h2>Simulating the SC population</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a></a>flowchart LR</span>
+<span id="cb1-2"><a></a>  Start((Start)) --&gt; Pop[/"SC population age 20–35"/]</span>
+<span id="cb1-3"><a></a>  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]</span>
+<span id="cb1-4"><a></a>  Pop --&gt; Rent[Renters&lt;br/&gt;85%]</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>  Home --&gt; HomeLeave{Leave?}</span>
+<span id="cb1-7"><a></a>  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]</span>
+<span id="cb1-8"><a></a>  HomeLeave -- No (99%) --&gt; HomeStay[Stay]</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a>  Rent --&gt; RentUptake{Take program?}</span>
+<span id="cb1-11"><a></a>  RentUptake -- Yes (30%) --&gt; Prog[Program participants]</span>
+<span id="cb1-12"><a></a>  RentUptake -- No (70%) --&gt; NoProg[Non-participants]</span>
+<span id="cb1-13"><a></a></span>
+<span id="cb1-14"><a></a>  Prog --&gt; ProgLeave{Leave?}</span>
+<span id="cb1-15"><a></a>  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]</span>
+<span id="cb1-16"><a></a>  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]</span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a>  NoProg --&gt; NoProgLeave{Leave?}</span>
+<span id="cb1-19"><a></a>  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]</span>
+<span id="cb1-20"><a></a>  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Start((Start)) --&gt; Pop[/"SC population age 20–35"/]
+  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]
+  Pop --&gt; Rent[Renters&lt;br/&gt;85%]
 
-<section id="using-simulation-to-understand-sampling-distributions" class="title-slide slide level1 center">
-<h1>Using simulation to understand sampling distributions</h1>
+  Home --&gt; HomeLeave{Leave?}
+  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]
+  HomeLeave -- No (99%) --&gt; HomeStay[Stay]
+
+  Rent --&gt; RentUptake{Take program?}
+  RentUptake -- Yes (30%) --&gt; Prog[Program participants]
+  RentUptake -- No (70%) --&gt; NoProg[Non-participants]
+
+  Prog --&gt; ProgLeave{Leave?}
+  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]
+  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]
+
+  NoProg --&gt; NoProgLeave{Leave?}
+  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]
+  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="simulating-the-sc-population-2" class="slide level2">
+<h2>Simulating the SC population</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb2-2"><a></a>sc_pop <span class="ot">=</span> usdata<span class="sc">::</span>pop_age_2019 <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"SC"</span>, age <span class="sc">&gt;=</span> <span class="dv">20</span>, age <span class="sc">&lt;=</span> <span class="dv">35</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-4"><a></a>  <span class="fu">pull</span>(population) <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span>
+<span id="cb2-5"><a></a>behavior_now <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">homeowner =</span> <span class="fu">rbinom</span>(sc_pop, <span class="dv">1</span>, <span class="fl">0.15</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a></a>  <span class="fu">mutate</span>(<span class="at">leaves =</span> <span class="fu">ifelse</span>(homeowner <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.01</span>), <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.15</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a></a>  <span class="fu">mutate</span>(<span class="at">cost =</span> leaves <span class="sc">*</span> <span class="dv">50000</span>)</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a>intervention <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">homeowner =</span> <span class="fu">rbinom</span>(sc_pop, <span class="dv">1</span>, <span class="fl">0.15</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a></a>  <span class="fu">mutate</span>(<span class="at">takes_program =</span> <span class="fu">ifelse</span>(homeowner <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.3</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb2-11"><a></a>  <span class="fu">mutate</span>(<span class="at">leave_prob =</span> <span class="fu">case_when</span>(</span>
+<span id="cb2-12"><a></a>    homeowner <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fl">0.01</span>,</span>
+<span id="cb2-13"><a></a>    takes_program <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fl">0.10</span>,</span>
+<span id="cb2-14"><a></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">0.15</span></span>
+<span id="cb2-15"><a></a>  )) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a></a>  <span class="fu">mutate</span>(<span class="at">leaves =</span> <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, leave_prob)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-17"><a></a>  <span class="fu">mutate</span>(<span class="at">cost =</span> leaves <span class="sc">*</span> <span class="dv">50000</span> <span class="sc">+</span> takes_program <span class="sc">*</span> <span class="dv">1000</span>)</span>
+<span id="cb2-18"><a></a></span>
+<span id="cb2-19"><a></a>total_cost_now <span class="ot">=</span> <span class="fu">sum</span>(behavior_now<span class="sc">$</span>cost)</span>
+<span id="cb2-20"><a></a>total_cost_intervention <span class="ot">=</span> <span class="fu">sum</span>(intervention<span class="sc">$</span>cost)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is one simulation of the total cost now and with the intervention. To understand the variability, we need to repeat this many times.</p>
+</section>
+<section id="running-many-simulations" class="slide level2">
+<h2>Running many simulations</h2>
+<p>First, encapsulate the logic in a function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>N <span class="ot">&lt;-</span> usdata<span class="sc">::</span>pop_age_2019 <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"SC"</span>, age <span class="sc">&gt;=</span> <span class="dv">20</span>, age <span class="sc">&lt;=</span> <span class="dv">35</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a></a>  <span class="fu">pull</span>(population) <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>sim_function <span class="ot">&lt;-</span> <span class="cf">function</span>(N){</span>
+<span id="cb3-6"><a></a>  behavior_now <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">homeowner =</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.15</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-7"><a></a>    <span class="fu">mutate</span>(<span class="at">leaves =</span> <span class="fu">ifelse</span>(homeowner <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.01</span>), <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.15</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb3-8"><a></a>    <span class="fu">mutate</span>(<span class="at">cost =</span> leaves <span class="sc">*</span> <span class="dv">50000</span>)</span>
+<span id="cb3-9"><a></a></span>
+<span id="cb3-10"><a></a>  intervention <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">homeowner =</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.15</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-11"><a></a>    <span class="fu">mutate</span>(<span class="at">takes_program =</span> <span class="fu">ifelse</span>(homeowner <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, <span class="fl">0.3</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a></a>    <span class="fu">mutate</span>(<span class="at">leave_prob =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-13"><a></a>      homeowner <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fl">0.01</span>,</span>
+<span id="cb3-14"><a></a>      takes_program <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fl">0.10</span>,</span>
+<span id="cb3-15"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fl">0.15</span></span>
+<span id="cb3-16"><a></a>    )) <span class="sc">|&gt;</span></span>
+<span id="cb3-17"><a></a>    <span class="fu">mutate</span>(<span class="at">leaves =</span> <span class="fu">rbinom</span>(<span class="fu">n</span>(), <span class="dv">1</span>, leave_prob)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-18"><a></a>    <span class="fu">mutate</span>(<span class="at">cost =</span> leaves <span class="sc">*</span> <span class="dv">50000</span> <span class="sc">+</span> takes_program <span class="sc">*</span> <span class="dv">1000</span>)</span>
+<span id="cb3-19"><a></a></span>
+<span id="cb3-20"><a></a>  total_cost_now <span class="ot">=</span> <span class="fu">sum</span>(behavior_now<span class="sc">$</span>cost)</span>
+<span id="cb3-21"><a></a>  total_cost_intervention <span class="ot">=</span> <span class="fu">sum</span>(intervention<span class="sc">$</span>cost)</span>
+<span id="cb3-22"><a></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="st">'now'</span> <span class="ot">=</span> total_cost_now, <span class="st">'intervention'</span> <span class="ot">=</span> total_cost_intervention))</span>
+<span id="cb3-23"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="now-run-many-simulations" class="slide level2">
+<h2>Now run many simulations</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb4-2"><a></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb4-3"><a></a>sim_results <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n_sims, <span class="fu">sim_function</span>(N), <span class="at">simplify =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a></a>  <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a></a>  <span class="fu">mutate</span>(<span class="at">saving =</span> now <span class="sc">-</span> intervention)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>sim_results <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/sc_sim_results.rds"</span>)</span>
+<span id="cb5-2"><a></a><span class="fu">ggplot</span>(sim_results, <span class="fu">aes</span>(<span class="at">x =</span> saving)) <span class="sc">+</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">geom_histogram</span>( <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_dollar</span>()) <span class="sc">+</span></span>
+<span id="cb5-5"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-6"><a></a>    <span class="at">title =</span> <span class="st">"Distribution of Savings from Intervention"</span>,</span>
+<span id="cb5-7"><a></a>    <span class="at">x =</span> <span class="st">"Savings ($)"</span>,</span>
+<span id="cb5-8"><a></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb5-9"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb5-10"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="now-we-can-explore-different-scenarios" class="slide level2">
+<h2>Now we can explore different scenarios</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a></a>flowchart LR</span>
+<span id="cb6-2"><a></a>  Start((Start)) --&gt; Pop[/"SC population age 20–35"/]</span>
+<span id="cb6-3"><a></a>  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]</span>
+<span id="cb6-4"><a></a>  Pop --&gt; Rent[Renters&lt;br/&gt;85%]</span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a>  Home --&gt; HomeLeave{Leave?}</span>
+<span id="cb6-7"><a></a>  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]</span>
+<span id="cb6-8"><a></a>  HomeLeave -- No (99%) --&gt; HomeStay[Stay]</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a>  Rent --&gt; RentUptake{Take program?}</span>
+<span id="cb6-11"><a></a>  RentUptake -- Yes (30%) --&gt; Prog[Program participants]</span>
+<span id="cb6-12"><a></a>  RentUptake -- No (70%) --&gt; NoProg[Non-participants]</span>
+<span id="cb6-13"><a></a></span>
+<span id="cb6-14"><a></a>  Prog --&gt; ProgLeave{Leave?}</span>
+<span id="cb6-15"><a></a>  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]</span>
+<span id="cb6-16"><a></a>  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]</span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a>  NoProg --&gt; NoProgLeave{Leave?}</span>
+<span id="cb6-19"><a></a>  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]</span>
+<span id="cb6-20"><a></a>  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Start((Start)) --&gt; Pop[/"SC population age 20–35"/]
+  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]
+  Pop --&gt; Rent[Renters&lt;br/&gt;85%]
+
+  Home --&gt; HomeLeave{Leave?}
+  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]
+  HomeLeave -- No (99%) --&gt; HomeStay[Stay]
+
+  Rent --&gt; RentUptake{Take program?}
+  RentUptake -- Yes (30%) --&gt; Prog[Program participants]
+  RentUptake -- No (70%) --&gt; NoProg[Non-participants]
+
+  Prog --&gt; ProgLeave{Leave?}
+  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]
+  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]
+
+  NoProg --&gt; NoProgLeave{Leave?}
+  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]
+  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>sim_function <span class="ot">&lt;-</span> <span class="cf">function</span>(N, p_home, p_leave_home, p_leave_rent_no_prog,</span>
+<span id="cb7-2"><a></a>                         p_leave_rent_prog, p_prog_uptake,</span>
+<span id="cb7-3"><a></a>                         cost_leave, cost_prog)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section></section>
+<section>
+<section id="using-simulation-to-understand-distributions" class="title-slide slide level1 center">
+<h1>Using simulation to understand distributions</h1>
 
 </section>
+<section id="simulating-distributions" class="slide level2">
+<h2>Simulating distributions</h2>
+<div class="cell">
+<div>
+<div id="webr-1" class="exercise-cell">
 
-<section id="recall-the-definition-of-a-sampling-distribution" class="title-slide slide level1 center">
-<h1>Recall the definition of a sampling distribution</h1>
-
+</div>
+<script type="webr-1-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImZpZy1oZWlnaHQiOiI0IiwiZmlnLXdpZHRoIjoiOCIsIm1heC1saW5lcyI6IjYiLCJ3YXJuaW5nIjpmYWxzZX0sImNvZGUiOiJsaWJyYXJ5KHRpZHl2ZXJzZSkgfD4gc3VwcHJlc3NNZXNzYWdlcygpXG5saWJyYXJ5KGdnZGlzdClcblxubl9zYW1wbGVzIDwtIDEwMDAwXG50aWJibGUoeCA9IHJub3JtKG5fc2FtcGxlcywgMiwyKSkgfD4gXG4gIGdncGxvdChhZXMoeCA9IHgpKSArXG4gIGdlb21faGlzdG9ncmFtKCkgK1xuICBsYWJzKFxuICAgIHRpdGxlID0gXCJEaXN0cmlidXRpb25cIixcbiAgICB4ID0gXCJWYWx1ZVwiLFxuICAgIHkgPSBcIkRlbnNpdHlcIlxuICApICtcbiAgdGhlbWVfbWluaW1hbCgpIn0=
+</script>
+</div>
+</div>
 </section>
-
+<section id="probability-distributions" class="slide level2">
+<h2>Probability distributions</h2>
+<ul>
+<li>Discrete distributions
+<ul>
+<li>Binomial</li>
+<li>Poisson</li>
+<li>Negative Binomial</li>
+<li>Multinomial</li>
+</ul></li>
+<li>Continuous distributions
+<ul>
+<li>Normal</li>
+<li>t</li>
+<li>Chi-squared</li>
+<li>F</li>
+<li>Exponential</li>
+<li>Gamma</li>
+</ul></li>
+</ul>
+<p>See <a href="https://en.wikipedia.org/wiki/List_of_probability_distributions">here</a> for a more complete list (purely for reference)</p>
+</section>
+<section id="if-you-have-data-how-will-you-decide-what-parameters-to-use" class="slide level2">
+<h2>If you have data, how will you decide what parameters to use?</h2>
+<ul>
+<li><p>Use domain knowledge</p></li>
+<li><p>Use historical data</p></li>
+<li><p>Use exploratory data analysis (EDA)</p></li>
+<li><p>If you have an idea of the <u>kind</u> of distribution, you can fit parameters using methods like:</p>
+<ul>
+<li>Method of moments</li>
+<li>Maximum likelihood estimation (MLE)</li>
+<li>Bayesian estimation</li>
+</ul></li>
+<li><p>If you don’t have an idea of the distribution, you can use non-parametric methods like:</p>
+<ul>
+<li>Kernel density estimation (KDE)</li>
+<li>Empirical cumulative distribution function (ECDF)</li>
+</ul></li>
+</ul>
+</section>
+<section id="an-example" class="slide level2">
+<h2>An example</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">set.seed</span>(<span class="dv">132495</span>)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a><span class="co">#generate sample of 200 observations that follows normal dist with mean=10 and sd=3</span></span>
+<span id="cb8-4"><a></a>data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a>MASS<span class="sc">::</span><span class="fu">fitdistr</span>(data, <span class="st">"normal"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     mean         sd    
+  9.8895289   3.0288885 
+ (0.2141748) (0.1514444)</code></pre>
+</div>
+</div>
+</section></section>
+<section>
 <section id="duality-between-confidence-intervals-and-hypothesis-tests" class="title-slide slide level1 center">
 <h1>Duality between confidence intervals and hypothesis tests</h1>
 
 </section>
-
-<section id="bootstrapping" class="title-slide slide level1 center">
-<h1>Bootstrapping</h1>
-
+<section id="estimation-and-hypothesis-testing" class="slide level2">
+<h2>Estimation and hypothesis testing</h2>
+<ul>
+<li>Confidence intervals provide a range of plausible values for a parameter</li>
+<li>Hypothesis tests assess the evidence against a null hypothesis about a parameter</li>
+</ul>
 </section>
-
+<section id="duality" class="slide level2">
+<h2>Duality</h2>
+<ul>
+<li>A 95% confidence interval for a parameter includes all values that would not be rejected by a two-sided hypothesis test at the 5% significance level</li>
+<li>Conversely, if a value is outside the 95% confidence interval, it would be rejected by the corresponding hypothesis test</li>
+</ul>
+</section>
+<section id="duality-contd." class="slide level2">
+<h2>Duality (contd.)</h2>
+<p>Let’s consider a random sample of size 100 from DC (using the data from last week). We want to test whether the mean age in DC is less than 35 years.</p>
+<p>Under the null hypothesis <span class="math inline">\(H_0: \mu = 35\)</span>, we can perform a one-sample t-test:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb10-2"><a></a>p <span class="ot">=</span> <span class="fu">t.test</span>(sample_100<span class="sc">$</span>age, <span class="at">mu =</span> <span class="dv">35</span>, <span class="at">alternative =</span> <span class="st">"less"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a><span class="fu">tibble</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age)<span class="sc">/</span><span class="fu">sqrt</span>(n)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-5"><a></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">xdist =</span> <span class="fu">dist_normal</span>(mean, sd), <span class="at">fill =</span> <span class="fu">stat</span>(x <span class="sc">&lt;</span> <span class="fu">mean</span>(sample_100<span class="sc">$</span>age))), <span class="at">show.legend=</span>F) <span class="sc">+</span></span>
+<span id="cb10-6"><a></a>    <span class="fu">stat_halfeye</span>() <span class="sc">+</span> </span>
+<span id="cb10-7"><a></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span><span class="ot">=</span><span class="st">'red'</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">'lightblue'</span>)) <span class="sc">+</span></span>
+<span id="cb10-8"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">30</span>, <span class="at">y =</span> <span class="fl">0.4</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p,<span class="dv">4</span>)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span> </span>
+<span id="cb10-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="duality-contd.-1" class="slide level2">
+<h2>Duality (contd.)</h2>
+<p>For the sample of 100 individuals from DC, we can calculate a 95% confidence interval for the mean age:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">t.test</span>(sample_100<span class="sc">$</span>age)) <span class="sc">|&gt;</span> <span class="fu">select</span>(conf.low, conf.high)</span>
+<span id="cb11-2"><a></a><span class="fu">tibble</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age) <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb11-4"><a></a>    <span class="fu">aes</span>(<span class="at">xdist =</span> <span class="fu">dist_normal</span>(mean, sd), </span>
+<span id="cb11-5"><a></a>    <span class="at">fill =</span> <span class="fu">stat</span>(<span class="fu">abs</span>(<span class="dv">35</span><span class="sc">-</span>x) <span class="sc">&gt;</span> <span class="fu">abs</span>(<span class="dv">35</span><span class="sc">-</span><span class="fu">mean</span>(sample_100<span class="sc">$</span>age)))),</span>
+<span id="cb11-6"><a></a>    <span class="at">show.legend =</span> F</span>
+<span id="cb11-7"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb11-8"><a></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb11-9"><a></a>  <span class="fu">annotate</span>(<span class="st">'segment'</span>, </span>
+<span id="cb11-10"><a></a>    <span class="at">x =</span> ci<span class="sc">$</span>conf.low, <span class="at">xend =</span> ci<span class="sc">$</span>conf.high, <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">yend =</span> <span class="fl">0.1</span>,</span>
+<span id="cb11-11"><a></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb11-12"><a></a>    <span class="at">color =</span> <span class="st">'black'</span></span>
+<span id="cb11-13"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb11-14"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">'red'</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">'lightblue'</span>)) <span class="sc">+</span></span>
+<span id="cb11-15"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">35</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb11-16"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb11-17"><a></a>    <span class="st">'text'</span>,</span>
+<span id="cb11-18"><a></a>    <span class="at">x =</span> <span class="dv">30</span>,</span>
+<span id="cb11-19"><a></a>    <span class="at">y =</span> <span class="fl">0.4</span>,</span>
+<span id="cb11-20"><a></a>    <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p, <span class="dv">4</span>)),</span>
+<span id="cb11-21"><a></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb11-22"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb11-23"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
+<span id="cb11-24"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-25"><a></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-26"><a></a>    <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-27"><a></a>    <span class="at">legend.position =</span> <span class="st">'none'</span></span>
+<span id="cb11-28"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that this confidence interval doesn’t cover 35, which is consistent with the result of our hypothesis test, where the p-value is less than 0.05.</p>
+</section>
+<section id="duality-contd.-2" class="slide level2">
+<h2>Duality (contd.)</h2>
+<p>If we test the null hypothesis <span class="math inline">\(H_0: \mu = 33\)</span> against the alternative <span class="math inline">\(H_a: \mu \neq 33\)</span>, we get:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>p <span class="ot">=</span> <span class="fu">t.test</span>(sample_100<span class="sc">$</span>age, <span class="at">mu =</span> <span class="dv">33</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a>ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">t.test</span>(sample_100<span class="sc">$</span>age)) <span class="sc">|&gt;</span> <span class="fu">select</span>(conf.low, conf.high)</span>
+<span id="cb12-4"><a></a><span class="fu">tibble</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">33</span>, <span class="at">sd =</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age) <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb12-6"><a></a>    <span class="fu">aes</span>(<span class="at">xdist =</span> <span class="fu">dist_normal</span>(mean, sd), </span>
+<span id="cb12-7"><a></a>    <span class="at">fill =</span> <span class="fu">stat</span>(<span class="fu">abs</span>(x <span class="sc">-</span><span class="dv">33</span>) <span class="sc">&gt;</span> <span class="fu">abs</span>(<span class="dv">33</span> <span class="sc">-</span> <span class="fu">mean</span>(sample_100<span class="sc">$</span>age)))),</span>
+<span id="cb12-8"><a></a>    <span class="at">show.legend =</span> F</span>
+<span id="cb12-9"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb12-10"><a></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb12-11"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb12-12"><a></a>    <span class="st">'segment'</span>,</span>
+<span id="cb12-13"><a></a>    <span class="at">x =</span> ci<span class="sc">$</span>conf.low,</span>
+<span id="cb12-14"><a></a>    <span class="at">xend =</span> ci<span class="sc">$</span>conf.high,</span>
+<span id="cb12-15"><a></a>    <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb12-16"><a></a>    <span class="at">yend =</span> <span class="fl">0.1</span>,</span>
+<span id="cb12-17"><a></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb12-18"><a></a>    <span class="at">color =</span> <span class="st">'black'</span></span>
+<span id="cb12-19"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb12-20"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">'red'</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">'lightblue'</span>)) <span class="sc">+</span></span>
+<span id="cb12-21"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb12-22"><a></a>    <span class="st">'text'</span>,</span>
+<span id="cb12-23"><a></a>    <span class="at">x =</span> <span class="dv">30</span>,</span>
+<span id="cb12-24"><a></a>    <span class="at">y =</span> <span class="fl">0.4</span>,</span>
+<span id="cb12-25"><a></a>    <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p, <span class="dv">4</span>)),</span>
+<span id="cb12-26"><a></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb12-27"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb12-28"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
+<span id="cb12-29"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">33</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb12-30"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-31"><a></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-32"><a></a>    <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb12-33"><a></a>    <span class="at">legend.position =</span> <span class="st">'none'</span></span>
+<span id="cb12-34"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that this confidence interval does cover 35, which is consistent with the result of our hypothesis test, where the p-value is greater than 0.05.</p>
+</section>
+<section id="out-of-curiosity" class="slide level2">
+<h2>Out of curiosity…</h2>
+<p>If we test the null hypothesis <span class="math inline">\(H_0: \mu = 33.9\)</span> against the alternative <span class="math inline">\(H_a: \mu \neq 33.9\)</span>, we get:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>p <span class="ot">=</span> <span class="fu">t.test</span>(sample_100<span class="sc">$</span>age, <span class="at">mu =</span> <span class="fl">33.9</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">t.test</span>(sample_100<span class="sc">$</span>age)) <span class="sc">|&gt;</span> <span class="fu">select</span>(conf.low, conf.high)</span>
+<span id="cb13-4"><a></a><span class="fu">tibble</span>(<span class="at">group =</span> <span class="dv">1</span>, <span class="at">mean =</span> <span class="fl">33.9</span>, <span class="at">sd =</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age) <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb13-6"><a></a>    <span class="fu">aes</span>(<span class="at">xdist =</span> <span class="fu">dist_normal</span>(mean, sd), </span>
+<span id="cb13-7"><a></a>    <span class="at">fill =</span> <span class="fu">stat</span>(<span class="fu">abs</span>(<span class="fl">33.9</span><span class="sc">-</span>x) <span class="sc">&gt;</span> <span class="fu">abs</span>(<span class="fl">33.9</span> <span class="sc">-</span> <span class="fu">mean</span>(sample_100<span class="sc">$</span>age)))),</span>
+<span id="cb13-8"><a></a>    <span class="at">show.legend =</span> F</span>
+<span id="cb13-9"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb13-10"><a></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb13-11"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb13-12"><a></a>    <span class="st">'segment'</span>,</span>
+<span id="cb13-13"><a></a>    <span class="at">x =</span> ci<span class="sc">$</span>conf.low,</span>
+<span id="cb13-14"><a></a>    <span class="at">xend =</span> ci<span class="sc">$</span>conf.high,</span>
+<span id="cb13-15"><a></a>    <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb13-16"><a></a>    <span class="at">yend =</span> <span class="fl">0.1</span>,</span>
+<span id="cb13-17"><a></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb13-18"><a></a>    <span class="at">color =</span> <span class="st">'black'</span></span>
+<span id="cb13-19"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb13-20"><a></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">'red'</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">'lightblue'</span>)) <span class="sc">+</span></span>
+<span id="cb13-21"><a></a>  <span class="fu">annotate</span>(</span>
+<span id="cb13-22"><a></a>    <span class="st">'text'</span>,</span>
+<span id="cb13-23"><a></a>    <span class="at">x =</span> <span class="dv">30</span>,</span>
+<span id="cb13-24"><a></a>    <span class="at">y =</span> <span class="fl">0.4</span>,</span>
+<span id="cb13-25"><a></a>    <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, <span class="fu">round</span>(p, <span class="dv">4</span>)),</span>
+<span id="cb13-26"><a></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb13-27"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb13-28"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span></span>
+<span id="cb13-29"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">33.9</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb13-30"><a></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-31"><a></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-32"><a></a>    <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-33"><a></a>    <span class="at">legend.position =</span> <span class="st">'none'</span></span>
+<span id="cb13-34"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that this confidence interval just barely covers 33.9, which is consistent with the result of our hypothesis test, where the p-value is approximately 0.05.</p>
+</section></section>
+<section>
 <section id="sample-size-and-power-analysis" class="title-slide slide level1 center">
 <h1>Sample size and Power analysis</h1>
 
 </section>
+<section id="how-do-we-figure-out-the-right-sample-size-for-a-study" class="slide level2">
+<h2>How do we figure out the right sample size for a study?</h2>
+<ul>
+<li>Need to consider:
+<ul>
+<li>Effect size (to detect)</li>
+<li>Significance level (alpha)</li>
+<li>Power (1 - beta)</li>
+<li>Variability in the data (standard deviation)</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>mu1 <span class="ot">=</span> <span class="dv">35</span>; mu2 <span class="ot">=</span> <span class="dv">41</span>; sdev <span class="ot">=</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age)<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb14-2"><a></a><span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">28</span>, <span class="dv">48</span>, <span class="at">length.out=</span><span class="dv">100</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a></a>    <span class="fu">mutate</span>(<span class="at">y1 =</span> <span class="fu">dnorm</span>(x, mu1, sdev), <span class="at">y2 =</span> <span class="fu">dnorm</span>(x, mu2, sdev)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x)) <span class="sc">+</span></span>
+<span id="cb14-5"><a></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mu1, <span class="at">sd =</span> sdev), <span class="at">color =</span> <span class="st">'blue'</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-6"><a></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mu2, <span class="at">sd =</span> sdev), <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mu2, <span class="at">sd =</span> sdev), <span class="at">geom=</span><span class="st">'area'</span>, <span class="at">fill =</span> <span class="st">'red'</span>, </span>
+<span id="cb14-8"><a></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">37</span>,<span class="dv">47</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mu1, <span class="at">sd =</span> sdev), <span class="at">geom=</span><span class="st">'area'</span>, <span class="at">fill =</span> <span class="st">'blue'</span>, </span>
+<span id="cb14-10"><a></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">37</span>,<span class="dv">47</span>), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Age'</span>) <span class="sc">+</span> </span>
+<span id="cb14-12"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">35</span>, <span class="at">y =</span> <span class="fl">0.21</span>, <span class="at">label =</span> <span class="st">'Null hypothesis'</span>, <span class="at">color =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">43</span>, <span class="at">y =</span> <span class="fl">0.21</span>, <span class="at">label =</span> <span class="st">'Alternative hypothesis'</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb14-14"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">45</span>, <span class="at">y =</span> <span class="fl">0.02</span>, <span class="at">hjust=</span><span class="dv">0</span>, <span class="at">label =</span> <span class="st">'Power'</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb14-15"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">36</span>, <span class="at">y =</span> <span class="fl">0.02</span>, <span class="at">hjust=</span><span class="dv">1</span>, <span class="at">label =</span> <span class="st">'Type I error'</span>, <span class="at">color =</span> <span class="st">'red'</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">37</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb14-17"><a></a>    <span class="fu">annotate</span>(<span class="st">'text'</span>, <span class="at">x =</span> <span class="dv">37</span><span class="sc">+</span><span class="dv">1</span>, <span class="at">y =</span> <span class="fl">0.25</span>, <span class="at">label =</span> <span class="st">'Observed sample mean'</span>, <span class="at">color =</span> <span class="st">'black'</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb14-18"><a></a>    <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">'none'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-07_files/figure-revealjs/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="week-07_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="strategy" class="slide level2">
+<h2>Strategy</h2>
+<ul>
+<li>Recall that we can increase power by reducing the standard error of the mean (SEM) → increase sample size</li>
+<li>For a particular sample size <em>n</em>, we can calculate value of the mean needed to achieve exactly the significnace level <span class="math inline">\(\alpha\)</span> that is set.</li>
+<li>Then, we can calculate the probability of observing a mean at least that extreme under the alternative hypothesis → this is the power.</li>
+<li>We can vary <em>n</em> until we achieve the desired power.</li>
+</ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p>Suppose we want to detect a difference in mean age of 6 years (from 35 to 41) with 80% power at a significance level of 5%. What sample size is needed?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(pwr)</span>
+<span id="cb15-2"><a></a>effect_size <span class="ot">&lt;-</span> (<span class="dv">41</span> <span class="sc">-</span> <span class="dv">35</span>) <span class="sc">/</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age)</span>
+<span id="cb15-3"><a></a>sample_size <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> effect_size, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>)<span class="sc">$</span>n</span>
+<span id="cb15-4"><a></a>sample_size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 72.80538</code></pre>
+</div>
+</div>
+<p>We would need a sample size of approximately 73 to achieve this power.</p>
+</section>
+<section id="but-how-would-we-do-this-using-simulation" class="slide level2">
+<h2>But how would we do this using simulation?</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb17-2"><a></a>n_sims <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb17-3"><a></a>sample_size <span class="ot">&lt;-</span> <span class="dv">50</span>  <span class="co"># initial guess</span></span>
+<span id="cb17-4"><a></a>power_simulation <span class="ot">&lt;-</span> <span class="cf">function</span>(sample_size, n_sims, mu0, mu1, sd){</span>
+<span id="cb17-5"><a></a>  rejections <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n_sims, {</span>
+<span id="cb17-6"><a></a>    sample_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(sample_size, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd)</span>
+<span id="cb17-7"><a></a>    p_value <span class="ot">&lt;-</span> <span class="fu">t.test</span>(sample_data, <span class="at">mu =</span> mu0, <span class="at">alternative =</span> <span class="st">"greater"</span>)<span class="sc">$</span>p.value</span>
+<span id="cb17-8"><a></a>    <span class="fu">return</span>(p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb17-9"><a></a>  })</span>
+<span id="cb17-10"><a></a>  power <span class="ot">&lt;-</span> <span class="fu">mean</span>(rejections)</span>
+<span id="cb17-11"><a></a>  <span class="fu">return</span>(power)</span>
+<span id="cb17-12"><a></a>}</span>
+<span id="cb17-13"><a></a>desired_power <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb17-14"><a></a>current_power <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-15"><a></a><span class="cf">while</span>(current_power <span class="sc">&lt;</span> desired_power){</span>
+<span id="cb17-16"><a></a>  current_power <span class="ot">&lt;-</span> <span class="fu">power_simulation</span>(sample_size, n_sims, <span class="at">mu0 =</span> <span class="dv">35</span>, <span class="at">mu1 =</span> <span class="dv">41</span>, <span class="at">sd =</span> <span class="fu">sd</span>(dc_pop<span class="sc">$</span>age))</span>
+<span id="cb17-17"><a></a>  <span class="cf">if</span>(current_power <span class="sc">&lt;</span> desired_power){</span>
+<span id="cb17-18"><a></a>    sample_size <span class="ot">&lt;-</span> sample_size <span class="sc">+</span> <span class="dv">5</span>  <span class="co"># increment sample size</span></span>
+<span id="cb17-19"><a></a>  }</span>
+<span id="cb17-20"><a></a>}</span>
+<span id="cb17-21"><a></a>sample_size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75</code></pre>
+</div>
+</div>
+<p>We would need a sample size of approximately 75 to achieve this power using simulation.</p>
+</section></section>
+<section id="the-infer-package" class="title-slide slide level1 center">
+<h1>The infer package</h1>
 
-<section id="summary" class="title-slide slide level1 center">
-<h1>Summary</h1>
 
-
+<script type="webr-data">
+eyJvcHRpb25zIjp7ImJhc2VVcmwiOiJodHRwczovL3dlYnIuci13YXNtLm9yZy92MC41LjQvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsiZXZhbHVhdGUiLCJrbml0ciIsImh0bWx0b29scyIsInRpZHl2ZXJzZSIsInRpZHltb2RlbHMiLCJqYW5pdG9yIiwidXNkYXRhIl0sInJlcG9zIjpbXX0sInJlbmRlcl9kZiI6ImRlZmF1bHQifQ==
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJ3ZWJyLXdpZGdldC0xIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoie1xuICAvLyBXYWl0IGZvciBvdXRwdXQgdG8gYmUgd3JpdHRlbiB0byB0aGUgRE9NLCB0aGVuIHRyaWdnZXIgd2lkZ2V0IHJlbmRlcmluZ1xuICBhd2FpdCBfd2Vicl92YWx1ZV8xO1xuICBpZiAod2luZG93LkhUTUxXaWRnZXRzKSB7XG4gICAgd2luZG93LkhUTUxXaWRnZXRzLnN0YXRpY1JlbmRlcigpO1xuICB9XG4gIGlmICh3aW5kb3cuUGFnZWRUYWJsZURvYykge1xuICAgIHdpbmRvdy5QYWdlZFRhYmxlRG9jLmluaXRBbGwoKTtcbiAgfVxufVxuIn0seyJjZWxsTmFtZSI6IndlYnItMSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJzb3VyY2UiOiJ2aWV3b2YgX3dlYnJfZWRpdG9yXzEgPSB7XG4gIGNvbnN0IHsgV2ViUkV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwid2Vici0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHdlYnItMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBXZWJSRXhlcmNpc2VFZGl0b3Iod2ViUk9qcy53ZWJSUHJvbWlzZSwgYmxvY2suY29kZSwgb3B0aW9ucyk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fd2Vicl92YWx1ZV8xID0gd2ViUk9qcy5wcm9jZXNzKF93ZWJyX2VkaXRvcl8xLCB7fSk7XG4ifSx7ImNlbGxOYW1lIjoid2Vici1wcmVsdWRlIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoid2ViUk9qcyA9IHtcbiAgY29uc3QgeyBXZWJSLCBDaGFubmVsVHlwZSB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZS5XZWJSO1xuICBjb25zdCB7XG4gICAgV2ViUkV2YWx1YXRvcixcbiAgICBXZWJSRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyB3ZWJSIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcIndlYnItZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIC8vIFVzZSBQb3N0TWVzc2FnZSBjaGFubmVsIGZvciBhc3luYyBjb21tdW5pY2F0aW9uXG4gIC8vIFdlIGRvIG5vdCBleHBlY3QgdG8gdGFrZSBuZXN0ZWQgcHJvbXB0IGlucHV0IGluIFF1YXJ0byBMaXZlIGNlbGxzXG4gIGRhdGEub3B0aW9ucy5jaGFubmVsVHlwZSA9IENoYW5uZWxUeXBlLlBvc3RNZXNzYWdlO1xuXG4gIC8vIEluaXRpYWxpc2Ugd2ViUiBhbmQgc2V0dXAgZm9yIFIgY29kZSBldmFsdWF0aW9uXG4gIGxldCB3ZWJSUHJvbWlzZSA9IChhc3luYyAod2ViUikgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgd2ViUmA7XG4gICAgYXdhaXQgd2ViUi5pbml0KCk7XG5cbiAgICAvLyBJbnN0YWxsIHByb3ZpZGVkIGxpc3Qgb2YgcGFja2FnZXNcbiAgICAvLyBFbnN1cmUgd2ViUiBkZWZhdWx0IHJlcG8gaXMgaW5jbHVkZWRcbiAgICBkYXRhLnBhY2thZ2VzLnJlcG9zLnB1c2goXCJodHRwczovL3JlcG8uci13YXNtLm9yZ1wiKVxuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIHdlYlIuZXZhbFJWb2lkKGBcbiAgICAgICAgd2Vicjo6aW5zdGFsbChwa2csIHJlcG9zID0gcmVwb3MpXG4gICAgICAgIGxpYnJhcnkocGtnLCBjaGFyYWN0ZXIub25seSA9IFRSVUUpXG4gICAgICBgLCB7IGVudjoge1xuICAgICAgICBwa2c6IHBrZyxcbiAgICAgICAgcmVwb3M6IGRhdGEucGFja2FnZXMucmVwb3MsXG4gICAgICB9fSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgY29uc3QgYW5hbHlzaXMgPSBhd2FpdCB3ZWJSLkZTLmFuYWx5emVQYXRoKHBhdGgpO1xuICAgICAgICBpZiAoIWFuYWx5c2lzLmV4aXN0cykge1xuICAgICAgICAgIHRyeSB7XG4gICAgICAgICAgICBhd2FpdCB3ZWJSLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvcjogXCIke2UubWVzc2FnZX1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHJldHVybiBhd2FpdCB3ZWJSLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluc3RhbGxpbmcgd2ViUiBzaGltc2A7XG4gICAgYXdhaXQgd2ViUi5ldmFsUlZvaWQoYHdlYnI6OnNoaW1faW5zdGFsbCgpYCk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFdlYlIgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUih3ZWJSLCBkYXRhKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiB3ZWJSO1xuICB9KShuZXcgV2ViUihkYXRhLm9wdGlvbnMpKTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3Qgd2ViUiA9IGF3YWl0IHdlYlJQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBXZWJSRXZhbHVhdG9yKHdlYlIsIGNvbnRleHQpXG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHJvY2VzcyxcbiAgICB3ZWJSUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -186,7 +927,7 @@ eyJjb250ZW50cyI6W119
 </div>
 </div>
 <script type="vfs-file">
-W10=
+WyJkYXRhL2RjX3BvcC5yZHMiLCJkYXRhL2Jpbm9taWFsX3BhcmFtcy5yZGEiLCJkYXRhL3BvcF9zYW1wbGVzLnJkYSIsImRhdGEvc2Nfc2ltX3Jlc3VsdHMucmRzIl0=
 </script>
 </section>
     </div>
@@ -419,6 +1160,44 @@ W10=
     window._ojs.selfContained = false;
     window._ojs.runtime.interpretFromScriptTags();
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -592,6 +1371,38 @@ W10=
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

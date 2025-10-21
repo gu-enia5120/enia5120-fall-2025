@@ -119,6 +119,195 @@
     "text": "Slightly dated slides from the class Practical R that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: https://www.araastat.com/BIOF339/slides/index.html\n\nThe slides on Data Structures and the Week 2 material will be particularly useful for you.\n\n\n\nRmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today."
   },
   {
+    "objectID": "slides/week-07.html#scenario",
+    "href": "slides/week-07.html#scenario",
+    "title": "Lecture 7",
+    "section": "Scenario",
+    "text": "Scenario\nIn the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15% of this age group own homes, compared to a national average of 20%. Home-owners have a 1% chance of leaving the state, while renters and non-home-owners have a 15% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost $1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15% to 10%. It is expected that 30% of renters will take up the program. The average cost of a person leaving the state is estimated to be $50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using usdata::pop_age_2019."
+  },
+  {
+    "objectID": "slides/week-07.html#simulations-are-most-often-based-on-conditional-probabilities",
+    "href": "slides/week-07.html#simulations-are-most-often-based-on-conditional-probabilities",
+    "title": "Lecture 7",
+    "section": "Simulations are most often based on conditional probabilities",
+    "text": "Simulations are most often based on conditional probabilities\n\nIf this, what is the likelihood of that?"
+  },
+  {
+    "objectID": "slides/week-07.html#there-is-intrinsic-variability-in-consequences",
+    "href": "slides/week-07.html#there-is-intrinsic-variability-in-consequences",
+    "title": "Lecture 7",
+    "section": "There is intrinsic variability in consequences",
+    "text": "There is intrinsic variability in consequences\n\nIf there was surety (likelihood = 100%), we wouldn’t need simulations\nWhat we will often think about is, how variable are the consequences?"
+  },
+  {
+    "objectID": "slides/week-07.html#categorical-outcomes",
+    "href": "slides/week-07.html#categorical-outcomes",
+    "title": "Lecture 7",
+    "section": "Categorical outcomes",
+    "text": "Categorical outcomes\nIf there is a small set of possible consequences:\n\nYes/No → Binomial(1, p) where p=P(Yes) → rbinom\nMutually exclusive outcomes → Multinomial(1, p), where p is a vector of probabilities summing to 1 → rmultinom\nIf not mutually exclusive, needs more thought.\n\nUsually split into two correlated categoricals where you work out the joint distribution"
+  },
+  {
+    "objectID": "slides/week-07.html#continuous-outcomes",
+    "href": "slides/week-07.html#continuous-outcomes",
+    "title": "Lecture 7",
+    "section": "Continuous outcomes",
+    "text": "Continuous outcomes\n\n\nSymmetric → Normal (\\(\\mu,\\ \\sigma\\))\n\nMore uncertain → larger \\(\\sigma\\)\nrnorm\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLong right tail → Gamma (\\(\\alpha,\\ \\beta\\))\n\nrgamma"
+  },
+  {
+    "objectID": "slides/week-07.html#continouous-outcomes-contd.",
+    "href": "slides/week-07.html#continouous-outcomes-contd.",
+    "title": "Lecture 7",
+    "section": "Continouous outcomes (contd.)",
+    "text": "Continouous outcomes (contd.)\n\n\nContinuous between 0 and 1 → Beta (\\(\\alpha,\\ \\beta\\)) - rbeta\n\n\n\n\n\n\n\n\n\n\n\nMany other choices possible, depending on the situation.\n implementations: see the Distributions Task View on CRAN."
+  },
+  {
+    "objectID": "slides/week-07.html#simulating-the-sc-population",
+    "href": "slides/week-07.html#simulating-the-sc-population",
+    "title": "Lecture 7",
+    "section": "Simulating the SC population",
+    "text": "Simulating the SC population\nLet’s break the scenario down:\n\nPopulation size: number of 20-35 year olds in SC in 2019\nHome-ownership rate: 15% (= P(Homeowner))\nLeaving probabilities:\n\nHomeowners: 1% (= P(Leave | Homeowner))\nRenters without program: 15% (= P(Leave | Renter, No Program))\nRenters with program: 10% (= P(Leave | Renter, Program))\n\nProgram take-up rate: 30% (= P(Program | Renter))\nCosts:\n\nCost of leaving: $50,000\nCost of program: $1,000 per participant"
+  },
+  {
+    "objectID": "slides/week-07.html#simulating-the-sc-population-1",
+    "href": "slides/week-07.html#simulating-the-sc-population-1",
+    "title": "Lecture 7",
+    "section": "Simulating the SC population",
+    "text": "Simulating the SC population\n\n\nCode\nflowchart LR\n  Start((Start)) --&gt; Pop[/\"SC population age 20–35\"/]\n  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]\n  Pop --&gt; Rent[Renters&lt;br/&gt;85%]\n\n  Home --&gt; HomeLeave{Leave?}\n  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]\n  HomeLeave -- No (99%) --&gt; HomeStay[Stay]\n\n  Rent --&gt; RentUptake{Take program?}\n  RentUptake -- Yes (30%) --&gt; Prog[Program participants]\n  RentUptake -- No (70%) --&gt; NoProg[Non-participants]\n\n  Prog --&gt; ProgLeave{Leave?}\n  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]\n  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]\n\n  NoProg --&gt; NoProgLeave{Leave?}\n  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]\n  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]\n\n\n\n\n\nflowchart LR\n  Start((Start)) --&gt; Pop[/\"SC population age 20–35\"/]\n  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]\n  Pop --&gt; Rent[Renters&lt;br/&gt;85%]\n\n  Home --&gt; HomeLeave{Leave?}\n  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]\n  HomeLeave -- No (99%) --&gt; HomeStay[Stay]\n\n  Rent --&gt; RentUptake{Take program?}\n  RentUptake -- Yes (30%) --&gt; Prog[Program participants]\n  RentUptake -- No (70%) --&gt; NoProg[Non-participants]\n\n  Prog --&gt; ProgLeave{Leave?}\n  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]\n  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]\n\n  NoProg --&gt; NoProgLeave{Leave?}\n  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]\n  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]"
+  },
+  {
+    "objectID": "slides/week-07.html#simulating-the-sc-population-2",
+    "href": "slides/week-07.html#simulating-the-sc-population-2",
+    "title": "Lecture 7",
+    "section": "Simulating the SC population",
+    "text": "Simulating the SC population\n\nset.seed(1234)\nsc_pop = usdata::pop_age_2019 |&gt; \n  filter(state == \"SC\", age &gt;= 20, age &lt;= 35) |&gt; \n  pull(population) |&gt; sum()\nbehavior_now &lt;- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |&gt; \n  mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |&gt; \n  mutate(cost = leaves * 50000)\n\nintervention &lt;- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |&gt; \n  mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |&gt;\n  mutate(leave_prob = case_when(\n    homeowner == 1 ~ 0.01,\n    takes_program == 1 ~ 0.10,\n    TRUE ~ 0.15\n  )) |&gt;\n  mutate(leaves = rbinom(n(), 1, leave_prob)) |&gt; \n  mutate(cost = leaves * 50000 + takes_program * 1000)\n\ntotal_cost_now = sum(behavior_now$cost)\ntotal_cost_intervention = sum(intervention$cost)\n\nThis is one simulation of the total cost now and with the intervention. To understand the variability, we need to repeat this many times."
+  },
+  {
+    "objectID": "slides/week-07.html#running-many-simulations",
+    "href": "slides/week-07.html#running-many-simulations",
+    "title": "Lecture 7",
+    "section": "Running many simulations",
+    "text": "Running many simulations\nFirst, encapsulate the logic in a function:\n\nN &lt;- usdata::pop_age_2019 |&gt; \n  filter(state == \"SC\", age &gt;= 20, age &lt;= 35) |&gt; \n  pull(population) |&gt; sum()\n\nsim_function &lt;- function(N){\n  behavior_now &lt;- tibble(homeowner = rbinom(N, 1, 0.15)) |&gt; \n    mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |&gt; \n    mutate(cost = leaves * 50000)\n\n  intervention &lt;- tibble(homeowner = rbinom(N, 1, 0.15)) |&gt; \n    mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |&gt;\n    mutate(leave_prob = case_when(\n      homeowner == 1 ~ 0.01,\n      takes_program == 1 ~ 0.10,\n      TRUE ~ 0.15\n    )) |&gt;\n    mutate(leaves = rbinom(n(), 1, leave_prob)) |&gt; \n    mutate(cost = leaves * 50000 + takes_program * 1000)\n\n  total_cost_now = sum(behavior_now$cost)\n  total_cost_intervention = sum(intervention$cost)\n  return(data.frame('now' = total_cost_now, 'intervention' = total_cost_intervention))\n}"
+  },
+  {
+    "objectID": "slides/week-07.html#now-run-many-simulations",
+    "href": "slides/week-07.html#now-run-many-simulations",
+    "title": "Lecture 7",
+    "section": "Now run many simulations",
+    "text": "Now run many simulations\n\nset.seed(1234)\nn_sims &lt;- 1000\nsim_results &lt;- replicate(n_sims, sim_function(N), simplify = FALSE) |&gt; \n  bind_rows() |&gt; \n  mutate(saving = now - intervention)\n\n\n\nCode\nsim_results &lt;- readRDS(\"data/sc_sim_results.rds\")\nggplot(sim_results, aes(x = saving)) +\n  geom_histogram( fill = \"lightblue\", color = \"black\") +\n  scale_x_continuous(labels = scales::label_dollar()) +\n  labs(\n    title = \"Distribution of Savings from Intervention\",\n    x = \"Savings ($)\",\n    y = \"Frequency\"\n  ) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "slides/week-07.html#now-we-can-explore-different-scenarios",
+    "href": "slides/week-07.html#now-we-can-explore-different-scenarios",
+    "title": "Lecture 7",
+    "section": "Now we can explore different scenarios",
+    "text": "Now we can explore different scenarios\n\n\nCode\nflowchart LR\n  Start((Start)) --&gt; Pop[/\"SC population age 20–35\"/]\n  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]\n  Pop --&gt; Rent[Renters&lt;br/&gt;85%]\n\n  Home --&gt; HomeLeave{Leave?}\n  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]\n  HomeLeave -- No (99%) --&gt; HomeStay[Stay]\n\n  Rent --&gt; RentUptake{Take program?}\n  RentUptake -- Yes (30%) --&gt; Prog[Program participants]\n  RentUptake -- No (70%) --&gt; NoProg[Non-participants]\n\n  Prog --&gt; ProgLeave{Leave?}\n  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]\n  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]\n\n  NoProg --&gt; NoProgLeave{Leave?}\n  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]\n  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]\n\n\n\n\n\nflowchart LR\n  Start((Start)) --&gt; Pop[/\"SC population age 20–35\"/]\n  Pop --&gt; Home[Homeowners&lt;br/&gt;15%]\n  Pop --&gt; Rent[Renters&lt;br/&gt;85%]\n\n  Home --&gt; HomeLeave{Leave?}\n  HomeLeave -- Yes (1%) --&gt; HomeCost[Leave cost&lt;br/&gt;$50,000]\n  HomeLeave -- No (99%) --&gt; HomeStay[Stay]\n\n  Rent --&gt; RentUptake{Take program?}\n  RentUptake -- Yes (30%) --&gt; Prog[Program participants]\n  RentUptake -- No (70%) --&gt; NoProg[Non-participants]\n\n  Prog --&gt; ProgLeave{Leave?}\n  ProgLeave -- Yes (10%) --&gt; ProgLeaveCost[Leave cost&lt;br/&gt;$50,000 + program $1,000]\n  ProgLeave -- No (90%) --&gt; ProgStay[Stay + program cost $1,000]\n\n  NoProg --&gt; NoProgLeave{Leave?}\n  NoProgLeave -- Yes (15%) --&gt; NoProgLeaveCost[Leave cost&lt;br/&gt;$50,000]\n  NoProgLeave -- No (85%) --&gt; NoProgStay[Stay]\n\n\n\n\n\n\n\nsim_function &lt;- function(N, p_home, p_leave_home, p_leave_rent_no_prog,\n                         p_leave_rent_prog, p_prog_uptake,\n                         cost_leave, cost_prog)"
+  },
+  {
+    "objectID": "slides/week-07.html#simulating-distributions",
+    "href": "slides/week-07.html#simulating-distributions",
+    "title": "Lecture 7",
+    "section": "Simulating distributions",
+    "text": "Simulating distributions"
+  },
+  {
+    "objectID": "slides/week-07.html#probability-distributions",
+    "href": "slides/week-07.html#probability-distributions",
+    "title": "Lecture 7",
+    "section": "Probability distributions",
+    "text": "Probability distributions\n\nDiscrete distributions\n\nBinomial\nPoisson\nNegative Binomial\nMultinomial\n\nContinuous distributions\n\nNormal\nt\nChi-squared\nF\nExponential\nGamma\n\n\nSee here for a more complete list (purely for reference)"
+  },
+  {
+    "objectID": "slides/week-07.html#if-you-have-data-how-will-you-decide-what-parameters-to-use",
+    "href": "slides/week-07.html#if-you-have-data-how-will-you-decide-what-parameters-to-use",
+    "title": "Lecture 7",
+    "section": "If you have data, how will you decide what parameters to use?",
+    "text": "If you have data, how will you decide what parameters to use?\n\nUse domain knowledge\nUse historical data\nUse exploratory data analysis (EDA)\nIf you have an idea of the kind of distribution, you can fit parameters using methods like:\n\nMethod of moments\nMaximum likelihood estimation (MLE)\nBayesian estimation\n\nIf you don’t have an idea of the distribution, you can use non-parametric methods like:\n\nKernel density estimation (KDE)\nEmpirical cumulative distribution function (ECDF)"
+  },
+  {
+    "objectID": "slides/week-07.html#an-example",
+    "href": "slides/week-07.html#an-example",
+    "title": "Lecture 7",
+    "section": "An example",
+    "text": "An example\n\n\nCode\nset.seed(132495)\n\n#generate sample of 200 observations that follows normal dist with mean=10 and sd=3\ndata &lt;- rnorm(200, mean = 10, sd = 3)\n\nMASS::fitdistr(data, \"normal\")\n\n\n     mean         sd    \n  9.8895289   3.0288885 \n (0.2141748) (0.1514444)"
+  },
+  {
+    "objectID": "slides/week-07.html#estimation-and-hypothesis-testing",
+    "href": "slides/week-07.html#estimation-and-hypothesis-testing",
+    "title": "Lecture 7",
+    "section": "Estimation and hypothesis testing",
+    "text": "Estimation and hypothesis testing\n\nConfidence intervals provide a range of plausible values for a parameter\nHypothesis tests assess the evidence against a null hypothesis about a parameter"
+  },
+  {
+    "objectID": "slides/week-07.html#duality",
+    "href": "slides/week-07.html#duality",
+    "title": "Lecture 7",
+    "section": "Duality",
+    "text": "Duality\n\nA 95% confidence interval for a parameter includes all values that would not be rejected by a two-sided hypothesis test at the 5% significance level\nConversely, if a value is outside the 95% confidence interval, it would be rejected by the corresponding hypothesis test"
+  },
+  {
+    "objectID": "slides/week-07.html#duality-contd.",
+    "href": "slides/week-07.html#duality-contd.",
+    "title": "Lecture 7",
+    "section": "Duality (contd.)",
+    "text": "Duality (contd.)\nLet’s consider a random sample of size 100 from DC (using the data from last week). We want to test whether the mean age in DC is less than 35 years.\nUnder the null hypothesis \\(H_0: \\mu = 35\\), we can perform a one-sample t-test:\n\n\nCode\nn = 100\np = t.test(sample_100$age, mu = 35, alternative = \"less\")$p.value\n\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |&gt; \nggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x &lt; mean(sample_100$age))), show.legend=F) +\n    stat_halfeye() + \n    scale_fill_manual(values = c(\"TRUE\"='red', \"FALSE\" = 'lightblue')) +\n    annotate('text', x = 30, y = 0.4, label = paste(\"p =\", round(p,4)), size = 3) +\n    labs(x = 'Age') + \n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+  },
+  {
+    "objectID": "slides/week-07.html#duality-contd.-1",
+    "href": "slides/week-07.html#duality-contd.-1",
+    "title": "Lecture 7",
+    "section": "Duality (contd.)",
+    "text": "Duality (contd.)\nFor the sample of 100 individuals from DC, we can calculate a 95% confidence interval for the mean age:\n\n\nCode\nci &lt;- broom::tidy(t.test(sample_100$age)) |&gt; select(conf.low, conf.high)\ntibble(group = 1, mean = 35, sd = sd(dc_pop$age) / sqrt(n)) |&gt;\n  ggplot(\n    aes(xdist = dist_normal(mean, sd), \n    fill = stat(abs(35-x) &gt; abs(35-mean(sample_100$age)))),\n    show.legend = F\n  ) +\n  stat_halfeye() +\n  annotate('segment', \n    x = ci$conf.low, xend = ci$conf.high, y = 0.1, yend = 0.1,\n    size = 3,\n    color = 'black'\n  ) +\n  scale_fill_manual(values = c(\"TRUE\" = 'red', \"FALSE\" = 'lightblue')) +\n  geom_vline(xintercept = 35, linetype = \"dashed\", color = \"blue\") +\n  annotate(\n    'text',\n    x = 30,\n    y = 0.4,\n    label = paste(\"p =\", round(p, 4)),\n    size = 3\n  ) +\n  labs(x = 'Age') +\n  theme(\n    axis.title.y = element_blank(),\n    axis.text.y = element_blank(),\n    legend.position = 'none'\n  )\n\n\n\n\n\n\n\n\n\nWe see that this confidence interval doesn’t cover 35, which is consistent with the result of our hypothesis test, where the p-value is less than 0.05."
+  },
+  {
+    "objectID": "slides/week-07.html#duality-contd.-2",
+    "href": "slides/week-07.html#duality-contd.-2",
+    "title": "Lecture 7",
+    "section": "Duality (contd.)",
+    "text": "Duality (contd.)\nIf we test the null hypothesis \\(H_0: \\mu = 33\\) against the alternative \\(H_a: \\mu \\neq 33\\), we get:\n\n\nCode\np = t.test(sample_100$age, mu = 33, alternative = \"two.sided\")$p.value\n\nci &lt;- broom::tidy(t.test(sample_100$age)) |&gt; select(conf.low, conf.high)\ntibble(group = 1, mean = 33, sd = sd(dc_pop$age) / sqrt(n)) |&gt;\n  ggplot(\n    aes(xdist = dist_normal(mean, sd), \n    fill = stat(abs(x -33) &gt; abs(33 - mean(sample_100$age)))),\n    show.legend = F\n  ) +\n  stat_halfeye() +\n  annotate(\n    'segment',\n    x = ci$conf.low,\n    xend = ci$conf.high,\n    y = 0.1,\n    yend = 0.1,\n    size = 3,\n    color = 'black'\n  ) +\n  scale_fill_manual(values = c(\"TRUE\" = 'red', \"FALSE\" = 'lightblue')) +\n  annotate(\n    'text',\n    x = 30,\n    y = 0.4,\n    label = paste(\"p =\", round(p, 4)),\n    size = 3\n  ) +\n  labs(x = 'Age') +\n  geom_vline(xintercept = 33, linetype = \"dashed\", color = \"blue\") +\n  theme(\n    axis.title.y = element_blank(),\n    axis.text.y = element_blank(),\n    legend.position = 'none'\n  )\n\n\n\n\n\n\n\n\n\nWe see that this confidence interval does cover 35, which is consistent with the result of our hypothesis test, where the p-value is greater than 0.05."
+  },
+  {
+    "objectID": "slides/week-07.html#out-of-curiosity",
+    "href": "slides/week-07.html#out-of-curiosity",
+    "title": "Lecture 7",
+    "section": "Out of curiosity…",
+    "text": "Out of curiosity…\nIf we test the null hypothesis \\(H_0: \\mu = 33.9\\) against the alternative \\(H_a: \\mu \\neq 33.9\\), we get:\n\n\nCode\np = t.test(sample_100$age, mu = 33.9, alternative = \"two.sided\")$p.value\n\nci &lt;- broom::tidy(t.test(sample_100$age)) |&gt; select(conf.low, conf.high)\ntibble(group = 1, mean = 33.9, sd = sd(dc_pop$age) / sqrt(n)) |&gt;\n  ggplot(\n    aes(xdist = dist_normal(mean, sd), \n    fill = stat(abs(33.9-x) &gt; abs(33.9 - mean(sample_100$age)))),\n    show.legend = F\n  ) +\n  stat_halfeye() +\n  annotate(\n    'segment',\n    x = ci$conf.low,\n    xend = ci$conf.high,\n    y = 0.1,\n    yend = 0.1,\n    size = 3,\n    color = 'black'\n  ) +\n  scale_fill_manual(values = c(\"TRUE\" = 'red', \"FALSE\" = 'lightblue')) +\n  annotate(\n    'text',\n    x = 30,\n    y = 0.4,\n    label = paste(\"p =\", round(p, 4)),\n    size = 3\n  ) +\n  labs(x = 'Age') +\n  geom_vline(xintercept = 33.9, linetype = \"dashed\", color = \"blue\") +\n  theme(\n    axis.title.y = element_blank(),\n    axis.text.y = element_blank(),\n    legend.position = 'none'\n  )\n\n\n\n\n\n\n\n\n\nWe see that this confidence interval just barely covers 33.9, which is consistent with the result of our hypothesis test, where the p-value is approximately 0.05."
+  },
+  {
+    "objectID": "slides/week-07.html#how-do-we-figure-out-the-right-sample-size-for-a-study",
+    "href": "slides/week-07.html#how-do-we-figure-out-the-right-sample-size-for-a-study",
+    "title": "Lecture 7",
+    "section": "How do we figure out the right sample size for a study?",
+    "text": "How do we figure out the right sample size for a study?\n\nNeed to consider:\n\nEffect size (to detect)\nSignificance level (alpha)\nPower (1 - beta)\nVariability in the data (standard deviation)"
+  },
+  {
+    "objectID": "slides/week-07.html#section",
+    "href": "slides/week-07.html#section",
+    "title": "Lecture 7",
+    "section": "",
+    "text": "Code\nmu1 = 35; mu2 = 41; sdev = sd(dc_pop$age)/sqrt(n)\ntibble(x = seq(28, 48, length.out=100)) |&gt; \n    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |&gt; \nggplot(aes(x=x)) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), color = 'blue', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), color = 'red', size=1) +\n    stat_function(fun = dnorm, args = list(mean = mu2, sd = sdev), geom='area', fill = 'red', \n    xlim = c(37,47), alpha = 0.5) +\n    stat_function(fun = dnorm, args = list(mean = mu1, sd = sdev), geom='area', fill = 'blue', \n    xlim = c(37,47), alpha = 0.5) +\n    labs(x = 'Age') + \n    annotate('text', x = 35, y = 0.21, label = 'Null hypothesis', color = 'blue') +\n    annotate('text', x = 43, y = 0.21, label = 'Alternative hypothesis', color = 'red') +\n    annotate('text', x = 45, y = 0.02, hjust=0, label = 'Power', color = 'red') +\n    annotate('text', x = 36, y = 0.02, hjust=1, label = 'Type I error', color = 'red') +\n    geom_vline(xintercept = 37, linetype = 2) +\n    annotate('text', x = 37+1, y = 0.25, label = 'Observed sample mean', color = 'black', hjust = 0) +\n    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')"
+  },
+  {
+    "objectID": "slides/week-07.html#strategy",
+    "href": "slides/week-07.html#strategy",
+    "title": "Lecture 7",
+    "section": "Strategy",
+    "text": "Strategy\n\nRecall that we can increase power by reducing the standard error of the mean (SEM) → increase sample size\nFor a particular sample size n, we can calculate value of the mean needed to achieve exactly the significnace level \\(\\alpha\\) that is set.\nThen, we can calculate the probability of observing a mean at least that extreme under the alternative hypothesis → this is the power.\nWe can vary n until we achieve the desired power."
+  },
+  {
+    "objectID": "slides/week-07.html#example",
+    "href": "slides/week-07.html#example",
+    "title": "Lecture 7",
+    "section": "Example",
+    "text": "Example\nSuppose we want to detect a difference in mean age of 6 years (from 35 to 41) with 80% power at a significance level of 5%. What sample size is needed?\n\n\nCode\nlibrary(pwr)\neffect_size &lt;- (41 - 35) / sd(dc_pop$age)\nsample_size &lt;- pwr.t.test(d = effect_size, power = 0.8, sig.level = 0.05, type = \"one.sample\", alternative = \"greater\")$n\nsample_size\n\n\n[1] 72.80538\n\n\nWe would need a sample size of approximately 73 to achieve this power."
+  },
+  {
+    "objectID": "slides/week-07.html#but-how-would-we-do-this-using-simulation",
+    "href": "slides/week-07.html#but-how-would-we-do-this-using-simulation",
+    "title": "Lecture 7",
+    "section": "But how would we do this using simulation?",
+    "text": "But how would we do this using simulation?\n\nset.seed(1234)\nn_sims &lt;- 1000\nsample_size &lt;- 50  # initial guess\npower_simulation &lt;- function(sample_size, n_sims, mu0, mu1, sd){\n  rejections &lt;- replicate(n_sims, {\n    sample_data &lt;- rnorm(sample_size, mean = mu1, sd = sd)\n    p_value &lt;- t.test(sample_data, mu = mu0, alternative = \"greater\")$p.value\n    return(p_value &lt; 0.05)\n  })\n  power &lt;- mean(rejections)\n  return(power)\n}\ndesired_power &lt;- 0.8\ncurrent_power &lt;- 0\nwhile(current_power &lt; desired_power){\n  current_power &lt;- power_simulation(sample_size, n_sims, mu0 = 35, mu1 = 41, sd = sd(dc_pop$age))\n  if(current_power &lt; desired_power){\n    sample_size &lt;- sample_size + 5  # increment sample size\n  }\n}\nsample_size\n\n[1] 75\n\n\nWe would need a sample size of approximately 75 to achieve this power using simulation."
+  },
+  {
     "objectID": "slides/week-05.html#a-look-back",
     "href": "slides/week-05.html#a-look-back",
     "title": "Lecture 5",
@@ -1221,7 +1410,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Mon Oct 20, 2025 at 12:22 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Tue Oct 21, 2025 at 05:37 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
