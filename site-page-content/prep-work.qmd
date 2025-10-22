@@ -101,3 +101,13 @@ This week, we start exploring the world of statistical pattern recognition, and 
 
 -   [Introduction to Statistical vs Systematic Uncertainty](https://openbooks.library.umass.edu/p132-lab-manual/chapter/introduction-to-statistical-vs-systematic-uncertainty/)
 -   [Variability and Uncertainty: Standard Deviations, Standard Errors, Confidence Intervals](https://www.middleprofessor.com/files/applied-biostatistics_bookdown/_book/variability-and-uncertainty-standard-deviations-standard-errors-confidence-intervals.html)
+  
+# Week 7: October 21
+## Reading
+
+IMS Chapters 11-15 (focus on 11-13 for now). Some of this will be review from last week, some will be new for this week. 
+
+## R
+
+We will be using the [**infer**](https://infer.netlify.app/) package for statistical inference via resampling methods. Please install it before class. 
+
