@@ -43,8 +43,8 @@ webr:
 lightbox: true
 chalkboard: true
 engine: knitr
-revealjs-plugins: 
-  - drop
+# revealjs-plugins: 
+#   - drop
 
 
   
