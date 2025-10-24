@@ -28,6 +28,7 @@ website:
           - href: supplemental/models/categorical.qmd
           - href: supplemental/models/practicing-factors.qmd
           - href: supplemental/models/boston.qmd
+          - href: supplemental/pwr_graph.qmd
   #       - text: "Worksheets"
   #         menu:
   #           - text: "Introduction to Quarto"
