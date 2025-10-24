@@ -1,0 +1,157 @@
+---
+format: live-html
+resources:
+  - data
+webr:
+  packages:
+    - tidyverse
+    - geomtextpath
+    - glue
+title: "Power analysis graphic"
+execute:
+  cache: false
+  freeze: false
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+
+```{ojs}
+//| echo: false
+viewof N=Inputs.range([0,500], {step: 5, value: 100, label:"Sample size (n)"})
+viewof d=Inputs.range([0.5,6], {step: 0.5, value: 6, label:"Effect size (d)"})
+viewof A=Inputs.range([0,0.2], {step: 0.05, value: 0.05, label:"Significance level (alpha)"})
+
+```
+
+
+
+```{webr}
+#| input:
+#|   - N
+#|   - d
+#|   - A
+#| autorun: true
+#| warning: false
+#| echo: false
+dc_pop <- readRDS("data/dc_pop.rds")
+theme_set(theme_minimal())
+pwr_graphic <- function(d = d, sdv = sd(dc_pop$age), n = N, alpha = A) {
+  mu1 <- 35
+  mu2 <- mu1 + d
+  sdev <- sdv / sqrt(n)
+  critval <- qnorm(1 - alpha, mean = mu1, sd = sdev)
+  pwr <- 1 - pnorm(critval, mean = mu2, sd = sdev)
+  tibble(x = seq(28, 50, length.out = 100)) |>
+    mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |>
+    ggplot(aes(x = x)) +
+    stat_function(
+      fun = dnorm,
+      args = list(mean = mu1, sd = sdev),
+      color = "blue",
+      linewidth = 1
+    ) +
+    stat_function(
+      fun = dnorm,
+      args = list(mean = mu2, sd = sdev),
+      color = "red",
+      linewidth = 1
+    ) +
+    stat_function(
+      fun = dnorm,
+      args = list(mean = mu2, sd = sdev),
+      geom = "area",
+      fill = "red",
+      xlim = c(critval, 47),
+      alpha = 0.5
+    ) +
+    stat_function(
+      fun = dnorm,
+      args = list(mean = mu1, sd = sdev),
+      geom = "area",
+      fill = "blue",
+      xlim = c(critval, 47),
+      alpha = 0.5
+    ) +
+    geom_segment(
+      x = mu1,
+      xend = mu2,
+      y = dnorm(mu1, mu1, sdev) + 0.01,
+      yend = dnorm(mu1, mu1, sdev) + 0.01,
+      arrow = arrow(length = unit(0.2, "cm"), ends = "both")
+    ) +
+    annotate(
+      "text",
+      x = (mu1 + mu2) / 2,
+      y = dnorm(mu1, mu1, sdev) + 0.02,
+      ,
+      label = glue::glue("Effect size = {d} years")
+    ) +
+    geom_segment(
+      x = mu1 - sdev,
+      xend = mu1 + sdev,
+      y = dnorm(mu1 - sdev, mu1, sdev),
+      yend = dnorm(mu1 + sdev, mu1, sdev),
+      arrow = arrow(length = unit(0.2, "cm"), ends = "both")
+    ) +
+    annotate(
+      "text",
+      x = mu1,
+      y = dnorm(mu1 - sdev, mu1, sdev) + 0.01,
+      label = sprintf("2\u03c3 / \u221a(n)")
+    ) +
+    labs(x = "Age") +
+    annotate(
+      "text",
+      x = mu1,
+      y = dnorm(mu1, mu1, sdev) + 0.05,
+      label = "Null hypothesis",
+      color = "blue"
+    ) +
+    annotate(
+      "text",
+      x = mu2,
+      y = dnorm(mu2, mu2, sdev) + 0.04,
+      label = "Alternative hypothesis",
+      color = "red"
+    ) +
+    annotate(
+      "text",
+      x = mu2 + 2 * sdev,
+      y = dnorm(critval, mu1, sdev) / 2,
+      hjust = -0.1,
+      label = glue::glue("Power = {round(pwr*100,1)}%"),
+      color = "red"
+    ) +
+    annotate(
+      "text",
+      x = critval,
+      y = 0.5 * dnorm(critval, mu1, sdev),
+      hjust = 1.1,
+      label = "Type I error(\u03b1)",
+      color = "blue"
+    ) +
+    geom_textvline(
+      xintercept = critval,
+      linetype = 2,
+      label = "Critical value"
+    ) +
+    annotate(
+      'text',
+      x = mu2 + 2 * sdev,
+      y = dnorm(mu2, mu2, sdev) * .8,
+      label = glue::glue(
+        "Sample size = {n}\nStd. Dev. = {round(sdv,1)}\nSignif. level = {alpha}"
+      ),
+      hjust = 0,
+      vjust = 0
+    ) +
+    theme(
+      axis.title.y = element_blank(),
+      axis.text.y = element_blank(),
+      legend.position = "none"
+    )
+}
+pwr_graphic(d = d, n = N, alpha = A)
+```
+
