@@ -13,6 +13,8 @@ execute:
   fig-height: 3
 ---
 
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
 # Simulating studies
 
 ```{r}
@@ -63,7 +65,7 @@ Symmetric &rarr; _Normal ($\mu,\ \sigma$)_
 
 ```{r}
 #| echo: false
-dist_df = data.frame(
+dist_df <- data.frame(
   group = c("a", "b", "c"),
   mean = c(5, 7, 8),
   sd = c(1, 1.5, 1)
@@ -88,7 +90,7 @@ Long right tail &rarr; _Gamma ($\alpha,\ \beta$)_
 
 ```{r}
 #| echo: false
-dist_df = data.frame(
+dist_df <- data.frame(
   group = c("a", "b", "c"),
   a = c(1, 2, 1),
   b = c(1, 1, 3)
@@ -111,7 +113,7 @@ Continuous between 0 and 1 &rarr; _Beta ($\alpha,\ \beta$)_
 ::: {.column width="40%"}
 ```{r}
 #| echo: false
-dist_df = data.frame(
+dist_df <- data.frame(
   group = c("a", "b", "c", "d"),
   a = c(1, 2, 1, 3),
   b = c(1, 2, 3, 1)
@@ -172,25 +174,26 @@ flowchart LR
 ```{r}
 #| code-fold: false
 set.seed(1234)
-sc_pop = usdata::pop_age_2019 |> 
-  filter(state == "SC", age >= 20, age <= 35) |> 
-  pull(population) |> sum()
-behavior_now <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |> 
-  mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |> 
+sc_pop <- usdata::pop_age_2019 |>
+  filter(state == "SC", age >= 20, age <= 35) |>
+  pull(population) |>
+  sum()
+behavior_now <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |>
+  mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |>
   mutate(cost = leaves * 50000)
 
-intervention <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |> 
+intervention <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |>
   mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |>
   mutate(leave_prob = case_when(
     homeowner == 1 ~ 0.01,
     takes_program == 1 ~ 0.10,
     TRUE ~ 0.15
   )) |>
-  mutate(leaves = rbinom(n(), 1, leave_prob)) |> 
+  mutate(leaves = rbinom(n(), 1, leave_prob)) |>
   mutate(cost = leaves * 50000 + takes_program * 1000)
 
-total_cost_now = sum(behavior_now$cost)
-total_cost_intervention = sum(intervention$cost)
+total_cost_now <- sum(behavior_now$cost)
+total_cost_intervention <- sum(intervention$cost)
 ```
 
 This is one simulation of the total cost now and with the intervention. To understand the variability, we need to repeat this many times.
@@ -201,30 +204,30 @@ First, encapsulate the logic in a function:
 
 ```{r}
 #| code-fold: false
-N <- usdata::pop_age_2019 |> 
-  filter(state == "SC", age >= 20, age <= 35) |> 
-  pull(population) |> sum()
+N <- usdata::pop_age_2019 |>
+  filter(state == "SC", age >= 20, age <= 35) |>
+  pull(population) |>
+  sum()
 
-sim_function <- function(N){
-  behavior_now <- tibble(homeowner = rbinom(N, 1, 0.15)) |> 
-    mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |> 
+sim_function <- function(N) {
+  behavior_now <- tibble(homeowner = rbinom(N, 1, 0.15)) |>
+    mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |>
     mutate(cost = leaves * 50000)
 
-  intervention <- tibble(homeowner = rbinom(N, 1, 0.15)) |> 
+  intervention <- tibble(homeowner = rbinom(N, 1, 0.15)) |>
     mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |>
     mutate(leave_prob = case_when(
       homeowner == 1 ~ 0.01,
       takes_program == 1 ~ 0.10,
       TRUE ~ 0.15
     )) |>
-    mutate(leaves = rbinom(n(), 1, leave_prob)) |> 
+    mutate(leaves = rbinom(n(), 1, leave_prob)) |>
     mutate(cost = leaves * 50000 + takes_program * 1000)
 
-  total_cost_now = sum(behavior_now$cost)
-  total_cost_intervention = sum(intervention$cost)
-  return(data.frame('now' = total_cost_now, 'intervention' = total_cost_intervention))
+  total_cost_now <- sum(behavior_now$cost)
+  total_cost_intervention <- sum(intervention$cost)
+  return(data.frame("now" = total_cost_now, "intervention" = total_cost_intervention))
 }
-
 ```
 
 ## Now run many simulations
@@ -235,15 +238,15 @@ sim_function <- function(N){
 #| code-fold: false
 set.seed(1234)
 n_sims <- 1000
-sim_results <- replicate(n_sims, sim_function(N), simplify = FALSE) |> 
-  bind_rows() |> 
+sim_results <- replicate(n_sims, sim_function(N), simplify = FALSE) |>
+  bind_rows() |>
   mutate(saving = now - intervention)
 ```
 
 ```{r}
 sim_results <- readRDS("data/sc_sim_results.rds")
 ggplot(sim_results, aes(x = saving)) +
-  geom_histogram( fill = "lightblue", color = "black") +
+  geom_histogram(fill = "lightblue", color = "black") +
   scale_x_continuous(labels = scales::label_dollar()) +
   labs(
     title = "Distribution of Savings from Intervention",
@@ -298,7 +301,7 @@ library(tidyverse) |> suppressMessages()
 library(ggdist)
 
 n_samples <- 10000
-tibble(x = rnorm(n_samples, 2,2)) |> 
+tibble(x = rnorm(n_samples, 2, 2)) |>
   ggplot(aes(x = x)) +
   geom_histogram() +
   labs(
@@ -307,7 +310,6 @@ tibble(x = rnorm(n_samples, 2,2)) |>
     y = "Density"
   ) +
   theme_minimal()
-
 ```
 
 ## Probability distributions
@@ -343,13 +345,13 @@ See [here](https://en.wikipedia.org/wiki/List_of_probability_distributions) for 
 ## An example
 
 ```{r}
+#| code-fold: false
 set.seed(132495)
 
-#generate sample of 200 observations that follows normal dist with mean=10 and sd=3
+# generate sample of 200 observations that follows normal dist with mean=10 and sd=3
 data <- rnorm(200, mean = 10, sd = 3)
 
 MASS::fitdistr(data, "normal")
-
 ```
 
 
@@ -368,13 +370,14 @@ MASS::fitdistr(data, "normal")
 
 ```{r}
 #| echo: false
+#| cache: false
 dc_pop <- usdata::pop_age_2019 |>
   filter(state == "DC") |>
   uncount(population) |>
   select(state, age) |>
   mutate(age = as.numeric(age)) |>
   drop_na(age)
-set.seed(975)
+set.seed(97537)
 sample_1000 <- dc_pop |>
   slice_sample(n = 1000)
 ```
@@ -384,138 +387,174 @@ whether the mean age in DC is less than 35 years.
 
 Under the null hypothesis $H_0: \mu = 35$, we can perform a one-sample t-test:
 ```{r}
-n = 100
-p = t.test(sample_1000$age, mu = 35, alternative = "less")$p.value
+n <- 1000
+p <- t.test(sample_1000$age, mu = 35, alternative = "less")$p.value
 
-tibble(group = 1, mean = 35, sd = sd(dc_pop$age)/sqrt(n)) |> 
-ggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x < mean(sample_1000$age))), show.legend=F) +
-    stat_halfeye() + 
-    scale_fill_manual(values = c("TRUE"='red', "FALSE" = 'lightblue')) +
-    annotate('text', x = 30, y = 0.4, label = paste("p =", round(p,4)), size = 3) +
-    labs(x = 'Age') + 
-    theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = 'none')
+tibble(group = 1, mean = 35, sd = sd(dc_pop$age) / sqrt(n)) |>
+  ggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x < mean(sample_1000$age))), show.legend = F) +
+  stat_halfeye() +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
+  annotate("text", x = 30, y = 0.4, label = paste("p =", round(p, 4)), size = 3) +
+  labs(x = "Age") +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = "none")
 ```
 
 ## Duality (contd.)
 
 For the sample of 100 individuals from DC, we can calculate a 95\% confidence interval for the mean age:
+
+::: {.columns}
+::: {.column width="70%"}
 ```{r}
 ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
+p <- t.test(sample_1000$age, mu = 35, alternative = "two.sided")$p.value
 tibble(group = 1, mean = 35, sd = sd(dc_pop$age) / sqrt(n)) |>
   ggplot(
-    aes(xdist = dist_normal(mean, sd), 
-    fill = stat(abs(35-x) > abs(35-mean(sample_1000$age)))),
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(35 - x) > abs(35 - mean(sample_1000$age)))
+    ),
     show.legend = F
   ) +
   stat_halfeye() +
-  annotate('segment', 
+  annotate("segment",
     x = ci$conf.low, xend = ci$conf.high, y = 0.1, yend = 0.1,
     size = 3,
-    color = 'black'
+    color = "black"
   ) +
-  scale_fill_manual(values = c("TRUE" = 'red', "FALSE" = 'lightblue')) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
   geom_vline(xintercept = 35, linetype = "dashed", color = "blue") +
   annotate(
-    'text',
+    "text",
     x = 30,
     y = 0.4,
     label = paste("p =", round(p, 4)),
     size = 3
   ) +
-  labs(x = 'Age') +
+  labs(x = "Age") +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
-    legend.position = 'none'
+    legend.position = "none"
   )
 ```
 
-We see that this confidence interval doesn't cover 35, which is consistent with the result of our hypothesis test, where the p-value is less than 0.05.
-
+:::
+::: {.column width="30%"}
+We see that this confidence interval  covers 35, which is consistent with the result of our hypothesis test, where the p-value is greater than 0.05.
+:::
+:::
 ## Duality (contd.)
 If we test the null hypothesis $H_0: \mu = 33$ against the alternative $H_a: \mu \neq 33$, we get:
+
+::: {.columns}
+::: {.column width="70%"}
 ```{r}
-p = t.test(sample_1000$age, mu = 33, alternative = "two.sided")$p.value
+n <- 1000
+p <- t.test(sample_1000$age, mu = 33, alternative = "two.sided")$p.value
 
 ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
 tibble(group = 1, mean = 33, sd = sd(dc_pop$age) / sqrt(n)) |>
   ggplot(
-    aes(xdist = dist_normal(mean, sd), 
-    fill = stat(abs(x -33) > abs(33 - mean(sample_1000$age)))),
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(x - 33) > abs(33 - mean(sample_1000$age)))
+    ),
     show.legend = F
   ) +
   stat_halfeye() +
   annotate(
-    'segment',
+    "segment",
     x = ci$conf.low,
     xend = ci$conf.high,
     y = 0.1,
     yend = 0.1,
     size = 3,
-    color = 'black'
+    color = "black"
   ) +
-  scale_fill_manual(values = c("TRUE" = 'red', "FALSE" = 'lightblue')) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
   annotate(
-    'text',
+    "text",
     x = 30,
     y = 0.4,
     label = paste("p =", round(p, 4)),
     size = 3
   ) +
-  labs(x = 'Age') +
+  labs(x = "Age") +
   geom_vline(xintercept = 33, linetype = "dashed", color = "blue") +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
-    legend.position = 'none'
+    legend.position = "none"
   )
 ```
-
-We see that this confidence interval does cover 35, which is consistent with the result of our hypothesis test, where the p-value is greater than 0.05.
+:::
+::: {.column width="30%"}
+We see that this confidence interval does not cover 33, which is consistent with the result of our hypothesis test, where the p-value is less than 0.05.
+:::
+:::
 
 ## Out of curiosity...
 
-
-If we test the null hypothesis $H_0: \mu = 33.9$ against the alternative $H_a: \mu \neq 33.9$, we get:
 ```{r}
-p = t.test(sample_1000$age, mu = 33.9, alternative = "two.sided")$p.value
+#| include: false
+#| cache: false
+target = ci$conf.low
+```
 
-ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
-tibble(group = 1, mean = 33.9, sd = sd(dc_pop$age) / sqrt(n)) |>
+The 95% confidence interval for the mean is `r glue::glue("[{round(ci$conf.low,1)}, {round(ci$conf.high,1)}]")`.
+
+If we test the null hypothesis $H_0: \mu = `r round(target,1)`$ against the alternative $H_a: \mu \neq `r round(target,1)`$, we get:
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| cache: false
+n <- 1000
+p <- t.test(sample_1000$age, mu = target, alternative = "two.sided")$p.value
+
+# ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
+tibble(group = 1, mean = target, sd = sd(dc_pop$age) / sqrt(n)) |>
   ggplot(
-    aes(xdist = dist_normal(mean, sd), 
-    fill = stat(abs(33.9-x) > abs(33.9 - mean(sample_1000$age)))),
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(target - x) > abs(target - mean(sample_1000$age)))
+    ),
     show.legend = F
   ) +
   stat_halfeye() +
   annotate(
-    'segment',
+    "segment",
     x = ci$conf.low,
     xend = ci$conf.high,
     y = 0.1,
     yend = 0.1,
     size = 3,
-    color = 'black'
+    color = "black"
   ) +
-  scale_fill_manual(values = c("TRUE" = 'red', "FALSE" = 'lightblue')) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
   annotate(
-    'text',
+    "text",
     x = 30,
     y = 0.4,
     label = paste("p =", round(p, 4)),
     size = 3
   ) +
-  labs(x = 'Age') +
-  geom_vline(xintercept = 33.9, linetype = "dashed", color = "blue") +
+  labs(x = "Age") +
+  geom_vline(xintercept = target, linetype = "dashed", color = "blue") +
   theme(
     axis.title.y = element_blank(),
     axis.text.y = element_blank(),
-    legend.position = 'none'
+    legend.position = "none"
   )
 ```
 
-We see that this confidence interval just barely covers 33.9, which is consistent with the result of our hypothesis test, where the p-value is approximately 0.05.
+:::
+::: {.column width="30%"}
+We see that this confidence interval just barely covers `r target`, which is consistent with the result of our hypothesis test, where the p-value is approximately 0.05.
 
+:::
+::: 
 # More common hypothesis tests: is there a difference between two groups?
 
 ## Scenario
@@ -533,7 +572,9 @@ emissions_data <- tibble(
   filter = rep(c("A", "B"), each = n),
   reduction = c(filter_A, filter_B)
 )
-observed_difference <- mean(emissions_data$reduction[emissions_data$filter == "B"]) -
+observed_difference <- mean(emissions_data$reduction[
+  emissions_data$filter == "B"
+]) -
   mean(emissions_data$reduction[emissions_data$filter == "A"])
 ```
 
@@ -608,13 +649,30 @@ tibble(difference = difference_perms) |>
     x = "Mean Difference (B - A)",
     y = "Frequency"
   ) +
-  geom_vline(xintercept = observed_difference, color = "red", linetype = "dashed") +
-  geom_textvline(xintercept = -observed_difference, color = "red", 
-    linetype = "dashed", label = 'Observed difference') +
-  annotate('text', x = observed_difference + 1, y = 50,
-           label = paste("P-value = ", pval)) + 
-  annotate('text', x = -3, y = 155, hadj=0,
-    label = "Doing a 2-sided test means we\nconsider both tails to compute\nthe p-value") +
+  geom_vline(
+    xintercept = observed_difference,
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_textvline(
+    xintercept = -observed_difference,
+    color = "red",
+    linetype = "dashed",
+    label = "Observed difference"
+  ) +
+  annotate(
+    "text",
+    x = observed_difference + 1,
+    y = 50,
+    label = paste("P-value = ", pval)
+  ) +
+  annotate(
+    "text",
+    x = -3,
+    y = 155,
+    hadj = 0,
+    label = "Doing a 2-sided test means we\nconsider both tails to compute\nthe p-value"
+  ) +
   theme_minimal()
 ```
 
@@ -645,13 +703,21 @@ penguin_data <- penguins |>
   filter(island %in% c("Biscoe", "Dream")) |>
   drop_na(flipper_length_mm, body_mass_g)
 observed_slope_diff <- {
-  model_biscoe <- lm(body_mass_g ~ flipper_length_mm, data = penguin_data |> filter(island == "Biscoe"))
-  model_dream <- lm(body_mass_g ~ flipper_length_mm, data = penguin_data |> filter(island == "Dream"))
+  model_biscoe <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |> filter(island == "Biscoe")
+  )
+  model_dream <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |> filter(island == "Dream")
+  )
   coef(model_biscoe)[2] - coef(model_dream)[2]
 }
 
-ggplot(penguin_data , 
-  aes(x = flipper_length_mm, y = body_mass_g, color = island)) +
+ggplot(
+  penguin_data,
+  aes(x = flipper_length_mm, y = body_mass_g, color = island)
+) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
@@ -659,8 +725,12 @@ ggplot(penguin_data ,
     x = "Flipper Length (mm)",
     y = "Body Mass (g)"
   ) +
-    annotate('text', x = 200, y = 6000,
-             label = paste("Observed slope difference =", round(observed_slope_diff,4))) +
+  annotate(
+    "text",
+    x = 200,
+    y = 6000,
+    label = paste("Observed slope difference =", round(observed_slope_diff, 4))
+  ) +
   theme_minimal()
 ```
 
@@ -671,8 +741,18 @@ set.seed(5678)
 n_permutation <- 1000
 slope_diffs_perms <- replicate(n_permutation, {
   shuffled_islands <- sample(penguin_data$island)
-  model_biscoe <- lm(body_mass_g ~ flipper_length_mm, data = penguin_data |> mutate(island = shuffled_islands) |> filter(island == "Biscoe"))
-  model_dream <- lm(body_mass_g ~ flipper_length_mm, data = penguin_data |> mutate(island = shuffled_islands) |> filter(island == "Dream"))
+  model_biscoe <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |>
+      mutate(island = shuffled_islands) |>
+      filter(island == "Biscoe")
+  )
+  model_dream <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |>
+      mutate(island = shuffled_islands) |>
+      filter(island == "Dream")
+  )
   coef(model_biscoe)[2] - coef(model_dream)[2]
 })
 
@@ -685,11 +765,23 @@ tibble(slope_diff = slope_diffs_perms) |>
     x = "Slope Difference (Biscoe - Dream)",
     y = "Frequency"
   ) +
-  geom_vline(xintercept = observed_slope_diff, color = "red", linetype = "dashed") +
-  geom_textvline(xintercept = -observed_slope_diff, color = "red", 
-    linetype = "dashed", label = 'Observed slope difference') +
-  annotate('text', x = observed_slope_diff + 0.5, y = 10,
-           label = paste("P-value = ", round(pval_slope,4))) + 
+  geom_vline(
+    xintercept = observed_slope_diff,
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_textvline(
+    xintercept = -observed_slope_diff,
+    color = "red",
+    linetype = "dashed",
+    label = "Observed slope difference"
+  ) +
+  annotate(
+    "text",
+    x = observed_slope_diff + 0.5,
+    y = 10,
+    label = paste("P-value = ", round(pval_slope, 4))
+  ) +
   theme_minimal()
 ```
 
@@ -712,7 +804,8 @@ It turns out that this bootstrap approach results in a distribution that approxi
 set.seed(975)
 n_bootstrap <- 5000
 bootstrap_means <- replicate(n_bootstrap, {
-  sample_data <- sample_1000$age |> sample(size = nrow(sample_1000), replace = TRUE)
+  sample_data <- sample_1000$age |>
+    sample(size = nrow(sample_1000), replace = TRUE)
   mean(sample_data)
 })
 ci_bootstrap <- quantile(bootstrap_means, probs = c(0.025, 0.975))
@@ -726,10 +819,18 @@ tibble(bootstrap_mean = bootstrap_means) |>
   ) +
   geom_vline(xintercept = ci_bootstrap[1], color = "red", linetype = "dashed") +
   geom_vline(xintercept = ci_bootstrap[2], color = "red", linetype = "dashed") +
-  annotate('text', x = ci_bootstrap[1] - 1, y = 50,
-           label = paste("2.5% =", round(ci_bootstrap[1],2))) +
-  annotate('text', x = ci_bootstrap[2] + 1, y = 50,
-           label = paste("97.5% =", round(ci_bootstrap[2],2))) +
+  annotate(
+    "text",
+    x = ci_bootstrap[1] - 1,
+    y = 50,
+    label = paste("2.5% =", round(ci_bootstrap[1], 2))
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap[2] + 1,
+    y = 50,
+    label = paste("97.5% =", round(ci_bootstrap[2], 2))
+  ) +
   theme_minimal()
 ```
 
@@ -741,7 +842,8 @@ For the median, we nolonger have the nice properties of the mean (like the Centr
 set.seed(975)
 n_bootstrap <- 5000
 bootstrap_medians <- replicate(n_bootstrap, {
-  sample_data <- sample_1000$age |> sample(size = nrow(sample_1000), replace = TRUE)
+  sample_data <- sample_1000$age |>
+    sample(size = nrow(sample_1000), replace = TRUE)
   median(sample_data)
 })
 ci_bootstrap_median <- quantile(bootstrap_medians, probs = c(0.025, 0.975))
@@ -753,12 +855,28 @@ tibble(bootstrap_median = bootstrap_medians) |>
     x = "Median Age",
     y = "Frequency"
   ) +
-  geom_vline(xintercept = ci_bootstrap_median[1], color = "red", linetype = "dashed") +
-  geom_vline(xintercept = ci_bootstrap_median[2], color = "red", linetype = "dashed") +
-  annotate('text', x = ci_bootstrap_median[1] - 1, y = 50,
-           label = paste("2.5% =", round(ci_bootstrap_median[1],2))) +
-  annotate('text', x = ci_bootstrap_median[2] + 1, y = 50,
-           label = paste("97.5% =", round(ci_bootstrap_median[2],2))) +
+  geom_vline(
+    xintercept = ci_bootstrap_median[1],
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_vline(
+    xintercept = ci_bootstrap_median[2],
+    color = "red",
+    linetype = "dashed"
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap_median[1] - 1,
+    y = 50,
+    label = paste("2.5% =", round(ci_bootstrap_median[1], 2))
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap_median[2] + 1,
+    y = 50,
+    label = paste("97.5% =", round(ci_bootstrap_median[2], 2))
+  ) +
   theme_minimal()
 ```
 
@@ -821,98 +939,8 @@ There are various variations of the bootstrap method we describe here (which is 
   - Power (1 - beta)
   - Variability in the data (standard deviation)
 
-##
 
-```{r}
-mu1 = 35
-mu2 = 41
-sdev = sd(dc_pop$age) / sqrt(n)
-tibble(x = seq(28, 48, length.out = 100)) |>
-  mutate(y1 = dnorm(x, mu1, sdev), y2 = dnorm(x, mu2, sdev)) |>
-  ggplot(aes(x = x)) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = mu1, sd = sdev),
-    color = 'blue',
-    size = 1
-  ) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = mu2, sd = sdev),
-    color = 'red',
-    size = 1
-  ) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = mu2, sd = sdev),
-    geom = 'area',
-    fill = 'red',
-    xlim = c(37, 47),
-    alpha = 0.5
-  ) +
-  stat_function(
-    fun = dnorm,
-    args = list(mean = mu1, sd = sdev),
-    geom = 'area',
-    fill = 'blue',
-    xlim = c(37, 47),
-    alpha = 0.5
-  ) +
-  geom_segment(x = 35, xend=41, y = dnorm(35,35, sdev)+0.01, yend=dnorm(35,35, sdev)+0.01,
-               arrow = arrow(length = unit(0.2, "cm"), ends='both')) +
-  annotate('text', x = 38, y = dnorm(35,35,sdev)+0.02,,
-           label = 'Effect size = 6 years') +
-  geom_segment(x = 35 - sdev, xend = 35 + sdev, 
-    y = dnorm(35-sdev, 35, sdev), yend = dnorm(35+sdev, 35, sdev), 
-               arrow = arrow(length = unit(0.2, "cm"), ends='both')) +
-  annotate('text', x = 35, y = dnorm(35-sdev, 35, sdev) + 0.01,  
-           label = expression("2" * sigma)) + 
-  labs(x = 'Age') +
-  annotate(
-    'text',
-    x = 35,
-    y = 0.21,
-    label = 'Null hypothesis',
-    color = 'blue'
-  ) +
-  annotate(
-    'text',
-    x = 43,
-    y = 0.21,
-    label = 'Alternative hypothesis',
-    color = 'red'
-  ) +
-  annotate(
-    'text',
-    x = 45,
-    y = 0.02,
-    hjust = 0,
-    label = 'Power',
-    color = 'red'
-  ) +
-  annotate(
-    'text',
-    x = 36,
-    y = 0.02,
-    hjust = 1,
-    label = 'Type I error',
-    color = 'blue'
-  ) +
-  geom_vline(xintercept = 37, linetype = 2) +
-  annotate(
-    'text',
-    x = 37 + 1,
-    y = 0.25,
-    label = 'Observed sample mean',
-    color = 'black',
-    hjust = 0
-  ) +
-  theme(
-    axis.title.y = element_blank(),
-    axis.text.y = element_blank(),
-    legend.position = 'none'
-  )
-```
+
 
 ## Strategy
 
@@ -933,6 +961,7 @@ tibble(x = seq(28, 48, length.out = 100)) |>
 Suppose we want to detect a difference in mean age of 6 years (from 35 to 41) with 80\% power at a significance level of 5\%. What sample size is needed?
 
 ```{r}
+#| code-fold: false
 library(pwr)
 effect_size <- (41 - 35) / sd(dc_pop$age)
 sample_size <- pwr.t.test(
@@ -982,55 +1011,41 @@ sample_size
 
 We would need a sample size of approximately `r sample_size` to achieve this power using simulation.
 
+See [this interactive widget](../supplemental/pwr_graph.qmd) for exploring how different parameters affect power and sample size.
 
-
-# Examples of hypothesis tests using R
-
-## Means
-
-## Proportions
-
-## Two categorical variables
-
-## Two continuous variables (permutation tests)
-
-
-
-
-
-# The infer package
+## Power curves
 
 ```{r}
-#| include: false
-#| eval: false
-library(infer)
-
-observed_statistic = sample_1000 |>
-  specify(response = age) |>
-  calculate(stat = "mean")
-
-null_distribution = sample_1000 |>
-  specify(response = age) |>
-  hypothesize(null = "point", mu = 35) |>
-  generate(reps = 1000, type = "bootstrap") |>
-  calculate(stat = "mean")
-
-null_distribution |>
-  visualize() +
-  shade_p_value(obs_stat = observed_statistic$stat, direction = "less")
-
-p_value = null_distribution |>
-  get_p_value(obs_stat = observed_statistic$stat, direction = "less")
-```
-
-
-```{r}
-#| include: false
-#| eval: false
-boot_dist = sample_1000 |>
-  specify(response = age) |>
-  generate(reps = 1000, type = "bootstrap") |>
-  calculate(stat = "mean")
-percentile_ci = get_ci(boot_dist)
-visualize(boot_dist) + shade_ci(percentile_ci)
+dc_pop <- readRDS("data/dc_pop.rds")
+theme_set(theme_minimal())
+alpha <- 0.05
+sdv <- sd(dc_pop$age)
+mu1 <- 35
+d <- seq(2,10, by=2)
+n <- seq(10, 500, by = 10)
+dat <- as.data.frame(expand.grid(d = d, n = n))
+dat <- dat |> 
+  mutate(
+    sdev = sdv / sqrt(n),
+    critval = qnorm(1 - alpha, mean = mu1, sd = sdev),
+    pwr = 1 - pnorm(critval, mean = mu1 + d, sd = sdev)
+  )
+dat |>
+  ggplot(aes(x = n, y = pwr, color=factor(d))) +
+  geom_textline(aes(label = paste("d =",d)), show.legend=F) +
+  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
+  labs(
+    title = "Power Curve",
+    x = "Sample Size (n)",
+    y = "Power"
+  ) +
+  annotate(
+    "text",
+    x = 200,
+    y = 0.85,
+    label = "Desired Power = 80%",
+    color = "red"
+  ) +
+    scale_y_continuous(breaks = seq(0,1, by=.2),labels = scales::label_percent()) +
+  theme_minimal()
 ```
