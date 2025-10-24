@@ -4067,6 +4067,10 @@ font-size: 2.5em;
     <a class="dropdown-item" href="../supplemental/models/boston.html">
  <span class="dropdown-text">Modeling case study: Boston housing data</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../supplemental/pwr_graph.html">
+ <span class="dropdown-text">Power analysis graphic</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -4146,6 +4150,12 @@ font-size: 2.5em;
   <div class="sidebar-item-container"> 
   <a href="../slides/week-02.html" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Lecture 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/week-03.html" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Lecture 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -4452,7 +4462,7 @@ Tip
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

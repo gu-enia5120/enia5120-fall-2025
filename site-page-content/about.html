@@ -4058,6 +4058,10 @@ font-size: 2.5em;
     <a class="dropdown-item" href="../supplemental/models/boston.html">
  <span class="dropdown-text">Modeling case study: Boston housing data</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../supplemental/pwr_graph.html">
+ <span class="dropdown-text">Power analysis graphic</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -4235,7 +4239,7 @@ g:Math.abs(Z(b[d])-Z(a))+da(b[d],a)});c.sort(function(l,ea){return ea.g-l.g});re
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gu-enia5120\.github\.io\/enia5120-fall-2025\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
