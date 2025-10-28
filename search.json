@@ -7,32 +7,389 @@
     "text": "Code\nviewof N=Inputs.range([0,500], {step: 5, value: 100, label:\"Sample size (n)\"})\nviewof d=Inputs.range([0.5,6], {step: 0.5, value: 6, label:\"Effect size (d)\"})\nviewof A=Inputs.range([0,0.2], {step: 0.05, value: 0.05, label:\"Significance level (alpha)\"})"
   },
   {
-    "objectID": "supplemental/models/boston.html",
-    "href": "supplemental/models/boston.html",
-    "title": "Modeling case study: Boston housing data",
+    "objectID": "supplemental/models/categorical.html",
+    "href": "supplemental/models/categorical.html",
+    "title": "Categorical variables and factors in R",
     "section": "",
-    "text": "The Boston housing dataset is a classic dataset in the field of machine learning and statistics. It contains information about various attributes of houses in the Boston area, including the median value of owner-occupied homes (in $1000s), crime rate, average number of rooms per dwelling, and more. You can look at the data dictionary here.\nCode\nlibrary(tidyverse)\nlibrary(mlbench)\ndata(\"BostonHousing\", package='mlbench')\n\nhead(BostonHousing)\n\n\n     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b lstat\n1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98\n2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14\n3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03\n4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94\n5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33\n6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21\n  medv\n1 24.0\n2 21.6\n3 34.7\n4 33.4\n5 36.2\n6 28.7\nWe can see that the dataset contains 506 rows and 14 columns. The target variable is medv, which represents the median value of owner-occupied homes in $1000s. The other columns are the features that we will use to predict medv.\nCode\nglimpse(BostonHousing)\n\n\nRows: 506\nColumns: 14\n$ crim    &lt;dbl&gt; 0.00632, 0.02731, 0.02729, 0.03237, 0.06905, 0.02985, 0.08829,…\n$ zn      &lt;dbl&gt; 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.5, 12.5, 12.5, 12.5, 12.5, 1…\n$ indus   &lt;dbl&gt; 2.31, 7.07, 7.07, 2.18, 2.18, 2.18, 7.87, 7.87, 7.87, 7.87, 7.…\n$ chas    &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ nox     &lt;dbl&gt; 0.538, 0.469, 0.469, 0.458, 0.458, 0.458, 0.524, 0.524, 0.524,…\n$ rm      &lt;dbl&gt; 6.575, 6.421, 7.185, 6.998, 7.147, 6.430, 6.012, 6.172, 5.631,…\n$ age     &lt;dbl&gt; 65.2, 78.9, 61.1, 45.8, 54.2, 58.7, 66.6, 96.1, 100.0, 85.9, 9…\n$ dis     &lt;dbl&gt; 4.0900, 4.9671, 4.9671, 6.0622, 6.0622, 6.0622, 5.5605, 5.9505…\n$ rad     &lt;dbl&gt; 1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4,…\n$ tax     &lt;dbl&gt; 296, 242, 242, 222, 222, 222, 311, 311, 311, 311, 311, 311, 31…\n$ ptratio &lt;dbl&gt; 15.3, 17.8, 17.8, 18.7, 18.7, 18.7, 15.2, 15.2, 15.2, 15.2, 15…\n$ b       &lt;dbl&gt; 396.90, 396.90, 392.83, 394.63, 396.90, 394.12, 395.60, 396.90…\n$ lstat   &lt;dbl&gt; 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43, 19.15, 29.93, 17.10…\n$ medv    &lt;dbl&gt; 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, 27.1, 16.5, 18.9, 15…\nAlmost all the features are numeric, except for chas, which is a binary variable indicating whether the house is adjacent to the Charles River (1 if true, 0 if false)."
+    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
   },
   {
-    "objectID": "supplemental/models/boston.html#eda",
-    "href": "supplemental/models/boston.html#eda",
-    "title": "Modeling case study: Boston housing data",
-    "section": "EDA",
-    "text": "EDA\n\n\nCode\nlibrary(ggplot2)\n\nggplot(BostonHousing, aes(x=medv)) +\n  geom_histogram(binwidth=1, fill='blue', color='black', alpha=0.7) +\n  labs(title='Distribution of Median Value of Homes', x='Median Value (in $1000s)', y='Frequency') +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nThe histogram shows that the distribution of medv is right-skewed, with a few high-value homes pulling the mean up. Most homes are valued between $10,000 and $30,000.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteExercise\n\n\n\nChange the predictor in the code above and explore bivariate relationships with medv using visualizations\n\n\nWe will see that there are fairly strong correlations of medv with the different predictors, and many of the relations are non-linear."
-  },
-  {
-    "objectID": "supplemental/models/boston.html#modeling",
-    "href": "supplemental/models/boston.html#modeling",
-    "title": "Modeling case study: Boston housing data",
-    "section": "Modeling",
-    "text": "Modeling\nEven if we eventually want to do and inferential statistical model, when you have many predictors which may or may not have linear relationships with the target (medv), and may have varying degrees of correlation with each other, it is often initially a fruitful exercise to fit a machine learning model that can account for the data complexity before dropping down to an explanatory statistical model. We’ll try using a random forest model.\n\n\n\n\n\n\n\n\n\nThis notation medv ~ . means include all available predictors in the right hand side\n\n\n\n\n\n\n\nNoteExercise\n\n\n\nPlay around with the value of nodesize in the code above (it can range from 1 to 506) and see how the prediction quality changes. You’re looking for bias (how poorly the data aligns the the green line which shows where the observed and predicted values would be equal) and variance (how much the predictions are spread out or tight)\n\n\nYou can get a sense of what variables might be important for the prediction by using what are called variable importances (for regression problems like this one, look at the %IncMSE one, which shows the % increase in the RMSE). Note that these will change as you change the nodesize value.\n\n\n\n\n\n\n\n\nThis plot shows that rm and lstat are the most predictive of the predictors, but others have some influence on the predictions\n\n\n\n\n\n\nTip\n\n\n\nWhat the variable importances are showing is how much worse the prediction would be if you replaced each variable with random noise, which would have no relationship with medv. There are other variable importance scores that can be computed.\nFor a linear regression, the estimated coefficients (or their squared values) work as variable importance scores"
-  },
-  {
-    "objectID": "supplemental/brackets.html",
-    "href": "supplemental/brackets.html",
-    "title": "Brackets in R",
+    "objectID": "supplemental/models/categorical.html#what-are-categorical-variables",
+    "href": "supplemental/models/categorical.html#what-are-categorical-variables",
+    "title": "Categorical variables and factors in R",
     "section": "",
-    "text": "There are three kinds of brackets in R\n\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst\n\n\n\n\n\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\n\nCode\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()\n\n\n\n\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\n\nCode\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\n\nA function definition\n\n\nCode\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}"
+    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#non-ordered",
+    "href": "supplemental/models/categorical.html#non-ordered",
+    "title": "Categorical variables and factors in R",
+    "section": "Non-ordered",
+    "text": "Non-ordered\n\nRace (White, Black, Hispanic, Asian, Native American)\nGender (Male, Female, Other)\nGeographic regions (Africa, Asia, Europe, North America, South America)\nGenes/Proteins"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordered",
+    "href": "supplemental/models/categorical.html#ordered",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordered",
+    "text": "Ordered\n\nIncome levels (&lt; $10K, $10K - $25K, $25K - $75K, $75K - $100K)\nBMI categories (Underweight, Normal, Overweight, Obese)\nNumber of bedrooms in houses (1 BR, 2BR, 3BR, 4BR)"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#the-factor-data-type",
+    "href": "supplemental/models/categorical.html#the-factor-data-type",
+    "title": "Categorical variables and factors in R",
+    "section": "The factor data type",
+    "text": "The factor data type\nR stores categorical variables as type factor.\n\nYou can coerce a character or numeric object into a factor using as.factor.\nYou can check if an object is a factor with is.factor.\nYou can create a factor with the function factor.\n\n\n\n\n\n\n\nNoteThe factor function\n\n\n\nfactor(x = character(), levels, labels = levels,       exclude = NA, ordered = is.ordered(x), nmax = NA)\nfactor returns an object of class “factor” which has a set of integer codes the length of x with a “levels” attribute of mode character and unique\n\n\n\nInternally, each level of a factor is coded as an integer\nEach such integer has a corresponding level which is a character, describing the level.\nYou can add labels to each level to change the printed form of the factor.\n\n\n\nCode\nx &lt;- c('Maryland','Virginia', 'District', 'Maryland','Virginia')  # a character vector\nxf &lt;- as.factor(x)\nxf\n\n\n[1] Maryland Virginia District Maryland Virginia\nLevels: District Maryland Virginia\n\n\nThere are three levels, that by default are in alphabetical order\n\n\n\n\nCode\nas.integer(xf)\n\n\n[1] 2 3 1 2 3\n\n\n\nDistrict = 1, Maryland = 2, Virginia = 3\n\n\n\n\nCode\nas.character(xf)\n\n\n[1] \"Maryland\" \"Virginia\" \"District\" \"Maryland\" \"Virginia\"\n\n\n\nGet original characters back\n\n\n\nNow let’s look at what happens when we convert a numeric vector to a factor\n\n\nCode\ny &lt;- c(5, 3, 9, 4, 5, 3)\nyf &lt;- as.factor(y)\nyf\n\n\n[1] 5 3 9 4 5 3\nLevels: 3 4 5 9\n\n\nLevels are still in alphanumeric order\n\n\n\n\nCode\nas.numeric(yf)\n\n\n[1] 3 1 4 2 3 1\n\n\n\nNote, we don’t get original integers back!!\n3 = 1, 4 = 2, 5 = 3, 9 = 4\n\n\n\n\nCode\nas.numeric(as.character(yf))\n\n\n[1] 5 3 9 4 5 3\n\n\n\nThis is how you get numbers back\n\n\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x)\nunclass(xf)\n\n\n[1] 2 1 3 2 1\nattr(,\"levels\")\n[1] \"DC\" \"MD\" \"VA\"\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x, levels = c('MD','DC','VA'))\nunclass(xf)\n\n\n[1] 1 2 3 1 2\nattr(,\"levels\")\n[1] \"MD\" \"DC\" \"VA\"\n\n\n\n\n\nIf I change the level designation, the underlying coding changes\nThis is important when a factor is an independent variable in a regression model\n\nThe drv variable in the mpg dataset tells us the kind of drive (front, rear or 4-wheel) each car has. However it’s coded as f, r, and 4, which is not great for display purposes. We can re-label these levels, but we have to be a bit careful\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n\n\n\n[1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4', 'f','r'),\n2              labels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n2\n\nlabels are what you want the levels to be displayed as\n\n\n\n\n[1] Front wheel Front wheel Front wheel Front wheel Front wheel Front wheel\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\nLevels have to match what’s actually in the original data, but you can re-label the levels."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
+    "href": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
+    "title": "Categorical variables and factors in R",
+    "section": "Factors are R’s discrete data type",
+    "text": "Factors are R’s discrete data type\n\nFactors are interpreted as discrete by R’s functions\n\n\n\n\n\nCode\nggplot(mpg,\n       aes(year, cty))+\n  geom_boxplot()\n\n\nWarning: Continuous x aesthetic\nℹ did you forget `aes(group = ...)`?\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(mpg, \n       aes(as.factor(year), cty))+\n  geom_boxplot()"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
+    "href": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
+    "title": "Categorical variables and factors in R",
+    "section": "Dummy variables: converting factors to numeric for modeling",
+    "text": "Dummy variables: converting factors to numeric for modeling\nModeling is a numerical enterprise, where we optimize a function of numerical variables to fit a numerical outcome. So categorical variables need to be converted to some numerical representation. The most common approach is to use dummy variables (also called indicator variables or one-hot encoding). With this approach, if a factor has n levels, we create n-1 new binary variables, each taking on values 0 or 1. Each new variable indicates whether the observation belongs to that level or not. The level corresponding to integer code 1 is omitted as the reference level.\nFor example, if we have a factor race with levels White, Black, Hispanic, Asian, Native American, we can create 4 new binary variables black, hispanic, asian, native_american, where each variable takes on value 1 if the observation belongs to that race, and 0 otherwise. White is the reference level, so if all 4 new variables are 0, then the observation is White.\n\n\n\n\n\n\nCautionWhy don’t we just code categories as integers, e.g., 1, 2, 3?\n\n\n\nCoding categories as integers implies an ordering and distance between the categories that may not exist. For example, if we code race categories as 1 = White, 2 = Black, 3 = Hispanic, 4 = Asian, 5 = Native American, then we are implying that the difference between White and Black is the same as the difference between Hispanic and Asian. This is not true, and can lead to misleading results in models. There is no reasonable interpretation of this difference."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
+    "href": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
+    "title": "Categorical variables and factors in R",
+    "section": "Dummy variables are automatically created from factors",
+    "text": "Dummy variables are automatically created from factors\n\n\n\n\nCode\nmodel.matrix(~species, data = palmerpenguins::penguins)\n\n\n\n\n  (Intercept) speciesChinstrap speciesGentoo\n1           1                0             0\n2           1                0             0\n3           1                1             0\n4           1                1             0\n5           1                0             1\n6           1                0             1\nattr(,\"assign\")\n[1] 0 1 1\nattr(,\"contrasts\")\nattr(,\"contrasts\")$species\n[1] \"contr.treatment\"\n\n\n\n\n\nIf a factor has n levels, you get n-1 dummy variables\nThe level corresponding to integer code 1 is omitted as the reference level\n\n\n\nChanging the base level (integer code 1) changes model interpretation since it changes the reference level against which all other levels are compared.\nThis enconding is automatically done when a factor is used as an independent variable in a model.\n\n\nNote on contrasts\nR uses treatment contrasts by default, which is the dummy variable approach described above. Other contrast schemes are possible, such as sum contrasts, Helmert contrasts, polynomial contrasts, etc. See ?contrasts for more details."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#effect-in-models",
+    "href": "supplemental/models/categorical.html#effect-in-models",
+    "title": "Categorical variables and factors in R",
+    "section": "Effect in models",
+    "text": "Effect in models\n\n\n\n\nCode\nlibrary(palmerpenguins)\nm &lt;- lm(body_mass_g ~ species, data = penguins)\nbroom::tidy(m)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)        3701.       37.6    98.4   2.49e-251\n2 speciesChinstrap     32.4      67.5     0.480 6.31e-  1\n3 speciesGentoo      1375.       56.1    24.5   5.42e- 77\n\n\nCompare with Adele\n\n\n\nCode\np1 &lt;- penguins %&gt;% \n  mutate(species = fct_relevel(species, 'Gentoo'))\nm1 &lt;- lm(body_mass_g ~ species, data=p1 )\nbroom::tidy(m1)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)         5076.      41.7     122.  6.86e-282\n2 speciesAdelie      -1375.      56.1     -24.5 5.42e- 77\n3 speciesChinstrap   -1343.      69.9     -19.2 3.21e- 56\n\n\nCompare with Gentoo\n\n\nProviding only one level to fct_relevel makes that the base level (integer code 1).\nYou can also fully specify all the levels in order, or partially specify them. If you partially specify them, the remaining levels will be put in alphabetical order after the ones you specify."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#effect-in-plots",
+    "href": "supplemental/models/categorical.html#effect-in-plots",
+    "title": "Categorical variables and factors in R",
+    "section": "Effect in plots",
+    "text": "Effect in plots\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species))+\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nggplot(p1, \n       aes(x = species))+\n  geom_bar()\nChanges the order in which bars are plotted"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#extra-levels",
+    "href": "supplemental/models/categorical.html#extra-levels",
+    "title": "Categorical variables and factors in R",
+    "section": "Extra levels",
+    "text": "Extra levels\n\n\n\n\nCode\nx &lt;- factor(str_split('statistics', '')[[1]], \n            levels = letters)\nx\n\n\n [1] s t a t i s t i c s\nLevels: a b c d e f g h i j k l m n o p q r s t u v w x y z\n\n\n\n\nCode\np1 &lt;- penguins %&gt;% filter(species != 'Gentoo')\nfct_count(p1$species)\n\n\n# A tibble: 3 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n3 Gentoo        0\n\n\n\n\n\nCode\nfct_drop(x)\n\n\n [1] s t a t i s t i c s\nLevels: a c i s t\n\n\n\n\nCode\np1 &lt;- p1 %&gt;% mutate(species = fct_drop(species))\nfct_count(p1$species)\n\n\n# A tibble: 2 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n\n\n\n\nGetting rid of extra levels Sometimes levels with no data show up in summaries or plots"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
+    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordering levels by values of another variable",
+    "text": "Ordering levels by values of another variable\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species,\n           y = bill_length_mm))+\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = fct_reorder(species, bill_length_mm, \n                           .fun=median, na.rm=T),\n           y = bill_length_mm))+\n  geom_boxplot() + labs(x = 'species')\n\n\n\n\n\n\n\n\n\n\n\nfct_reorder is useful for ordering a plot by ascending or descending levels. This makes the plot easier to read."
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
+    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
+    "title": "Categorical variables and factors in R",
+    "section": "Ordering levels by values of another variable",
+    "text": "Ordering levels by values of another variable\n\n\nCode\nUSArrests &lt;- USArrests %&gt;% rownames_to_column('State')\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(x=State, y = Murder))+\n  geom_bar(stat = 'identity') + \n  theme(axis.text = element_text(size=6))+\n  coord_flip()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(\n  x = fct_reorder(State, Murder),\n  y = Murder))+\n  geom_bar(stat = 'identity')+\n  theme(axis.text = element_text(size=6))+\n  coord_flip()"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
+    "href": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
+    "title": "Categorical variables and factors in R",
+    "section": "Order levels based on last values when plotting 2 variables",
+    "text": "Order levels based on last values when plotting 2 variables\nThe level ordering also shows up in the order of levels in the legends of plots. Suppose you are plotting two variables, grouped by a factor.\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = Species))+\n  geom_smooth(se=F)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = fct_reorder2(Species,\n                       Sepal.Length, Sepal.Width)))+\n  geom_smooth(se=F) + labs(color = 'Species')"
+  },
+  {
+    "objectID": "supplemental/models/categorical.html#further-exploration",
+    "href": "supplemental/models/categorical.html#further-exploration",
+    "title": "Categorical variables and factors in R",
+    "section": "Further exploration",
+    "text": "Further exploration\n\nforcats cheatsheet\nChapter 15 of R4DS"
+  },
+  {
+    "objectID": "supplemental/data_munging.html",
+    "href": "supplemental/data_munging.html",
+    "title": "Additional resources for data munging",
+    "section": "",
+    "text": "Slightly dated slides from the class Practical R that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: https://www.araastat.com/BIOF339/slides/index.html\n\nThe slides on Data Structures and the Week 2 material will be particularly useful for you.\n\n\n\nRmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today."
+  },
+  {
+    "objectID": "supplemental/data_munging.html#my-slides-and-blogs",
+    "href": "supplemental/data_munging.html#my-slides-and-blogs",
+    "title": "Additional resources for data munging",
+    "section": "",
+    "text": "Slightly dated slides from the class Practical R that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: https://www.araastat.com/BIOF339/slides/index.html\n\nThe slides on Data Structures and the Week 2 material will be particularly useful for you.\n\n\n\nRmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today."
+  },
+  {
+    "objectID": "slides/week-08.html#agenda-and-goals-for-the-day",
+    "href": "slides/week-08.html#agenda-and-goals-for-the-day",
+    "title": "Lecture 9",
+    "section": "Agenda and goals for the day",
+    "text": "Agenda and goals for the day\n\n\nLecture\n\nVisit bootstrapping as a way to estimate uncertainty (in last week’s slides, now)\nThe two paradigms (frequentist and Bayesian)\nDecisions from a Bayesian perspective\nUsefulness and examples for statistical inference\n\n\nLab\n\nBootstrapping for uncertainty estimation\nBasic Bayesian model fitting\nUsing posterior distributions to understand uncertainty"
+  },
+  {
+    "objectID": "slides/week-08.html#bootstrapping-revisited",
+    "href": "slides/week-08.html#bootstrapping-revisited",
+    "title": "Lecture 9",
+    "section": "Bootstrapping, revisited",
+    "text": "Bootstrapping, revisited\n\nBootstrapping is resampling your data, recomputing your statistic, and seeing the distribution of the statistic over the resampling\nPlenty of theory work in the 90s showed that the bootstrap variance estimate is very close to what you would get if you could generate the sampling distribution\n\nWhat do I mean by this?\n\nGetting a good estimate of the variability allows us to make good inferences and plan studies"
+  },
+  {
+    "objectID": "slides/week-08.html#using-the-bootstrap-in-machine-learning",
+    "href": "slides/week-08.html#using-the-bootstrap-in-machine-learning",
+    "title": "Lecture 9",
+    "section": "Using the bootstrap in machine learning",
+    "text": "Using the bootstrap in machine learning\nLet’s look at linear regression\n\n\nCode\nlibrary(rsample)\nlibrary(broom)\n\nset.seed(8459)\nboots &lt;- bootstraps(iris, times = 1000)\nboot_results &lt;- boots |&gt;\n  mutate(\n      models = map(splits, ~lm(Petal.Length ~Sepal.Length, data = analysis(.x))),\n      coef = map(models, tidy)\n  ) |&gt;\nunnest(coef)\n\nboot_coefs &lt;- boot_results |&gt; select(id, term, estimate) |&gt;\n    pivot_wider(names_from = term, values_from = estimate) \n\nggplot(data = iris, aes(y = Petal.Length, x = Sepal.Length))+\n    geom_point() + \n    geom_abline(data = boot_coefs, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray', alpha = 0.2) + \n    geom_smooth( method = 'lm', color = 'blue')"
+  },
+  {
+    "objectID": "slides/week-08.html#using-bootstrap-to-look-at-uncertainty-in-prediction",
+    "href": "slides/week-08.html#using-bootstrap-to-look-at-uncertainty-in-prediction",
+    "title": "Lecture 9",
+    "section": "Using bootstrap to look at uncertainty in prediction",
+    "text": "Using bootstrap to look at uncertainty in prediction\n\n\nCode\nlibrary(randomForest)\niris &lt;- iris |&gt; rownames_to_column('id')\nboots &lt;- bootstraps(iris, times = 50)\n\n# For each split: train RF, predict assessment (OOB) set\noob_pred_tbl &lt;- map_dfr(\n  boots$splits,\n  function(split) {\n    train_data &lt;- analysis(split)\n    oob_data &lt;- assessment(split)\n    rf_fit &lt;- randomForest(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = train_data)\n    if (nrow(oob_data) &gt; 0) {\n      pred &lt;- predict(rf_fit, newdata = oob_data)\n      tibble(\n        row_id = oob_data$id,\n        oob_pred = pred\n      )\n    }\n  }\n)\niris |&gt; full_join(oob_pred_tbl, by = c('id' = 'row_id')) |&gt; \n    ggplot(aes(x = Petal.Length)) + \n        geom_point(aes(y = Sepal.Length), color = 'gray', alpha = 0.2) + \n        geom_point(aes(y = oob_pred), color = 'black')"
+  },
+  {
+    "objectID": "slides/week-08.html#frequentists-see-probability-as-long-term-frequencies",
+    "href": "slides/week-08.html#frequentists-see-probability-as-long-term-frequencies",
+    "title": "Lecture 9",
+    "section": "Frequentists see probability as long-term frequencies",
+    "text": "Frequentists see probability as long-term frequencies\nThe underlying idea in frequentist frameworks is that one can observe a phenomenon repeatedly over time and establish the distribution of the outcome of interest\n\nIn reality, we utilize idealized models (Binomial, Normal, etc) to model these “long term” probabilities\n\n\nThe practice is based on the concept of multiple repetitions of the same experiment and what might happen"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade",
+    "href": "slides/week-08.html#tools-of-the-trade",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nThe central limit theorem\nThis says that, as you take larger and larger samples, the distribution of the sample mean, over repeated identical experiments, will look like a normal distribution\n\n\n\nTheorem\n\n\nLet \\(X_1,\\dots,X_n\\) are independent and identically distributed with mean \\(\\mu\\) and variance \\(\\sigma^2\\), then\n\\[\n\\sqrt{n}(\\bar{X_n} - \\mu)/\\sigma \\rightarrow^d N(0,1)\n\\]"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-1",
+    "href": "slides/week-08.html#tools-of-the-trade-1",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nThe weak law of large numbers (WLLN)\n\n\n\nTheorem\n\n\nLet \\(X_1,\\dots,X_n\\) be independent and identically distributed random variables with mean \\(\\mu\\) and variance \\(\\sigma^2\\). Then the sample mean \\(\\bar{X_n}\\) goes in probability to the population mean \\(\\mu\\) as \\(n \\rightarrow \\infty\\).\n\\[\n\\Pr (|\\bar{X_n} - \\mu | &gt; \\epsilon) \\rightarrow 0 \\quad \\text{as } n\\rightarrow\\infty\n\\]"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-2",
+    "href": "slides/week-08.html#tools-of-the-trade-2",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nWe postulate a null hypothesis \\(H_0\\) and an alternative hypothesis \\(H_1\\). We devise a statistical test \\(\\phi(X)\\) that attempts to judge when the data provides sufficient evidence to favor \\(H_1\\) over \\(H_0\\) (which is often a strawman). This test can only reject \\(H_0\\). The test \\(\\phi(X)\\) takes values 1 (reject \\(H_0\\)) and 0 (does not reject \\(H_0\\)).\nThe test \\(\\phi(X)\\) can incur two kinds of errors:\n\nType I error: P((X) = 1 | \\(H_0\\) is true)\nType II error: P((X) = 0 | \\(H_0\\) is false)\n\n\nWe also will see another quantity, statistical power of a test, which is defined as 1 - Type II error, i.e., P((X) = 1 | \\(H_0\\) is false)"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-3",
+    "href": "slides/week-08.html#tools-of-the-trade-3",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nThe Neymann-Pearson paradigm of NHST states that we fix the Type I error at some number \\(\\alpha\\), and proceed to find that optimal test \\(\\phi(X)\\) that maximizes the statistical power, i.e., minimizes the Type II error, usually denoted by \\(\\beta\\).\nFor simple hypothesis, such a test is generally of the form\n\\[\n\\phi (X) = \\left\\{\\begin{array}{ll}\n1& T(X) \\geq c\\\\\n0 & T(X) &lt; c\n\\end{array}\n\\right.\n\\]\nfor some test statistic T(X) and some number \\(c\\), where \\(c\\) is determined by the value of \\(\\alpha\\).\n\n\n\nExample\n\n\nThe one-sample test for the mean, \\(H_0: \\mu = \\mu_0\\) vs \\(H_1: \\mu \\neq \\mu_0\\) rejects the null hypotheses if\n\\[\n|\\sqrt{n}(\\bar{X_n} - \\mu_0)/s| &gt; z_{1-\\alpha/2}\n\\]"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-4",
+    "href": "slides/week-08.html#tools-of-the-trade-4",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nThe p-value gives the probability, under \\(H_0\\) of seeing an observation at least as extreme as the one we observed\n\nNote, this is based on the idea of repeated identical experiments\n\nFor most statistical tests, the observed value of the test statistic is compared to quantiles of the (idealized) sampling distribution (often the normal distribution due to the CLT) to get the p-value"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-5",
+    "href": "slides/week-08.html#tools-of-the-trade-5",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nConfidence intervals\nWe assume that there is a true value of a parameter \\(\\theta\\).\nWe specify a number \\(0&lt;\\alpha&lt;1\\) and define a bivariate statistic (L(X), U(X)) so that, over repeated random samples of the same size from the underlying population, the computed interval from L(X) to U(X) will miss the true value of \\(\\theta\\) in \\(100\\alpha\\) % of the samples.\n\n\n\n\n\n\nWarning\n\n\nWhat is random in a confidence interval is the actual computed interval!!\n\n\n\nConfidence intervals are almost always misinterpreted to mean that “there is a 95% chance that the true parameter falls within the interval”, rather than “95% of the time, intervals constructed in this manner will cover the true parameter”"
+  },
+  {
+    "objectID": "slides/week-08.html#tools-of-the-trade-6",
+    "href": "slides/week-08.html#tools-of-the-trade-6",
+    "title": "Lecture 9",
+    "section": "Tools of the trade",
+    "text": "Tools of the trade\nConfidence intervals"
+  },
+  {
+    "objectID": "slides/week-08.html#pitfalls-of-the-frequentist-approach",
+    "href": "slides/week-08.html#pitfalls-of-the-frequentist-approach",
+    "title": "Lecture 9",
+    "section": "Pitfalls of the frequentist approach",
+    "text": "Pitfalls of the frequentist approach\n\nAll arguments are based on non-observable “repeated experiments” rather than solely based on the data at hand\nThe p-value, which is the basis of much inference, is based on the assumption that \\(H_0\\) is true, which is unverifiable. It is saying that, if we assume that, how unlikely are we to see what we’re seeing. It also just says that, so we can’t actually infer that the alternative \\(H_1\\) is more plausible (ever!!) or “correct”, or what kinds of \\(H_1\\) would have the data at hand be more plausible.\nThe p-value by itself is not very useful without the domain context, and the corresponding effect size. Recall that the p-value is just an indication of the signal-to-noise ratio in the data, and so with very precise data, even a very small signal can have a small p-value\nThe need for preserving overall Type I error results in the need for multiple comparisons corrections (essentially reducing the p-value threshold on a per-test basis), but also results in significant loss of power and hence loss of detectable signals\nThe confidence interval is very frequently mis-interpreted as the chance that the true value of \\(\\theta\\) lies in the interval is \\(100(1-\\alpha)\\)%. As we shall see, this is the interpretation of the Bayesian credible interval"
+  },
+  {
+    "objectID": "slides/week-08.html#what-is-bayesian-analysis",
+    "href": "slides/week-08.html#what-is-bayesian-analysis",
+    "title": "Lecture 9",
+    "section": "What is Bayesian analysis?",
+    "text": "What is Bayesian analysis?\n\nA Bayesian analysis is a particular approach of using probabilities to answer statistical problems"
+  },
+  {
+    "objectID": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making",
+    "href": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making",
+    "title": "Lecture 9",
+    "section": "What question should we ask our data to inform decision making?",
+    "text": "What question should we ask our data to inform decision making?\n\n“Given the data and everything I already know, what are the chances that my hypothesis is correct?”\n\nThis is the question that a Bayesian analysis answers"
+  },
+  {
+    "objectID": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making-1",
+    "href": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making-1",
+    "title": "Lecture 9",
+    "section": "What question should we ask our data to inform decision making?",
+    "text": "What question should we ask our data to inform decision making?\nIt is well-established and convenient to ask this question:\n\n\n\n\n“What is the chance of getting this data if my null hypothesis is true?”  (or “what is the p-value?”)\n\n\n\n\nA Bayesian analysis asks and can answer the question:\n\n\n\n\n“Given the data and everything I already know, what are the chances that my hypothesis is correct?”\n\n\n\n\nThere are many advantages to framing the question in a Bayesian way that can help us make faster and more robust decisions"
+  },
+  {
+    "objectID": "slides/week-08.html#what-is-bayesian-analysis-1",
+    "href": "slides/week-08.html#what-is-bayesian-analysis-1",
+    "title": "Lecture 9",
+    "section": "What is Bayesian analysis?",
+    "text": "What is Bayesian analysis?"
+  },
+  {
+    "objectID": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know",
+    "href": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know",
+    "title": "Lecture 9",
+    "section": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know",
+    "text": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know\nAn example: I left my last piece of birthday cake in the fridge. I suspect this was a bad idea as my partner is working form home today. I am worried that she will eat my cake. I get back from work to discover icing, and a guilty look, on her face"
+  },
+  {
+    "objectID": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know-1",
+    "href": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know-1",
+    "title": "Lecture 9",
+    "section": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know",
+    "text": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know\nAnother example: A stakeholder has a theory and has just acquired some new data that might support that theory – they want to know the chances that their theory is correct in light of this new data."
+  },
+  {
+    "objectID": "slides/week-08.html#a-bayesian-analysis-can-facilitate-faster-more-informed-decision-making-with-known-risk-profiles",
+    "href": "slides/week-08.html#a-bayesian-analysis-can-facilitate-faster-more-informed-decision-making-with-known-risk-profiles",
+    "title": "Lecture 9",
+    "section": "A Bayesian analysis can facilitate faster, more informed decision making with known risk profiles",
+    "text": "A Bayesian analysis can facilitate faster, more informed decision making with known risk profiles"
+  },
+  {
+    "objectID": "slides/week-08.html#a-bayesian-approach-can-improve-replicability",
+    "href": "slides/week-08.html#a-bayesian-approach-can-improve-replicability",
+    "title": "Lecture 9",
+    "section": "A Bayesian approach can improve replicability",
+    "text": "A Bayesian approach can improve replicability"
+  },
+  {
+    "objectID": "slides/week-08.html#bayesian-analysis-allows-us-to-update-our-beliefs-over-time",
+    "href": "slides/week-08.html#bayesian-analysis-allows-us-to-update-our-beliefs-over-time",
+    "title": "Lecture 9",
+    "section": "Bayesian analysis allows us to update our beliefs over time",
+    "text": "Bayesian analysis allows us to update our beliefs over time"
+  },
+  {
+    "objectID": "slides/week-08.html#how-is-a-bayesian-analysis-implemented",
+    "href": "slides/week-08.html#how-is-a-bayesian-analysis-implemented",
+    "title": "Lecture 9",
+    "section": "How is a Bayesian analysis implemented?",
+    "text": "How is a Bayesian analysis implemented?"
+  },
+  {
+    "objectID": "slides/week-08.html#the-bayesian-framework",
+    "href": "slides/week-08.html#the-bayesian-framework",
+    "title": "Lecture 9",
+    "section": "The Bayesian framework",
+    "text": "The Bayesian framework\n\nThe parameter of interest \\(\\theta\\) is treated as a variable, not a constant.\n\\(\\theta\\) is a random variable with a distribution denoted by \\(p(\\theta)\\), called the prior distribution\n\n\n\nThe data \\(D = X_1,\\dots,X_n\\) comes as i.i.d. data from a data model defined by a probability distribution \\(p(D|\\theta)\\) dependent on \\(\\theta\\).\nThe p.d.f./p.m.f of this distribution, defined as a function of the data, is called the likelihood \\(L(\\theta | D)\\).\n\n\n\nThe posterior distribution can be computed as\n\\[\np(\\theta | D) \\propto p(\\theta) p(D | \\theta)\n\\]\n\n\n\nWhy do we have the \\(\\propto\\)?"
+  },
+  {
+    "objectID": "slides/week-08.html#bayesian-inference",
+    "href": "slides/week-08.html#bayesian-inference",
+    "title": "Lecture 9",
+    "section": "Bayesian inference",
+    "text": "Bayesian inference\nBayesian inference is entirely based on the posterior distribution \\(p(\\theta | D)\\)\n\nWe can ask and quantify questions like \\(P(\\theta \\in (-1, 1) | D)\\), \\(P(\\theta &gt; 2| D)\\), …\nInference becomes an estimation problem\nWe can compute credible intervals (CR) from \\(P(\\theta \\in CR | D) = 0.95\\)\n\nWe can actually quantify the chance that a hypothesis is true.\nIf \\(H_0: \\theta \\in\\Theta_0\\) vs \\(H_1: \\theta \\in \\Theta_1\\) then we can compute\n\\[\nP(\\theta \\in \\Theta_0 | D), \\quad P(\\theta\\in\\Theta_1 | D)\n\\]\n\n\n\n\n\n\n\nNo longer a strawman\n\n\nIn NHST (frequentism), the \\(H_0\\) is set up to be a strawman to negate.\nIn the Bayesian setup, \\(H_0\\) can actually be a substantive hypothesis of interest, and we can actually evaluate the likelihood of it being true given the data, or see how much the data we see changes the likelihood of the hypothesis. \\(H_1\\) is no longer the alternative that we want to get evidence for, but just another hypothesis to contrast with \\(H_0\\). This is quite a philosophic difference."
+  },
+  {
+    "objectID": "slides/week-08.html#controversy-the-prior-distribution",
+    "href": "slides/week-08.html#controversy-the-prior-distribution",
+    "title": "Lecture 9",
+    "section": "CONTROVERSY: The prior distribution",
+    "text": "CONTROVERSY: The prior distribution\nTo get to the posterior, one must first define a prior distribution \\(p(\\theta)\\) for the parameters of interest\n\nThis has been one of the most controversial parts of the Bayesian method\nCritics have said that the specification of the prior makes the process subjective, which can bias our inference\n\nWe “should be completely agnostic”, which is what frequentist methods appear to be\n\n\n\n\n\nWe are rarely completely ignorant about values a parameter can take\nDomain knowledge often dictates the prior distribution\n“Priors are never arbitrary” but can be justified by domain knowledge (Richard McElreath, 2023)\nThe frequentist method corresponds often to the assumption of a uniform distribution as a prior. This too, is a choice."
+  },
+  {
+    "objectID": "slides/week-08.html#the-prior-distribution",
+    "href": "slides/week-08.html#the-prior-distribution",
+    "title": "Lecture 9",
+    "section": "The prior distribution",
+    "text": "The prior distribution\nThe prior distribution theoretically can be elicited from expert opinion and knowledge as well as prior data. This is a process.\n\nWe will often choose prior distributions based on heuristic considerations of the constraints a parameter will be under\nThere is a choice of priors, called conjugate priors, for a particular data model (likelihood function), so that using those priors results in the posterior being in the same family as the prior\n\nOne can get analytic solutions to the posterior"
+  },
+  {
+    "objectID": "slides/week-08.html#conjugate-priors",
+    "href": "slides/week-08.html#conjugate-priors",
+    "title": "Lecture 9",
+    "section": "Conjugate priors",
+    "text": "Conjugate priors\nIf you have a binary (yes/no) variable that you are observing, and you’re interested in the probabilty of a “yes”, taking the prior as a Beta distribution results in a Beta posterior.\n\\[\n\\theta \\sim Beta(\\alpha,\\beta)\\\\\nX_1, \\dots, X_n \\sim Bin(1, \\theta)\n\\] then \\[\n\\theta | X \\sim Beta(\\alpha + \\sum X, \\beta + n - \\sum X)\n\\]\nThe parameters \\(\\alpha, \\beta\\) are called hyperparameters.\n\n\n\n\n\n\nHyperparameters can have priors, too"
+  },
+  {
+    "objectID": "slides/week-08.html#conjugate-priors-1",
+    "href": "slides/week-08.html#conjugate-priors-1",
+    "title": "Lecture 9",
+    "section": "Conjugate priors",
+    "text": "Conjugate priors\nIf our data comes from a \\(N(\\mu, \\sigma^2)\\) distribution with known \\(\\sigma\\), then\n\\[\n\\mu \\sim N(\\mu_0, \\sigma_0^2)\\\\\nX_1,\\dots,X_n \\sim N(\\mu,\\sigma^2)\n\\]\nthen\n\\[\n\\mu | X_1,\\dots,X_n\n\\sim\nN\\left(\\frac{1}{\\frac{1}{\\sigma_0^2}+\\frac{1}{\\sigma^2}} \\left( \\frac{\\mu_0}{\\sigma_0^2} + \\frac{\\sum X}{\\sigma^2}\\right), \\frac{1}{\\sigma_0^2} + \\frac{n}{\\sigma^2}\n\\right)\n\\]\n\n\n\n\n\n\nTip\n\n\nA list of conjugate priors is given here"
+  },
+  {
+    "objectID": "slides/week-08.html#fitting-bayesian-models",
+    "href": "slides/week-08.html#fitting-bayesian-models",
+    "title": "Lecture 9",
+    "section": "Fitting Bayesian models",
+    "text": "Fitting Bayesian models\nMost tasks we face in data science are regression models. We’ll start there.\n\n\nCode\nlibrary(rstanarm)\nlibrary(easystats)\nmodel_b &lt;- stan_glm(Petal.Length ~ Sepal.Length, data = iris)\n\n\n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 2.8e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 1: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 1:                0.02 seconds (Sampling)\nChain 1:                0.032 seconds (Total)\nChain 1: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).\nChain 2: \nChain 2: Gradient evaluation took 4e-06 seconds\nChain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.\nChain 2: Adjust your expectations accordingly!\nChain 2: \nChain 2: \nChain 2: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 2: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 2: \nChain 2:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 2:                0.02 seconds (Sampling)\nChain 2:                0.032 seconds (Total)\nChain 2: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).\nChain 3: \nChain 3: Gradient evaluation took 2e-06 seconds\nChain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.\nChain 3: Adjust your expectations accordingly!\nChain 3: \nChain 3: \nChain 3: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 3: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 3: \nChain 3:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 3:                0.021 seconds (Sampling)\nChain 3:                0.033 seconds (Total)\nChain 3: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).\nChain 4: \nChain 4: Gradient evaluation took 2e-06 seconds\nChain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.\nChain 4: Adjust your expectations accordingly!\nChain 4: \nChain 4: \nChain 4: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 4: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 4: \nChain 4:  Elapsed Time: 0.014 seconds (Warm-up)\nChain 4:                0.022 seconds (Sampling)\nChain 4:                0.036 seconds (Total)\nChain 4: \n\n\nCode\nposteriors &lt;- get_parameters(model_b)\ndescribe_posterior(model_b)\n\n\nSummary of Posterior Distribution\n\nParameter    | Median |         95% CI |   pd |          ROPE | % in ROPE\n-------------------------------------------------------------------------\n(Intercept)  |  -7.11 | [-8.06, -6.14] | 100% | [-0.18, 0.18] |        0%\nSepal.Length |   1.86 | [ 1.69,  2.02] | 100% | [-0.18, 0.18] |        0%\n\nParameter    |  Rhat |  ESS\n---------------------------\n(Intercept)  | 1.000 | 3789\nSepal.Length | 1.000 | 3867\n\n\nCode\nggplot(iris, aes(Sepal.Length, Petal.Length))+\n    geom_point() + \n    geom_abline(data = posteriors, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray') + \n    geom_abline(intercept = coef(model_b)[1], slope = coef(model_b)[2], color = 'blue') +\n    geom_smooth(method='lm', color = 'orange')"
+  },
+  {
+    "objectID": "slides/week-08.html#how-much-does-the-prior-matter",
+    "href": "slides/week-08.html#how-much-does-the-prior-matter",
+    "title": "Lecture 9",
+    "section": "How much does the prior matter",
+    "text": "How much does the prior matter\nSuppose we do a coin tossing experiment with a biased coin with P(heads) = 0.7. From a Bayesian approach, we’ll put a prior distribution of Beta(1,1) on it.\nLet’s see how the posterior changes as we toss more coins"
+  },
+  {
+    "objectID": "slides/week-08.html#prior-predictive-checks",
+    "href": "slides/week-08.html#prior-predictive-checks",
+    "title": "Lecture 9",
+    "section": "Prior predictive checks",
+    "text": "Prior predictive checks\nWe want to see if our choice of prior leads to data that is reasonably what we would expect. This is called a prior predictive check, and is achieved by generating data based on the prior choice."
+  },
+  {
+    "objectID": "slides/week-08.html#computing-the-posterior",
+    "href": "slides/week-08.html#computing-the-posterior",
+    "title": "Lecture 9",
+    "section": "Computing the posterior",
+    "text": "Computing the posterior\nWith a conjugate prior, computing the posterior distribution is analytic.\nLet us consider the beta-binomial conjugate family, with a \\(Beta(1,1)\\) prior\n\n\n\n\n\n\n\n\n\nPlay around with how much data is needed to move the ticker on our knowledge of \\(p\\)."
+  },
+  {
+    "objectID": "slides/week-08.html#bayes-factor",
+    "href": "slides/week-08.html#bayes-factor",
+    "title": "Lecture 9",
+    "section": "Bayes factor",
+    "text": "Bayes factor\nThe Bayes factor is the relative evidence for different models (or different parameter sets under the same model) given the data\n\\[\nk = \\frac{P(\\Theta_1 | D)}{P(\\Theta_2 | D)}\n\\]\nKass & Raftery (2005) provided a rule of thumb when evaluating Bayes factors"
+  },
+  {
+    "objectID": "slides/week-08.html#an-example",
+    "href": "slides/week-08.html#an-example",
+    "title": "Lecture 9",
+    "section": "An example",
+    "text": "An example\nWe’re interested in evaluating an assay to see if it is sensitive enough for our purposes. We deem an assay to be acceptable if it has sensitivity of 95% or above. It is considered unacceptable if the sensitivity is below 90%.\nWe run the test on 100 sick people and get 95 positive tests.\nThe model\n\\[\n\\theta \\sim Beta(4,1)\\\\\nX \\sim Bin(100, \\theta)\n\\]\nUnder this conjugate prior, the posterior distribution of \\(\\theta\\) is Beta(4 + X, 1 + 100 - X)."
+  },
+  {
+    "objectID": "slides/week-08.html#an-example-1",
+    "href": "slides/week-08.html#an-example-1",
+    "title": "Lecture 9",
+    "section": "An example",
+    "text": "An example\nPrior predictive checks"
+  },
+  {
+    "objectID": "slides/week-08.html#an-example-2",
+    "href": "slides/week-08.html#an-example-2",
+    "title": "Lecture 9",
+    "section": "An example",
+    "text": "An example"
+  },
+  {
+    "objectID": "slides/week-08.html#resources",
+    "href": "slides/week-08.html#resources",
+    "title": "Lecture 9",
+    "section": "Resources",
+    "text": "Resources\n\nStatistical Rethinking by R. McElreath (link\nrstanarm (link)\nbrms (link)"
   },
   {
     "objectID": "slides/week-06.html#announcements",
@@ -1588,7 +1945,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Fri Oct 24, 2025 at 01:32 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Tue Oct 28, 2025 at 03:33 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -3807,122 +4164,38 @@
     ]
   },
   {
-    "objectID": "supplemental/data_munging.html",
-    "href": "supplemental/data_munging.html",
-    "title": "Additional resources for data munging",
+    "objectID": "supplemental/brackets.html",
+    "href": "supplemental/brackets.html",
+    "title": "Brackets in R",
     "section": "",
-    "text": "Slightly dated slides from the class Practical R that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: https://www.araastat.com/BIOF339/slides/index.html\n\nThe slides on Data Structures and the Week 2 material will be particularly useful for you.\n\n\n\nRmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today."
+    "text": "There are three kinds of brackets in R\n\n[] are used for extracting elements from arrays, matrices, data frames.\n\nArraysLists\n\n\n\nx[3] is the 3rd element of an array x\nd[1,3] is the element in the 1st row and 3rd column of a matrix/data frame d\nd[2,] is the entire first row of a matrix/data frame d\nd[,4] is the entire 4th column of a matrix/data frame d\nd[,'gender'] is the column named gender in a data frame d\n\n\n\nTo extract single elements, you use a .acidinline[double bracket:] - lst[[3]] is the third element of the list lst - lst[['apple']] is the element named apple in a named list lst\nTo extract a sub-list, you use .acidinline[single brackets]: + lst[1:3] creates a sub-list with the first 3 elements of lst\n\n\n\n\n\n() are used for specifying arguments to functions\n\nmean(x) gives the mean of an array of numbers x\nsummary(d) gives a summary representation of a data frame d\nThere are several functions used to make the following visualization\n\n\n\nCode\nggplot(beaches, aes(x = temperature, y = rainfall)) + \n  geom_point() + \n  geom_smooth() + \n  theme_classic()\n\n\n\n\n{} are used to contain groups of commands/statements\n\n\nA conditional statement\n\n\nCode\nif (age &lt; 18){\n   person &lt;- 'Minor'\n} else if (age &gt; 65) {\n  person &lt;- 'Senior'\n} else {\n  person &lt;- 'Adult'\n}\n\n\n\nA function definition\n\n\nCode\nmy_mean &lt;- function(x, na.rm = T){\n  if(na.rm){\n    x &lt;- x[!is.na(x)]\n  }\n  s &lt;- sum(x)\n  n &lt;- length(x)\n  mn &lt;- s / n # There is a built-in function mean, so I don't use that word\n  return(mn)\n}"
   },
   {
-    "objectID": "supplemental/data_munging.html#my-slides-and-blogs",
-    "href": "supplemental/data_munging.html#my-slides-and-blogs",
-    "title": "Additional resources for data munging",
+    "objectID": "supplemental/models/boston.html",
+    "href": "supplemental/models/boston.html",
+    "title": "Modeling case study: Boston housing data",
     "section": "",
-    "text": "Slightly dated slides from the class Practical R that I developed and taught for several years at the National Institutes of Health. They cover data munging and visualization in R. The slides are here: https://www.araastat.com/BIOF339/slides/index.html\n\nThe slides on Data Structures and the Week 2 material will be particularly useful for you.\n\n\n\nRmarkdown sources of all the lectures are available. These will be very similar to what the Quarto version would be today."
+    "text": "The Boston housing dataset is a classic dataset in the field of machine learning and statistics. It contains information about various attributes of houses in the Boston area, including the median value of owner-occupied homes (in $1000s), crime rate, average number of rooms per dwelling, and more. You can look at the data dictionary here.\nCode\nlibrary(tidyverse)\nlibrary(mlbench)\ndata(\"BostonHousing\", package='mlbench')\n\nhead(BostonHousing)\n\n\n     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b lstat\n1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98\n2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14\n3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03\n4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94\n5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33\n6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21\n  medv\n1 24.0\n2 21.6\n3 34.7\n4 33.4\n5 36.2\n6 28.7\nWe can see that the dataset contains 506 rows and 14 columns. The target variable is medv, which represents the median value of owner-occupied homes in $1000s. The other columns are the features that we will use to predict medv.\nCode\nglimpse(BostonHousing)\n\n\nRows: 506\nColumns: 14\n$ crim    &lt;dbl&gt; 0.00632, 0.02731, 0.02729, 0.03237, 0.06905, 0.02985, 0.08829,…\n$ zn      &lt;dbl&gt; 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.5, 12.5, 12.5, 12.5, 12.5, 1…\n$ indus   &lt;dbl&gt; 2.31, 7.07, 7.07, 2.18, 2.18, 2.18, 7.87, 7.87, 7.87, 7.87, 7.…\n$ chas    &lt;fct&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n$ nox     &lt;dbl&gt; 0.538, 0.469, 0.469, 0.458, 0.458, 0.458, 0.524, 0.524, 0.524,…\n$ rm      &lt;dbl&gt; 6.575, 6.421, 7.185, 6.998, 7.147, 6.430, 6.012, 6.172, 5.631,…\n$ age     &lt;dbl&gt; 65.2, 78.9, 61.1, 45.8, 54.2, 58.7, 66.6, 96.1, 100.0, 85.9, 9…\n$ dis     &lt;dbl&gt; 4.0900, 4.9671, 4.9671, 6.0622, 6.0622, 6.0622, 5.5605, 5.9505…\n$ rad     &lt;dbl&gt; 1, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 4,…\n$ tax     &lt;dbl&gt; 296, 242, 242, 222, 222, 222, 311, 311, 311, 311, 311, 311, 31…\n$ ptratio &lt;dbl&gt; 15.3, 17.8, 17.8, 18.7, 18.7, 18.7, 15.2, 15.2, 15.2, 15.2, 15…\n$ b       &lt;dbl&gt; 396.90, 396.90, 392.83, 394.63, 396.90, 394.12, 395.60, 396.90…\n$ lstat   &lt;dbl&gt; 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43, 19.15, 29.93, 17.10…\n$ medv    &lt;dbl&gt; 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, 27.1, 16.5, 18.9, 15…\nAlmost all the features are numeric, except for chas, which is a binary variable indicating whether the house is adjacent to the Charles River (1 if true, 0 if false)."
   },
   {
-    "objectID": "supplemental/models/categorical.html",
-    "href": "supplemental/models/categorical.html",
-    "title": "Categorical variables and factors in R",
+    "objectID": "supplemental/models/boston.html#eda",
+    "href": "supplemental/models/boston.html#eda",
+    "title": "Modeling case study: Boston housing data",
+    "section": "EDA",
+    "text": "EDA\n\n\nCode\nlibrary(ggplot2)\n\nggplot(BostonHousing, aes(x=medv)) +\n  geom_histogram(binwidth=1, fill='blue', color='black', alpha=0.7) +\n  labs(title='Distribution of Median Value of Homes', x='Median Value (in $1000s)', y='Frequency') +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nThe histogram shows that the distribution of medv is right-skewed, with a few high-value homes pulling the mean up. Most homes are valued between $10,000 and $30,000.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteExercise\n\n\n\nChange the predictor in the code above and explore bivariate relationships with medv using visualizations\n\n\nWe will see that there are fairly strong correlations of medv with the different predictors, and many of the relations are non-linear."
+  },
+  {
+    "objectID": "supplemental/models/boston.html#modeling",
+    "href": "supplemental/models/boston.html#modeling",
+    "title": "Modeling case study: Boston housing data",
+    "section": "Modeling",
+    "text": "Modeling\nEven if we eventually want to do and inferential statistical model, when you have many predictors which may or may not have linear relationships with the target (medv), and may have varying degrees of correlation with each other, it is often initially a fruitful exercise to fit a machine learning model that can account for the data complexity before dropping down to an explanatory statistical model. We’ll try using a random forest model.\n\n\n\n\n\n\n\n\n\nThis notation medv ~ . means include all available predictors in the right hand side\n\n\n\n\n\n\n\nNoteExercise\n\n\n\nPlay around with the value of nodesize in the code above (it can range from 1 to 506) and see how the prediction quality changes. You’re looking for bias (how poorly the data aligns the the green line which shows where the observed and predicted values would be equal) and variance (how much the predictions are spread out or tight)\n\n\nYou can get a sense of what variables might be important for the prediction by using what are called variable importances (for regression problems like this one, look at the %IncMSE one, which shows the % increase in the RMSE). Note that these will change as you change the nodesize value.\n\n\n\n\n\n\n\n\nThis plot shows that rm and lstat are the most predictive of the predictors, but others have some influence on the predictions\n\n\n\n\n\n\nTip\n\n\n\nWhat the variable importances are showing is how much worse the prediction would be if you replaced each variable with random noise, which would have no relationship with medv. There are other variable importance scores that can be computed.\nFor a linear regression, the estimated coefficients (or their squared values) work as variable importance scores"
+  },
+  {
+    "objectID": "supplemental/models/practicing-factors.html",
+    "href": "supplemental/models/practicing-factors.html",
+    "title": "Practicing with factors",
     "section": "",
-    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#what-are-categorical-variables",
-    "href": "supplemental/models/categorical.html#what-are-categorical-variables",
-    "title": "Categorical variables and factors in R",
-    "section": "",
-    "text": "Categorical variables are variables that\n\nhave values defining categories of things\ntypically have a few unique values\nmay or may not be ordered\nare not interval-scaled, i.e., their differences don’t make sense per se"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#non-ordered",
-    "href": "supplemental/models/categorical.html#non-ordered",
-    "title": "Categorical variables and factors in R",
-    "section": "Non-ordered",
-    "text": "Non-ordered\n\nRace (White, Black, Hispanic, Asian, Native American)\nGender (Male, Female, Other)\nGeographic regions (Africa, Asia, Europe, North America, South America)\nGenes/Proteins"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#ordered",
-    "href": "supplemental/models/categorical.html#ordered",
-    "title": "Categorical variables and factors in R",
-    "section": "Ordered",
-    "text": "Ordered\n\nIncome levels (&lt; $10K, $10K - $25K, $25K - $75K, $75K - $100K)\nBMI categories (Underweight, Normal, Overweight, Obese)\nNumber of bedrooms in houses (1 BR, 2BR, 3BR, 4BR)"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#the-factor-data-type",
-    "href": "supplemental/models/categorical.html#the-factor-data-type",
-    "title": "Categorical variables and factors in R",
-    "section": "The factor data type",
-    "text": "The factor data type\nR stores categorical variables as type factor.\n\nYou can coerce a character or numeric object into a factor using as.factor.\nYou can check if an object is a factor with is.factor.\nYou can create a factor with the function factor.\n\n\n\n\n\n\n\nNoteThe factor function\n\n\n\nfactor(x = character(), levels, labels = levels,       exclude = NA, ordered = is.ordered(x), nmax = NA)\nfactor returns an object of class “factor” which has a set of integer codes the length of x with a “levels” attribute of mode character and unique\n\n\n\nInternally, each level of a factor is coded as an integer\nEach such integer has a corresponding level which is a character, describing the level.\nYou can add labels to each level to change the printed form of the factor.\n\n\n\nCode\nx &lt;- c('Maryland','Virginia', 'District', 'Maryland','Virginia')  # a character vector\nxf &lt;- as.factor(x)\nxf\n\n\n[1] Maryland Virginia District Maryland Virginia\nLevels: District Maryland Virginia\n\n\nThere are three levels, that by default are in alphabetical order\n\n\n\n\nCode\nas.integer(xf)\n\n\n[1] 2 3 1 2 3\n\n\n\nDistrict = 1, Maryland = 2, Virginia = 3\n\n\n\n\nCode\nas.character(xf)\n\n\n[1] \"Maryland\" \"Virginia\" \"District\" \"Maryland\" \"Virginia\"\n\n\n\nGet original characters back\n\n\n\nNow let’s look at what happens when we convert a numeric vector to a factor\n\n\nCode\ny &lt;- c(5, 3, 9, 4, 5, 3)\nyf &lt;- as.factor(y)\nyf\n\n\n[1] 5 3 9 4 5 3\nLevels: 3 4 5 9\n\n\nLevels are still in alphanumeric order\n\n\n\n\nCode\nas.numeric(yf)\n\n\n[1] 3 1 4 2 3 1\n\n\n\nNote, we don’t get original integers back!!\n3 = 1, 4 = 2, 5 = 3, 9 = 4\n\n\n\n\nCode\nas.numeric(as.character(yf))\n\n\n[1] 5 3 9 4 5 3\n\n\n\nThis is how you get numbers back\n\n\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x)\nunclass(xf)\n\n\n[1] 2 1 3 2 1\nattr(,\"levels\")\n[1] \"DC\" \"MD\" \"VA\"\n\n\n\n\n\nCode\nx &lt;- c('MD','DC','VA','MD','DC')\nxf &lt;- factor(x, levels = c('MD','DC','VA'))\nunclass(xf)\n\n\n[1] 1 2 3 1 2\nattr(,\"levels\")\n[1] \"MD\" \"DC\" \"VA\"\n\n\n\n\n\nIf I change the level designation, the underlying coding changes\nThis is important when a factor is an independent variable in a regression model\n\nThe drv variable in the mpg dataset tells us the kind of drive (front, rear or 4-wheel) each car has. However it’s coded as f, r, and 4, which is not great for display purposes. We can re-label these levels, but we have to be a bit careful\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n\n\n\n[1] &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\n\n\nCode\nx &lt;- mpg$drv\nxf &lt;- factor(x, \n1              levels = c('4', 'f','r'),\n2              labels = c('4-wheel','Front wheel',\n                         'Rear wheel'))\nhead(xf)\n\n\n\n1\n\nlevels have to match what’s actually in the data\n\n2\n\nlabels are what you want the levels to be displayed as\n\n\n\n\n[1] Front wheel Front wheel Front wheel Front wheel Front wheel Front wheel\nLevels: 4-wheel Front wheel Rear wheel\n\n\n\n\nLevels have to match what’s actually in the original data, but you can re-label the levels."
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
-    "href": "supplemental/models/categorical.html#factors-are-rs-discrete-data-type",
-    "title": "Categorical variables and factors in R",
-    "section": "Factors are R’s discrete data type",
-    "text": "Factors are R’s discrete data type\n\nFactors are interpreted as discrete by R’s functions\n\n\n\n\n\nCode\nggplot(mpg,\n       aes(year, cty))+\n  geom_boxplot()\n\n\nWarning: Continuous x aesthetic\nℹ did you forget `aes(group = ...)`?\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(mpg, \n       aes(as.factor(year), cty))+\n  geom_boxplot()"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
-    "href": "supplemental/models/categorical.html#dummy-variables-converting-factors-to-numeric-for-modeling",
-    "title": "Categorical variables and factors in R",
-    "section": "Dummy variables: converting factors to numeric for modeling",
-    "text": "Dummy variables: converting factors to numeric for modeling\nModeling is a numerical enterprise, where we optimize a function of numerical variables to fit a numerical outcome. So categorical variables need to be converted to some numerical representation. The most common approach is to use dummy variables (also called indicator variables or one-hot encoding). With this approach, if a factor has n levels, we create n-1 new binary variables, each taking on values 0 or 1. Each new variable indicates whether the observation belongs to that level or not. The level corresponding to integer code 1 is omitted as the reference level.\nFor example, if we have a factor race with levels White, Black, Hispanic, Asian, Native American, we can create 4 new binary variables black, hispanic, asian, native_american, where each variable takes on value 1 if the observation belongs to that race, and 0 otherwise. White is the reference level, so if all 4 new variables are 0, then the observation is White.\n\n\n\n\n\n\nCautionWhy don’t we just code categories as integers, e.g., 1, 2, 3?\n\n\n\nCoding categories as integers implies an ordering and distance between the categories that may not exist. For example, if we code race categories as 1 = White, 2 = Black, 3 = Hispanic, 4 = Asian, 5 = Native American, then we are implying that the difference between White and Black is the same as the difference between Hispanic and Asian. This is not true, and can lead to misleading results in models. There is no reasonable interpretation of this difference."
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
-    "href": "supplemental/models/categorical.html#dummy-variables-are-automatically-created-from-factors",
-    "title": "Categorical variables and factors in R",
-    "section": "Dummy variables are automatically created from factors",
-    "text": "Dummy variables are automatically created from factors\n\n\n\n\nCode\nmodel.matrix(~species, data = palmerpenguins::penguins)\n\n\n\n\n  (Intercept) speciesChinstrap speciesGentoo\n1           1                0             0\n2           1                0             0\n3           1                1             0\n4           1                1             0\n5           1                0             1\n6           1                0             1\nattr(,\"assign\")\n[1] 0 1 1\nattr(,\"contrasts\")\nattr(,\"contrasts\")$species\n[1] \"contr.treatment\"\n\n\n\n\n\nIf a factor has n levels, you get n-1 dummy variables\nThe level corresponding to integer code 1 is omitted as the reference level\n\n\n\nChanging the base level (integer code 1) changes model interpretation since it changes the reference level against which all other levels are compared.\nThis enconding is automatically done when a factor is used as an independent variable in a model.\n\n\nNote on contrasts\nR uses treatment contrasts by default, which is the dummy variable approach described above. Other contrast schemes are possible, such as sum contrasts, Helmert contrasts, polynomial contrasts, etc. See ?contrasts for more details."
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#effect-in-models",
-    "href": "supplemental/models/categorical.html#effect-in-models",
-    "title": "Categorical variables and factors in R",
-    "section": "Effect in models",
-    "text": "Effect in models\n\n\n\n\nCode\nlibrary(palmerpenguins)\nm &lt;- lm(body_mass_g ~ species, data = penguins)\nbroom::tidy(m)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)        3701.       37.6    98.4   2.49e-251\n2 speciesChinstrap     32.4      67.5     0.480 6.31e-  1\n3 speciesGentoo      1375.       56.1    24.5   5.42e- 77\n\n\nCompare with Adele\n\n\n\nCode\np1 &lt;- penguins %&gt;% \n  mutate(species = fct_relevel(species, 'Gentoo'))\nm1 &lt;- lm(body_mass_g ~ species, data=p1 )\nbroom::tidy(m1)\n\n\n# A tibble: 3 × 5\n  term             estimate std.error statistic   p.value\n  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)         5076.      41.7     122.  6.86e-282\n2 speciesAdelie      -1375.      56.1     -24.5 5.42e- 77\n3 speciesChinstrap   -1343.      69.9     -19.2 3.21e- 56\n\n\nCompare with Gentoo\n\n\nProviding only one level to fct_relevel makes that the base level (integer code 1).\nYou can also fully specify all the levels in order, or partially specify them. If you partially specify them, the remaining levels will be put in alphabetical order after the ones you specify."
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#effect-in-plots",
-    "href": "supplemental/models/categorical.html#effect-in-plots",
-    "title": "Categorical variables and factors in R",
-    "section": "Effect in plots",
-    "text": "Effect in plots\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species))+\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\nggplot(p1, \n       aes(x = species))+\n  geom_bar()\nChanges the order in which bars are plotted"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#extra-levels",
-    "href": "supplemental/models/categorical.html#extra-levels",
-    "title": "Categorical variables and factors in R",
-    "section": "Extra levels",
-    "text": "Extra levels\n\n\n\n\nCode\nx &lt;- factor(str_split('statistics', '')[[1]], \n            levels = letters)\nx\n\n\n [1] s t a t i s t i c s\nLevels: a b c d e f g h i j k l m n o p q r s t u v w x y z\n\n\n\n\nCode\np1 &lt;- penguins %&gt;% filter(species != 'Gentoo')\nfct_count(p1$species)\n\n\n# A tibble: 3 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n3 Gentoo        0\n\n\n\n\n\nCode\nfct_drop(x)\n\n\n [1] s t a t i s t i c s\nLevels: a c i s t\n\n\n\n\nCode\np1 &lt;- p1 %&gt;% mutate(species = fct_drop(species))\nfct_count(p1$species)\n\n\n# A tibble: 2 × 2\n  f             n\n  &lt;fct&gt;     &lt;int&gt;\n1 Adelie      152\n2 Chinstrap    68\n\n\n\n\nGetting rid of extra levels Sometimes levels with no data show up in summaries or plots"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
-    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable",
-    "title": "Categorical variables and factors in R",
-    "section": "Ordering levels by values of another variable",
-    "text": "Ordering levels by values of another variable\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = species,\n           y = bill_length_mm))+\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(penguins, \n       aes(x = fct_reorder(species, bill_length_mm, \n                           .fun=median, na.rm=T),\n           y = bill_length_mm))+\n  geom_boxplot() + labs(x = 'species')\n\n\n\n\n\n\n\n\n\n\n\nfct_reorder is useful for ordering a plot by ascending or descending levels. This makes the plot easier to read."
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
-    "href": "supplemental/models/categorical.html#ordering-levels-by-values-of-another-variable-1",
-    "title": "Categorical variables and factors in R",
-    "section": "Ordering levels by values of another variable",
-    "text": "Ordering levels by values of another variable\n\n\nCode\nUSArrests &lt;- USArrests %&gt;% rownames_to_column('State')\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(x=State, y = Murder))+\n  geom_bar(stat = 'identity') + \n  theme(axis.text = element_text(size=6))+\n  coord_flip()\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(USArrests, aes(\n  x = fct_reorder(State, Murder),\n  y = Murder))+\n  geom_bar(stat = 'identity')+\n  theme(axis.text = element_text(size=6))+\n  coord_flip()"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
-    "href": "supplemental/models/categorical.html#order-levels-based-on-last-values-when-plotting-2-variables",
-    "title": "Categorical variables and factors in R",
-    "section": "Order levels based on last values when plotting 2 variables",
-    "text": "Order levels based on last values when plotting 2 variables\nThe level ordering also shows up in the order of levels in the legends of plots. Suppose you are plotting two variables, grouped by a factor.\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = Species))+\n  geom_smooth(se=F)\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nggplot(iris, aes(\n  x = Sepal.Length, \n  y = Sepal.Width, \n  color = fct_reorder2(Species,\n                       Sepal.Length, Sepal.Width)))+\n  geom_smooth(se=F) + labs(color = 'Species')"
-  },
-  {
-    "objectID": "supplemental/models/categorical.html#further-exploration",
-    "href": "supplemental/models/categorical.html#further-exploration",
-    "title": "Categorical variables and factors in R",
-    "section": "Further exploration",
-    "text": "Further exploration\n\nforcats cheatsheet\nChapter 15 of R4DS"
+    "text": "The tidyr package provides a dataset from the 2017 American Community Survey (ACS) that contains information about the median household incomes and median monthly rents by state. The dataset is called us_rent_income. We plot a barplot of the medianan household income by state.\n\n\n\n\n\n\n\n\nWe can see that the states are ordered alphabetically. We can use the forcats package to change the order of the states to be in descending order of median household income. Find the right function in the forcats package to do this, and add it to the data wrangling step above. You can refer to the forcats documentation and forcats cheatsheet for help.\n\nExerciseHintSolution\n\n\n\n\n\n\n\n\n\n\n\n\n\nThink of what you want to do with the states. Do you want to reorder them based on another variable? Do you want to change the order of the levels? Find a function that does that rather than trying to do it manually."
   }
 ]
