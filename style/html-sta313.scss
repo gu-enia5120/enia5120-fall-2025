@@ -13,11 +13,17 @@ $subtle-accent: #003da5;
 
 $font-family: "Atkinson Hyperlegible", sans-serif;
 $font-family-monospace: "Source Code Pro", monospace;
+$font-family-alternative: "Roboto", sans-serif;
 $link-color: $accent;
 $hover-color: lighten($link-color, 40%);
 
 /*-- scss:rules --*/
 
+div.hw {
+  font-weight: bold;
+  font-size: 1.25em;
+  font-family: $font-family-alternative;
+}
 div.questions {
   border-color: $accent;
   border-radius: .5rem;
