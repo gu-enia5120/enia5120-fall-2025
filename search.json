@@ -128,419 +128,419 @@
   {
     "objectID": "slides/week-08.html#agenda-and-goals-for-the-day",
     "href": "slides/week-08.html#agenda-and-goals-for-the-day",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Agenda and goals for the day",
     "text": "Agenda and goals for the day\n\n\nLecture\n\nVisit bootstrapping as a way to estimate uncertainty (in last week’s slides, now)\nThe two paradigms (frequentist and Bayesian)\nDecisions from a Bayesian perspective\nUsefulness and examples for statistical inference\n\n\nLab\n\nBootstrapping for uncertainty estimation\nBasic Bayesian model fitting\nUsing posterior distributions to understand uncertainty",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bootstrapping-revisited",
     "href": "slides/week-08.html#bootstrapping-revisited",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bootstrapping, revisited",
     "text": "Bootstrapping, revisited\n\nBootstrapping is resampling your data, recomputing your statistic, and seeing the distribution of the statistic over the resampling\nPlenty of theory work in the 90s showed that the bootstrap variance estimate is very close to what you would get if you could generate the sampling distribution\n\nWhat do I mean by this?\n\nGetting a good estimate of the variability allows us to make good inferences and plan studies",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#using-the-bootstrap-in-machine-learning",
     "href": "slides/week-08.html#using-the-bootstrap-in-machine-learning",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Using the bootstrap in machine learning",
     "text": "Using the bootstrap in machine learning\nLet’s look at linear regression\n\n\nCode\nlibrary(rsample)\nlibrary(broom)\n\nset.seed(8459)\nboots &lt;- bootstraps(iris, times = 1000)\nboot_results &lt;- boots |&gt;\n  mutate(\n      models = map(splits, ~lm(Petal.Length ~Sepal.Length, data = analysis(.x))),\n      coef = map(models, tidy)\n  ) |&gt;\nunnest(coef)\n\nboot_coefs &lt;- boot_results |&gt; select(id, term, estimate) |&gt;\n    pivot_wider(names_from = term, values_from = estimate) \n\nggplot(data = iris, aes(y = Petal.Length, x = Sepal.Length))+\n    geom_point() + \n    geom_abline(data = boot_coefs, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray', alpha = 0.2) + \n    geom_smooth( method = 'lm', color = 'blue')",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#using-bootstrap-to-look-at-uncertainty-in-prediction",
     "href": "slides/week-08.html#using-bootstrap-to-look-at-uncertainty-in-prediction",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Using bootstrap to look at uncertainty in prediction",
     "text": "Using bootstrap to look at uncertainty in prediction\n\n\nCode\nlibrary(randomForest)\niris &lt;- iris |&gt; rownames_to_column('id')\nboots &lt;- bootstraps(iris, times = 50)\n\n# For each split: train RF, predict assessment (OOB) set\noob_pred_tbl &lt;- map_dfr(\n  boots$splits,\n  function(split) {\n    train_data &lt;- analysis(split)\n    oob_data &lt;- assessment(split)\n    rf_fit &lt;- randomForest(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = train_data)\n    if (nrow(oob_data) &gt; 0) {\n      pred &lt;- predict(rf_fit, newdata = oob_data)\n      tibble(\n        row_id = oob_data$id,\n        oob_pred = pred\n      )\n    }\n  }\n)\niris |&gt; full_join(oob_pred_tbl, by = c('id' = 'row_id')) |&gt; \n    ggplot(aes(x = Petal.Length)) + \n        geom_point(aes(y = Sepal.Length), color = 'gray', alpha = 0.2) + \n        geom_point(aes(y = oob_pred), color = 'black')",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#frequentists-see-probability-as-long-term-frequencies",
     "href": "slides/week-08.html#frequentists-see-probability-as-long-term-frequencies",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Frequentists see probability as long-term frequencies",
     "text": "Frequentists see probability as long-term frequencies\nThe underlying idea in frequentist frameworks is that one can observe a phenomenon repeatedly over time and establish the distribution of the outcome of interest\n\nIn reality, we utilize idealized models (Binomial, Normal, etc) to model these “long term” probabilities\n\n\nThe practice is based on the concept of multiple repetitions of the same experiment and what might happen",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade",
     "href": "slides/week-08.html#tools-of-the-trade",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nThe central limit theorem\nThis says that, as you take larger and larger samples, the distribution of the sample mean, over repeated identical experiments, will look like a normal distribution\n\n\n\nTheorem\n\n\nLet \\(X_1,\\dots,X_n\\) are independent and identically distributed with mean \\(\\mu\\) and variance \\(\\sigma^2\\), then\n\\[\n\\sqrt{n}(\\bar{X_n} - \\mu)/\\sigma \\rightarrow^d N(0,1)\n\\]",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-1",
     "href": "slides/week-08.html#tools-of-the-trade-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nThe weak law of large numbers (WLLN)\n\n\n\nTheorem\n\n\nLet \\(X_1,\\dots,X_n\\) be independent and identically distributed random variables with mean \\(\\mu\\) and variance \\(\\sigma^2\\). Then the sample mean \\(\\bar{X_n}\\) goes in probability to the population mean \\(\\mu\\) as \\(n \\rightarrow \\infty\\).\n\\[\n\\Pr (|\\bar{X_n} - \\mu | &gt; \\epsilon) \\rightarrow 0 \\quad \\text{as } n\\rightarrow\\infty\n\\]",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-2",
     "href": "slides/week-08.html#tools-of-the-trade-2",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nWe postulate a null hypothesis \\(H_0\\) and an alternative hypothesis \\(H_1\\). We devise a statistical test \\(\\phi(X)\\) that attempts to judge when the data provides sufficient evidence to favor \\(H_1\\) over \\(H_0\\) (which is often a strawman). This test can only reject \\(H_0\\). The test \\(\\phi(X)\\) takes values 1 (reject \\(H_0\\)) and 0 (does not reject \\(H_0\\)).\nThe test \\(\\phi(X)\\) can incur two kinds of errors:\n\nType I error: P((X) = 1 | \\(H_0\\) is true)\nType II error: P((X) = 0 | \\(H_0\\) is false)\n\n\nWe also will see another quantity, statistical power of a test, which is defined as 1 - Type II error, i.e., P((X) = 1 | \\(H_0\\) is false)",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-3",
     "href": "slides/week-08.html#tools-of-the-trade-3",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nThe Neymann-Pearson paradigm of NHST states that we fix the Type I error at some number \\(\\alpha\\), and proceed to find that optimal test \\(\\phi(X)\\) that maximizes the statistical power, i.e., minimizes the Type II error, usually denoted by \\(\\beta\\).\nFor simple hypothesis, such a test is generally of the form\n\\[\n\\phi (X) = \\left\\{\\begin{array}{ll}\n1& T(X) \\geq c\\\\\n0 & T(X) &lt; c\n\\end{array}\n\\right.\n\\]\nfor some test statistic T(X) and some number \\(c\\), where \\(c\\) is determined by the value of \\(\\alpha\\).\n\n\n\nExample\n\n\nThe one-sample test for the mean, \\(H_0: \\mu = \\mu_0\\) vs \\(H_1: \\mu \\neq \\mu_0\\) rejects the null hypotheses if\n\\[\n|\\sqrt{n}(\\bar{X_n} - \\mu_0)/s| &gt; z_{1-\\alpha/2}\n\\]",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-4",
     "href": "slides/week-08.html#tools-of-the-trade-4",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nNull hypothesis significance testing (NHST)\nThe p-value gives the probability, under \\(H_0\\) of seeing an observation at least as extreme as the one we observed\n\nNote, this is based on the idea of repeated identical experiments\n\nFor most statistical tests, the observed value of the test statistic is compared to quantiles of the (idealized) sampling distribution (often the normal distribution due to the CLT) to get the p-value",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-5",
     "href": "slides/week-08.html#tools-of-the-trade-5",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nConfidence intervals\nWe assume that there is a true value of a parameter \\(\\theta\\).\nWe specify a number \\(0&lt;\\alpha&lt;1\\) and define a bivariate statistic (L(X), U(X)) so that, over repeated random samples of the same size from the underlying population, the computed interval from L(X) to U(X) will miss the true value of \\(\\theta\\) in \\(100\\alpha\\) % of the samples.\n\n\n\n\n\n\nWarning\n\n\nWhat is random in a confidence interval is the actual computed interval!!\n\n\n\nConfidence intervals are almost always misinterpreted to mean that “there is a 95% chance that the true parameter falls within the interval”, rather than “95% of the time, intervals constructed in this manner will cover the true parameter”",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#tools-of-the-trade-6",
     "href": "slides/week-08.html#tools-of-the-trade-6",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Tools of the trade",
     "text": "Tools of the trade\nConfidence intervals",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#pitfalls-of-the-frequentist-approach",
     "href": "slides/week-08.html#pitfalls-of-the-frequentist-approach",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Pitfalls of the frequentist approach",
     "text": "Pitfalls of the frequentist approach\n\nAll arguments are based on non-observable “repeated experiments” rather than solely based on the data at hand\nThe p-value, which is the basis of much inference, is based on the assumption that \\(H_0\\) is true, which is unverifiable. It is saying that, if we assume that, how unlikely are we to see what we’re seeing. It also just says that, so we can’t actually infer that the alternative \\(H_1\\) is more plausible (ever!!) or “correct”, or what kinds of \\(H_1\\) would have the data at hand be more plausible.\nThe p-value by itself is not very useful without the domain context, and the corresponding effect size. Recall that the p-value is just an indication of the signal-to-noise ratio in the data, and so with very precise data, even a very small signal can have a small p-value\nThe need for preserving overall Type I error results in the need for multiple comparisons corrections (essentially reducing the p-value threshold on a per-test basis), but also results in significant loss of power and hence loss of detectable signals\nThe confidence interval is very frequently mis-interpreted as the chance that the true value of \\(\\theta\\) lies in the interval is \\(100(1-\\alpha)\\)%. As we shall see, this is the interpretation of the Bayesian credible interval",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#what-is-bayesian-analysis",
     "href": "slides/week-08.html#what-is-bayesian-analysis",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "What is Bayesian analysis?",
     "text": "What is Bayesian analysis?\n\nA Bayesian analysis is a particular approach of using probabilities to answer statistical problems",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making",
     "href": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "What question should we ask our data to inform decision making?",
     "text": "What question should we ask our data to inform decision making?\n\n“Given the data and everything I already know, what are the chances that my hypothesis is correct?”\n\nThis is the question that a Bayesian analysis answers",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making-1",
     "href": "slides/week-08.html#what-question-should-we-ask-our-data-to-inform-decision-making-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "What question should we ask our data to inform decision making?",
     "text": "What question should we ask our data to inform decision making?\nIt is well-established and convenient to ask this question:\n\n\n\n\n“What is the chance of getting this data if my null hypothesis is true?”  (or “what is the p-value?”)\n\n\n\n\nA Bayesian analysis asks and can answer the question:\n\n\n\n\n“Given the data and everything I already know, what are the chances that my hypothesis is correct?”\n\n\n\n\nThere are many advantages to framing the question in a Bayesian way that can help us make faster and more robust decisions",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#what-is-bayesian-analysis-1",
     "href": "slides/week-08.html#what-is-bayesian-analysis-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "What is Bayesian analysis?",
     "text": "What is Bayesian analysis?",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know",
     "href": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know",
     "text": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know\nAn example: I left my last piece of birthday cake in the fridge. I suspect this was a bad idea as my partner is working form home today. I am worried that she will eat my cake. I get back from work to discover icing, and a guilty look, on her face",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know-1",
     "href": "slides/week-08.html#bayesian-analysis-answers-our-questions-as-fully-as-possible-by-incorporating-everything-we-know-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know",
     "text": "Bayesian analysis answers our questions as fully as possible by incorporating everything we know\nAnother example: A stakeholder has a theory and has just acquired some new data that might support that theory – they want to know the chances that their theory is correct in light of this new data.",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#a-bayesian-analysis-can-facilitate-faster-more-informed-decision-making-with-known-risk-profiles",
     "href": "slides/week-08.html#a-bayesian-analysis-can-facilitate-faster-more-informed-decision-making-with-known-risk-profiles",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "A Bayesian analysis can facilitate faster, more informed decision making with known risk profiles",
     "text": "A Bayesian analysis can facilitate faster, more informed decision making with known risk profiles",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#a-bayesian-approach-can-improve-replicability",
     "href": "slides/week-08.html#a-bayesian-approach-can-improve-replicability",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "A Bayesian approach can improve replicability",
     "text": "A Bayesian approach can improve replicability",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bayesian-analysis-allows-us-to-update-our-beliefs-over-time",
     "href": "slides/week-08.html#bayesian-analysis-allows-us-to-update-our-beliefs-over-time",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bayesian analysis allows us to update our beliefs over time",
     "text": "Bayesian analysis allows us to update our beliefs over time",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#how-is-a-bayesian-analysis-implemented",
     "href": "slides/week-08.html#how-is-a-bayesian-analysis-implemented",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "How is a Bayesian analysis implemented?",
     "text": "How is a Bayesian analysis implemented?",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#the-bayesian-framework",
     "href": "slides/week-08.html#the-bayesian-framework",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "The Bayesian framework",
     "text": "The Bayesian framework\n\nThe parameter of interest \\(\\theta\\) is treated as a variable, not a constant.\n\\(\\theta\\) is a random variable with a distribution denoted by \\(p(\\theta)\\), called the prior distribution\n\n\n\nThe data \\(D = X_1,\\dots,X_n\\) comes as i.i.d. data from a data model defined by a probability distribution \\(p(D|\\theta)\\) dependent on \\(\\theta\\).\nThe p.d.f./p.m.f of this distribution, defined as a function of the data, is called the likelihood \\(L(\\theta | D)\\).\n\n\n\nThe posterior distribution can be computed as\n\\[\np(\\theta | D) \\propto p(\\theta) p(D | \\theta)\n\\]\n\n\n\nWhy do we have the \\(\\propto\\)?",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bayesian-inference",
     "href": "slides/week-08.html#bayesian-inference",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bayesian inference",
     "text": "Bayesian inference\nBayesian inference is entirely based on the posterior distribution \\(p(\\theta | D)\\)\n\nWe can ask and quantify questions like \\(P(\\theta \\in (-1, 1) | D)\\), \\(P(\\theta &gt; 2| D)\\), …\nInference becomes an estimation problem\nWe can compute credible intervals (CR) from \\(P(\\theta \\in CR | D) = 0.95\\)\n\nWe can actually quantify the chance that a hypothesis is true.\nIf \\(H_0: \\theta \\in\\Theta_0\\) vs \\(H_1: \\theta \\in \\Theta_1\\) then we can compute\n\\[\nP(\\theta \\in \\Theta_0 | D), \\quad P(\\theta\\in\\Theta_1 | D)\n\\]\n\n\n\n\n\n\n\nNo longer a strawman\n\n\nIn NHST (frequentism), the \\(H_0\\) is set up to be a strawman to negate.\nIn the Bayesian setup, \\(H_0\\) can actually be a substantive hypothesis of interest, and we can actually evaluate the likelihood of it being true given the data, or see how much the data we see changes the likelihood of the hypothesis. \\(H_1\\) is no longer the alternative that we want to get evidence for, but just another hypothesis to contrast with \\(H_0\\). This is quite a philosophic difference.",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#controversy-the-prior-distribution",
     "href": "slides/week-08.html#controversy-the-prior-distribution",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "CONTROVERSY: The prior distribution",
     "text": "CONTROVERSY: The prior distribution\nTo get to the posterior, one must first define a prior distribution \\(p(\\theta)\\) for the parameters of interest\n\nThis has been one of the most controversial parts of the Bayesian method\nCritics have said that the specification of the prior makes the process subjective, which can bias our inference\n\nWe “should be completely agnostic”, which is what frequentist methods appear to be\n\n\n\n\n\nWe are rarely completely ignorant about values a parameter can take\nDomain knowledge often dictates the prior distribution\n“Priors are never arbitrary” but can be justified by domain knowledge (Richard McElreath, 2023)\nThe frequentist method corresponds often to the assumption of a uniform distribution as a prior. This too, is a choice.",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#the-prior-distribution",
     "href": "slides/week-08.html#the-prior-distribution",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "The prior distribution",
     "text": "The prior distribution\nThe prior distribution theoretically can be elicited from expert opinion and knowledge as well as prior data. This is a process.\n\nWe will often choose prior distributions based on heuristic considerations of the constraints a parameter will be under\nThere is a choice of priors, called conjugate priors, for a particular data model (likelihood function), so that using those priors results in the posterior being in the same family as the prior\n\nOne can get analytic solutions to the posterior",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#conjugate-priors",
     "href": "slides/week-08.html#conjugate-priors",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Conjugate priors",
     "text": "Conjugate priors\nIf you have a binary (yes/no) variable that you are observing, and you’re interested in the probabilty of a “yes”, taking the prior as a Beta distribution results in a Beta posterior.\n\\[\n\\theta \\sim Beta(\\alpha,\\beta)\\\\\nX_1, \\dots, X_n \\sim Bin(1, \\theta)\n\\] then \\[\n\\theta | X \\sim Beta(\\alpha + \\sum X, \\beta + n - \\sum X)\n\\]\nThe parameters \\(\\alpha, \\beta\\) are called hyperparameters.\n\n\n\n\n\n\nHyperparameters can have priors, too",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#conjugate-priors-1",
     "href": "slides/week-08.html#conjugate-priors-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Conjugate priors",
     "text": "Conjugate priors\nIf our data comes from a \\(N(\\mu, \\sigma^2)\\) distribution with known \\(\\sigma\\), then\n\\[\n\\mu \\sim N(\\mu_0, \\sigma_0^2)\\\\\nX_1,\\dots,X_n \\sim N(\\mu,\\sigma^2)\n\\]\nthen\n\\[\n\\mu | X_1,\\dots,X_n\n\\sim\nN\\left(\\frac{1}{\\frac{1}{\\sigma_0^2}+\\frac{1}{\\sigma^2}} \\left( \\frac{\\mu_0}{\\sigma_0^2} + \\frac{\\sum X}{\\sigma^2}\\right), \\frac{1}{\\sigma_0^2} + \\frac{n}{\\sigma^2}\n\\right)\n\\]\n\n\n\n\n\n\nTip\n\n\nA list of conjugate priors is given here",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#fitting-bayesian-models",
     "href": "slides/week-08.html#fitting-bayesian-models",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Fitting Bayesian models",
     "text": "Fitting Bayesian models\nMost tasks we face in data science are regression models. We’ll start there.\n\n\nCode\nlibrary(rstanarm)\nlibrary(easystats)\nmodel_b &lt;- stan_glm(Petal.Length ~ Sepal.Length, data = iris)\n\n\n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 1).\nChain 1: \nChain 1: Gradient evaluation took 2.8e-05 seconds\nChain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.28 seconds.\nChain 1: Adjust your expectations accordingly!\nChain 1: \nChain 1: \nChain 1: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 1: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 1: \nChain 1:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 1:                0.02 seconds (Sampling)\nChain 1:                0.032 seconds (Total)\nChain 1: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 2).\nChain 2: \nChain 2: Gradient evaluation took 4e-06 seconds\nChain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.\nChain 2: Adjust your expectations accordingly!\nChain 2: \nChain 2: \nChain 2: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 2: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 2: \nChain 2:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 2:                0.02 seconds (Sampling)\nChain 2:                0.032 seconds (Total)\nChain 2: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 3).\nChain 3: \nChain 3: Gradient evaluation took 2e-06 seconds\nChain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.\nChain 3: Adjust your expectations accordingly!\nChain 3: \nChain 3: \nChain 3: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 3: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 3: \nChain 3:  Elapsed Time: 0.012 seconds (Warm-up)\nChain 3:                0.021 seconds (Sampling)\nChain 3:                0.033 seconds (Total)\nChain 3: \n\nSAMPLING FOR MODEL 'continuous' NOW (CHAIN 4).\nChain 4: \nChain 4: Gradient evaluation took 2e-06 seconds\nChain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.\nChain 4: Adjust your expectations accordingly!\nChain 4: \nChain 4: \nChain 4: Iteration:    1 / 2000 [  0%]  (Warmup)\nChain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)\nChain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)\nChain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)\nChain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)\nChain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)\nChain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)\nChain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)\nChain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)\nChain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)\nChain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)\nChain 4: Iteration: 2000 / 2000 [100%]  (Sampling)\nChain 4: \nChain 4:  Elapsed Time: 0.014 seconds (Warm-up)\nChain 4:                0.022 seconds (Sampling)\nChain 4:                0.036 seconds (Total)\nChain 4: \n\n\nCode\nposteriors &lt;- get_parameters(model_b)\ndescribe_posterior(model_b)\n\n\nSummary of Posterior Distribution\n\nParameter    | Median |         95% CI |   pd |          ROPE | % in ROPE\n-------------------------------------------------------------------------\n(Intercept)  |  -7.11 | [-8.06, -6.14] | 100% | [-0.18, 0.18] |        0%\nSepal.Length |   1.86 | [ 1.69,  2.02] | 100% | [-0.18, 0.18] |        0%\n\nParameter    |  Rhat |  ESS\n---------------------------\n(Intercept)  | 1.000 | 3789\nSepal.Length | 1.000 | 3867\n\n\nCode\nggplot(iris, aes(Sepal.Length, Petal.Length))+\n    geom_point() + \n    geom_abline(data = posteriors, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray') + \n    geom_abline(intercept = coef(model_b)[1], slope = coef(model_b)[2], color = 'blue') +\n    geom_smooth(method='lm', color = 'orange')",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#how-much-does-the-prior-matter",
     "href": "slides/week-08.html#how-much-does-the-prior-matter",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "How much does the prior matter",
     "text": "How much does the prior matter\nSuppose we do a coin tossing experiment with a biased coin with P(heads) = 0.7. From a Bayesian approach, we’ll put a prior distribution of Beta(1,1) on it.\nLet’s see how the posterior changes as we toss more coins",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#prior-predictive-checks",
     "href": "slides/week-08.html#prior-predictive-checks",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Prior predictive checks",
     "text": "Prior predictive checks\nWe want to see if our choice of prior leads to data that is reasonably what we would expect. This is called a prior predictive check, and is achieved by generating data based on the prior choice.",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#computing-the-posterior",
     "href": "slides/week-08.html#computing-the-posterior",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Computing the posterior",
     "text": "Computing the posterior\nWith a conjugate prior, computing the posterior distribution is analytic.\nLet us consider the beta-binomial conjugate family, with a \\(Beta(1,1)\\) prior\n\n\n\n\n\n\n\n\n\nPlay around with how much data is needed to move the ticker on our knowledge of \\(p\\).",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#bayes-factor",
     "href": "slides/week-08.html#bayes-factor",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Bayes factor",
     "text": "Bayes factor\nThe Bayes factor is the relative evidence for different models (or different parameter sets under the same model) given the data\n\\[\nk = \\frac{P(\\Theta_1 | D)}{P(\\Theta_2 | D)}\n\\]\nKass & Raftery (2005) provided a rule of thumb when evaluating Bayes factors",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#an-example",
     "href": "slides/week-08.html#an-example",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "An example",
     "text": "An example\nWe’re interested in evaluating an assay to see if it is sensitive enough for our purposes. We deem an assay to be acceptable if it has sensitivity of 95% or above. It is considered unacceptable if the sensitivity is below 90%.\nWe run the test on 100 sick people and get 95 positive tests.\nThe model\n\\[\n\\theta \\sim Beta(4,1)\\\\\nX \\sim Bin(100, \\theta)\n\\]\nUnder this conjugate prior, the posterior distribution of \\(\\theta\\) is Beta(4 + X, 1 + 100 - X).",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#an-example-1",
     "href": "slides/week-08.html#an-example-1",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "An example",
     "text": "An example\nPrior predictive checks",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#an-example-2",
     "href": "slides/week-08.html#an-example-2",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "An example",
     "text": "An example",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
     "objectID": "slides/week-08.html#resources",
     "href": "slides/week-08.html#resources",
-    "title": "Lecture 9",
+    "title": "Lecture 8",
     "section": "Resources",
     "text": "Resources\n\nStatistical Rethinking by R. McElreath (link\nrstanarm (link)\nbrms (link)",
     "crumbs": [
       "Lecture Slides",
-      "Lecture 9"
+      "Lecture 8"
     ]
   },
   {
@@ -2097,7 +2097,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Tue Oct 28, 2025 at 03:41 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Tue Oct 28, 2025 at 05:03 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
