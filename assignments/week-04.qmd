@@ -31,7 +31,7 @@ Modify this quarto notebook, change `eval: false` to `eval: true` above, convert
 
 Either HTML or PDF submissions are fine. Please also submit this Quarto file.
 
-[Week 4 Quarto template](week-04-student.qmd)
+<a href="https://gu-enia5120.github.io/enia5120-fall-2025/assignments/week-04-student.qmd">Download the Quarto template</a>
 
 ### Rubric:
 

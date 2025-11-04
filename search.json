@@ -2117,7 +2117,7 @@
     "href": "index.html",
     "title": "Data Science and Analytics",
     "section": "",
-    "text": "This course website was last rendered on Tue Nov 04, 2025 at 11:50 AM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
+    "text": "This course website was last rendered on Tue Nov 04, 2025 at 12:49 PM.\nAn introduction to data science concepts and computational tools that help us use data for understanding, insights, inference and prediction"
   },
   {
     "objectID": "index.html#sections-and-meeting-locations",
@@ -2229,7 +2229,7 @@
     "href": "assignments/week-04.html",
     "title": "Homework 4",
     "section": "",
-    "text": "Modify this quarto notebook, change eval: false to eval: true above, convert it to PDF using typst or to HTML and submit. Total is 75 points\nEither HTML or PDF submissions are fine. Please also submit this Quarto file.\nWeek 4 Quarto template\n\n\n\nEach question is worth 10 points\nSince these are numerical questions with a right answer, full credit will be given for following directions, using appropriate methods and getting the right answer\nPartial credit may be given for incorrect answers if the reasoning and methodology are sound. The correct answer itself is worth 2 points.",
+    "text": "Modify this quarto notebook, change eval: false to eval: true above, convert it to PDF using typst or to HTML and submit. Total is 75 points\nEither HTML or PDF submissions are fine. Please also submit this Quarto file.\nDownload the Quarto template\n\n\n\nEach question is worth 10 points\nSince these are numerical questions with a right answer, full credit will be given for following directions, using appropriate methods and getting the right answer\nPartial credit may be given for incorrect answers if the reasoning and methodology are sound. The correct answer itself is worth 2 points.",
     "crumbs": [
       "Assignments",
       "Homework 4"
@@ -2240,7 +2240,7 @@
     "href": "assignments/week-04.html#instructions",
     "title": "Homework 4",
     "section": "",
-    "text": "Modify this quarto notebook, change eval: false to eval: true above, convert it to PDF using typst or to HTML and submit. Total is 75 points\nEither HTML or PDF submissions are fine. Please also submit this Quarto file.\nWeek 4 Quarto template\n\n\n\nEach question is worth 10 points\nSince these are numerical questions with a right answer, full credit will be given for following directions, using appropriate methods and getting the right answer\nPartial credit may be given for incorrect answers if the reasoning and methodology are sound. The correct answer itself is worth 2 points.",
+    "text": "Modify this quarto notebook, change eval: false to eval: true above, convert it to PDF using typst or to HTML and submit. Total is 75 points\nEither HTML or PDF submissions are fine. Please also submit this Quarto file.\nDownload the Quarto template\n\n\n\nEach question is worth 10 points\nSince these are numerical questions with a right answer, full credit will be given for following directions, using appropriate methods and getting the right answer\nPartial credit may be given for incorrect answers if the reasoning and methodology are sound. The correct answer itself is worth 2 points.",
     "crumbs": [
       "Assignments",
       "Homework 4"
