@@ -14,8 +14,13 @@ engine: knitr
 ---
 
 ```{css}
+<<<<<<< HEAD
+.hw {
+  font-weight: hw;
+=======
 .bold { 
   font-weight: bold;
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 }
 ```
 
@@ -26,7 +31,7 @@ Modify this quarto notebook, change `eval: false` to `eval: true` above, convert
 
 Either HTML or PDF submissions are fine. Please also submit this Quarto file.
 
-{{< downloadthis week-04-student.qmd dname="homework4" label="Download Quarto file" >}}
+[Week 4 Quarto template](week-04-student.qmd)
 
 ### Rubric:
 
@@ -45,12 +50,17 @@ Either HTML or PDF submissions are fine. Please also submit this Quarto file.
 :::
 
 
+<<<<<<< HEAD
+:::: hw
+Question 1: An air quality monitoring station reports that the probability of a “high pollution alert” on any given day in July is 0.3. Assuming days are independent, what is the probability that exactly 2 out of the next 5 days have high pollution alerts?
+=======
 <hr style="border: 5px solid black;" />
 
 :::: hw
 ### Question 1
 
 An air quality monitoring station reports that the probability of a “high pollution alert” on any given day in July is 0.3. Assuming days are independent, what is the probability that exactly 2 out of the next 5 days have high pollution alerts?
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 
 ::: small
 Show your work, and confirm your answer using `dbinom(x=2, size=5, prob=0.3)`
@@ -76,9 +86,19 @@ where each event is independent and has a chance *p* of occurring. You can compu
 ------------------------------------------------------------------------
 
 ::: hw
+<<<<<<< HEAD
+Question 2: An environmental sensor detects excess ozone (event A) and excess particulate matter (event B). Historical data show:
+
+-   P(A) = 0.25
+-   P(B) = 0.40
+-   P(A and B) = 0.12
+
+Compute P(B\|A) and interpret the result in context. What does it suggest about the joint occurrence of these pollutants?
+=======
 ### Question 2
 
 An environmental sensor detects excess ozone (event A) and excess particulate matter (event B). Historical data show: - P(A) = 0.25 - P(B) = 0.40 - P(A∩B) = 0.12 Compute P(B\|A) and interpret the result in context. What does it suggest about the joint occurrence of these pollutants?
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 
 Are A and B independent? Provide both a numerical check and an interpretation in terms of environmental processes
 :::
@@ -88,9 +108,13 @@ Are A and B independent? Provide both a numerical check and an interpretation in
 ------------------------------------------------------------------------
 
 ::: hw
+<<<<<<< HEAD
+Question 3. In a three-region election analysis, probabilities of supporting Candidate Y differ by region:
+=======
 ### Question 3. 
 
 In a three-region election analysis, probabilities of supporting Candidate Y differ by region:
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 
 -   Urban (45% of population): 0.70
 -   Suburban (35%): 0.55
@@ -114,9 +138,13 @@ $$
 ------------------------------------------------------------------------
 
 ::: hw
+<<<<<<< HEAD
+Question 4. Suppose a new water-testing kit detects microplastics with 95% sensitivity (true positive) and 90% specificity (true negative). Environmental assessments show that 10% of water samples in the region contain microplastics. If the test gives a positive result, what is the posterior probability the sample truly contains microplastics?
+=======
 ### Question 4. 
 
 Suppose a new water-testing kit detects microplastics with 95% sensitivity (true positive) and 90% specificity (true negative). Environmental assessments show that 10% of water samples in the region contain microplastics. If the test gives a positive result, what is the posterior probability the sample truly contains microplastics?
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -138,9 +166,13 @@ Use Bayes' theorem
 ------------------------------------------------------------------------
 
 ::: hw
+<<<<<<< HEAD
+Question 5: A survey of 1000 voters shows a mean approval rating of 35% for the Governor, with a standard deviation of 12%. Construct a 95% confidence interval for the true approval rating. Interpret your results.
+=======
 ### Question 5
 
 A survey of 1000 voters shows a mean approval rating of 35% for the Governor, with a standard deviation of 12%. Construct a 95% confidence interval for the true approval rating. Interpret your results.
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 :::
 
 #### Answer
@@ -148,9 +180,13 @@ A survey of 1000 voters shows a mean approval rating of 35% for the Governor, wi
 ------------------------------------------------------------------------
 
 :::: hw
+<<<<<<< HEAD
+Question 6. An environmental agency claims that the average nitrate level in groundwater exceeds the safety standard of 10 mg/L. A random sample of 40 wells gives a mean of 10.6 mg/L with a standard deviation of 1.5 mg/L.
+=======
 ### Question 6
 
 An environmental agency claims that the average nitrate level in groundwater exceeds the safety standard of 10 mg/L. A random sample of 40 wells gives a mean of 10.6 mg/L with a standard deviation of 1.5 mg/L.
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 
 a.  Formulate the null and alternate hypothesis to test this claim.
 b.  Construct a simulation experiment to assess the evidence against the null hypothesis and report the p-value from the simulation
@@ -173,7 +209,11 @@ Follow the examples done in class to set up the simulation experiments. Ensure y
 ------------------------------------------------------------------------
 
 ::::: hw
+<<<<<<< HEAD
+Question 7:
+=======
 ### Question 7
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
 
 The file `dc_sample.rds` is provided you on Canvas. Download this and load this into R with the code
 
