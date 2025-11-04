@@ -1,0 +1,1051 @@
+---
+title: "Lecture 7"
+subtitle: "Statistical Inference: Simulation-Based Methods"
+format: live-revealjs
+resources:
+  - data
+execute:
+  cache: true
+  message: false
+  warning: false
+  echo: true
+  fig-width: 8
+  fig-height: 3
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+# Simulating studies
+
+```{r}
+#| include: false
+#| cache: false
+library(tidyverse)
+library(ggdist)
+library(distributional)
+library(usdata)
+library(geomtextpath)
+theme_set(theme_minimal())
+```
+
+## Scenario 
+
+In the state of South Carolina, there is a concern that young people of working age (20-35) are leaving the state for better opportunities elsewhere. Around 15\% of this age group own homes, compared to a national average of 20\%. Home-owners have a 1\% chance of leaving the state, while renters and non-home-owners have a 15\% chance of leaving the state. A new program is being considered to provide incentives for young renters to stay in the state. The program will cost \$1000 per person who takes it up, and is expected to reduce the chance of leaving the state from 15\% to 10\%. It is expected that 30\% of renters will take up the program. The average cost of a person leaving the state is estimated to be \$50,000 in lost tax revenue and economic activity. We will simulate the impact of this program on a population reflecting the population of South Carolina in 2019, using `usdata::pop_age_2019`.
+
+## Simulations are most often based on conditional probabilities
+
+::: {.r-fit-text}
+If this, what is the [likelihood]{.underline} of that?
+:::
+
+## There is intrinsic variability in consequences
+
+- If there was surety (likelihood = 100\%), we wouldn't need simulations
+- What we will often think about is, how variable are the consequences?
+
+## Categorical outcomes
+
+If there is a small set of possible consequences:
+
+- Yes/No &rarr; _Binomial(1, p)_ where _p_=P(Yes) &rarr; `rbinom`
+- Mutually exclusive outcomes &rarr; _Multinomial(1, **p**)_, where _**p**_ is a [vector]{.underline} of probabilities summing to 1 &rarr; `rmultinom`
+- If not mutually exclusive, needs more thought. 
+  - Usually split into two correlated categoricals where you work out the joint distribution
+
+## Continuous outcomes
+
+::: {.columns}
+::: {.column width="60%"}
+Symmetric &rarr; _Normal ($\mu,\ \sigma$)_
+
+- More uncertain &rarr; larger $\sigma$
+- `rnorm`
+:::
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+dist_df <- data.frame(
+  group = c("a", "b", "c"),
+  mean = c(5, 7, 8),
+  sd = c(1, 1.5, 1)
+)
+# Vectorized distribution types, like distributional::dist_normal()
+# and posterior::rvar(), can be used with the `xdist` / `ydist` aesthetics
+dist_df %>%
+  ggplot(aes(y = group, xdist = dist_normal(mean, sd))) +
+  stat_slab()
+```
+
+:::
+::: 
+
+::: {.columns}
+::: {.column width="60%"}
+Long right tail &rarr; _Gamma ($\alpha,\ \beta$)_
+
+- `rgamma`
+:::
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+dist_df <- data.frame(
+  group = c("a", "b", "c"),
+  a = c(1, 2, 1),
+  b = c(1, 1, 3)
+)
+dist_df %>%
+  ggplot(aes(y = group, xdist = dist_gamma(a, b))) +
+  stat_slab()
+```
+
+:::
+::: 
+
+## Continouous outcomes (contd.)
+
+::: {.columns}
+::: {.column width="60%"}
+Continuous between 0 and 1 &rarr; _Beta ($\alpha,\ \beta$)_
+- `rbeta`
+:::
+::: {.column width="40%"}
+```{r}
+#| echo: false
+dist_df <- data.frame(
+  group = c("a", "b", "c", "d"),
+  a = c(1, 2, 1, 3),
+  b = c(1, 2, 3, 1)
+)
+dist_df %>%
+  ggplot(aes(y = group, xdist = dist_beta(a, b))) +
+  stat_slab()
+```
+:::
+:::
+
+Many other choices possible, depending on the situation. 
+
+{{< fa brands r-project >}} implementations: see the [Distributions Task View](https://cran.r-project.org/web/views/Distributions.html) on CRAN.
+
+## Simulating the SC population
+
+Let's break the scenario down:
+
+- Population size: number of 20-35 year olds in SC in 2019
+- Home-ownership rate: 15\% (= P(Homeowner))
+- Leaving probabilities:
+  - Homeowners: 1\% (= P(Leave | Homeowner))
+  - Renters without program: 15\% (= P(Leave | Renter, No Program))
+  - Renters with program: 10\% (= P(Leave | Renter, Program))
+- Program take-up rate: 30\% (= P(Program | Renter))
+- Costs:
+  - Cost of leaving: \$50,000
+  - Cost of program: \$1,000 per participant
+
+## Simulating the SC population
+
+```{mermaid}
+flowchart LR
+  Start((Start)) --> Pop[/"SC population age 20–35"/]
+  Pop --> Home[Homeowners<br/>15%]
+  Pop --> Rent[Renters<br/>85%]
+
+  Home --> HomeLeave{Leave?}
+  HomeLeave -- Yes (1%) --> HomeCost[Leave cost<br/>$50,000]
+  HomeLeave -- No (99%) --> HomeStay[Stay]
+
+  Rent --> RentUptake{Take program?}
+  RentUptake -- Yes (30%) --> Prog[Program participants]
+  RentUptake -- No (70%) --> NoProg[Non-participants]
+
+  Prog --> ProgLeave{Leave?}
+  ProgLeave -- Yes (10%) --> ProgLeaveCost[Leave cost<br/>$50,000 + program $1,000]
+  ProgLeave -- No (90%) --> ProgStay[Stay + program cost $1,000]
+
+  NoProg --> NoProgLeave{Leave?}
+  NoProgLeave -- Yes (15%) --> NoProgLeaveCost[Leave cost<br/>$50,000]
+  NoProgLeave -- No (85%) --> NoProgStay[Stay]
+```
+
+## Simulating the SC population
+
+```{r}
+#| code-fold: false
+set.seed(1234)
+sc_pop <- usdata::pop_age_2019 |>
+  filter(state == "SC", age >= 20, age <= 35) |>
+  pull(population) |>
+  sum()
+behavior_now <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |>
+  mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |>
+  mutate(cost = leaves * 50000)
+
+intervention <- tibble(homeowner = rbinom(sc_pop, 1, 0.15)) |>
+  mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |>
+  mutate(leave_prob = case_when(
+    homeowner == 1 ~ 0.01,
+    takes_program == 1 ~ 0.10,
+    TRUE ~ 0.15
+  )) |>
+  mutate(leaves = rbinom(n(), 1, leave_prob)) |>
+  mutate(cost = leaves * 50000 + takes_program * 1000)
+
+total_cost_now <- sum(behavior_now$cost)
+total_cost_intervention <- sum(intervention$cost)
+```
+
+This is one simulation of the total cost now and with the intervention. To understand the variability, we need to repeat this many times.
+
+## Running many simulations
+
+First, encapsulate the logic in a function:
+
+```{r}
+#| code-fold: false
+N <- usdata::pop_age_2019 |>
+  filter(state == "SC", age >= 20, age <= 35) |>
+  pull(population) |>
+  sum()
+
+sim_function <- function(N) {
+  behavior_now <- tibble(homeowner = rbinom(N, 1, 0.15)) |>
+    mutate(leaves = ifelse(homeowner == 1, rbinom(n(), 1, 0.01), rbinom(n(), 1, 0.15))) |>
+    mutate(cost = leaves * 50000)
+
+  intervention <- tibble(homeowner = rbinom(N, 1, 0.15)) |>
+    mutate(takes_program = ifelse(homeowner == 1, 0, rbinom(n(), 1, 0.3))) |>
+    mutate(leave_prob = case_when(
+      homeowner == 1 ~ 0.01,
+      takes_program == 1 ~ 0.10,
+      TRUE ~ 0.15
+    )) |>
+    mutate(leaves = rbinom(n(), 1, leave_prob)) |>
+    mutate(cost = leaves * 50000 + takes_program * 1000)
+
+  total_cost_now <- sum(behavior_now$cost)
+  total_cost_intervention <- sum(intervention$cost)
+  return(data.frame("now" = total_cost_now, "intervention" = total_cost_intervention))
+}
+```
+
+## Now run many simulations
+
+
+```{r}
+#| eval: false
+#| code-fold: false
+set.seed(1234)
+n_sims <- 1000
+sim_results <- replicate(n_sims, sim_function(N), simplify = FALSE) |>
+  bind_rows() |>
+  mutate(saving = now - intervention)
+```
+
+```{r}
+sim_results <- readRDS("data/sc_sim_results.rds")
+ggplot(sim_results, aes(x = saving)) +
+  geom_histogram(fill = "lightblue", color = "black") +
+  scale_x_continuous(labels = scales::label_dollar()) +
+  labs(
+    title = "Distribution of Savings from Intervention",
+    x = "Savings ($)",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+## Now we can explore different scenarios
+
+```{mermaid}
+flowchart LR
+  Start((Start)) --> Pop[/"SC population age 20–35"/]
+  Pop --> Home[Homeowners<br/>15%]
+  Pop --> Rent[Renters<br/>85%]
+
+  Home --> HomeLeave{Leave?}
+  HomeLeave -- Yes (1%) --> HomeCost[Leave cost<br/>$50,000]
+  HomeLeave -- No (99%) --> HomeStay[Stay]
+
+  Rent --> RentUptake{Take program?}
+  RentUptake -- Yes (30%) --> Prog[Program participants]
+  RentUptake -- No (70%) --> NoProg[Non-participants]
+
+  Prog --> ProgLeave{Leave?}
+  ProgLeave -- Yes (10%) --> ProgLeaveCost[Leave cost<br/>$50,000 + program $1,000]
+  ProgLeave -- No (90%) --> ProgStay[Stay + program cost $1,000]
+
+  NoProg --> NoProgLeave{Leave?}
+  NoProgLeave -- Yes (15%) --> NoProgLeaveCost[Leave cost<br/>$50,000]
+  NoProgLeave -- No (85%) --> NoProgStay[Stay]
+```
+
+. . .
+
+```r
+sim_function <- function(N, p_home, p_leave_home, p_leave_rent_no_prog,
+                         p_leave_rent_prog, p_prog_uptake,
+                         cost_leave, cost_prog)
+```
+
+
+
+# Using simulation to understand  distributions
+
+
+## Simulating distributions
+
+```{webr}
+library(tidyverse) |> suppressMessages()
+library(ggdist)
+
+n_samples <- 10000
+tibble(x = rnorm(n_samples, 2, 2)) |>
+  ggplot(aes(x = x)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution",
+    x = "Value",
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+## Probability distributions
+- Discrete distributions
+  - Binomial
+  - Poisson
+  - Negative Binomial
+  - Multinomial
+- Continuous distributions
+  - Normal
+  - t
+  - Chi-squared
+  - F
+  - Exponential
+  - Gamma
+
+See [here](https://en.wikipedia.org/wiki/List_of_probability_distributions) for a more complete list (purely for reference)
+
+## If you have data, how will you decide what parameters to use?
+
+- Use domain knowledge
+- Use historical data
+- Use exploratory data analysis (EDA)
+
+- If you have an idea of the [kind]{.underline} of distribution, you can fit parameters using methods like:
+  - Method of moments
+  - Maximum likelihood estimation (MLE)
+  - Bayesian estimation
+- If you don't have an idea of the distribution, you can use non-parametric methods like:
+  - Kernel density estimation (KDE)
+  - Empirical cumulative distribution function (ECDF)
+
+## An example
+
+```{r}
+#| code-fold: false
+set.seed(132495)
+
+# generate sample of 200 observations that follows normal dist with mean=10 and sd=3
+data <- rnorm(200, mean = 10, sd = 3)
+
+MASS::fitdistr(data, "normal")
+```
+
+
+# Duality between confidence intervals and hypothesis tests
+
+## Estimation and hypothesis testing
+
+- Confidence intervals provide a range of plausible values for a parameter
+- Hypothesis tests assess the evidence against a null hypothesis about a parameter
+
+## Duality
+- A 95\% confidence interval for a parameter includes all values that would not be rejected by a two-sided hypothesis test at the 5\% significance level
+- Conversely, if a value is outside the 95\% confidence interval, it would be rejected by the corresponding hypothesis test
+
+## Duality (contd.)
+
+```{r}
+#| echo: false
+#| cache: false
+dc_pop <- usdata::pop_age_2019 |>
+  filter(state == "DC") |>
+  uncount(population) |>
+  select(state, age) |>
+  mutate(age = as.numeric(age)) |>
+  drop_na(age)
+set.seed(97537)
+sample_1000 <- dc_pop |>
+  slice_sample(n = 1000)
+```
+
+Let's consider a random sample of size 100 from DC (using the data from last week). We want to test
+whether the mean age in DC is less than 35 years. 
+
+Under the null hypothesis $H_0: \mu = 35$, we can perform a one-sample t-test:
+```{r}
+n <- 1000
+p <- t.test(sample_1000$age, mu = 35, alternative = "less")$p.value
+
+tibble(group = 1, mean = 35, sd = sd(dc_pop$age) / sqrt(n)) |>
+  ggplot(aes(xdist = dist_normal(mean, sd), fill = stat(x < mean(sample_1000$age))), show.legend = F) +
+  stat_halfeye() +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
+  annotate("text", x = 30, y = 0.4, label = paste("p =", round(p, 4)), size = 3) +
+  labs(x = "Age") +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), legend.position = "none")
+```
+
+## Duality (contd.)
+
+For the sample of 100 individuals from DC, we can calculate a 95\% confidence interval for the mean age:
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
+p <- t.test(sample_1000$age, mu = 35, alternative = "two.sided")$p.value
+tibble(group = 1, mean = 35, sd = sd(dc_pop$age) / sqrt(n)) |>
+  ggplot(
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(35 - x) > abs(35 - mean(sample_1000$age)))
+    ),
+    show.legend = F
+  ) +
+  stat_halfeye() +
+  annotate("segment",
+    x = ci$conf.low, xend = ci$conf.high, y = 0.1, yend = 0.1,
+    size = 3,
+    color = "black"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
+  geom_vline(xintercept = 35, linetype = "dashed", color = "blue") +
+  annotate(
+    "text",
+    x = 30,
+    y = 0.4,
+    label = paste("p =", round(p, 4)),
+    size = 3
+  ) +
+  labs(x = "Age") +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    legend.position = "none"
+  )
+```
+
+:::
+::: {.column width="30%"}
+We see that this confidence interval  covers 35, which is consistent with the result of our hypothesis test, where the p-value is greater than 0.05.
+:::
+:::
+## Duality (contd.)
+If we test the null hypothesis $H_0: \mu = 33$ against the alternative $H_a: \mu \neq 33$, we get:
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+n <- 1000
+p <- t.test(sample_1000$age, mu = 33, alternative = "two.sided")$p.value
+
+ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
+tibble(group = 1, mean = 33, sd = sd(dc_pop$age) / sqrt(n)) |>
+  ggplot(
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(x - 33) > abs(33 - mean(sample_1000$age)))
+    ),
+    show.legend = F
+  ) +
+  stat_halfeye() +
+  annotate(
+    "segment",
+    x = ci$conf.low,
+    xend = ci$conf.high,
+    y = 0.1,
+    yend = 0.1,
+    size = 3,
+    color = "black"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
+  annotate(
+    "text",
+    x = 30,
+    y = 0.4,
+    label = paste("p =", round(p, 4)),
+    size = 3
+  ) +
+  labs(x = "Age") +
+  geom_vline(xintercept = 33, linetype = "dashed", color = "blue") +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    legend.position = "none"
+  )
+```
+:::
+::: {.column width="30%"}
+We see that this confidence interval does not cover 33, which is consistent with the result of our hypothesis test, where the p-value is less than 0.05.
+:::
+:::
+
+## Out of curiosity...
+
+```{r}
+#| include: false
+#| cache: false
+target = ci$conf.low
+```
+
+The 95% confidence interval for the mean is `r glue::glue("[{round(ci$conf.low,1)}, {round(ci$conf.high,1)}]")`.
+
+If we test the null hypothesis $H_0: \mu = `r round(target,1)`$ against the alternative $H_a: \mu \neq `r round(target,1)`$, we get:
+
+::: {.columns}
+::: {.column width="70%"}
+```{r}
+#| cache: false
+n <- 1000
+p <- t.test(sample_1000$age, mu = target, alternative = "two.sided")$p.value
+
+# ci <- broom::tidy(t.test(sample_1000$age)) |> select(conf.low, conf.high)
+tibble(group = 1, mean = target, sd = sd(dc_pop$age) / sqrt(n)) |>
+  ggplot(
+    aes(
+      xdist = dist_normal(mean, sd),
+      fill = stat(abs(target - x) > abs(target - mean(sample_1000$age)))
+    ),
+    show.legend = F
+  ) +
+  stat_halfeye() +
+  annotate(
+    "segment",
+    x = ci$conf.low,
+    xend = ci$conf.high,
+    y = 0.1,
+    yend = 0.1,
+    size = 3,
+    color = "black"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "lightblue")) +
+  annotate(
+    "text",
+    x = 30,
+    y = 0.4,
+    label = paste("p =", round(p, 4)),
+    size = 3
+  ) +
+  labs(x = "Age") +
+  geom_vline(xintercept = target, linetype = "dashed", color = "blue") +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    legend.position = "none"
+  )
+```
+
+:::
+::: {.column width="30%"}
+We see that this confidence interval just barely covers `r target`, which is consistent with the result of our hypothesis test, where the p-value is approximately 0.05.
+
+:::
+::: 
+# More common hypothesis tests: is there a difference between two groups?
+
+## Scenario
+
+We want to test which of two new smokestack filters work better to reduce emissions from a factory. We have two filters, A and B, and we want to know if there is a difference in the mean emissions reduction between the two filters. We randomly assign 50 factories to use filter A and 50 factories to use filter B, and measure the emissions reduction for each factory.
+
+## Simulating data
+```{r}
+#| code-fold: false
+set.seed(3495)
+n <- 50
+filter_A <- rnorm(n, mean = 30, sd = 5)
+filter_B <- rnorm(n, mean = 35, sd = 5)
+emissions_data <- tibble(
+  filter = rep(c("A", "B"), each = n),
+  reduction = c(filter_A, filter_B)
+)
+observed_difference <- mean(emissions_data$reduction[
+  emissions_data$filter == "B"
+]) -
+  mean(emissions_data$reduction[emissions_data$filter == "A"])
+```
+
+## Visualizing the data
+
+```{r}
+ggplot(emissions_data, aes(x = filter, y = reduction, fill = filter)) +
+  geom_boxplot() +
+  labs(
+    title = "Emissions Reduction by Filter Type",
+    x = "Filter Type",
+    y = "Emissions Reduction"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Permutation test
+
+When we're trying to determine if there is a significant difference between two groups, we can use a permutation test. 
+Under the null hypothesis of no difference between two groups, the group labels are interchangeable, since we are assuming the two distributions are the same. 
+
+::: {.small}
+A permutation test involves:
+
+1. Calculating the observed difference in a statistic of interest between the two groups.
+2. Randomly shuffling the group labels and recalculating the difference in the statistic.
+3. Repeating this process many times to create a distribution of the differences under the null hypothesis.
+4. Comparing the observed difference to this null distribution to calculate a p-value.
+:::
+
+::: callout-important
+We are not making any assumptions about the distributions of the data, or restricting ourselves to the statistics we can use. This makes permutation tests very flexible and robust, and allows us to compare different parameters between groups even if there are no "standard" tests available. 
+
+This is a general approach where we can compare groups using any statistic of interest, rather than restricting ourselves to standard tests like the t-test which only compare means.
+:::
+
+## Doing permutations
+
+```{r}
+#| code-fold: false
+sample(emissions_data$filter)
+sample(emissions_data$filter)
+```
+
+This gives us 2 random shuffles of the group labels for the data.
+
+## Running a permutation test
+To perform a permutation test, we'd do, say, 1000 random shuffles, and then compute the difference in the group means based on the shuffled labels each time.
+
+```{r}
+#| code-fold: false
+n_permutation <- 1000
+set.seed(2894)
+difference_perms <- replicate(n_permutation, {
+  shuffled_labels <- sample(emissions_data$filter)
+  mean_A <- mean(emissions_data$reduction[shuffled_labels == "A"])
+  mean_B <- mean(emissions_data$reduction[shuffled_labels == "B"])
+  return(mean_B - mean_A)
+})
+```
+
+## Visualizing the permutation distribution (Null distribution)
+
+```{r}
+pval <- mean(abs(difference_perms) >= abs(observed_difference))
+tibble(difference = difference_perms) |>
+  ggplot(aes(x = difference)) +
+  geom_histogram(binwidth = 0.5, fill = "lightblue", color = "black") +
+  labs(
+    title = "Permutation Distribution of Mean Differences",
+    x = "Mean Difference (B - A)",
+    y = "Frequency"
+  ) +
+  geom_vline(
+    xintercept = observed_difference,
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_textvline(
+    xintercept = -observed_difference,
+    color = "red",
+    linetype = "dashed",
+    label = "Observed difference"
+  ) +
+  annotate(
+    "text",
+    x = observed_difference + 1,
+    y = 50,
+    label = paste("P-value = ", pval)
+  ) +
+  annotate(
+    "text",
+    x = -3,
+    y = 155,
+    hadj = 0,
+    label = "Doing a 2-sided test means we\nconsider both tails to compute\nthe p-value"
+  ) +
+  theme_minimal()
+```
+
+We get a directly interpretable p-value of `r round(pval,4)` for the hypothesis test of no difference in mean emissions reduction between the two filters.
+
+## Comparison with t-test
+```{r}
+#| code-fold: false
+t_test_result <- t.test(
+  reduction ~ filter,
+  data = emissions_data,
+  alternative = "two.sided"
+)
+t_test_result$p.value
+```
+
+The permutation test result of `r round(pval,4)` is very close to the t-test p-value of `r format.pval(t_test_result$p.value, digits=4)`, which is expected since both tests are assessing the same hypothesis about the means of two groups. We can get closer by increasing the number of permutations.
+
+## Let's do a different statistic
+
+We'll use the Palmer penguins dataset to compare the characteristics of penguins from two of the islands. Let's do something a bit non-standard: compare the slopes of the relationship between flipper length and body mass for penguins from Biscoe and Dream islands.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+library(palmerpenguins)
+penguin_data <- penguins |>
+  filter(island %in% c("Biscoe", "Dream")) |>
+  drop_na(flipper_length_mm, body_mass_g)
+observed_slope_diff <- {
+  model_biscoe <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |> filter(island == "Biscoe")
+  )
+  model_dream <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |> filter(island == "Dream")
+  )
+  coef(model_biscoe)[2] - coef(model_dream)[2]
+}
+
+ggplot(
+  penguin_data,
+  aes(x = flipper_length_mm, y = body_mass_g, color = island)
+) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Penguin Body Mass vs Flipper Length by Island",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)"
+  ) +
+  annotate(
+    "text",
+    x = 200,
+    y = 6000,
+    label = paste("Observed slope difference =", round(observed_slope_diff, 4))
+  ) +
+  theme_minimal()
+```
+
+## Permutation test for slope difference
+
+```{r}
+set.seed(5678)
+n_permutation <- 1000
+slope_diffs_perms <- replicate(n_permutation, {
+  shuffled_islands <- sample(penguin_data$island)
+  model_biscoe <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |>
+      mutate(island = shuffled_islands) |>
+      filter(island == "Biscoe")
+  )
+  model_dream <- lm(
+    body_mass_g ~ flipper_length_mm,
+    data = penguin_data |>
+      mutate(island = shuffled_islands) |>
+      filter(island == "Dream")
+  )
+  coef(model_biscoe)[2] - coef(model_dream)[2]
+})
+
+pval_slope <- mean(abs(slope_diffs_perms) >= abs(observed_slope_diff))
+tibble(slope_diff = slope_diffs_perms) |>
+  ggplot(aes(x = slope_diff)) +
+  geom_histogram(fill = "lightblue", color = "black") +
+  labs(
+    title = "Permutation Distribution of Slope Differences",
+    x = "Slope Difference (Biscoe - Dream)",
+    y = "Frequency"
+  ) +
+  geom_vline(
+    xintercept = observed_slope_diff,
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_textvline(
+    xintercept = -observed_slope_diff,
+    color = "red",
+    linetype = "dashed",
+    label = "Observed slope difference"
+  ) +
+  annotate(
+    "text",
+    x = observed_slope_diff + 0.5,
+    y = 10,
+    label = paste("P-value = ", round(pval_slope, 4))
+  ) +
+  theme_minimal()
+```
+
+
+# Resampling-based confidence intervals
+
+## Bootstrapping
+
+How can we get assumption-free confidence intervals directly from our sample data?
+
+- Resample with replacement from the observed data to create "bootstrap samples"
+- Calculate the statistic of interest for each bootstrap sample
+- Use the distribution of bootstrap statistics to estimate confidence intervals
+
+It turns out that this bootstrap approach results in a distribution that approximates the sampling distribution of the statistic. For not-too-small samples, this works well in practice.
+
+## Example: bootstrap confidence interval for mean age in DC
+```{r}
+#| cache: false
+set.seed(975)
+n_bootstrap <- 5000
+bootstrap_means <- replicate(n_bootstrap, {
+  sample_data <- sample_1000$age |>
+    sample(size = nrow(sample_1000), replace = TRUE)
+  mean(sample_data)
+})
+ci_bootstrap <- quantile(bootstrap_means, probs = c(0.025, 0.975))
+tibble(bootstrap_mean = bootstrap_means) |>
+  ggplot(aes(x = bootstrap_mean)) +
+  geom_histogram(fill = "lightblue", color = "black") +
+  labs(
+    title = "Bootstrap Distribution of Mean Age",
+    x = "Mean Age",
+    y = "Frequency"
+  ) +
+  geom_vline(xintercept = ci_bootstrap[1], color = "red", linetype = "dashed") +
+  geom_vline(xintercept = ci_bootstrap[2], color = "red", linetype = "dashed") +
+  annotate(
+    "text",
+    x = ci_bootstrap[1] - 1,
+    y = 50,
+    label = paste("2.5% =", round(ci_bootstrap[1], 2))
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap[2] + 1,
+    y = 50,
+    label = paste("97.5% =", round(ci_bootstrap[2], 2))
+  ) +
+  theme_minimal()
+```
+
+## Bootstrap confidence interval for median age in DC
+
+For the median, we nolonger have the nice properties of the mean (like the Central Limit Theorem), so bootstrap confidence intervals are especially useful here.
+
+```{r}
+set.seed(975)
+n_bootstrap <- 5000
+bootstrap_medians <- replicate(n_bootstrap, {
+  sample_data <- sample_1000$age |>
+    sample(size = nrow(sample_1000), replace = TRUE)
+  median(sample_data)
+})
+ci_bootstrap_median <- quantile(bootstrap_medians, probs = c(0.025, 0.975))
+tibble(bootstrap_median = bootstrap_medians) |>
+  ggplot(aes(x = bootstrap_median)) +
+  geom_histogram(fill = "lightblue", color = "black") +
+  labs(
+    title = "Bootstrap Distribution of Median Age",
+    x = "Median Age",
+    y = "Frequency"
+  ) +
+  geom_vline(
+    xintercept = ci_bootstrap_median[1],
+    color = "red",
+    linetype = "dashed"
+  ) +
+  geom_vline(
+    xintercept = ci_bootstrap_median[2],
+    color = "red",
+    linetype = "dashed"
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap_median[1] - 1,
+    y = 50,
+    label = paste("2.5% =", round(ci_bootstrap_median[1], 2))
+  ) +
+  annotate(
+    "text",
+    x = ci_bootstrap_median[2] + 1,
+    y = 50,
+    label = paste("97.5% =", round(ci_bootstrap_median[2], 2))
+  ) +
+  theme_minimal()
+```
+
+## Bootstraps and sampling distributions
+- The bootstrap distribution approximates the sampling distribution of a statistic, especially its variability
+- We can use the bootstrap distribution to estimate standard errors, bias, and confidence intervals for the statistic
+- This is particularly useful when the sampling distribution is unknown or difficult to derive analytically
+- The bootstrap approach is flexible and can be applied to a wide range of statistics and data types
+
+## Bootstrapped standard error of the mean age in DC
+
+```{r}
+#| cache: false
+se_bootstrap <- sd(bootstrap_means)
+se_bootstrap
+```
+
+Comparing to the theoretical standard error of the mean:
+```{r}
+#| cache: false
+se_theoretical <- sd(dc_pop$age) / sqrt(nrow(sample_1000))
+se_theoretical
+```
+
+and simulating the sampling distribution of the mean:
+```{r}
+#| cache: false
+set.seed(975)
+n_sim <- 5000
+sampling_means <- replicate(n_sim, {
+  sample_data <- dc_pop$age |> sample(size = nrow(sample_1000))
+  mean(sample_data)
+})
+se_simulated <- sd(sampling_means)
+se_simulated
+```
+
+This is quite useful for planning studies, when you might have a small pilot data in hand. As we'll see next, we can use this to figure out how large a sample size we need to achieve a desired power for hypothesis tests. A good estimate of variability (uncertainty) is crucial for this.
+
+
+## Some caveats
+
+- Bootstrap methods assume that the sample is representative of the population, and that the sample is a random sample from the population.
+- Bootstrap methods may not perform well for small sample sizes, especially for statistics that are not smooth functions of the data (e.g., medians, quantiles). We need enough data to capture the variability in the population.
+- Bootstrap methods may not perform well for data with strong dependencies or complex structures (e.g., time series, spatial data).
+
+. . .
+
+There are various variations of the bootstrap method we describe here (which is often called the naive bootstrap). These may improve things in certain situations, but the naive bootstrap works well in many practical scenarios. Find your friendly neighborhood statistician if you need help!
+
+
+
+# Sample size and Power analysis {.inverse}
+
+## How do we figure out the right sample size for a study?
+
+- Need to consider:
+  - Effect size (to detect)
+  - Significance level (alpha)
+  - Power (1 - beta)
+  - Variability in the data (standard deviation)
+
+
+
+
+## Strategy
+
+- Recall that we can increase power by reducing the standard error of the mean (SEM) &rarr; increase sample size
+- For a particular sample size _n_, we can calculate value of the mean needed to achieve exactly the significnace level $\alpha$ that is set. 
+- Then, we can calculate the probability of observing a mean at least that extreme under the alternative hypothesis &rarr; this is the power.
+- We can vary _n_ until we achieve the desired power.
+
+## Heuristics
+
+- Larger effect sizes require smaller sample sizes to detect, since the difference is more pronounced.
+- Higher significance levels (alpha) require smaller sample sizes, as we are more lenient in rejecting the null hypothesis.
+- Higher desired power (1 - beta) requires larger sample sizes, as we want to be more confident in detecting the effect.
+- Greater variability in the data (higher standard deviation) requires larger sample sizes, as the signal is harder to detect amidst the noise.
+
+## Example
+
+Suppose we want to detect a difference in mean age of 6 years (from 35 to 41) with 80\% power at a significance level of 5\%. What sample size is needed?
+
+```{r}
+#| code-fold: false
+library(pwr)
+effect_size <- (41 - 35) / sd(dc_pop$age)
+sample_size <- pwr.t.test(
+  d = effect_size,
+  power = 0.8,
+  sig.level = 0.05,
+  type = "one.sample",
+  alternative = "greater"
+)$n
+sample_size
+```
+
+We would need a sample size of approximately `r ceiling(sample_size)` to achieve this power.
+
+## But how would we do this using simulation?
+
+```{r}
+#| code-fold: false
+set.seed(1234)
+n_sims <- 1000
+sample_size <- 50 # initial guess
+power_simulation <- function(sample_size, n_sims, mu0, mu1, sd) {
+  rejections <- replicate(n_sims, {
+    sample_data <- rnorm(sample_size, mean = mu1, sd = sd)
+    p_value <- t.test(sample_data, mu = mu0, alternative = "greater")$p.value
+    return(p_value < 0.05)
+  })
+  power <- mean(rejections)
+  return(power)
+}
+desired_power <- 0.8
+current_power <- 0
+while (current_power < desired_power) {
+  current_power <- power_simulation(
+    sample_size,
+    n_sims,
+    mu0 = 35,
+    mu1 = 41,
+    sd = sd(dc_pop$age)
+  )
+  if (current_power < desired_power) {
+    sample_size <- sample_size + 5 # increment sample size
+  }
+}
+sample_size
+```
+
+We would need a sample size of approximately `r sample_size` to achieve this power using simulation.
+
+See [this interactive widget](../supplemental/pwr_graph.qmd) for exploring how different parameters affect power and sample size.
+
+## Power curves
+
+```{r}
+dc_pop <- readRDS("data/dc_pop.rds")
+theme_set(theme_minimal())
+alpha <- 0.05
+sdv <- sd(dc_pop$age)
+mu1 <- 35
+d <- seq(2,10, by=2)
+n <- seq(10, 500, by = 10)
+dat <- as.data.frame(expand.grid(d = d, n = n))
+dat <- dat |> 
+  mutate(
+    sdev = sdv / sqrt(n),
+    critval = qnorm(1 - alpha, mean = mu1, sd = sdev),
+    pwr = 1 - pnorm(critval, mean = mu1 + d, sd = sdev)
+  )
+dat |>
+  ggplot(aes(x = n, y = pwr, color=factor(d))) +
+  geom_textline(aes(label = paste("d =",d)), show.legend=F) +
+  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
+  labs(
+    title = "Power Curve",
+    x = "Sample Size (n)",
+    y = "Power"
+  ) +
+  annotate(
+    "text",
+    x = 200,
+    y = 0.85,
+    label = "Desired Power = 80%",
+    color = "red"
+  ) +
+    scale_y_continuous(breaks = seq(0,1, by=.2),labels = scales::label_percent()) +
+  theme_minimal()
+```

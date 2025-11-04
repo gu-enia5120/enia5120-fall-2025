@@ -7,7 +7,7 @@ webr:
       - rio
       - janitor
       - palmerpenguins
-    autoload-packages: true
+    # autoload-packages: true
 resources:
   - data
 ---

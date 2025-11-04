@@ -1,0 +1,23 @@
+color:
+  palette:
+    white: "#ffffff"
+    primary: "#041e42"
+    secondary: "#bbbcbc"
+    accent: "#9BBB59"
+    subtle-accent: "#003da5"
+  background: white
+  foreground: primary
+
+typography:
+  fonts:
+    - family: "Atkinson Hyperlegible"
+      source: google
+    - family: "Source Code Pro"
+      source: google
+  base: "Atkinson Hyperlegible"
+  link:
+    decoration: underline
+  monospace: "Source Code Pro"
+  headings:
+    family: "Atkinson Hyperlegible"
+    weight: 700

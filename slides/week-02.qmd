@@ -2,8 +2,6 @@
 title: "Lecture 2"
 subtitle: "Starting data analysis: Software and EDA"
 format: live-revealjs
-revealjs-plugins:
-    - drop
     
 ---
 

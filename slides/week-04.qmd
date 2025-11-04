@@ -11,10 +11,7 @@ execute:
 -   Rooted in **statistics** and mathematical models.\
 -   Goal: Build models to identify trends, predict outcomes, or group data meaningfully.
 
-```{r}
-#| echo: false
-mean(iris$Petal.)
-```
+
 
 ## Major Approaches
 
@@ -114,20 +111,8 @@ theme_set(theme_bw())
 #| fig-height: 1
 #| fig-asp: 0.6
 
-
-ggplot(airquality, aes(Temp, Ozone))+
-  geom_point() + theme_bw()
-```
-
-## Let's look at some data
-
-**EDA helps us figure out the kind of statistical model we might fit**
-
-```{r}
-#| fig-height: 1
-#| fig-asp: 0.6
-ggplot(airquality, aes(Temp, Ozone))+
-  geom_point() + geom_smooth(se=F) + 
+ggplot(airquality, aes(Temp, Ozone)) +
+  geom_point() +
   theme_bw()
 ```
 
@@ -138,9 +123,30 @@ ggplot(airquality, aes(Temp, Ozone))+
 ```{r}
 #| fig-height: 1
 #| fig-asp: 0.6
-ggplot(airquality, aes(Temp, Ozone))+
-  geom_point() + geom_smooth(se=F) + 
-  annotate('text', x = 65, y = 125, label = "Not linear", size = 10, color = 'red')+
+ggplot(airquality, aes(Temp, Ozone)) +
+  geom_point() +
+  geom_smooth(se = F) +
+  theme_bw()
+```
+
+## Let's look at some data
+
+**EDA helps us figure out the kind of statistical model we might fit**
+
+```{r}
+#| fig-height: 1
+#| fig-asp: 0.6
+ggplot(airquality, aes(Temp, Ozone)) +
+  geom_point() +
+  geom_smooth(se = F) +
+  annotate(
+    'text',
+    x = 65,
+    y = 125,
+    label = "Not linear",
+    size = 10,
+    color = 'red'
+  ) +
   theme_bw()
 ```
 
@@ -148,7 +154,7 @@ ggplot(airquality, aes(Temp, Ozone))+
 
 ```{r}
 #| code-fold: false
-model <- lm(Ozone ~ Temp , data = airquality)
+model <- lm(Ozone ~ Temp, data = airquality)
 summary(model)
 ```
 
@@ -157,9 +163,9 @@ summary(model)
 ```{r}
 library(broom)
 add_model <- augment(model)
-ggplot(add_model, aes(x = Temp))+
-  geom_point(aes(y = Ozone)) + 
-  geom_line(aes(y = .fitted), color ='blue')
+ggplot(add_model, aes(x = Temp)) +
+  geom_point(aes(y = Ozone)) +
+  geom_line(aes(y = .fitted), color = 'blue')
 ```
 
 ## Fitting a linear model in R
@@ -167,10 +173,17 @@ ggplot(add_model, aes(x = Temp))+
 ```{r}
 library(broom)
 add_model <- augment(model)
-ggplot(add_model, aes(x = Temp))+
-  geom_point(aes(y = Ozone)) + 
-  geom_line(aes(y = .fitted), color ='blue') +
-  annotate('text', x = 65, y = 125, label = 'Not a great fit', size=8, color = 'red')
+ggplot(add_model, aes(x = Temp)) +
+  geom_point(aes(y = Ozone)) +
+  geom_line(aes(y = .fitted), color = 'blue') +
+  annotate(
+    'text',
+    x = 65,
+    y = 125,
+    label = 'Not a great fit',
+    size = 8,
+    color = 'red'
+  )
 ```
 
 ## Residuals can help figure out functional forms
@@ -180,9 +193,10 @@ Residuals are what's left after you subtract the fitted (predicted) values of th
 See [here](http://www.feat.engineering/numeric-one-to-one) for more details
 
 ```{r}
-ggplot(add_model, aes(.fitted, .resid))+
-  geom_point() + geom_smooth(se=F) + 
-  geom_hline(yintercept = 0, linetype = 2) + 
+ggplot(add_model, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_smooth(se = F) +
+  geom_hline(yintercept = 0, linetype = 2) +
   labs(x = 'Fitted values', y = 'Residual values')
 ```
 
@@ -191,18 +205,19 @@ ggplot(add_model, aes(.fitted, .resid))+
 ```{r}
 model2 <- lm(Ozone ~ Temp + I(Temp^2), data = airquality)
 add_model2 <- augment(model2)
-ggplot(model2, aes(x = Temp))+
-  geom_point(aes(y = Ozone)) + 
-  geom_line(aes(y = .fitted), color = 'blue')+
-  geom_smooth(aes(y = Ozone), se=F, color = 'green')
+ggplot(model2, aes(x = Temp)) +
+  geom_point(aes(y = Ozone)) +
+  geom_line(aes(y = .fitted), color = 'blue') +
+  geom_smooth(aes(y = Ozone), se = F, color = 'green')
 ```
 
 ## Residuals
 
 ```{r}
-ggplot(add_model2, aes(.fitted, .resid))+
-  geom_point() + geom_smooth(se=F) + 
-  geom_hline(yintercept = 0, linetype = 2) + 
+ggplot(add_model2, aes(.fitted, .resid)) +
+  geom_point() +
+  geom_smooth(se = F) +
+  geom_hline(yintercept = 0, linetype = 2) +
   labs(x = 'Fitted values', y = 'Residual values')
 ```
 
@@ -331,9 +346,9 @@ Use them for now, understand them later
 
 ```{r}
 data(iris)
-clust <- kmeans(iris |> select(-Species), centers=3)
-ggplot(iris, aes(x = Petal.Length, y = Petal.Width))+
-  geom_point(color = clust$cluster, show.legend=F)
+clust <- kmeans(iris |> select(-Species), centers = 3)
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +
+  geom_point(color = clust$cluster, show.legend = F)
 ```
 
 ## Application in R (2)
@@ -343,8 +358,8 @@ d = dist(iris |> select(-Species))
 clust2 <- hclust(d)
 clust_ids <- cutree(clust2, k = 3)
 
-ggplot(iris, aes(x = Petal.Length, y = Petal.Width))+
-  geom_point(color = clust_ids, show.legend=F)
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +
+  geom_point(color = clust_ids, show.legend = F)
 ```
 
 ## Bias-Variance Tradeoff
