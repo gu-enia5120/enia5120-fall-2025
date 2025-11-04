@@ -13,11 +13,19 @@ $subtle-accent: #003da5;
 
 $font-family: "Atkinson Hyperlegible", sans-serif;
 $font-family-monospace: "Source Code Pro", monospace;
+$font-family-alternative: "Roboto", sans-serif;
 $link-color: $accent;
 $hover-color: lighten($link-color, 40%);
 
 /*-- scss:rules --*/
 
+<<<<<<< HEAD:style/html-sta313.scss
+div.hw {
+  font-weight: bold;
+  font-size: 1.25em;
+  font-family: $font-family-alternative;
+}
+=======
 h1,
 h2,
 h3,
@@ -50,6 +58,7 @@ h6 {
   position: relative;
 }
 
+>>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1:style/html-sta313-adg.scss
 div.questions {
   border-color: $accent;
   border-radius: .5rem;

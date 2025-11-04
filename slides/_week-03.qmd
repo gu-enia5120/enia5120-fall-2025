@@ -1,0 +1,256 @@
+---
+title: "Lecture 3"
+subtitle: "An introduction to R"
+webr:
+    packages:
+      - tidyverse
+      - rio
+      - janitor
+      - palmerpenguins
+    # autoload-packages: true
+resources:
+  - data
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}} 
+
+## Agenda
+
+-   Introduction to R and RStudio
+-   R basics
+-   Data structures
+-   Data import
+-   Data manipulation
+-   Data and object export
+
+## Frustration is part of learning R, but it doesn't have to be
+
+
+-   You will get errors (need fixing) and warnings (just informative) when you run code
+-   Errors and warnings are your friends. They tell you what is wrong
+
+. . .
+
+-   **Errors and warnings are not your fault. They are part of the learning process**
+
+. . .
+
+-   Take a breath and step away
+-   Work on it for a set time; don't go down a rabbit hole
+-   When you're more settled ...
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/d6b4f8cb-53bf-49d5-822c-e45cd01204a4_rw_1200.png?h=8dd8a9af5a2104fb34f4c391a260a2e3){width="40%" style="float: right; margin-left: 1em;"}
+
+::: aside
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
+:::
+
+## Trying to figure it out
+
+:::: {.columns}
+::: {.column width="50%"}
+-   Check the documentation of the function you are using (`?function_name` or `help(function_name)`)
+-   Approach the problem from a different angle
+-   Ask for help from the local community (classmates, instructor)
+-   Consult online resources (Stack Overflow, RStudio Community, Claude AI)
+
+:::
+::: {.column width="50%"}
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/e684f0da-13b1-4d00-ab25-37814e79ee1e_rw_1200.png?h=4812a536b27c1674bfd8962b1ce4ea87){height="500"}
+
+:::
+:::: 
+
+::: aside
+A lot of this advice comes from [R for Political Science Research](https://a.co/d/34I21mN) by Jane L. Sumner (might be available through the GU library)
+
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
+:::
+
+## What is coding?
+
+-   Translating a set of logical steps into a language the computer understands
+    -   It is a "conversation" with a computer (no, we're not going to vibe code here)
+    -   using a grammar and vocabulary that the computer understands[^1]
+
+::: incremental
+- Computers are "dumb" - they do exactly what you tell them to do
+    - Things can get lost in translation
+    - So you have to be accurate and precise
+    - If the computer is making a mistake, it's because of the instructions it got
+    - You have to tell it everything, even the things that seem obvious to you (but it gets better)
+:::
+
+[^1]: So you'll get into similar difficulties as asking directions in Tokyo or Paris.
+    
+## An opinionated tour of {{< fa brands r-project >}}
+
+- We will concentrate on  the tidyverse set of packages 
+    - So you don't have to tell R everything
+    - Reasonable choices have been made for you
+- We won't learn everything today
+    - You will learn more as you go along
+    - You will learn more by doing
+    - You will learn more by making mistakes and getting feedback
+
+::: callout-important
+Have R and RStudio open while we go through this, but also keep these slides open. There are coding examples embedded in the slides.
+:::
+
+# Start up R and RStudio
+
+{{< countdown minutes="1" >}}
+
+## Make an RStudio project
+- Projects help you manage your work
+- They keep your files organized
+- They help R find your files
+
+If you create a project, and then forget where you created it, type `getwd()` in the console to find out where you are. 
+
+For reference, you can see a walkthrough of creating a project [here](https://www.araastat.com/BIOF339/slides/lectures/week5/01-best_practices.html#14).
+
+## {background-image="img/best_practices_structure.png" background-size="contain" background-repeat="no-repeat" background-position="center:w
+"}
+
+## Basic keyboard shortcuts
+
+::: callout-note
+## Regular coding use keyboard shortcuts
+- Run current line or selection: {{< kbd "Ctrl+Enter" >}} (Windows) or {{< kbd "Cmd+Enter" >}} (Mac)
+- Insert assignment operator: {{< kbd "Alt+-" >}} (Windows) or {{< kbd "Option+-" >}} (Mac)
+- insert pipe operator: {{< kbd "Ctrl+Shift+M" >}} (Windows) or {{< kbd "Cmd+Shift+M" >}} (Mac)
+
+- Comment/uncomment current line or selection: {{< kbd "Ctrl+Shift+C" >}} (Windows) or {{< kbd "Cmd+Shift+C" >}} (Mac)
+:::
+
+::: callout-note
+## General use keyboard shortcuts
+
+- Find: {{< kbd "Ctrl+F" >}} (Windows) or {{< kbd "Cmd+F" >}} (Mac)
+- Replace: {{< kbd "Ctrl+H" >}} (Windows) or {{< kbd "Cmd+Option+F" >}} (Mac)
+- Save: {{< kbd "Ctrl+S" >}} (Windows) or {{< kbd "Cmd+S" >}} (Mac)
+:::
+
+# Packages
+
+## What are packages?
+- Packages are collections of R functions, data, and compiled code in a well-defined format
+  - Usually for a specific purpose
+  - They extend R's functionality
+- R comes with a standard set of packages, but there are thousands more available
+  - You can install packages from CRAN, Bioconductor, GitHub, and other repositories
+
+::: callout-note
+Packages are collections of functions, and sometimes data, that are usually unified for a common purpose
+
+If functions are recipes, then packages are recipe books
+
+If you want to cook from a recipe, you first have to grab the recipe book from your shelf
+
+[Similarly, if you want to use a function from a package, you first have to grab or activate the package in your current R session]{style="color: red; font-weight: bold;"}
+:::
+
+An (incomplete) list of packages you might want to explore is available [here](https://www.araastat.com/BIOF339/slides/lectures/week2/01-packages.html#17)
+
+## Installing and loading packages
+
+::: callout-important
+You only need to install a package once, but you need to load it every time you start a new R session
+:::
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+::: callout-note
+If you don't have the package `janitor` installed, you can install it by running the following command once:
+```r
+install.packages("janitor")
+```
+{{< countdown seconds="45" minutes="0">}}
+:::
+
+## Using functions from packages
+
+There is another way to access functions from packages, if you're really only going to use one function from it.
+
+The general form for this is `<package>::<function>` (note the two colons)
+
+For example, if you just want to use the `clean_names` function from the **janitor** package, you can do so by
+
+```r
+janitor::clean_names(dataset)
+```
+
+where dataset is the name of the data.frame whose column names you want to clean.
+
+## Cleaning names (to maintain sanity and typing efficiency) {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/79a12c01-0cc1-4643-b1e7-8ce8cafc947b_rw_1200.png?h=4136fa7e5c95e6d8e4b3a35faaebd082" background-size="contain" background-repeat="no-repeat" background-position="center:center"
+}
+::: aside
+[Artwork by @allison_horst](https://twitter.com/allison_horst)
+:::
+
+
+
+## Cleaning names (to maintain sanity and typing efficiency)
+
+```{webr}
+library(readr)
+library(janitor)
+
+cars <- read_csv("data/cars2018.csv")
+# cars <- janitor::clean_names(cars)
+head(cars)
+```
+
+::: {.aside}
+The dataset is available [here](https://raw.githubusercontent.com/gu-dsan5200/datasets/refs/heads/main/cars2018.csv)
+:::
+
+::: callout-important
+If you download the data, you **need to know** where it's downloaded to on your computer, so that you can tell R where to find it. 
+Typically this is your "Downloads" folder. Preferably, you move it to your project's `data` folder.
+:::
+
+{{< countdown minutes="1" seconds="30" >}}
+
+## Easier data imports: the `rio` package
+
+- Install the **rio** package if you haven't already
+
+{{< countdown seconds="60" minutes="0">}}
+
+## Now use it 
+
+```{webr}
+library(rio)
+
+cars <- import("data/cars2018.csv") |> 
+  janitor::clean_names() ## what's going on here?
+head(cars)
+```
+
+`janitor::clean_names()` calls the `clean_names` function from the **janitor** package, without loading the whole package
+
+But what is this `|>` thing? (I create this using {{< kbd "Ctrl+Shift+M" >}} or {{< kbd "Cmd+Shift+M" >}})
+
+## Pipes
+
+Pipes are a method in R to create analytic pipelines utilizing tidyverse functions.
+
+The pipe operator (denoted `|>`, spoken as "going to") is what creates the pipes.
+
+You start with a dataset, and then progressively add functions to the pipe. Typically you save the result to a new object.
+
+Each element of the pipe takes as its first argument the results of the previous step, which typically is a data frame.
+
+Pipes are just a different representation of an analytic process that we can do in separate steps anyway. We'll see this later.
+
+# The tidyverse
+
+{{< include topics/tidyverse.qmd >}}
+{{< include topics/naming_rules.qmd >}}
+{{< include topics/functions.qmd >}} >}}
