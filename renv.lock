@@ -1397,22 +1397,14 @@
     },
     "later": {
       "Package": "later",
-<<<<<<< HEAD
-      "Version": "1.4.2",
-=======
       "Version": "1.4.4",
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "Rcpp",
         "rlang"
       ],
-<<<<<<< HEAD
-      "Hash": "9591aabef9cf988f05bde9324fd3ad99"
-=======
       "Hash": "a729883bff94b606cd4f0445aeed95b5"
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
     },
     "lattice": {
       "Package": "lattice",
@@ -1778,11 +1770,7 @@
     },
     "patchwork": {
       "Package": "patchwork",
-<<<<<<< HEAD
-      "Version": "1.3.1",
-=======
       "Version": "1.3.2",
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1797,11 +1785,7 @@
         "stats",
         "utils"
       ],
-<<<<<<< HEAD
-      "Hash": "4f3392eb5828d32cdd82bd875b42e424"
-=======
       "Hash": "97fc0338dd42af55d170478dfc4c0c03"
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
     },
     "pillar": {
       "Package": "pillar",
@@ -1921,11 +1905,7 @@
     },
     "progressr": {
       "Package": "progressr",
-<<<<<<< HEAD
-      "Version": "0.15.1",
-=======
       "Version": "0.16.0",
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1933,11 +1913,7 @@
         "digest",
         "utils"
       ],
-<<<<<<< HEAD
-      "Hash": "f8e9876b6ffff900e83f171081cacd6f"
-=======
       "Hash": "a1c4def81b4a098b2e288558f719cbad"
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
     },
     "promises": {
       "Package": "promises",
@@ -1981,8 +1957,6 @@
       ],
       "Hash": "9240cfb47489133f809918a0d3cc60cb"
     },
-<<<<<<< HEAD
-=======
     "pwr": {
       "Package": "pwr",
       "Version": "1.3-0",
@@ -1994,7 +1968,6 @@
       ],
       "Hash": "adfa41db3678b41bf9235c514c51799a"
     },
->>>>>>> e2441e37c9df957c63ecd3c630d2895fd269f1e1
     "quadprog": {
       "Package": "quadprog",
       "Version": "1.5-8",

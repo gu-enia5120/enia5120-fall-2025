@@ -118,8 +118,8 @@ website:
             target: _blank
           - href: slides/week-07.qmd
             target: _blank
-          #          - href: slides/week-08.qmd
-          #            target: _blank
+          - href: slides/week-08.qmd
+            target: _blank
           #          - href: slides/week-09.qmd
           #            target: _blank
           #          - href: slides/week-10.qmd
@@ -168,8 +168,8 @@ website:
 format:
   html:
     theme:
-      light: [cerulean, brand, style/html-sta313-adg.scss, style/sfah.scss]
-      dark: [cerulean, brand, style/html-sta313-adg.scss, style/html-dark.scss, style/sfah.scss]
+      light: [cerulean, style/html-sta313-adg.scss, style/sfah.scss]
+      dark: [cerulean,  style/html-sta313-adg.scss, style/html-dark.scss, style/sfah.scss]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
     embed-resources: true
