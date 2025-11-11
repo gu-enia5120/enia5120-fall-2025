@@ -111,3 +111,17 @@ IMS Chapters 11-15 (focus on 11-13 for now). Some of this will be review from la
 
 We will be using the [**infer**](https://infer.netlify.app/) package for statistical inference via resampling methods. Please install it before class. 
 
+# Week 8: October 28
+
+# Week 9: November 4
+## Reading
+
+- Readings from the **bayestestR** package
+    - [Credible intervals](https://easystats.github.io/bayestestR/articles/credible_interval.html)
+    - [Region of Practical Equivalence (ROPE)](https://easystats.github.io/bayestestR/articles/region_of_practical_equivalence.html)
+    - [Probability of Direction](https://easystats.github.io/bayestestR/articles/probability_of_direction.html)
+    - [Reporting guidelines for Bayesian analysis](https://easystats.github.io/bayestestR/articles/guidelines.html)
+
+## References
+
+- [Bayesian Statistics and Modeling](https://sites.stat.columbia.edu/gelman/research/published/43586_2020_1_Author.pdf) by van de Schoot, et al, 2021

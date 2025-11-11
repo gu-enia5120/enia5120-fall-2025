@@ -1,5 +1,5 @@
 ---
-title: "Lecture 9"
+title: "Lecture 8"
 subtitle: "Bayesian analysis"
 editor: visual
 engine: knitr
@@ -16,6 +16,8 @@ webr:
 ::: column
 ### Lecture
 
+-   Visit bootstrapping as a way to estimate uncertainty (in last week's slides, now)
+
 -   The two paradigms (frequentist and Bayesian)
 
 -   Decisions from a Bayesian perspective
@@ -26,15 +28,80 @@ webr:
 ::: column
 ### Lab
 
--   Basics of Bayesian computation
+-   Bootstrapping for uncertainty estimation
 
--   Fitting models using Bayesian principles
+-   Basic Bayesian model fitting
 
--   Pointers to more advanced computations
+-   Using posterior distributions to understand uncertainty
 :::
 :::::
 
-# The two paradigms
+## Bootstrapping, revisited
+
+-   Bootstrapping is resampling your data, recomputing your statistic, and seeing the distribution of the statistic over the resampling
+
+-   Plenty of theory work in the 90s showed that the bootstrap variance estimate is very close to what you would get if you could generate the sampling distribution
+
+    -   What do I mean by this?
+
+-   Getting a good estimate of the variability allows us to make good inferences and plan studies
+
+## Using the bootstrap in machine learning
+
+Let's look at linear regression
+
+```{r}
+library(rsample)
+library(broom)
+
+set.seed(8459)
+boots <- bootstraps(iris, times = 1000)
+boot_results <- boots |>
+  mutate(
+      models = map(splits, ~lm(Petal.Length ~Sepal.Length, data = analysis(.x))),
+      coef = map(models, tidy)
+  ) |>
+unnest(coef)
+
+boot_coefs <- boot_results |> select(id, term, estimate) |>
+    pivot_wider(names_from = term, values_from = estimate) 
+
+ggplot(data = iris, aes(y = Petal.Length, x = Sepal.Length))+
+    geom_point() + 
+    geom_abline(data = boot_coefs, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray', alpha = 0.2) + 
+    geom_smooth( method = 'lm', color = 'blue')
+```
+
+## Using bootstrap to look at uncertainty in prediction
+
+```{r}
+library(randomForest)
+iris <- iris |> rownames_to_column('id')
+boots <- bootstraps(iris, times = 50)
+
+# For each split: train RF, predict assessment (OOB) set
+oob_pred_tbl <- map_dfr(
+  boots$splits,
+  function(split) {
+    train_data <- analysis(split)
+    oob_data <- assessment(split)
+    rf_fit <- randomForest(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = train_data)
+    if (nrow(oob_data) > 0) {
+      pred <- predict(rf_fit, newdata = oob_data)
+      tibble(
+        row_id = oob_data$id,
+        oob_pred = pred
+      )
+    }
+  }
+)
+iris |> full_join(oob_pred_tbl, by = c('id' = 'row_id')) |> 
+    ggplot(aes(x = Petal.Length)) + 
+        geom_point(aes(y = Sepal.Length), color = 'gray', alpha = 0.2) + 
+        geom_point(aes(y = oob_pred), color = 'black')
+```
+
+# Bayesian approaches
 
 ## Frequentists see probability as long-term frequencies
 
@@ -414,6 +481,44 @@ $$
 ::: callout-tip
 A list of conjugate priors is given [here](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions)
 :::
+
+## Fitting Bayesian models
+
+Most tasks we face in data science are regression models. We'll start there.
+
+```{r}
+library(rstanarm)
+library(easystats)
+model_b <- stan_glm(Petal.Length ~ Sepal.Length, data = iris)
+posteriors <- get_parameters(model_b)
+describe_posterior(model_b)
+ggplot(iris, aes(Sepal.Length, Petal.Length))+
+    geom_point() + 
+    geom_abline(data = posteriors, aes(intercept = `(Intercept)`, slope = Sepal.Length), color = 'gray') + 
+    geom_abline(intercept = coef(model_b)[1], slope = coef(model_b)[2], color = 'blue') +
+    geom_smooth(method='lm', color = 'orange')
+```
+
+## How much does the prior matter
+
+Suppose we do a coin tossing experiment with a biased coin with P(heads) = 0.7. From a Bayesian approach, we'll put a prior distribution of Beta(1,1) on it.
+
+Let's see how the posterior changes as we toss more coins
+
+```{webr}
+set.seed(4958)
+x <- seq(0, 1, length.out = 50)
+prior <- dbeta(x, 1,1)
+n <- 50
+obs <- rbinom(1, n, 0.7)
+posterior <- dbeta(x, 1 + obs, 1 + n - obs)
+
+d <- tibble(x, prior, posterior)
+d |> ggplot(aes(x = x))+
+    geom_line(aes(y = prior), linetype = 2) + 
+    geom_line(aes(y = posterior))
+
+```
 
 ## Prior predictive checks
 
