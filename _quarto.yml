@@ -120,8 +120,8 @@ website:
             target: _blank
           - href: slides/week-08.qmd
             target: _blank
-          #          - href: slides/week-09.qmd
-          #            target: _blank
+          - href: slides/week-09.qmd
+            target: _blank
           #          - href: slides/week-10.qmd
           #            target: _blank
           #          - href: slides/week-11.qmd
