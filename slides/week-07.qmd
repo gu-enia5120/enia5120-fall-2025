@@ -18,6 +18,7 @@ execute:
 # Simulating studies
 
 ```{r}
+#| label: week-07-01
 #| include: false
 #| cache: false
 library(tidyverse)
@@ -64,6 +65,7 @@ Symmetric &rarr; _Normal ($\mu,\ \sigma$)_
 ::: {.column width="40%"}
 
 ```{r}
+#| label: week-07-02
 #| echo: false
 dist_df <- data.frame(
   group = c("a", "b", "c"),
@@ -89,6 +91,7 @@ Long right tail &rarr; _Gamma ($\alpha,\ \beta$)_
 ::: {.column width="40%"}
 
 ```{r}
+#| label: week-07-03
 #| echo: false
 dist_df <- data.frame(
   group = c("a", "b", "c"),
@@ -203,6 +206,7 @@ This is one simulation of the total cost now and with the intervention. To under
 First, encapsulate the logic in a function:
 
 ```{r}
+#| label: week-07-04
 #| code-fold: false
 N <- usdata::pop_age_2019 |>
   filter(state == "SC", age >= 20, age <= 35) |>
@@ -387,6 +391,7 @@ whether the mean age in DC is less than 35 years.
 
 Under the null hypothesis $H_0: \mu = 35$, we can perform a one-sample t-test:
 ```{r}
+#| label: week-07-05
 n <- 1000
 p <- t.test(sample_1000$age, mu = 35, alternative = "less")$p.value
 
@@ -800,6 +805,7 @@ It turns out that this bootstrap approach results in a distribution that approxi
 
 ## Example: bootstrap confidence interval for mean age in DC
 ```{r}
+#| label: week-07-06
 #| cache: false
 set.seed(975)
 n_bootstrap <- 5000

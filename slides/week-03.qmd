@@ -161,6 +161,7 @@ You only need to install a package once, but you need to load it every time you 
 :::
 
 ```{r}
+#| label: week-03-01
 library(tidyverse)
 library(janitor)
 ```
