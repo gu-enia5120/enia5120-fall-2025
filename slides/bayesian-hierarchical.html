@@ -1,0 +1,3019 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <meta name="author" content="Abhijit Das Gupta">
+  <title>ENIA 5120 – Advanced: Bayesian Hierarchical Models</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-202071fc02f58b4a3bb510e8b45ba0e8.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Advanced: Bayesian Hierarchical Models</h1>
+  <p class="subtitle">A Practical Guide for Applied Scientists</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Abhijit Das Gupta 
+</div>
+</div>
+</div>
+
+</section>
+<section id="disclaimer" class="slide level2">
+<h2>Disclaimer</h2>
+<p>This deck was developed collaboratively by Dr.&nbsp;Dasgupta and Claude AI. All errors are the responsibility of Dr.&nbsp;Dasgupta.</p>
+</section>
+<section id="overview" class="slide level2">
+<h2>Overview</h2>
+<p><strong>Learning Objectives:</strong></p>
+<ul>
+<li>Understand what hierarchical models are and why they’re useful</li>
+<li>Learn when to use hierarchical models vs.&nbsp;standard regression</li>
+<li>Master the concepts of pooling: complete, none, and partial</li>
+<li>Apply hierarchical models using rstanarm and brms in R</li>
+<li>Interpret Bayesian results appropriately for environmental data</li>
+<li>Make informed decisions about model structure</li>
+</ul>
+</section>
+<section id="why-hierarchical-models" class="slide level2">
+<h2><strong>Why Hierarchical Models?</strong></h2>
+<p>Environmental data naturally has structure</p>
+<p>— sites within regions, measurements over time, species within ecosystems. Hierarchical models respect this structure.</p>
+</section>
+<section id="what-are-hierarchical-models" class="slide level2">
+<h2>What are Hierarchical Models?</h2>
+<p><strong>Definition:</strong> Statistical models that account for data collected at multiple levels or with nested structure.</p>
+<p><strong>Also Known As:</strong></p>
+<ul>
+<li>Mixed-effects models</li>
+<li>Multilevel models</li>
+<li>Random effects models</li>
+<li>Nested models</li>
+</ul>
+</section>
+<section id="key-idea" class="slide level2">
+<h2><strong>Key Idea</strong></h2>
+<p>Some observations are more similar to each other than to others because they share common features (same site, same species, same year).</p>
+<p><strong>Example in Environmental Science:</strong></p>
+<ul>
+<li>Water quality measurements from multiple lakes</li>
+<li>Each lake has multiple sampling sites</li>
+<li>Each site measured multiple times</li>
+<li>Measurements within a lake are more similar than across lakes</li>
+</ul>
+</section>
+<section id="the-problem-clustered-data" class="slide level2">
+<h2>The Problem: Clustered Data</h2>
+<p><strong>Real-World Scenario:</strong></p>
+<p>You’re studying mercury contamination in fish across 20 lakes. You catch 10 fish per lake and measure mercury levels and length of each fish. You want to build a model that relates fish length to mercury concentration.</p>
+<p><strong>Question:</strong> How should we analyze these 200 measurements?</p>
+<p><strong>The Issue:</strong></p>
+<ul>
+<li>Fish from the same lake are more similar than fish from different lakes</li>
+<li>They share the same water chemistry, food web, temperature</li>
+<li>Standard regression assumes all observations are independent</li>
+<li><b>Ignoring lake structure leads to incorrect conclusions</b></li>
+</ul>
+</section>
+<section id="consequences-of-ignoring-structure" class="slide level2">
+<h2><strong>Consequences of Ignoring Structure</strong></h2>
+<ul>
+<li>Underestimated standard errors → inflated Type I error rates</li>
+<li>False confidence in results</li>
+<li>Poor predictions for new lakes</li>
+<li>Missing important sources of variation</li>
+</ul>
+</section>
+<section id="the-pooling-problem" class="slide level2">
+<h2>The Pooling Problem</h2>
+<p><strong>Three Approaches to Handling Groups:</strong></p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>1. Complete Pooling (Ignore Groups)</strong></p>
+<ul>
+<li>Treat all fish as if they came from one giant lake</li>
+<li>Simple but wrong</li>
+<li>Ignores important variation between lakes</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>2. No Pooling (Separate Models)</strong></p>
+<ul>
+<li>Fit completely separate model for each lake</li>
+<li>20 independent analyses</li>
+<li>Loses information, can’t compare lakes</li>
+<li>Terrible for lakes with few fish</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>3. Partial Pooling (Hierarchical Model)</strong></p>
+<ul>
+<li>Model each lake separately BUT</li>
+<li>Share information across lakes</li>
+<li><strong>Best of both worlds!</strong></li>
+</ul>
+</div></div>
+<p>Let’s explore each approach…</p>
+</section>
+<section id="complete-pooling-ignore-the-structure" class="slide level2">
+<h2>Complete Pooling: Ignore the Structure</h2>
+<p><strong>The Model:</strong></p>
+<p><span class="math display">\[
+\text{mercury}_i = \beta_0 + \beta_1 \times \text{length}_i + \epsilon_i
+\]</span> where i indexes fish.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>What This Means:</strong></p>
+<ul>
+<li>One grand mean (<span class="math inline">\(\beta_0\)</span>) for all lakes</li>
+<li>Same relationship (<span class="math inline">\(\beta_1\)</span>) everywhere</li>
+<li>Assumes all lakes are identical</li>
+</ul>
+<p><strong>When It Might Be OK:</strong></p>
+<ul>
+<li>Groups are truly irrelevant to the question</li>
+<li>Interest is only in population average</li>
+<li><em>Rarely appropriate for environmental data</em></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Problems:</strong></p>
+<ul>
+<li>Clearly wrong—lakes differ in baseline mercury</li>
+<li>Pretends we have 200 independent fish</li>
+<li>Standard errors too small (overconfident)</li>
+<li>Can’t make lake-specific predictions</li>
+</ul>
+</div></div>
+</section>
+<section id="no-pooling-treat-groups-independently" class="slide level2">
+<h2>No Pooling: Treat Groups Independently</h2>
+<p><strong>The Model:</strong></p>
+<p><span class="math display">\[
+\text{mercury}_{ij} = \beta_{0j} + \beta_1 \times \text{length}_{ij} + \epsilon_{ij}
+\]</span> where j indexes lake and i indexes fish within lake j. This is equivalent to fitting 20 separate regressions</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>What This Means:</strong></p>
+<ul>
+<li>Each lake gets its own intercept (β₀j)</li>
+<li>20 separate analyses</li>
+<li>No information shared between lakes</li>
+</ul>
+<p><strong>When It Might Be OK:</strong></p>
+<ul>
+<li>Groups are fundamentally different</li>
+<li>Abundant data in each group</li>
+<li>No interest in new groups</li>
+<li><em>Sometimes reasonable but wasteful</em></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Problems:</strong></p>
+<ul>
+<li>Estimates for small lakes are very uncertain</li>
+<li>Can’t make predictions for new lakes</li>
+<li>Ignores fact that lakes come from common distribution</li>
+<li>Extreme estimates for unusual lakes</li>
+</ul>
+</div></div>
+</section>
+<section id="partial-pooling-the-hierarchical-solution" class="slide level2">
+<h2>Partial Pooling: The Hierarchical Solution</h2>
+<p><strong>The Model:</strong></p>
+<p>Level 1 (fish): <span class="math inline">\(\text{mercury}_{ij} = \alpha_j + \beta × \text{length}_{ij} + \varepsilon_{ij}\)</span><br>
+Level 2 (lake): <span class="math inline">\(\alpha_j \sim \text{Normal}(\mu_\alpha, \sigma_\alpha)\)</span></p>
+<p>where j indexes lake and i indexes fish within lake j.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>What This Means:</strong></p>
+<ul>
+<li>Each lake has its own intercept (<span class="math inline">\(\alpha_j\)</span>)</li>
+<li>BUT lake intercepts come from a common distribution</li>
+<li>Lakes with little data “borrow strength” from others</li>
+<li><strong>Information sharing!</strong></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Why This Works:</strong></p>
+<ul>
+<li>Respects that lakes differ (random intercepts)</li>
+<li>Recognizes lakes are samples from population</li>
+<li>Automatically balances group vs.&nbsp;population information</li>
+<li>Produces “shrinkage” toward population mean</li>
+</ul>
+</div></div>
+<p><strong>This is What Makes Hierarchical Models Powerful!</strong></p>
+</section>
+<section id="shrinkage-the-magic-of-partial-pooling" class="slide level2">
+<h2>Shrinkage: The Magic of Partial Pooling</h2>
+<p><strong>What is Shrinkage?</strong></p>
+<p>Estimates for individual groups are pulled toward the overall mean, with the amount of pull depending on:</p>
+<ol type="1">
+<li>How much data in that group</li>
+<li>How variable the group is</li>
+<li>How different it is from other groups</li>
+</ol>
+<p><strong>The Formula (Conceptually):</strong></p>
+<pre><code>group_estimate = w × group_data + (1-w) × population_mean</code></pre>
+<p>where w depends on sample size and variability</p>
+</section>
+<section id="practical-example" class="slide level2">
+<h2><strong>Practical Example</strong></h2>
+<ul>
+<li>Lake with 2 fish: mostly uses population info (w ≈ 0.2)</li>
+<li>Lake with 50 fish: mostly uses own data (w ≈ 0.9)</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb2-2"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-5"><a></a><span class="fu">library</span>(purrr)</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb2-8"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="co"># Create simulated lake mercury data with varying sample sizes</span></span>
+<span id="cb2-11"><a></a><span class="co"># This reflects the "8 lakes with different sample sizes" concept</span></span>
+<span id="cb2-12"><a></a>lake_info <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-13"><a></a>  <span class="at">lake =</span> <span class="fu">paste0</span>(<span class="st">"Lake_"</span>, LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]),</span>
+<span id="cb2-14"><a></a>  <span class="at">sample_size =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">30</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>), <span class="co"># Varying sample sizes</span></span>
+<span id="cb2-15"><a></a>  <span class="at">true_intercept =</span> <span class="fu">c</span>(<span class="fl">2.0</span>, <span class="fl">2.8</span>, <span class="fl">1.5</span>, <span class="fl">3.2</span>, <span class="fl">1.8</span>, <span class="fl">2.5</span>, <span class="fl">1.2</span>, <span class="fl">3.5</span>) <span class="co"># True lake effects</span></span>
+<span id="cb2-16"><a></a>)</span>
+<span id="cb2-17"><a></a></span>
+<span id="cb2-18"><a></a><span class="co"># Generate fish data</span></span>
+<span id="cb2-19"><a></a>fish_data <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lake_info), <span class="cf">function</span>(i) {</span>
+<span id="cb2-20"><a></a>  lake <span class="ot">&lt;-</span> lake_info<span class="sc">$</span>lake[i]</span>
+<span id="cb2-21"><a></a>  n <span class="ot">&lt;-</span> lake_info<span class="sc">$</span>sample_size[i]</span>
+<span id="cb2-22"><a></a>  true_int <span class="ot">&lt;-</span> lake_info<span class="sc">$</span>true_intercept[i]</span>
+<span id="cb2-23"><a></a></span>
+<span id="cb2-24"><a></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb2-25"><a></a>    <span class="at">lake =</span> lake,</span>
+<span id="cb2-26"><a></a>    <span class="at">fish_id =</span> <span class="dv">1</span><span class="sc">:</span>n,</span>
+<span id="cb2-27"><a></a>    <span class="at">length =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">25</span>, <span class="at">sd =</span> <span class="dv">5</span>), <span class="co"># Fish length (cm)</span></span>
+<span id="cb2-28"><a></a>    <span class="at">mercury =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> true_int <span class="sc">+</span> <span class="fl">0.05</span> <span class="sc">*</span> <span class="fu">rnorm</span>(n, <span class="dv">25</span>, <span class="dv">5</span>), <span class="at">sd =</span> <span class="fl">0.3</span>)</span>
+<span id="cb2-29"><a></a>  )</span>
+<span id="cb2-30"><a></a>})</span>
+<span id="cb2-31"><a></a></span>
+<span id="cb2-32"><a></a><span class="co"># 1. COMPLETE POOLING (ignore lake structure)</span></span>
+<span id="cb2-33"><a></a>complete_pool <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb2-34"><a></a>  mercury <span class="sc">~</span> length,</span>
+<span id="cb2-35"><a></a>  <span class="at">data =</span> fish_data,</span>
+<span id="cb2-36"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb2-37"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb2-38"><a></a>  <span class="at">iter =</span> <span class="dv">1000</span>,</span>
+<span id="cb2-39"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span>, <span class="co"># Suppress output</span></span>
+<span id="cb2-40"><a></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb2-41"><a></a>)</span>
+<span id="cb2-42"><a></a></span>
+<span id="cb2-43"><a></a><span class="co"># 2. NO POOLING (separate models for each lake)</span></span>
+<span id="cb2-44"><a></a>no_pool_estimates <span class="ot">&lt;-</span> fish_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-45"><a></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span></span>
+<span id="cb2-46"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb2-47"><a></a>    <span class="at">intercept =</span> <span class="fu">mean</span>(mercury <span class="sc">-</span> <span class="fl">0.05</span> <span class="sc">*</span> length), <span class="co"># Crude estimate</span></span>
+<span id="cb2-48"><a></a>    <span class="at">n_fish =</span> <span class="fu">n</span>(),</span>
+<span id="cb2-49"><a></a>    <span class="at">.groups =</span> <span class="st">'drop'</span></span>
+<span id="cb2-50"><a></a>  )</span>
+<span id="cb2-51"><a></a></span>
+<span id="cb2-52"><a></a><span class="co"># 3. PARTIAL POOLING (hierarchical model)</span></span>
+<span id="cb2-53"><a></a>partial_pool <span class="ot">&lt;-</span> <span class="fu">stan_glmer</span>(</span>
+<span id="cb2-54"><a></a>  mercury <span class="sc">~</span> length <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> lake),</span>
+<span id="cb2-55"><a></a>  <span class="at">data =</span> fish_data,</span>
+<span id="cb2-56"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb2-57"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb2-58"><a></a>  <span class="at">iter =</span> <span class="dv">1000</span>,</span>
+<span id="cb2-59"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span>,</span>
+<span id="cb2-60"><a></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb2-61"><a></a>)</span>
+<span id="cb2-62"><a></a></span>
+<span id="cb2-63"><a></a><span class="co"># Extract estimates for comparison</span></span>
+<span id="cb2-64"><a></a>complete_pool_int <span class="ot">&lt;-</span> <span class="fu">fixef</span>(complete_pool)[<span class="dv">1</span>]</span>
+<span id="cb2-65"><a></a>partial_pool_ints <span class="ot">&lt;-</span> <span class="fu">coef</span>(partial_pool)<span class="sc">$</span>lake[, <span class="dv">1</span>]</span>
+<span id="cb2-66"><a></a>population_mean <span class="ot">&lt;-</span> <span class="fu">fixef</span>(partial_pool)[<span class="dv">1</span>]</span>
+<span id="cb2-67"><a></a></span>
+<span id="cb2-68"><a></a><span class="co"># Create comparison data frame</span></span>
+<span id="cb2-69"><a></a>comparison_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-70"><a></a>  <span class="at">lake =</span> lake_info<span class="sc">$</span>lake,</span>
+<span id="cb2-71"><a></a>  <span class="at">sample_size =</span> lake_info<span class="sc">$</span>sample_size,</span>
+<span id="cb2-72"><a></a>  <span class="at">true_intercept =</span> lake_info<span class="sc">$</span>true_intercept,</span>
+<span id="cb2-73"><a></a>  <span class="at">complete_pooling =</span> complete_pool_int,</span>
+<span id="cb2-74"><a></a>  <span class="at">no_pooling =</span> no_pool_estimates<span class="sc">$</span>intercept,</span>
+<span id="cb2-75"><a></a>  <span class="at">partial_pooling =</span> partial_pool_ints,</span>
+<span id="cb2-76"><a></a>  <span class="at">population_mean =</span> population_mean</span>
+<span id="cb2-77"><a></a>)</span>
+<span id="cb2-78"><a></a></span>
+<span id="cb2-79"><a></a><span class="co"># Calculate shrinkage factor (w) - how much each lake relies on its own data</span></span>
+<span id="cb2-80"><a></a>comparison_data <span class="ot">&lt;-</span> comparison_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-81"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-82"><a></a>    <span class="at">shrinkage_factor =</span> <span class="fu">abs</span>(no_pooling <span class="sc">-</span> population_mean) <span class="sc">/</span></span>
+<span id="cb2-83"><a></a>      <span class="fu">abs</span>(partial_pooling <span class="sc">-</span> population_mean),</span>
+<span id="cb2-84"><a></a>    <span class="at">w_approx =</span> <span class="fu">pmin</span>(<span class="fl">0.9</span>, <span class="fu">pmax</span>(<span class="fl">0.1</span>, sample_size <span class="sc">/</span> (sample_size <span class="sc">+</span> <span class="dv">10</span>))) <span class="co"># Approximate weight</span></span>
+<span id="cb2-85"><a></a>  )</span>
+<span id="cb2-86"><a></a></span>
+<span id="cb2-87"><a></a><span class="co"># Reshape for plotting</span></span>
+<span id="cb2-88"><a></a>plot_data <span class="ot">&lt;-</span> comparison_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-89"><a></a>  <span class="fu">select</span>(</span>
+<span id="cb2-90"><a></a>    lake,</span>
+<span id="cb2-91"><a></a>    sample_size,</span>
+<span id="cb2-92"><a></a>    true_intercept,</span>
+<span id="cb2-93"><a></a>    complete_pooling,</span>
+<span id="cb2-94"><a></a>    no_pooling,</span>
+<span id="cb2-95"><a></a>    partial_pooling</span>
+<span id="cb2-96"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-97"><a></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb2-98"><a></a>    <span class="at">cols =</span> <span class="fu">c</span>(complete_pooling, no_pooling, partial_pooling),</span>
+<span id="cb2-99"><a></a>    <span class="at">names_to =</span> <span class="st">"method"</span>,</span>
+<span id="cb2-100"><a></a>    <span class="at">values_to =</span> <span class="st">"estimate"</span></span>
+<span id="cb2-101"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-102"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-103"><a></a>    <span class="at">method =</span> <span class="fu">factor</span>(</span>
+<span id="cb2-104"><a></a>      method,</span>
+<span id="cb2-105"><a></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"complete_pooling"</span>, <span class="st">"no_pooling"</span>, <span class="st">"partial_pooling"</span>),</span>
+<span id="cb2-106"><a></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Complete Pooling"</span>, <span class="st">"No Pooling"</span>, <span class="st">"Partial Pooling"</span>)</span>
+<span id="cb2-107"><a></a>    )</span>
+<span id="cb2-108"><a></a>  )</span>
+<span id="cb2-109"><a></a></span>
+<span id="cb2-110"><a></a><span class="co"># Create the visualization showing different pooling strategies</span></span>
+<span id="cb2-111"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb2-112"><a></a>  plot_data,</span>
+<span id="cb2-113"><a></a>  <span class="fu">aes</span>(</span>
+<span id="cb2-114"><a></a>    <span class="at">x =</span> <span class="fu">reorder</span>(lake, sample_size),</span>
+<span id="cb2-115"><a></a>    <span class="at">y =</span> estimate,</span>
+<span id="cb2-116"><a></a>    <span class="at">color =</span> method,</span>
+<span id="cb2-117"><a></a>    <span class="at">shape =</span> method</span>
+<span id="cb2-118"><a></a>  )</span>
+<span id="cb2-119"><a></a>) <span class="sc">+</span></span>
+<span id="cb2-120"><a></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb2-121"><a></a>    <span class="at">yintercept =</span> population_mean,</span>
+<span id="cb2-122"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb2-123"><a></a>    <span class="at">color =</span> <span class="st">"gray50"</span>,</span>
+<span id="cb2-124"><a></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb2-125"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-126"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb2-127"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> true_intercept), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb2-128"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"darkgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb2-129"><a></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb2-130"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-131"><a></a>    <span class="at">title =</span> <span class="st">"Comparison of Pooling Strategies"</span>,</span>
+<span id="cb2-132"><a></a>    <span class="at">subtitle =</span> <span class="st">"Black X = True value, Dashed line = Population mean"</span>,</span>
+<span id="cb2-133"><a></a>    <span class="at">x =</span> <span class="st">"Lake (ordered by sample size)"</span>,</span>
+<span id="cb2-134"><a></a>    <span class="at">y =</span> <span class="st">"Estimated Mercury Intercept (μg/g)"</span>,</span>
+<span id="cb2-135"><a></a>    <span class="at">color =</span> <span class="st">"Method"</span>,</span>
+<span id="cb2-136"><a></a>    <span class="at">shape =</span> <span class="st">"Method"</span></span>
+<span id="cb2-137"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-138"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-139"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb2-140"><a></a></span>
+<span id="cb2-141"><a></a><span class="co"># Add sample sizes to x-axis labels</span></span>
+<span id="cb2-142"><a></a>plot_data_labeled <span class="ot">&lt;-</span> plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-143"><a></a>  <span class="fu">left_join</span>(</span>
+<span id="cb2-144"><a></a>    comparison_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(lake, sample_size),</span>
+<span id="cb2-145"><a></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"lake"</span>, <span class="st">"sample_size"</span>)</span>
+<span id="cb2-146"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-147"><a></a>  <span class="fu">mutate</span>(<span class="at">lake_label =</span> <span class="fu">paste0</span>(lake, <span class="st">"</span><span class="sc">\n</span><span class="st">(n="</span>, sample_size, <span class="st">")"</span>))</span>
+<span id="cb2-148"><a></a></span>
+<span id="cb2-149"><a></a>p1_labeled <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb2-150"><a></a>  plot_data_labeled,</span>
+<span id="cb2-151"><a></a>  <span class="fu">aes</span>(</span>
+<span id="cb2-152"><a></a>    <span class="at">x =</span> <span class="fu">reorder</span>(lake_label, sample_size),</span>
+<span id="cb2-153"><a></a>    <span class="at">y =</span> estimate,</span>
+<span id="cb2-154"><a></a>    <span class="at">color =</span> method,</span>
+<span id="cb2-155"><a></a>    <span class="at">shape =</span> method</span>
+<span id="cb2-156"><a></a>  )</span>
+<span id="cb2-157"><a></a>) <span class="sc">+</span></span>
+<span id="cb2-158"><a></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb2-159"><a></a>    <span class="at">yintercept =</span> population_mean,</span>
+<span id="cb2-160"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb2-161"><a></a>    <span class="at">color =</span> <span class="st">"gray50"</span>,</span>
+<span id="cb2-162"><a></a>    <span class="at">alpha =</span> <span class="fl">0.7</span></span>
+<span id="cb2-163"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-164"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb2-165"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> true_intercept), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb2-166"><a></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"darkgreen"</span>)) <span class="sc">+</span></span>
+<span id="cb2-167"><a></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb2-168"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-169"><a></a>    <span class="at">title =</span> <span class="st">"Comparison of Pooling Strategies by Sample Size"</span>,</span>
+<span id="cb2-170"><a></a>    <span class="at">subtitle =</span> <span class="st">"Black X = True value, Dashed line = Population mean</span><span class="sc">\n</span><span class="st">Note how partial pooling shrinks small-sample estimates toward the mean"</span>,</span>
+<span id="cb2-171"><a></a>    <span class="at">x =</span> <span class="st">"Lake (sample size)"</span>,</span>
+<span id="cb2-172"><a></a>    <span class="at">y =</span> <span class="st">"Estimated Mercury Intercept (μg/g)"</span>,</span>
+<span id="cb2-173"><a></a>    <span class="at">color =</span> <span class="st">"Method"</span>,</span>
+<span id="cb2-174"><a></a>    <span class="at">shape =</span> <span class="st">"Method"</span></span>
+<span id="cb2-175"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-176"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-177"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span>
+<span id="cb2-178"><a></a></span>
+<span id="cb2-179"><a></a><span class="co"># Show shrinkage effect more clearly</span></span>
+<span id="cb2-180"><a></a>p2 <span class="ot">&lt;-</span> comparison_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-181"><a></a>  <span class="fu">select</span>(lake, sample_size, no_pooling, partial_pooling, population_mean) <span class="sc">%&gt;%</span></span>
+<span id="cb2-182"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_size)) <span class="sc">+</span></span>
+<span id="cb2-183"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb2-184"><a></a>    <span class="fu">aes</span>(<span class="at">xend =</span> sample_size, <span class="at">y =</span> no_pooling, <span class="at">yend =</span> partial_pooling),</span>
+<span id="cb2-185"><a></a>    <span class="at">alpha =</span> <span class="fl">0.6</span>,</span>
+<span id="cb2-186"><a></a>    <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb2-187"><a></a>    <span class="at">color =</span> <span class="st">"purple"</span></span>
+<span id="cb2-188"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-189"><a></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> no_pooling), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb2-190"><a></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb2-191"><a></a>    <span class="fu">aes</span>(<span class="at">y =</span> partial_pooling),</span>
+<span id="cb2-192"><a></a>    <span class="at">color =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb2-193"><a></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb2-194"><a></a>    <span class="at">alpha =</span> <span class="fl">0.8</span></span>
+<span id="cb2-195"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-196"><a></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb2-197"><a></a>    <span class="at">yintercept =</span> population_mean,</span>
+<span id="cb2-198"><a></a>    <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb2-199"><a></a>    <span class="at">color =</span> <span class="st">"gray50"</span></span>
+<span id="cb2-200"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-201"><a></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> partial_pooling, <span class="at">label =</span> lake), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.1</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-202"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-203"><a></a>    <span class="at">title =</span> <span class="st">"Shrinkage Effect in Partial Pooling"</span>,</span>
+<span id="cb2-204"><a></a>    <span class="at">subtitle =</span> <span class="st">"Blue = No pooling, Green = Partial pooling</span><span class="sc">\n</span><span class="st">Lines show how estimates are 'shrunk' toward population mean"</span>,</span>
+<span id="cb2-205"><a></a>    <span class="at">x =</span> <span class="st">"Sample Size (number of fish)"</span>,</span>
+<span id="cb2-206"><a></a>    <span class="at">y =</span> <span class="st">"Estimated Mercury Intercept (μg/g)"</span></span>
+<span id="cb2-207"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb2-208"><a></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb2-209"><a></a></span>
+<span id="cb2-210"><a></a><span class="co"># Print the plots</span></span>
+<span id="cb2-211"><a></a><span class="fu">print</span>(p1_labeled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-01-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-01-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">print</span>(p2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-01-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-01-2.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># Show the shrinkage weights</span></span>
+<span id="cb4-2"><a></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Shrinkage Analysis:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-3"><a></a><span class="fu">cat</span>(<span class="st">"Lakes with small samples get 'shrunk' more toward population mean:</span><span class="sc">\n\n</span><span class="st">"</span>)</span>
+<span id="cb4-4"><a></a>comparison_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a></a>  <span class="fu">arrange</span>(sample_size) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a></a>  <span class="fu">select</span>(lake, sample_size, w_approx) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-8"><a></a>    <span class="at">w_approx =</span> <span class="fu">round</span>(w_approx, <span class="dv">2</span>),</span>
+<span id="cb4-9"><a></a>    <span class="at">interpretation =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-10"><a></a>      w_approx <span class="sc">&lt;</span> <span class="fl">0.3</span> <span class="sc">~</span> <span class="st">"Mostly uses population info"</span>,</span>
+<span id="cb4-11"><a></a>      w_approx <span class="sc">&lt;</span> <span class="fl">0.7</span> <span class="sc">~</span> <span class="st">"Balanced combination"</span>,</span>
+<span id="cb4-12"><a></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Mostly uses own data"</span></span>
+<span id="cb4-13"><a></a>    )</span>
+<span id="cb4-14"><a></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-15"><a></a>  <span class="fu">print</span>()</span>
+<span id="cb4-16"><a></a></span>
+<span id="cb4-17"><a></a><span class="co"># Model comparison</span></span>
+<span id="cb4-18"><a></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Model Summary:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-19"><a></a><span class="fu">cat</span>(<span class="st">"Partial Pooling Model (Hierarchical):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb4-20"><a></a><span class="fu">print</span>(partial_pool)</span>
+<span id="cb4-21"><a></a></span>
+<span id="cb4-22"><a></a><span class="co"># Extract and show ICC</span></span>
+<span id="cb4-23"><a></a>icc_value <span class="ot">&lt;-</span> <span class="fu">VarCorr</span>(partial_pool)<span class="sc">$</span>lake[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">/</span></span>
+<span id="cb4-24"><a></a>  (<span class="fu">VarCorr</span>(partial_pool)<span class="sc">$</span>lake[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">+</span> <span class="fu">sigma</span>(partial_pool)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb4-25"><a></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Intraclass Correlation Coefficient (ICC): %.3f</span><span class="sc">\n</span><span class="st">"</span>, icc_value))</span>
+<span id="cb4-26"><a></a><span class="fu">cat</span>(<span class="st">"This means"</span>, <span class="fu">round</span>(icc_value <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"% of variance is between lakes</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>Complete Pooling:</strong></p>
+<ul>
+<li>All fish: one line</li>
+<li>Ignores lakes entirely</li>
+</ul>
+<p><strong>No Pooling:</strong></p>
+<ul>
+<li>8 completely separate lines</li>
+<li>Wild variation for small-sample lakes</li>
+<li>Lake C (n=3): crazy extreme estimate</li>
+</ul>
+<p><strong>Partial Pooling:</strong></p>
+<ul>
+<li>8 different lines</li>
+<li>Small-sample lakes pulled toward average</li>
+<li>Lake C’s estimate is moderated</li>
+<li>Uncertainty properly reflects sample size</li>
+</ul>
+<p><strong>The Pattern:</strong></p>
+<ul>
+<li>Large-sample lakes: similar in no-pooling vs partial-pooling</li>
+<li>Small-sample lakes: shrunk toward population mean</li>
+<li>This is automatic and optimal!</li>
+</ul>
+</section>
+<section id="when-to-use-hierarchical-models" class="slide level2">
+<h2>When to Use Hierarchical Models</h2>
+<p><strong>You Should Use Hierarchical Models When:</strong></p>
+<p>✓ <strong>Nested/Grouped Structure</strong></p>
+<ul>
+<li>Multiple sites within regions</li>
+<li>Repeated measurements on same individuals/locations</li>
+<li>Multiple species, plots, watersheds</li>
+</ul>
+<p>✓ <strong>Interest in Group-Level Variation</strong></p>
+<ul>
+<li>How much do lakes differ in baseline mercury?</li>
+<li>What’s the variance between sites?</li>
+<li>Are groups meaningfully different?</li>
+</ul>
+</section>
+<section id="when-to-use-hierarchical-models-1" class="slide level2">
+<h2>When to Use Hierarchical Models</h2>
+<p><strong>You Should Use Hierarchical Models When:</strong></p>
+<p>✓ <strong>Predictions for New Groups</strong></p>
+<ul>
+<li>Predict mercury for an unsampled lake</li>
+<li>Estimate values for new sites</li>
+<li>Generalize beyond observed groups</li>
+</ul>
+<p>✓ <strong>Unbalanced Data</strong></p>
+<ul>
+<li>Some groups have many observations, others few</li>
+<li>Hierarchical models handle this gracefully</li>
+<li>No need to throw away data!</li>
+</ul>
+</section>
+<section id="when-to-use-hierarchical-models-examples" class="slide level2">
+<h2>When to Use Hierarchical Models (Examples)</h2>
+<p><strong>Environmental Science Examples:</strong></p>
+<p><strong>1. Spatial Hierarchical Structure</strong></p>
+<ul>
+<li><strong>Problem:</strong> Measuring nitrogen runoff from 50 farms across 5 watersheds</li>
+<li><strong>Why Hierarchical:</strong> Farms within a watershed share hydrology, soil, climate</li>
+<li><strong>Model:</strong> Farm-level measurements nested in watersheds</li>
+</ul>
+<p><strong>2. Temporal Hierarchical Structure</strong></p>
+<ul>
+<li><strong>Problem:</strong> Species counts at 20 sites over 10 years</li>
+<li><strong>Why Hierarchical:</strong> Repeated measures at same sites aren’t independent</li>
+<li><strong>Model:</strong> Yearly observations nested within sites</li>
+</ul>
+</section>
+<section id="when-to-use-hierarchical-models-examples-1" class="slide level2">
+<h2>When to Use Hierarchical Models (Examples)</h2>
+<p><strong>Environmental Science Examples:</strong></p>
+<p><strong>3. Taxonomic Hierarchical Structure</strong></p>
+<ul>
+<li><strong>Problem:</strong> Testing pollutant effects on 30 fish species from 4 families</li>
+<li><strong>Why Hierarchical:</strong> Species within family share biology</li>
+<li><strong>Model:</strong> Species nested within families</li>
+</ul>
+<p><strong>4. Multi-Level Spatial</strong></p>
+<ul>
+<li><strong>Problem:</strong> Tree growth in plots within forests within ecoregions</li>
+<li><strong>Why Hierarchical:</strong> Three levels of grouping!</li>
+<li><strong>Model:</strong> Plots within forests within regions</li>
+</ul>
+</section>
+<section id="problem-which-model-for-bird-surveys" class="slide level2">
+<h2>Problem: Which Model for Bird Surveys?</h2>
+<p><strong>Scenario:</strong></p>
+<p>You conduct bird surveys at 30 sites across a mountain gradient. Each site is visited 4 times during breeding season.</p>
+<p><strong>Data Structure:</strong></p>
+<ul>
+<li>30 sites × 4 visits = 120 observations</li>
+<li>Want to relate bird abundance to elevation</li>
+</ul>
+<p><strong>Question:</strong> What model should you use?</p>
+<p><strong>A. Standard Linear Model (ignore sites)</strong></p>
+<pre><code>abundance ~ elevation</code></pre>
+<p><strong>B. Fixed Effects for Sites</strong></p>
+<pre><code>abundance ~ elevation + site</code></pre>
+<p><strong>C. Hierarchical Model</strong></p>
+<pre><code>Level 1: abundance_ij ~ elevation_j + α_j
+Level 2: α_j ~ Normal(μ, σ)</code></pre>
+</section>
+<section id="answer-c-why" class="slide level2">
+<h2><strong>Answer:</strong> C! Why?</h2>
+<ul>
+<li>Visits within sites are not independent (repeated measures)</li>
+<li>Want to generalize to other sites on mountain</li>
+<li>Sites are random sample from population of possible sites</li>
+<li>Interested in site-to-site variation</li>
+</ul>
+</section>
+<section id="bayesian-approach-to-hierarchical-models" class="slide level2">
+<h2>Bayesian Approach to Hierarchical Models</h2>
+<p><strong>Why Bayesian for Hierarchical Models?</strong></p>
+<ol type="1">
+<li><p><strong>Natural Framework</strong></p>
+<ul>
+<li>Hierarchical structure maps directly to Bayesian model</li>
+<li>Hyperparameters get hyperpriors—it’s all just probability!</li>
+</ul></li>
+<li><p><strong>Handles Complexity</strong></p>
+<ul>
+<li>Complex models fit without approximations</li>
+<li>Correctly propagates uncertainty through levels</li>
+</ul></li>
+<li><p><strong>Small Sample Sizes</strong></p>
+<ul>
+<li>Works well even with few groups or observations per group</li>
+<li>No asymptotic assumptions needed</li>
+</ul></li>
+<li><p><strong>Interpretable Uncertainty</strong></p>
+<ul>
+<li>Full posterior distributions for everything</li>
+<li>Credible intervals have direct interpretation</li>
+<li>Uncertainty about variance components</li>
+</ul></li>
+<li><p><strong>Predictive Distributions</strong></p>
+<ul>
+<li>Easy to predict for new groups</li>
+<li>Accounts for all sources of uncertainty</li>
+</ul></li>
+</ol>
+</section>
+<section id="bayesian-building-blocks" class="slide level2 smaller">
+<h2>Bayesian Building Blocks</h2>
+<p><strong>Quick Bayesian Refresher:</strong></p>
+<p><strong>Bayes’ Theorem:</strong></p>
+<pre><code>Posterior ∝ Likelihood × Prior
+P(θ|data) ∝ P(data|θ) × P(θ)</code></pre>
+<p><strong>Components:</strong></p>
+<ul>
+<li><strong>Likelihood:</strong> P(data|θ) = How likely are the data given parameters?</li>
+<li><strong>Prior:</strong> P(θ) = What do we believe before seeing data?</li>
+<li><strong>Posterior:</strong> P(θ|data) = Updated beliefs after seeing data</li>
+</ul>
+<p><strong>In Hierarchical Models:</strong></p>
+<ul>
+<li>Parameters at each level get distributions</li>
+<li>Hyperparameters control group-level distributions</li>
+<li>Everything estimated simultaneously</li>
+</ul>
+<p><strong>Practical Interpretation:</strong></p>
+<ul>
+<li><strong>95% Credible Interval:</strong> “Given the data, there’s a 95% probability the parameter is in this range”</li>
+<li>Direct probability statements!</li>
+</ul>
+</section>
+<section id="hierarchical-model-structure" class="slide level2">
+<h2>Hierarchical Model Structure</h2>
+<p><strong>General Form:</strong></p>
+<p><strong>Level 1 (Observation Level):</strong></p>
+<p><span class="math display">\[
+y_{ij} \sim \text{Normal}(\mu_{ij}, \sigma_{y}) \\
+\mu_{ij} = \alpha_j + \beta \times x_{ij}
+\]</span></p>
+<p><strong>Level 2 (Group Level):</strong></p>
+<p><span class="math display">\[
+\alpha_j \sim \text{Normal}(\mu_{\alpha}, \sigma_{\alpha})
+\]</span></p>
+<p><strong>Level 3 (Population Level / Priors):</strong></p>
+<p><span class="math display">\[
+\mu_{\alpha} \sim \text{Normal}(0, 10) \\
+\sigma_{\alpha} \sim \text{Cauchy}(0, 2.5) \\
+\beta \sim \text{Normal}(0, 5) \\
+\sigma_{y} \sim \text{Cauchy}(0, 2.5)
+\]</span></p>
+</section>
+<section id="what-this-means" class="slide level2">
+<h2><strong>What This Means:</strong></h2>
+<ul>
+<li>Observations vary within groups (<span class="math inline">\(\sigma_y\)</span>)</li>
+<li>Groups vary within population (<span class="math inline">\(\sigma_{\alpha}\)</span>)</li>
+<li>Both sources of variation estimated</li>
+<li>Priors express prior knowledge (often weakly informative)</li>
+</ul>
+</section>
+<section id="fixed-vs-random-effects" class="slide level2 smaller">
+<h2>Fixed vs Random Effects</h2>
+<p><strong>Terminology (Often Confusing!):</strong></p>
+<p><strong>Fixed Effects:</strong></p>
+<ul>
+<li>Parameters we estimate and care about</li>
+<li>Examples: slope of elevation, effect of temperature</li>
+<li>Same across all groups (though can vary in mixed models)</li>
+</ul>
+<p><strong>Random Effects:</strong></p>
+<ul>
+<li>Parameters that vary by group</li>
+<li>Assume groups drawn from population distribution</li>
+<li>Examples: lake-specific intercepts, site-level variation</li>
+<li>Focus is on the distribution (mean and variance), not individual values</li>
+</ul>
+<p><strong>Helpful Distinction:</strong></p>
+<ul>
+<li><strong>Fixed:</strong> “These specific effects”</li>
+<li><strong>Random:</strong> “Variation among similar things”</li>
+</ul>
+<p><strong>In Environmental Models:</strong></p>
+<ul>
+<li>Fixed: covariate effects (temperature, elevation, treatment)</li>
+<li>Random: site effects, year effects, species effects</li>
+<li><strong>Both can be in the same model!</strong></li>
+</ul>
+</section>
+<section id="introduction-to-rstanarm" class="slide level2">
+<h2>Introduction to rstanarm</h2>
+<p><strong>What is rstanarm?</strong></p>
+<p>An R package that fits Bayesian regression models using Stan, with syntax similar to base R.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Familiar formula syntax (<code>lm</code>, <code>lmer</code> style)</li>
+<li>Pre-compiled models (fast!)</li>
+<li>Sensible default priors</li>
+<li>Easy to use, hard to misuse</li>
+</ul>
+<p><strong>Installation:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">install.packages</span>(<span class="st">"rstanarm"</span>)</span>
+<span id="cb9-2"><a></a><span class="fu">library</span>(rstanarm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="basic-syntax" class="slide level2">
+<h2><strong>Basic Syntax:</strong></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Standard regression</span></span>
+<span id="cb10-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> mydata)</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a><span class="co"># Hierarchical model (like lme4)</span></span>
+<span id="cb10-5"><a></a>model <span class="ot">&lt;-</span> <span class="fu">stan_glmer</span>(y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group), <span class="at">data =</span> mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="advantages-for-beginners" class="slide level2">
+<h2><strong>Advantages for Beginners:</strong></h2>
+<ul>
+<li>Simple syntax</li>
+<li>Good defaults</li>
+<li>Extensive documentation</li>
+<li>Active community</li>
+</ul>
+</section>
+<section id="introduction-to-brms" class="slide level2">
+<h2>Introduction to brms</h2>
+<p><strong>What is brms?</strong></p>
+<p>Bayesian Regression Models using Stan</p>
+<p>— more flexible than rstanarm.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Extremely flexible model specification</li>
+<li>Supports complex hierarchical structures</li>
+<li>Distributional regression (model σ, not just μ)</li>
+<li>Custom families and link functions</li>
+<li>Generates Stan code on the fly</li>
+</ul>
+</section>
+<section id="installation" class="slide level2">
+<h2><strong>Installation:</strong></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">install.packages</span>(<span class="st">"brms"</span>)</span>
+<span id="cb11-2"><a></a><span class="fu">library</span>(brms)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="basic-syntax-1" class="slide level2">
+<h2><strong>Basic Syntax:</strong></h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Standard regression</span></span>
+<span id="cb12-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">brm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> mydata)</span>
+<span id="cb12-3"><a></a></span>
+<span id="cb12-4"><a></a><span class="co"># Hierarchical model</span></span>
+<span id="cb12-5"><a></a>model <span class="ot">&lt;-</span> <span class="fu">brm</span>(y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group), <span class="at">data =</span> mydata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="when-to-use-brms" class="slide level2">
+<h2><strong>When to Use brms:</strong></h2>
+<ul>
+<li>Need custom distributions</li>
+<li>Complex random effects structures</li>
+<li>Non-linear models</li>
+<li>Want maximum flexibility</li>
+</ul>
+</section>
+<section id="example-1-lake-mercury-rstanarm" class="slide level2">
+<h2>Example 1: Lake Mercury (rstanarm)</h2>
+<p><strong>Scenario:</strong> Mercury in fish across 20 lakes</p>
+<p><strong>Data Structure:</strong></p>
+<ul>
+<li>200 fish (10 per lake)</li>
+<li>Mercury concentration (response)</li>
+<li>Fish length (predictor)</li>
+<li>Lake ID (grouping)</li>
+</ul>
+<p><strong>Question:</strong> How does fish length relate to mercury? Do lakes differ in baseline mercury?</p>
+</section>
+<section id="example-1-lake-mercury-rstanarm-1" class="slide level2">
+<h2>Example 1: Lake Mercury (rstanarm)</h2>
+<p><strong>Complete Pooling (Wrong):</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a><span class="co"># Ignore lake structure</span></span>
+<span id="cb13-4"><a></a>complete_pool <span class="ot">&lt;-</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb13-5"><a></a>  mercury <span class="sc">~</span> length,</span>
+<span id="cb13-6"><a></a>  <span class="at">data =</span> fish_data,</span>
+<span id="cb13-7"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb13-8"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb13-9"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb13-10"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb13-11"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span> <span class="co"># Suppress output</span></span>
+<span id="cb13-12"><a></a>)</span>
+<span id="cb13-13"><a></a>complete_pool</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>stan_glm
+ family:       gaussian [identity]
+ formula:      mercury ~ length
+ observations: 135
+ predictors:   2
+------
+            Median MAD_SD
+(Intercept) 3.3    0.3   
+length      0.0    0.0   
+
+Auxiliary parameter(s):
+      Median MAD_SD
+sigma 0.7    0.0   
+
+------
+* For help interpreting the printed output see ?print.stanreg
+* For info on the priors used see ?prior_summary.stanreg</code></pre>
+</div>
+</div>
+<p><strong>Problem:</strong> Treats all 200 fish as independent. Standard errors too small!</p>
+</section>
+<section id="example-1-lake-mercury-hierarchical-model" class="slide level2">
+<h2>Example 1: Lake Mercury (Hierarchical Model)</h2>
+<p><strong>Partial Pooling (Correct):</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a><span class="co"># Random intercepts for lakes</span></span>
+<span id="cb15-4"><a></a>partial_pool <span class="ot">&lt;-</span> <span class="fu">stan_glmer</span>(</span>
+<span id="cb15-5"><a></a>  mercury <span class="sc">~</span> length <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> lake),</span>
+<span id="cb15-6"><a></a>  <span class="at">data =</span> fish_data,</span>
+<span id="cb15-7"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb15-8"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb15-9"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb15-10"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb15-11"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span> <span class="co"># Suppress output</span></span>
+<span id="cb15-12"><a></a>)</span>
+<span id="cb15-13"><a></a></span>
+<span id="cb15-14"><a></a><span class="co"># View results</span></span>
+<span id="cb15-15"><a></a><span class="co"># print(partial_pool)</span></span>
+<span id="cb15-16"><a></a><span class="fu">summary</span>(partial_pool)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model Info:
+ function:     stan_glmer
+ family:       gaussian [identity]
+ formula:      mercury ~ length + (1 | lake)
+ algorithm:    sampling
+ sample:       4000 (posterior sample size)
+ priors:       see help('prior_summary')
+ observations: 135
+ groups:       lake (8)
+
+Estimates:
+                                      mean   sd   10%   50%   90%
+(Intercept)                          3.4    0.3  3.0   3.4   3.8 
+length                               0.0    0.0  0.0   0.0   0.0 
+b[(Intercept) lake:Lake_A]          -0.4    0.3 -0.7  -0.4   0.0 
+b[(Intercept) lake:Lake_B]           0.4    0.3  0.1   0.4   0.8 
+b[(Intercept) lake:Lake_C]          -0.6    0.3 -1.0  -0.6  -0.3 
+b[(Intercept) lake:Lake_D]           1.0    0.3  0.6   1.0   1.3 
+b[(Intercept) lake:Lake_E]          -0.4    0.3 -0.7  -0.4   0.0 
+b[(Intercept) lake:Lake_F]           0.2    0.3 -0.2   0.2   0.6 
+b[(Intercept) lake:Lake_G]          -1.1    0.3 -1.5  -1.1  -0.7 
+b[(Intercept) lake:Lake_H]           0.9    0.4  0.5   0.9   1.4 
+sigma                                0.4    0.0  0.4   0.4   0.4 
+Sigma[lake:(Intercept),(Intercept)]  0.6    0.4  0.3   0.5   1.1 
+
+Fit Diagnostics:
+           mean   sd   10%   50%   90%
+mean_PPD 3.5    0.0  3.5   3.5   3.6  
+
+The mean_ppd is the sample average posterior predictive distribution of the outcome variable (for details see help('summary.stanreg')).
+
+MCMC diagnostics
+                                    mcse Rhat n_eff
+(Intercept)                         0.0  1.0  1310 
+length                              0.0  1.0  3220 
+b[(Intercept) lake:Lake_A]          0.0  1.0  1078 
+b[(Intercept) lake:Lake_B]          0.0  1.0  1103 
+b[(Intercept) lake:Lake_C]          0.0  1.0  1102 
+b[(Intercept) lake:Lake_D]          0.0  1.0  1144 
+b[(Intercept) lake:Lake_E]          0.0  1.0  1165 
+b[(Intercept) lake:Lake_F]          0.0  1.0  1229 
+b[(Intercept) lake:Lake_G]          0.0  1.0  1454 
+b[(Intercept) lake:Lake_H]          0.0  1.0  1618 
+sigma                               0.0  1.0  2943 
+Sigma[lake:(Intercept),(Intercept)] 0.0  1.0  1290 
+mean_PPD                            0.0  1.0  3836 
+log-posterior                       0.1  1.0  1089 
+
+For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
+</div>
+</div>
+</section>
+<section>
+<section id="example-1-lake-mercury-hierarchical-model-1" class="title-slide slide level1 center">
+<h1>Example 1: Lake Mercury (Hierarchical Model)</h1>
+<p><strong>Model Interpretation:</strong></p>
+<p><strong>Fixed Effects:</strong></p>
+<ul>
+<li><code>length</code>: Average effect of fish size on mercury across all lakes</li>
+</ul>
+<p><strong>Random Effects:</strong></p>
+<ul>
+<li><code>(1 | lake)</code>: Each lake has its own intercept</li>
+<li><code>sd(Intercept)</code>: How much lakes vary in baseline mercury</li>
+<li><strong>This is the key quantity!</strong></li>
+</ul>
+<p><strong>Residual:</strong></p>
+<ul>
+<li><code>sigma</code>: Within-lake variation sigma `: Within-lake variation</li>
+</ul>
+</section>
+<section id="interpreting-rstanarm-output" class="slide level2 smaller">
+<h2>Interpreting rstanarm Output</h2>
+<p><strong>Output Looks Like:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(partial_pool, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+  term                    estimate std.error conf.low conf.high group   
+  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;   
+1 (Intercept)              3.43      0.314    2.90       3.98   &lt;NA&gt;    
+2 length                   0.00563   0.00731 -0.00650    0.0172 &lt;NA&gt;    
+3 sd_(Intercept).lake      0.804    NA       NA         NA      lake    
+4 sd_Observation.Residual  0.383    NA       NA         NA      Residual</code></pre>
+</div>
+</div>
+<p><strong>What This Means:</strong></p>
+<p><strong>Fixed Effects:</strong></p>
+<ul>
+<li>Intercept = 3.4 µg/g: Average mercury for average-length fish</li>
+<li>Length = 0.005: Each cm of length → 0.005 µg/g more mercury</li>
+<li>95% CI [-0.07, 0.01]: No evidence of relationship</li>
+</ul>
+<p><strong>Random Effects:</strong></p>
+<ul>
+<li>SD(lake) = 0.8: Lakes differ by about 0.8 µg/g on average</li>
+<li>SD(residual) = 0.4: Fish within lake differ by 0.4 µg/g</li>
+<li><strong>Between-lake variance &gt; within-lake variance!</strong></li>
+</ul>
+<p><strong>Conclusion:</strong> Lake identity matters more than individual variation!</p>
+</section>
+<section id="extracting-random-effects" class="slide level2">
+<h2>Extracting Random Effects</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Get Lake-Specific Estimates:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Extract random effects</span></span>
+<span id="cb19-2"><a></a>lake_effects <span class="ot">&lt;-</span> <span class="fu">ranef</span>(partial_pool)<span class="sc">$</span>lake</span>
+<span id="cb19-3"><a></a><span class="fu">head</span>(lake_effects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)
+Lake_A  -0.3676444
+Lake_B   0.4416676
+Lake_C  -0.6403057
+Lake_D   0.9666968
+Lake_E  -0.3807978
+Lake_F   0.2039404</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Gives deviations from population mean</span></span>
+<span id="cb21-2"><a></a><span class="co">#       (Intercept)</span></span>
+<span id="cb21-3"><a></a><span class="co"># Lake1    -0.5</span></span>
+<span id="cb21-4"><a></a><span class="co"># Lake2     0.3</span></span>
+<span id="cb21-5"><a></a><span class="co"># Lake3     1.2</span></span>
+<span id="cb21-6"><a></a><span class="co"># ...</span></span>
+<span id="cb21-7"><a></a></span>
+<span id="cb21-8"><a></a><span class="co"># Get actual lake-specific intercepts</span></span>
+<span id="cb21-9"><a></a>lake_intercepts <span class="ot">&lt;-</span> <span class="fu">coef</span>(partial_pool)<span class="sc">$</span>lake</span>
+<span id="cb21-10"><a></a><span class="fu">head</span>(lake_intercepts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)      length
+Lake_A    3.064039 0.005629112
+Lake_B    3.873351 0.005629112
+Lake_C    2.791378 0.005629112
+Lake_D    4.398380 0.005629112
+Lake_E    3.050886 0.005629112
+Lake_F    3.635624 0.005629112</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co">#       (Intercept)  length</span></span>
+<span id="cb23-2"><a></a><span class="co"># Lake1    1.6       0.5</span></span>
+<span id="cb23-3"><a></a><span class="co"># Lake2    2.4       0.5</span></span>
+<span id="cb23-4"><a></a><span class="co"># Lake3    3.3       0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div><div class="column smaller">
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>Lake A has lower baseline mercury (-0.4 from mean)</li>
+<li>Lake D has higher baseline mercury (+0.97 from mean)</li>
+<li>All lakes share same length effect (fixed slope)</li>
+<li>Shrinkage visible: no extreme values for small-sample lakes!</li>
+</ul>
+</div></div>
+</section>
+<section id="visualizing-random-effects" class="slide level2">
+<h2>Visualizing Random Effects</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Plot Lake-Specific Intercepts:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-2"><a></a><span class="fu">library</span>(tidybayes)</span>
+<span id="cb24-3"><a></a></span>
+<span id="cb24-4"><a></a><span class="co"># Get posterior distributions of lake intercepts</span></span>
+<span id="cb24-5"><a></a>fish_data <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a></a>  modelr<span class="sc">::</span><span class="fu">data_grid</span>(lake, <span class="at">length =</span> <span class="fu">mean</span>(length)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-7"><a></a>  <span class="fu">add_epred_draws</span>(partial_pool, <span class="at">ndraws =</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> .epred, <span class="at">y =</span> <span class="fu">reorder</span>(lake, .epred))) <span class="sc">+</span></span>
+<span id="cb24-9"><a></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb24-10"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-11"><a></a>    <span class="at">x =</span> <span class="st">"Predicted Mercury (µg/g)"</span>,</span>
+<span id="cb24-12"><a></a>    <span class="at">y =</span> <span class="st">"Lake"</span>,</span>
+<span id="cb24-13"><a></a>    <span class="at">title =</span> <span class="st">"Lake-Specific Baseline Mercury Levels"</span></span>
+<span id="cb24-14"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb24-15"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-06-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-06-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><strong>What You’ll See:</strong></p>
+<ul>
+<li>Distribution of predicted mercury for each lake</li>
+<li>Lakes ranked by baseline level</li>
+<li>Uncertainty wider for lakes with fewer fish</li>
+<li>Clear differences between lakes</li>
+<li>Evidence of shrinkage: estimates pulled toward overall mean</li>
+</ul>
+</div></div>
+</section>
+<section id="posterior-predictive-checks" class="slide level2">
+<h2>Posterior Predictive Checks</h2>
+<p><strong>Are Our Predictions Reasonable?</strong></p>
+<div class="columns">
+<div class="column">
+<p><strong>Generate Predictions:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a><span class="co"># Generate predictions from posterior</span></span>
+<span id="cb25-4"><a></a>y_rep <span class="ot">&lt;-</span> <span class="fu">posterior_predict</span>(partial_pool, <span class="at">draws =</span> <span class="dv">500</span>)</span>
+<span id="cb25-5"><a></a></span>
+<span id="cb25-6"><a></a><span class="co"># Compare to observed data</span></span>
+<span id="cb25-7"><a></a><span class="fu">ppc_dens_overlay</span>(fish_data<span class="sc">$</span>mercury, y_rep[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, ])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-07-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-07-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Check by lake</span></span>
+<span id="cb26-2"><a></a><span class="fu">ppc_stat_grouped</span>(</span>
+<span id="cb26-3"><a></a>  fish_data<span class="sc">$</span>mercury,</span>
+<span id="cb26-4"><a></a>  y_rep,</span>
+<span id="cb26-5"><a></a>  <span class="at">group =</span> fish_data<span class="sc">$</span>lake,</span>
+<span id="cb26-6"><a></a>  <span class="at">stat =</span> <span class="st">"mean"</span></span>
+<span id="cb26-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-07-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-07-2.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><strong>What to Look For:</strong></p>
+<ul>
+<li>Do simulated data look like observed data?</li>
+<li>Are we capturing the right amount of variation?</li>
+<li>Are extreme values reasonable?</li>
+<li>Do predictions match data distribution?</li>
+</ul>
+<p><strong>Bad Fit Indicators:</strong></p>
+<ul>
+<li>Simulated data too narrow or too wide</li>
+<li>Missing multimodality</li>
+<li>Wrong tail behavior</li>
+</ul>
+</div></div>
+</section>
+<section id="example-2-radon-in-homes-brms" class="slide level2 smaller">
+<h2>Example 2: Radon in Homes (brms)</h2>
+<p><strong>Scenario:</strong> Radon levels in homes across 85 counties in Minnesota</p>
+<p><strong>Data Structure:</strong></p>
+<ul>
+<li>~900 homes</li>
+<li>Radon measurement (response)</li>
+<li>Floor type: basement vs first floor (predictor)</li>
+<li>County (grouping factor)</li>
+<li>Uranium content in county soil (county-level predictor)</li>
+</ul>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li>Does floor type affect radon?</li>
+<li>How much do counties differ?</li>
+<li>Does county uranium explain county differences?</li>
+</ol>
+<p><strong>Why This Example:</strong></p>
+<ul>
+<li>Mix of individual and group-level predictors</li>
+<li>Many groups with unbalanced sample sizes (some counties have 2 homes, others 50)</li>
+<li>Perfect for showing hierarchical modeling!</li>
+</ul>
+</section>
+<section id="radon-example-model-1-random-intercepts" class="slide level2 smaller">
+<h2>Radon Example: Model 1 (Random Intercepts)</h2>
+<p><strong>Model:</strong> Floor effect + county random intercepts</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(brms)</span>
+<span id="cb27-2"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb27-3"><a></a><span class="fu">data</span>(radon)</span>
+<span id="cb27-4"><a></a></span>
+<span id="cb27-5"><a></a><span class="co"># Random intercepts only</span></span>
+<span id="cb27-6"><a></a>radon_model1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb27-7"><a></a>  log_radon <span class="sc">~</span> floor <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> county),</span>
+<span id="cb27-8"><a></a>  <span class="at">data =</span> radon,</span>
+<span id="cb27-9"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb27-10"><a></a>  <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb27-11"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb27-12"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="at">class =</span> b),</span>
+<span id="cb27-13"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd),</span>
+<span id="cb27-14"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)</span>
+<span id="cb27-15"><a></a>  ),</span>
+<span id="cb27-16"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb27-17"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb27-18"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb27-19"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb27-20"><a></a>)</span>
+<span id="cb27-21"><a></a></span>
+<span id="cb27-22"><a></a><span class="co"># View results</span></span>
+<span id="cb27-23"><a></a><span class="fu">summary</span>(radon_model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: log_radon ~ floor + (1 | county) 
+   Data: radon (Number of observations: 919) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Multilevel Hyperparameters:
+~county (Number of levels: 85) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.32      0.04     0.24     0.41 1.00     1776     2782
+
+Regression Coefficients:
+          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept     1.49      0.05     1.39     1.59 1.00     2531     3071
+floor        -0.66      0.07    -0.80    -0.52 1.00     8866     3020
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.73      0.02     0.69     0.76 1.00     7665     2969
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+</div><div class="column">
+<p><strong>Model Structure:</strong></p>
+<p>Level 1: <span class="math inline">\(\log(\text{radon})_{ij} = \alpha_j + \beta \times \text{floor}_{ij} + \varepsilon_{ij}\)</span><br>
+Level 2: <span class="math inline">\(\alpha_j \sim \text{Normal}(\mu_\alpha, \sigma_\alpha)\)</span></p>
+<p><strong>What This Estimates:</strong></p>
+<ul>
+<li><span class="math inline">\(\beta\)</span>: Effect of floor type (same for all counties)</li>
+<li><span class="math inline">\(\mu_\alpha\)</span>: Average baseline radon</li>
+<li><span class="math inline">\(\sigma_\alpha\)</span>: Variation between counties</li>
+<li><span class="math inline">\(\sigma_y\)</span>: Variation within counties</li>
+</ul>
+</div></div>
+</section>
+<section id="radon-example-model-2-adding-county-level-predictor" class="slide level2 smaller">
+<h2>Radon Example: Model 2 (Adding County-Level Predictor)</h2>
+<p><strong>Model:</strong> Floor effect + uranium + random intercepts</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># Add county-level predictor</span></span>
+<span id="cb29-2"><a></a>radon_model2 <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb29-3"><a></a>  log_radon <span class="sc">~</span> floor <span class="sc">+</span> log_uranium <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> county),</span>
+<span id="cb29-4"><a></a>  <span class="at">data =</span> radon,</span>
+<span id="cb29-5"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb29-6"><a></a>  <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb29-7"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb29-8"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="at">class =</span> b),</span>
+<span id="cb29-9"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd),</span>
+<span id="cb29-10"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)</span>
+<span id="cb29-11"><a></a>  ),</span>
+<span id="cb29-12"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb29-13"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb29-14"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb29-15"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb29-16"><a></a>)</span>
+<span id="cb29-17"><a></a></span>
+<span id="cb29-18"><a></a><span class="fu">summary</span>(radon_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: log_radon ~ floor + log_uranium + (1 | county) 
+   Data: radon (Number of observations: 919) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Multilevel Hyperparameters:
+~county (Number of levels: 85) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.15      0.05     0.06     0.25 1.01     1101     1134
+
+Regression Coefficients:
+            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept       1.50      0.04     1.42     1.57 1.00     4395     3471
+floor          -0.64      0.06    -0.76    -0.51 1.00     7392     3194
+log_uranium     0.70      0.09     0.53     0.88 1.00     3782     3057
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.73      0.02     0.70     0.77 1.00     5580     2650
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+</div><div class="column">
+<p><strong>What Changed:</strong></p>
+<ul>
+<li>Added uranium as fixed effect</li>
+<li>Uranium varies by county (not by home)</li>
+<li>Should explain some county-level variation</li>
+<li>Expect <span class="math inline">\(\sigma_\alpha\)</span> (county SD) to decrease if uranium explains differences</li>
+</ul>
+<p><strong>Model Structure:</strong></p>
+<p>Level 1: <span class="math inline">\(\log(\text{radon})_{ij} = \alpha_j + \beta \times \text{floor}_{ij} + \varepsilon_{ij}\)</span><br>
+Level 2: <span class="math inline">\(\alpha_j = \mu_\alpha + \gamma \times \log(\text{uranium}_j) + u_j\)</span><br>
+<span class="math inline">\(u_j \sim \text{Normal}(0, \sigma_u)\)</span></p>
+</div></div>
+</section>
+<section id="radon-example-model-3-random-slopes" class="slide level2 smaller">
+<h2>Radon Example: Model 3 (Random Slopes)</h2>
+<p><strong>Model:</strong> Varying intercepts AND varying slopes</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="co"># Random slopes for floor effect</span></span>
+<span id="cb31-2"><a></a>radon_model3 <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb31-3"><a></a>  log_radon <span class="sc">~</span> floor <span class="sc">+</span> log_uranium <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> floor <span class="sc">|</span> county),</span>
+<span id="cb31-4"><a></a>  <span class="at">data =</span> radon,</span>
+<span id="cb31-5"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb31-6"><a></a>  <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb31-7"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb31-8"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">2</span>), <span class="at">class =</span> b),</span>
+<span id="cb31-9"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd),</span>
+<span id="cb31-10"><a></a>    <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma),</span>
+<span id="cb31-11"><a></a>    <span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> cor) <span class="co"># correlation between random effects</span></span>
+<span id="cb31-12"><a></a>  ),</span>
+<span id="cb31-13"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb31-14"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb31-15"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb31-16"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb31-17"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>What This Means:</strong></p>
+<ul>
+<li>Each county has its own intercept AND slope</li>
+<li>Counties differ in baseline radon (intercept variation)</li>
+<li>Counties differ in floor effect strength (slope variation)</li>
+<li>Intercepts and slopes can be correlated</li>
+</ul>
+<p><strong>When to Use:</strong></p>
+<ul>
+<li>Theory suggests effect varies by group</li>
+<li>Enough data per group (need ~5-10 obs/group minimum)</li>
+<li>Interested in variation in relationships</li>
+</ul>
+</section>
+<section id="comparing-brms-models" class="slide level2 smaller">
+<h2>Comparing brms Models</h2>
+<p><strong>Model Comparison Using LOO:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># Compute leave-one-out cross-validation</span></span>
+<span id="cb32-2"><a></a>loo1 <span class="ot">&lt;-</span> <span class="fu">loo</span>(radon_model1)</span>
+<span id="cb32-3"><a></a>loo2 <span class="ot">&lt;-</span> <span class="fu">loo</span>(radon_model2)</span>
+<span id="cb32-4"><a></a>loo3 <span class="ot">&lt;-</span> <span class="fu">loo</span>(radon_model3)</span>
+<span id="cb32-5"><a></a></span>
+<span id="cb32-6"><a></a><span class="co"># Compare models</span></span>
+<span id="cb32-7"><a></a><span class="fu">loo_compare</span>(loo1, loo2, loo3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             elpd_diff se_diff
+radon_model2  0.0       0.0   
+radon_model3 -3.3       3.7   
+radon_model1 -9.8       5.2   </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="co">#            elpd_diff se_diff</span></span>
+<span id="cb34-2"><a></a><span class="co"># model2       0.0       0.0</span></span>
+<span id="cb34-3"><a></a><span class="co"># model3      -2.3       3.1</span></span>
+<span id="cb34-4"><a></a><span class="co"># model1     -45.2      10.8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>Model 2 (uranium + random intercepts) is best</li>
+<li>Model 3 (random slopes) similar but slightly worse</li>
+<li>Model 1 (no uranium) much worse</li>
+<li><strong>Uranium explains substantial county variation!</strong></li>
+</ul>
+<p><strong>Decision:</strong> Use Model 2</p>
+<ul>
+<li>Simpler than Model 3</li>
+<li>Much better than Model 1</li>
+<li>Easier to interpret and more stable</li>
+</ul>
+</section>
+<section id="visualizing-random-slopes" class="slide level2 smaller">
+<h2>Visualizing Random Slopes</h2>
+<p><strong>Plot County-Specific Relationships:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># Extract county-specific coefficients</span></span>
+<span id="cb35-2"><a></a>county_coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(radon_model3)<span class="sc">$</span>county</span>
+<span id="cb35-3"><a></a></span>
+<span id="cb35-4"><a></a></span>
+<span id="cb35-5"><a></a><span class="co"># Add predictions</span></span>
+<span id="cb35-6"><a></a>plot_data <span class="ot">&lt;-</span> radon <span class="sc">|&gt;</span></span>
+<span id="cb35-7"><a></a>  <span class="fu">add_epred_draws</span>(radon_model3, <span class="at">ndraws =</span> <span class="dv">100</span>)</span>
+<span id="cb35-8"><a></a></span>
+<span id="cb35-9"><a></a><span class="co"># Plot</span></span>
+<span id="cb35-10"><a></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> floor, <span class="at">y =</span> .epred)) <span class="sc">+</span></span>
+<span id="cb35-11"><a></a>  <span class="fu">stat_lineribbon</span>(<span class="at">.width =</span> <span class="fl">0.95</span>) <span class="sc">+</span></span>
+<span id="cb35-12"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>county, <span class="at">ncol =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-14"><a></a>    <span class="at">title =</span> <span class="st">"County-Specific Floor Effects"</span>,</span>
+<span id="cb35-15"><a></a>    <span class="at">x =</span> <span class="st">"Floor Type"</span>,</span>
+<span id="cb35-16"><a></a>    <span class="at">y =</span> <span class="st">"Predicted Log(Radon)"</span></span>
+<span id="cb35-17"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb35-18"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-12-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What You’ll See:</strong></p>
+<ul>
+<li>Different slopes across counties</li>
+<li>Some counties: big floor effect</li>
+<li>Other counties: small floor effect</li>
+<li>Uncertainty varies by sample size</li>
+</ul>
+</section>
+<section id="extracting-and-reporting-results" class="slide level2">
+<h2>Extracting and Reporting Results</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Fixed Effects:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co">#| label: bayesian-hierarchical-13</span></span>
+<span id="cb36-2"><a></a><span class="co"># Get fixed effects summary</span></span>
+<span id="cb36-3"><a></a><span class="fu">fixef</span>(radon_model2)</span>
+<span id="cb36-4"><a></a></span>
+<span id="cb36-5"><a></a><span class="co"># Get posterior samples</span></span>
+<span id="cb36-6"><a></a>posterior_samples <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(radon_model2)</span>
+<span id="cb36-7"><a></a></span>
+<span id="cb36-8"><a></a><span class="co"># Calculate probability of positive effect</span></span>
+<span id="cb36-9"><a></a><span class="fu">mean</span>(posterior_samples<span class="sc">$</span>b_floor <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb36-10"><a></a></span>
+<span id="cb36-11"><a></a><span class="co"># Specific quantities</span></span>
+<span id="cb36-12"><a></a><span class="fu">median</span>(posterior_samples<span class="sc">$</span>b_uranium)</span>
+<span id="cb36-13"><a></a><span class="fu">quantile</span>(posterior_samples<span class="sc">$</span>b_uranium, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><strong>Random Effects:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co">#| label: bayesian-hierarchical-14</span></span>
+<span id="cb37-2"><a></a><span class="co"># Group-level standard deviations</span></span>
+<span id="cb37-3"><a></a><span class="fu">VarCorr</span>(radon_model2)</span>
+<span id="cb37-4"><a></a></span>
+<span id="cb37-5"><a></a><span class="co"># Extract county-specific effects</span></span>
+<span id="cb37-6"><a></a><span class="fu">ranef</span>(radon_model2)</span>
+<span id="cb37-7"><a></a></span>
+<span id="cb37-8"><a></a><span class="co"># Plot random effects distribution</span></span>
+<span id="cb37-9"><a></a><span class="fu">mcmc_areas</span>(radon_model2, <span class="at">pars =</span> <span class="st">"sd_county__Intercept"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+<p><strong>Reporting:</strong></p>
+<ul>
+<li>Fixed effects: median and 95% CI</li>
+<li>Probability statements: P(β &gt; 0 | data) = 0.97</li>
+<li>Random effects: report SD and interpretation</li>
+<li>Always include uncertainty!</li>
+</ul>
+</section>
+<section id="prior-selection-for-hierarchical-models" class="slide level2 smaller">
+<h2>Prior Selection for Hierarchical Models</h2>
+<p><strong>Why Priors Matter:</strong></p>
+<p>In hierarchical models, priors are particularly important for:</p>
+<ul>
+<li>Variance parameters (σ_α, σ_y)</li>
+<li>Group-level effects with limited data</li>
+<li>Complex models with many parameters</li>
+</ul>
+<p><strong>Default vs Custom Priors:</strong></p>
+<p><strong>rstanarm Defaults (Usually Good):</strong></p>
+<ul>
+<li>Weakly informative</li>
+<li>Scaled to data</li>
+<li>Rarely need to change</li>
+</ul>
+<p><strong>brms Requires Specification:</strong></p>
+<ul>
+<li>More flexible</li>
+<li>Should think about priors</li>
+<li>Can use <code>get_prior()</code> to see options</li>
+</ul>
+</section>
+<section id="prior-selection-guidelines" class="slide level2 smaller">
+<h2>Prior Selection Guidelines</h2>
+<p><strong>For Fixed Effects (β):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">5</span>), <span class="at">class =</span> b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Normal(0, 5) is weakly informative</li>
+<li>Allows wide range but not absurd values</li>
+<li>Adjust scale based on response variable units</li>
+</ul>
+<p><strong>For Standard Deviations (σ):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)</span>
+<span id="cb39-2"><a></a><span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Half-Cauchy is standard choice</li>
+<li>Heavy tails allow large values if data support it</li>
+<li>Scale should relate to expected variation</li>
+</ul>
+<p><strong>For Correlations:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> cor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>LKJ prior for correlation matrices</li>
+<li>η = 2 is weakly informative (favors no correlation)</li>
+<li>η = 1 is uniform (all correlations equally likely)</li>
+</ul>
+<p><strong>Principle:</strong> Weakly informative priors that regularize but don’t dominate data</p>
+</section>
+<section id="prior-sensitivity-analysis" class="slide level2 smaller">
+<h2>Prior Sensitivity Analysis</h2>
+<p><strong>Always Check Prior Influence:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># Fit with different priors</span></span>
+<span id="cb41-2"><a></a>model_weak <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb41-3"><a></a>  y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group),</span>
+<span id="cb41-4"><a></a>  <span class="at">prior =</span> <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b)</span>
+<span id="cb41-5"><a></a>)</span>
+<span id="cb41-6"><a></a></span>
+<span id="cb41-7"><a></a>model_strong <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb41-8"><a></a>  y <span class="sc">~</span> x <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> group),</span>
+<span id="cb41-9"><a></a>  <span class="at">prior =</span> <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b)</span>
+<span id="cb41-10"><a></a>)</span>
+<span id="cb41-11"><a></a></span>
+<span id="cb41-12"><a></a><span class="co"># Compare posteriors</span></span>
+<span id="cb41-13"><a></a>posterior_weak <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model_weak)</span>
+<span id="cb41-14"><a></a>posterior_strong <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(model_strong)</span>
+<span id="cb41-15"><a></a></span>
+<span id="cb41-16"><a></a><span class="co"># Plot</span></span>
+<span id="cb41-17"><a></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb41-18"><a></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(posterior_weak<span class="sc">$</span>b_x), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb41-19"><a></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(posterior_strong<span class="sc">$</span>b_x), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb41-20"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Prior Sensitivity"</span>, <span class="at">subtitle =</span> <span class="st">"Blue = Weak, Red = Strong"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What to Look For:</strong></p>
+<ul>
+<li>Are posteriors similar? Good! (Data overwhelms prior)</li>
+<li>Very different? Prior is too strong OR insufficient data</li>
+<li>If conclusions change: report sensitivity, get more data</li>
+</ul>
+</section>
+<section id="model-checking-convergence-diagnostics" class="slide level2 smaller">
+<h2>Model Checking: Convergence Diagnostics</h2>
+<p><strong>Did the MCMC Chains Converge?</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="co"># Check Rhat values</span></span>
+<span id="cb42-2"><a></a><span class="fu">summary</span>(radon_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: log_radon ~ floor + log_uranium + (1 | county) 
+   Data: radon (Number of observations: 919) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Multilevel Hyperparameters:
+~county (Number of levels: 85) 
+              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)     0.15      0.05     0.06     0.25 1.01     1101     1134
+
+Regression Coefficients:
+            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept       1.50      0.04     1.42     1.57 1.00     4395     3471
+floor          -0.64      0.06    -0.76    -0.51 1.00     7392     3194
+log_uranium     0.70      0.09     0.53     0.88 1.00     3782     3057
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.73      0.02     0.70     0.77 1.00     5580     2650
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p><strong>1. Rhat Statistic:</strong></p>
+<ul>
+<li>Should all be &lt; 1.01 (ideally &lt; 1.05)</li>
+<li>Rhat = 1.00 is perfect</li>
+<li>Rhat &gt; 1.1 is serious problem</li>
+</ul>
+</div><div class="column">
+<p><strong>2. Effective Sample Size (ESS):</strong></p>
+<ul>
+<li>Want ESS &gt; 1000 for stable estimates</li>
+<li>ESS &lt; 400 is concerning</li>
+<li>Low ESS → run more iterations</li>
+</ul>
+</div></div>
+</section>
+<section id="model-checking-convergence-diagnostics-1" class="slide level2">
+<h2>Model Checking: Convergence Diagnostics</h2>
+<p><strong>Did the MCMC Chains Converge?</strong></p>
+<p><strong>3. Trace Plots:</strong></p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb44-2"><a></a></span>
+<span id="cb44-3"><a></a><span class="fu">mcmc_trace</span>(radon_model2, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"b_Intercept"</span>, <span class="st">"b_floor"</span>, <span class="st">"sigma"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="bayesian-hierarchical_files/figure-revealjs/bayesian-hierarchical-19-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><strong>Good Traces:</strong></p>
+<ul>
+<li>Fuzzy caterpillar</li>
+<li>No trends or patterns</li>
+<li>All chains overlapping</li>
+<li>Good mixing</li>
+</ul>
+<p><strong>Bad Traces:</strong></p>
+<ul>
+<li>Trends up or down</li>
+<li>Chains don’t overlap</li>
+<li>Stuck in regions</li>
+<li><strong>Don’t trust results!</strong></li>
+</ul>
+</div></div>
+</section>
+<section id="model-checking-posterior-predictive-checks" class="slide level2 smaller">
+<h2>Model Checking: Posterior Predictive Checks</h2>
+<p><strong>Does the Model Fit the Data?</strong></p>
+<p><strong>Visual Checks:</strong></p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb45-2"><a></a></span>
+<span id="cb45-3"><a></a><span class="co"># Density overlay</span></span>
+<span id="cb45-4"><a></a><span class="fu">pp_check</span>(radon_model2, <span class="at">type =</span> <span class="st">"dens_overlay"</span>, <span class="at">ndraws =</span> <span class="dv">50</span>)</span>
+<span id="cb45-5"><a></a><span class="co"># Statistics by group</span></span>
+<span id="cb45-6"><a></a><span class="fu">pp_check</span>(radon_model2, <span class="at">type =</span> <span class="st">"stat_grouped"</span>, <span class="at">stat =</span> <span class="st">"mean"</span>, <span class="at">group =</span> <span class="st">"county"</span>)</span>
+<span id="cb45-7"><a></a><span class="co"># Intervals</span></span>
+<span id="cb45-8"><a></a><span class="fu">pp_check</span>(radon_model2, <span class="at">type =</span> <span class="st">"intervals"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><a href="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-1.png" width="576"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><a href="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-2.png" width="576"></a></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><a href="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-1-3.png" width="576"></a></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p><strong>What to Look For:</strong></p>
+<ul>
+<li>Predicted data should look like observed data</li>
+<li>Check means, variances, extremes</li>
+<li>Look for systematic misfit</li>
+<li>Check each group separately</li>
+</ul>
+</div><div class="column">
+<p><strong>Common Issues:</strong></p>
+<ul>
+<li>Wrong distribution family</li>
+<li>Missing important predictor</li>
+<li>Need non-linear terms</li>
+<li>Outliers or leverage points</li>
+</ul>
+</div></div>
+</section>
+<section id="example-3-species-abundance-across-sites-rstanarm" class="slide level2">
+<h2>Example 3: Species Abundance Across Sites (rstanarm)</h2>
+<p><strong>Scenario:</strong> Counting birds at 40 sites over 3 years</p>
+<p><strong>Data Structure:</strong></p>
+<ul>
+<li>Site (40 levels)</li>
+<li>Year (3 levels)</li>
+<li>Habitat type (forest, grassland, wetland)</li>
+<li>Count data (Poisson distributed)</li>
+</ul>
+<p><strong>Question:</strong> How does habitat affect abundance? How much do sites vary?</p>
+</section>
+<section id="example-3-species-abundance-across-sites-rstanarm-1" class="slide level2">
+<h2>Example 3: Species Abundance Across Sites (rstanarm)</h2>
+<p><strong>Model with Poisson Distribution:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb46-2"><a></a></span>
+<span id="cb46-3"><a></a>bird_model <span class="ot">&lt;-</span> <span class="fu">stan_glmer</span>(</span>
+<span id="cb46-4"><a></a>  count <span class="sc">~</span> habitat <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> site) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> year),</span>
+<span id="cb46-5"><a></a>  <span class="at">data =</span> bird_data,</span>
+<span id="cb46-6"><a></a>  <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">"log"</span>),</span>
+<span id="cb46-7"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb46-8"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb46-9"><a></a>  <span class="at">seed =</span> <span class="dv">123</span>,</span>
+<span id="cb46-10"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb46-11"><a></a>)</span>
+<span id="cb46-12"><a></a></span>
+<span id="cb46-13"><a></a><span class="fu">print</span>(bird_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Poisson family for count data</li>
+<li>Log link function (counts can’t be negative)</li>
+<li>Two grouping factors: site AND year</li>
+<li><strong>Crossed random effects</strong> (not nested)</li>
+</ul>
+</section>
+<section id="example-3-interpreting-count-model" class="slide level2 smaller">
+<h2>Example 3: Interpreting Count Model</h2>
+<p><strong>Model Structure:</strong></p>
+<pre><code>log(λ_ij) = β₀ + β₁×(habitat=grassland) + β₂×(habitat=wetland) 
+            + α_site[i] + α_year[j]
+count_ij ~ Poisson(λ_ij)</code></pre>
+<p><strong>Output Interpretation:</strong></p>
+<pre><code>Fixed Effects:
+                    Estimate  95% CI
+(Intercept)         2.3       [2.0, 2.6]
+habitatgrassland    0.4       [0.2, 0.6]
+habitatwetland      0.8       [0.5, 1.1]
+
+Random Effects:
+Groups  Name        Std.Dev.
+site    (Intercept) 0.3
+year    (Intercept) 0.1</code></pre>
+<p><strong>What This Means:</strong></p>
+<ul>
+<li>exp(2.3) = 10: Expected count in forest</li>
+<li>exp(2.3 + 0.4) = 15: Expected count in grassland</li>
+<li>exp(2.3 + 0.8) = 25: Expected count in wetland</li>
+<li>Sites vary by factor of exp(0.3×2) ≈ 1.8 (±2 SD)</li>
+<li>Years vary by factor of exp(0.1×2) ≈ 1.2</li>
+<li><strong>Site variation larger than year variation</strong></li>
+</ul>
+</section>
+<section id="crossed-vs-nested-random-effects" class="slide level2 smaller">
+<h2>Crossed vs Nested Random Effects</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Nested:</strong> Groups within groups</p>
+<ul>
+<li>Sites within regions</li>
+<li>Students within schools</li>
+<li>Plots within forests</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="co"># Syntax</span></span>
+<span id="cb49-2"><a></a>(<span class="dv">1</span> <span class="sc">|</span> region<span class="sc">/</span>site)</span>
+<span id="cb49-3"><a></a><span class="co"># or equivalently</span></span>
+<span id="cb49-4"><a></a>(<span class="dv">1</span> <span class="sc">|</span> region) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> region<span class="sc">:</span>site)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Crossed:</strong> Independent grouping factors</p>
+<ul>
+<li>Sites AND years (each site measured each year)</li>
+<li>Subjects AND stimuli (each subject sees each stimulus)</li>
+<li>Raters AND items (each rater rates each item)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co"># Syntax</span></span>
+<span id="cb50-2"><a></a>(<span class="dv">1</span> <span class="sc">|</span> site) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><strong>How to Tell:</strong></p>
+<ul>
+<li>Nested: Each site belongs to exactly one region</li>
+<li>Crossed: Each combination of site×year is possible</li>
+</ul>
+<p><strong>Environmental Examples:</strong></p>
+<ul>
+<li>Nested: Transects within sites within watersheds</li>
+<li>Crossed: Sites measured across multiple years</li>
+<li>Mixed: Sites within regions, measured across years</li>
+</ul>
+</div></div>
+</section>
+<section id="example-4-varying-slopes-environmental-gradient" class="slide level2 smaller">
+<h2>Example 4: Varying Slopes (Environmental Gradient)</h2>
+<p><strong>Scenario:</strong> Tree growth along elevation gradient at 15 sites</p>
+<p><strong>Question:</strong> Does elevation effect vary by site?</p>
+<div class="columns">
+<div class="column">
+<p><strong>Random Intercepts Only:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>model_ri <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb51-2"><a></a>  growth <span class="sc">~</span> elevation <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> site),</span>
+<span id="cb51-3"><a></a>  <span class="at">data =</span> tree_data,</span>
+<span id="cb51-4"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>()</span>
+<span id="cb51-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>All sites: same elevation slope</li>
+<li>Sites differ only in baseline growth</li>
+</ul>
+</div><div class="column">
+<p><strong>Random Intercepts and Slopes:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>model_ris <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb52-2"><a></a>  growth <span class="sc">~</span> elevation <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> elevation <span class="sc">|</span> site),</span>
+<span id="cb52-3"><a></a>  <span class="at">data =</span> tree_data,</span>
+<span id="cb52-4"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>()</span>
+<span id="cb52-5"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Each site: own elevation slope</li>
+<li>Sites differ in baseline AND relationship</li>
+<li>Intercepts and slopes can be correlated</li>
+</ul>
+<p><strong>When to Use Random Slopes:</strong></p>
+<ul>
+<li>Theory suggests effect varies</li>
+<li>Sufficient data per group</li>
+<li>Interaction between group and predictor</li>
+</ul>
+</div></div>
+</section>
+<section id="interpreting-random-slopes-output" class="slide level2 smaller">
+<h2>Interpreting Random Slopes Output</h2>
+<p><strong>Model Output:</strong></p>
+<pre><code>Random Effects:
+~site (Number of levels: 15)
+              Estimate Est.Error
+sd(Intercept)    2.1      0.5
+sd(elevation)    0.3      0.1
+cor(Intercept,elevation) -0.4  0.2</code></pre>
+<p><strong>What This Means:</strong></p>
+<p><strong>sd(Intercept) = 2.1:</strong></p>
+<ul>
+<li>Sites vary in baseline growth by ±2.1 mm/year</li>
+</ul>
+<p><strong>sd(elevation) = 0.3:</strong></p>
+<ul>
+<li>Elevation slopes vary by ±0.3 across sites</li>
+<li>Some sites more sensitive to elevation than others</li>
+</ul>
+<p><strong>cor(Intercept, elevation) = -0.4:</strong></p>
+<ul>
+<li>Negative correlation: sites with high baseline growth show weaker elevation effect</li>
+<li>Low-elevation (high-baseline) sites less affected by going higher</li>
+<li>High-elevation sites more affected by elevation changes</li>
+</ul>
+<p><strong>Interpretation:</strong> Sites show consistent but varying responses to elevation</p>
+</section>
+<section id="predicting-for-new-groups" class="slide level2 smaller">
+<h2>Predicting for New Groups</h2>
+<p><strong>Major Advantage of Hierarchical Models:</strong></p>
+<p><strong>Scenario:</strong> You want to predict mercury for a NEW, unsampled lake</p>
+<p><strong>Three Approaches:</strong></p>
+<p><strong>1. Complete Pooling:</strong></p>
+<ul>
+<li>Use population average</li>
+<li>Ignores that lakes differ</li>
+<li>Underpredicts uncertainty</li>
+</ul>
+<p><strong>2. No Pooling:</strong></p>
+<ul>
+<li>Can’t predict! No data for this lake</li>
+<li>Completely stuck</li>
+</ul>
+<p><strong>3. Partial Pooling (Hierarchical):</strong></p>
+<ul>
+<li>Use population distribution of lake effects</li>
+<li>Incorporates uncertainty about new lake</li>
+<li><strong>This works!</strong></li>
+</ul>
+</section>
+<section id="predicting-for-new-groups-code" class="slide level2">
+<h2>Predicting for New Groups (Code)</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Generate Predictions:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="co"># Create data for new lake</span></span>
+<span id="cb54-2"><a></a>new_lake_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb54-3"><a></a>  <span class="at">lake =</span> <span class="st">"Lake_NEW"</span>, <span class="co"># Previously unobserved</span></span>
+<span id="cb54-4"><a></a>  <span class="at">length =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">40</span>, <span class="at">by =</span> <span class="dv">5</span>)</span>
+<span id="cb54-5"><a></a>)</span>
+<span id="cb54-6"><a></a></span>
+<span id="cb54-7"><a></a><span class="co"># Predict allowing new levels</span></span>
+<span id="cb54-8"><a></a>predictions <span class="ot">&lt;-</span> <span class="fu">posterior_predict</span>(</span>
+<span id="cb54-9"><a></a>  partial_pool,</span>
+<span id="cb54-10"><a></a>  <span class="at">newdata =</span> new_lake_data,</span>
+<span id="cb54-11"><a></a>  <span class="at">allow_new_levels =</span> <span class="cn">TRUE</span></span>
+<span id="cb54-12"><a></a>)</span>
+<span id="cb54-13"><a></a></span>
+<span id="cb54-14"><a></a><span class="co"># Summarize predictions</span></span>
+<span id="cb54-15"><a></a>pred_summary <span class="ot">&lt;-</span> new_lake_data <span class="sc">%&gt;%</span></span>
+<span id="cb54-16"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb54-17"><a></a>    <span class="at">median =</span> <span class="fu">apply</span>(predictions, <span class="dv">2</span>, median),</span>
+<span id="cb54-18"><a></a>    <span class="at">lower =</span> <span class="fu">apply</span>(predictions, <span class="dv">2</span>, quantile, <span class="fl">0.05</span>),</span>
+<span id="cb54-19"><a></a>    <span class="at">upper =</span> <span class="fu">apply</span>(predictions, <span class="dv">2</span>, quantile, <span class="fl">0.95</span>)</span>
+<span id="cb54-20"><a></a>  )</span>
+<span id="cb54-21"><a></a></span>
+<span id="cb54-22"><a></a><span class="co"># Plot</span></span>
+<span id="cb54-23"><a></a><span class="fu">ggplot</span>(pred_summary, <span class="fu">aes</span>(<span class="at">x =</span> length)) <span class="sc">+</span></span>
+<span id="cb54-24"><a></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb54-25"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> median)) <span class="sc">+</span></span>
+<span id="cb54-26"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predictions for New Lake"</span>, <span class="at">y =</span> <span class="st">"Mercury (µg/g)"</span>) <span class="sc">+</span></span>
+<span id="cb54-27"><a></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="bayesian-hierarchical_files/figure-revealjs/unnamed-chunk-2-1.png" width="576"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><strong>What Happens:</strong></p>
+<ul>
+<li>Model samples new lake effect from population distribution</li>
+<li>Wider intervals than for observed lakes (more uncertainty)</li>
+<li>Uses all available information about population</li>
+</ul>
+</div></div>
+</section>
+<section id="intraclass-correlation-coefficient-icc" class="slide level2 smaller">
+<h2>Intraclass Correlation Coefficient (ICC)</h2>
+<p><strong>What is ICC?</strong></p>
+<p>Proportion of total variance due to grouping structure.</p>
+<p><strong>Formula:</strong></p>
+<pre><code>ICC = σ²_group / (σ²_group + σ²_residual)</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>ICC = 0: Grouping doesn’t matter (no clustering)</li>
+<li>ICC = 0.05: 5% of variance is between groups</li>
+<li>ICC = 0.50: Half of variance is between groups</li>
+<li>ICC = 1.0: All variance is between groups</li>
+</ul>
+<p><strong>Practical Meaning:</strong></p>
+<ul>
+<li>High ICC: Groups are very different, group identity is important</li>
+<li>Low ICC: Groups are similar, might not need hierarchical model</li>
+<li>ICC &gt; 0.05: Generally use hierarchical model</li>
+</ul>
+</section>
+<section id="intraclass-correlation-coefficient-icc-1" class="slide level2 smaller">
+<h2>Intraclass Correlation Coefficient (ICC)</h2>
+<p><strong>In R:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="co"># Calculate ICC</span></span>
+<span id="cb56-2"><a></a>performance<span class="sc">::</span><span class="fu">icc</span>(model)</span>
+<span id="cb56-3"><a></a></span>
+<span id="cb56-4"><a></a><span class="co"># Or manually from output</span></span>
+<span id="cb56-5"><a></a>var_group <span class="ot">&lt;-</span> <span class="fl">0.8</span><span class="sc">^</span><span class="dv">2</span>  <span class="co"># SD of group effect</span></span>
+<span id="cb56-6"><a></a>var_resid <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">^</span><span class="dv">2</span>  <span class="co"># Residual SD</span></span>
+<span id="cb56-7"><a></a>icc <span class="ot">&lt;-</span> var_group <span class="sc">/</span> (var_group <span class="sc">+</span> var_resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="variance-partitioning" class="slide level2 smaller">
+<h2>Variance Partitioning</h2>
+<p><strong>Where Does Variation Come From?</strong></p>
+<p><strong>Example: Multi-Level Environmental Study</strong></p>
+<pre><code>Total Variation = Region + Site-within-Region + Measurement</code></pre>
+<p><strong>From Model:</strong></p>
+<pre><code>Random Effects:
+ Groups           Variance  Proportion
+ region           2.5       0.45 (45%)
+ site:region      1.8       0.32 (32%)
+ Residual         1.3       0.23 (23%)
+ Total            5.6</code></pre>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>Most variation (45%) is between regions</li>
+<li>Site differences account for 32%</li>
+<li>Within-site variation is 23%</li>
+<li><strong>Implications:</strong> Regional factors most important!</li>
+</ul>
+<p><strong>Management Implications:</strong></p>
+<ul>
+<li>Focus monitoring at regional level</li>
+<li>Site-specific interventions less important</li>
+<li>Within-site variation relatively small</li>
+<li>Invest resources in understanding regional drivers</li>
+</ul>
+</section>
+<section id="model-selection-and-comparison" class="slide level2">
+<h2>Model Selection and Comparison</h2>
+<p><strong>How to Choose Between Models?</strong></p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Leave-One-Out Cross-Validation (LOO)</a></li><li><a href="#tabset-1-2">WAIC (Watanabe-Akaike IC):</a></li><li><a href="#tabset-1-3">Bayes Factor (for nested models)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="co"># Compute LOO for each model</span></span>
+<span id="cb59-2"><a></a>loo1 <span class="ot">&lt;-</span> <span class="fu">loo</span>(model1)</span>
+<span id="cb59-3"><a></a>loo2 <span class="ot">&lt;-</span> <span class="fu">loo</span>(model2)</span>
+<span id="cb59-4"><a></a></span>
+<span id="cb59-5"><a></a><span class="co"># Compare</span></span>
+<span id="cb59-6"><a></a><span class="fu">loo_compare</span>(loo1, loo2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>ELPD = Expected Log Pointwise Predictive Density</li>
+<li>Higher ELPD = Better</li>
+<li>Difference &gt; 2×SE suggests meaningful difference</li>
+</ul>
+</div>
+<div id="tabset-1-2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">waic</span>(model1)</span>
+<span id="cb60-2"><a></a><span class="fu">waic</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Lower WAIC = Better</li>
+<li>Similar to LOO but different computation</li>
+</ul>
+</div>
+<div id="tabset-1-3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">library</span>(bridgesampling)</span>
+<span id="cb61-2"><a></a>bf <span class="ot">&lt;-</span> <span class="fu">bayes_factor</span>(model1, model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Ratio of marginal likelihoods</li>
+<li>BF &gt; 10: Strong evidence for model1</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="model-selection-practical-considerations" class="slide level2 smaller">
+<h2>Model Selection: Practical Considerations</h2>
+<p><strong>Don’t Rely Only on Metrics!</strong></p>
+<p><strong>Consider:</strong></p>
+<ol type="1">
+<li><strong>Scientific Plausibility</strong>
+<ul>
+<li>Does model make sense?</li>
+<li>Consistent with theory?</li>
+</ul></li>
+<li><strong>Interpretability</strong>
+<ul>
+<li>Can you explain results?</li>
+<li>Simpler is often better</li>
+</ul></li>
+<li><strong>Predictive Performance</strong>
+<ul>
+<li>How well does it predict new data?</li>
+<li>Check posterior predictive checks</li>
+</ul></li>
+<li><strong>Computational Feasibility</strong>
+<ul>
+<li>Does it converge?</li>
+<li>Reasonable run time?</li>
+</ul></li>
+<li><strong>Robustness</strong>
+<ul>
+<li>Sensitive to priors?</li>
+<li>Stable across subsets?</li>
+</ul></li>
+</ol>
+<p><strong>Best Practice:</strong> Fit multiple reasonable models, compare, report sensitivity</p>
+</section>
+<section id="common-pitfalls-and-solutions" class="slide level2 smaller">
+<h2>Common Pitfalls and Solutions</h2>
+<p><strong>1. Convergence Failures</strong></p>
+<ul>
+<li><strong>Problem:</strong> Rhat &gt; 1.1, divergent transitions</li>
+<li><strong>Solutions:</strong>
+<ul>
+<li>Run more iterations</li>
+<li>Reparameterize model</li>
+<li>Use stronger priors</li>
+<li>Check for multicollinearity</li>
+</ul></li>
+</ul>
+<p><strong>2. Too Many Random Effects</strong></p>
+<ul>
+<li><strong>Problem:</strong> Model doesn’t converge, huge uncertainties</li>
+<li><strong>Solutions:</strong>
+<ul>
+<li>Simplify random effects structure</li>
+<li>Need more data per group</li>
+<li>Consider some effects as fixed</li>
+</ul></li>
+</ul>
+</section>
+<section id="common-pitfalls-and-solutions-1" class="slide level2 smaller">
+<h2>Common Pitfalls and Solutions</h2>
+<p><strong>3. Complete Separation</strong></p>
+<ul>
+<li><strong>Problem:</strong> Perfect prediction in logistic regression</li>
+<li><strong>Solutions:</strong>
+<ul>
+<li>Use informative priors (Bayesian advantage!)</li>
+<li>Combine rare categories</li>
+<li>Get more data</li>
+</ul></li>
+</ul>
+<p><strong>4. Overfitting Random Effects</strong></p>
+<ul>
+<li><strong>Problem:</strong> Random effects for groups with 1-2 observations</li>
+<li><strong>Solutions:</strong>
+<ul>
+<li>Groups need ≥3 observations ideally</li>
+<li>Combine small groups</li>
+<li>Use stronger priors</li>
+</ul></li>
+</ul>
+</section>
+<section id="reporting-bayesian-hierarchical-models" class="slide level2 smaller">
+<h2>Reporting Bayesian Hierarchical Models</h2>
+<p><strong>Essential Components:</strong></p>
+<div class="columns">
+<div class="column">
+<p><strong>1. Model Specification</strong></p>
+<ul>
+<li>Full model equation</li>
+<li>Distributional assumptions</li>
+<li>Random effects structure</li>
+</ul>
+<p><strong>2. Prior Choices</strong></p>
+<ul>
+<li>State all priors</li>
+<li>Justify choices</li>
+<li>Report sensitivity analysis</li>
+</ul>
+<p><strong>3. Convergence Diagnostics</strong></p>
+<ul>
+<li>Rhat for all parameters</li>
+<li>Effective sample sizes</li>
+<li>Any convergence issues</li>
+</ul>
+</div><div class="column">
+<p><strong>4. Fixed Effects Results</strong></p>
+<ul>
+<li>Posterior medians and 95% CIs</li>
+<li>Probability statements where relevant</li>
+<li>Effect sizes and interpretation</li>
+</ul>
+<p><strong>5. Random Effects</strong></p>
+<ul>
+<li>Standard deviations with CIs</li>
+<li>ICC if relevant</li>
+<li>Interpretation of variance components</li>
+</ul>
+<p><strong>6. Model Comparison</strong></p>
+<ul>
+<li>LOO or WAIC if comparing models</li>
+<li>Posterior predictive checks</li>
+</ul>
+</div></div>
+</section>
+<section id="example-write-up" class="slide level2">
+<h2>Example Write-Up</h2>
+<p><strong>Methods:</strong></p>
+<p>“We fit a Bayesian hierarchical linear model with random intercepts for lakes to account for repeated measures within lakes. The model included fish length as a fixed effect. We used weakly informative priors: Normal(0, 5) for fixed effects and Half-Cauchy(0, 2.5) for variance parameters. We fit the model using <code>stan_glmer</code> from the rstanarm package with 4 chains of 2000 iterations each (1000 warmup). Convergence was assessed using Rhat statistics (all &lt; 1.01) and visual inspection of trace plots.”</p>
+<p><strong>Results:</strong></p>
+<p>“Fish length had a positive effect on mercury concentration (β = 0.52, 95% CI [0.34, 0.71], P(β &gt; 0) &gt; 0.999), with each additional cm associated with 0.52 µg/g more mercury. Lakes varied substantially in baseline mercury (SD = 0.78, 95% CI [0.53, 1.15]), with the intraclass correlation coefficient indicating that 58% of total variance was attributable to differences between lakes. Posterior predictive checks indicated good model fit (Figure S1).”</p>
+</section>
+<section id="advanced-topics-non-linear-hierarchical-models" class="slide level2">
+<h2>Advanced Topics: Non-Linear Hierarchical Models</h2>
+<p><strong>When Relationships Aren’t Linear:</strong></p>
+<div class="columns">
+<div class="column">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="co"># Non-linear growth curve</span></span>
+<span id="cb62-2"><a></a>nl_model <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb62-3"><a></a>  <span class="fu">bf</span>(</span>
+<span id="cb62-4"><a></a>    height <span class="sc">~</span> a <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>k <span class="sc">*</span> age)),</span>
+<span id="cb62-5"><a></a>    a <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> species),</span>
+<span id="cb62-6"><a></a>    k <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> species),</span>
+<span id="cb62-7"><a></a>    <span class="at">nl =</span> <span class="cn">TRUE</span></span>
+<span id="cb62-8"><a></a>  ),</span>
+<span id="cb62-9"><a></a>  <span class="at">data =</span> growth_data,</span>
+<span id="cb62-10"><a></a>  <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb62-11"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">100</span>, <span class="dv">20</span>), <span class="at">nlpar =</span> <span class="st">"a"</span>),</span>
+<span id="cb62-12"><a></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="fl">0.1</span>, <span class="fl">0.05</span>), <span class="at">nlpar =</span> <span class="st">"k"</span>, <span class="at">lb =</span> <span class="dv">0</span>)</span>
+<span id="cb62-13"><a></a>  )</span>
+<span id="cb62-14"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Growth curves (von Bertalanffy, logistic)</li>
+<li>Dose-response relationships</li>
+<li>Michaelis-Menten kinetics</li>
+<li>Population dynamics</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Mechanistic interpretation</li>
+<li>Extrapolation based on theory</li>
+<li>Species/site-specific parameters</li>
+</ul>
+</div></div>
+</section>
+<section id="advanced-topics-distributional-regression" class="slide level2 smaller">
+<h2>Advanced Topics: Distributional Regression</h2>
+<p><strong>Model More Than the Mean:</strong></p>
+<div class="columns">
+<div class="column">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># Model both mean AND variance</span></span>
+<span id="cb63-2"><a></a>dist_model <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb63-3"><a></a>  <span class="fu">bf</span>(</span>
+<span id="cb63-4"><a></a>    mercury <span class="sc">~</span> length <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> lake),</span>
+<span id="cb63-5"><a></a>    sigma <span class="sc">~</span> length <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> lake)</span>
+<span id="cb63-6"><a></a>  ),</span>
+<span id="cb63-7"><a></a>  <span class="at">data =</span> fish_data,</span>
+<span id="cb63-8"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>()</span>
+<span id="cb63-9"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column">
+<p><strong>What This Does:</strong></p>
+<ul>
+<li>Mean mercury depends on length and lake</li>
+<li>Variance ALSO depends on length and lake</li>
+<li>Some lakes more variable than others</li>
+<li>Variability might increase with length (heteroscedasticity)</li>
+</ul>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>When variance differs across groups</li>
+<li>Heteroscedasticity</li>
+<li>Understanding variability patterns</li>
+<li>Risk assessment (variance matters!)</li>
+</ul>
+</div></div>
+</section>
+<section id="putting-it-all-together-complete-workflow" class="slide level2 smaller">
+<h2>Putting It All Together: Complete Workflow</h2>
+<p><strong>Step-by-Step Process:</strong></p>
+<div class="columns">
+<div class="column">
+<p><strong>1. Identify Structure</strong></p>
+<ul>
+<li>What are the grouping variables?</li>
+<li>How are they related (nested, crossed)?</li>
+<li>What level are predictors measured at?</li>
+</ul>
+<p><strong>2. Specify Model</strong></p>
+<ul>
+<li>Random intercepts, slopes, or both?</li>
+<li>Fixed effects of interest</li>
+<li>Appropriate distribution family</li>
+</ul>
+<p><strong>3. Choose Priors</strong></p>
+<ul>
+<li>Weakly informative as default</li>
+<li>Stronger if prior knowledge available</li>
+<li>Document choices</li>
+</ul>
+</div><div class="column">
+<p><strong>4. Fit Model</strong></p>
+<ul>
+<li>Use rstanarm for simplicity or brms for flexibility</li>
+<li>Check convergence (Rhat, ESS, traces)</li>
+<li>Run longer if needed</li>
+</ul>
+<p><strong>5. Check Model</strong></p>
+<ul>
+<li>Posterior predictive checks</li>
+<li>Residual diagnostics</li>
+<li>Prior sensitivity</li>
+</ul>
+<p><strong>6. Interpret and Report</strong></p>
+<ul>
+<li>Fixed effects with uncertainty</li>
+<li>Random effects variation</li>
+<li>Biological meaning</li>
+<li>Visualizations</li>
+</ul>
+</div></div>
+</section>
+<section id="complete-workflow-example-code" class="slide level2">
+<h2>Complete Workflow Example (Code)</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb64-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb64-3"><a></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb64-4"><a></a></span>
+<span id="cb64-5"><a></a><span class="co"># 1. Explore data structure</span></span>
+<span id="cb64-6"><a></a><span class="fu">summary</span>(mydata)</span>
+<span id="cb64-7"><a></a><span class="fu">table</span>(mydata<span class="sc">$</span>site)  <span class="co"># How many obs per site?</span></span>
+<span id="cb64-8"><a></a></span>
+<span id="cb64-9"><a></a><span class="co"># 2. Fit model</span></span>
+<span id="cb64-10"><a></a>model <span class="ot">&lt;-</span> <span class="fu">stan_glmer</span>(</span>
+<span id="cb64-11"><a></a>  response <span class="sc">~</span> predictor1 <span class="sc">+</span> predictor2 <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">+</span> predictor1 <span class="sc">|</span> site),</span>
+<span id="cb64-12"><a></a>  <span class="at">data =</span> mydata,</span>
+<span id="cb64-13"><a></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb64-14"><a></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb64-15"><a></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb64-16"><a></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb64-17"><a></a>)</span>
+<span id="cb64-18"><a></a></span>
+<span id="cb64-19"><a></a><span class="co"># 3. Check convergence</span></span>
+<span id="cb64-20"><a></a><span class="fu">summary</span>(model)  <span class="co"># Look at Rhat</span></span>
+<span id="cb64-21"><a></a><span class="fu">mcmc_trace</span>(model, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"predictor1"</span>, <span class="st">"predictor2"</span>))</span>
+<span id="cb64-22"><a></a></span>
+<span id="cb64-23"><a></a><span class="co"># 4. Posterior predictive check</span></span>
+<span id="cb64-24"><a></a><span class="fu">pp_check</span>(model, <span class="at">type =</span> <span class="st">"dens_overlay"</span>, <span class="at">ndraws =</span> <span class="dv">50</span>)</span>
+<span id="cb64-25"><a></a></span>
+<span id="cb64-26"><a></a><span class="co"># 5. Extract results</span></span>
+<span id="cb64-27"><a></a><span class="fu">fixef</span>(model)</span>
+<span id="cb64-28"><a></a><span class="fu">ranef</span>(model)</span>
+<span id="cb64-29"><a></a>performance<span class="sc">::</span><span class="fu">icc</span>(model)</span>
+<span id="cb64-30"><a></a></span>
+<span id="cb64-31"><a></a><span class="co"># 6. Visualize</span></span>
+<span id="cb64-32"><a></a><span class="fu">plot</span>(model)</span>
+<span id="cb64-33"><a></a><span class="fu">mcmc_areas</span>(model, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">"predictor1"</span>, <span class="st">"predictor2"</span>))</span>
+<span id="cb64-34"><a></a></span>
+<span id="cb64-35"><a></a><span class="co"># 7. Predict</span></span>
+<span id="cb64-36"><a></a>new_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb64-37"><a></a>  <span class="at">predictor1 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(mydata<span class="sc">$</span>predictor1), <span class="fu">max</span>(mydata<span class="sc">$</span>predictor1), <span class="at">length =</span> <span class="dv">100</span>),</span>
+<span id="cb64-38"><a></a>  <span class="at">predictor2 =</span> <span class="fu">mean</span>(mydata<span class="sc">$</span>predictor2),</span>
+<span id="cb64-39"><a></a>  <span class="at">site =</span> <span class="st">"Site1"</span></span>
+<span id="cb64-40"><a></a>)</span>
+<span id="cb64-41"><a></a>predictions <span class="ot">&lt;-</span> <span class="fu">posterior_epred</span>(model, <span class="at">newdata =</span> new_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="decision-guide-when-to-use-what" class="slide level2">
+<h2>Decision Guide: When to Use What</h2>
+<p><strong>Use Standard Regression When:</strong> - No clustering or repeated measures - All observations truly independent - Single level of observation</p>
+<p><strong>Use Hierarchical Model When:</strong> - Nested or grouped data structure - Repeated measures - Unbalanced group sizes - Want to generalize to new groups - Interested in group-level variation</p>
+<p><strong>Use Random Intercepts When:</strong> - Groups differ in baseline/mean - Same relationship across groups - Most common hierarchical model</p>
+<p><strong>Use Random Slopes When:</strong> - Relationship varies by group - Sufficient data per group (n ≥ 5-10) - Theoretical reason to expect variation</p>
+<p><strong>Use rstanarm When:</strong> - Want simple, standard models - Getting started with Bayesian - Need fast computation</p>
+<p><strong>Use brms When:</strong> - Need flexibility - Complex random effects - Custom distributions - Distributional regression</p>
+</section>
+<section id="summary-key-takeaways" class="slide level2">
+<h2>Summary: Key Takeaways</h2>
+<p><strong>Core Concepts:</strong> 1. <strong>Clustering matters</strong>: Ignoring structure leads to wrong conclusions 2. <strong>Partial pooling</strong>: Best of complete and no pooling approaches 3. <strong>Shrinkage</strong>: Automatic regularization toward population mean 4. <strong>Information sharing</strong>: Small groups borrow strength from larger groups</p>
+<p><strong>Practical Benefits:</strong> - Correct standard errors - Better predictions for groups with little data - Can predict for new, unobserved groups - Explicitly models and estimates sources of variation - Handles unbalanced data elegantly</p>
+<p><strong>When to Use:</strong> - Nested/grouped/repeated measures data - Interest in group-level variation - Predictions for new groups - Unbalanced sample sizes - <strong>Common in environmental science!</strong></p>
+<p><strong>Bayesian Advantages:</strong> - Natural hierarchical framework - Handles small samples well - Full uncertainty quantification - Direct probability statements - Flexible and extensible</p>
+</section>
+<section id="common-questions" class="slide level2">
+<h2>Common Questions</h2>
+<p><strong>Q: How many groups/observations per group do I need?</strong> - Minimum: ~5-10 groups for stable variance estimates - Per group: 2-3 minimum, 5-10 ideal for random slopes - Unbalanced is OK! (that’s a strength of hierarchical models)</p>
+<p><strong>Q: Random or fixed effects?</strong> - Fixed: Specific levels you care about (e.g., specific treatments) - Random: Sample from population, want to generalize - If unsure: start with random, it’s usually safer</p>
+<p><strong>Q: How do I know if I need random slopes?</strong> - Theory suggests varying relationships - Test with model comparison (LOO/WAIC) - Plot data by group—do slopes look different? - Need enough data per group</p>
+<p><strong>Q: Do I need to worry about p-values?</strong> - No! Use credible intervals and probability statements - P(β &gt; 0 | data) is more interpretable than p-value - Focus on effect sizes and uncertainty</p>
+<p><strong>Q: How do I deal with convergence problems?</strong> - Run more iterations - Use informative priors - Reparameterize model - Check for multicollinearity</p>
+</section>
+<section id="additional-resources" class="slide level2">
+<h2>Additional Resources</h2>
+<p><strong>Books:</strong> - “Data Analysis Using Regression and Multilevel/Hierarchical Models” - Gelman &amp; Hill - “Statistical Rethinking” - McElreath (Bayesian focused) - “Bayesian Data Analysis” - Gelman et al.&nbsp;(advanced) - “Hierarchical Modeling for Environmental Sciences” - Clark &amp; Gelfand</p>
+<p><strong>Online Resources:</strong> - <a href="https://mc-stan.org">Stan documentation</a> - <a href="https://mc-stan.org/rstanarm/">rstanarm vignettes</a> - <a href="https://paul-buerkner.github.io/brms/">brms documentation</a> - <a href="https://m-clark.github.io/mixed-models-with-R/">Michael Clark’s Mixed Models tutorial</a></p>
+<p><strong>R Packages:</strong> - <code>rstanarm</code>: Simple Bayesian hierarchical models - <code>brms</code>: Flexible Bayesian hierarchical models - <code>bayesplot</code>: Visualization for Bayesian models - <code>tidybayes</code>: Tidy manipulation of Bayesian output - <code>performance</code>: Model diagnostics including ICC</p>
+<p><strong>Practice Datasets:</strong> - Radon data (rstanarm package) - sleepstudy (lme4 package) - Environmental datasets in <code>lterdatasampler</code></p>
+</section>
+<section id="end-of-slide-deck" class="slide level2">
+<h2>End of Slide Deck</h2>
+<p><strong>Next Steps:</strong></p>
+<ol type="1">
+<li>Start with simple random intercepts models</li>
+<li>Use your own data with grouping structure</li>
+<li>Check convergence and model fit carefully</li>
+<li>Gradually add complexity (random slopes, predictors)</li>
+<li>Compare to non-hierarchical models to see the difference</li>
+<li>Practice interpreting variance components</li>
+</ol>
+<p><strong>Key Principles:</strong> - Respect the structure in your data - Partial pooling is usually the right answer - Bayesian framework is natural for hierarchical models - Always check convergence and model fit - Visualize random effects to understand patterns - Report uncertainty honestly</p>
+<p><strong>Remember:</strong> - Hierarchical models are appropriate for most environmental data - They provide better estimates and correct inference - rstanarm and brms make fitting these models straightforward - The hardest part is understanding the concept, not the code!</p>
+<p><strong>Good luck with your hierarchical modeling!</strong></p>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W119
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../slides";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

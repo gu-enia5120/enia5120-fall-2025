@@ -14,7 +14,7 @@
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
-  <title>ENIA 5120 – Week 9</title>
+  <title>ENIA 5120 – Lecture 9</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -99,7 +99,7 @@
     code span.vs { color: #008000; } /* VerbatimString */
     code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-29f0a8a060d1807bf1541810e0e35c2c.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-202071fc02f58b4a3bb510e8b45ba0e8.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -201,7 +201,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Week 9</h1>
+  <h1 class="title">Lecture 9</h1>
   <p class="subtitle">Prediction and evaluation</p>
 
 <div class="quarto-title-authors">
@@ -223,19 +223,6 @@
 <li>Learning curves and cross-validation</li>
 </ul></li>
 </ul>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>These slides are incomplete as of 11/11/25 4pm.</p>
-</div>
-</div>
-</div>
 </section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
@@ -315,33 +302,42 @@
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>n_simulations <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb2-2"><a></a>posterior_samples <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n_simulations, <span class="dv">1</span> <span class="sc">+</span> observed_heads, <span class="dv">1</span> <span class="sc">+</span> n_tosses <span class="sc">-</span> observed_heads)</span>
-<span id="cb2-3"><a></a>simulated_data <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n_simulations, n_tosses, posterior_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a></a>posterior_samples <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(</span>
+<span id="cb2-3"><a></a>  n_simulations,</span>
+<span id="cb2-4"><a></a>  <span class="dv">1</span> <span class="sc">+</span> observed_heads,</span>
+<span id="cb2-5"><a></a>  <span class="dv">1</span> <span class="sc">+</span> n_tosses <span class="sc">-</span> observed_heads</span>
+<span id="cb2-6"><a></a>)</span>
+<span id="cb2-7"><a></a>simulated_data <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n_simulations, n_tosses, posterior_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="posterior-simulations-continued" class="slide level2">
 <h2>Posterior simulations, continued</h2>
 <p>We can visualize the posterior predictive distribution of the number of heads in 10 tosses:</p>
+<div class="columns">
+<div class="column">
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a></a><span class="fu">ggplot</span>(tibble<span class="sc">::</span><span class="fu">tibble</span>(simulated_data), <span class="fu">aes</span>(<span class="at">x =</span> simulated_data)) <span class="sc">+</span></span>
 <span id="cb3-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Posterior Predictive Distribution of Heads in 10 Tosses"</span>,</span>
-<span id="cb3-5"><a></a>       <span class="at">x =</span> <span class="st">"Number of Heads"</span>,</span>
-<span id="cb3-6"><a></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-4"><a></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-5"><a></a>    <span class="at">title =</span> <span class="st">"Posterior Predictive Distribution of Heads in 10 Tosses"</span>,</span>
+<span id="cb3-6"><a></a>    <span class="at">x =</span> <span class="st">"Number of Heads"</span>,</span>
+<span id="cb3-7"><a></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb3-8"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-09_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="week-09_files/figure-revealjs/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-1-1.png" width="480"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>This histogram shows the distribution of the number of heads we would expect to see in 10 tosses, given our observed data and the uncertainty in our estimate of <span class="math inline">\(p\)</span>.</p>
+</div><div class="column">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -351,164 +347,19 @@
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>This example illustrates the concept of generative models in a Bayesian framework. By treating parameters as random variables and using posterior distributions, we can simulate new data that reflects both our uncertainty about the parameters and the inherent variability in the data generation process. This gives us our best guess about future observations, given what we have already seen</p>
+<p>This example illustrates the concept of generative models in a Bayesian framework. By treating parameters as random variables and using posterior distributions, we can simulate new data that reflects both our uncertainty about the parameters and the inherent variability in the data generation process. This gives us our best guess about future observations, given what we have already seen.</p>
 </div>
 </div>
 </div>
+</div></div>
 </section>
-<section id="posterior-predictive-checks-ppc" class="slide level2">
-<h2>Posterior Predictive Checks (PPC)</h2>
+<section id="a-real-example-deciding-on-a-clinical-trial-threshold" class="slide level2">
+<h2>A real example: Deciding on a clinical trial threshold</h2>
+<p>** Problem Context:** We are planning a clinical trial to evaluate a new treatment. We need to decide on a threshold for a key biomarker that will determine whether patients respond to the treatment. We have historical data from a competitor’s trial that shows the distribution of this biomarker in their patient population. We want to use this data to inform our decision on the threshold, and understand how often we expect to meet this threshold in future patients.</p>
 <ul>
-<li>Key model diagnostic in Bayesian workflow<br>
-</li>
-<li>Compare replicated data to observed data using R</li>
+<li>The competitor’s data shows the percentage change in a biomarker after treatment. We want to decide on a threshold for this percentage change that will determine whether we consider a patient to be a responder.</li>
 </ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(brms)</span>
-<span id="cb4-2"><a></a><span class="co"># Simulate</span></span>
-<span id="cb4-3"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb4-4"><a></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb4-5"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb4-6"><a></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a></a>  <span class="fu">mutate</span>(<span class="at">y =</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb4-8"><a></a><span class="co"># Fit model</span></span>
-<span id="cb4-9"><a></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
-Chain 1: 
-Chain 1: Gradient evaluation took 4.2e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.42 seconds.
-Chain 1: Adjust your expectations accordingly!
-Chain 1: 
-Chain 1: 
-Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 1: 
-Chain 1:  Elapsed Time: 0.018 seconds (Warm-up)
-Chain 1:                0.011 seconds (Sampling)
-Chain 1:                0.029 seconds (Total)
-Chain 1: 
-
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
-Chain 2: 
-Chain 2: Gradient evaluation took 2e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 2: Adjust your expectations accordingly!
-Chain 2: 
-Chain 2: 
-Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 2: 
-Chain 2:  Elapsed Time: 0.016 seconds (Warm-up)
-Chain 2:                0.013 seconds (Sampling)
-Chain 2:                0.029 seconds (Total)
-Chain 2: 
-
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
-Chain 3: 
-Chain 3: Gradient evaluation took 2e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 3: Adjust your expectations accordingly!
-Chain 3: 
-Chain 3: 
-Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 3: 
-Chain 3:  Elapsed Time: 0.014 seconds (Warm-up)
-Chain 3:                0.014 seconds (Sampling)
-Chain 3:                0.028 seconds (Total)
-Chain 3: 
-
-SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
-Chain 4: 
-Chain 4: Gradient evaluation took 2e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.02 seconds.
-Chain 4: Adjust your expectations accordingly!
-Chain 4: 
-Chain 4: 
-Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-Chain 4: 
-Chain 4:  Elapsed Time: 0.013 seconds (Warm-up)
-Chain 4:                0.014 seconds (Sampling)
-Chain 4:                0.027 seconds (Total)
-Chain 4: </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Posterior predictive simulations</span></span>
-<span id="cb6-2"><a></a>yrep <span class="ot">&lt;-</span> <span class="fu">posterior_predict</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section>
-<section id="ppc-visuals" class="slide level2">
-<h2>PPC Visuals</h2>
-<ul>
-<li>Overlay densities for observed vs.&nbsp;simulated data</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb7-2"><a></a><span class="fu">ppc_dens_overlay</span>(<span class="at">y =</span> dat<span class="sc">$</span>y, <span class="at">yrep =</span> yrep[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, ])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week-09_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="a-real-example-from-work" class="slide level2">
-<h2>A real example from work</h2>
-<p>We’re trying to plan a new study, based on this figure from a poster by a competitor</p>
-<p><a href="images/paste-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/paste-2.png"></a></p>
+<p><a href="images/paste-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/paste-2.png"></a></p>
 </section>
 <section id="importing-our-data" class="slide level2">
 <h2>Importing our data</h2>
@@ -518,15 +369,15 @@ Chain 4: </code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>abbvie_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/cdln3_abbvie_data.csv'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a></a>    <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb8-4"><a></a><span class="fu">ggplot</span>(abbvie_data, <span class="fu">aes</span>(y))<span class="sc">+</span><span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>abbvie_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/cdln3_abbvie_data.csv'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb4-4"><a></a><span class="fu">ggplot</span>(abbvie_data, <span class="fu">aes</span>(y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week-09_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
+<p><a href="week-09_files/figure-revealjs/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></a></p>
 </figure>
 </div>
 </div>
@@ -539,12 +390,59 @@ Chain 4: </code></pre>
 <li><p>If we fix a threshold at , say, 60%, we can model whether an observation falls above or below this threshold as a <em>Binomial(1, p)</em>, where <span class="math inline">\(p = P(X &gt; 60\%)\)</span>. This is a binomial distribution, whose conjugate prior is a Beta distribution. We start with a <em>Beta(2,1)</em> distribution</p></li>
 <li><p>We can get posterior distributions for <em>p</em>, which gives us how often we expect, in future data, to meet this threshold of 60%. We did this for several thresholds</p></li>
 </ul>
-<p><a href="images/paste-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/paste-3.png"></a></p>
+<p><a href="images/paste-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="images/paste-3.png"></a></p>
 </section>
 <section id="using-the-predictive-distribution" class="slide level2">
 <h2>Using the predictive distribution</h2>
 <p>We want to make a decision of whether to recruit more patients by seeing whether a new patient meets a chosen threshold or not. A question was if we needed to see if at least 1 patient or at least 2 patients have to meet the threshold (out of a possible 6 patients to be investigated)</p>
-<p><a href="images/paste-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="images/paste-4.png"></a></p>
+<p><a href="images/paste-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="images/paste-4.png"></a></p>
+</section>
+<section>
+<section id="evaluating-a-bayesian-model-posterior-predictive-checks-ppc" class="title-slide slide level1 center">
+<h1>Evaluating a Bayesian model: Posterior Predictive Checks (PPC)</h1>
+
+</section>
+<section id="posterior-predictive-checks-ppc" class="slide level2">
+<h2>Posterior predictive checks (PPC)</h2>
+<ul>
+<li>Posterior predictive checks are a way to evaluate how well our Bayesian model fits the data</li>
+<li>The idea is to simulate new data from the posterior predictive distribution and compare it to the observed data</li>
+<li>If the model is a good fit, the simulated data should look similar to the observed data</li>
+</ul>
+</section>
+<section id="ppc-in-r-with-brms" class="slide level2">
+<h2>PPC in R with <code>brms</code></h2>
+<ul>
+<li>The <code>brms</code> package has built-in functions for performing PPC</li>
+<li>We can use the <code>pp_check()</code> function to visualize the PPC results</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Fit a simple Bayesian model</span></span>
+<span id="cb5-2"><a></a><span class="fu">data</span>(<span class="st">"mtcars"</span>)</span>
+<span id="cb5-3"><a></a>fit <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb5-4"><a></a>  mpg <span class="sc">~</span> wt <span class="sc">+</span> cyl,</span>
+<span id="cb5-5"><a></a>  <span class="at">data =</span> mtcars,</span>
+<span id="cb5-6"><a></a>  <span class="at">family =</span> gaussian,</span>
+<span id="cb5-7"><a></a>  <span class="at">silent =</span> <span class="dv">2</span>,</span>
+<span id="cb5-8"><a></a>  <span class="at">refresh =</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a></a>)</span>
+<span id="cb5-10"><a></a><span class="co"># Perform posterior predictive check</span></span>
+<span id="cb5-11"><a></a><span class="fu">pp_check</span>(fit, <span class="at">ndraws =</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-09_files/figure-revealjs/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="week-09_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The plot shows the distribution of the observed data (black line) and the distribution of the simulated data from the posterior predictive distribution (colored lines)</li>
+<li>We can see how well the model captures the variability in the data</li>
+</ul>
 
 
 <script type="ojs-module-contents">
@@ -561,7 +459,7 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
