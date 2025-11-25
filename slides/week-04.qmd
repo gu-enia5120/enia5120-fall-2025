@@ -96,6 +96,7 @@ are all linear models
 :::
 
 ```{r}
+#| label: week-04-01
 #| include: false
 #| echo: false
 #| cache: false
@@ -108,6 +109,7 @@ theme_set(theme_bw())
 **EDA helps us figure out the kind of statistical model we might fit**
 
 ```{r}
+#| label: week-04-02
 #| fig-height: 1
 #| fig-asp: 0.6
 
@@ -121,6 +123,7 @@ ggplot(airquality, aes(Temp, Ozone)) +
 **EDA helps us figure out the kind of statistical model we might fit**
 
 ```{r}
+#| label: week-04-03
 #| fig-height: 1
 #| fig-asp: 0.6
 ggplot(airquality, aes(Temp, Ozone)) +
@@ -134,6 +137,7 @@ ggplot(airquality, aes(Temp, Ozone)) +
 **EDA helps us figure out the kind of statistical model we might fit**
 
 ```{r}
+#| label: week-04-04
 #| fig-height: 1
 #| fig-asp: 0.6
 ggplot(airquality, aes(Temp, Ozone)) +
@@ -153,6 +157,7 @@ ggplot(airquality, aes(Temp, Ozone)) +
 ## Fitting a linear model in R
 
 ```{r}
+#| label: week-04-05
 #| code-fold: false
 model <- lm(Ozone ~ Temp, data = airquality)
 summary(model)
@@ -161,6 +166,7 @@ summary(model)
 ## Fitting a linear model in R
 
 ```{r}
+#| label: week-04-06
 library(broom)
 add_model <- augment(model)
 ggplot(add_model, aes(x = Temp)) +
@@ -171,6 +177,7 @@ ggplot(add_model, aes(x = Temp)) +
 ## Fitting a linear model in R
 
 ```{r}
+#| label: week-04-07
 library(broom)
 add_model <- augment(model)
 ggplot(add_model, aes(x = Temp)) +
@@ -193,6 +200,7 @@ Residuals are what's left after you subtract the fitted (predicted) values of th
 See [here](http://www.feat.engineering/numeric-one-to-one) for more details
 
 ```{r}
+#| label: week-04-08
 ggplot(add_model, aes(.fitted, .resid)) +
   geom_point() +
   geom_smooth(se = F) +
@@ -203,6 +211,7 @@ ggplot(add_model, aes(.fitted, .resid)) +
 ## Trying a new model (still linear)
 
 ```{r}
+#| label: week-04-09
 model2 <- lm(Ozone ~ Temp + I(Temp^2), data = airquality)
 add_model2 <- augment(model2)
 ggplot(model2, aes(x = Temp)) +
@@ -214,6 +223,7 @@ ggplot(model2, aes(x = Temp)) +
 ## Residuals
 
 ```{r}
+#| label: week-04-10
 ggplot(add_model2, aes(.fitted, .resid)) +
   geom_point() +
   geom_smooth(se = F) +
@@ -236,6 +246,7 @@ ggplot(add_model2, aes(.fitted, .resid)) +
 ## Where's the inference bit?
 
 ```{r}
+#| label: week-04-11
 library(gtsummary)
 tbl_regression(model2)
 ```
@@ -345,6 +356,7 @@ Use them for now, understand them later
 ## Application in R
 
 ```{r}
+#| label: week-04-12
 data(iris)
 clust <- kmeans(iris |> select(-Species), centers = 3)
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +
@@ -354,6 +366,7 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width)) +
 ## Application in R (2)
 
 ```{r}
+#| label: week-04-13
 d = dist(iris |> select(-Species))
 clust2 <- hclust(d)
 clust_ids <- cutree(clust2, k = 3)

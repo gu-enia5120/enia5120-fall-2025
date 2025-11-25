@@ -7,7 +7,6 @@ project:
     - "*.qmd"
     - "!*.md"
 
-
   resources:
     - img
     - "site-page-content/*.pdf"
@@ -169,7 +168,13 @@ format:
   html:
     theme:
       light: [cerulean, style/html-sta313-adg.scss, style/sfah.scss]
-      dark: [cerulean,  style/html-sta313-adg.scss, style/html-dark.scss, style/sfah.scss]
+      dark:
+        [
+          cerulean,
+          style/html-sta313-adg.scss,
+          style/html-dark.scss,
+          style/sfah.scss,
+        ]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
     embed-resources: true

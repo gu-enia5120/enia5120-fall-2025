@@ -1,5 +1,6 @@
 ---
 title: "Lecture 9"
+title: "Lecture 9"
 subtitle: "Prediction and evaluation"
 execute:
   echo: true
@@ -11,6 +12,7 @@ execute:
 ---
 
 ```{r}
+#| label: week-09-01
 #| include: false
 
 library(tidyverse)
@@ -78,6 +80,7 @@ Let's take a simple example of coin tossing (again!!)
 Let's simulate 10 coin tosses with probability of heads p = 0.7. This will be our observed data:
 
 ```{r}
+#| label: week-09-02
 set.seed(123)
 n_tosses <- 10
 p_true <- 0.7
@@ -92,6 +95,7 @@ The posterior predictive distribution allows us to simulate new data based on th
 2.  Simulating new coin tosses using the sampled $p$.
 
 ```{r}
+#| label: week-09-03
 n_simulations <- 1000
 posterior_samples <- rbeta(n_simulations, 1 + observed_heads, 1 + n_tosses - observed_heads)
 simulated_data <- rbinom(n_simulations, n_tosses, posterior_samples)

@@ -24,6 +24,7 @@ execute:
 
 ::: aside
 ```{r}
+#| label: week-05-01
 #| code-fold: true
 #| code-summary: "Setup code"
 #| eval: true
@@ -45,6 +46,7 @@ theme_set(theme_minimal() +
 ::::: columns
 ::: column
 ```{r}
+#| label: week-05-02
 airquality |> 
     clean_names() |>
     ggplot(aes(x = wind, y = ozone)) +
@@ -102,6 +104,7 @@ Randomness and independence are concepts from the language of **probability**
 ::::: columns
 ::: column
 ```{r}
+#| label: week-05-03
 #| echo: false
 expand.grid(x = 0:10, y = 0:10) |> 
     ggplot(aes(x = x, y = y)) +
@@ -115,6 +118,7 @@ expand.grid(x = 0:10, y = 0:10) |>
 
 ::: column
 ```{r}
+#| label: week-05-04
 #| echo: false
 set.seed(2395)
 x <- runif(50, 0, 10)
@@ -187,6 +191,7 @@ mean(x == "H")
 
 ::: fragment
 ```{r}
+#| label: week-05-05
 #| echo: false
 #| fig-height: 2
 n = c(1,5,10,50, 100, 500, 1000, 5000, 10000)
@@ -294,6 +299,7 @@ where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient, i.e. the
 :::
 ::: {.column}
 ```{r}
+#| label: week-05-06
 n <- 10; p <- 0.7
 p = pbinom(0:n, size = n, prob = p)
 
@@ -339,6 +345,7 @@ where $\lambda$ is the average rate of occurrence of the event, and $e$ is the b
 :::
 ::: {.column}
 ```{r}
+#| label: week-05-07
 lambda <- 3
 p = dpois(0:15, lambda = lambda)
 tibble(k = 0:15, p) |>
@@ -390,6 +397,7 @@ It is also called the Gaussian distribution, after Carl Friedrich Gauss, who fir
 
 ::: {.column}
 ```{r}
+#| label: week-05-08
 mu <- 0; sigma <- 1
 x <- seq(-4, 4, length.out = 100)
 y <- dnorm(x, mean = mu, sd = sigma)
@@ -432,6 +440,7 @@ $$
 :::
 ::: {.column}
 ```{r}
+#| label: week-05-09
 a <- 0; b <- 1
 x <- seq(a, b, length.out = 100)
 y <- dunif(x, min = a, max = b)
@@ -463,6 +472,7 @@ It is related to the Poisson distribution, as the time between events in a Poiss
 :::
 ::: {.column}
 ```{r}
+#| label: week-05-10
 lambda <- 1
 x <- seq(0, 5, length.out = 100)
 y <- dexp(x, rate = lambda)
@@ -511,6 +521,7 @@ For continuous distributions, it makes no sense to talk about the probability of
 Events are defined as intervals, e.g., $a < X < b$
 
 ```{r}
+#| label: week-05-11
 ggplot() +
   # Add the full normal density curve
   stat_function(
@@ -701,6 +712,7 @@ Generally, $P(A|B) \neq P(B|A)$, so you cannot just reverse the conditioning eve
 ## The Monty Hall problem
 
 ```{r}
+#| label: week-05-12
 set.seed(123)
 n <- 1000
 
@@ -834,6 +846,7 @@ How many patients do we need to screen?
 ## Simulating an epidemic
 
 ```{r}
+#| label: week-05-13
 set.seed(100)
 # Parameters
 N <- 1000        # Total population

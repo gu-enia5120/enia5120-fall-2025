@@ -171,6 +171,7 @@ dc_pop <- pop_age_2019 |>
 ```
 
 ```{r}
+#| label: week-06-01
 #| fig-width: 8
 #| fig-height: 4
 #| echo: false
@@ -227,6 +228,7 @@ The sampling distribution of the mean (or any statistic) is the distribution of 
 ## Simulating the sampling distribution of the mean
 
 ```{r}
+#| label: week-06-02
 #| fig-width: 8
 #| fig-height: 4
 #| warning: false
@@ -254,6 +256,7 @@ tibble(sample_mean = sample_means) |>
 ## Simulating the sampling distribution of the mean
 
 ```{r}
+#| label: week-06-03
 #| fig-width: 8
 #| fig-height: 3
 #| warning: false
@@ -293,6 +296,7 @@ Notice that the population mean is pretty much in the middle of the sampling dis
 ## Simulating the sampling distribution of the mean
 
 ```{r}
+#| label: week-06-04
 #| fig-width: 8
 #| fig-height: 3
 #| warning: false
@@ -352,6 +356,7 @@ Notice that the population mean is pretty much in the middle of the sampling dis
 ## Simulating the sampling distribution of the mean
 
 ```{r}
+#| label: week-06-05
 #| fig-width: 8
 #| fig-height: 3
 #| warning: false
@@ -443,6 +448,7 @@ is called the **variance**. It is measuring how far from the mean, on average, w
 ## 
 
 ```{r}
+#| label: week-06-06
 library(ggdist)
 library(distributional)
 tibble(sigma=seq(0.5, 3, by=0.5)) |>
@@ -678,6 +684,7 @@ In the sequel, we will use idealized distributions to illustrate concepts, based
 Let's go to DC and take a random sample of 100 people and measure their ages.
 
 ```{r}
+#| label: week-06-07
 set.seed(1234)
 n <- 100
 sample_100 <- sample_n(dc_pop, n)
@@ -695,6 +702,7 @@ We will test the hypotheses:
 We'll deal with the Type I error first, i.e., how likely is it to see a sample mean as large as we saw if the null hypothesis were true?
 
 ```{r}
+#| label: week-06-08
 #| fig-width: 8
 #| fig-height: 3
 
@@ -736,6 +744,7 @@ We might like to also take a look at the other kind of error, the Type II error.
 To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
 
 ```{r}
+#| label: week-06-09
 #| fig-width: 8
 #| fig-height: 3
 
@@ -758,6 +767,7 @@ ggplot(aes(x=x)) +
 To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
 
 ```{r}
+#| label: week-06-10
 #| fig-width: 8
 #| fig-height: 3
 
@@ -782,6 +792,7 @@ ggplot(aes(x=x)) +
 To understand the Type II error, we need to consider what happens if the null hypothesis is false. For our hypotheses, there is a range of possible true values for $\mu$ that are greater than 35. The further away the true $\mu$ is from 35, the easier it is to reject the null hypothesis, since the sample mean is likely to be larger.
 
 ```{r}
+#| label: week-06-11
 #| fig-width: 8
 #| fig-height: 3
 
@@ -854,18 +865,21 @@ ggplot(aes(x=x)) +
 ## Running a hypothesis test in R
 
 ```{r}
+#| label: week-06-12
 t.test(sample_100$age, mu = 35, alternative = "greater")
 ```
 
 This output can be cleaned up using `broom::tidy()`
 
 ```{r}
+#| label: week-06-13
 broom::tidy(t.test(sample_100$age, mu = 35, alternative = "greater"))
 ```
 
 ## What happens if we change to a two-sided test?
 
 ```{r}
+#| label: week-06-14
 broom::tidy(t.test(sample_100$age, mu = 35, alternative = "two.sided"))
 ```
 The p-value has doubled, since we are now considering extreme values on both sides of the null hypothesis value.
@@ -873,6 +887,7 @@ The p-value has doubled, since we are now considering extreme values on both sid
 ## 
 
 ```{r}
+#| label: week-06-15
 #| fig-width: 8
 #| fig-height: 3
 

@@ -2,8 +2,14 @@ engine: knitr
 format:
   live-html:
     theme:
-      light: [cosmo, ../style/html-sta313.scss, ../style/sfah.scss]
-      dark: [cosmo, ../style/html-sta313.scss, ../style/html-dark.scss, ../style/sfah.scss]
+      light: [cosmo, ../style/html-sta313-adg.scss, ../style/sfah.scss]
+      dark:
+        [
+          cosmo,
+          ../style/html-sta313-adg.scss,
+          ../style/html-dark.scss,
+          ../style/sfah.scss,
+        ]
     toc: true
     linkcolor: "#866fa3" # Glossy Grape
     code-copy: true
@@ -26,3 +32,4 @@ execute:
   fig-dpi: 96
   out-width: "70%"
   out-height: "70%"
+

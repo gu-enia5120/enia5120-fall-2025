@@ -51,9 +51,10 @@ webr:
 Let's look at linear regression
 
 ```{r}
+#| label: week-08-01
 library(rsample)
 library(broom)
-
+library(tidyverse) |> suppressPackageStartupMessages()
 set.seed(8459)
 boots <- bootstraps(iris, times = 1000)
 boot_results <- boots |>
@@ -75,6 +76,7 @@ ggplot(data = iris, aes(y = Petal.Length, x = Sepal.Length))+
 ## Using bootstrap to look at uncertainty in prediction
 
 ```{r}
+#| label: week-08-02
 library(randomForest)
 iris <- iris |> rownames_to_column('id')
 boots <- bootstraps(iris, times = 50)
@@ -211,6 +213,7 @@ The **p-value** gives the probability, under $H_0$ of seeing an observation at l
 For most statistical tests, the observed value of the test statistic is compared to quantiles of the (idealized) sampling distribution (often the normal distribution due to the CLT) to get the p-value
 
 ```{r}
+#| label: week-08-03
 #| echo: false
 #| fig-height: 2
 library(infer)
@@ -487,6 +490,7 @@ A list of conjugate priors is given [here](https://en.wikipedia.org/wiki/Conjuga
 Most tasks we face in data science are regression models. We'll start there.
 
 ```{r}
+#| label: week-08-04
 library(rstanarm)
 library(easystats)
 model_b <- stan_glm(Petal.Length ~ Sepal.Length, data = iris)
