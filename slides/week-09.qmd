@@ -1,11 +1,13 @@
 ---
-title: "Week 9"
+title: "Lecture 9"
 subtitle: "Prediction and evaluation"
 execute:
   echo: true
   warning: false
   error: false
   message: false
+  fig-width: 5
+  fig-asp: 0.618
 ---
 
 ```{r}
@@ -28,9 +30,7 @@ theme_set(theme_minimal())
     -   Concepts of overfitting and out-of-sample evaluation
     -   Learning curves and cross-validation
 
-::: callout-important
-These slides are incomplete as of 11/11/25 4pm.
-:::
+
 
 ## Outline
 
@@ -101,6 +101,8 @@ simulated_data <- rbinom(n_simulations, n_tosses, posterior_samples)
 
 We can visualize the posterior predictive distribution of the number of heads in 10 tosses:
 
+::: {.columns}
+::: {.column}
 ```{r}
 library(ggplot2)
 ggplot(tibble::tibble(simulated_data), aes(x = simulated_data)) +
@@ -111,42 +113,21 @@ ggplot(tibble::tibble(simulated_data), aes(x = simulated_data)) +
 ```
 
 This histogram shows the distribution of the number of heads we would expect to see in 10 tosses, given our observed data and the uncertainty in our estimate of $p$.
-
+:::
+::: {.column}
 ::: callout-note
-This example illustrates the concept of generative models in a Bayesian framework. By treating parameters as random variables and using posterior distributions, we can simulate new data that reflects both our uncertainty about the parameters and the inherent variability in the data generation process. This gives us our best guess about future observations, given what we have already seen
+This example illustrates the concept of generative models in a Bayesian framework. By treating parameters as random variables and using posterior distributions, we can simulate new data that reflects both our uncertainty about the parameters and the inherent variability in the data generation process. This gives us our best guess about future observations, given what we have already seen.
 :::
 
-## Posterior Predictive Checks (PPC)
+:::
+::: 
 
--   Key model diagnostic in Bayesian workflow\
--   Compare replicated data to observed data using R
+## A real example: Deciding on a clinical trial threshold
 
-```{r}
-library(brms)
-# Simulate
-set.seed(123)
-n <- 100
-dat <- tibble(x = rnorm(n, 0, 1))
-dat <- dat %>%
-  mutate(y = 3 + 2 * x + rnorm(n, 0, 1))
-# Fit model
-fit <- brm(y ~ x, data = dat)
-# Posterior predictive simulations
-yrep <- posterior_predict(fit)
-```
+** Problem Context:** We are planning a clinical trial to evaluate a new treatment. We need to decide on a threshold for a key biomarker that will determine whether patients respond to the treatment. We have historical data from a competitor's trial that shows the distribution of this biomarker in their patient population. We want to use this data to inform our decision on the threshold, and understand how often we expect to meet this threshold in future patients.
 
-## PPC Visuals
 
--   Overlay densities for observed vs. simulated data
-
-```{r}
-library(bayesplot)
-ppc_dens_overlay(y = dat$y, yrep = yrep[1:100, ])
-```
-
-## A real example from work
-
-We're trying to plan a new study, based on this figure from a poster by a competitor
+-   The competitor's data shows the percentage change in a biomarker after treatment. We want to decide on a threshold for this percentage change that will determine whether we consider a patient to be a responder.
 
 ![](images/paste-2.png)
 
@@ -176,3 +157,27 @@ We're trying to model the percentage change in this metric. What we want to mode
 We want to make a decision of whether to recruit more patients by seeing whether a new patient meets a chosen threshold or not. A question was if we needed to see if at least 1 patient or at least 2 patients have to meet the threshold (out of a possible 6 patients to be investigated)
 
 ![](images/paste-4.png)
+
+# Evaluating a Bayesian model: Posterior Predictive Checks (PPC)
+
+## Posterior predictive checks (PPC)
+-   Posterior predictive checks are a way to evaluate how well our Bayesian model fits the data
+-   The idea is to simulate new data from the posterior predictive distribution and compare it to the observed data
+-   If the model is a good fit, the simulated data should look similar to the observed data
+
+## PPC in R with `brms`
+
+-   The `brms` package has built-in functions for performing PPC
+-   We can use the `pp_check()` function to visualize the PPC results
+
+```{r}
+
+# Fit a simple Bayesian model
+data("mtcars")
+fit <- brm(mpg ~ wt + cyl, data = mtcars, family = gaussian, silent = 2, refresh = 0)
+# Perform posterior predictive check
+pp_check(fit, ndraws = 100) + theme_bw()
+```
+
+-   The plot shows the distribution of the observed data (black line) and the distribution of the simulated data from the posterior predictive distribution (colored lines)
+-   We can see how well the model captures the variability in the data

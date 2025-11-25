@@ -1,0 +1,1809 @@
+---
+title: "Predictive Modeling: Evaluation and Improvement Methods"
+
+---
+
+## Overview
+
+**Learning Objectives:**
+
+- Understand the fundamentals of predictive modeling
+- Learn different methods for evaluating model performance
+- Identify common modeling problems and their solutions
+- Apply model improvement techniques using R and tidymodels
+- Make informed decisions about model selection and tuning
+
+**Target Audience:** Masters-level scientists working with environmental and other applied data
+
+**Why Tidymodels?** A modern, consistent framework for machine learning in R that integrates seamlessly with the tidyverse
+
+---
+
+## What is Predictive Modeling?
+
+**Definition:** Predictive modeling uses statistical and machine learning techniques to predict future outcomes based on historical data.
+
+**Key Components:**
+
+1. **Training Data**: Historical data used to build the model
+2. **Features (Predictors)**: Input variables used for prediction
+3. **Target Variable**: The outcome we want to predict
+4. **Model Algorithm**: The mathematical approach (e.g., linear regression, random forest)
+5. **Predictions**: The model's outputs for new data
+
+**Two Main Types:**
+
+- **Regression**: Predicting continuous values (e.g., temperature, species abundance)
+- **Classification**: Predicting categories (e.g., species presence/absence, habitat type)
+
+---
+
+## The Fundamental Challenge: Generalization
+
+**The Goal:** Build a model that performs well on *new, unseen data*
+
+**The Problem:** Models can perform well on training data but poorly on new data
+
+**Why This Matters:**
+
+- A model that only works on training data is useless for predictions
+- We need models that capture true patterns, not random noise
+- This is the essence of the **generalization problem**
+
+**Example from Environmental Science:**
+
+- Training on water quality data from 2020
+- Want to predict water quality in 2025
+- Model must learn general patterns, not year-specific quirks
+
+---
+
+## Problem #1: Overfitting
+
+**What is Overfitting?**
+
+Overfitting occurs when a model learns the training data *too well*, including random noise and specific details that don't generalize to new data.
+
+**Characteristics:**
+- High performance on training data
+- Poor performance on test/new data
+- Model is too complex for the amount of data
+- Captures noise instead of signal
+
+**Real-World Analogy:** 
+Like a student who memorizes specific exam questions instead of understanding concepts—they'll fail when questions are worded differently.
+
+**Symptoms:**
+- Large gap between training and validation accuracy
+- Model has too many parameters relative to data size
+- Unstable predictions (small input changes cause large output changes)
+
+---
+
+## Problem #1: Overfitting (Example)
+
+**R Example: Polynomial Regression with Tidymodels**
+
+```r
+library(tidymodels)
+library(ggplot2)
+
+# Generate data with noise
+set.seed(42)
+x <- seq(0, 10, by = 0.5)
+y_true <- 2*x + 5
+y_observed <- y_true + rnorm(length(x), sd = 3)
+train_data <- tibble(x = x, y = y_observed)
+
+# Simple linear model (appropriate)
+simple_spec <- linear_reg() %>%
+  set_engine("lm")
+
+simple_fit <- simple_spec %>%
+  fit(y ~ x, data = train_data)
+
+# Overfit model (polynomial degree 15)
+overfit_spec <- linear_reg() %>%
+  set_engine("lm")
+
+overfit_fit <- overfit_spec %>%
+  fit(y ~ poly(x, 15), data = train_data)
+
+# Generate predictions
+x_new <- seq(0, 10, by = 0.1)
+pred_data <- tibble(x = x_new)
+
+pred_data$simple <- predict(simple_fit, pred_data)$.pred
+pred_data$overfit <- predict(overfit_fit, pred_data)$.pred
+
+# Plot
+ggplot() +
+  geom_point(data = train_data, aes(x, y), size = 3) +
+  geom_line(data = pred_data, aes(x, simple), 
+            color = "blue", linewidth = 1) +
+  geom_line(data = pred_data, aes(x, overfit), 
+            color = "red", linewidth = 1) +
+  labs(title = "Simple (blue) vs Overfit (red) Model")
+```
+
+**What You'll See:** The overfit model wiggles through every point but won't generalize well.
+
+---
+
+## Problem #2: Underfitting
+
+**What is Underfitting?**
+
+Underfitting occurs when a model is *too simple* to capture the underlying patterns in the data.
+
+**Characteristics:**
+- Poor performance on both training and test data
+- Model lacks sufficient complexity
+- Fails to capture important relationships
+- Too much bias toward simplicity
+
+**Real-World Analogy:**
+Like trying to predict species diversity using only one environmental variable when multiple factors matter.
+
+**Symptoms:**
+- Low accuracy on training data
+- Model predictions are systematically wrong
+- Clear patterns in residual plots
+- Important features are ignored
+
+---
+
+## The Bias-Variance Tradeoff
+
+**Two Sources of Prediction Error:**
+
+1. **Bias**: Error from overly simplistic assumptions
+   - High bias → underfitting
+   - Model consistently misses the true pattern
+   
+2. **Variance**: Error from sensitivity to training data fluctuations
+   - High variance → overfitting
+   - Model changes dramatically with different training samples
+
+**The Tradeoff:**
+- Increasing model complexity reduces bias but increases variance
+- Decreasing complexity reduces variance but increases bias
+- **Goal**: Find the sweet spot that minimizes total error
+
+**Formula:**
+```
+Total Error = Bias² + Variance + Irreducible Error
+```
+
+---
+
+## Bias-Variance Tradeoff (Visualization)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+library(ggplot2)
+
+# Simulate model complexity vs error
+complexity <- seq(1, 20, by = 0.5)
+bias <- 10 / complexity + 0.5
+variance <- 0.1 * complexity
+total_error <- bias + variance
+
+df <- tibble(
+  Complexity = rep(complexity, 3),
+  Error = c(bias, variance, total_error),
+  Type = rep(c("Bias²", "Variance", "Total Error"), 
+             each = length(complexity))
+)
+
+ggplot(df, aes(x = Complexity, y = Error, color = Type)) +
+  geom_line(linewidth = 1.5) +
+  geom_vline(xintercept = complexity[which.min(total_error)],
+             linetype = "dashed", color = "gray") +
+  labs(title = "Bias-Variance Tradeoff",
+       x = "Model Complexity",
+       y = "Prediction Error") +
+  theme_minimal(base_size = 14)
+```
+
+**Key Insight:** The optimal model complexity minimizes total error, not bias or variance individually.
+
+---
+
+## Solution #1: Train-Test Split
+
+**What is it?**
+
+Splitting your data into separate sets for training and evaluation ensures honest assessment of model performance.
+
+**The Method:**
+- **Training Set (70-80%)**: Used to fit the model
+- **Test Set (20-30%)**: Used to evaluate final performance
+- Test data is *never* seen during training
+
+**Why It Works:**
+- Simulates real-world prediction scenario
+- Prevents overfitting to the entire dataset
+- Provides unbiased performance estimate
+
+**Important:** The split should be **random** to avoid systematic bias.
+
+---
+
+## Solution #1: Train-Test Split (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Load data
+data(iris)
+
+# Create stratified 80-20 split
+# (stratified ensures balanced classes)
+iris_split <- initial_split(
+  iris, 
+  prop = 0.8,
+  strata = Species
+)
+
+# Extract training and test sets
+train_data <- training(iris_split)
+test_data <- testing(iris_split)
+
+# Check dimensions and class balance
+cat("Training samples:", nrow(train_data), "\n")
+cat("Test samples:", nrow(test_data), "\n")
+
+cat("\nTraining class distribution:\n")
+print(table(train_data$Species))
+
+cat("\nTest class distribution:\n")
+print(table(test_data$Species))
+
+# Define model specification
+rf_spec <- rand_forest(trees = 100) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Fit model on training data
+rf_fit <- rf_spec %>%
+  fit(Species ~ ., data = train_data)
+
+# Evaluate on test data
+test_results <- test_data %>%
+  bind_cols(predict(rf_fit, test_data)) %>%
+  bind_cols(predict(rf_fit, test_data, type = "prob"))
+
+# Confusion matrix
+conf_mat(test_results, truth = Species, estimate = .pred_class)
+
+# Accuracy
+accuracy(test_results, truth = Species, estimate = .pred_class)
+```
+
+**Problem Solved:** Prevents overfitting by evaluating on unseen data.
+
+---
+
+## Solution #2: K-Fold Cross-Validation
+
+**What is it?**
+
+A more robust evaluation method that uses multiple train-test splits to get a better estimate of model performance.
+
+**The Method:**
+1. Divide data into K equal parts (folds), typically K=5 or K=10
+2. For each fold:
+   - Train on K-1 folds
+   - Test on the remaining fold
+3. Average the performance across all K iterations
+
+**Why It's Better Than Single Split:**
+- More stable performance estimate
+- Uses all data for both training and testing
+- Reduces impact of lucky/unlucky splits
+- Better for smaller datasets
+
+**Common Choices:**
+- **K=10**: Most common, good balance
+- **K=5**: Faster, still reliable
+- **Leave-One-Out (LOO)**: Maximum data use, computationally expensive
+
+---
+
+## Solution #2: K-Fold Cross-Validation (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+set.seed(123)
+
+# Load data
+data(iris)
+
+# Create 10-fold cross-validation
+iris_folds <- vfold_cv(iris, v = 10, strata = Species)
+
+# Define model specification
+rf_spec <- rand_forest(trees = 100) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Create workflow
+rf_workflow <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_formula(Species ~ .)
+
+# Fit resamples
+rf_results <- rf_workflow %>%
+  fit_resamples(
+    resamples = iris_folds,
+    metrics = metric_set(accuracy, roc_auc),
+    control = control_resamples(save_pred = TRUE)
+  )
+
+# View results
+collect_metrics(rf_results)
+
+# View individual fold results
+fold_results <- rf_results %>%
+  collect_metrics(summarize = FALSE)
+
+print(fold_results)
+
+# Calculate mean and SD of accuracy
+accuracy_stats <- fold_results %>%
+  filter(.metric == "accuracy") %>%
+  summarize(
+    mean_accuracy = mean(.estimate),
+    sd_accuracy = sd(.estimate)
+  )
+
+cat("Mean Accuracy:", round(accuracy_stats$mean_accuracy, 3), "\n")
+cat("SD Accuracy:", round(accuracy_stats$sd_accuracy, 3), "\n")
+```
+
+**Problem Solved:** Provides reliable performance estimates, especially with limited data.
+
+---
+
+## Evaluation Metrics: Regression
+
+**For Continuous Predictions (temperature, biomass, etc.)**
+
+**1. Mean Absolute Error (MAE)**
+```
+MAE = mean(|actual - predicted|)
+```
+- Easy to interpret: average prediction error in original units
+- Not sensitive to outliers
+
+**2. Root Mean Squared Error (RMSE)**
+```
+RMSE = sqrt(mean((actual - predicted)²))
+```
+- Penalizes large errors more than MAE
+- Same units as target variable
+- More commonly used than MAE
+
+**3. R-squared (R²)**
+```
+R² = 1 - (SS_residual / SS_total)
+```
+- Proportion of variance explained by model
+- Ranges from 0 to 1 (higher is better)
+- Can be negative for very poor models
+
+**When to Use Each:**
+- **MAE**: When all errors are equally important
+- **RMSE**: When large errors are particularly problematic
+- **R²**: When comparing models or understanding explained variance
+
+---
+
+## Evaluation Metrics: Regression (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+library(MASS)  # For Boston dataset
+
+# Load and prepare data
+data(Boston)
+
+set.seed(123)
+
+# Split data
+boston_split <- initial_split(Boston, prop = 0.8)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
+
+# Define model specification
+lm_spec <- linear_reg() %>%
+  set_engine("lm")
+
+# Fit model
+lm_fit <- lm_spec %>%
+  fit(medv ~ ., data = boston_train)
+
+# Predict on test set
+test_results <- boston_test %>%
+  bind_cols(predict(lm_fit, boston_test))
+
+# Calculate metrics
+metrics <- test_results %>%
+  metrics(truth = medv, estimate = .pred)
+
+print(metrics)
+
+# Or calculate specific metrics
+rmse_value <- test_results %>%
+  rmse(truth = medv, estimate = .pred)
+
+mae_value <- test_results %>%
+  mae(truth = medv, estimate = .pred)
+
+rsq_value <- test_results %>%
+  rsq(truth = medv, estimate = .pred)
+
+cat("RMSE:", round(rmse_value$.estimate, 3), "\n")
+cat("MAE:", round(mae_value$.estimate, 3), "\n")
+cat("R²:", round(rsq_value$.estimate, 3), "\n")
+
+# Residual plot
+test_results %>%
+  mutate(residual = medv - .pred) %>%
+  ggplot(aes(x = .pred, y = residual)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  labs(x = "Predicted", y = "Residuals",
+       title = "Residual Plot") +
+  theme_minimal()
+```
+
+**Interpretation:** Lower RMSE/MAE and higher R² indicate better predictions.
+
+---
+
+## Evaluation Metrics: Classification
+
+**For Categorical Predictions (species, present/absent, etc.)**
+
+**The Confusion Matrix:**
+```
+                  Predicted
+                Positive  Negative
+Actual Positive    TP        FN
+       Negative    FP        TN
+```
+
+**Key Metrics:**
+
+**1. Accuracy**: Overall correctness
+```
+Accuracy = (TP + TN) / (TP + TN + FP + FN)
+```
+
+**2. Precision**: When model predicts positive, how often is it correct?
+```
+Precision = TP / (TP + FP)
+```
+
+**3. Recall (Sensitivity)**: Of all actual positives, how many did we catch?
+```
+Recall = TP / (TP + FN)
+```
+
+**4. F1-Score**: Harmonic mean of precision and recall
+```
+F1 = 2 × (Precision × Recall) / (Precision + Recall)
+```
+
+---
+
+## Classification Metrics: When to Use Each
+
+**Accuracy**
+- Use when: Classes are balanced
+- Problem: Misleading with imbalanced data
+- Example: 95% accuracy seems good, but if 95% of samples are negative, predicting "always negative" achieves this!
+
+**Precision**
+- Use when: False positives are costly
+- Example: Predicting disease presence—don't want to unnecessarily alarm patients
+
+**Recall**
+- Use when: False negatives are costly
+- Example: Detecting invasive species—missing one could be disastrous
+
+**F1-Score**
+- Use when: Need balance between precision and recall
+- Example: General classification where both error types matter
+
+**Key Insight:** Choose metrics based on the **cost of errors** in your specific context.
+
+---
+
+## Classification Metrics (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+set.seed(123)
+
+# Prepare data - binary classification
+data(iris)
+iris_binary <- iris %>%
+  mutate(binary = factor(ifelse(Species == "setosa", 
+                                 "setosa", "other")))
+
+# Split data
+iris_split <- initial_split(iris_binary, prop = 0.7, 
+                            strata = binary)
+train_data <- training(iris_split)
+test_data <- testing(iris_split)
+
+# Define model specification
+rf_spec <- rand_forest(trees = 100) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Fit model
+rf_fit <- rf_spec %>%
+  fit(binary ~ Sepal.Length + Sepal.Width + 
+               Petal.Length + Petal.Width, 
+      data = train_data)
+
+# Predictions
+test_results <- test_data %>%
+  bind_cols(predict(rf_fit, test_data)) %>%
+  bind_cols(predict(rf_fit, test_data, type = "prob"))
+
+# Confusion matrix
+conf_mat(test_results, truth = binary, estimate = .pred_class)
+
+# All classification metrics
+class_metrics <- metric_set(accuracy, precision, recall, f_meas)
+test_results %>%
+  class_metrics(truth = binary, estimate = .pred_class, 
+                event_level = "first")
+
+# Or access individually
+accuracy_val <- accuracy(test_results, truth = binary, 
+                         estimate = .pred_class)
+precision_val <- precision(test_results, truth = binary, 
+                           estimate = .pred_class)
+recall_val <- recall(test_results, truth = binary, 
+                     estimate = .pred_class)
+f1_val <- f_meas(test_results, truth = binary, 
+                 estimate = .pred_class)
+
+cat("Accuracy:", round(accuracy_val$.estimate, 3), "\n")
+cat("Precision:", round(precision_val$.estimate, 3), "\n")
+cat("Recall:", round(recall_val$.estimate, 3), "\n")
+cat("F1-Score:", round(f1_val$.estimate, 3), "\n")
+```
+
+---
+
+## Advanced Metric: ROC Curve and AUC
+
+**What is ROC?**
+
+**ROC (Receiver Operating Characteristic)** curve visualizes classifier performance across all possible decision thresholds.
+
+**Components:**
+- **X-axis**: False Positive Rate (1 - Specificity)
+- **Y-axis**: True Positive Rate (Recall/Sensitivity)
+- **Each point**: Performance at different threshold
+
+**AUC (Area Under Curve):**
+- Single number summarizing ROC curve
+- Ranges from 0.5 (random guessing) to 1.0 (perfect)
+- **Interpretation**: Probability that model ranks a random positive instance higher than a random negative instance
+
+**Why It's Useful:**
+- Threshold-independent evaluation
+- Good for imbalanced datasets
+- Easy to compare multiple models
+
+---
+
+## ROC Curve and AUC (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+set.seed(123)
+
+# Prepare binary classification data
+data(iris)
+iris_binary <- iris %>%
+  mutate(binary = factor(ifelse(Species == "setosa", 
+                                 "setosa", "other"),
+                        levels = c("setosa", "other")))
+
+# Split data
+iris_split <- initial_split(iris_binary, prop = 0.7, 
+                            strata = binary)
+train_data <- training(iris_split)
+test_data <- testing(iris_split)
+
+# Define and fit model
+rf_spec <- rand_forest(trees = 100) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+rf_fit <- rf_spec %>%
+  fit(binary ~ . - Species, data = train_data)
+
+# Get predicted probabilities
+test_results <- test_data %>%
+  bind_cols(predict(rf_fit, test_data, type = "prob"))
+
+# Calculate ROC curve
+roc_curve_data <- test_results %>%
+  roc_curve(truth = binary, .pred_setosa, event_level = "first")
+
+# Plot ROC curve
+roc_curve_data %>%
+  autoplot() +
+  labs(title = "ROC Curve for Setosa Classification") +
+  theme_minimal()
+
+# Calculate AUC
+auc_value <- test_results %>%
+  roc_auc(truth = binary, .pred_setosa, event_level = "first")
+
+cat("AUC:", round(auc_value$.estimate, 3), "\n")
+
+# Find optimal threshold
+# (manually by choosing point closest to top-left corner)
+optimal_point <- roc_curve_data %>%
+  mutate(distance = sqrt((1 - sensitivity)^2 + (1 - specificity)^2)) %>%
+  slice_min(distance, n = 1)
+
+cat("Optimal threshold:", round(optimal_point$.threshold, 3), "\n")
+```
+
+**Problem Solved:** Evaluate classifier performance independent of threshold choice.
+
+---
+
+## Solution #3: Regularization
+
+**What is Regularization?**
+
+Regularization adds a penalty to the model's loss function to discourage overly complex models, helping prevent overfitting.
+
+**How It Works:**
+- Original goal: Minimize prediction error
+- Regularized goal: Minimize prediction error **+ penalty for complexity**
+
+**Two Main Types:**
+
+**1. Ridge Regression (L2 Regularization)**
+```
+Loss = MSE + λ × Σ(coefficients²)
+```
+- Shrinks all coefficients toward zero
+- Never sets coefficients exactly to zero
+- Good when all features might be relevant
+
+**2. Lasso Regression (L1 Regularization)**
+```
+Loss = MSE + λ × Σ|coefficients|
+```
+- Can set some coefficients exactly to zero
+- Performs automatic feature selection
+- Good when some features are irrelevant
+
+**The λ (Penalty) Parameter:** Controls strength of regularization (higher = more penalty)
+
+---
+
+## Regularization: Ridge vs Lasso
+
+**Ridge Regression (L2):**
+
+**Advantages:**
+- Handles multicollinearity well
+- Keeps all features in model
+- Typically more stable
+
+**When to Use:**
+- All features potentially relevant
+- Features are correlated
+- Interpretability less important
+
+**Lasso Regression (L1):**
+
+**Advantages:**
+- Automatic feature selection
+- Produces simpler, more interpretable models
+- Better for high-dimensional data
+
+**When to Use:**
+- Many irrelevant features
+- Want sparse model
+- Need interpretability
+
+**Elastic Net:**
+- Combines both L1 and L2 (mixture parameter)
+- Best of both worlds
+- Extra hyperparameter to tune
+
+---
+
+## Regularization: Ridge Example
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+# Prepare data
+data(mtcars)
+set.seed(123)
+
+# Split data
+mtcars_split <- initial_split(mtcars, prop = 0.8)
+mtcars_train <- training(mtcars_split)
+mtcars_test <- testing(mtcars_split)
+
+# Define ridge regression specification (alpha = 0)
+ridge_spec <- linear_reg(penalty = tune(), mixture = 0) %>%
+  set_engine("glmnet")
+
+# Create recipe for preprocessing
+ridge_recipe <- recipe(mpg ~ ., data = mtcars_train) %>%
+  step_normalize(all_predictors())
+
+# Create workflow
+ridge_workflow <- workflow() %>%
+  add_model(ridge_spec) %>%
+  add_recipe(ridge_recipe)
+
+# Create grid of penalty values
+penalty_grid <- grid_regular(penalty(range = c(-3, 0)), 
+                             levels = 50)
+
+# Cross-validation
+set.seed(123)
+mtcars_folds <- vfold_cv(mtcars_train, v = 5)
+
+# Tune
+ridge_tune <- ridge_workflow %>%
+  tune_grid(
+    resamples = mtcars_folds,
+    grid = penalty_grid,
+    metrics = metric_set(rmse, rsq)
+  )
+
+# Plot results
+ridge_tune %>%
+  collect_metrics() %>%
+  filter(.metric == "rmse") %>%
+  ggplot(aes(x = penalty, y = mean)) +
+  geom_line() +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Ridge Regression: Cross-Validation",
+       x = "Penalty (λ)", y = "RMSE") +
+  theme_minimal()
+
+# Best penalty
+best_penalty <- select_best(ridge_tune, metric = "rmse")
+cat("Best penalty:", round(best_penalty$penalty, 4), "\n")
+
+# Finalize workflow and fit
+final_ridge <- ridge_workflow %>%
+  finalize_workflow(best_penalty) %>%
+  fit(mtcars_train)
+
+# Evaluate on test set
+test_results <- mtcars_test %>%
+  bind_cols(predict(final_ridge, mtcars_test))
+
+test_results %>%
+  metrics(truth = mpg, estimate = .pred)
+```
+
+**Problem Solved:** Reduces overfitting by shrinking coefficients.
+
+---
+
+## Regularization: Lasso Example
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+# Prepare data
+data(mtcars)
+set.seed(123)
+
+mtcars_split <- initial_split(mtcars, prop = 0.8)
+mtcars_train <- training(mtcars_split)
+mtcars_test <- testing(mtcars_split)
+
+# Define lasso regression specification (alpha = 1)
+lasso_spec <- linear_reg(penalty = tune(), mixture = 1) %>%
+  set_engine("glmnet")
+
+# Create recipe
+lasso_recipe <- recipe(mpg ~ ., data = mtcars_train) %>%
+  step_normalize(all_predictors())
+
+# Create workflow
+lasso_workflow <- workflow() %>%
+  add_model(lasso_spec) %>%
+  add_recipe(lasso_recipe)
+
+# Penalty grid
+penalty_grid <- grid_regular(penalty(range = c(-3, 0)), 
+                             levels = 50)
+
+# Cross-validation
+set.seed(123)
+mtcars_folds <- vfold_cv(mtcars_train, v = 5)
+
+# Tune
+lasso_tune <- lasso_workflow %>%
+  tune_grid(
+    resamples = mtcars_folds,
+    grid = penalty_grid,
+    metrics = metric_set(rmse, rsq)
+  )
+
+# Plot results
+lasso_tune %>%
+  collect_metrics() %>%
+  filter(.metric == "rmse") %>%
+  ggplot(aes(x = penalty, y = mean)) +
+  geom_line() +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Lasso Regression: Cross-Validation",
+       x = "Penalty (λ)", y = "RMSE") +
+  theme_minimal()
+
+# Best penalty
+best_penalty <- select_best(lasso_tune, metric = "rmse")
+cat("Best penalty:", round(best_penalty$penalty, 4), "\n")
+
+# Finalize and fit
+final_lasso <- lasso_workflow %>%
+  finalize_workflow(best_penalty) %>%
+  fit(mtcars_train)
+
+# Extract coefficients to see which are zero
+final_lasso %>%
+  extract_fit_parsnip() %>%
+  tidy() %>%
+  filter(term != "(Intercept)") %>%
+  arrange(desc(abs(estimate)))
+
+# Count non-zero coefficients
+non_zero <- final_lasso %>%
+  extract_fit_parsnip() %>%
+  tidy() %>%
+  filter(term != "(Intercept)", estimate != 0) %>%
+  nrow()
+
+cat("Number of selected features:", non_zero, "\n")
+```
+
+**Problem Solved:** Reduces overfitting AND performs automatic feature selection.
+
+---
+
+## Solution #4: Feature Selection
+
+**What is Feature Selection?**
+
+Choosing a subset of relevant features and removing irrelevant or redundant ones to improve model performance and interpretability.
+
+**Why It Matters:**
+- Reduces overfitting (fewer parameters to learn)
+- Improves model interpretability
+- Decreases computational cost
+- Can improve prediction accuracy
+
+**Three Main Approaches:**
+
+**1. Filter Methods**
+- Use statistical tests to rank features
+- Independent of model
+- Fast but ignores feature interactions
+- Examples: correlation, variance threshold
+
+**2. Wrapper Methods**
+- Use model performance to evaluate subsets
+- Considers feature interactions
+- Computationally expensive
+- Examples: recursive feature elimination
+
+**3. Embedded Methods**
+- Feature selection during model training
+- Balance between filter and wrapper
+- Examples: Lasso, Random Forest importance
+
+---
+
+## Feature Selection (Example)
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+library(vip)  # For variable importance
+
+# Method 1: Filter - Correlation-based
+data(mtcars)
+set.seed(123)
+
+# Create recipe with correlation filter
+corr_recipe <- recipe(mpg ~ ., data = mtcars) %>%
+  step_corr(all_predictors(), threshold = 0.8) %>%
+  prep()
+
+# See which variables were removed
+corr_recipe %>%
+  tidy(number = 1)
+
+# Method 2: Variable Importance from Random Forest
+mtcars_split <- initial_split(mtcars, prop = 0.8)
+mtcars_train <- training(mtcars_split)
+
+rf_spec <- rand_forest(trees = 500) %>%
+  set_engine("ranger", importance = "permutation") %>%
+  set_mode("regression")
+
+rf_fit <- rf_spec %>%
+  fit(mpg ~ ., data = mtcars_train)
+
+# Plot variable importance
+rf_fit %>%
+  vip(num_features = 10) +
+  labs(title = "Top 10 Most Important Features") +
+  theme_minimal()
+
+# Extract importance values
+importance_df <- rf_fit %>%
+  extract_fit_engine() %>%
+  vip::vi() %>%
+  arrange(desc(Importance))
+
+print(importance_df)
+
+# Select top K features
+top_features <- importance_df %>%
+  slice_head(n = 5) %>%
+  pull(Variable)
+
+cat("Top 5 features:", paste(top_features, collapse = ", "), "\n")
+
+# Method 3: Using Lasso for feature selection
+# (See previous Lasso slide - features with zero coefficients are removed)
+
+# Method 4: Recursive Feature Elimination with workflow
+# Define control for feature selection
+rfe_ctrl <- control_grid(save_workflow = TRUE)
+
+# Create base model
+base_spec <- linear_reg() %>%
+  set_engine("lm")
+
+# Manually implement RFE logic by training models with different feature subsets
+# This can be done by creating multiple recipes and comparing performance
+```
+
+**Problem Solved:** Removes irrelevant features, reducing complexity and overfitting.
+
+---
+
+## Solution #5: Ensemble Methods - Bagging
+
+**What is Bagging?**
+
+**Bagging (Bootstrap Aggregating)** trains multiple models on different random subsets of data and averages their predictions.
+
+**How It Works:**
+1. Create K bootstrap samples (sampling with replacement)
+2. Train a model on each sample independently
+3. Aggregate predictions (average for regression, vote for classification)
+
+**Why It Works:**
+- Reduces variance without increasing bias
+- Particularly effective for high-variance models (e.g., decision trees)
+- Models learn different aspects from different samples
+
+**Random Forest:**
+- Most popular bagging method
+- Bags decision trees
+- Also randomizes features at each split
+- Excellent general-purpose algorithm
+
+**Key Benefit:** Prevents overfitting by averaging out individual model quirks.
+
+---
+
+## Bagging: Random Forest Example
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+library(vip)
+
+set.seed(123)
+
+# Prepare data
+data(iris)
+iris_split <- initial_split(iris, prop = 0.7, strata = Species)
+train_data <- training(iris_split)
+test_data <- testing(iris_split)
+
+# Define Random Forest specification
+rf_spec <- rand_forest(
+  trees = 500,
+  mtry = 2,
+  min_n = 1
+) %>%
+  set_engine("ranger", importance = "permutation") %>%
+  set_mode("classification")
+
+# Create workflow
+rf_workflow <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_formula(Species ~ .)
+
+# Fit model
+rf_fit <- rf_workflow %>%
+  fit(train_data)
+
+# Predictions on test set
+test_results <- test_data %>%
+  bind_cols(predict(rf_fit, test_data)) %>%
+  bind_cols(predict(rf_fit, test_data, type = "prob"))
+
+# Confusion matrix and accuracy
+conf_mat(test_results, truth = Species, estimate = .pred_class)
+accuracy(test_results, truth = Species, estimate = .pred_class)
+
+# Variable importance
+rf_fit %>%
+  extract_fit_parsnip() %>%
+  vip(num_features = 10) +
+  labs(title = "Variable Importance in Random Forest") +
+  theme_minimal()
+
+# Compare with single decision tree
+tree_spec <- decision_tree() %>%
+  set_engine("rpart") %>%
+  set_mode("classification")
+
+tree_fit <- tree_spec %>%
+  fit(Species ~ ., data = train_data)
+
+tree_results <- test_data %>%
+  bind_cols(predict(tree_fit, test_data))
+
+tree_acc <- accuracy(tree_results, truth = Species, 
+                     estimate = .pred_class)
+
+rf_acc <- accuracy(test_results, truth = Species, 
+                   estimate = .pred_class)
+
+cat("Single Tree Accuracy:", round(tree_acc$.estimate, 3), "\n")
+cat("Random Forest Accuracy:", round(rf_acc$.estimate, 3), "\n")
+```
+
+**Problem Solved:** Reduces variance and improves stability through ensemble averaging.
+
+---
+
+## Solution #5: Ensemble Methods - Boosting
+
+**What is Boosting?**
+
+Boosting sequentially trains models, with each new model focusing on correcting errors made by previous models.
+
+**How It Works:**
+1. Train initial model on all data
+2. Identify misclassified/poorly predicted samples
+3. Train next model with more weight on those difficult samples
+4. Repeat, building sequence of models
+5. Final prediction is weighted combination of all models
+
+**Why It Works:**
+- Reduces both bias and variance
+- Forces models to learn difficult patterns
+- Each model specializes in different aspects
+
+**Popular Algorithms:**
+- **AdaBoost**: Adjusts sample weights
+- **Gradient Boosting**: Fits to residual errors
+- **XGBoost/LightGBM**: Optimized implementations
+
+**Key Difference from Bagging:** Sequential (not parallel) with focus on previous errors.
+
+---
+
+## Boosting Example
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+# Prepare data for regression
+set.seed(123)
+data(mtcars)
+
+mtcars_split <- initial_split(mtcars, prop = 0.7)
+mtcars_train <- training(mtcars_split)
+mtcars_test <- testing(mtcars_split)
+
+# Define XGBoost specification (gradient boosting)
+xgb_spec <- boost_tree(
+  trees = 500,
+  tree_depth = 3,
+  learn_rate = 0.01,
+  min_n = 5
+) %>%
+  set_engine("xgboost") %>%
+  set_mode("regression")
+
+# Create workflow
+xgb_workflow <- workflow() %>%
+  add_model(xgb_spec) %>%
+  add_formula(mpg ~ .)
+
+# Fit model
+xgb_fit <- xgb_workflow %>%
+  fit(mtcars_train)
+
+# Predictions on test set
+test_results <- mtcars_test %>%
+  bind_cols(predict(xgb_fit, mtcars_test))
+
+# Evaluate
+test_metrics <- test_results %>%
+  metrics(truth = mpg, estimate = .pred)
+
+print(test_metrics)
+
+# Variable importance
+xgb_fit %>%
+  extract_fit_parsnip() %>%
+  vip(num_features = 10) +
+  labs(title = "Variable Importance in XGBoost") +
+  theme_minimal()
+
+# Compare with simple linear model
+lm_spec <- linear_reg() %>%
+  set_engine("lm")
+
+lm_fit <- lm_spec %>%
+  fit(mpg ~ ., data = mtcars_train)
+
+lm_results <- mtcars_test %>%
+  bind_cols(predict(lm_fit, mtcars_test))
+
+lm_rmse <- rmse(lm_results, truth = mpg, estimate = .pred)
+xgb_rmse <- rmse(test_results, truth = mpg, estimate = .pred)
+
+cat("Linear Model RMSE:", round(lm_rmse$.estimate, 3), "\n")
+cat("XGBoost RMSE:", round(xgb_rmse$.estimate, 3), "\n")
+```
+
+**Problem Solved:** Reduces both bias and variance through sequential error correction.
+
+---
+
+## Solution #6: Hyperparameter Tuning
+
+**What are Hyperparameters?**
+
+Parameters set *before* training that control the learning process (not learned from data).
+
+**Examples:**
+- Number of trees in random forest
+- Learning rate in gradient boosting
+- Regularization strength (λ)
+- Number of neighbors in k-NN
+- Tree depth, min samples per leaf
+
+**Why Tune Them?**
+- Default values rarely optimal
+- Proper tuning significantly improves performance
+- Can mean difference between mediocre and excellent model
+
+**Two Main Approaches:**
+
+**1. Grid Search**
+- Tests all combinations of specified values
+- Exhaustive but thorough
+- Computationally expensive
+- Best when parameter space is small
+
+**2. Random Search**
+- Tests random combinations
+- More efficient for large parameter spaces
+- Often finds good solutions faster
+- Recommended for initial exploration
+
+---
+
+## Hyperparameter Tuning: Grid Search Example
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+set.seed(123)
+
+# Prepare data
+data(iris)
+
+# Define model with tuning placeholders
+rf_spec <- rand_forest(
+  trees = 500,
+  mtry = tune(),
+  min_n = tune()
+) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Create workflow
+rf_workflow <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_formula(Species ~ .)
+
+# Define parameter grid
+rf_grid <- grid_regular(
+  mtry(range = c(2, 4)),
+  min_n(range = c(1, 20)),
+  levels = c(3, 4)  # 3 levels for mtry, 4 for min_n = 12 combinations
+)
+
+cat("Total combinations to test:", nrow(rf_grid), "\n")
+print(rf_grid)
+
+# Create cross-validation folds
+iris_folds <- vfold_cv(iris, v = 5, strata = Species)
+
+# Perform grid search
+grid_results <- rf_workflow %>%
+  tune_grid(
+    resamples = iris_folds,
+    grid = rf_grid,
+    metrics = metric_set(accuracy, roc_auc)
+  )
+
+# View results
+collect_metrics(grid_results)
+
+# Best parameters
+best_params <- select_best(grid_results, metric = "accuracy")
+cat("\nBest Parameters:\n")
+print(best_params)
+
+# Plot results
+grid_results %>%
+  collect_metrics() %>%
+  filter(.metric == "accuracy") %>%
+  ggplot(aes(x = min_n, y = mean, color = factor(mtry))) +
+  geom_line() +
+  geom_point(size = 3) +
+  labs(title = "Grid Search Results",
+       x = "Min N",
+       y = "Accuracy",
+       color = "mtry") +
+  theme_minimal()
+
+# Finalize workflow with best parameters
+final_workflow <- rf_workflow %>%
+  finalize_workflow(best_params)
+
+# Fit final model
+final_fit <- final_workflow %>%
+  fit(iris)
+
+cat("\nBest Model Accuracy:", 
+    round(max(collect_metrics(grid_results)$mean), 3), "\n")
+```
+
+**Problem Solved:** Finds optimal hyperparameters systematically.
+
+---
+
+## Hyperparameter Tuning: Random/Bayesian Search
+
+**R Example with Tidymodels:**
+
+```r
+library(tidymodels)
+
+set.seed(123)
+
+# Prepare data
+data(iris)
+
+# Define model with tuning
+rf_spec <- rand_forest(
+  trees = 500,
+  mtry = tune(),
+  min_n = tune()
+) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+# Create workflow
+rf_workflow <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_formula(Species ~ .)
+
+# Create CV folds
+iris_folds <- vfold_cv(iris, v = 5, strata = Species)
+
+# Random grid search (space-filling design)
+set.seed(456)
+random_results <- rf_workflow %>%
+  tune_grid(
+    resamples = iris_folds,
+    grid = 20,  # Number of random combinations
+    metrics = metric_set(accuracy, roc_auc)
+  )
+
+# View results
+collect_metrics(random_results)
+
+# Best parameters from random search
+best_random <- select_best(random_results, metric = "accuracy")
+cat("Best Parameters from Random Search:\n")
+print(best_random)
+
+# Bayesian Optimization (requires finetune package)
+# install.packages("finetune")
+library(finetune)
+
+# Bayesian optimization - iteratively explores parameter space
+set.seed(789)
+bayes_results <- rf_workflow %>%
+  tune_bayes(
+    resamples = iris_folds,
+    initial = 5,  # Initial random points
+    iter = 15,    # Bayesian iterations
+    metrics = metric_set(accuracy),
+    control = control_bayes(verbose = TRUE)
+  )
+
+# Best from Bayesian optimization
+best_bayes <- select_best(bayes_results, metric = "accuracy")
+cat("\nBest Parameters from Bayesian Optimization:\n")
+print(best_bayes)
+
+# Compare efficiencies
+cat("\nGrid Search: 12 combinations\n")
+cat("Random Search: 20 combinations\n")
+cat("Bayesian Optimization: 20 total evaluations (5 initial + 15 iterations)\n")
+```
+
+**When to Use Each:**
+- **Grid Search**: 2-3 hyperparameters, small ranges, want exhaustive search
+- **Random Search**: Many hyperparameters, initial exploration
+- **Bayesian Optimization**: Expensive models, want efficient search
+
+---
+
+## Putting It All Together: Complete Workflow
+
+**Step-by-Step Predictive Modeling Process:**
+
+**1. Data Preparation**
+- Clean data, handle missing values
+- Split into train/test sets
+- Create cross-validation folds
+
+**2. Initial Model Training**
+- Start with simple baseline models
+- Use cross-validation for evaluation
+- Check for obvious overfitting/underfitting
+
+**3. Feature Engineering**
+- Create relevant features using recipes
+- Remove irrelevant/redundant features
+- Use domain knowledge
+
+**4. Model Selection**
+- Try multiple algorithms
+- Compare using consistent metrics
+- Consider bias-variance tradeoff
+
+**5. Hyperparameter Tuning**
+- Use grid, random, or Bayesian search
+- Optimize on validation/CV folds
+- Avoid tuning on test set
+
+**6. Final Evaluation**
+- Evaluate best model on held-out test set using last_fit()
+- Report multiple relevant metrics
+- Check residuals/error patterns
+
+---
+
+## Complete Workflow Example
+
+**R Example: Full Tidymodels Pipeline**
+
+```r
+library(tidymodels)
+library(MASS)
+
+set.seed(123)
+
+# Step 1: Data Preparation
+data(Boston)
+
+# Initial split
+boston_split <- initial_split(Boston, prop = 0.8, strata = medv)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
+
+# Create CV folds
+boston_folds <- vfold_cv(boston_train, v = 5)
+
+# Step 2: Create recipe for preprocessing
+boston_recipe <- recipe(medv ~ ., data = boston_train) %>%
+  step_normalize(all_numeric_predictors()) %>%
+  step_corr(all_numeric_predictors(), threshold = 0.9)
+
+# Step 3: Define multiple model specifications
+
+# Linear regression
+lm_spec <- linear_reg() %>%
+  set_engine("lm")
+
+# Ridge regression
+ridge_spec <- linear_reg(penalty = tune(), mixture = 0) %>%
+  set_engine("glmnet")
+
+# Random forest
+rf_spec <- rand_forest(trees = 500, mtry = tune()) %>%
+  set_engine("ranger") %>%
+  set_mode("regression")
+
+# XGBoost
+xgb_spec <- boost_tree(
+  trees = 500,
+  tree_depth = tune(),
+  learn_rate = tune()
+) %>%
+  set_engine("xgboost") %>%
+  set_mode("regression")
+
+# Step 4: Create workflows
+lm_workflow <- workflow() %>%
+  add_model(lm_spec) %>%
+  add_recipe(boston_recipe)
+
+ridge_workflow <- workflow() %>%
+  add_model(ridge_spec) %>%
+  add_recipe(boston_recipe)
+
+rf_workflow <- workflow() %>%
+  add_model(rf_spec) %>%
+  add_recipe(boston_recipe)
+
+xgb_workflow <- workflow() %>%
+  add_model(xgb_spec) %>%
+  add_recipe(boston_recipe)
+
+# Step 5: Evaluate baseline model (linear regression)
+lm_results <- lm_workflow %>%
+  fit_resamples(
+    resamples = boston_folds,
+    metrics = metric_set(rmse, rsq)
+  )
+
+cat("Linear Regression CV Results:\n")
+collect_metrics(lm_results)
+
+# Step 6: Tune more complex models
+
+# Ridge tuning
+ridge_results <- ridge_workflow %>%
+  tune_grid(
+    resamples = boston_folds,
+    grid = grid_regular(penalty(range = c(-3, 0)), levels = 30),
+    metrics = metric_set(rmse, rsq)
+  )
+
+# Random Forest tuning
+rf_results <- rf_workflow %>%
+  tune_grid(
+    resamples = boston_folds,
+    grid = 10,
+    metrics = metric_set(rmse, rsq)
+  )
+
+# XGBoost tuning
+xgb_results <- xgb_workflow %>%
+  tune_grid(
+    resamples = boston_folds,
+    grid = 10,
+    metrics = metric_set(rmse, rsq)
+  )
+
+# Step 7: Compare models
+cat("\nModel Comparison (CV RMSE):\n")
+cat("Linear Regression:", 
+    round(collect_metrics(lm_results) %>% 
+            filter(.metric == "rmse") %>% 
+            pull(mean), 3), "\n")
+cat("Ridge Regression:", 
+    round(show_best(ridge_results, metric = "rmse", n = 1)$mean, 3), "\n")
+cat("Random Forest:", 
+    round(show_best(rf_results, metric = "rmse", n = 1)$mean, 3), "\n")
+cat("XGBoost:", 
+    round(show_best(xgb_results, metric = "rmse", n = 1)$mean, 3), "\n")
+
+# Step 8: Select best model and finalize
+best_rf <- select_best(rf_results, metric = "rmse")
+final_workflow <- rf_workflow %>%
+  finalize_workflow(best_rf)
+
+# Step 9: Final evaluation on test set
+final_results <- final_workflow %>%
+  last_fit(boston_split)
+
+# Extract test metrics
+collect_metrics(final_results)
+
+# Extract test predictions
+test_predictions <- collect_predictions(final_results)
+
+# Plot predictions vs actual
+test_predictions %>%
+  ggplot(aes(x = medv, y = .pred)) +
+  geom_point(alpha = 0.5) +
+  geom_abline(color = "red", linetype = "dashed") +
+  labs(x = "Actual", y = "Predicted",
+       title = "Test Set: Predicted vs Actual") +
+  theme_minimal()
+```
+
+---
+
+## Common Mistakes to Avoid
+
+**1. Data Leakage**
+- **Problem**: Information from test set leaks into training
+- **Example**: Normalizing data before splitting
+- **Solution**: Always split first, then preprocess (use recipes!)
+
+**2. Overfitting to Validation Set**
+- **Problem**: Tuning hyperparameters repeatedly on same validation set
+- **Solution**: Use nested cross-validation or separate validation set
+
+**3. Ignoring Class Imbalance**
+- **Problem**: High accuracy on imbalanced data is misleading
+- **Solution**: Use appropriate metrics (precision, recall, F1, AUC) and stratified sampling
+
+**4. Not Checking Assumptions**
+- **Problem**: Using linear models on non-linear relationships
+- **Solution**: Visualize data, check residuals, consider transformations
+
+**5. Test Set Contamination**
+- **Problem**: Trying many models and reporting best result on test set
+- **Solution**: Final test set evaluation should be done exactly once with last_fit()
+
+**6. Forgetting to Set Seeds**
+- **Problem**: Results not reproducible
+- **Solution**: Set seed before any random operation
+
+---
+
+## Decision Guide: Which Method When?
+
+**Problem: Overfitting**
+- ✓ Use cross-validation with fit_resamples()
+- ✓ Apply regularization (Ridge/Lasso with tune())
+- ✓ Feature selection (step_corr(), vip, lasso)
+- ✓ Get more training data
+- ✓ Use ensemble methods (bagging)
+- ✓ Reduce model complexity
+
+**Problem: Underfitting**
+- ✓ Use more complex model
+- ✓ Add relevant features (recipes)
+- ✓ Reduce regularization penalty
+- ✓ Use ensemble methods (boosting)
+- ✓ Increase trees/iterations
+
+**Problem: Limited Data**
+- ✓ Use cross-validation (vfold_cv())
+- ✓ Use simpler models
+- ✓ Strong regularization
+- ✓ Feature selection
+
+**Problem: High-Dimensional Data**
+- ✓ Lasso for feature selection
+- ✓ Random Forest (handles many features)
+- ✓ step_pca() for dimensionality reduction
+
+**Problem: Imbalanced Classes**
+- ✓ Use precision, recall, F1, AUC
+- ✓ Stratified sampling (strata argument)
+- ✓ step_downsample() or step_upsample()
+
+---
+
+## Summary: Key Takeaways
+
+**Core Concepts:**
+1. **Generalization** is the ultimate goal—models must work on new data
+2. **Bias-variance tradeoff** governs model complexity decisions
+3. **Overfitting** and **underfitting** are the two main pitfalls
+
+**Essential Evaluation Methods:**
+- **Train-test split**: initial_split() for honest evaluation
+- **Cross-validation**: vfold_cv() for robust performance estimation
+- **Appropriate metrics**: Choose based on problem and costs
+
+**Key Improvement Techniques:**
+- **Regularization**: Prevents overfitting through complexity penalties
+- **Feature selection**: Removes irrelevant features (recipes)
+- **Ensemble methods**: Combines multiple models (rand_forest(), boost_tree())
+- **Hyperparameter tuning**: Optimizes model configuration (tune_grid(), tune_bayes())
+
+**Tidymodels Workflow:**
+1. **rsample**: Data splitting and resampling
+2. **recipes**: Feature engineering and preprocessing
+3. **parsnip**: Model specifications
+4. **workflows**: Bundle recipes and models
+5. **tune**: Hyperparameter optimization
+6. **yardstick**: Performance metrics
+
+---
+
+## Tidymodels Ecosystem Overview
+
+**Core Packages:**
+
+**rsample**: Data splitting and resampling
+- `initial_split()`, `training()`, `testing()`
+- `vfold_cv()`, `bootstraps()`, `mc_cv()`
+
+**recipes**: Feature engineering
+- `recipe()`, `step_normalize()`, `step_corr()`
+- `step_pca()`, `step_dummy()`, `step_interact()`
+
+**parsnip**: Unified model interface
+- `linear_reg()`, `rand_forest()`, `boost_tree()`
+- `set_engine()`, `set_mode()`, `fit()`
+
+**workflows**: Bundle preprocessing and models
+- `workflow()`, `add_recipe()`, `add_model()`
+- `fit()`, `predict()`
+
+**tune**: Hyperparameter optimization
+- `tune()`, `tune_grid()`, `tune_bayes()`
+- `select_best()`, `finalize_workflow()`
+
+**yardstick**: Performance metrics
+- `accuracy()`, `rmse()`, `roc_auc()`
+- `conf_mat()`, `metrics()`, `metric_set()`
+
+**Additional Packages:**
+- **vip**: Variable importance plots
+- **finetune**: Advanced tuning (Bayesian, racing)
+- **workflowsets**: Compare multiple workflows
+
+---
+
+## Additional Resources
+
+**R Packages (Install with install.packages()):**
+- `tidymodels`: Meta-package loading all core packages
+- `vip`: Variable importance plots
+- `finetune`: Advanced hyperparameter tuning
+- `themis`: Handling class imbalance
+- `embed`: Additional recipe steps
+- `discrim`: Discriminant analysis models
+- `baguette`: Bagged models
+
+**Books and Tutorials:**
+- "Tidy Modeling with R" (tmwr.org) - Free online book
+- "An Introduction to Statistical Learning" (ISLR)
+- Tidymodels website: tidymodels.org
+- Julia Silge's blog and YouTube channel
+
+**Online Resources:**
+- Tidymodels documentation (tidymodels.org)
+- RStudio Community forums
+- #TidyTuesday for practice examples
+
+**Practice Datasets:**
+- modeldata package (part of tidymodels)
+- UCI Machine Learning Repository
+- Kaggle datasets
+- Environmental Data Initiative (EDI)
+
+---
+
+## Questions & Discussion
+
+**Common Questions:**
+
+1. **How much data do I need?**
+   - Depends on problem complexity
+   - Rule of thumb: 10+ samples per feature
+   - Cross-validation helps with smaller datasets
+
+2. **Which algorithm should I start with?**
+   - Regression: linear_reg() → regularization → rand_forest()
+   - Classification: logistic_reg() → rand_forest() → boost_tree()
+
+3. **How do I know if my model is good enough?**
+   - Compare to baseline (e.g., mean prediction)
+   - Consider domain requirements
+   - Check if performance is stable across CV folds
+
+4. **Tidymodels vs caret?**
+   - Tidymodels is more modern and actively developed
+   - Better integration with tidyverse
+   - More modular and flexible
+   - Easier to extend and customize
+
+5. **How do I prevent data leakage?**
+   - Always split data FIRST
+   - Use recipes (preprocessing happens automatically per fold)
+   - Never touch test set until final evaluation with last_fit()
+
+---
+
+## End of Slide Deck
+
+**Next Steps:**
+
+1. Practice with your own environmental datasets
+2. Start with simple models and evaluation methods
+3. Gradually incorporate more advanced techniques
+4. Focus on understanding *why* methods work
+5. Always validate on independent test data
+
+**Key Principles:**
+- Split data first, then preprocess (recipes handle this!)
+- Use workflows to bundle everything together
+- Tune on validation/CV, evaluate once on test
+- Compare multiple models systematically
+- Choose metrics that match your problem's costs
+
+**Remember:** 
+- There's no single "best" method for all problems
+- Understanding the problem and data is crucial
+- Proper evaluation is more important than fancy algorithms
+- Interpretability often matters as much as accuracy
+- Tidymodels makes good practices easy to implement
+
+**Good luck with your predictive modeling journey!**
