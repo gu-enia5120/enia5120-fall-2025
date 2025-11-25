@@ -125,8 +125,10 @@ website:
           #            target: _blank
           #          - href: slides/week-11.qmd
           #            target: _blank
-          #          - href: slides/week-12.qmd
-          #            target: _blank
+          - href: slides/week-12.qmd
+            target: _blank
+          - href: slides/bayesian-hierarchical.qmd
+            target: _blank
           #          - href: slides/week-13.qmd
           #            target: _blank
           #          - href: slides/Wrap-up.pdf

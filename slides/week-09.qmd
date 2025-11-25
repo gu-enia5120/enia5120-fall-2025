@@ -1,6 +1,5 @@
 ---
 title: "Lecture 9"
-title: "Lecture 9"
 subtitle: "Prediction and evaluation"
 execute:
   echo: true
@@ -97,7 +96,11 @@ The posterior predictive distribution allows us to simulate new data based on th
 ```{r}
 #| label: week-09-03
 n_simulations <- 1000
-posterior_samples <- rbeta(n_simulations, 1 + observed_heads, 1 + n_tosses - observed_heads)
+posterior_samples <- rbeta(
+  n_simulations,
+  1 + observed_heads,
+  1 + n_tosses - observed_heads
+)
 simulated_data <- rbinom(n_simulations, n_tosses, posterior_samples)
 ```
 
@@ -111,9 +114,11 @@ We can visualize the posterior predictive distribution of the number of heads in
 library(ggplot2)
 ggplot(tibble::tibble(simulated_data), aes(x = simulated_data)) +
   geom_histogram(binwidth = 1, fill = "blue", alpha = 0.5) +
-  labs(title = "Posterior Predictive Distribution of Heads in 10 Tosses",
-       x = "Number of Heads",
-       y = "Frequency")
+  labs(
+    title = "Posterior Predictive Distribution of Heads in 10 Tosses",
+    x = "Number of Heads",
+    y = "Frequency"
+  )
 ```
 
 This histogram shows the distribution of the number of heads we would expect to see in 10 tosses, given our observed data and the uncertainty in our estimate of $p$.
@@ -141,9 +146,9 @@ This example illustrates the concept of generative models in a Bayesian framewor
 
 ```{r}
 abbvie_data <- read_csv('data/cdln3_abbvie_data.csv') |>
-    janitor::clean_names() |>
-    select(1:3)
-ggplot(abbvie_data, aes(y))+geom_histogram()
+  janitor::clean_names() |>
+  select(1:3)
+ggplot(abbvie_data, aes(y)) + geom_histogram()
 ```
 
 ## Setting up our model
@@ -178,7 +183,13 @@ We want to make a decision of whether to recruit more patients by seeing whether
 
 # Fit a simple Bayesian model
 data("mtcars")
-fit <- brm(mpg ~ wt + cyl, data = mtcars, family = gaussian, silent = 2, refresh = 0)
+fit <- brm(
+  mpg ~ wt + cyl,
+  data = mtcars,
+  family = gaussian,
+  silent = 2,
+  refresh = 0
+)
 # Perform posterior predictive check
 pp_check(fit, ndraws = 100) + theme_bw()
 ```

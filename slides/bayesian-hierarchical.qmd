@@ -1,0 +1,2407 @@
+---
+title: "Advanced: Bayesian Hierarchical Models"
+subtitle: A Practical Guide for Applied Scientists
+author: Abhijit Das Gupta
+execute: 
+  messages: false
+  warning: false
+  cache: true
+  fig-width: 6
+  fig-asp: 0.618
+---
+
+## Disclaimer
+
+This deck was developed collaboratively by Dr. Dasgupta and Claude AI. All errors
+are the responsibility of Dr. Dasgupta. 
+
+## Overview
+
+**Learning Objectives:**
+
+- Understand what hierarchical models are and why they're useful
+- Learn when to use hierarchical models vs. standard regression
+- Master the concepts of pooling: complete, none, and partial
+- Apply hierarchical models using rstanarm and brms in R
+- Interpret Bayesian results appropriately for environmental data
+- Make informed decisions about model structure
+
+## **Why Hierarchical Models?** 
+
+Environmental data naturally has structure 
+
+— sites within regions, measurements over time, species within ecosystems. Hierarchical models respect this structure.
+
+
+## What are Hierarchical Models?
+
+**Definition:** Statistical models that account for data collected at multiple levels or with nested structure.
+
+**Also Known As:**
+
+- Mixed-effects models
+- Multilevel models
+- Random effects models
+- Nested models
+
+## **Key Idea** 
+
+Some observations are more similar to each other than to others because they share common features (same site, same species, same year).
+
+**Example in Environmental Science:**
+
+- Water quality measurements from multiple lakes
+- Each lake has multiple sampling sites
+- Each site measured multiple times
+- Measurements within a lake are more similar than across lakes
+
+
+
+## The Problem: Clustered Data
+
+**Real-World Scenario:**
+
+You're studying mercury contamination in fish across 20 lakes. You catch 10 fish per lake and measure mercury levels and length of each fish. You want to build a model that relates fish length to mercury concentration.
+
+**Question:** How should we analyze these 200 measurements?
+
+**The Issue:**
+
+- Fish from the same lake are more similar than fish from different lakes
+- They share the same water chemistry, food web, temperature
+- Standard regression assumes all observations are independent
+- <b>Ignoring lake structure leads to incorrect conclusions</b>
+
+
+## **Consequences of Ignoring Structure**
+
+- Underestimated standard errors → inflated Type I error rates
+- False confidence in results
+- Poor predictions for new lakes
+- Missing important sources of variation
+
+
+
+## The Pooling Problem
+
+**Three Approaches to Handling Groups:**
+
+:::: columns
+::: {.column width="33%"}
+**1. Complete Pooling (Ignore Groups)**
+
+- Treat all fish as if they came from one giant lake
+- Simple but wrong
+- Ignores important variation between lakes
+
+:::
+::: {.column width="33%"}
+
+**2. No Pooling (Separate Models)**
+
+- Fit completely separate model for each lake
+- 20 independent analyses
+- Loses information, can't compare lakes
+- Terrible for lakes with few fish
+
+:::
+::: {.column width="33%"}
+**3. Partial Pooling (Hierarchical Model)**
+
+- Model each lake separately BUT
+- Share information across lakes
+- **Best of both worlds!**
+:::
+::::
+
+Let's explore each approach...
+
+
+
+## Complete Pooling: Ignore the Structure
+
+**The Model:**
+
+$$
+\text{mercury}_i = \beta_0 + \beta_1 \times \text{length}_i + \epsilon_i
+$$
+where i indexes fish. 
+
+:::: columns
+::: {.column width="50%"}
+**What This Means:**
+
+- One grand mean ($\beta_0$) for all lakes
+- Same relationship ($\beta_1$) everywhere
+- Assumes all lakes are identical
+
+**When It Might Be OK:**
+
+- Groups are truly irrelevant to the question
+- Interest is only in population average
+- *Rarely appropriate for environmental data*
+
+:::
+::: {.column width="50%"}
+
+**Problems:**
+
+- Clearly wrong—lakes differ in baseline mercury
+- Pretends we have 200 independent fish
+- Standard errors too small (overconfident)
+- Can't make lake-specific predictions
+
+
+:::
+::::
+
+
+## No Pooling: Treat Groups Independently
+
+**The Model:**
+
+$$
+\text{mercury}_{ij} = \beta_{0j} + \beta_1 \times \text{length}_{ij} + \epsilon_{ij}
+$$
+where j indexes lake and i indexes fish within lake j. This is equivalent to fitting 20 separate regressions
+
+:::: columns
+::: {.column width="50%"}
+
+**What This Means:**
+
+- Each lake gets its own intercept (β₀j)
+- 20 separate analyses
+- No information shared between lakes
+
+**When It Might Be OK:**
+
+- Groups are fundamentally different
+- Abundant data in each group
+- No interest in new groups
+- *Sometimes reasonable but wasteful*
+
+
+:::
+::: {.column width="50%"}
+**Problems:**
+
+- Estimates for small lakes are very uncertain
+- Can't make predictions for new lakes
+- Ignores fact that lakes come from common distribution
+- Extreme estimates for unusual lakes
+
+:::
+::::
+
+## Partial Pooling: The Hierarchical Solution
+
+**The Model:**
+
+Level 1 (fish): $\text{mercury}_{ij} = \alpha_j + \beta × \text{length}_{ij} + \varepsilon_{ij}$  
+Level 2 (lake): $\alpha_j \sim \text{Normal}(\mu_\alpha, \sigma_\alpha)$
+
+where j indexes lake and i indexes fish within lake j.
+
+:::: columns
+::: {.column width="50%"}
+**What This Means:**
+
+- Each lake has its own intercept ($\alpha_j$)
+- BUT lake intercepts come from a common distribution
+- Lakes with little data "borrow strength" from others
+- **Information sharing!**
+
+:::
+::: {.column width="50%"}
+**Why This Works:**
+
+- Respects that lakes differ (random intercepts)
+- Recognizes lakes are samples from population
+- Automatically balances group vs. population information
+- Produces "shrinkage" toward population mean
+
+:::
+::::
+
+**This is What Makes Hierarchical Models Powerful!**
+
+
+
+## Shrinkage: The Magic of Partial Pooling
+
+**What is Shrinkage?**
+
+Estimates for individual groups are pulled toward the overall mean, with the amount of pull depending on:
+
+1. How much data in that group
+2. How variable the group is
+3. How different it is from other groups
+
+**The Formula (Conceptually):**
+```
+group_estimate = w × group_data + (1-w) × population_mean
+```
+
+where w depends on sample size and variability
+
+## **Practical Example**
+
+- Lake with 2 fish: mostly uses population info (w ≈ 0.2)
+- Lake with 50 fish: mostly uses own data (w ≈ 0.9)
+
+```{r}
+#| label: bayesian-hierarchical-01
+#| eval: true
+#| results: hide
+library(rstanarm)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(purrr)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Create simulated lake mercury data with varying sample sizes
+# This reflects the "8 lakes with different sample sizes" concept
+lake_info <- data.frame(
+  lake = paste0("Lake_", LETTERS[1:8]),
+  sample_size = c(50, 30, 20, 15, 10, 5, 3, 2), # Varying sample sizes
+  true_intercept = c(2.0, 2.8, 1.5, 3.2, 1.8, 2.5, 1.2, 3.5) # True lake effects
+)
+
+# Generate fish data
+fish_data <- map_dfr(1:nrow(lake_info), function(i) {
+  lake <- lake_info$lake[i]
+  n <- lake_info$sample_size[i]
+  true_int <- lake_info$true_intercept[i]
+
+  data.frame(
+    lake = lake,
+    fish_id = 1:n,
+    length = rnorm(n, mean = 25, sd = 5), # Fish length (cm)
+    mercury = rnorm(n, mean = true_int + 0.05 * rnorm(n, 25, 5), sd = 0.3)
+  )
+})
+
+# 1. COMPLETE POOLING (ignore lake structure)
+complete_pool <- stan_glm(
+  mercury ~ length,
+  data = fish_data,
+  family = gaussian(),
+  chains = 4,
+  iter = 1000,
+  refresh = 0, # Suppress output
+  seed = 123
+)
+
+# 2. NO POOLING (separate models for each lake)
+no_pool_estimates <- fish_data %>%
+  group_by(lake) %>%
+  summarise(
+    intercept = mean(mercury - 0.05 * length), # Crude estimate
+    n_fish = n(),
+    .groups = 'drop'
+  )
+
+# 3. PARTIAL POOLING (hierarchical model)
+partial_pool <- stan_glmer(
+  mercury ~ length + (1 | lake),
+  data = fish_data,
+  family = gaussian(),
+  chains = 4,
+  iter = 1000,
+  refresh = 0,
+  seed = 123
+)
+
+# Extract estimates for comparison
+complete_pool_int <- fixef(complete_pool)[1]
+partial_pool_ints <- coef(partial_pool)$lake[, 1]
+population_mean <- fixef(partial_pool)[1]
+
+# Create comparison data frame
+comparison_data <- data.frame(
+  lake = lake_info$lake,
+  sample_size = lake_info$sample_size,
+  true_intercept = lake_info$true_intercept,
+  complete_pooling = complete_pool_int,
+  no_pooling = no_pool_estimates$intercept,
+  partial_pooling = partial_pool_ints,
+  population_mean = population_mean
+)
+
+# Calculate shrinkage factor (w) - how much each lake relies on its own data
+comparison_data <- comparison_data %>%
+  mutate(
+    shrinkage_factor = abs(no_pooling - population_mean) /
+      abs(partial_pooling - population_mean),
+    w_approx = pmin(0.9, pmax(0.1, sample_size / (sample_size + 10))) # Approximate weight
+  )
+
+# Reshape for plotting
+plot_data <- comparison_data %>%
+  select(
+    lake,
+    sample_size,
+    true_intercept,
+    complete_pooling,
+    no_pooling,
+    partial_pooling
+  ) %>%
+  pivot_longer(
+    cols = c(complete_pooling, no_pooling, partial_pooling),
+    names_to = "method",
+    values_to = "estimate"
+  ) %>%
+  mutate(
+    method = factor(
+      method,
+      levels = c("complete_pooling", "no_pooling", "partial_pooling"),
+      labels = c("Complete Pooling", "No Pooling", "Partial Pooling")
+    )
+  )
+
+# Create the visualization showing different pooling strategies
+p1 <- ggplot(
+  plot_data,
+  aes(
+    x = reorder(lake, sample_size),
+    y = estimate,
+    color = method,
+    shape = method
+  )
+) +
+  geom_hline(
+    yintercept = population_mean,
+    linetype = "dashed",
+    color = "gray50",
+    alpha = 0.7
+  ) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_point(aes(y = true_intercept), color = "black", shape = 4, size = 4) +
+  scale_color_manual(values = c("red", "blue", "darkgreen")) +
+  scale_shape_manual(values = c(16, 17, 15)) +
+  labs(
+    title = "Comparison of Pooling Strategies",
+    subtitle = "Black X = True value, Dashed line = Population mean",
+    x = "Lake (ordered by sample size)",
+    y = "Estimated Mercury Intercept (μg/g)",
+    color = "Method",
+    shape = "Method"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Add sample sizes to x-axis labels
+plot_data_labeled <- plot_data %>%
+  left_join(
+    comparison_data %>% select(lake, sample_size),
+    by = c("lake", "sample_size")
+  ) %>%
+  mutate(lake_label = paste0(lake, "\n(n=", sample_size, ")"))
+
+p1_labeled <- ggplot(
+  plot_data_labeled,
+  aes(
+    x = reorder(lake_label, sample_size),
+    y = estimate,
+    color = method,
+    shape = method
+  )
+) +
+  geom_hline(
+    yintercept = population_mean,
+    linetype = "dashed",
+    color = "gray50",
+    alpha = 0.7
+  ) +
+  geom_point(size = 3, alpha = 0.8) +
+  geom_point(aes(y = true_intercept), color = "black", shape = 4, size = 4) +
+  scale_color_manual(values = c("red", "blue", "darkgreen")) +
+  scale_shape_manual(values = c(16, 17, 15)) +
+  labs(
+    title = "Comparison of Pooling Strategies by Sample Size",
+    subtitle = "Black X = True value, Dashed line = Population mean\nNote how partial pooling shrinks small-sample estimates toward the mean",
+    x = "Lake (sample size)",
+    y = "Estimated Mercury Intercept (μg/g)",
+    color = "Method",
+    shape = "Method"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 8))
+
+# Show shrinkage effect more clearly
+p2 <- comparison_data %>%
+  select(lake, sample_size, no_pooling, partial_pooling, population_mean) %>%
+  ggplot(aes(x = sample_size)) +
+  geom_segment(
+    aes(xend = sample_size, y = no_pooling, yend = partial_pooling),
+    alpha = 0.6,
+    size = 1.5,
+    color = "purple"
+  ) +
+  geom_point(aes(y = no_pooling), color = "blue", size = 3, alpha = 0.8) +
+  geom_point(
+    aes(y = partial_pooling),
+    color = "darkgreen",
+    size = 3,
+    alpha = 0.8
+  ) +
+  geom_hline(
+    yintercept = population_mean,
+    linetype = "dashed",
+    color = "gray50"
+  ) +
+  geom_text(aes(y = partial_pooling, label = lake), hjust = -0.1, size = 3) +
+  labs(
+    title = "Shrinkage Effect in Partial Pooling",
+    subtitle = "Blue = No pooling, Green = Partial pooling\nLines show how estimates are 'shrunk' toward population mean",
+    x = "Sample Size (number of fish)",
+    y = "Estimated Mercury Intercept (μg/g)"
+  ) +
+  theme_minimal()
+
+# Print the plots
+print(p1_labeled)
+print(p2)
+
+# Show the shrinkage weights
+cat("\nShrinkage Analysis:\n")
+cat("Lakes with small samples get 'shrunk' more toward population mean:\n\n")
+comparison_data %>%
+  arrange(sample_size) %>%
+  select(lake, sample_size, w_approx) %>%
+  mutate(
+    w_approx = round(w_approx, 2),
+    interpretation = case_when(
+      w_approx < 0.3 ~ "Mostly uses population info",
+      w_approx < 0.7 ~ "Balanced combination",
+      TRUE ~ "Mostly uses own data"
+    )
+  ) %>%
+  print()
+
+# Model comparison
+cat("\nModel Summary:\n")
+cat("Partial Pooling Model (Hierarchical):\n")
+print(partial_pool)
+
+# Extract and show ICC
+icc_value <- VarCorr(partial_pool)$lake[1, 1] /
+  (VarCorr(partial_pool)$lake[1, 1] + sigma(partial_pool)^2)
+cat(sprintf("\nIntraclass Correlation Coefficient (ICC): %.3f\n", icc_value))
+cat("This means", round(icc_value * 100, 1), "% of variance is between lakes\n")
+```
+
+**Complete Pooling:**
+
+- All fish: one line
+- Ignores lakes entirely
+
+**No Pooling:**
+
+- 8 completely separate lines
+- Wild variation for small-sample lakes
+- Lake C (n=3): crazy extreme estimate
+
+**Partial Pooling:**
+
+- 8 different lines
+- Small-sample lakes pulled toward average
+- Lake C's estimate is moderated
+- Uncertainty properly reflects sample size
+
+**The Pattern:**
+
+- Large-sample lakes: similar in no-pooling vs partial-pooling
+- Small-sample lakes: shrunk toward population mean
+- This is automatic and optimal!
+
+
+
+## When to Use Hierarchical Models
+
+**You Should Use Hierarchical Models When:**
+
+✓ **Nested/Grouped Structure**
+
+- Multiple sites within regions
+- Repeated measurements on same individuals/locations
+- Multiple species, plots, watersheds
+
+✓ **Interest in Group-Level Variation**
+
+- How much do lakes differ in baseline mercury?
+- What's the variance between sites?
+- Are groups meaningfully different?
+
+## When to Use Hierarchical Models
+
+**You Should Use Hierarchical Models When:**
+
+✓ **Predictions for New Groups**
+
+- Predict mercury for an unsampled lake
+- Estimate values for new sites
+- Generalize beyond observed groups
+
+✓ **Unbalanced Data**
+
+- Some groups have many observations, others few
+- Hierarchical models handle this gracefully
+- No need to throw away data!
+
+
+## When to Use Hierarchical Models (Examples)
+
+**Environmental Science Examples:**
+
+**1. Spatial Hierarchical Structure**
+
+- **Problem:** Measuring nitrogen runoff from 50 farms across 5 watersheds
+- **Why Hierarchical:** Farms within a watershed share hydrology, soil, climate
+- **Model:** Farm-level measurements nested in watersheds
+
+**2. Temporal Hierarchical Structure**
+
+- **Problem:** Species counts at 20 sites over 10 years
+- **Why Hierarchical:** Repeated measures at same sites aren't independent
+- **Model:** Yearly observations nested within sites
+
+## When to Use Hierarchical Models (Examples)
+
+**Environmental Science Examples:**
+
+**3. Taxonomic Hierarchical Structure**
+
+- **Problem:** Testing pollutant effects on 30 fish species from 4 families
+- **Why Hierarchical:** Species within family share biology
+- **Model:** Species nested within families
+
+**4. Multi-Level Spatial**
+
+- **Problem:** Tree growth in plots within forests within ecoregions
+- **Why Hierarchical:** Three levels of grouping!
+- **Model:** Plots within forests within regions
+
+
+
+## Problem: Which Model for Bird Surveys?
+
+**Scenario:**
+
+You conduct bird surveys at 30 sites across a mountain gradient. Each site is visited 4 times during breeding season.
+
+**Data Structure:**
+
+- 30 sites × 4 visits = 120 observations
+- Want to relate bird abundance to elevation
+
+**Question:** What model should you use?
+
+**A. Standard Linear Model (ignore sites)**
+```
+abundance ~ elevation
+```
+
+**B. Fixed Effects for Sites**
+```
+abundance ~ elevation + site
+```
+
+**C. Hierarchical Model**
+```
+Level 1: abundance_ij ~ elevation_j + α_j
+Level 2: α_j ~ Normal(μ, σ)
+```
+
+## **Answer:** C! Why?
+
+- Visits within sites are not independent (repeated measures)
+- Want to generalize to other sites on mountain
+- Sites are random sample from population of possible sites
+- Interested in site-to-site variation
+
+
+
+## Bayesian Approach to Hierarchical Models
+
+**Why Bayesian for Hierarchical Models?**
+
+1. **Natural Framework** 
+
+   - Hierarchical structure maps directly to Bayesian model
+   - Hyperparameters get hyperpriors—it's all just probability!
+
+2. **Handles Complexity**
+
+   - Complex models fit without approximations
+   - Correctly propagates uncertainty through levels
+
+3. **Small Sample Sizes**
+
+   - Works well even with few groups or observations per group
+   - No asymptotic assumptions needed
+
+4. **Interpretable Uncertainty**
+
+   - Full posterior distributions for everything
+   - Credible intervals have direct interpretation
+   - Uncertainty about variance components
+
+5. **Predictive Distributions**
+
+   - Easy to predict for new groups
+   - Accounts for all sources of uncertainty
+
+
+
+## Bayesian Building Blocks {.smaller}
+
+**Quick Bayesian Refresher:**
+
+**Bayes' Theorem:**
+```
+Posterior ∝ Likelihood × Prior
+P(θ|data) ∝ P(data|θ) × P(θ)
+```
+
+**Components:**
+
+- **Likelihood:** P(data|θ) = How likely are the data given parameters?
+- **Prior:** P(θ) = What do we believe before seeing data?
+- **Posterior:** P(θ|data) = Updated beliefs after seeing data
+
+**In Hierarchical Models:**
+
+- Parameters at each level get distributions
+- Hyperparameters control group-level distributions
+- Everything estimated simultaneously
+
+**Practical Interpretation:**
+
+- **95% Credible Interval:** "Given the data, there's a 95% probability the parameter is in this range"
+- Direct probability statements!
+
+
+
+## Hierarchical Model Structure
+
+**General Form:**
+
+**Level 1 (Observation Level):**
+
+$$
+y_{ij} \sim \text{Normal}(\mu_{ij}, \sigma_{y}) \\
+\mu_{ij} = \alpha_j + \beta \times x_{ij}
+$$
+
+**Level 2 (Group Level):**
+
+$$
+\alpha_j \sim \text{Normal}(\mu_{\alpha}, \sigma_{\alpha})
+$$
+
+**Level 3 (Population Level / Priors):**
+
+$$
+\mu_{\alpha} \sim \text{Normal}(0, 10) \\
+\sigma_{\alpha} \sim \text{Cauchy}(0, 2.5) \\
+\beta \sim \text{Normal}(0, 5) \\
+\sigma_{y} \sim \text{Cauchy}(0, 2.5)
+$$
+
+## **What This Means:**
+
+- Observations vary within groups ($\sigma_y$)
+- Groups vary within population ($\sigma_{\alpha}$)
+- Both sources of variation estimated
+- Priors express prior knowledge (often weakly informative)
+
+
+
+## Fixed vs Random Effects {.smaller}
+
+**Terminology (Often Confusing!):**
+
+**Fixed Effects:**
+
+- Parameters we estimate and care about
+- Examples: slope of elevation, effect of temperature
+- Same across all groups (though can vary in mixed models)
+
+**Random Effects:**
+
+- Parameters that vary by group
+- Assume groups drawn from population distribution
+- Examples: lake-specific intercepts, site-level variation
+- Focus is on the distribution (mean and variance), not individual values
+
+**Helpful Distinction:**
+
+- **Fixed:** "These specific effects"
+- **Random:** "Variation among similar things"
+
+**In Environmental Models:**
+
+- Fixed: covariate effects (temperature, elevation, treatment)
+- Random: site effects, year effects, species effects
+- **Both can be in the same model!**
+
+
+
+## Introduction to rstanarm
+
+**What is rstanarm?**
+
+An R package that fits Bayesian regression models using Stan, with syntax similar to base R.
+
+**Key Features:**
+
+- Familiar formula syntax (`lm`, `lmer` style)
+- Pre-compiled models (fast!)
+- Sensible default priors
+- Easy to use, hard to misuse
+
+**Installation:**
+
+```r
+install.packages("rstanarm")
+library(rstanarm)
+```
+
+## **Basic Syntax:**
+```r
+# Standard regression
+model <- stan_glm(y ~ x, data = mydata)
+
+# Hierarchical model (like lme4)
+model <- stan_glmer(y ~ x + (1 | group), data = mydata)
+```
+
+## **Advantages for Beginners:**
+
+- Simple syntax
+- Good defaults
+- Extensive documentation
+- Active community
+
+
+
+## Introduction to brms
+
+**What is brms?**
+
+Bayesian Regression Models using Stan
+
+— more flexible than rstanarm.
+
+**Key Features:**
+
+- Extremely flexible model specification
+- Supports complex hierarchical structures
+- Distributional regression (model σ, not just μ)
+- Custom families and link functions
+- Generates Stan code on the fly
+
+## **Installation:**
+```r
+install.packages("brms")
+library(brms)
+```
+
+## **Basic Syntax:**
+
+```r
+# Standard regression
+model <- brm(y ~ x, data = mydata)
+
+# Hierarchical model
+model <- brm(y ~ x + (1 | group), data = mydata)
+```
+
+## **When to Use brms:**
+
+- Need custom distributions
+- Complex random effects structures
+- Non-linear models
+- Want maximum flexibility
+
+
+
+## Example 1: Lake Mercury (rstanarm)
+
+**Scenario:** Mercury in fish across 20 lakes
+
+**Data Structure:**
+
+- 200 fish (10 per lake)
+- Mercury concentration (response)
+- Fish length (predictor)
+- Lake ID (grouping)
+
+**Question:** How does fish length relate to mercury? Do lakes differ in baseline mercury?
+
+## Example 1: Lake Mercury (rstanarm)
+
+**Complete Pooling (Wrong):**
+```{r}
+#| label: bayesian-hierarchical-02
+library(rstanarm)
+
+# Ignore lake structure
+complete_pool <- stan_glm(
+  mercury ~ length,
+  data = fish_data,
+  family = gaussian(),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0 # Suppress output
+)
+complete_pool
+```
+
+**Problem:** Treats all 200 fish as independent. Standard errors too small!
+
+
+
+## Example 1: Lake Mercury (Hierarchical Model)
+
+**Partial Pooling (Correct):**
+```{r}
+#| label: bayesian-hierarchical-03
+library(rstanarm)
+
+# Random intercepts for lakes
+partial_pool <- stan_glmer(
+  mercury ~ length + (1 | lake),
+  data = fish_data,
+  family = gaussian(),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0 # Suppress output
+)
+
+# View results
+# print(partial_pool)
+summary(partial_pool)
+```
+
+# Example 1: Lake Mercury (Hierarchical Model)
+
+**Model Interpretation:**
+
+**Fixed Effects:**
+
+- `length`: Average effect of fish size on mercury across all lakes
+
+**Random Effects:**
+
+- `(1 | lake)`: Each lake has its own intercept
+- `sd(Intercept)`: How much lakes vary in baseline mercury
+- **This is the key quantity!**
+
+**Residual:**
+
+- `sigma`: Within-lake variation
+sigma
+`: Within-lake variation
+
+
+
+## Interpreting rstanarm Output {.smaller}
+
+**Output Looks Like:**
+
+```{r}
+#| label: bayesian-hierarchical-04
+broom.mixed::tidy(partial_pool, conf.int = TRUE)
+```
+
+**What This Means:**
+
+**Fixed Effects:**
+
+- Intercept = 3.4 µg/g: Average mercury for average-length fish
+- Length = 0.005: Each cm of length → 0.005 µg/g more mercury
+- 95% CI [-0.07, 0.01]: No evidence of relationship
+
+**Random Effects:**
+
+- SD(lake) = 0.8: Lakes differ by about 0.8 µg/g on average
+- SD(residual) = 0.4: Fish within lake differ by 0.4 µg/g
+- **Between-lake variance > within-lake variance!**
+
+**Conclusion:** Lake identity matters more than individual variation!
+
+
+
+## Extracting Random Effects
+
+::: {.columns}
+::: {.column}
+**Get Lake-Specific Estimates:**
+```{r}
+#| label: bayesian-hierarchical-05
+# Extract random effects
+lake_effects <- ranef(partial_pool)$lake
+head(lake_effects)
+
+# Gives deviations from population mean
+#       (Intercept)
+# Lake1    -0.5
+# Lake2     0.3
+# Lake3     1.2
+# ...
+
+# Get actual lake-specific intercepts
+lake_intercepts <- coef(partial_pool)$lake
+head(lake_intercepts)
+
+#       (Intercept)  length
+# Lake1    1.6       0.5
+# Lake2    2.4       0.5
+# Lake3    3.3       0.5
+```
+
+:::
+::: {.column .smaller}
+
+**Interpretation:**
+
+- Lake A has lower baseline mercury (-0.4 from mean)
+- Lake D has higher baseline mercury (+0.97 from mean)
+- All lakes share same length effect (fixed slope)
+- Shrinkage visible: no extreme values for small-sample lakes!
+
+
+:::
+::: 
+
+## Visualizing Random Effects
+
+::: {.columns}
+::: {.column width='60%'}
+**Plot Lake-Specific Intercepts:**
+```{r}
+#| label: bayesian-hierarchical-06
+library(ggplot2)
+library(tidybayes)
+
+# Get posterior distributions of lake intercepts
+fish_data %>%
+  modelr::data_grid(lake, length = mean(length)) %>%
+  add_epred_draws(partial_pool, ndraws = 100) %>%
+  ggplot(aes(x = .epred, y = reorder(lake, .epred))) +
+  stat_halfeye() +
+  labs(
+    x = "Predicted Mercury (µg/g)",
+    y = "Lake",
+    title = "Lake-Specific Baseline Mercury Levels"
+  ) +
+  theme_minimal()
+```
+
+:::
+::: {.column width='40%'}
+
+**What You'll See:**
+
+- Distribution of predicted mercury for each lake
+- Lakes ranked by baseline level
+- Uncertainty wider for lakes with fewer fish
+- Clear differences between lakes
+- Evidence of shrinkage: estimates pulled toward overall mean
+
+:::
+::: 
+
+
+## Posterior Predictive Checks
+
+**Are Our Predictions Reasonable?**
+
+::: {.columns}
+::: {.column}
+**Generate Predictions:**
+```{r}
+#| label: bayesian-hierarchical-07
+library(bayesplot)
+
+# Generate predictions from posterior
+y_rep <- posterior_predict(partial_pool, draws = 500)
+
+# Compare to observed data
+ppc_dens_overlay(fish_data$mercury, y_rep[1:50, ])
+
+# Check by lake
+ppc_stat_grouped(
+  fish_data$mercury,
+  y_rep,
+  group = fish_data$lake,
+  stat = "mean"
+)
+```
+
+:::
+::: {.column}
+
+**What to Look For:**
+
+- Do simulated data look like observed data?
+- Are we capturing the right amount of variation?
+- Are extreme values reasonable?
+- Do predictions match data distribution?
+
+**Bad Fit Indicators:**
+
+- Simulated data too narrow or too wide
+- Missing multimodality
+- Wrong tail behavior
+
+:::
+::: 
+
+
+## Example 2: Radon in Homes (brms) {.smaller}
+
+**Scenario:** Radon levels in homes across 85 counties in Minnesota
+
+**Data Structure:**
+
+- ~900 homes
+- Radon measurement (response)
+- Floor type: basement vs first floor (predictor)
+- County (grouping factor)
+- Uranium content in county soil (county-level predictor)
+
+**Questions:**
+
+1. Does floor type affect radon?
+2. How much do counties differ?
+3. Does county uranium explain county differences?
+
+**Why This Example:**
+
+- Mix of individual and group-level predictors
+- Many groups with unbalanced sample sizes (some counties have 2 homes, others 50)
+- Perfect for showing hierarchical modeling!
+
+
+
+## Radon Example: Model 1 (Random Intercepts) {.smaller}
+
+**Model:** Floor effect + county random intercepts
+
+::: {.columns}
+::: {.column}
+```{r}
+#| label: bayesian-hierarchical-08
+library(brms)
+library(rstanarm)
+data(radon)
+
+# Random intercepts only
+radon_model1 <- brm(
+  log_radon ~ floor + (1 | county),
+  data = radon,
+  family = gaussian(),
+  prior = c(
+    prior(normal(0, 5), class = Intercept),
+    prior(normal(0, 2), class = b),
+    prior(cauchy(0, 1), class = sd),
+    prior(cauchy(0, 1), class = sigma)
+  ),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0
+)
+
+# View results
+summary(radon_model1)
+```
+
+:::
+::: {.column}
+
+**Model Structure:**
+
+Level 1: $\log(\text{radon})_{ij} = \alpha_j + \beta \times \text{floor}_{ij} + \varepsilon_{ij}$  
+Level 2: $\alpha_j \sim \text{Normal}(\mu_\alpha, \sigma_\alpha)$
+
+**What This Estimates:**
+
+- $\beta$: Effect of floor type (same for all counties)
+- $\mu_\alpha$: Average baseline radon
+- $\sigma_\alpha$: Variation between counties
+- $\sigma_y$: Variation within counties
+
+:::
+::: 
+
+
+## Radon Example: Model 2 (Adding County-Level Predictor) {.smaller}
+
+**Model:** Floor effect + uranium + random intercepts
+
+::: {.columns}
+::: {.column}
+
+```{r}
+#| label: bayesian-hierarchical-09
+# Add county-level predictor
+radon_model2 <- brm(
+  log_radon ~ floor + log_uranium + (1 | county),
+  data = radon,
+  family = gaussian(),
+  prior = c(
+    prior(normal(0, 5), class = Intercept),
+    prior(normal(0, 2), class = b),
+    prior(cauchy(0, 1), class = sd),
+    prior(cauchy(0, 1), class = sigma)
+  ),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0
+)
+
+summary(radon_model2)
+```
+
+:::
+::: {.column}
+
+**What Changed:**
+
+- Added uranium as fixed effect
+- Uranium varies by county (not by home)
+- Should explain some county-level variation
+- Expect $\sigma_\alpha$ (county SD) to decrease if uranium explains differences
+
+**Model Structure:**
+
+Level 1: $\log(\text{radon})_{ij} = \alpha_j + \beta \times \text{floor}_{ij} + \varepsilon_{ij}$  
+Level 2: $\alpha_j = \mu_\alpha + \gamma \times \log(\text{uranium}_j) + u_j$  
+         $u_j \sim \text{Normal}(0, \sigma_u)$
+
+
+:::
+::: 
+
+
+## Radon Example: Model 3 (Random Slopes) {.smaller}
+
+**Model:** Varying intercepts AND varying slopes
+
+```{r}
+#| label: bayesian-hierarchical-10
+# Random slopes for floor effect
+radon_model3 <- brm(
+  log_radon ~ floor + log_uranium + (1 + floor | county),
+  data = radon,
+  family = gaussian(),
+  prior = c(
+    prior(normal(0, 5), class = Intercept),
+    prior(normal(0, 2), class = b),
+    prior(cauchy(0, 1), class = sd),
+    prior(cauchy(0, 1), class = sigma),
+    prior(lkj(2), class = cor) # correlation between random effects
+  ),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0
+)
+```
+
+**What This Means:**
+
+- Each county has its own intercept AND slope
+- Counties differ in baseline radon (intercept variation)
+- Counties differ in floor effect strength (slope variation)
+- Intercepts and slopes can be correlated
+
+**When to Use:**
+
+- Theory suggests effect varies by group
+- Enough data per group (need ~5-10 obs/group minimum)
+- Interested in variation in relationships
+
+
+
+## Comparing brms Models {.smaller}
+
+**Model Comparison Using LOO:**
+
+```{r}
+#| label: bayesian-hierarchical-11
+# Compute leave-one-out cross-validation
+loo1 <- loo(radon_model1)
+loo2 <- loo(radon_model2)
+loo3 <- loo(radon_model3)
+
+# Compare models
+loo_compare(loo1, loo2, loo3)
+
+#            elpd_diff se_diff
+# model2       0.0       0.0
+# model3      -2.3       3.1
+# model1     -45.2      10.8
+```
+
+**Interpretation:**
+
+- Model 2 (uranium + random intercepts) is best
+- Model 3 (random slopes) similar but slightly worse
+- Model 1 (no uranium) much worse
+- **Uranium explains substantial county variation!**
+
+**Decision:** Use Model 2
+
+- Simpler than Model 3
+- Much better than Model 1
+- Easier to interpret and more stable
+
+
+
+## Visualizing Random Slopes {.smaller}
+
+**Plot County-Specific Relationships:**
+
+```{r}
+#| label: bayesian-hierarchical-12
+# Extract county-specific coefficients
+county_coefs <- coef(radon_model3)$county
+
+
+# Add predictions
+plot_data <- radon |>
+  add_epred_draws(radon_model3, ndraws = 100)
+
+# Plot
+ggplot(plot_data, aes(x = floor, y = .epred)) +
+  stat_lineribbon(.width = 0.95) +
+  facet_wrap(~county, ncol = 10) +
+  labs(
+    title = "County-Specific Floor Effects",
+    x = "Floor Type",
+    y = "Predicted Log(Radon)"
+  ) +
+  theme_minimal()
+```
+
+**What You'll See:**
+
+- Different slopes across counties
+- Some counties: big floor effect
+- Other counties: small floor effect
+- Uncertainty varies by sample size
+
+
+
+## Extracting and Reporting Results
+
+::: {.columns}
+::: {.column}
+**Fixed Effects:**
+
+```r
+#| label: bayesian-hierarchical-13
+# Get fixed effects summary
+fixef(radon_model2)
+
+# Get posterior samples
+posterior_samples <- as_draws_df(radon_model2)
+
+# Calculate probability of positive effect
+mean(posterior_samples$b_floor > 0)
+
+# Specific quantities
+median(posterior_samples$b_uranium)
+quantile(posterior_samples$b_uranium, c(0.025, 0.975))
+```
+
+:::
+::: {.column}
+
+**Random Effects:**
+```r
+#| label: bayesian-hierarchical-14
+# Group-level standard deviations
+VarCorr(radon_model2)
+
+# Extract county-specific effects
+ranef(radon_model2)
+
+# Plot random effects distribution
+mcmc_areas(radon_model2, pars = "sd_county__Intercept")
+```
+
+:::
+::: 
+
+**Reporting:**
+
+- Fixed effects: median and 95% CI
+- Probability statements: P(β > 0 | data) = 0.97
+- Random effects: report SD and interpretation
+- Always include uncertainty!
+
+
+
+## Prior Selection for Hierarchical Models {.smaller}
+
+**Why Priors Matter:**
+
+In hierarchical models, priors are particularly important for:
+
+- Variance parameters (σ_α, σ_y)
+- Group-level effects with limited data
+- Complex models with many parameters
+
+**Default vs Custom Priors:**
+
+**rstanarm Defaults (Usually Good):**
+
+- Weakly informative
+- Scaled to data
+- Rarely need to change
+
+**brms Requires Specification:**
+
+- More flexible
+- Should think about priors
+- Can use `get_prior()` to see options
+
+
+
+## Prior Selection Guidelines {.smaller}
+
+**For Fixed Effects (β):**
+```r
+prior(normal(0, 5), class = b)
+```
+- Normal(0, 5) is weakly informative
+- Allows wide range but not absurd values
+- Adjust scale based on response variable units
+
+**For Standard Deviations (σ):**
+```r
+prior(cauchy(0, 1), class = sigma)
+prior(cauchy(0, 1), class = sd)
+```
+- Half-Cauchy is standard choice
+- Heavy tails allow large values if data support it
+- Scale should relate to expected variation
+
+**For Correlations:**
+```r
+prior(lkj(2), class = cor)
+```
+- LKJ prior for correlation matrices
+- η = 2 is weakly informative (favors no correlation)
+- η = 1 is uniform (all correlations equally likely)
+
+**Principle:** Weakly informative priors that regularize but don't dominate data
+
+
+
+## Prior Sensitivity Analysis {.smaller}
+
+**Always Check Prior Influence:**
+
+```r
+# Fit with different priors
+model_weak <- brm(
+  y ~ x + (1 | group),
+  prior = prior(normal(0, 10), class = b)
+)
+
+model_strong <- brm(
+  y ~ x + (1 | group),
+  prior = prior(normal(0, 1), class = b)
+)
+
+# Compare posteriors
+posterior_weak <- as_draws_df(model_weak)
+posterior_strong <- as_draws_df(model_strong)
+
+# Plot
+ggplot() +
+  geom_density(aes(posterior_weak$b_x), color = "blue") +
+  geom_density(aes(posterior_strong$b_x), color = "red") +
+  labs(title = "Prior Sensitivity", subtitle = "Blue = Weak, Red = Strong")
+```
+
+**What to Look For:**
+
+- Are posteriors similar? Good! (Data overwhelms prior)
+- Very different? Prior is too strong OR insufficient data
+- If conclusions change: report sensitivity, get more data
+
+
+
+## Model Checking: Convergence Diagnostics {.smaller}
+
+**Did the MCMC Chains Converge?**
+
+
+```{r}
+#| label: bayesian-hierarchical-15
+# Check Rhat values
+summary(radon_model2)
+
+
+```
+
+::: {.columns}
+::: {.column}
+**1. Rhat Statistic:**
+
+- Should all be < 1.01 (ideally < 1.05)
+- Rhat = 1.00 is perfect
+- Rhat > 1.1 is serious problem
+
+:::
+::: {.column}
+
+**2. Effective Sample Size (ESS):**
+
+- Want ESS > 1000 for stable estimates
+- ESS < 400 is concerning
+- Low ESS → run more iterations
+
+:::
+:::
+
+
+## Model Checking: Convergence Diagnostics
+
+**Did the MCMC Chains Converge?**
+
+
+**3. Trace Plots:**
+
+::: {.columns}
+::: {.column}
+
+```{r}
+#| label: bayesian-hierarchical-19
+library(bayesplot)
+
+mcmc_trace(radon_model2, pars = c("b_Intercept", "b_floor", "sigma"))
+```
+
+:::
+::: {.column}
+
+**Good Traces:**
+
+- Fuzzy caterpillar
+- No trends or patterns
+- All chains overlapping
+- Good mixing
+
+**Bad Traces:**
+
+- Trends up or down
+- Chains don't overlap
+- Stuck in regions
+- **Don't trust results!**
+
+
+:::
+::: 
+
+## Model Checking: Posterior Predictive Checks {.smaller}
+
+**Does the Model Fit the Data?**
+
+**Visual Checks:**
+
+```{r}
+#| layout-ncol: 3
+library(bayesplot)
+
+# Density overlay
+pp_check(radon_model2, type = "dens_overlay", ndraws = 50)
+
+# Statistics by group
+pp_check(radon_model2, type = "stat_grouped", stat = "mean", group = "county")
+
+# Intervals
+pp_check(radon_model2, type = "intervals")
+```
+
+::: {.columns}
+::: {.column}
+**What to Look For:**
+
+- Predicted data should look like observed data
+- Check means, variances, extremes
+- Look for systematic misfit
+- Check each group separately
+:::
+::: {.column}
+
+**Common Issues:**
+
+- Wrong distribution family
+- Missing important predictor
+- Need non-linear terms
+- Outliers or leverage points
+
+:::
+::: 
+
+
+## Example 3: Species Abundance Across Sites (rstanarm)
+
+**Scenario:** Counting birds at 40 sites over 3 years
+
+**Data Structure:**
+
+- Site (40 levels)
+- Year (3 levels)
+- Habitat type (forest, grassland, wetland)
+- Count data (Poisson distributed)
+
+**Question:** How does habitat affect abundance? How much do sites vary?
+
+## Example 3: Species Abundance Across Sites (rstanarm)
+
+**Model with Poisson Distribution:**
+```r
+library(rstanarm)
+
+bird_model <- stan_glmer(
+  count ~ habitat + (1 | site) + (1 | year),
+  data = bird_data,
+  family = poisson(link = "log"),
+  chains = 4,
+  iter = 2000,
+  seed = 123,
+  refresh = 0
+)
+
+print(bird_model)
+```
+
+**Key Features:**
+
+- Poisson family for count data
+- Log link function (counts can't be negative)
+- Two grouping factors: site AND year
+- **Crossed random effects** (not nested)
+
+
+
+## Example 3: Interpreting Count Model {.smaller}
+
+**Model Structure:**
+```
+log(λ_ij) = β₀ + β₁×(habitat=grassland) + β₂×(habitat=wetland) 
+            + α_site[i] + α_year[j]
+count_ij ~ Poisson(λ_ij)
+```
+
+**Output Interpretation:**
+```
+Fixed Effects:
+                    Estimate  95% CI
+(Intercept)         2.3       [2.0, 2.6]
+habitatgrassland    0.4       [0.2, 0.6]
+habitatwetland      0.8       [0.5, 1.1]
+
+Random Effects:
+Groups  Name        Std.Dev.
+site    (Intercept) 0.3
+year    (Intercept) 0.1
+```
+
+**What This Means:**
+
+- exp(2.3) = 10: Expected count in forest
+- exp(2.3 + 0.4) = 15: Expected count in grassland
+- exp(2.3 + 0.8) = 25: Expected count in wetland
+- Sites vary by factor of exp(0.3×2) ≈ 1.8 (±2 SD)
+- Years vary by factor of exp(0.1×2) ≈ 1.2
+- **Site variation larger than year variation**
+
+
+
+## Crossed vs Nested Random Effects {.smaller}
+
+::: {.columns}
+::: {.column}
+**Nested:** Groups within groups
+
+- Sites within regions
+- Students within schools
+- Plots within forests
+
+```r
+# Syntax
+(1 | region/site)
+# or equivalently
+(1 | region) + (1 | region:site)
+```
+
+**Crossed:** Independent grouping factors
+
+- Sites AND years (each site measured each year)
+- Subjects AND stimuli (each subject sees each stimulus)
+- Raters AND items (each rater rates each item)
+
+```r
+# Syntax
+(1 | site) + (1 | year)
+```
+:::
+::: {.column}
+
+
+**How to Tell:**
+
+- Nested: Each site belongs to exactly one region
+- Crossed: Each combination of site×year is possible
+
+**Environmental Examples:**
+
+- Nested: Transects within sites within watersheds
+- Crossed: Sites measured across multiple years
+- Mixed: Sites within regions, measured across years
+
+:::
+:::
+
+
+## Example 4: Varying Slopes (Environmental Gradient) {.smaller}
+
+**Scenario:** Tree growth along elevation gradient at 15 sites
+
+**Question:** Does elevation effect vary by site?
+
+::: {.columns}
+::: {.column}
+**Random Intercepts Only:**
+```r
+model_ri <- brm(
+  growth ~ elevation + (1 | site),
+  data = tree_data,
+  family = gaussian()
+)
+```
+- All sites: same elevation slope
+- Sites differ only in baseline growth
+:::
+::: {.column}
+
+**Random Intercepts and Slopes:**
+```r
+model_ris <- brm(
+  growth ~ elevation + (1 + elevation | site),
+  data = tree_data,
+  family = gaussian()
+)
+```
+- Each site: own elevation slope
+- Sites differ in baseline AND relationship
+- Intercepts and slopes can be correlated
+
+**When to Use Random Slopes:**
+
+- Theory suggests effect varies
+- Sufficient data per group
+- Interaction between group and predictor
+
+:::
+::: 
+
+
+## Interpreting Random Slopes Output {.smaller}
+
+**Model Output:**
+```
+Random Effects:
+~site (Number of levels: 15)
+              Estimate Est.Error
+sd(Intercept)    2.1      0.5
+sd(elevation)    0.3      0.1
+cor(Intercept,elevation) -0.4  0.2
+```
+
+**What This Means:**
+
+**sd(Intercept) = 2.1:**
+
+- Sites vary in baseline growth by ±2.1 mm/year
+
+**sd(elevation) = 0.3:**
+
+- Elevation slopes vary by ±0.3 across sites
+- Some sites more sensitive to elevation than others
+
+**cor(Intercept, elevation) = -0.4:**
+
+- Negative correlation: sites with high baseline growth show weaker elevation effect
+- Low-elevation (high-baseline) sites less affected by going higher
+- High-elevation sites more affected by elevation changes
+
+**Interpretation:** Sites show consistent but varying responses to elevation
+
+
+
+## Predicting for New Groups {.smaller}
+
+**Major Advantage of Hierarchical Models:**
+
+**Scenario:** You want to predict mercury for a NEW, unsampled lake
+
+**Three Approaches:**
+
+**1. Complete Pooling:**
+
+- Use population average
+- Ignores that lakes differ
+- Underpredicts uncertainty
+
+**2. No Pooling:**
+
+- Can't predict! No data for this lake
+- Completely stuck
+
+**3. Partial Pooling (Hierarchical):**
+
+- Use population distribution of lake effects
+- Incorporates uncertainty about new lake
+- **This works!**
+
+
+
+## Predicting for New Groups (Code)
+
+::: {.columns}
+::: {.column}
+**Generate Predictions:**
+```{r}
+# Create data for new lake
+new_lake_data <- data.frame(
+  lake = "Lake_NEW", # Previously unobserved
+  length = seq(10, 40, by = 5)
+)
+
+# Predict allowing new levels
+predictions <- posterior_predict(
+  partial_pool,
+  newdata = new_lake_data,
+  allow_new_levels = TRUE
+)
+
+# Summarize predictions
+pred_summary <- new_lake_data %>%
+  mutate(
+    median = apply(predictions, 2, median),
+    lower = apply(predictions, 2, quantile, 0.05),
+    upper = apply(predictions, 2, quantile, 0.95)
+  )
+
+# Plot
+ggplot(pred_summary, aes(x = length)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.3) +
+  geom_line(aes(y = median)) +
+  labs(title = "Predictions for New Lake", y = "Mercury (µg/g)") +
+  theme_minimal()
+```
+
+:::
+::: {.column}
+**What Happens:**
+
+- Model samples new lake effect from population distribution
+- Wider intervals than for observed lakes (more uncertainty)
+- Uses all available information about population
+
+:::
+:::
+
+
+## Intraclass Correlation Coefficient (ICC) {.smaller}
+
+**What is ICC?**
+
+Proportion of total variance due to grouping structure.
+
+**Formula:**
+```
+ICC = σ²_group / (σ²_group + σ²_residual)
+```
+
+**Interpretation:**
+
+- ICC = 0: Grouping doesn't matter (no clustering)
+- ICC = 0.05: 5% of variance is between groups
+- ICC = 0.50: Half of variance is between groups
+- ICC = 1.0: All variance is between groups
+
+**Practical Meaning:**
+
+- High ICC: Groups are very different, group identity is important
+- Low ICC: Groups are similar, might not need hierarchical model
+- ICC > 0.05: Generally use hierarchical model
+
+
+## Intraclass Correlation Coefficient (ICC) {.smaller}
+
+**In R:**
+```r
+# Calculate ICC
+performance::icc(model)
+
+# Or manually from output
+var_group <- 0.8^2  # SD of group effect
+var_resid <- 0.3^2  # Residual SD
+icc <- var_group / (var_group + var_resid)
+```
+
+
+
+## Variance Partitioning {.smaller}
+
+**Where Does Variation Come From?**
+
+**Example: Multi-Level Environmental Study**
+```
+Total Variation = Region + Site-within-Region + Measurement
+```
+
+**From Model:**
+```
+Random Effects:
+ Groups           Variance  Proportion
+ region           2.5       0.45 (45%)
+ site:region      1.8       0.32 (32%)
+ Residual         1.3       0.23 (23%)
+ Total            5.6
+```
+
+**Interpretation:**
+
+- Most variation (45%) is between regions
+- Site differences account for 32%
+- Within-site variation is 23%
+- **Implications:** Regional factors most important!
+
+**Management Implications:**
+
+- Focus monitoring at regional level
+- Site-specific interventions less important
+- Within-site variation relatively small
+- Invest resources in understanding regional drivers
+
+
+
+## Model Selection and Comparison
+
+**How to Choose Between Models?**
+
+::: {.panel-tabset}
+## Leave-One-Out Cross-Validation (LOO)
+
+```r
+# Compute LOO for each model
+loo1 <- loo(model1)
+loo2 <- loo(model2)
+
+# Compare
+loo_compare(loo1, loo2)
+```
+- ELPD = Expected Log Pointwise Predictive Density
+- Higher ELPD = Better
+- Difference > 2×SE suggests meaningful difference
+
+## WAIC (Watanabe-Akaike IC):
+
+```r
+waic(model1)
+waic(model2)
+```
+- Lower WAIC = Better
+- Similar to LOO but different computation
+
+## Bayes Factor (for nested models)
+```r
+library(bridgesampling)
+bf <- bayes_factor(model1, model2)
+```
+- Ratio of marginal likelihoods
+- BF > 10: Strong evidence for model1
+
+:::
+
+## Model Selection: Practical Considerations {.smaller}
+
+**Don't Rely Only on Metrics!**
+
+**Consider:**
+
+1. **Scientific Plausibility**
+   - Does model make sense?
+   - Consistent with theory?
+
+2. **Interpretability**
+   - Can you explain results?
+   - Simpler is often better
+
+3. **Predictive Performance**
+   - How well does it predict new data?
+   - Check posterior predictive checks
+
+4. **Computational Feasibility**
+   - Does it converge?
+   - Reasonable run time?
+
+5. **Robustness**
+   - Sensitive to priors?
+   - Stable across subsets?
+
+**Best Practice:** Fit multiple reasonable models, compare, report sensitivity
+
+
+
+## Common Pitfalls and Solutions {.smaller}
+
+**1. Convergence Failures**
+
+- **Problem:** Rhat > 1.1, divergent transitions
+- **Solutions:** 
+  - Run more iterations
+  - Reparameterize model
+  - Use stronger priors
+  - Check for multicollinearity
+
+**2. Too Many Random Effects**
+
+- **Problem:** Model doesn't converge, huge uncertainties
+- **Solutions:**
+  - Simplify random effects structure
+  - Need more data per group
+  - Consider some effects as fixed
+
+## Common Pitfalls and Solutions {.smaller}
+
+**3. Complete Separation**
+
+- **Problem:** Perfect prediction in logistic regression
+- **Solutions:**
+  - Use informative priors (Bayesian advantage!)
+  - Combine rare categories
+  - Get more data
+
+**4. Overfitting Random Effects**
+
+- **Problem:** Random effects for groups with 1-2 observations
+- **Solutions:**
+  - Groups need ≥3 observations ideally
+  - Combine small groups
+  - Use stronger priors
+
+
+
+## Reporting Bayesian Hierarchical Models {.smaller}
+
+**Essential Components:**
+
+::: {.columns}
+::: {.column}
+**1. Model Specification**
+
+- Full model equation
+- Distributional assumptions
+- Random effects structure
+
+**2. Prior Choices**
+
+- State all priors
+- Justify choices
+- Report sensitivity analysis
+
+**3. Convergence Diagnostics**
+
+- Rhat for all parameters
+- Effective sample sizes
+- Any convergence issues
+:::
+::: {.column}
+
+**4. Fixed Effects Results**
+
+- Posterior medians and 95% CIs
+- Probability statements where relevant
+- Effect sizes and interpretation
+
+**5. Random Effects**
+
+- Standard deviations with CIs
+- ICC if relevant
+- Interpretation of variance components
+
+**6. Model Comparison**
+
+- LOO or WAIC if comparing models
+- Posterior predictive checks
+
+:::
+::: 
+
+
+## Example Write-Up
+
+**Methods:**
+
+"We fit a Bayesian hierarchical linear model with random intercepts for lakes to account for repeated measures within lakes. The model included fish length as a fixed effect. We used weakly informative priors: Normal(0, 5) for fixed effects and Half-Cauchy(0, 2.5) for variance parameters. We fit the model using `stan_glmer` from the rstanarm package with 4 chains of 2000 iterations each (1000 warmup). Convergence was assessed using Rhat statistics (all < 1.01) and visual inspection of trace plots."
+
+**Results:**
+
+"Fish length had a positive effect on mercury concentration (β = 0.52, 95% CI [0.34, 0.71], P(β > 0) > 0.999), with each additional cm associated with 0.52 µg/g more mercury. Lakes varied substantially in baseline mercury (SD = 0.78, 95% CI [0.53, 1.15]), with the intraclass correlation coefficient indicating that 58% of total variance was attributable to differences between lakes. Posterior predictive checks indicated good model fit (Figure S1)."
+
+
+
+## Advanced Topics: Non-Linear Hierarchical Models
+
+**When Relationships Aren't Linear:**
+
+::: {.columns}
+::: {.column}
+```r
+# Non-linear growth curve
+nl_model <- brm(
+  bf(
+    height ~ a * (1 - exp(-k * age)),
+    a ~ 1 + (1 | species),
+    k ~ 1 + (1 | species),
+    nl = TRUE
+  ),
+  data = growth_data,
+  prior = c(
+    prior(normal(100, 20), nlpar = "a"),
+    prior(normal(0.1, 0.05), nlpar = "k", lb = 0)
+  )
+)
+```
+:::
+::: {.column}
+
+**Applications:**
+
+- Growth curves (von Bertalanffy, logistic)
+- Dose-response relationships
+- Michaelis-Menten kinetics
+- Population dynamics
+
+**Advantages:**
+
+- Mechanistic interpretation
+- Extrapolation based on theory
+- Species/site-specific parameters
+
+:::
+:::
+
+
+## Advanced Topics: Distributional Regression {.smaller}
+
+**Model More Than the Mean:**
+
+::: {.columns}
+::: {.column}
+```r
+# Model both mean AND variance
+dist_model <- brm(
+  bf(
+    mercury ~ length + (1 | lake),
+    sigma ~ length + (1 | lake)
+  ),
+  data = fish_data,
+  family = gaussian()
+)
+```
+:::
+::: {.column}
+
+
+**What This Does:**
+
+- Mean mercury depends on length and lake
+- Variance ALSO depends on length and lake
+- Some lakes more variable than others
+- Variability might increase with length (heteroscedasticity)
+
+**Applications:**
+
+- When variance differs across groups
+- Heteroscedasticity
+- Understanding variability patterns
+- Risk assessment (variance matters!)
+
+:::
+::: 
+
+
+
+## Putting It All Together: Complete Workflow {.smaller}
+
+**Step-by-Step Process:**
+
+::: {.columns}
+::: {.column}
+**1. Identify Structure**
+
+- What are the grouping variables?
+- How are they related (nested, crossed)?
+- What level are predictors measured at?
+
+**2. Specify Model**
+
+- Random intercepts, slopes, or both?
+- Fixed effects of interest
+- Appropriate distribution family
+
+**3. Choose Priors**
+
+- Weakly informative as default
+- Stronger if prior knowledge available
+- Document choices
+:::
+::: {.column}
+
+**4. Fit Model**
+
+- Use rstanarm for simplicity or brms for flexibility
+- Check convergence (Rhat, ESS, traces)
+- Run longer if needed
+
+**5. Check Model**
+
+- Posterior predictive checks
+- Residual diagnostics
+- Prior sensitivity
+
+**6. Interpret and Report**
+
+- Fixed effects with uncertainty
+- Random effects variation
+- Biological meaning
+- Visualizations
+:::
+::: 
+
+
+
+## Complete Workflow Example (Code)
+
+```r
+library(rstanarm)
+library(tidyverse)
+library(bayesplot)
+
+# 1. Explore data structure
+summary(mydata)
+table(mydata$site)  # How many obs per site?
+
+# 2. Fit model
+model <- stan_glmer(
+  response ~ predictor1 + predictor2 + (1 + predictor1 | site),
+  data = mydata,
+  family = gaussian(),
+  chains = 4,
+  iter = 2000,
+  seed = 123
+)
+
+# 3. Check convergence
+summary(model)  # Look at Rhat
+mcmc_trace(model, pars = c("(Intercept)", "predictor1", "predictor2"))
+
+# 4. Posterior predictive check
+pp_check(model, type = "dens_overlay", ndraws = 50)
+
+# 5. Extract results
+fixef(model)
+ranef(model)
+performance::icc(model)
+
+# 6. Visualize
+plot(model)
+mcmc_areas(model, pars = c("predictor1", "predictor2"))
+
+# 7. Predict
+new_data <- expand.grid(
+  predictor1 = seq(min(mydata$predictor1), max(mydata$predictor1), length = 100),
+  predictor2 = mean(mydata$predictor2),
+  site = "Site1"
+)
+predictions <- posterior_epred(model, newdata = new_data)
+```
+
+
+
+## Decision Guide: When to Use What
+
+**Use Standard Regression When:**
+- No clustering or repeated measures
+- All observations truly independent
+- Single level of observation
+
+**Use Hierarchical Model When:**
+- Nested or grouped data structure
+- Repeated measures
+- Unbalanced group sizes
+- Want to generalize to new groups
+- Interested in group-level variation
+
+**Use Random Intercepts When:**
+- Groups differ in baseline/mean
+- Same relationship across groups
+- Most common hierarchical model
+
+**Use Random Slopes When:**
+- Relationship varies by group
+- Sufficient data per group (n ≥ 5-10)
+- Theoretical reason to expect variation
+
+**Use rstanarm When:**
+- Want simple, standard models
+- Getting started with Bayesian
+- Need fast computation
+
+**Use brms When:**
+- Need flexibility
+- Complex random effects
+- Custom distributions
+- Distributional regression
+
+
+
+## Summary: Key Takeaways
+
+**Core Concepts:**
+1. **Clustering matters**: Ignoring structure leads to wrong conclusions
+2. **Partial pooling**: Best of complete and no pooling approaches
+3. **Shrinkage**: Automatic regularization toward population mean
+4. **Information sharing**: Small groups borrow strength from larger groups
+
+**Practical Benefits:**
+- Correct standard errors
+- Better predictions for groups with little data
+- Can predict for new, unobserved groups
+- Explicitly models and estimates sources of variation
+- Handles unbalanced data elegantly
+
+**When to Use:**
+- Nested/grouped/repeated measures data
+- Interest in group-level variation
+- Predictions for new groups
+- Unbalanced sample sizes
+- **Common in environmental science!**
+
+**Bayesian Advantages:**
+- Natural hierarchical framework
+- Handles small samples well
+- Full uncertainty quantification
+- Direct probability statements
+- Flexible and extensible
+
+
+
+## Common Questions
+
+**Q: How many groups/observations per group do I need?**
+- Minimum: ~5-10 groups for stable variance estimates
+- Per group: 2-3 minimum, 5-10 ideal for random slopes
+- Unbalanced is OK! (that's a strength of hierarchical models)
+
+**Q: Random or fixed effects?**
+- Fixed: Specific levels you care about (e.g., specific treatments)
+- Random: Sample from population, want to generalize
+- If unsure: start with random, it's usually safer
+
+**Q: How do I know if I need random slopes?**
+- Theory suggests varying relationships
+- Test with model comparison (LOO/WAIC)
+- Plot data by group—do slopes look different?
+- Need enough data per group
+
+**Q: Do I need to worry about p-values?**
+- No! Use credible intervals and probability statements
+- P(β > 0 | data) is more interpretable than p-value
+- Focus on effect sizes and uncertainty
+
+**Q: How do I deal with convergence problems?**
+- Run more iterations
+- Use informative priors
+- Reparameterize model
+- Check for multicollinearity
+
+
+
+## Additional Resources
+
+**Books:**
+- "Data Analysis Using Regression and Multilevel/Hierarchical Models" - Gelman & Hill
+- "Statistical Rethinking" - McElreath (Bayesian focused)
+- "Bayesian Data Analysis" - Gelman et al. (advanced)
+- "Hierarchical Modeling for Environmental Sciences" - Clark & Gelfand
+
+**Online Resources:**
+- [Stan documentation](https://mc-stan.org)
+- [rstanarm vignettes](https://mc-stan.org/rstanarm/)
+- [brms documentation](https://paul-buerkner.github.io/brms/)
+- [Michael Clark's Mixed Models tutorial](https://m-clark.github.io/mixed-models-with-R/)
+
+**R Packages:**
+- `rstanarm`: Simple Bayesian hierarchical models
+- `brms`: Flexible Bayesian hierarchical models
+- `bayesplot`: Visualization for Bayesian models
+- `tidybayes`: Tidy manipulation of Bayesian output
+- `performance`: Model diagnostics including ICC
+
+**Practice Datasets:**
+- Radon data (rstanarm package)
+- sleepstudy (lme4 package)
+- Environmental datasets in `lterdatasampler`
+
+
+
+## End of Slide Deck
+
+**Next Steps:**
+
+1. Start with simple random intercepts models
+2. Use your own data with grouping structure
+3. Check convergence and model fit carefully
+4. Gradually add complexity (random slopes, predictors)
+5. Compare to non-hierarchical models to see the difference
+6. Practice interpreting variance components
+
+**Key Principles:**
+- Respect the structure in your data
+- Partial pooling is usually the right answer
+- Bayesian framework is natural for hierarchical models
+- Always check convergence and model fit
+- Visualize random effects to understand patterns
+- Report uncertainty honestly
+
+**Remember:**
+- Hierarchical models are appropriate for most environmental data
+- They provide better estimates and correct inference
+- rstanarm and brms make fitting these models straightforward
+- The hardest part is understanding the concept, not the code!
+
+**Good luck with your hierarchical modeling!**
