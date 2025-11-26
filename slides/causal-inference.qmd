@@ -1,0 +1,405 @@
+---
+title: "Introduction to Causal Inference"
+---
+
+## Goals for today
+
+- Understand **why** causation matters, contrasted with correlation
+- Learn the potential outcomes (counterfactual) framework
+- See how confounders can mislead us—and how DAGs help
+- Work through practical examples in {{< fa brands r-project >}}
+- Apply propensity scores, matching, and weighting to real questions
+
+---
+
+## Why does causation matter? {.smaller}
+
+We face three core challenges in observational data:
+
+**Example 1: Does democracy increase government spending?**
+
+- Observation: Democracies spend more on welfare
+- Confounder: Wealthier countries are both more democratic and spend more
+- Without causal reasoning: We misattribute spending to democracy
+
+**Example 2: Do campaign ads change vote choice?**
+
+- Observation: Voters who see ads support the candidate more
+- Selection: Supporters self-select into watching the campaign's ads
+- Without causal reasoning: We overestimate ad effectiveness
+
+**Example 3: Does police presence reduce crime?**
+
+- Observation: High-crime areas have more police
+- Reverse causation: Police are *sent to* high-crime areas
+- Without causal reasoning: We might defund police in places that need them most
+
+---
+
+## Correlation ≠ Causation (the usual suspects) {.smaller}
+
+**Confounding**: A third variable X influences both treatment A and outcome Y
+
+- Example: Education → income and health (health isn't caused by income alone)
+
+**Reverse causation**: Y causes A, not the other way around
+
+- Example: Does crime cause policing, or policing cause crime?
+
+**Selection bias**: Non-random assignment to treatment
+
+- Example: Voters who attend rallies already support the candidate
+
+**Measurement error**: Imperfect proxies for what we care about
+
+- Example: Survey responses vs. actual behavior
+
+**Bias in data collection**: Systematic differences in how data is recorded
+
+- Example: The 1948 "Dewey defeats Truman" polls (telephone sampling favored wealthy Dewey supporters)
+
+---
+
+## The counterfactual framework
+
+For each unit (person, district, country), imagine two possible worlds:
+
+- **Y(1)**: Outcome if they received treatment
+- **Y(0)**: Outcome if they did not receive treatment
+
+The **individual causal effect** for unit i:
+$$\tau_i = Y_i(1) - Y_i(0)$$
+
+(Unobservable: we only see one outcome per unit)
+
+---
+
+## The fundamental problem of causal inference
+
+We observe either Y(1) or Y(0), but never both for the same unit.
+
+| Unit | A | Y(0) | Y(1) | Observed Y | Effect |
+|------|---|------|------|------------|--------|
+| 1    | 1 | ?    | 10   | 10         | ? |
+| 2    | 0 | 5    | ?    | 5          | ? |
+
+**Solution**: Use aggregation and assumptions to estimate average effects instead of individual effects.
+
+---
+
+## Average Treatment Effects (ATE)
+
+We want to estimate:
+
+$$\text{ATE} = \mathbb{E}[Y(1) - Y(0)] = \mathbb{E}[Y(1)] - \mathbb{E}[Y(0)]$$
+
+Related estimands:
+
+- **ATT** (Average Treatment Effect on Treated): $\mathbb{E}[Y(1) - Y(0) | A=1]$  
+  Effect among those who actually received treatment
+  
+- **CATE** (Conditional ATE): $\mathbb{E}[Y(1) - Y(0) | X=x]$  
+  Effect for a specific subgroup (e.g., swing voters, rural districts)
+
+In political science, we often care most about **ATE** for universal policies or **ATT** for targeted interventions.
+
+---
+
+## Three core identification assumptions
+
+To estimate causal effects from observational data, we must assume:
+
+**1. Consistency**  
+The observed outcome equals the potential outcome under the treatment actually received.
+
+- If unit i got A=1, then $Y_i = Y_i(1)$
+
+**2. Positivity (overlap)**  
+Every unit has a non-zero probability of receiving each treatment level.
+
+- $0 < P(A=1 | X=x) < 1$ for all relevant x
+- If some groups never get treated, we can't learn their treatment effect
+
+**3. Conditional Exchangeability**  
+After controlling for measured confounders X, treatment is as good as random.
+
+- $(Y(1), Y(0)) \perp A | X$ (no unmeasured confounding)
+- This is the hardest assumption—DAGs help us think through it
+
+---
+
+## Directed Acyclic Graphs (DAGs)
+
+A DAG shows causal relationships between variables. We use them to reason about confounding and identify adjustment sets.
+
+```{r}
+#| label: dag-intro
+#| layout-ncol: 2
+library(dagitty)
+library(ggdag)
+library(tidyverse)
+
+# Simple confounding: X confounds the A → Y relationship
+g_conf <- dagitty('dag { X -> A; X -> Y; A -> Y }')
+ggdag(g_conf) + 
+  ggtitle('Confounding:\nX → A and X → Y') + 
+  theme_void() + 
+  theme(plot.title = element_text(size=14, hjust=0.5))
+
+# Mediator: M is the mechanism through which A affects Y
+g_med <- dagitty('dag { A -> M -> Y; A -> Y }')
+ggdag(g_med) + 
+  ggtitle('Mediation:\nA → M → Y') + 
+  theme_void() + 
+  theme(plot.title = element_text(size=14, hjust=0.5))
+```
+
+**Rule**: Adjustment sets block backdoor paths while leaving front-door paths open.
+
+---
+
+## Backdoor criterion
+
+A **backdoor path** from A to Y starts with an arrow pointing *into* A:
+
+$$A \leftarrow \cdots \rightarrow Y$$
+
+To estimate the causal effect of A on Y, we must **block all backdoor paths**.
+
+```{r}
+#| label: backdoor-example
+g_backdoor <- dagitty('dag { A <- X -> Y; A -> Y }')
+ggdag(g_backdoor) + 
+  ggtitle('Backdoor path: A ← X → Y\n(confounding)') + 
+  theme_void() + 
+  theme(plot.title = element_text(size=14, hjust=0.5))
+
+# Find minimal adjustment set
+adjustmentSets(g_backdoor, exposure = 'A', outcome = 'Y')
+```
+
+By conditioning on X, we block the backdoor path and isolate the causal effect.
+
+---
+
+## What is a propensity score?
+
+The **propensity score** is the probability of receiving treatment given observed covariates:
+
+$$e(X) = P(A=1 | X)$$
+
+**Key insight**: Units with the same propensity score are balanced on X in expectation.  
+Comparing treated and control units with similar scores gives an unbiased estimate of the treatment effect.
+
+**Three ways to use propensity scores**:
+
+1. **Matching**: Pair treated and control units with similar scores
+2. **Weighting (IPTW)**: Weight each unit inversely by score to create a pseudo-population where treatment is independent of X
+3. **Stratification**: Compare treated and control within score "bins"
+
+**Political example**: Do swing voters (same propensity to support either candidate) change their vote based on negative ads?
+
+---
+
+## Simulation example: Setup
+
+We'll simulate a dataset where treatment assignment depends on covariates and the treatment effect varies across units (heterogeneity).
+
+```{r}
+#| label: sim-data
+set.seed(2025)
+N <- 2000
+X1 <- rnorm(N)           # Continuous covariate (e.g., ideology)
+X2 <- rbinom(N, 1, 0.4)  # Binary covariate (e.g., urban vs. rural)
+
+# True heterogeneous treatment effect: τ(x) = 1 + 0.5 * X1
+tau <- 1 + 0.5 * X1
+
+# Propensity score depends on X1 and X2
+ps <- plogis(-0.2 + 0.8 * X1 - 0.5 * X2)
+A <- rbinom(N, 1, ps)
+
+# Potential outcomes
+Y0 <- 2 + 0.5 * X1 - 0.3 * X2 + rnorm(N, 0, 1)
+Y1 <- Y0 + tau
+
+# Observed outcome
+Y <- ifelse(A == 1, Y1, Y0)
+
+df <- tibble(Y, A, X1, X2, ps, tau)
+head(df, 10)
+```
+
+---
+
+## Naive estimate (biased)
+
+Simply comparing treated vs. control ignores confounding:
+
+```{r}
+#| label: naive-estimate
+naive_ate <- df |>
+  group_by(A) |>
+  summarize(mean_Y = mean(Y), .groups = 'drop') |>
+  summarize(naive_ATE = diff(mean_Y))
+
+naive_ate
+```
+
+This is biased because treated units have higher X1 on average, which independently increases Y.
+
+---
+
+## Regression adjustment
+
+Control for confounders in an outcome model:
+
+```{r}
+#| label: regression-adjustment
+reg_mod <- lm(Y ~ A + X1 + X2, data = df)
+
+broom::tidy(reg_mod) |>
+  filter(term == 'A') |>
+  select(term, estimate, std.error, p.value)
+```
+
+This isolates the effect of A after adjusting for X1 and X2.
+
+---
+
+## Inverse Probability of Treatment Weighting (IPTW)
+
+Estimate propensity scores, then weight each unit by the inverse of their probability of receiving their observed treatment:
+
+```{r}
+#| label: iptw
+# Estimate propensity score
+ps_mod <- glm(A ~ X1 + X2, family = binomial(), data = df)
+
+df <- df |>
+  mutate(
+    ps_hat = predict(ps_mod, type = 'response'),
+    # Weight: 1/P(A=1) if treated, 1/P(A=0) if control
+    w = ifelse(A == 1, 1 / ps_hat, 1 / (1 - ps_hat))
+  )
+
+# Weighted outcome regression
+iptw_mod <- lm(Y ~ A, weights = w, data = df)
+
+broom::tidy(iptw_mod) |>
+  filter(term == 'A') |>
+  select(term, estimate, std.error, p.value)
+```
+
+This creates a pseudo-population where treatment is independent of X.
+
+---
+
+## Propensity Score Matching
+
+Match treated units to control units with similar propensity scores:
+
+```{r}
+#| label: matching
+library(MatchIt)
+
+# 1:1 nearest-neighbor matching on propensity score
+m_out <- matchit(A ~ X1 + X2, data = df, method = 'nearest', ratio = 1)
+
+# Extract matched sample
+matched <- match.data(m_out)
+
+# Estimate ATE on matched sample
+matched_ate <- matched |>
+  group_by(A) |>
+  summarize(mean_Y = mean(Y), .groups = 'drop') |>
+  summarize(matched_ATE = diff(mean_Y))
+
+matched_ate
+```
+
+Matching directly creates a balanced sample where treated and control are comparable.
+
+---
+
+## Heterogeneous Treatment Effects (HTE)
+
+Treatment effects may vary across subgroups. A simple approach: include interactions.
+
+```{r}
+#| label: hte-interaction
+# Outcome model with interaction
+int_mod <- lm(Y ~ A * X1 + X2, data = df)
+
+# CATE at different X1 values
+cate_fn <- function(x_val) {
+  coefs <- coef(int_mod)
+  # CATE(x) = β_A + β_(A:X1) * x
+  ate_x <- coefs['A'] + coefs['A:X1'] * x_val
+  tibble(X1_value = x_val, CATE = ate_x)
+}
+
+bind_rows(
+  cate_fn(-1),  # Low ideology
+  cate_fn(0),   # Moderate
+  cate_fn(1)    # High ideology
+)
+```
+
+Treatment effects are stronger for high-X1 units (effect of 1.5 vs. 0.5).
+
+---
+
+## Summary: When to use each method
+
+| Method | When to use | Pros | Cons |
+|--------|------------|------|------|
+| **Regression** | Few confounders, linear effects | Simple, interpretable | Assumes linearity; vulnerable to model misspecification |
+| **IPTW** | Moderate confounding | Flexible; creates interpretable pseudo-population | Weights can be extreme; requires positivity |
+| **Matching** | Need transparent comparisons | Creates balanced sample; easy to diagnose | May discard data; harder with many confounders |
+| **HTE methods** | Interested in subgroups | Answers heterogeneous effects | Requires more data; multiple testing concerns |
+
+---
+
+## Causal inference in political science: Key applications
+
+1. **Policy evaluation**: Did a law reduce unemployment, or was it passed during recovery?
+
+2. **Campaign effects**: Do campaign ads change votes, or do they target supporters?
+
+3. **Representation**: Does descriptive representation (diversity) cause better policy outcomes?
+
+4. **International relations**: Does trade reduce conflict, or do peaceful countries trade more?
+
+All require causal thinking + DAG reasoning + careful estimation.
+
+---
+
+## Key takeaways
+
+✓ Correlation ≠ causation. Confounding, selection bias, and reverse causation are everywhere.
+
+✓ **Counterfactuals** let us formalize what we mean by "causal effect."
+
+✓ **DAGs** help us reason about confounding and decide what to adjust for.
+
+✓ **Propensity scores** create comparable groups and estimate treatment effects.
+
+✓ **Heterogeneous effects** matter: treatment doesn't affect everyone the same way.
+
+✓ No method is perfect. Always report robustness checks and acknowledge assumptions.
+
+---
+
+## References & Further Reading
+
+- Hernán, M. A., & Robins, J. M. (2020). *Causal Inference: What If*. Chapman and Hall/CRC.  
+  [Free online at: www.hsph.harvard.edu/miguel-hernan/causal-inference-book/](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
+
+- Imbens, G. W., & Rubin, D. B. (2015). *Causal Inference in Statistics, Social, and Biomedical Sciences*. Cambridge University Press.
+
+- Pearl, J. (2009). *Causality: Models, Reasoning and Inference*. Cambridge University Press.
+
+- Cunningham, S. (2021). *Causal Inference: The Mixtape*. [Free online at: mixtape.scunning.com](https://mixtape.scunning.com)
+
+- Wickham, H., & Grolemund, G. (2017). *R for Data Science*. O'Reilly Media.
