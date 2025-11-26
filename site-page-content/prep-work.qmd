@@ -125,3 +125,17 @@ We will be using the [**infer**](https://infer.netlify.app/) package for statist
 ## References
 
 - [Bayesian Statistics and Modeling](https://sites.stat.columbia.edu/gelman/research/published/43586_2020_1_Author.pdf) by van de Schoot, et al, 2021
+
+# Week 13: December 2
+
+## Reading
+
+1. [Foundations and Future Directions for Causal Inference in Ecological Research](https://onlinelibrary.wiley.com/doi/epdf/10.1111/ele.70053?msockid=1dd291b782ae6f0d0a39847583036e66) by Siegel and Dee (2024)
+1. [Causal Inference is not a Statistics Problem](https://www.tandfonline.com/doi/full/10.1080/26939169.2023.2276446) by McGowan, Gerke, and Barrett (2024)
+1. [Causality - A Political Science Guide](https://politicalscienceguide.com/research/causality/) by Michael Nelson
+
+## References
+
+- [Causal Inference in R](https://www.r-causal.org/) by Barrett, McGowan and Gerke
+- [Causal Inference: What If](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) (the book)
+- [EBIO 5460: Causal Inference in Ecology](https://katherinesiegel.github.io/EBIOcausalinference/)
