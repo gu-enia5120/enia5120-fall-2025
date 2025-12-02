@@ -1,7 +1,7 @@
 project:
   type: website
-  pre-render: python scripts/pre.py slides
-  post-render: python scripts/post.py slides
+  # pre-render: python scripts/pre.py slides
+  # post-render: python scripts/post.py slides
 
   render:
     - "*.qmd"
@@ -129,8 +129,8 @@ website:
             target: _blank
           - href: slides/bayesian-hierarchical.qmd
             target: _blank
-          #          - href: slides/week-13.qmd
-          #            target: _blank
+          - href: slides/week-13.qmd
+            target: _blank
           #          - href: slides/Wrap-up.pdf
           #            text: "Wrap-up"
           #            target: _blank
@@ -144,7 +144,7 @@ website:
           - href: assignments/week-02.qmd
           - href: assignments/week-03.qmd
           - href: assignments/week-04.qmd
-          # - href: assignments/assignment-05.qmd
+          - href: assignments/week-05.qmd
           # - href: assignments/assignment-06.qmd
           # - href: assignments/assignment-07.qmd
           # - href: assignments/assignment-08.qmd

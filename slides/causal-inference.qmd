@@ -58,7 +58,20 @@ We face three core challenges in observational data:
 
 - Example: The 1948 "Dewey defeats Truman" polls (telephone sampling favored wealthy Dewey supporters)
 
+
+## Types of bias
+
+| Bias Type          | Description                                      | Example                                         |
+|--------------------|--------------------------------------------------|-------------------------------------------------|
+| Confounding        | A third variable affects both A and Y           | Wealth confounds democracy and spending          |
+| Reverse Causation  | Y causes A instead of A causing Y                   | Crime rates influence police deployment          |
+| Selection Bias     | Non-random assignment to treatment                     | Supporters self-select into watching ads         |
+| Measurement Error  | Imperfect measurement of variables                     | Survey responses vs. actual behavior             |
+| Data Collection Bias | Systematic differences in data recording                | Telephone polls missing non-telephone households |
 ---
+
+
+# Counterfactuals & Potential Outcomes
 
 ## The counterfactual framework
 
