@@ -1349,11 +1349,17 @@
     },
     "ggdag": {
       "Package": "ggdag",
-      "Version": "0.2.13",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "0.2.13.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "r-causal",
+      "RemoteRepo": "ggdag",
+      "RemoteRef": "main",
+      "RemoteSha": "3a93a5e395c03fe8d80f93c92d830b2abc774aa2",
       "Requirements": [
         "R",
+        "cli",
         "dagitty",
         "dplyr",
         "forcats",
@@ -1361,6 +1367,7 @@
         "ggraph",
         "ggrepel",
         "igraph",
+        "lifecycle",
         "magrittr",
         "pillar",
         "purrr",
@@ -1369,7 +1376,7 @@
         "tibble",
         "tidygraph"
       ],
-      "Hash": "c923747c35d5aa953cc6d2e7cd7bfb20"
+      "Hash": "a1543eac0c86b8321fa63913a8fd9a62"
     },
     "ggdist": {
       "Package": "ggdist",
