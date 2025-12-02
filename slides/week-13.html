@@ -1,0 +1,2315 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb1cd4028f63a369ab283e072cb7d572.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
+
+  <title>ENIA 5120 – Lecture 13</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-857c1e38c7f8756f363ea65e7ad620aa.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Lecture 13</h1>
+  <p class="subtitle">Design of experiments and causality</p>
+
+<div class="quarto-title-authors">
+</div>
+
+</section>
+<section id="goals-for-today" class="slide level2">
+<h2>Goals for today</h2>
+<ul>
+<li>Objectives of statistical analyses</li>
+<li>Design of experiments and how we collect data</li>
+<li>Causal reasoning and criteria</li>
+<li>How other variables can interfere: confounding, mediation, moderation</li>
+<li>Randomized controlled trials (RCTs)</li>
+</ul>
+</section>
+<section id="thinking-about-how-we-collect-data" class="slide level2">
+<h2>Thinking about <span class="fatinline"><strong>how</strong></span> we collect data</h2>
+<ul>
+<li>The way that the data is collected can affect the external validity of the model, i.e., how well the model can generalize to other data sets.</li>
+<li>We have a innate idea that a good training dataset is, in some ways, representative of the population we want to run future predictions, in order to have a useful predictive model.</li>
+<li>The way we collect the data can be important, and can certainly have downstream implications in how we analyze data and how we interpret our results.</li>
+</ul>
+</section>
+<section id="data-can-be-expensive" class="slide level2">
+<h2>Data can be expensive!!</h2>
+<ul>
+<li>In many cases, collecting data can be expensive and time-consuming.</li>
+<li>For example, clinical trials for new drugs can take years and cost millions of dollars.</li>
+<li>Therefore, it is crucial to design experiments carefully to maximize the information gained from the data collected</li>
+</ul>
+<div class="fragment">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Data collection is expensive in many fields, though it doesn’t seem so if you follow the AI hype. ML often assumes we have tons of data and so can do as well as possible with data-hungry methods. But when you have data limitations, you have to be more careful.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pharmaceutical-clinical-trials" class="slide level2">
+<h2>Pharmaceutical clinical trials</h2>
+<p>Phase III clinical trials are funded by pharmaceutical companies to provide definitive evidence of a drug’s effectiveness. A phase III trial can cost <span class="fatinline">multiple billions of dollars</span>, for testing the drug on perhaps several hundred subjects.</p>
+<p>Given the costs per patient, pharmaceutical companies have a strong interest in <span class="fatinline">getting the strongest results possible from the fewest numbers of participants</span>, and a lot of effort goes into designing the trial so that the “treatment effect” can be robustly ascertained, since this is the basis of drug approvals. The trial design goes through multiple iterations within the company, and then needs agreeement from the regulatory agencies like the FDA and EMA, before the trial can go to the field and the first subject enrolled.</p>
+<p>With billions of dollars on the line, finding the right patients and the right study design are imperative</p>
+</section>
+<section id="statistical-efficiency" class="slide level2">
+<h2>Statistical efficiency</h2>
+<ul>
+<li>Statistical efficiency refers to the ability of a statistical method to make the most accurate inferences about a population using the least amount of data.</li>
+<li>A statistically efficient method can achieve the same level of accuracy with fewer data points compared to a less efficient method.</li>
+<li>Efficiency is often measured in terms of the variance of an estimator; a more efficient estimator has a lower variance.</li>
+</ul>
+<p>Better experimental design can lead to more statistically efficient estimates, allowing researchers to draw more reliable conclusions from their data.</p>
+<div class="fragment">
+<hr>
+<div class="smaller">
+<p>Recall we discussed that most statistical tests look at the signal-to-noise ratio</p>
+<p><span class="math display">\[
+\text{SNR} = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Effect Size}}{\text{Variability}}
+\]</span></p>
+<p>The signal is usually a given. What we’d like to do is <span class="heatinline">reduce the variability (noise) in our estimates</span>, so that we can have a better chance of seeing the signal rise above the noise.</p>
+</div>
+</div>
+</section>
+<section id="what-are-most-studies-trying-to-do" class="slide level2">
+<h2>What are most studies trying to do?</h2>
+<p>Most studies are done to to see if an intervention of interest has an effect on some result of interest.</p>
+<p><strong>Some Examples</strong></p>
+<ol type="1">
+<li>Seeing if a new fertilizer can help improve yields of wheat (<a href="https://icl-growingsolutions.com/en-us/agriculture/trials/winter-wheat-trial-with-polysulphate-in-the-uk/">link</a>)</li>
+<li>Seeing if a non-narcotic drug can help reduce pain post-surgery (<a href="https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2020-00497">link</a>)</li>
+<li>Seeing if a particular advertisement can improve sales of a product (<a href="https://www.hotjar.com/ab-testing/examples/">link</a>)</li>
+<li>Seeing if a GLP-1 inhibitor can help reduce a person’s weight (<a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2206038">link</a>)</li>
+</ol>
+</section>
+<section id="how-to-collect-data-to-get-robust-results" class="slide level2">
+<h2>How to collect data to get robust results?</h2>
+<p>There are several questions we might want to think about when we collect data for finding a result (fairly!!).</p>
+<ol type="1">
+<li>Is the data we’re looking at representative of the population that we are interested in?</li>
+<li>Can we make fair comparisons within the data?</li>
+<li>Can we see robust results using less data?</li>
+<li>Is the data we’re using biased in any way?</li>
+</ol>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Food for thought</strong></p>
+</div>
+<div class="callout-content">
+<p>What other questions might we address that might guide our data collection?</p>
+</div>
+</div>
+</div>
+</section>
+<section>
+<section id="biases" class="title-slide slide level1 center">
+<h1>Biases</h1>
+
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="r-fit-text">
+<p>The main point here is fairness.</p>
+</div>
+<p>We want results that are not subject to intentional and unintentional biases.</p>
+</section>
+<section id="common-types-of-biases" class="slide level2">
+<h2>Common types of biases</h2>
+<h3 id="observer-bias">Observer bias</h3>
+<p>This can arise when there are systematic differences between true and recorded values, or this difference depends upon who is collecting the data. This can happen if, for example, a doctor knows the treatment a patient received. Another example might be in how a doctor measures pain levels depending on the race or ethnicity of a patient.</p>
+<h3 id="selection-bias">Selection bias</h3>
+<p>This can arise when how subjects are selected can affect the final inference. For example, if you assign the first 100 patients who come to a hospital on a Friday to one group and a second 100 patients who come to the hospital on Monday to another group, there may be intrinsic differences that may explain any differences you might see that are not related to treatment.</p>
+</section>
+<section id="common-types-of-biases-contd." class="slide level2">
+<h2>Common types of biases (contd.)</h2>
+<h3 id="confirmation-bias">Confirmation bias</h3>
+<p>This is the tendency to interpret information to support a pre-existing idea or notion</p>
+<h3 id="response-bias">Response bias</h3>
+<p>This occurs when the answers given by a patient are influenced by extraneous factors</p>
+<h3 id="non-response-bias">Non-response bias</h3>
+<p>This is seen when there are differences in characteristics of individuals who respond and don’t respond to a survey. This is particularly evident in ratings of products available at an online retailer, for example.</p>
+<h3 id="recall-bias">Recall bias</h3>
+<p>This occurs in retrospective studies where subjects recall their experience depending on their condition. This issue is rampant in nutritional epidemiology where subjects are asked to recall everything they ate in the last week (a 7-day food frequency questionnaire). A simpler example might be where people diagnosed with lung cancer overestimate their tobacco use while healthy people underestimate it.</p>
+</section></section>
+<section>
+<section id="principles-of-experimental-design" class="title-slide slide level1 center">
+<h1>Principles of experimental design</h1>
+
+</section>
+<section id="randomization" class="slide level2">
+<h2>Randomization</h2>
+<ul>
+<li>Randomly assign subjects to groups to minimize selection bias.</li>
+<li>The act of randomization creates a natural balance between groups on average and should minimize biases and confounding</li>
+</ul>
+<div class="fragment">
+<p>Randomization tries to ensure that each subject has an equal chance of being assigned to any group, which helps to create comparable groups and allows for valid statistical inferences.</p>
+<ul>
+<li>It can help <span class="fatinline">minimize the effect of confounding variables</span> by evenly distributing them across groups. This helps to isolate the effect of the treatment or intervention being studied.
+<ul>
+<li>This helps minimize the effect of measured <strong>and unmeasured</strong> confounders. <span class="fragment highlight-red">This is really important!!</span></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="local-control" class="slide level2">
+<h2>Local control</h2>
+<ul>
+<li>Control for effects due to factors other than ones of primary interest.
+<ul>
+<li>This can be done be <strong>blocking</strong> and <strong>stratification</strong>, which are both ways of allocating treatment randomly within relatively homogeneous sub-populations.</li>
+<li>For example, if there are differences in soil fertility across a large field, you want to create smaller blocks where the fertility is relatively constant, and allocate treatments within those blocks.</li>
+</ul></li>
+</ul>
+<p>The basic idea is to create relatively homogeneous groups so that the effect of the treatment can be more easily ascertained.</p>
+<p>In practical terms, local control shows up in models as including covariates that help explain variability in the outcome that are not directly related to the treatment of interest.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Difference between blocking and stratification:</strong></p>
+</div>
+<div class="callout-content">
+<p>Blocking is done before randomization, while stratification is done after randomization.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="replication" class="slide level2">
+<h2>Replication</h2>
+<p>Repeat the experiment under identical conditions on multiple subjects.</p>
+<p>The more subjects you include, the lower the variability of your estimates.</p>
+<p>You can think of this as, <strong>the more subjects that exhibit similar behavior, the more confident you are of the results</strong>.</p>
+</section>
+<section id="lets-relate-this-back" class="slide level2">
+<h2>Let’s relate this back</h2>
+<p>Recall we discussed that most statistical tests look at the signal-to-noise ratio</p>
+<p><span class="math display">\[
+\text{SNR} = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Effect Size}}{\text{Variability}}
+\]</span></p>
+<p>For example, the t-statistic is given by</p>
+<p><span class="math display">\[t = \frac{\bar{X}_1 - \bar{X}_2}{SE}\]</span></p>
+<p>Statistical inference can be considered as a way of seeing if there is sufficient signal in the data to overcome the noise in the data, so the signal rises above the noise, so to speak.</p>
+<p>So, to find a statistical difference we need to have (a) <span class="fatinline">the signal to be larger</span>, or (b) <span class="saltinline">the noise to be smaller</span>.</p>
+</section>
+<section id="better-design-more-signal-less-noise-more-efficiency" class="slide level2">
+<h2>Better design = more signal + less noise = more efficiency</h2>
+<p>If we can find ways to reduce variability then we have a chance of finding something more than just massive effects</p>
+<ul>
+<li>What randomization gives us is minimizing bias, so our estimates are more likely to be unbiased.</li>
+<li>What local control and replication give us are means to look at estimates within subgroups with lower variance, which in turn reduces the standard error of the estimate.</li>
+</ul>
+<p>So we can be clever <span class="saltinline">with local control and replication</span>, i.e., appropriate stratification and sufficient number of samples, we can reduce the variability of our estimate and so get more accurate estimates; <span class="fatinline">the randomization piece tries to ensure that the estimates are on target</span>.</p>
+<p>For problems of statistical association and causality, we still can use models that have good bias-variance properties, but the study design can help further to get better estimates, and we can account for the particulars of the study design in the models</p>
+</section></section>
+<section>
+<section id="types-of-study-designs" class="title-slide slide level1 center">
+<h1>Types of study designs</h1>
+
+</section>
+<section id="observational-studies" class="slide level2">
+<h2>Observational studies</h2>
+<p>Observational studies are often the first look into a problem, to see if an intervention might be needed. They generally fall under the umbrella of <strong>association studies</strong></p>
+<ul>
+<li>Observational studies are just that – data is collected as it is observed.</li>
+<li>The interest is not in seeing particular differences between groups, but in seeing a snapshot of reality that may be indicative of existing differences.</li>
+<li>The purpose is to observe, not treat, and so what we’re looking for are <strong>associations or correlations</strong> between variables that we observe</li>
+</ul>
+<div class="fragment">
+<p>A lot of pilot studies, or surveys, are observational in nature. They can be useful to see if there are any interesting patterns that might warrant further investigation.</p>
+</div>
+</section>
+<section id="case-control-studies" class="slide level2">
+<h2>Case-control studies</h2>
+<ul>
+<li>A common type of observational study is a case-control study, often used in epidemiology to identify factors that may contribute to a medical condition by comparing subjects who have that condition (the “cases”) with patients who do not have the condition (the “controls”).</li>
+<li>These are retrospective studies since we are looking back from a time when a disease was caught to see if some exposure or experience was more likely (associated) among people with the disease compared to people without the disease.</li>
+</ul>
+</section>
+<section id="case-control-studies-contd." class="slide level2">
+<h2>Case-control studies (contd.)</h2>
+<ul>
+<li>Case-control studies are a great design if you’re invesigating an outcome that is <strong>rare</strong>.
+<ul>
+<li>You start by finding people who already have the disease, match them with comparable people (think age, sex, ethnicity) who don’t have the disease (controls), and then see how often the exposure of interest happened in each group.</li>
+</ul></li>
+<li>Study participants are often selected by random sampling from the population subgroups of cases and controls</li>
+<li>If we’re including matched controls (a form of local control by having similar age, sex, race, for example), you randomly select, for each case, 1 or more matched controls</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The main hurdle in creating good case-control studies is in getting a good group of controls that are comparable to the cases and don’t bias your results. Wacholder, et al wrote a <a href="https://pubmed.ncbi.nlm.nih.gov/1595688/">series</a> <a href="https://pubmed.ncbi.nlm.nih.gov/1595689/">of</a> <a href="https://pubmed.ncbi.nlm.nih.gov/1595690/">papers</a> on this subject which form the basis of how controls are selected today.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="case-control-studies-contd.-1" class="slide level2">
+<h2>Case-control studies (contd.)</h2>
+<ol type="1">
+<li>You cannot directly estimate incidence or prevalence of a disease from a case-control study, since you are selecting the number of cases and controls, and they have an artificial ratio.</li>
+<li>You cannot ascribe causality from a case-control study, since you are only looking at associations.</li>
+<li>Associations are usually measured using odds ratios (OR), which is the odds of exposure among cases divided by the odds of exposure among controls.</li>
+<li>Case-control studies can be prone to biases like recall bias and selection bias, which can affect the validity of the findings.</li>
+</ol>
+<p>Case-control studies are a more structured form of an observational study compared to just making observations, and so inferences are often stronger.</p>
+</section>
+<section id="cohort-studies" class="slide level2">
+<h2>Cohort studies</h2>
+<ul>
+<li>Cohorts, as the name suggests, are groups of individuals collected at a point in time and followed forward in time.</li>
+<li>For representativeness, cohorts are selected by random sampling from a particular study population</li>
+<li>Baseline measurements are taken and then the individuals are followed to see what develops over time.</li>
+<li>Cohort studies can be prospective (looking forward) or retrospective (looking back at existing data).</li>
+<li>These studies enable us to understand the natural history and evolution of phenomena over time.</li>
+</ul>
+</section>
+<section id="cohort-studies-contd." class="slide level2">
+<h2>Cohort studies (contd.)</h2>
+<ul>
+<li>Cohort studies are, by design, much longer in duration, since that time is required for the outcomes of interest to be observed</li>
+<li>They are particularly useful for studying rare <strong>exposures</strong>, since you can select a cohort based on exposure status and then follow them to see what outcomes develop.</li>
+<li>Some limited causality can be inferred from cohort studies, since you are looking forward in time and can see if exposure precedes outcome.</li>
+</ul>
+</section>
+<section id="sample-surveys" class="slide level2">
+<h2>Sample surveys</h2>
+<ul>
+<li>Sample surveys are a type of observational study where data is collected from a subset (sample) of a larger population to make inferences about the entire population.</li>
+<li>Surveys can be cross-sectional (data collected at a single point in time) or longitudinal (data collected over multiple time points).</li>
+<li>Surveys can be conducted using various methods, including face-to-face interviews, telephone interviews, online questionnaires, and mailed questionnaires.</li>
+<li>The design of the survey, including question wording, order, and response options, can significantly impact the quality and reliability of the data collected</li>
+<li>Sampling methods can include simple random sampling, stratified sampling, cluster sampling, and systematic sampling, each with its own advantages and disadvantages.</li>
+</ul>
+</section>
+<section id="sample-surveys-contd." class="slide level2">
+<h2>Sample surveys (contd.)</h2>
+<ul>
+<li>Sample surveys are widely used in various fields, including social sciences, market research, public health, and political polling.</li>
+<li>They provide valuable insights into population characteristics, behaviors, attitudes, and opinions, which can inform policy decisions, marketing strategies, and academic research.</li>
+<li>However, surveys can be subject to various biases, including non-response bias, sampling bias, and measurement error, which can affect the validity of the findings.</li>
+<li>Proper survey design, sampling techniques, and data analysis methods are crucial to ensure the reliability and validity of survey results.</li>
+</ul>
+<p>The American Community Survey (ACS) is a large survey carried out by the US Census Bureau to collect detailed demographic, social, economic, and housing information about the US population. The ACS is conducted annually and samples approximately 3.5 million households each year (so about 1% of the population). Most countries have similar large-scale surveys to collect data about their populations between censuses.</p>
+</section>
+<section id="randomized-controlled-trials-rcts" class="slide level2">
+<h2>Randomized controlled trials (RCTs)</h2>
+<ul>
+<li>Randomized controlled studies are the gold standard for studies to ascertain causal relationships.</li>
+<li>They are usually used to evaluate interventions and how they affect an outcome.</li>
+<li>They use all the principles of good study design to allow definitive conclusions to be made. RCTs randomize individuals to groups, with each such group getting a different intervention.</li>
+<li>The randomization allows us to balance measured and unmeasured confounders and minimize systematic biases, and allows us to attribute differences in outcomes between groups to differences in treatments.</li>
+</ul>
+</section></section>
+<section>
+<section id="causality-and-causal-inference" class="title-slide slide level1 center">
+<h1>Causality and causal inference</h1>
+
+</section>
+<section id="what-are-we-trying-to-do" class="slide level2">
+<h2>What are we trying to do?</h2>
+<p>We are primarily interested in causal statements and questions of the nature</p>
+<ul>
+<li>Smoking causes lung cancer</li>
+<li>How effective is a treatment in prolonging life among lung cancer patients?</li>
+<li>What is the healthcare cost attributable to the increasing prevalence of obesity?</li>
+<li>Can scheduling records and hospital interactions prove someone is guilty of medical malpractice?</li>
+<li>Can a drug that targets the activity of a particular biological functional pathway cause a disease to be cured by the drug?</li>
+</ul>
+<p>Data, particular Big Data, appear to be attractive means to evaluate such statements. Surely, as we collect more data, we should be able to ascertain whether a drug can cure disease, or whether using Ozempic will reduce weight, or that eating less red meat will prolong our lives.</p>
+<h3 id="example-environmental-science">Example: Environmental science</h3>
+<ul>
+<li>Causal question: Does reducing upstream agricultural fertilizer application cause a reduction in downstream algal bloom frequency and severity?</li>
+<li>Key considerations: temporality (fertilizer reduction must precede blooms), potential confounders (river flow, rainfall, point-source discharges, land-use changes), and feasible designs (natural experiments, difference-in-differences across watersheds, instrumental variables, or targeted interventions with before/after monitoring).</li>
+</ul>
+</section>
+<section id="can-modeling-help-us-ascertain-causality" class="slide level2">
+<h2>Can modeling help us ascertain causality?</h2>
+<ul>
+<li><p>Statistical and machine learning models leverage <span class="fatinline">observed patterns</span> of correlation or association between features (predictors/covariates) and outcomes (responses/labels) to make predictions on new data.</p></li>
+<li><p>However, these models primarily capture correlations and associations, not causation.</p></li>
+<li><p>A lot of effort also goes into improving predictions or modeled associations by (a) experimental design, (b) adding more independent features to improve the precision of the prediction or association.</p></li>
+<li><p>This observed association is often subject to many other factors, including biases in subject selection and data collection, presence of related factors both observed and unobserved that can influence the observed association, and measurement error.</p></li>
+</ul>
+</section>
+<section id="what-is-an-association" class="slide level2">
+<h2>What is an “association”?</h2>
+<p>We often use the term association in this text and other textbooks and papers. What do we mean as statisticians? The term is often used to say that two variables have a relationship, in that there is some pattern between the values of the two variables. What we often tacitly imply in using the term is correlation, in that high values of one variable appear to co-occur on average with high values of the other variable (positive correlation), or low values of the other variable (negative correlation). Note, I specifically use the term “co-occur”, because that’s really all we can determine in observational data.</p>
+<p>Just because observational values co-occur doesn’t mean that one caused the other. There are plenty of examples of spurious correlations and ecological fallacies where there is no actual causal relationship between the variables, while we observe a high degree of association between them.</p>
+</section>
+<section id="strengthening-associations-to-imply-causality-bradford-hill-criteria" class="slide level2 smaller">
+<h2>Strengthening associations to imply causality<br> Bradford Hill criteria</h2>
+<p>In 1965, Sir Austin Bradford Hill proposed a set of nine criteria to help determine whether an observed association is likely to be causal. These criteria are widely used in epidemiology and public health research to assess causality. The nine criteria are:</p>
+<ol type="1">
+<li><strong>Strength of the association:</strong> The stronger the association, the more likely it is to be causal.</li>
+<li><strong>Consistency:</strong> The association is observed repeatedly in different studies and populations.</li>
+<li><strong>Specificity:</strong> A specific cause leads to a specific effect.</li>
+<li><strong>Temporality:</strong> The cause precedes the effect in time.</li>
+<li><strong>Biological gradient:</strong> A dose-response relationship exists.</li>
+<li><strong>Plausibility:</strong> The association is biologically plausible.</li>
+<li><strong>Coherence:</strong> The association does not conflict with existing knowledge.</li>
+<li><strong>Experiment:</strong> Evidence from experiments supports the association.</li>
+<li><strong>Analogy:</strong> Similar factors have been shown to cause similar effects.</li>
+</ol>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>These criteria are not strict rules, but rather guidelines to help assess causality. Not all criteria need to be met for an association to be considered causal, and the absence of one or more criteria does not necessarily rule out causality.</p>
+<p>This was an attempt to systematize thinking about causality in studies where we can only see <strong>observed associations</strong>. But, as we’ll see, there are other ways to think about causality that can help us design better studies and analyze data better.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="a-hierarchy-of-causality" class="slide level2 smaller">
+<h2>A hierarchy of causality</h2>
+<div class="columns">
+<div class="column">
+<p><a href="images/paste-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/paste-5.png"></a></p>
+</div><div class="column">
+<ul>
+<li>“… machine learning programs (including those with deep neural networks) operate almost entirely in an associational mode” (Pearl and Mackenzie (2018), pp.&nbsp;30)</li>
+<li>Supervised learning models are entirely based on observable patterns and so can’t necessarily identify causal relationships, no matter how large the training data is</li>
+</ul>
+<p><strong>Interventional causality</strong></p>
+<ul>
+<li>Interventional causation cannot be assessed merely by collecting data</li>
+<li>Randomization allows balance in other factors and enables statistical estimation of the intervention effect</li>
+</ul>
+<p><strong>Counterfactual causality</strong></p>
+<ul>
+<li>Links Pearl’s ideas with Rubin’s potential outcomes framework</li>
+<li>It asks what could have happened if a different (unobservable) action was experienced</li>
+<li>This idea cannot be directly evaluated using observable data</li>
+</ul>
+</div></div>
+</section>
+<section id="concept-1-counterfactuals-or-potential-outcomes" class="slide level2">
+<h2>Concept 1: Counterfactuals, or potential outcomes</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Take ibuprofen</td>
+<td>Headache resolves in 1 hour</td>
+</tr>
+<tr class="even">
+<td>Don’t take ibuprofen</td>
+<td>Headache resolves in 6 hours</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The potential outcomes framework, also known as the Rubin Causal Model, is a framework for causal inference that focuses on the concept of potential outcomes.</li>
+<li>The fundamental problem of causal inference is that we can never observe both potential outcomes for the same individual at the same time.</li>
+</ul>
+</section>
+<section id="a-formulation-of-potential-outcomes" class="slide level2">
+<h2>A formulation of potential outcomes</h2>
+<ul>
+<li>Let Y(1) be the potential outcome if an individual receives the treatment, and Y(0) be the potential outcome if the individual does not receive the treatment.</li>
+<li>The observed outcome Y can be expressed as: <span class="math display">\[
+Y = T \cdot Y(1) + (1 - T) \cdot Y(0)
+\]</span> where T is a binary indicator variable that equals 1 if the individual receives the treatment and 0 otherwise.</li>
+<li>The average treatment effect (ATE) can be defined as: <span class="math display">\[
+ATE = E[Y(1) - Y(0)]
+\]</span></li>
+<li>The goal of causal inference is to estimate the ATE using observed data, while accounting for confounding variables and other sources of bias.</li>
+</ul>
+</section>
+<section id="an-example" class="slide level2">
+<h2>An example</h2>
+<p>Create a population where we look at all potential outcomes for individuals with and without treatment. Understand that the individual causal effects are unobservable.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1020</span>)</span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-4"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-5"><a></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb1-6"><a></a>  <span class="at">headache_ibf =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb1-7"><a></a>  <span class="at">headache_noibf =</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>)</span>
+<span id="cb1-8"><a></a>)</span>
+<span id="cb1-9"><a></a>dat <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a></a>  <span class="fu">mutate</span>(<span class="at">causal_effect =</span> headache_ibf <span class="sc">-</span> headache_noibf)</span>
+<span id="cb1-11"><a></a></span>
+<span id="cb1-12"><a></a><span class="fu">gt</span>(dat) <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a></a>  <span class="fu">cols_label</span>(<span class="at">headache_ibf =</span> <span class="st">"{{Y_i}}(ibf)"</span>,</span>
+<span id="cb1-14"><a></a>             <span class="at">headache_noibf =</span> <span class="st">"{{Y_i}}(no ibf)"</span>,</span>
+<span id="cb1-15"><a></a>             <span class="at">causal_effect =</span> <span class="fu">html</span>(<span class="st">"Y&lt;sub&gt;i&lt;/sub&gt;(ibf) - Y&lt;sub&gt;i&lt;/sub&gt;(no ibf)"</span>)</span>
+<span id="cb1-16"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-17"><a></a>  <span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Potential outcomes"</span>, <span class="at">columns =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-18"><a></a>  <span class="fu">tab_spanner</span>(<span class="at">label =</span> <span class="st">"Causal effect"</span>, <span class="at">columns =</span> <span class="dv">4</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-19"><a></a>  <span class="fu">cols_align</span>(<span class="at">align=</span><span class="st">'center'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="prlpuqojaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#prlpuqojaq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#prlpuqojaq thead, #prlpuqojaq tbody, #prlpuqojaq tfoot, #prlpuqojaq tr, #prlpuqojaq td, #prlpuqojaq th {
+  border-style: none;
+}
+
+#prlpuqojaq p {
+  margin: 0;
+  padding: 0;
+}
+
+#prlpuqojaq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#prlpuqojaq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#prlpuqojaq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#prlpuqojaq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#prlpuqojaq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#prlpuqojaq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#prlpuqojaq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#prlpuqojaq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#prlpuqojaq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#prlpuqojaq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#prlpuqojaq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#prlpuqojaq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#prlpuqojaq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#prlpuqojaq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#prlpuqojaq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#prlpuqojaq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#prlpuqojaq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#prlpuqojaq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#prlpuqojaq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#prlpuqojaq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#prlpuqojaq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#prlpuqojaq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#prlpuqojaq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#prlpuqojaq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#prlpuqojaq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#prlpuqojaq .gt_left {
+  text-align: left;
+}
+
+#prlpuqojaq .gt_center {
+  text-align: center;
+}
+
+#prlpuqojaq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#prlpuqojaq .gt_font_normal {
+  font-weight: normal;
+}
+
+#prlpuqojaq .gt_font_bold {
+  font-weight: bold;
+}
+
+#prlpuqojaq .gt_font_italic {
+  font-style: italic;
+}
+
+#prlpuqojaq .gt_super {
+  font-size: 65%;
+}
+
+#prlpuqojaq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#prlpuqojaq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#prlpuqojaq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#prlpuqojaq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#prlpuqojaq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#prlpuqojaq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#prlpuqojaq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#prlpuqojaq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#prlpuqojaq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="id" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">id</th>
+<th colspan="2" id="Potential outcomes" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+Potential outcomes
+</div></th>
+<th id="Causal effect" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="col"><div class="gt_column_spanner">
+Causal effect
+</div></th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="headache_ibf" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Y<span style="white-space:nowrap;"><sub>i</sub></span>(ibf)</th>
+<th id="headache_noibf" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Y<span style="white-space:nowrap;"><sub>i</sub></span>(no ibf)</th>
+<th id="causal_effect" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Y<sub>i</sub>(ibf) - Y<sub>i</sub>(no ibf)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="id">1</td>
+<td class="gt_row gt_center" headers="headache_ibf">1</td>
+<td class="gt_row gt_center" headers="headache_noibf">6</td>
+<td class="gt_row gt_center" headers="causal_effect">-5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="id">2</td>
+<td class="gt_row gt_center" headers="headache_ibf">3</td>
+<td class="gt_row gt_center" headers="headache_noibf">6</td>
+<td class="gt_row gt_center" headers="causal_effect">-3</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="id">3</td>
+<td class="gt_row gt_center" headers="headache_ibf">5</td>
+<td class="gt_row gt_center" headers="headache_noibf">5</td>
+<td class="gt_row gt_center" headers="causal_effect">0</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="id">4</td>
+<td class="gt_row gt_center" headers="headache_ibf">3</td>
+<td class="gt_row gt_center" headers="headache_noibf">3</td>
+<td class="gt_row gt_center" headers="causal_effect">0</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="id">5</td>
+<td class="gt_row gt_center" headers="headache_ibf">1</td>
+<td class="gt_row gt_center" headers="headache_noibf">6</td>
+<td class="gt_row gt_center" headers="causal_effect">-5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="id">6</td>
+<td class="gt_row gt_center" headers="headache_ibf">1</td>
+<td class="gt_row gt_center" headers="headache_noibf">7</td>
+<td class="gt_row gt_center" headers="causal_effect">-6</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="id">7</td>
+<td class="gt_row gt_center" headers="headache_ibf">2</td>
+<td class="gt_row gt_center" headers="headache_noibf">4</td>
+<td class="gt_row gt_center" headers="causal_effect">-2</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="id">8</td>
+<td class="gt_row gt_center" headers="headache_ibf">3</td>
+<td class="gt_row gt_center" headers="headache_noibf">5</td>
+<td class="gt_row gt_center" headers="causal_effect">-2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="id">9</td>
+<td class="gt_row gt_center" headers="headache_ibf">1</td>
+<td class="gt_row gt_center" headers="headache_noibf">6</td>
+<td class="gt_row gt_center" headers="causal_effect">-5</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="id">10</td>
+<td class="gt_row gt_center" headers="headache_ibf">2</td>
+<td class="gt_row gt_center" headers="headache_noibf">6</td>
+<td class="gt_row gt_center" headers="causal_effect">-4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>If we could actually see this, we see that the average causal effect was -3.2 hours (taking ibuprofen reduces headache duration by 3.2 hours on average).</p>
+</section>
+<section id="an-example-contd." class="slide level2">
+<h2>An example (contd.)</h2>
+<p>We can randomly assign individuals in this population to taking ibuprofen or not, and then see what happens.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">1038</span>)</span>
+<span id="cb2-2"><a></a>data_observed <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-4"><a></a>    <span class="at">exposure =</span> <span class="fu">ifelse</span>(<span class="fu">rbinom</span>(<span class="fu">n</span>(),<span class="dv">1</span>, <span class="fl">0.5</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="st">'ibf'</span>,<span class="st">'no_ibf'</span>),</span>
+<span id="cb2-5"><a></a>    <span class="at">observed_outcome =</span> <span class="fu">ifelse</span>(exposure<span class="sc">==</span><span class="st">'ibf'</span>, headache_ibf, headache_noibf)</span>
+<span id="cb2-6"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a></a>  <span class="fu">select</span>(id, exposure, observed_outcome)</span>
+<span id="cb2-8"><a></a>output <span class="ot">&lt;-</span> data_observed <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a></a>  <span class="fu">group_by</span>(exposure) <span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a></a>  <span class="fu">summarise</span>(<span class="at">avg_outcome =</span> <span class="fu">mean</span>(observed_outcome)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-11"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> exposure, <span class="at">values_from =</span> avg_outcome) <span class="sc">|&gt;</span> </span>
+<span id="cb2-12"><a></a>  <span class="fu">mutate</span>(<span class="at">causal_effect =</span> ibf <span class="sc">-</span> no_ibf)</span>
+<span id="cb2-13"><a></a>output</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+    ibf no_ibf causal_effect
+  &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;
+1  2.57   5.67         -3.10</code></pre>
+</div>
+</div>
+<p>From this randomized experiment, we see that the estimated causal effect is -3.1 hours, which is close to the true average causal effect of -3.2 hours.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(infer)</span>
+<span id="cb4-2"><a></a><span class="fu">library</span>(geomtextpath)</span>
+<span id="cb4-3"><a></a><span class="fu">set.seed</span>(<span class="dv">384</span>)</span>
+<span id="cb4-4"><a></a>boot_dist <span class="ot">=</span> data_observed <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a></a>  <span class="fu">specify</span>(observed_outcome <span class="sc">~</span> exposure) <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type=</span><span class="st">'bootstrap'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-7"><a></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">'diff in means'</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">'ibf'</span>,<span class="st">'no_ibf'</span>))</span>
+<span id="cb4-8"><a></a><span class="fu">visualize</span>(boot_dist) <span class="sc">+</span> <span class="fu">shade_confidence_interval</span>(<span class="at">endpoints =</span> <span class="fu">get_ci</span>(boot_dist)) <span class="sc">+</span></span>
+<span id="cb4-9"><a></a>  <span class="fu">geom_textvline</span>(<span class="at">xintercept =</span> <span class="sc">-</span><span class="fl">3.2</span>, <span class="at">color =</span> <span class="st">'red'</span>, <span class="at">label =</span> <span class="st">'true effect'</span>) <span class="sc">+</span>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Difference in means"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-13_files/figure-revealjs/week-13-03-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week-13_files/figure-revealjs/week-13-03-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="other-estimands" class="slide level2">
+<h2>Other estimands</h2>
+<ul>
+<li><p><strong>ATT</strong> (Average Treatment Effect on Treated): <span class="math inline">\(\mathbb{E}[Y(1) - Y(0) | A=1]\)</span><br>
+Effect among those who actually received treatment</p></li>
+<li><p><strong>CATE</strong> (Conditional ATE): <span class="math inline">\(\mathbb{E}[Y(1) - Y(0) | X=x]\)</span><br>
+Effect for a specific subgroup (e.g., swing voters, rural districts)</p></li>
+</ul>
+<p>In political science, we often care most about <strong>ATE</strong> for universal policies or <strong>ATT</strong> for targeted interventions.</p>
+</section>
+<section id="causal-diagrams-and-directed-acyclic-graphs-dags" class="slide level2">
+<h2>Causal diagrams and directed acyclic graphs (DAGs)</h2>
+<ul>
+<li>Causal diagrams, often represented as directed acyclic graphs (DAGs), are graphical representations of causal relationships between variables.</li>
+<li>In a DAG, nodes represent variables, and directed edges (arrows) represent causal relationships between those variables.</li>
+<li>DAGs help visualize and understand the causal structure of a system, allowing researchers to identify potential <span class="saltinline">confounders</span>, <span class="acidinline">mediators</span>, <span class="fatinline">colliders</span> and moderators.</li>
+<li>They can also guide the selection of variables to include in statistical models to estimate causal effects accurately.</li>
+</ul>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Causal diagrams are not data driven per se, but depend on <strong>domain knowledge</strong> to construct the relationships between variables. They can then be used to guide data analysis, study design and modeling. They are a powerful tool to help think about causality. They are especially useful in observational studies where randomization is not possible, and so confounding and biases may be present.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Recommended reading</strong></p>
+</div>
+<div class="callout-content">
+<p>See <a href="https://static1.squarespace.com/static/675db8b0dd37046447128f5f/t/691fb7706ce66332f0b44467/1763686256720/hernanrobins_WhatIf_21nov25.pdf">Chapter 6 of Hernan and Robins (2023)</a> and <a href="https://www.r-causal.org/chapters/04-dags">Chapter 4</a> of <a href="https://www.r-causal.org/">Causal Inference in R</a> for great introductions to causal diagrams and DAGs.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="confounders" class="slide level2">
+<h2>Confounders</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-13_files/figure-revealjs/week-13-04-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week-13_files/figure-revealjs/week-13-04-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column smaller" style="width:55%;">
+<p>A confounder is a variable that influences both the dependent variable and independent variable, causing a spurious association. In the diagram, the confounder affects both the exposure and the outcome, creating a <em>backdoor path</em> that can bias the estimated effect of the exposure on the outcome.</p>
+</div></div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Backdoor path</strong></p>
+</div>
+<div class="callout-content">
+<p>A backdoor path is a noncausal path between treatment and outcome that remains even if all arrows pointing from the treatment to other variables are removed. That is, the path has an arrow pointing into treatment. (Hernan and Robins (2023))</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Confounders are one of the things we have to worry about when we’re assessing associations. And its not just the confounders we measure, it’s also confounders that we didn’t measure. This requires thought, and some critical thinking. This is not necessary an analytic thing, but often requires domain knowledge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="examples-of-confounding" class="slide level2">
+<h2>Examples of confounding</h2>
+<ul>
+<li>The effect of aspirin on the risk of stroke may be confounded if the drug is more likely to be prescribed to individuals with heart disease that is both an indication for treatment and a risk factor for the disease. An unmeasured variable, atherosclerosis, is a causal factor for both heart disease and stroke. Such confounding is often called confounding by indication.</li>
+<li>The effect of a DNA sequence A on the risk of developing cancer will be confounded if there exists another DNA sequence B that has a causal effect on cancer and is more frequent among people carrying A. This phenomenon is often called linkage disequilibrium. A similar bias can occur if the particular causal sequence B is more prevalent in some ethnicities than others, and the study includes a mixture of individuals from different ethnic groups; this is often referred to as population stratification.</li>
+<li>Smoking and alcohol consumption are risk factors for several cancers, and they also tend to co-occur, resulting in confounding.</li>
+</ul>
+</section>
+<section id="dealing-with-confounding" class="slide level2">
+<h2>Dealing with confounding</h2>
+<ul>
+<li>Randomization in experimental studies helps to balance both measured and unmeasured confounders across treatment groups.</li>
+<li>In observational studies, statistical methods such as multivariable regression, propensity score matching, and instrumental variable analysis can be used to adjust for confounding.</li>
+<li>Careful study design, including the selection of appropriate control groups and the use of stratification or matching, can help minimize confounding.</li>
+</ul>
+<p>Analytically, the most common way to deal with confounding is to include the confounder as a covariate in a regression model. This helps to adjust for the effect of the confounder when estimating the effect of the exposure on the outcome. However, this only works for measured confounders. Unmeasured confounders remain a challenge in causal inference.</p>
+</section>
+<section id="other-forks-in-the-road" class="slide level2 smaller">
+<h2>Other forks in the road</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Mediators</a></li><li><a href="#tabset-1-2">Colliders</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>A mediator is a variable that lies on the causal pathway between an exposure and an outcome. In the diagram, the exposure affects the mediator, which in turn affects the outcome. Mediators help explain the mechanism through which the exposure influences the outcome.</p>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">dagify</span>(</span>
+<span id="cb5-2"><a></a>  Z <span class="sc">~</span> X,</span>
+<span id="cb5-3"><a></a>  Y <span class="sc">~</span> Z,</span>
+<span id="cb5-4"><a></a>  Y <span class="sc">~</span> X</span>
+<span id="cb5-5"><a></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-6"><a></a>  <span class="fu">ggdag</span>(<span class="at">layout=</span><span class="st">'circle'</span>) <span class="sc">+</span> <span class="fu">theme_dag</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-13_files/figure-revealjs/week-13-05-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week-13_files/figure-revealjs/week-13-05-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p>Here the variable Z is a mediator of the effect of X on Y.</p>
+<ul>
+<li>There is a direct effect of X on Y (the arrow from X to Y).</li>
+<li>There is also an indirect effect of X on Y through Z (the path X -&gt; Z -&gt; Y).</li>
+<li>The total effect of X on Y is the sum of the direct and indirect effects.</li>
+</ul>
+</div></div>
+<p>Consider Fertilizer (X) applied upstream, Algal Bloom intensity (Z) in a downstream waterbody, and Fish Mortality (Y). Fertilizer increases nutrient runoff which increases algal biomass; algal biomass reduces dissolved oxygen (hypoxia) and thus increases fish mortality. Here Algal Bloom (Z) mediates the effect of Fertilizer on Fish Mortality. In some settings there may also be a residual direct effect of Fertilizer on Fish Mortality (e.g., through toxic contaminants), so both direct and indirect paths can coexist.</p>
+</div>
+<div id="tabset-1-2">
+<p>A collider is a variable that is influenced by two other variables. In the diagram, both the exposure and the outcome affect the collider. Conditioning on a collider can introduce bias in estimating the causal effect of the exposure on the outcome.</p>
+<p><strong>Algal bloom as a collider</strong></p>
+<ul>
+<li>Suppose Fertilizer (F) and Sewage discharge (S) are two independent causes of Algal Bloom (B).</li>
+<li>AlgalBloom is therefore a collider (F -&gt; B &lt;- S). If an analysis conditions on B (for example, by restricting to sites where blooms were observed or by sampling only when a bloom is reported), this opens a noncausal association between F and S and can bias estimates of the effect of Fertilizer on downstream outcomes.</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week-13_files/figure-revealjs/week-13-06-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week-13_files/figure-revealjs/week-13-06-1.png" width="480"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><strong>Practical implication:</strong> If monitoring or sampling is triggered by visible blooms (conditioning on B), then Fertilizer and Sewage become (spuriously) associated in the sampled data even if they are independent in the population. This can distort attempts to estimate the causal effect of Fertilizer on water quality or bloom severity.</p>
+</div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="concept-3-principles-to-establish-causality" class="slide level2 smaller">
+<h2>Concept 3: Principles to establish causality</h2>
+<p>This appears quite straightforward, but does have some underlying assumptions:</p>
+<p><strong>No interference:</strong><br>
+Unit i’s potential outcomes do not depend on the outcomes of the other units.</p>
+<p><strong>Consistency:</strong><br>
+There are no other versions of the treament, or that we need treatment levels to be well defined</p>
+<p>These assumptions together are called the <strong>Stable Unit Treatment Value Assumption (SUTVA)</strong> (Rubin (1980))</p>
+<p><strong>Exchangeability</strong><br>
+We assume that within levels of relevant variables (confounders), exposed and unexposed individuals have the same chance of experiencing any outcome prior to being exposed. This can be interpreted to mean that there is no unmeasured confounding. It also means that once we control for confounders, treatment allocation is as good as random. <em>This is the hardest assumption to verify in practice!!</em> Causal diagrams help us think through it.</p>
+<p><strong>Positivity</strong><br>
+Each individual has a positive chance of being exposed to every available exposure level. In our earlier example, this means that there is no one who is prohibited from taking ibuprofen, and no one who is required to just take ibuprofen.</p>
+</section>
+<section id="correlation-is-not-causation" class="slide level2">
+<h2>“Correlation is not causation”</h2>
+<p>Most studies we’ve described will be able to extract correlations or associations between an exposure and disease incidence. But, other than RCTs, we need to be careful that the observed correlations aren’t due to other factors.</p>
+<p>There are <a href="http://www.tylervigen.com/spurious-correlations">many examples</a> of <strong>spurious</strong> correlations that can be found if one tortures data long enough. We will ignore those and focus on situations where the correlations are reasonable. One reason that we might see correlations between variables but no direct causal relationship is due to the presence of a confounder.</p>
+<p>The point of these principles is to enable apples-to-apples comparison, so that the individuals are comparable and can be good proxies for each others’ counterfactuals</p>
+</section></section>
+<section>
+<section id="propensity-scores" class="title-slide slide level1 center">
+<h1>Propensity scores</h1>
+
+</section>
+<section id="what-are-propensity-scores" class="slide level2">
+<h2>What are propensity scores?</h2>
+<ul>
+<li><p>A propensity score is the probability of an individual receiving a particular treatment given their observed covariates.</p></li>
+<li><p>Propensity scores are used in observational studies to reduce selection bias and confounding when estimating the effect of a treatment or intervention.</p></li>
+<li><p>The propensity score is typically estimated using logistic regression or other machine learning methods.</p></li>
+<li><p>Once the propensity scores are estimated, they can be used to match treated and untreated individuals with similar scores, or to weight individuals in the analysis to create a balanced comparison between treatment groups.</p></li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Mathematics</strong></p>
+</div>
+<div class="callout-content">
+<p>If <em>X</em> is our set of observed covariates, and <em>T</em> is a binary treatment indicator (1 for treated, 0 for untreated), then the propensity score <em>e(X)</em> is defined as: <span class="math display">\[
+e(X) = P(T=1 | X) = E(T | X)
+\]</span> You can also create propensity scores for continuous treatments.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="why-use-propensity-scores" class="slide level2">
+<h2>Why use propensity scores?</h2>
+<ul>
+<li>In observational studies, treatment assignment is not random, which can lead to confounding and selection bias.</li>
+<li>Propensity scores help to balance the distribution of observed covariates between treatment groups, making them more comparable.</li>
+<li>By adjusting for propensity scores, researchers can obtain more accurate estimates of treatment effects and reduce bias in their analyses.</li>
+</ul>
+<p>The basic idea is that adjusting for or weighting by propensity scores “levels the playing field” between those exposed and those not exposed, creating something similar to a randomized experiment.</p>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Unmeasured confounding</strong></p>
+</div>
+<div class="callout-content">
+<p>Propensity scoring adjustments can only adjust for measured confounders. Unmeasured confounders remain a challenge in causal inference.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-propensity-scores" class="slide level2">
+<h2>Using propensity scores</h2>
+<p><strong>Key insight</strong>: Units with the same propensity score are balanced on X in expectation.<br>
+Comparing treated and control units with similar scores gives an unbiased estimate of the treatment effect.</p>
+<p><strong>Three ways to use propensity scores</strong>:</p>
+<ol type="1">
+<li><strong>Matching</strong>: Pair treated and control units with similar scores</li>
+<li><strong>Weighting (IPTW)</strong>: Weight each unit inversely by score to create a pseudo-population where treatment is independent of X</li>
+<li><strong>Stratification</strong>: Compare treated and control within score “bins”</li>
+</ol>
+<p><strong>Political example</strong>: Do swing voters (same propensity to support either candidate) change their vote based on negative ads?</p>
+</section>
+<section id="simulation-example-setup" class="slide level2">
+<h2>Simulation example: Setup</h2>
+<p>We’ll simulate a dataset where treatment assignment depends on covariates and the treatment effect varies across units (heterogeneity).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">set.seed</span>(<span class="dv">2025</span>)</span>
+<span id="cb6-2"><a></a>N <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb6-3"><a></a>X1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N)           <span class="co"># Continuous covariate (e.g., ideology)</span></span>
+<span id="cb6-4"><a></a>X2 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.4</span>)  <span class="co"># Binary covariate (e.g., urban vs. rural)</span></span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a><span class="co"># True heterogeneous treatment effect: τ(x) = 1 + 0.5 * X1</span></span>
+<span id="cb6-7"><a></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> X1</span>
+<span id="cb6-8"><a></a></span>
+<span id="cb6-9"><a></a><span class="co"># Propensity score depends on X1 and X2</span></span>
+<span id="cb6-10"><a></a>ps <span class="ot">&lt;-</span> <span class="fu">plogis</span>(<span class="sc">-</span><span class="fl">0.2</span> <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> X1 <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> X2)</span>
+<span id="cb6-11"><a></a>A <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, ps)</span>
+<span id="cb6-12"><a></a></span>
+<span id="cb6-13"><a></a><span class="co"># Potential outcomes</span></span>
+<span id="cb6-14"><a></a>Y0 <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> X1 <span class="sc">-</span> <span class="fl">0.3</span> <span class="sc">*</span> X2 <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb6-15"><a></a>Y1 <span class="ot">&lt;-</span> Y0 <span class="sc">+</span> tau</span>
+<span id="cb6-16"><a></a></span>
+<span id="cb6-17"><a></a><span class="co"># Observed outcome</span></span>
+<span id="cb6-18"><a></a>Y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(A <span class="sc">==</span> <span class="dv">1</span>, Y1, Y0)</span>
+<span id="cb6-19"><a></a></span>
+<span id="cb6-20"><a></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(Y, A, X1, X2, ps, tau)</span>
+<span id="cb6-21"><a></a><span class="fu">head</span>(df, <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+        Y     A      X1    X2    ps   tau
+    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 -0.220     0  0.621      1 0.449 1.31 
+ 2  2.79      0  0.0356     1 0.338 1.02 
+ 3  4.85      1  0.773      1 0.480 1.39 
+ 4  1.12      0  1.27       1 0.579 1.64 
+ 5  3.16      1  0.371      0 0.524 1.19 
+ 6  3.22      0 -0.163      0 0.418 0.919
+ 7  2.32      1  0.397      1 0.406 1.20 
+ 8  2.30      0 -0.0800     1 0.318 0.960
+ 9  1.68      0 -0.345      1 0.274 0.828
+10  4.50      1  0.702      1 0.465 1.35 </code></pre>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Truth</strong></p>
+</div>
+<div class="callout-content">
+<p>Since we simulated the data, we know the true average treatment effect (ATE) is 0.99.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="naive-estimate-biased" class="slide level2">
+<h2>Naive estimate (biased)</h2>
+<p>Simply comparing treated vs.&nbsp;control ignores confounding:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>naive_ate <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a></a>  <span class="fu">group_by</span>(A) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_Y =</span> <span class="fu">mean</span>(Y), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">summarize</span>(<span class="at">naive_ATE =</span> <span class="fu">diff</span>(mean_Y))</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a>naive_ate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  naive_ATE
+      &lt;dbl&gt;
+1      1.66</code></pre>
+</div>
+</div>
+<p>This is biased because treated units have higher X1 on average, which independently increases Y.</p>
+<p>The 95% bootstrap CI for the naive ATE is:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">3958</span>)</span>
+<span id="cb10-2"><a></a>df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">A =</span> <span class="fu">as.factor</span>(A)) <span class="sc">|&gt;</span> <span class="fu">specify</span>(Y <span class="sc">~</span> A) <span class="sc">|&gt;</span> <span class="fu">generate</span>(<span class="dv">1000</span>, <span class="at">type=</span><span class="st">'bootstrap'</span>) <span class="sc">|&gt;</span> <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">'diff in means'</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">'1'</span>,<span class="st">'0'</span>)) <span class="sc">|&gt;</span> <span class="fu">get_ci</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  lower_ci upper_ci
+     &lt;dbl&gt;    &lt;dbl&gt;
+1     1.54     1.78</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>  <span class="co"># visualize() + labs(x = "Difference in means (Naive ATE)") + theme_minimal() + theme(axis.text.y = element_blank(), axis.title.y = element_blank())</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>We see that the naive estimate’s CI does not cover the true ATE of 0.99, which would lead to incorrect conclusions.</p>
+</section>
+<section id="regression-adjustment" class="slide level2">
+<h2>Regression adjustment</h2>
+<p>Control for confounders in an outcome model:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb13-2"><a></a><span class="fu">library</span>(glue)</span>
+<span id="cb13-3"><a></a>reg_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> A <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> df)</span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a>broom<span class="sc">::</span><span class="fu">tidy</span>(reg_mod) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">'A'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a></a>  <span class="fu">select</span>(term, estimate, std.error) <span class="sc">|&gt;</span> </span>
+<span id="cb13-8"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-9"><a></a>    <span class="at">lower_ci =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> std.error,</span>
+<span id="cb13-10"><a></a>    <span class="at">upper_ci =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> std.error</span>
+<span id="cb13-11"><a></a>  ) <span class="sc">|&gt;</span> <span class="fu">glue_data</span>(<span class="st">"Estimated ATE: {round(estimate,2)} (95% CI: [{round(lower_ci,2)}, {round(upper_ci,2)}])"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated ATE: 1.09 (95% CI: [0.99, 1.19])</code></pre>
+</div>
+</div>
+<p>This isolates the effect of A after adjusting for X1 and X2. This gets us much closer, but often doesn’t fully remove bias if the model is misspecified.</p>
+</section>
+<section id="inverse-probability-of-treatment-weighting-iptw" class="slide level2">
+<h2>Inverse Probability of Treatment Weighting (IPTW)</h2>
+<p>Estimate propensity scores, then weight each unit by the inverse of their probability of receiving their observed treatment. This creates a pseudo-population where treatment is independent of X.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Estimate propensity score</span></span>
+<span id="cb15-2"><a></a>ps_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(A <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="fu">binomial</span>(), <span class="at">data =</span> df)</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-6"><a></a>    <span class="at">ps_hat =</span> <span class="fu">predict</span>(ps_mod, <span class="at">type =</span> <span class="st">'response'</span>),</span>
+<span id="cb15-7"><a></a>    <span class="co"># Weight: 1/P(A=1) if treated, 1/P(A=0) if control</span></span>
+<span id="cb15-8"><a></a>    <span class="at">w =</span> <span class="fu">ifelse</span>(A <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span> <span class="sc">/</span> ps_hat, <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> ps_hat))</span>
+<span id="cb15-9"><a></a>  )</span>
+<span id="cb15-10"><a></a></span>
+<span id="cb15-11"><a></a><span class="co"># Weighted outcome regression</span></span>
+<span id="cb15-12"><a></a>iptw_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> A, <span class="at">weights =</span> w, <span class="at">data =</span> df)</span>
+<span id="cb15-13"><a></a></span>
+<span id="cb15-14"><a></a>broom<span class="sc">::</span><span class="fu">tidy</span>(iptw_mod) <span class="sc">|&gt;</span></span>
+<span id="cb15-15"><a></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">'A'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-16"><a></a>  <span class="fu">select</span>(term, estimate, std.error, p.value) <span class="sc">|&gt;</span> </span>
+<span id="cb15-17"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-18"><a></a>    <span class="at">lower_ci =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> std.error,</span>
+<span id="cb15-19"><a></a>    <span class="at">upper_ci =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> std.error</span>
+<span id="cb15-20"><a></a>  ) <span class="sc">|&gt;</span> <span class="fu">glue_data</span>(<span class="st">"Estimated ATE (IPTW): {round(estimate,2)} (95% CI: [{round(lower_ci,2)}, {round(upper_ci,2)}])"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated ATE (IPTW): 1.01 (95% CI: [0.9, 1.13])</code></pre>
+</div>
+</div>
+<p>This approach effectively balances covariates across treatment groups, yielding an unbiased ATE estimate.</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Further reading</strong></p>
+</div>
+<div class="callout-content">
+<p>See <a href="https://www.araastat.com/6150-notes/chapters/week-04.html#weighting-observations-for-statistical-analysis">this section</a> for a detailed explanation of weighting methods and how IPTW works.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="propensity-score-matching" class="slide level2">
+<h2>Propensity Score Matching</h2>
+<p>Match treated units to control units with similar propensity scores:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(MatchIt)</span>
+<span id="cb17-2"><a></a><span class="fu">library</span>(glue)</span>
+<span id="cb17-3"><a></a></span>
+<span id="cb17-4"><a></a><span class="co"># 1:1 nearest-neighbor matching on propensity score</span></span>
+<span id="cb17-5"><a></a>m_out <span class="ot">&lt;-</span> <span class="fu">matchit</span>(A <span class="sc">~</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> df, <span class="at">method =</span> <span class="st">'nearest'</span>, <span class="at">ratio =</span> <span class="dv">1</span>)</span>
+<span id="cb17-6"><a></a></span>
+<span id="cb17-7"><a></a><span class="co"># Extract matched sample</span></span>
+<span id="cb17-8"><a></a>matched <span class="ot">&lt;-</span> <span class="fu">match.data</span>(m_out)</span>
+<span id="cb17-9"><a></a></span>
+<span id="cb17-10"><a></a><span class="co"># Estimate ATE on matched sample</span></span>
+<span id="cb17-11"><a></a>matched_ate <span class="ot">&lt;-</span> matched <span class="sc">|&gt;</span></span>
+<span id="cb17-12"><a></a>  <span class="fu">group_by</span>(A) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a></a>  <span class="fu">summarize</span>(<span class="at">mean_Y =</span> <span class="fu">mean</span>(Y), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-14"><a></a>  <span class="fu">summarize</span>(<span class="at">matched_ATE =</span> <span class="fu">diff</span>(mean_Y))</span>
+<span id="cb17-15"><a></a></span>
+<span id="cb17-16"><a></a>matched <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">A =</span> <span class="fu">factor</span>(A)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-17"><a></a>  <span class="fu">specify</span>(Y <span class="sc">~</span> A) <span class="sc">|&gt;</span> </span>
+<span id="cb17-18"><a></a>  <span class="fu">generate</span>(<span class="dv">1000</span>, <span class="at">type=</span><span class="st">'bootstrap'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-19"><a></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">'diff in means'</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">'1'</span>,<span class="st">'0'</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-20"><a></a>  <span class="fu">get_ci</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb17-21"><a></a>  <span class="fu">glue_data</span>(<span class="st">"Estimated ATE (Matching): {round(matched_ate$matched_ATE,2)} (95% CI: [{round(lower_ci,2)}, {round(upper_ci,2)}])"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated ATE (Matching): 1.45 (95% CI: [1.34, 1.58])</code></pre>
+</div>
+</div>
+<p>Matching directly tries to create a balanced sample where treated and control are comparable. It depends on how well matches can be found, and, as we can see, might not fully remove bias if the propensity model is misspecified or we have poor matching within our data.</p>
+</section>
+<section id="heterogeneous-treatment-effects-hte" class="slide level2">
+<h2>Heterogeneous Treatment Effects (HTE)</h2>
+<p>Treatment effects may vary across subgroups. A simple approach: include interactions.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Outcome model with interaction</span></span>
+<span id="cb19-2"><a></a>int_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> A <span class="sc">*</span> X1 <span class="sc">+</span> X2, <span class="at">data =</span> df)</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a><span class="co"># CATE at different X1 values</span></span>
+<span id="cb19-5"><a></a>cate_fn <span class="ot">&lt;-</span> <span class="cf">function</span>(x_val) {</span>
+<span id="cb19-6"><a></a>  coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(int_mod)</span>
+<span id="cb19-7"><a></a>  <span class="co"># CATE(x) = β_A + β_(A:X1) * x</span></span>
+<span id="cb19-8"><a></a>  ate_x <span class="ot">&lt;-</span> coefs[<span class="st">'A'</span>] <span class="sc">+</span> coefs[<span class="st">'A:X1'</span>] <span class="sc">*</span> x_val</span>
+<span id="cb19-9"><a></a>  <span class="fu">tibble</span>(<span class="at">X1_value =</span> x_val, <span class="at">CATE =</span> ate_x)</span>
+<span id="cb19-10"><a></a>}</span>
+<span id="cb19-11"><a></a></span>
+<span id="cb19-12"><a></a><span class="fu">bind_rows</span>(</span>
+<span id="cb19-13"><a></a>  <span class="fu">cate_fn</span>(<span class="sc">-</span><span class="dv">1</span>),  <span class="co"># Low ideology</span></span>
+<span id="cb19-14"><a></a>  <span class="fu">cate_fn</span>(<span class="dv">0</span>),   <span class="co"># Moderate</span></span>
+<span id="cb19-15"><a></a>  <span class="fu">cate_fn</span>(<span class="dv">1</span>)    <span class="co"># High ideology</span></span>
+<span id="cb19-16"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  X1_value  CATE
+     &lt;dbl&gt; &lt;dbl&gt;
+1       -1 0.553
+2        0 1.05 
+3        1 1.54 </code></pre>
+</div>
+</div>
+<p>Treatment effects are stronger for high-X1 units (effect of 1.5 vs.&nbsp;0.5).</p>
+</section>
+<section id="summary-when-to-use-each-method" class="slide level2">
+<h2>Summary: When to use each method</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 37%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>When to use</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Regression</strong></td>
+<td>Few confounders, linear effects</td>
+<td>Simple, interpretable</td>
+<td>Assumes linearity; vulnerable to model misspecification</td>
+</tr>
+<tr class="even">
+<td><strong>IPTW</strong></td>
+<td>Moderate confounding</td>
+<td>Flexible; creates interpretable pseudo-population</td>
+<td>Weights can be extreme; requires positivity</td>
+</tr>
+<tr class="odd">
+<td><strong>Matching</strong></td>
+<td>Need transparent comparisons</td>
+<td>Creates balanced sample; easy to diagnose</td>
+<td>May discard data; harder with many confounders</td>
+</tr>
+<tr class="even">
+<td><strong>HTE methods</strong></td>
+<td>Interested in subgroups</td>
+<td>Answers heterogeneous effects</td>
+<td>Requires more data; multiple testing concerns</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="causal-inference-in-political-science-key-applications" class="slide level2">
+<h2>Causal inference in political science: Key applications</h2>
+<ol type="1">
+<li><p><strong>Policy evaluation</strong>: Did a law reduce unemployment, or was it passed during recovery?</p></li>
+<li><p><strong>Campaign effects</strong>: Do campaign ads change votes, or do they target supporters?</p></li>
+<li><p><strong>Representation</strong>: Does descriptive representation (diversity) cause better policy outcomes?</p></li>
+<li><p><strong>International relations</strong>: Does trade reduce conflict, or do peaceful countries trade more?</p></li>
+</ol>
+<p>All require causal thinking + DAG reasoning + careful estimation.</p>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key takeaways</h2>
+<p>✓ Correlation ≠ causation. Confounding, selection bias, and reverse causation are everywhere.</p>
+<p>✓ <strong>Counterfactuals</strong> let us formalize what we mean by “causal effect.”</p>
+<p>✓ <strong>DAGs</strong> help us reason about confounding and decide what to adjust for.</p>
+<p>✓ <strong>Propensity scores</strong> create comparable groups and estimate treatment effects.</p>
+<p>✓ <strong>Heterogeneous effects</strong> matter: treatment doesn’t affect everyone the same way.</p>
+<p>✓ No method is perfect. Always report robustness checks and acknowledge assumptions.</p>
+</section>
+<section id="references-further-reading" class="slide level2">
+<h2>References &amp; Further Reading</h2>
+<ul>
+<li><p>Hernán, M. A., &amp; Robins, J. M. (2020). <em>Causal Inference: What If</em>. Chapman and Hall/CRC.<br>
+<a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">Free online at: www.hsph.harvard.edu/miguel-hernan/causal-inference-book/</a></p></li>
+<li><p>Barrett, M., McGowan, L.D., &amp; Gerke, T. (2025). <a href="https://www.r-causal.org/">Causal Inference in R</a></p></li>
+<li><p>Imbens, G. W., &amp; Rubin, D. B. (2015). <em>Causal Inference in Statistics, Social, and Biomedical Sciences</em>. Cambridge University Press.</p></li>
+<li><p>Pearl, J. (2009). <em>Causality: Models, Reasoning and Inference</em>. Cambridge University Press.</p></li>
+<li><p>Cunningham, S. (2021). <em>Causal Inference: The Mixtape</em>. <a href="https://mixtape.scunning.com">Free online at: mixtape.scunning.com</a></p></li>
+<li><p>Wickham, H., &amp; Grolemund, G. (2017). <em>R for Data Science</em>. O’Reilly Media.</p></li>
+</ul>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W119
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../slides";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

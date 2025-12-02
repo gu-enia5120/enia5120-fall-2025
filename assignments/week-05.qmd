@@ -1,0 +1,252 @@
+---
+title: "Assignment 5"
+subtitle: "Bayesian Methods and Inference"
+format: 
+  html:
+    code-fold: false
+---
+
+## Overview
+
+This assignment tests your understanding of Bayesian statistical methods, including prior specification, posterior computation, posterior predictive checks, and model evaluation. You'll work with both conjugate priors (analytical solutions) and modern Bayesian regression models.
+
+------------------------------------------------------------------------
+
+## Problem 1: Conjugate Priors and Posterior Inference (10 points)
+
+### Part A: Beta-Binomial Model (5 points)
+
+A field researcher is studying the occupancy of a rare bird species. They conduct surveys at 50 sites and observe the species at 18 of them.
+
+**Question 1a (2 points):** Using a Beta(2, 2) prior (reflecting weak prior belief that occupancy is around 0.5), what is the posterior distribution and its parameters?
+
+**Question 1b (2 points):** Calculate the posterior probability that the true occupancy rate exceeds 40%. Show your calculation in R using `pbeta()`.
+
+**Question 1c (1 point):** Create a visualization showing the prior and posterior distributions on the same plot.
+
+### Part B: Normal-Normal Conjugate Model (5 points)
+
+A water quality dataset shows that historical dissolved oxygen (DO) measurements have a known standard deviation of σ = 1.5 mg/L. You collect 20 new measurements with sample mean = 6.8 mg/L.
+
+**Question 1b (2 points):** Using a Normal(7, 1) prior (mean = 7, sd = 1) for the true mean DO level, state the posterior mean and standard deviation.
+
+**Question 1b (2 points):** Interpret: How much did the data update your prior belief? Calculate the prior predictive standard error and posterior predictive standard error.
+
+::: callout-tip
+The prior predictive distribution can be calculated as: $$\text{Prior Predictive SD} = \sqrt{\sigma^2 + \tau^2}$$ where σ is the known data standard deviation and τ is the prior standard deviation. The posterior predictive distribution can be calculated as: $$\text{Posterior Predictive SD} = \sqrt{\sigma^2 + \text{Posterior Variance}}$$
+:::
+
+**Question 1b (1 point):** Would a Normal(8, 0.5) prior (more confident that μ = 8) substantially change your posterior? Explain conceptually (no calculations needed).
+
+------------------------------------------------------------------------
+
+## Problem 2: Prior Specification and Sensitivity Analysis (10 points)
+
+You're designing a clinical trial for a new treatment. Historical data suggests a response rate of approximately 60%, but there's substantial uncertainty in this estimate.
+
+**Question 2a (3 points):** Compare three different Beta priors for the response rate: - Prior 1: Beta(1, 1) - uniform prior - Prior 2: Beta(6, 4) - optimistic prior (centered at 0.6) - Prior 3: Beta(3, 3) - weakly informative prior
+
+For each prior, generate 1000 samples and create density plots. Describe how each prior reflects different domain knowledge.
+
+**Question 2b (4 points):** Suppose you observe 45 responses out of 100 patients. For each of the three priors above: - Compute the posterior distribution - Calculate the posterior probability that the response rate exceeds 50% - Create a table showing posterior mean and posterior standard deviation (for each prior) (*use R to perform these calculations by simulating from the posterior distribution*)
+
+Which prior had the most influence on the posterior? Why?
+
+**Question 2c (3 points):** Perform a prior predictive check for Prior 2 (Beta(6, 4)). Generate 1000 samples of hypothetical response counts (out of 100) from the prior predictive distribution. Does this prior seem reasonable given your domain knowledge? Explain.
+
+::: callout-tip
+The prior predictive distribution for a Binomial likelihood with a Beta prior can be simulated by: 1. Sample θ from the Beta prior. 2. Sample response counts from a Binomial distribution using the sampled θ.
+
+Example in R:
+
+``` r
+theta_samples <- rbeta(1000, 6, 4)
+response_counts <- rbinom(1000, size = 100, prob = theta_samples)
+```
+:::
+
+------------------------------------------------------------------------
+
+## Problem 3: Posterior Predictive Checks (10 points)
+
+You've fit a Bayesian regression model to predict species abundance based on environmental covariates using `brms`. Here's the setup:
+
+``` r
+library(brms)
+library(bayesplot)
+library(tidybayes)
+
+# Simulated ecological data
+set.seed(42)
+n <- 100
+df <- tibble(
+  temperature = rnorm(n, mean = 15, sd = 5),
+  precipitation = rnorm(n, mean = 800, sd = 200),
+  abundance = rnorm(n, mean = 20 + 1.5 * (temperature - 15) + 0.01 * (precipitation - 800), 
+                    sd = 3)
+)
+
+# Fit Bayesian model (this will take a moment)
+fit <- brm(
+  abundance ~ temperature + precipitation,
+  data = df,
+  family = gaussian(),
+  chains = 2,
+  iter = 1000,
+  refresh = 0,
+  seed = 123
+)
+```
+
+**Question 3a (3 points):**
+
+Perform posterior predictive checks using at least three different test statistics:
+
+-   `pp_check(fit, type = "dens_overlay")`
+-   `pp_check(fit, type = "stat", stat = "mean")`
+-   `pp_check(fit, type = "error_binned")`
+
+For each check, describe what you observe and whether the model appears to fit the data well.
+
+**Question 3b (4 points):** \
+Create a custom posterior predictive check that computes the proportion of observations in different abundance ranges (e.g., \<15, 15-25, \>25) and compares observed vs. predicted proportions. What does this reveal about model fit?
+
+**Question 3c (3 points):** \
+If you noticed systematic discrepancies in the posterior predictive checks, suggest two model modifications that might improve fit. For each, explain why it would address the problem.
+
+------------------------------------------------------------------------
+
+## **Problem 4: Bayesian Hypothesis Testing with Bayes Factors (10 points)**
+
+You want to evaluate whether a conservation intervention changed species richness. You have richness data from 40 sites, with 20 in control and 20 in treatment groups.
+
+``` r
+set.seed(99)
+control_richness <- rnorm(20, mean=15, sd=3)
+treatment_richness <- rnorm(20, mean=17, sd=3)
+```
+
+**Question 4a (3 points):** \
+\
+Frame two competing hypotheses:
+
+-   H₀: Treatment has no effect (μ_control = μ_treatment)
+
+-   H₁: Treatment increases richness (μ_treatment \> μ_control)
+
+Fit two Bayesian models using `brms`:
+
+-   Model 0: `brm(richness ~ group, data = data_combined, ...)`
+
+-   Model 1: `brm(richness ~ group, data = data_combined, prior = c(prior(normal(2, 1), class = "b")), ...)`
+
+**Question 4b (4 points):** \
+Calculate the Bayes factor comparing these models using `bayes_factor()` or manually compute:
+
+$$
+BF_{01} = \frac{p(D|H_0)}{p(D|H_1)}
+$$
+
+Interpret the Bayes factor according to the Kass & Raftery scale provided in the lecture slides.
+
+**Question 4c (3 points):** \
+Explain how the Bayesian hypothesis test differs conceptually from frequentist null hypothesis significance testing. What question does it answer that NHST cannot?
+
+------------------------------------------------------------------------
+
+## Problem 5: Integration of Bayesian Inference and Prediction (10 points) 
+
+Combine Bayesian inference with predictive modeling using a realistic scenario.
+
+Scenario: You're modeling water quality (pH) across multiple monitoring stations. You have:
+
+-   Historical prior information: mean pH typically 7.2, with sd = 0.5
+
+-   New observational data from 5 stations with pH measurements
+
+-   Goal: Make predictions for unsampled stations while quantifying uncertainty
+
+**Question 5a (4 points):** \
+Fit a Bayesian hierarchical model where stations are nested within regions. Use `brms` to model:
+
+```         
+pH ~ 1 + (1 | station)
+```
+
+Extract the posterior distributions for each station's mean pH and visualize using `tidybayes::stat_pointinterval()`.
+
+**Question 5b (3 points):** \
+Generate posterior predictive samples for a new, unsampled station. Create a visualization showing:
+
+-   50%, 80%, and 95% credible intervals for predicted pH
+
+-   Compare to the posterior mean estimates from 5a
+
+**Question 5c (3 points):** \
+How does the credible interval for a new prediction compare to the credible interval for the posterior mean of an observed station? Explain why they differ in width.
+
+------------------------------------------------------------------------
+
+## Problem 6: Reflection and Synthesis (10 points) 
+
+**Question 6a (5 points):** \
+Compare Bayesian and frequentist approaches across these dimensions:
+
+| Dimension                          | Bayesian | Frequentist |
+|------------------------------------|----------|-------------|
+| Parameter interpretation           |          |             |
+| Use of prior information           |          |             |
+| Type of uncertainty quantification |          |             |
+| Primary question answered          |          |             |
+| Strength for small sample sizes    |          |             |
+
+\
+**Question 6b (5 points):**
+
+Describe a real ecological or environmental research scenario where you would recommend a Bayesian approach over frequentist methods. Explain:
+
+-   Why the research question benefits from Bayesian framing
+
+-   What prior information would be relevant
+
+-   How posterior predictive checks would inform model adequacy
+
+-   What decision(s) the posterior distribution would inform
+
+------------------------------------------------------------------------
+
+## Submission Guidelines 
+
+-   Create an Quarto file that reproduces all analyses
+
+-   For each problem, include:
+
+    -   Clear code with comments
+
+    -   Statistical output and visualizations
+
+    -   Written interpretation of results
+
+-   Save as `week-05-solutions.qmd`
+
+-   Render to HTML and submit both `.qmd` and `.html` files
+
+## Resources 
+
+-   Lecture slides: Weeks 8, 9 and 12
+
+-   `brms` documentation: <http://paulbuerkner.com/brms/>
+
+-   `bayesplot` vignette: <https://mc-stan.org/bayesplot/>
+
+-   `tidybayes`: <https://mjskay.github.io/tidybayes/>
+
+## Grading Rubric 
+
+-   **Correctness (40%):** Mathematical accuracy, proper use of R functions
+
+-   **Conceptual Understanding (35%):** Interpretation, explanation of results
+
+-   **Code Quality (15%):** Clarity, comments, reproducibility
+
+-   **Visualization (10%):** Informative plots with clear labels and legends
